@@ -534,7 +534,8 @@ Known limits of the kit agents (read from the code):
 - `play()` handles one thread at a time and waits for each reply. In RFQ cases the other threads'
   60-second clocks keep running meanwhile: confirmed, 2 timeouts per session in sandbox `D02` and
   in P05. One loop per thread removes them (`experiments/RESULTS.md`).
-- The `--agent` choices `naive|llm` are hard-coded in `cli.py`.
+- The `--agent` choices are listed in `AGENTS` in `cli.py`: `naive`, `llm` and our `sellm` (it plays
+  `sellm.agent.make_agent`, added Sat 17:16).
 - Our one change to the kit so far: `cli.py` calls `scripts/pull-first` before `play` and `run`
   (`pull_first()`), so every run uses the team's latest code.
 - The LLM call has a 45 s timeout; any failure silently plays the naive move.

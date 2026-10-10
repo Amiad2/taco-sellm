@@ -313,3 +313,7 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 **[change] Corrected wrong times in PLAN, STATUS and CONTEXT**
 - I had written times by hand that were later than the clock (18:30, 18:50, 19:00, 19:05, 18:20, 17:25, 17:30). Replaced with the commit times: agent registered 17:16, groups and dossier schema decided 17:41, rebalanced 17:45, group B claimed 17:48, LLM decided 17:50, data facts checked 17:40, arena-sim checked 17:15.
 - No content changed. The timeline row 'Sat 19:00 Each part works alone' is the original plan and stays.
+
+## 2026-10-10 18:11 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
+**[change] CONTEXT section 14: --agent now also offers sellm**
+- The line said the choices naive|llm are hard-coded in cli.py; since 17:16 AGENTS in cli.py lists naive, llm and sellm (sellm.agent.make_agent).
