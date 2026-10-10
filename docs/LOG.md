@@ -90,3 +90,25 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Dossiers are built by one command and looked up by ID; rebuilt after the Sunday 08:00 release. Best term sheets are computed from the case file, never looked up from practice results.
 - Timing: case files are readable before POST /v1/sessions, so all preparation happens before the 60 s clock starts. Per move: 15 s target, 40 s hard deadline, then the calculator's move without the LLM.
 - Overfitting guards in docs/PLAN.md section 8: no practice IDs in code or prompts, every negotiable field supported (incoterm is never negotiable in practice), dry-runs on all 19 case files incl. P06 and P13, property tests, hold-out P04/P10/P18.
+
+## 2026-10-10 15:35 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] Baseline: kit LLM agent on all 10 hosted cases, mean 61.5**
+- Sat 15:27-15:31, 'uv run arena run --set practice --agent llm --parallel 10 -v', kit agent unchanged, OpenAI gpt-6.1-sol. 10 sessions, quota left 189. No LLM failure, no fallback.
+- Scores: P01 0.789, P02 0.105, P03 0.903, P04 0.810, P05 0.676, P07 0.779, P08 0.433, P10 0.570, P11 0.710, P18 0.377. All ten closed a deal.
+- Every session in full under runs/practice/<case>/ (.md readable, .json raw), index runs/README.md, run log runs/logs/2026-10-10-1527-baseline-kit-llm.log.
+- Analysis with 9 findings and 7 hypotheses to test: runs/BASELINE.md. Rules distilled into docs/LEARNINGS.md.
+
+## 2026-10-10 15:35 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[change] scripts/pull-runs saves every team session into runs/**
+- It lists all practice and sandbox sessions of our key (whoever played them) and saves case file, all e-mails, attachment texts, the supplier's reasons, back office, result and cost breakdown.
+- It adds an offline analysis per session: value of each lever at the deal, best non-price terms at the deal's price, the price that would reach C_best, and the split of the gap into structure and price.
+- After every run: scripts/pull-runs --label "<agent and model>", then commit runs/ (AGENTS.md section 3). STATUS no longer keeps a scoreboard by hand; runs/README.md is generated.
+
+## 2026-10-10 15:35 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[finding] Baseline: where the kit LLM agent loses points**
+- It reads only the supplier's first term sheet: in P10 the ignored alternative (32.00, 54 days) scored 0.647 against the accepted 0.570. Alternatives came in 11 of 12 threads.
+- It accepts as soon as the supplier stops moving, after 2-5 of 10 messages.
+- P05 (RFQ) handled thread by thread: timeouts on two threads, the cheapest bidder withdrew.
+- Claims: 8 verified, 8 duplicate (same ID cited again), none in P05, P07, P08. Suppliers asked for data in P03, P04, P05, P10.
+- Where a plant-specific should-cost exists, the price at C_best is 0.98-1.16 times should-cost; in P10 we closed at 1.38 times.
+- Open: in P08, P18 and P10 C_best lies 6-19 % below the current price and we do not know which fact unlocks it.

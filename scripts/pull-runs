@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Save every session the team has played into runs/ and rebuild runs/README.md.
+# Usage: scripts/pull-runs [--label "which agent played the new sessions"] [--force]
+cd "$(dirname "$0")/.." || exit 1
+exec uv run python scripts/pull_runs.py "$@"

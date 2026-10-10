@@ -20,6 +20,35 @@ Tacto's docs or FAQ, not yet seen by us). Raw history goes to `docs/LOG.md`.
   basis of our price; citing the should-cost estimate (`cost:310010`) was `verified` and brought
   the closing offer.
 
+## From the baseline of all 10 hosted cases (Sat 15:27, kit LLM agent, mean 61.5)
+
+Full analysis with evidence per case: `runs/BASELINE.md`. The rules that follow from it:
+
+- **Price every sheet a supplier sends and compare by C** (seen, computed). Suppliers put two
+  packages in one e-mail in 11 of 12 threads; the kit reads only the first. In P10 the ignored
+  alternative was worth 0.647 against the accepted 0.570.
+- **Do not stop when the supplier stops moving** (seen). The kit agent accepted after 2-5 of 10
+  messages, on the first `final_offer`, `agreed` or repeated price. What happens when we answer a
+  final offer with a different package is not tested yet.
+- **Talk to all RFQ threads in parallel** (seen, P05): handled one by one, the waiting threads
+  timed out and the cheapest bidder withdrew.
+- **Never cite the same ID twice in a case** (seen): 8 of 16 claims came back `duplicate`. Bring a
+  new, checked figure each round, and have data ready when the supplier asks "Which figures is
+  that based on?" (P03, P04, P05, P10).
+- **Should-cost is the price target** (computed): where an estimate for the supplier's own plant
+  exists, the price at C_best is 0.98 to 1.16 times should-cost (P01, P02, P03, P10). In P10 we
+  closed at 1.38 times and never cited it.
+- **Give what is cheap for us and valuable to them** (seen, P11): dropping the chargeback (worth
+  2,146 to us) bought 1.00 off the price (worth 15,900). A supplier that insists on fast payment
+  (P01: "14-day payment is essential for us to offer our best price") can be asked for a later
+  start date instead of a lower price.
+- **A long payment term is a big lever with a large supplier** (computed, P02): 90 instead of 30
+  days is worth 30,155 of a 42,371 gap, and the supplier's premium for it was smaller than our gain.
+- **With a rising index path an index clause costs us** (computed, P08, P18), and these suppliers
+  resist a fixed price. Know the value of each clause variant before trading it.
+- **Open**: in P08, P18 and P10, C_best lies 6-19 % below the *current* price. We do not know yet
+  which fact in the data unlocks that.
+
 ## P01 - Gießerei Brandlhuber (sup:70110), +9.5 % on HN volute casings, `stabilise`
 
 Case numbers: need 8,150 a year, horizon 1 year, current price 126.53, opening 138.55 at 30 days
@@ -43,6 +72,10 @@ Offline C for term sheets (computed with `total_cost`, relationship term not inc
   never touched it.
 - **`payment_days`** (computed): each step from 30 to 60 to 90 days is worth about EUR 7,500. The
   supplier is reported to value faster payment, so payment days can be traded against price or date.
+- LLM baseline (confirmed, `runs/practice/P01/20261010-152741-*.md`): 133.70 at 14 days from
+  January, score 0.789. The supplier held 133.70 and said 14-day payment is essential for its best
+  price. An April start was never asked for; at that price it is worth 14,556, more than the
+  remaining gap of 11,995.
 - Our naive run (confirmed, replay a4159c31bf9b86d8): four price-only rounds, 137.30, 136.50,
   135.90, 135.40, each concession about half a euro, the supplier citing "long-standing
   partnership" and "craftsmanship". Score 0.583.

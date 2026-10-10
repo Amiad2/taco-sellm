@@ -1,6 +1,6 @@
 # PLAN - how three people get the best agent running by Sunday 12:00
 
-Status: **proposed Sat 15:20 by Jonathan (with Claude Code), not yet agreed by the team.** Owners
+Status: **proposed Sat 15:10 by Jonathan (with Claude Code), not yet agreed by the team.** Owners
 are open: claim a workstream in `docs/STATUS.md`. Change this file when the team changes the plan,
 and log the change as a `[decision]`.
 
@@ -60,7 +60,7 @@ later). C runs every new agent version and reports per case what the cost breakd
 
 | When | Milestone |
 |---|---|
-| Sat 15:30 | **Baseline**: kit LLM agent on all 10 hosted cases and on D02. We then know `C_open` and `C_best` of every case and can score any term sheet offline |
+| Sat 15:30 | **Baseline** (done, see `runs/README.md`): kit LLM agent on all 10 hosted cases and on D02. We then know `C_open` and `C_best` of every case and can score any term sheet offline |
 | Sat 17:00 | Interfaces agreed; `runs/` in the repo; lever table for all 10 cases |
 | Sat 19:00 | Each part works alone: calculator offline, dossiers for the practice suppliers, runner on `arena-sim` |
 | Sat 20:30 | Agent v1 integrated, plays D01 and D02 without errors; **full practice run 1** |
@@ -110,7 +110,7 @@ a hypothesis written down first is a wasted session.
   write a number or an ID that code did not give it.
 - **One machine, one key.** Decide the final machine today (open question in `docs/STATUS.md`).
 
-## 8. Data access, timing and overfitting (decided Sat 15:40)
+## 8. Data access, timing and overfitting (decided Sat 15:20)
 
 **No vector database, no embeddings.** The data is small and keyed by ID: all 208 letters, e-mails
 and notes together are 46 KB; everything written about one supplier is at most about 500 tokens;
