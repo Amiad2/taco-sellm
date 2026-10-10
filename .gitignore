@@ -18,3 +18,6 @@ runs/lab/llm-cache/
 runs/lab/ui.pid
 # the runner's per-machine logs (sessions themselves go to runs/ with scripts/pull-runs)
 runs/logs/
+runs/lab/playbooks/**/progress.log
+runs/lab/playbooks/**/scenarios.json.gz
+runs/lab/playbooks/**/rows.jsonl.gz
