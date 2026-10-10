@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-10 18:50 CEST by Omar (Claude Code).
+Last updated: 2026-10-10 19:00 CEST by Omar (Claude Code).
 
 ## Now
 
@@ -20,6 +20,7 @@ Last updated: 2026-10-10 18:50 CEST by Omar (Claude Code).
 | Who | What | Files | Since |
 |---|---|---|---|
 | Amiad (Claude Code) | **Lab** upkeep and strategy search: suppliers, scenarios, tournament, stress test, the `Calculator` strategy and its knobs. No arena calls | `sellm/lab/`, `scripts/lab`, `tests/test_lab.py`, `runs/lab/` | Sat 16:00 |
+| Omar (Claude Code) | **Group B - Data** (`docs/PLAN.md` sections 3 and 10): stub `dossier()` first, then the dossier builder for all 46 detailed suppliers, signal rules and derived fields, the case overlay (mini-dossier), the Sunday rebuild. No arena calls | `sellm/intel.py`, `sellm/dossiers/`, `tests/test_intel.py` | Sat 19:00 |
 ## Next up
 
 From the lab (Amiad): **the final runner needs one loop per thread** - the kit's `play()` times RFQ
@@ -55,7 +56,7 @@ Weakest: P02 0.105, P18 0.377, P08 0.433, P10 0.570. Analysis and hypotheses: `r
 
 - Which machine runs the Live Final, and is it a cloud VM or a laptop?
 - Which LLM and whose key for the final; is there budget for an hour of parallel play?
-- Who takes group A, B and C (`docs/PLAN.md` section 3)?
+- Who takes group A and C (`docs/PLAN.md` section 3)? B: Omar.
 - Which agent plays the final? Proposed: `sellm` replaces `llm` only if its mean is higher in lab, sandbox and one full practice run including the hold-out cases P04, P10, P18.
 - How do the final score and the jury score combine for places 1-3? Ask at the Tacto desk.
 - When does Tacto go offline on Saturday night?
