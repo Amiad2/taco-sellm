@@ -203,6 +203,10 @@ def search(run, minutes=10, start=64, seeds=2, seed=0, test_top=8, test_seeds=3,
     names = [s.name for s in run.train]
     rng.shuffle(names)
     deadline = time.time() + 60 * minutes * 0.85  # the rest of the time is for the test phase
+    fits = max(8, int(25 * minutes))  # about what a first round on an eighth of the scenarios can play
+    if start > fits:
+        run.log(f"{minutes:g} min fit about {fits} variants in a first round, not {start}: starting with {fits}")
+        start = fits
     variants = [("calc", {})] + [("calc", sample_knobs(rng)) for _ in range(start - 1)]
     size, played = max(12, len(names) // 8), {}
     rows = run.play([(b, {}, n, k) for b in baselines for n in names for k in range(seeds)])
@@ -215,7 +219,11 @@ def search(run, minutes=10, start=64, seeds=2, seed=0, test_top=8, test_seeds=3,
             have = played.setdefault(_key(name, knobs), set())
             jobs += [(name, knobs, n, k) for n in subset if n not in have for k in range(seeds)]
             have.update(subset)
+        before = len(rows)
         rows += run.play(jobs, deadline)
+        if rnd == 1 and len(rows) - before < len(jobs):
+            run.inconclusive = True
+            run.log("the first round did not finish in time: the ranking is inconclusive, give it more minutes")
         means = {}
         for r in rows:
             means.setdefault(_key(r["strategy"], r["knobs"]), []).append(r["score"])
@@ -414,6 +422,8 @@ def write(run, rows, title, sort="test", min_scenarios=0):
     """report.md, best.json (the ten best with their knobs) and rows.jsonl.gz into the run folder."""
     import gzip
 
+    if getattr(run, "inconclusive", False):
+        title += " - INCONCLUSIVE: time ran out in the first round, give it more minutes"
     text = report(rows, title, sort=sort, min_scenarios=min_scenarios)
     (run.out / "report.md").write_text(text, encoding="utf-8")
     with gzip.open(run.out / "rows.jsonl.gz", "wt", encoding="utf-8") as fh:

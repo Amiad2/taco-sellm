@@ -288,3 +288,8 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Signals sit in quote remarks ('head-office directive', 'Payment within 10 days requested', 'Material covered until March 2027') and news topics (allocation, credit_watch, short_time_work, free_capacity, succession, ...; 10 items are 'noise').
 - Should-cost: 22 plant-specific, 6 generic DE; two parts have one estimate per plant (cost:310012 vs cost:310012-70110, cost:350010 vs cost:350010-70520). 34 of 55 parts have more than one approved supplier. 17 suppliers amber/red in 2026Q3. We pay some suppliers up to ~19 days late. Index clauses in only 4 contracts. No practice case file carries 'facts'.
 - Also documented: running arena-sim by hand (its 'practice sessions left' is the sim's own counter, not our quota; CONTEXT section 9) and installing uv on a machine without it (pip install is refused on Ubuntu; AGENTS.md section 7).
+## 2026-10-10 17:46 CEST · Amiad @ fedora
+**[run] Lab search from the UI, 1 minute: inconclusive (Amiad's trial of the UI)**
+- Sat 17:42, 'search --minutes 1' from scripts/lab ui, commit 20449e8. Time ran out in the first round (1,488 of its negotiations unplayed), so the ranking is noise: #1 vs the Calculator default +1.3 +- 0.7 points on 83 test scenarios, 'not distinguishable'. All variants beat the kit naive agent by about 29 points.
+- A signal worth following: some variants make refused moves (422) - structure=keep 14 times, the default twice - which crash the kit's play() in the arena. To check with a stress test.
+- Changed: a search now starts with about 25 variants per minute (at most --start) so the first round can finish, and its report is marked INCONCLUSIVE when it does not. Report: runs/lab/20261010-174243-search/report.md.
