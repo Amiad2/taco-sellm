@@ -293,3 +293,12 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Sat 17:42, 'search --minutes 1' from scripts/lab ui, commit 20449e8. Time ran out in the first round (1,488 of its negotiations unplayed), so the ranking is noise: #1 vs the Calculator default +1.3 +- 0.7 points on 83 test scenarios, 'not distinguishable'. All variants beat the kit naive agent by about 29 points.
 - A signal worth following: some variants make refused moves (422) - structure=keep 14 times, the default twice - which crash the kit's play() in the arena. To check with a stress test.
 - Changed: a search now starts with about 25 variants per minute (at most --start) so the first round can finish, and its report is marked INCONCLUSIVE when it does not. Report: runs/lab/20261010-174243-search/report.md.
+
+## 2026-10-10 17:49 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[finding] --agent sellm as registered is not ready for a real supplier: first e-mails checked offline**
+- Checked offline (no arena call): make_agent() from sellm/agent.py at 49dfc05 on the opening e-mails saved in runs/, i.e. what it would send as its first message.
+- D01: asks 40.11 against the supplier's 52.90 and a current price of 48.60 (17 % below what we pay today). The body says 40.47, the sheet 40.11: text and term sheet disagree.
+- P01: asks 105.06-105.78 against 138.55, current price 126.53, plant-specific should-cost 132.64 - 21 % below the supplier's estimated full cost, in a 'stabilise' case, with the earliest start date.
+- P10: one of its three sheets is 2.98 per unit for 12 months (opening 32.20): the 'same cost to us' alternative solves for a price that offsets the uncovered second year. A real supplier reads that as a mistake or an insult.
+- The e-mail is one template line ('We propose EUR x per unit on the terms attached'), salutation 'Dear Sir or Madam' although the contact is named in the opening e-mail.
+- Why it matters: the lab's suppliers cannot be offended and read keywords only; the arena's read the whole e-mail and react to tone, trust and manipulation (brief section 2). These knobs won in the lab because nothing there punishes them. Before any practice session: play it in the sandbox (free) and bound the asks.
