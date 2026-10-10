@@ -1,0 +1,43 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4KQSF5JP0HZM4TAR7BXDJA2",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 2,
+  "files_touched": [
+    "runs/lab/playbooks/engine-D01/best.json",
+    "runs/lab/playbooks/engine-D02/best.json",
+    "runs/lab/playbooks/engine-P01/best.json",
+    "runs/lab/playbooks/engine-P02/best.json",
+    "runs/lab/playbooks/engine-P03/best.json",
+    "runs/lab/playbooks/engine-P04/best.json",
+    "runs/lab/playbooks/engine-P05/best.json",
+    "runs/lab/playbooks/engine-P07/best.json",
+    "runs/lab/playbooks/engine-P08/best.json",
+    "runs/lab/playbooks/engine-P10/best.json",
+    "runs/lab/playbooks/engine-P11/best.json",
+    "runs/lab/playbooks/engine-P18/best.json",
+    "runs/lab/playbooks/matrix-engine/matrix.txt",
+    "runs/lab/playbooks/matrix-llm/matrix.txt",
+    "sellm/lab/pb_groups.py",
+    "sellm/lab/pb_matrix.py",
+    "sellm/lab/playbooks.py",
+    "sellm/lab/spaces.py"
+  ],
+  "sessions": [
+    {
+      "metadata": "/0/metadata.json",
+      "transcript": "/0/full.jsonl",
+      "compact_transcript": "/0/transcript.jsonl",
+      "content_hash": "/0/content_hash.txt",
+      "prompt": "/0/prompt.txt"
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 48,
+    "cache_creation_tokens": 32503,
+    "cache_read_tokens": 7338399,
+    "output_tokens": 18687,
+    "api_call_count": 24
+  }
+}
