@@ -55,7 +55,11 @@ DEFAULTS = dict(
     claims="bank",  # none | bank (one new checked figure per e-mail)
     max_holds=2,  # holding e-mails per RFQ thread whose offer waits while the others still move; then we close
     levers="ours",  # first ask: ours (the calculator's cheapest package) | theirs (its terms, need covered)
-    dossier=True,  # read its cost of money from sellm.intel when a dossier exists
+    dossier=True,  # read its cost of money and cash position from sellm.intel when a dossier exists
+    second_choice=False,  # ask once for our cheapest option of a field the supplier changed. Off: measured on
+    # practice Sat 21:45 - one supplier gave the wider deadband for nothing (+0.06), another charged its worth or
+    # ignored it and said final_offer a round earlier (-0.10 three times)
+    recent_cap=True,  # without a cost estimate: aim no higher than its lowest own price of the last twelve months
     writer="template",
 )
 # Where deals could end, as a share of the supplier's opening price, when no should-cost of its own
@@ -529,7 +533,7 @@ class Negotiator:
         stay = next((o for o in options if o[1] == previous), options[0])
         best = min(options, key=lambda o: o[0])
         chosen = best if best[0] < stay[0] * (1 - 0.002) else stay
-        return self.second_choice(case, v, chosen[1])
+        return self.second_choice(case, v, chosen[1]) if self.k["second_choice"] else chosen[1]
 
     def refused(self, case, v):
         """{field: [values]} we asked and it changed in its answer. An answer on one of our own
@@ -595,9 +599,10 @@ class Negotiator:
                 try:
                     from .intel import dossier
 
-                    found = dossier(v.sid, case.get("parts") or [], case, v.opening) or {}
-                except Exception:
-                    log.debug("%s %s: no dossier", case.get("case_id"), v.sid)
+                    with calculator.LOCK:  # one cache for all cases played at once
+                        found = dossier(v.sid, case.get("parts") or [], case, v.opening) or {}
+                except Exception as e:
+                    log.warning("%s %s: no dossier (%s: %s)", case.get("case_id"), v.sid, type(e).__name__, e)
             self._memo[key] = found
         return self._memo[key]
 
@@ -681,7 +686,7 @@ class Negotiator:
             share = self.k["floor_share"] or TARGET_SHARE[bool(relationship)]
             target = share * min(reference, market)
             charged = calculator.recent_low(calculator.supplier_cost(case, v.sid, None, self.package))
-            if charged:  # a price it charged for this part within twelve months is one it can go back to
+            if charged and self.k["recent_cap"]:  # a price it charged within twelve months is one it can go back to
                 target = min(target, charged)
             if v.opening and v1 > v0:  # the same worth to it on the structure we ask
                 its = v.filled(v.opening["term_sheets"][0]["terms"])
@@ -702,22 +707,11 @@ class Negotiator:
     def should_cost(self, case, sid):
         """(fact ID, unit cost) of this supplier's own plant for a single-part case, else None. A
         generic estimate or another plant's is neither its floor nor citable to it."""
-        if len(case.get("parts") or []) != 1:
-            return None
-        part = case["parts"][0]
-        number = part.split(":", 1)[1]
-        for ref, fact in (case.get("facts") or {}).items():
-            if ref.startswith("cost:") and fact.get("unit_cost") and fact.get("part") in (part, number, None):
-                if fact.get("supplier") in (None, sid) and fact.get("supplier_id") in (None, sid):
-                    return ref, float(fact["unit_cost"])
-        if not self.package:
-            return None
-        try:
-            rows = self.package.query("select id, supplier_id, unit_cost from should_cost where part_id = ?", (part,))
-        except Exception:
-            return None
-        own = next((r for r in rows if r.get("supplier_id") == sid and r.get("unit_cost")), None)
-        return (own["id"], float(own["unit_cost"])) if own else None
+        key = (case.get("case_id"), sid, "should_cost")
+        if key not in self._memo:
+            cost = calculator.supplier_cost(case, sid, None, self.package)["cost"]
+            self._memo[key] = (cost["ref"], float(cost["value"])) if cost else None
+        return self._memo[key]
 
     def estimate(self, case, v):
         """The supplier as the relationship term needs it (strategic and bottleneck goals only)."""
@@ -762,24 +756,25 @@ class Negotiator:
         parts = case.get("parts") or []
         if self.package and parts:
             try:
-                marks = ",".join("?" * len(parts))
-                rows = self.package.query(
-                    f"select distinct series_id from cost_drivers where part_id in ({marks})", tuple(parts)
-                )
-                for r in rows:
-                    ids = self.package.ids(f"idx:{r['series_id']}@")
-                    if len(ids) < 13:
-                        continue
-                    a, b = ids[-13], ids[-1]
-                    change = (self.package.lookup(b)["value"] / self.package.lookup(a)["value"] - 1) * 100
-                    if change < -0.5:  # worded as the kit's worked example, which the arena verified
-                        months = (a.split("@", 1)[1], b.split("@", 1)[1])
-                        out.append(
-                            (
-                                b,
-                                f"The index {r['series_id']} changed {change:+.1f} % from {months[0]} to {months[1]} ({a}, {b}).",
+                with calculator.LOCK:
+                    marks = ",".join("?" * len(parts))
+                    rows = self.package.query(
+                        f"select distinct series_id from cost_drivers where part_id in ({marks})", tuple(parts)
+                    )
+                    for r in rows:
+                        ids = self.package.ids(f"idx:{r['series_id']}@")
+                        if len(ids) < 13:
+                            continue
+                        a, b = ids[-13], ids[-1]
+                        change = (self.package.lookup(b)["value"] / self.package.lookup(a)["value"] - 1) * 100
+                        if change < -0.5:  # worded as the kit's worked example, which the arena verified
+                            months = (a.split("@", 1)[1], b.split("@", 1)[1])
+                            out.append(
+                                (
+                                    b,
+                                    f"The index {r['series_id']} changed {change:+.1f} % from {months[0]} to {months[1]} ({a}, {b}).",
+                                )
                             )
-                        )
             except Exception:  # an argument less, never a lost move
                 log.warning("%s: index arguments not available", case.get("case_id"))
         self._memo[key] = out

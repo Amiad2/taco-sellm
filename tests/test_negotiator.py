@@ -284,8 +284,9 @@ def test_a_bug_in_our_code_becomes_a_safe_move(monkeypatch):
 
 
 def test_a_changed_field_is_asked_once_more_at_the_option_cheapest_for_us(package):
-    """It answers a fixed-price ask with an index clause without a deadband: we ask once for the
-    clause that costs us least; if it changes the field again, its value stands."""
+    """The `second_choice` knob (off by default, see its note): it answers a fixed-price ask with an
+    index clause without a deadband, we ask once for the clause that costs us least; if it changes
+    the field again, its value stands. Without the knob we take its structure as it comes."""
     for record in sessions():
         case = record["case"]
         clauses = [o for o in case.get("term_options", {}).get("index_clause") or [] if o]
@@ -309,12 +310,40 @@ def test_a_changed_field_is_asked_once_more_at_the_option_cheapest_for_us(packag
             return {**its, "term_sheets": [{"term_sheet_id": f"offer:t-{n}", "terms": terms}]}
 
         threads = {sid: [first, {**ours, "from": "buyer"}, answer(1, price)]}
-        second = make_agent(package).decide(case, threads)["message"]
+        plain = make_agent(package).decide(case, threads)["message"]["term_sheets"][0]["terms"]
+        assert plain["index_clause"] == worst
+        second = make_agent(package, second_choice=True).decide(case, threads)["message"]
         sheet = second["term_sheets"][0]["terms"]
         assert sheet["index_clause"] == cheapest, sheet
         assert asked["unit_price"] <= sheet["unit_price"] < price
         threads = {sid: [*threads[sid], {**second, "from": "buyer"}, answer(2, price * 0.99)]}
-        third = make_agent(package).decide(case, threads)["message"]["term_sheets"][0]["terms"]
+        third = make_agent(package, second_choice=True).decide(case, threads)["message"]["term_sheets"][0]["terms"]
         assert third["index_clause"] == worst, "changed twice: we take its clause"
         return
     pytest.skip("no saved case with an index clause and a contract length")
+
+
+def test_cases_played_at_the_same_time_decide_as_they_do_alone(package):
+    """The final plays ten cases at once on one data package. A lookup that fails under threads
+    must not turn a should-cost target or a dossier into a guess (it did: 7 of 10 cases, Sat 21:40)."""
+    from concurrent.futures import ThreadPoolExecutor
+
+    if package is None:
+        pytest.skip("no data package")
+    openings = {}
+    for record in sessions():
+        case = record["case"]
+        openings.setdefault(case["case_id"], (case, {s: [t["messages"][0]] for s, t in record["threads"].items()}))
+
+    def first_asks(case_id):
+        case, threads = openings[case_id]
+        asks = []
+        for sid in threads:
+            message = make_agent(package).decide(case, threads, focus=sid)["message"]
+            asks.append([sheet["terms"] for sheet in message.get("term_sheets") or []])
+        return case_id, asks
+
+    alone = dict(first_asks(case_id) for case_id in openings)
+    with ThreadPoolExecutor(max_workers=10) as pool:
+        for case_id, asks in pool.map(first_asks, list(openings) * 8):
+            assert asks == alone[case_id], case_id

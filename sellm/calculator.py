@@ -20,10 +20,18 @@ The supplier's side, an estimate with its evidence (`supplier_cost`):
 """
 
 import itertools
+import logging
 import re
+import threading
 from datetime import date
 
 from arena_kit.cost import complete_offer, cost_breakdown, must_haves_ok, supplier_value, total_cost
+
+log = logging.getLogger("sellm")
+# The data package is one SQLite connection and the dossiers one cache, shared by every case that is
+# played at the same time. Without this lock a lookup failed now and then under ten parallel cases
+# and the agent silently fell back to its guess (measured Sat 21:40: 7 of 10 cases, 1-4 times in 30).
+LOCK = threading.RLock()
 
 # a deal's worth to the supplier in cash (arena_kit.cost.supplier_value): these terms move it
 CASH_FIELDS = ("payment_days", "incoterm", "tooling_eur", "chargeback_eur_per_complaint")
@@ -105,8 +113,10 @@ def read_breakdown(text):
 
 def _query(package, sql, args):
     try:
-        return package.query(sql, args)
-    except Exception:  # a table or a column less in a later data release: an evidence less
+        with LOCK:
+            return package.query(sql, args)
+    except Exception as e:  # a table or a column less in a later data release: an evidence less, and said so
+        log.warning("calculator: a lookup failed (%s: %s) - %s", type(e).__name__, e, sql[:60])
         return []
 
 
@@ -124,6 +134,11 @@ def supplier_cost(case, sid, events=None, package=None):
     of its own cost: {"value", "low", "high", "ref", "basis"}. Every evidence row is
     {"kind", "value", "ref", "note"} with `value` in EUR per price unit, comparable to its price.
     """
+    with LOCK:
+        return _supplier_cost(case, sid, events, package)
+
+
+def _supplier_cost(case, sid, events, package):
     evidence, cost = [], None
     parts = case.get("parts") or []
     part = parts[0] if len(parts) == 1 else None  # a kit's unit price is not a part's price
