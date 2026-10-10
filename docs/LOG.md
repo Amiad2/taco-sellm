@@ -843,3 +843,7 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 ## 2026-10-11 00:49 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
 **[run] Arena check, interim: horizon 6 loses on all three practice cases, as the lab predicted - P07 0.702 (0.747), P11 0.710 (0.778), P18 0.401 (0.467)**
 - experiments/price_path_arena.py --variant horizon_6, agent = sellm.agent.make_agent @130210e with horizon 6; baselines = the 22:25 full run (today's agent replays it move for move). Smaller steps got smaller counters: P07 closed at 5.48 (5.41), P11 at 45.50 (45.09), P18 at 5.60 instead of 5.50. Sessions 5c8da0c8, 207d1c4d, 46c8d103. Oracle (P02 P07 P11 P18) and relationship x0.95 (P02) running.
+
+## 2026-10-11 00:54 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
+**[run] Arena check, interim: oracle first ask 3 % below the calibrated floor - P02 0.531 (0.531, same deal 371.66), P07 0.766 (0.747)**
+- experiments/price_path_arena.py --variant oracle+open_0.03; sessions 3ffb8694 (P02, first ask 354.43 instead of 343.47, Nordmark ended at the same 371.66), 4f9de9e6 (P07, closed at 5.38 instead of 5.41). Lab had predicted P02 +1.9, P07 -0.9. P11, P18 and relationship x0.95 on P02 still running.
