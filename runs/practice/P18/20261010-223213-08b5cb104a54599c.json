@@ -3,7 +3,7 @@
  "case_id": "case:P18",
  "set": "practice",
  "created_at": "2026-10-10T22:32:13+02:00",
- "label": "PERSIST? a teammate's session of 22:30-22:35, not Omar's full run (pulled by Omar's pull-runs at 22:40 without its own label - relabel if yours)",
+ "label": "PERSIST E2 past target + creep 0.25 + zone 0.9% {\"creep\": 0.25, \"past_target\": true, \"zone\": 0.009}",
  "replay": "https://arena.tacto.ai/replay/08b5cb104a54599c",
  "case": {
   "case_id": "case:P18",
