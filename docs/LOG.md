@@ -377,3 +377,19 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Cause: the Calculator underrates the relationship term (its supplier cost estimate is too low), so it takes deals the true term makes worse than walking away (X71-002: estimated 1,266,308, true 1,339,289, alternative 1,281,528). Weakest: monopolist 42, trader 43, capacity 47, falling_index 51.
 - Challenger rel_estimate=max (full cost = max of should-cost and 0.97 x its lowest offer) everywhere: REJECT, -3.5 +- 1.1 points paired on 163 test scenarios (runs/lab/*-challenge-*). Next to try: the cautious estimate only in the check against the alternative (accept() in strategies.py).
 - New tools: 'python -m sellm.lab challenge <knobs>' (champion vs champion+change, paired on the test pool, ADOPT/TIE/REJECT); 'search --around champion' (local search from our agent's knobs). New knobs rel_estimate/rel_margin, default off - sellm/agent.py unchanged. No practice quota used (189 left).
+
+## 2026-10-10 18:30 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] Reality check: --agent sellm (Calculator, lab-best knobs) on the real sandbox D01 scores 0.789, four times**
+- Sat 18:18-18:22, experiments/ab_sandbox.py --case D01 --arms calc --repeat 4 (commit 29e2d11, one loop per thread, no LLM). Free, quota still 189. Sessions under runs/sandbox/D01, label 'ab calc'.
+- All four identical: asks 40.47, 43.08, 44.86 (plus variant sheets 24.76/29.98/33.54 for 12 months); supplier 52.20, 51.30, then final_offer 50.60 after our 3rd message; deal 50.60, 30 days, 24 months, from 2026-12-01; score 0.789. The kit LLM agent scored 0.786 there.
+- The supplier's words on the first ask: 'your proposed prices are unfortunately far below a feasible level for our production and cannot be accommodated', later 'remains well below our operational limits'.
+- Scripted on the same case, same day (experiments/sandbox_probes.py h13): open 47.00, steps 0.60 -> finals 49.90, 49.80, scores 0.944, 0.957, final_offer after our 6th message. Open 46.00, steps 0.80 -> 0.944, 0.914, final_offer after the 5th.
+
+## 2026-10-10 18:30 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[finding] A lowball opening costs rounds and a worse first counter; a moderate path reaches 0.95 on D01**
+- Opening 18 % below the supplier's floor (40.47 against about 49.65): first counter 52.10-52.20 instead of 51.50, and final_offer after our 3rd message instead of the 6th. Openings 5-7 % below the floor (47.00, 46.00) showed neither.
+- Per round the supplier gave more when our step was huge (0.90, 0.70 against steps of 2.6 and 1.8), but two rounds of that are worth less than five rounds of 0.3-0.5: the rounds are the scarce thing.
+- Step-size curve on D01 now, same terms, final price / score: 0.05 -> 51.40 / 0.68; 0.15 -> 50.86 / 0.77; 0.30 -> 50.63 / 0.82; 0.40 -> 50.23 / 0.89; 0.60 -> 49.85 / 0.95; 0.80 -> 50.00 / 0.93. C_best corresponds to about 49.65.
+- For the lab (Amiad): the twins do not punish an opening far below the floor, which is why floor_guess 0.85 with open_below 0.10 won the search. The four 'ab calc' sessions and the h13 probes are pulled; calibrating on them should teach the lab the penalty. Until then lab-best knobs are not arena-best.
+- Also seen: the Calculator closes when its rising ask meets the supplier's falling price (accept_gap 0.01), while the scripts stayed 0.30 below the supplier until it said final_offer. And its 'joint' structure kept the earliest start date.
+- Group A therefore builds the negotiator's price path on this curve (open a few percent below the floor estimate, steps of about 1.2 % of the price, never close the gap ourselves) instead of the lab-tuned knobs. One demo supplier: to be confirmed on practice suppliers.

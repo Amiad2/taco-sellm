@@ -22,6 +22,9 @@ H8  what does the supplier's final price follow: our level or our steps?
     h8-low: open at 49.00 instead of 50.00; h8-slow: steps of 0.05 instead of 0.15
 H10 does the supplier come down further when we move further? (follows from H8)
     h10-a: open at 48.60, steps of 0.30; h10-b: open at 48.00, steps of 0.40
+H13 where does the mirror effect stop? h13-a: open at 47.00, steps of 0.60; h13-b: 46.00, steps of 0.80
+H14 how low can the opening go before the supplier treats it as not serious?
+    h14-a: open at 44.00, steps of 1.00; h14-b: open at 42.00, steps of 1.40
 H11 RFQ: does citing the rival's standing offer by its ID pull prices down?
     h11: scripted, one loop per thread, every e-mail cites the other supplier's offer if it is lower
 """
@@ -440,7 +443,7 @@ def h11(client):
 
 
 def main():
-    probes = ["h1a", "h1b", "h1c", "h2-trade", "h2-push", "h2-shift", "h2-hold", "h3-seq", "h3-par", "h8-low", "h8-slow", "h10-a", "h10-b", "h11"]
+    probes = ["h1a", "h1b", "h1c", "h2-trade", "h2-push", "h2-shift", "h2-hold", "h3-seq", "h3-par", "h8-low", "h8-slow", "h10-a", "h10-b", "h11", "h13-a", "h13-b", "h14-a", "h14-b"]
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("probes", nargs="+", choices=probes)
     ap.add_argument("--repeat", type=int, default=1, help="how often to run each probe (suppliers vary)")
@@ -469,6 +472,10 @@ def main():
         "h10-a": lambda: h2(client, "none", start=48.6, step=0.3, name="h10-a"),
         "h10-b": lambda: h2(client, "none", start=48.0, step=0.4, name="h10-b"),
         "h11": lambda: h11(client),
+        "h13-a": lambda: h2(client, "none", start=47.0, step=0.6, name="h13-a"),
+        "h13-b": lambda: h2(client, "none", start=46.0, step=0.8, name="h13-b"),
+        "h14-a": lambda: h2(client, "none", start=44.0, step=1.0, name="h14-a"),
+        "h14-b": lambda: h2(client, "none", start=42.0, step=1.4, name="h14-b"),
     }
     todo = [p for p in args.probes for _ in range(args.repeat)]
 
