@@ -23,7 +23,7 @@ runs are in `runs/logs/`.
 | P11 (practice) | quality / quality_first | 817,578 | 722,500 | 894,383 | 0.710 | kit llm, gpt-6.1-sol | 2 |
 | P18 (practice) | raw_material / leverage | 295,173 | 222,651 | 301,088 | 0.406 | sellm negotiator v1.1 @2dadddb, kit runner, no LLM | 2 |
 | D01 (sandbox) | price_increase / stabilise | 448,811 | 408,624 | - | 0.957 | probe h13-a | 59 |
-| D02 (sandbox) | rfq / leverage | 214,296 | 156,739 | 238,800 | 0.535 | ab nego-template @ebcdcd6+local | 20 |
+| D02 (sandbox) | rfq / leverage | 214,296 | 156,739 | 238,800 | 0.535 | ab nego-template @ebcdcd6+local | 23 |
 
 Mean of our best per practice case played: 65.2 (10 cases).
 
@@ -136,3 +136,6 @@ price would beat C_best, so the supplier would not give all of them at this pric
 | D02 | 10-10 20:49 | runner v1, sellm (negotiator v1.1) | 0.535 | accepted | 11 | unit_price=14.5, payment_days=14, lead_time_days=28, incoterm=EXW | 26,768 | 8,979 | 17,789 | [md](sandbox/D02/20261010-204942-cf9a618f7b85a064.md) · [json](sandbox/D02/20261010-204942-cf9a618f7b85a064.json) · [replay](https://arena.tacto.ai/replay/cf9a618f7b85a064) |
 | D02 | 10-10 20:49 | runner v1, sellm (negotiator v1.1) | 0.514 | accepted | 13 | unit_price=14.6, payment_days=14, lead_time_days=28, incoterm=EXW | 27,980 | 8,991 | 18,989 | [md](sandbox/D02/20261010-204942-2ddae512980855ac.md) · [json](sandbox/D02/20261010-204942-2ddae512980855ac.json) · [replay](https://arena.tacto.ai/replay/2ddae512980855ac) |
 | D02 | 10-10 20:49 | runner v1, sellm (negotiator v1.1) | 0.535 | accepted | 13 | unit_price=14.5, payment_days=14, lead_time_days=28, incoterm=EXW | 26,768 | 8,979 | 17,789 | [md](sandbox/D02/20261010-204942-f387b4ae1daf4dfa.md) · [json](sandbox/D02/20261010-204942-f387b4ae1daf4dfa.json) · [replay](https://arena.tacto.ai/replay/f387b4ae1daf4dfa) |
+| D02 | 10-10 20:54 | runner v1.1 (clock guard), sellm (negotiator v1.1) | 0.535 | accepted | 12 | unit_price=14.5, payment_days=14, lead_time_days=28, incoterm=EXW | 26,768 | 8,979 | 17,789 | [md](sandbox/D02/20261010-205446-8c918171a0c2a23b.md) · [json](sandbox/D02/20261010-205446-8c918171a0c2a23b.json) · [replay](https://arena.tacto.ai/replay/8c918171a0c2a23b) |
+| D02 | 10-10 20:54 | runner v1.1 (clock guard), sellm (negotiator v1.1) | 0.535 | accepted | 14 | unit_price=14.5, payment_days=14, lead_time_days=28, incoterm=EXW | 26,768 | 8,979 | 17,789 | [md](sandbox/D02/20261010-205446-5bbbe16ce04d1bc8.md) · [json](sandbox/D02/20261010-205446-5bbbe16ce04d1bc8.json) · [replay](https://arena.tacto.ai/replay/5bbbe16ce04d1bc8) |
+| D02 | 10-10 20:54 | runner v1.1 (clock guard), sellm (negotiator v1.1) | 0.535 | accepted | 14 | unit_price=14.5, payment_days=14, lead_time_days=28, incoterm=EXW | 26,768 | 8,979 | 17,789 | [md](sandbox/D02/20261010-205446-fcae23239373e7e3.md) · [json](sandbox/D02/20261010-205446-fcae23239373e7e3.json) · [replay](https://arena.tacto.ai/replay/fcae23239373e7e3) |

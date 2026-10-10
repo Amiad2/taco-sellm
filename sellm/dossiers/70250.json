@@ -6,7 +6,370 @@
   "sunday_release": false
  },
  "case_facts": {},
- "citable": [],
+ "citable": [
+  {
+   "about": "part:320060",
+   "figure": 12.3,
+   "helps_buyer": false,
+   "ids": [
+    "idx:PPI-C2431@2025-08",
+    "idx:PPI-C2431@2026-08"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "PPI-C2431",
+   "statement": "The index PPI-C2431 changed +12.3 % from 2025-08 to 2026-08 (idx:PPI-C2431@2025-08, idx:PPI-C2431@2026-08).",
+   "strength": 3.923478,
+   "unit": "%",
+   "weight": 0.32,
+   "window": 12
+  },
+  {
+   "about": "part:320060",
+   "figure": 9.7,
+   "helps_buyer": false,
+   "ids": [
+    "idx:PPI-C2431@2026-02",
+    "idx:PPI-C2431@2026-08"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "PPI-C2431",
+   "statement": "The index PPI-C2431 changed +9.7 % from 2026-02 to 2026-08 (idx:PPI-C2431@2026-02, idx:PPI-C2431@2026-08).",
+   "strength": 3.099405,
+   "unit": "%",
+   "weight": 0.32,
+   "window": 6
+  },
+  {
+   "about": "part:320060",
+   "figure": -3.7,
+   "helps_buyer": true,
+   "ids": [
+    "idx:PPI-D351@2025-08",
+    "idx:PPI-D351@2026-08"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "PPI-D351",
+   "statement": "The index PPI-D351 changed -3.7 % from 2025-08 to 2026-08 (idx:PPI-D351@2025-08, idx:PPI-D351@2026-08).",
+   "strength": 0.186131,
+   "unit": "%",
+   "weight": 0.05,
+   "window": 12
+  },
+  {
+   "about": "part:320060",
+   "figure": 6.6,
+   "helps_buyer": false,
+   "ids": [
+    "idx:PPI-D351@2026-02",
+    "idx:PPI-D351@2026-08"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "PPI-D351",
+   "statement": "The index PPI-D351 changed +6.6 % from 2026-02 to 2026-08 (idx:PPI-D351@2026-02, idx:PPI-D351@2026-08).",
+   "strength": 0.331447,
+   "unit": "%",
+   "weight": 0.05,
+   "window": 6
+  },
+  {
+   "about": "part:320060",
+   "figure": 2.7,
+   "helps_buyer": false,
+   "ids": [
+    "idx:LCI-C@2025-06",
+    "idx:LCI-C@2026-06"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "LCI-C",
+   "statement": "The index LCI-C changed +2.7 % from 2025-06 to 2026-06 (idx:LCI-C@2025-06, idx:LCI-C@2026-06).",
+   "strength": 0.904721,
+   "unit": "%",
+   "weight": 0.34,
+   "window": 12
+  },
+  {
+   "about": "part:320060",
+   "figure": 1.7,
+   "helps_buyer": false,
+   "ids": [
+    "idx:LCI-C@2025-12",
+    "idx:LCI-C@2026-06"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "LCI-C",
+   "statement": "The index LCI-C changed +1.7 % from 2025-12 to 2026-06 (idx:LCI-C@2025-12, idx:LCI-C@2026-06).",
+   "strength": 0.578231,
+   "unit": "%",
+   "weight": 0.34,
+   "window": 6
+  },
+  {
+   "about": "part:320090",
+   "figure": 5.9,
+   "helps_buyer": false,
+   "ids": [
+    "idx:AS-14404@2025-09",
+    "idx:AS-14404@2026-09"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "AS-14404",
+   "statement": "The index AS-14404 changed +5.9 % from 2025-09 to 2026-09 (idx:AS-14404@2025-09, idx:AS-14404@2026-09).",
+   "strength": 0.887898,
+   "unit": "%",
+   "weight": 0.15,
+   "window": 12
+  },
+  {
+   "about": "part:320090",
+   "figure": -0.3,
+   "helps_buyer": false,
+   "ids": [
+    "idx:AS-14404@2026-03",
+    "idx:AS-14404@2026-09"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "AS-14404",
+   "statement": "The index AS-14404 changed -0.3 % from 2026-03 to 2026-09 (idx:AS-14404@2026-03, idx:AS-14404@2026-09).",
+   "strength": 0.03916,
+   "unit": "%",
+   "weight": 0.15,
+   "window": 6
+  },
+  {
+   "about": "sup:70250",
+   "figure": 88.0,
+   "helps_buyer": true,
+   "ids": [
+    "sc:70250@2026Q3"
+   ],
+   "kind": "sc_otd",
+   "private": false,
+   "statement": "Your rolling twelve-month on-time delivery in 2026Q3 was 88.0 % (sc:70250@2026Q3).",
+   "strength": 0.7,
+   "unit": "%"
+  },
+  {
+   "about": "sup:70250",
+   "figure": 318.0,
+   "helps_buyer": false,
+   "ids": [
+    "sc:70250@2026Q3"
+   ],
+   "kind": "sc_ppm",
+   "private": false,
+   "statement": "Your rolling twelve-month quality level in 2026Q3 was 318 ppm (sc:70250@2026Q3).",
+   "strength": 0.318,
+   "unit": "ppm"
+  },
+  {
+   "about": "part:320090",
+   "figure": 1961.0,
+   "helps_buyer": true,
+   "ids": [
+    "qn:20004953"
+   ],
+   "kind": "qn",
+   "private": false,
+   "statement": "Complaint qn:20004953 of 2026-06-19 recorded 1,961 ppm.",
+   "strength": 0.49025,
+   "unit": "ppm"
+  },
+  {
+   "about": "part:320090",
+   "figure": 1887.0,
+   "helps_buyer": true,
+   "ids": [
+    "qn:20004789"
+   ],
+   "kind": "qn",
+   "private": false,
+   "statement": "Complaint qn:20004789 of 2026-01-11 recorded 1,887 ppm.",
+   "strength": 0.47175,
+   "unit": "ppm"
+  },
+  {
+   "about": "part:320090",
+   "figure": 1667.0,
+   "helps_buyer": true,
+   "ids": [
+    "qn:20004737"
+   ],
+   "kind": "qn",
+   "private": false,
+   "statement": "Complaint qn:20004737 of 2025-11-18 recorded 1,667 ppm.",
+   "strength": 0.41675,
+   "unit": "ppm"
+  },
+  {
+   "about": "part:320090",
+   "figure": -2.1,
+   "helps_buyer": false,
+   "ids": [
+    "po:4500011378-10",
+    "po:4500014433-10"
+   ],
+   "kind": "po",
+   "private": false,
+   "statement": "We ordered from you at EUR 4.74 per unit in 2024-09 and at EUR 4.64 per unit in 2026-09 (po:4500011378-10, po:4500014433-10).",
+   "strength": 1.054852,
+   "unit": "%"
+  },
+  {
+   "about": "part:320060",
+   "figure": 20.0,
+   "helps_buyer": true,
+   "ids": [
+    "fc:320060@2026-09"
+   ],
+   "kind": "fc",
+   "private": false,
+   "statement": "Our forecast fc:320060@2026-09 expects 17,910 units a year, a change of +20.0 %.",
+   "strength": 4.0,
+   "unit": "%"
+  },
+  {
+   "about": "part:320090",
+   "figure": 7.7,
+   "helps_buyer": true,
+   "ids": [
+    "fc:320090@2026-09"
+   ],
+   "kind": "fc",
+   "private": false,
+   "statement": "Our forecast fc:320090@2026-09 expects 27,000 units a year, a change of +7.7 %.",
+   "strength": 1.54,
+   "unit": "%"
+  },
+  {
+   "about": "sup:70250",
+   "figure": null,
+   "helps_buyer": true,
+   "helps_supplier": false,
+   "ids": [
+    "news:20260309-03"
+   ],
+   "kind": "news",
+   "private": false,
+   "sensitive": false,
+   "statement": "We have read that Drehteile Fuchsreiter GmbH looks for new customers (news:20260309-03).",
+   "strength": 0.5,
+   "topic": "free_capacity",
+   "unit": ""
+  },
+  {
+   "about": "part:320060",
+   "case_only": true,
+   "figure": 16.3,
+   "helps_buyer": true,
+   "ids": [
+    "quote:7300013"
+   ],
+   "kind": "quote",
+   "private": true,
+   "rival": true,
+   "statement": "We hold a quote at EUR 16.30 per unit for this part (quote:7300013).",
+   "strength": 2.0,
+   "unit": "EUR"
+  },
+  {
+   "about": "part:320060",
+   "case_only": true,
+   "figure": 17.87,
+   "helps_buyer": true,
+   "ids": [
+    "quote:7200013"
+   ],
+   "kind": "quote",
+   "private": false,
+   "rival": false,
+   "statement": "Your own quote of 2026-09-14 was EUR 17.87 per unit (quote:7200013).",
+   "strength": 2.0,
+   "unit": "EUR"
+  },
+  {
+   "about": "part:320090",
+   "case_only": true,
+   "figure": 4.6,
+   "helps_buyer": true,
+   "ids": [
+    "quote:7300080"
+   ],
+   "kind": "quote",
+   "private": true,
+   "rival": true,
+   "statement": "We hold a quote at EUR 4.60 per unit for this part (quote:7300080).",
+   "strength": 2.0,
+   "unit": "EUR"
+  },
+  {
+   "about": "part:320060",
+   "case_only": true,
+   "figure": 18.1,
+   "helps_buyer": true,
+   "ids": [
+    "quote:7100028"
+   ],
+   "kind": "quote",
+   "private": true,
+   "rival": true,
+   "statement": "We hold a quote at EUR 18.10 per unit for this part (quote:7100028).",
+   "strength": 2.0,
+   "unit": "EUR"
+  },
+  {
+   "about": "part:320060",
+   "case_only": true,
+   "figure": 17.3,
+   "helps_buyer": true,
+   "ids": [
+    "quote:7100029"
+   ],
+   "kind": "quote",
+   "private": false,
+   "rival": false,
+   "statement": "Your own quote of 2025-08-17 was EUR 17.30 per unit (quote:7100029).",
+   "strength": 2.0,
+   "unit": "EUR"
+  },
+  {
+   "about": "part:320090",
+   "case_only": true,
+   "figure": 5.0,
+   "helps_buyer": true,
+   "ids": [
+    "quote:7100030"
+   ],
+   "kind": "quote",
+   "private": true,
+   "rival": true,
+   "statement": "We hold a quote at EUR 5.00 per unit for this part (quote:7100030).",
+   "strength": 2.0,
+   "unit": "EUR"
+  },
+  {
+   "about": "part:320090",
+   "case_only": true,
+   "figure": 5.1,
+   "helps_buyer": true,
+   "ids": [
+    "quote:7100031"
+   ],
+   "kind": "quote",
+   "private": false,
+   "rival": false,
+   "statement": "Your own quote of 2025-03-16 was EUR 5.10 per unit (quote:7100031).",
+   "strength": 2.0,
+   "unit": "EUR"
+  }
+ ],
  "contact": null,
  "contract": {
   "id": "ctr:4600070250",

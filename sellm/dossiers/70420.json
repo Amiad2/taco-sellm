@@ -6,7 +6,174 @@
   "sunday_release": false
  },
  "case_facts": {},
- "citable": [],
+ "citable": [
+  {
+   "about": "part:340012",
+   "figure": 3.9,
+   "helps_buyer": false,
+   "ids": [
+    "idx:PPI-C2219@2025-08",
+    "idx:PPI-C2219@2026-08"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "PPI-C2219",
+   "statement": "The index PPI-C2219 changed +3.9 % from 2025-08 to 2026-08 (idx:PPI-C2219@2025-08, idx:PPI-C2219@2026-08).",
+   "strength": 0.429542,
+   "unit": "%",
+   "weight": 0.11,
+   "window": 12
+  },
+  {
+   "about": "part:340012",
+   "figure": 3.2,
+   "helps_buyer": false,
+   "ids": [
+    "idx:PPI-C2219@2026-02",
+    "idx:PPI-C2219@2026-08"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "PPI-C2219",
+   "statement": "The index PPI-C2219 changed +3.2 % from 2026-02 to 2026-08 (idx:PPI-C2219@2026-02, idx:PPI-C2219@2026-08).",
+   "strength": 0.352445,
+   "unit": "%",
+   "weight": 0.11,
+   "window": 6
+  },
+  {
+   "about": "part:340012",
+   "figure": 2.7,
+   "helps_buyer": false,
+   "ids": [
+    "idx:LCI-C@2025-06",
+    "idx:LCI-C@2026-06"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "LCI-C",
+   "statement": "The index LCI-C changed +2.7 % from 2025-06 to 2026-06 (idx:LCI-C@2025-06, idx:LCI-C@2026-06).",
+   "strength": 0.824893,
+   "unit": "%",
+   "weight": 0.31,
+   "window": 12
+  },
+  {
+   "about": "part:340012",
+   "figure": 1.7,
+   "helps_buyer": false,
+   "ids": [
+    "idx:LCI-C@2025-12",
+    "idx:LCI-C@2026-06"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "LCI-C",
+   "statement": "The index LCI-C changed +1.7 % from 2025-12 to 2026-06 (idx:LCI-C@2025-12, idx:LCI-C@2026-06).",
+   "strength": 0.527211,
+   "unit": "%",
+   "weight": 0.31,
+   "window": 6
+  },
+  {
+   "about": "part:340012",
+   "figure": 273.72,
+   "helps_buyer": true,
+   "ids": [
+    "cost:340012"
+   ],
+   "kind": "cost",
+   "plant_specific": true,
+   "private": false,
+   "statement": "Our bottom-up estimate of the full cost is EUR 273.72 per unit before margin (cost:340012).",
+   "strength": 3.0,
+   "unit": "EUR"
+  },
+  {
+   "about": "sup:70420",
+   "figure": 95.8,
+   "helps_buyer": false,
+   "ids": [
+    "sc:70420@2026Q3"
+   ],
+   "kind": "sc_otd",
+   "private": false,
+   "statement": "Your rolling twelve-month on-time delivery in 2026Q3 was 95.8 % (sc:70420@2026Q3).",
+   "strength": 0.0,
+   "unit": "%"
+  },
+  {
+   "about": "sup:70420",
+   "figure": 0.0,
+   "helps_buyer": false,
+   "ids": [
+    "sc:70420@2026Q3"
+   ],
+   "kind": "sc_ppm",
+   "private": false,
+   "statement": "Your rolling twelve-month quality level in 2026Q3 was 0 ppm (sc:70420@2026Q3).",
+   "strength": 0.0,
+   "unit": "ppm"
+  },
+  {
+   "about": "part:340012",
+   "figure": 0.0,
+   "helps_buyer": false,
+   "ids": [
+    "po:4500011399-10",
+    "po:4500014451-10"
+   ],
+   "kind": "po",
+   "private": false,
+   "statement": "We ordered from you at EUR 319.11 per unit in 2024-09 and at EUR 319.11 per unit in 2026-09 (po:4500011399-10, po:4500014451-10).",
+   "strength": 0.0,
+   "unit": "%"
+  },
+  {
+   "about": "part:340012",
+   "figure": 19.8,
+   "helps_buyer": true,
+   "ids": [
+    "fc:340012@2026-09"
+   ],
+   "kind": "fc",
+   "private": false,
+   "statement": "Our forecast fc:340012@2026-09 expects 1,598 units a year, a change of +19.8 %.",
+   "strength": 3.96,
+   "unit": "%"
+  },
+  {
+   "about": "sup:70420",
+   "figure": null,
+   "helps_buyer": false,
+   "helps_supplier": false,
+   "ids": [
+    "news:20260912-29"
+   ],
+   "kind": "news",
+   "private": false,
+   "sensitive": false,
+   "statement": "We have read that Gleitring-Systeme Kaltenbrunn AG extends drinking-water approvals (news:20260912-29).",
+   "strength": 0.5,
+   "topic": "approvals",
+   "unit": ""
+  },
+  {
+   "about": "part:340012",
+   "case_only": true,
+   "figure": 319.11,
+   "helps_buyer": true,
+   "ids": [
+    "quote:7300055"
+   ],
+   "kind": "quote",
+   "private": false,
+   "rival": false,
+   "statement": "Your own quote of 2026-09-07 was EUR 319.11 per unit (quote:7300055).",
+   "strength": 2.0,
+   "unit": "EUR"
+  }
+ ],
  "contact": null,
  "contract": {
   "id": "ctr:4600070420",

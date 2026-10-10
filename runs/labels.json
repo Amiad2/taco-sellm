@@ -36,6 +36,7 @@
  "55fdbfea88ae9d8c": "probe h11",
  "56a40214af01822c": "probe h10-a",
  "56a5429b4ce2918c": "ab nego-template @ebcdcd6+local",
+ "5bbbe16ce04d1bc8": "runner v1.1 (clock guard), sellm (negotiator v1.1)",
  "5f15d1920cec3f32": "kit llm, gpt-6.1-sol",
  "6254f7fbad799c3f": "sellm negotiator v1.1 @2dadddb, kit runner, no LLM",
  "63971c870bbbf17d": "sellm negotiator v1.1 @2dadddb, kit runner, no LLM",
@@ -53,6 +54,7 @@
  "878779258c7d07cc": "kit llm, gpt-6.1-sol",
  "8a471ef29c3e7c62": "ab nego-template @d1b07a8+local",
  "8a5e931b04819ab2": "runner v1, sellm (negotiator v1.1)",
+ "8c918171a0c2a23b": "runner v1.1 (clock guard), sellm (negotiator v1.1)",
  "8ca87b4ebe80ed28": "ab nego-template+opening_line=thank you for your offer and for twelve years of reliable supply. @ebcdcd6+local",
  "90f0247dd0438143": "ab nego-template+opening_line=thank you for your offer and for twelve years of reliable supply. @ebcdcd6+local",
  "924397216b84b3ab": "ab nego-template @ebcdcd6+local",
@@ -96,6 +98,7 @@
  "f8ee381f24b016da": "probe h8-low",
  "f958c6b07c068a22": "ab nego-template+opening_line=thank you for your offer and for twelve years of reliable supply. @ebcdcd6+local",
  "fc33ea1824a54fa0": "ab nego-template @ebcdcd6+local",
+ "fcae23239373e7e3": "runner v1.1 (clock guard), sellm (negotiator v1.1)",
  "feeb978644092365": "ab nego-template @ebcdcd6+local",
  "ffaaeec39a8214fd": "probe h1c",
  "fff76670fe248a29": "kit llm, gpt-6.1-sol"

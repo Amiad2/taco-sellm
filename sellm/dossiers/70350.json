@@ -6,7 +6,233 @@
   "sunday_release": false
  },
  "case_facts": {},
- "citable": [],
+ "citable": [
+  {
+   "about": "part:330060",
+   "figure": -3.7,
+   "helps_buyer": true,
+   "ids": [
+    "idx:PPI-D351@2025-08",
+    "idx:PPI-D351@2026-08"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "PPI-D351",
+   "statement": "The index PPI-D351 changed -3.7 % from 2025-08 to 2026-08 (idx:PPI-D351@2025-08, idx:PPI-D351@2026-08).",
+   "strength": 0.260584,
+   "unit": "%",
+   "weight": 0.07,
+   "window": 12
+  },
+  {
+   "about": "part:330060",
+   "figure": 6.6,
+   "helps_buyer": false,
+   "ids": [
+    "idx:PPI-D351@2026-02",
+    "idx:PPI-D351@2026-08"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "PPI-D351",
+   "statement": "The index PPI-D351 changed +6.6 % from 2026-02 to 2026-08 (idx:PPI-D351@2026-02, idx:PPI-D351@2026-08).",
+   "strength": 0.464026,
+   "unit": "%",
+   "weight": 0.07,
+   "window": 6
+  },
+  {
+   "about": "part:330060",
+   "figure": 6.5,
+   "helps_buyer": false,
+   "ids": [
+    "idx:PPI-C241@2025-08",
+    "idx:PPI-C241@2026-08"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "PPI-C241",
+   "statement": "The index PPI-C241 changed +6.5 % from 2025-08 to 2026-08 (idx:PPI-C241@2025-08, idx:PPI-C241@2026-08).",
+   "strength": 1.438632,
+   "unit": "%",
+   "weight": 0.22,
+   "window": 12
+  },
+  {
+   "about": "part:330060",
+   "figure": 6.2,
+   "helps_buyer": false,
+   "ids": [
+    "idx:PPI-C241@2026-02",
+    "idx:PPI-C241@2026-08"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "PPI-C241",
+   "statement": "The index PPI-C241 changed +6.2 % from 2026-02 to 2026-08 (idx:PPI-C241@2026-02, idx:PPI-C241@2026-08).",
+   "strength": 1.368104,
+   "unit": "%",
+   "weight": 0.22,
+   "window": 6
+  },
+  {
+   "about": "part:330060",
+   "figure": 2.7,
+   "helps_buyer": false,
+   "ids": [
+    "idx:LCI-C@2025-06",
+    "idx:LCI-C@2026-06"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "LCI-C",
+   "statement": "The index LCI-C changed +2.7 % from 2025-06 to 2026-06 (idx:LCI-C@2025-06, idx:LCI-C@2026-06).",
+   "strength": 0.904721,
+   "unit": "%",
+   "weight": 0.34,
+   "window": 12
+  },
+  {
+   "about": "part:330060",
+   "figure": 1.7,
+   "helps_buyer": false,
+   "ids": [
+    "idx:LCI-C@2025-12",
+    "idx:LCI-C@2026-06"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "LCI-C",
+   "statement": "The index LCI-C changed +1.7 % from 2025-12 to 2026-06 (idx:LCI-C@2025-12, idx:LCI-C@2026-06).",
+   "strength": 0.578231,
+   "unit": "%",
+   "weight": 0.34,
+   "window": 6
+  },
+  {
+   "about": "sup:70350",
+   "figure": 53.8,
+   "helps_buyer": true,
+   "ids": [
+    "sc:70350@2026Q3"
+   ],
+   "kind": "sc_otd",
+   "private": false,
+   "statement": "Your rolling twelve-month on-time delivery in 2026Q3 was 53.8 % (sc:70350@2026Q3).",
+   "strength": 4.12,
+   "unit": "%"
+  },
+  {
+   "about": "sup:70350",
+   "figure": 5556.0,
+   "helps_buyer": true,
+   "ids": [
+    "sc:70350@2026Q3"
+   ],
+   "kind": "sc_ppm",
+   "private": false,
+   "statement": "Your rolling twelve-month quality level in 2026Q3 was 5,556 ppm (sc:70350@2026Q3).",
+   "strength": 5.556,
+   "unit": "ppm"
+  },
+  {
+   "about": "part:330060",
+   "figure": 25000.0,
+   "helps_buyer": true,
+   "ids": [
+    "qn:20005030"
+   ],
+   "kind": "qn",
+   "private": false,
+   "statement": "Complaint qn:20005030 of 2026-09-19 recorded 25,000 ppm.",
+   "strength": 6.25,
+   "unit": "ppm"
+  },
+  {
+   "about": "part:330060",
+   "figure": 28846.0,
+   "helps_buyer": true,
+   "ids": [
+    "qn:20005026"
+   ],
+   "kind": "qn",
+   "private": false,
+   "statement": "Complaint qn:20005026 of 2026-09-14 recorded 28,846 ppm.",
+   "strength": 7.2115,
+   "unit": "ppm"
+  },
+  {
+   "about": "part:330060",
+   "figure": 30303.0,
+   "helps_buyer": true,
+   "ids": [
+    "qn:20005009"
+   ],
+   "kind": "qn",
+   "private": false,
+   "statement": "Complaint qn:20005009 of 2026-08-27 recorded 30,303 ppm.",
+   "strength": 7.57575,
+   "unit": "ppm"
+  },
+  {
+   "about": "part:330060",
+   "figure": 0.0,
+   "helps_buyer": false,
+   "ids": [
+    "po:4500011360-10",
+    "po:4500014424-10"
+   ],
+   "kind": "po",
+   "private": false,
+   "statement": "We ordered from you at EUR 9.99 per unit in 2024-09 and at EUR 9.99 per unit in 2026-09 (po:4500011360-10, po:4500014424-10).",
+   "strength": 0.0,
+   "unit": "%"
+  },
+  {
+   "about": "part:330060",
+   "figure": 3.8,
+   "helps_buyer": true,
+   "ids": [
+    "fc:330060@2026-09"
+   ],
+   "kind": "fc",
+   "private": false,
+   "statement": "Our forecast fc:330060@2026-09 expects 22,600 units a year, a change of +3.8 %.",
+   "strength": 0.76,
+   "unit": "%"
+  },
+  {
+   "about": "sup:70350",
+   "figure": null,
+   "helps_buyer": true,
+   "helps_supplier": false,
+   "ids": [
+    "news:20260904-26"
+   ],
+   "kind": "news",
+   "private": false,
+   "sensitive": true,
+   "statement": "We have read that Credit agency lowers rating of Oberflächentechnik Weißacher GmbH (news:20260904-26).",
+   "strength": 0.5,
+   "topic": "credit_downgrade",
+   "unit": ""
+  },
+  {
+   "about": "part:330060",
+   "case_only": true,
+   "figure": 9.99,
+   "helps_buyer": true,
+   "ids": [
+    "quote:7300070"
+   ],
+   "kind": "quote",
+   "private": false,
+   "rival": false,
+   "statement": "Your own quote of 2026-09-22 was EUR 9.99 per unit (quote:7300070).",
+   "strength": 2.0,
+   "unit": "EUR"
+  }
+ ],
  "contact": null,
  "contract": {
   "id": "ctr:4600070350",

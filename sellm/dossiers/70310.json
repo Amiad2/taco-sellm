@@ -6,7 +6,202 @@
   "sunday_release": false
  },
  "case_facts": {},
- "citable": [],
+ "citable": [
+  {
+   "about": "part:330010",
+   "figure": 6.5,
+   "helps_buyer": false,
+   "ids": [
+    "idx:PPI-C241@2025-08",
+    "idx:PPI-C241@2026-08"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "PPI-C241",
+   "statement": "The index PPI-C241 changed +6.5 % from 2025-08 to 2026-08 (idx:PPI-C241@2025-08, idx:PPI-C241@2026-08).",
+   "strength": 2.092555,
+   "unit": "%",
+   "weight": 0.32,
+   "window": 12
+  },
+  {
+   "about": "part:330010",
+   "figure": 6.2,
+   "helps_buyer": false,
+   "ids": [
+    "idx:PPI-C241@2026-02",
+    "idx:PPI-C241@2026-08"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "PPI-C241",
+   "statement": "The index PPI-C241 changed +6.2 % from 2026-02 to 2026-08 (idx:PPI-C241@2026-02, idx:PPI-C241@2026-08).",
+   "strength": 1.98997,
+   "unit": "%",
+   "weight": 0.32,
+   "window": 6
+  },
+  {
+   "about": "part:330010",
+   "figure": -3.7,
+   "helps_buyer": true,
+   "ids": [
+    "idx:PPI-D351@2025-08",
+    "idx:PPI-D351@2026-08"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "PPI-D351",
+   "statement": "The index PPI-D351 changed -3.7 % from 2025-08 to 2026-08 (idx:PPI-D351@2025-08, idx:PPI-D351@2026-08).",
+   "strength": 0.223358,
+   "unit": "%",
+   "weight": 0.06,
+   "window": 12
+  },
+  {
+   "about": "part:330010",
+   "figure": 6.6,
+   "helps_buyer": false,
+   "ids": [
+    "idx:PPI-D351@2026-02",
+    "idx:PPI-D351@2026-08"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "PPI-D351",
+   "statement": "The index PPI-D351 changed +6.6 % from 2026-02 to 2026-08 (idx:PPI-D351@2026-02, idx:PPI-D351@2026-08).",
+   "strength": 0.397736,
+   "unit": "%",
+   "weight": 0.06,
+   "window": 6
+  },
+  {
+   "about": "part:330010",
+   "figure": 2.7,
+   "helps_buyer": false,
+   "ids": [
+    "idx:LCI-C@2025-06",
+    "idx:LCI-C@2026-06"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "LCI-C",
+   "statement": "The index LCI-C changed +2.7 % from 2025-06 to 2026-06 (idx:LCI-C@2025-06, idx:LCI-C@2026-06).",
+   "strength": 0.771674,
+   "unit": "%",
+   "weight": 0.29,
+   "window": 12
+  },
+  {
+   "about": "part:330010",
+   "figure": 1.7,
+   "helps_buyer": false,
+   "ids": [
+    "idx:LCI-C@2025-12",
+    "idx:LCI-C@2026-06"
+   ],
+   "kind": "idx",
+   "private": false,
+   "series": "LCI-C",
+   "statement": "The index LCI-C changed +1.7 % from 2025-12 to 2026-06 (idx:LCI-C@2025-12, idx:LCI-C@2026-06).",
+   "strength": 0.493197,
+   "unit": "%",
+   "weight": 0.29,
+   "window": 6
+  },
+  {
+   "about": "sup:70310",
+   "figure": 63.0,
+   "helps_buyer": true,
+   "ids": [
+    "sc:70310@2026Q3"
+   ],
+   "kind": "sc_otd",
+   "private": false,
+   "statement": "Your rolling twelve-month on-time delivery in 2026Q3 was 63.0 % (sc:70310@2026Q3).",
+   "strength": 3.2,
+   "unit": "%"
+  },
+  {
+   "about": "sup:70310",
+   "figure": 4118.0,
+   "helps_buyer": true,
+   "ids": [
+    "sc:70310@2026Q3"
+   ],
+   "kind": "sc_ppm",
+   "private": false,
+   "statement": "Your rolling twelve-month quality level in 2026Q3 was 4,118 ppm (sc:70310@2026Q3).",
+   "strength": 4.118,
+   "unit": "ppm"
+  },
+  {
+   "about": "part:330010",
+   "figure": 15000.0,
+   "helps_buyer": true,
+   "ids": [
+    "qn:20005001"
+   ],
+   "kind": "qn",
+   "private": false,
+   "statement": "Complaint qn:20005001 of 2026-08-24 recorded 15,000 ppm.",
+   "strength": 3.75,
+   "unit": "ppm"
+  },
+  {
+   "about": "part:330010",
+   "figure": 19444.0,
+   "helps_buyer": true,
+   "ids": [
+    "qn:20004974"
+   ],
+   "kind": "qn",
+   "private": false,
+   "statement": "Complaint qn:20004974 of 2026-07-15 recorded 19,444 ppm.",
+   "strength": 4.861,
+   "unit": "ppm"
+  },
+  {
+   "about": "part:330010",
+   "figure": 20000.0,
+   "helps_buyer": true,
+   "ids": [
+    "qn:20004913"
+   ],
+   "kind": "qn",
+   "private": false,
+   "statement": "Complaint qn:20004913 of 2026-05-06 recorded 20,000 ppm.",
+   "strength": 5.0,
+   "unit": "ppm"
+  },
+  {
+   "about": "part:330010",
+   "figure": 0.0,
+   "helps_buyer": false,
+   "ids": [
+    "po:4500011418-10",
+    "po:4500014457-10"
+   ],
+   "kind": "po",
+   "private": false,
+   "statement": "We ordered from you at EUR 100.14 per unit in 2024-09 and at EUR 100.14 per unit in 2026-09 (po:4500011418-10, po:4500014457-10).",
+   "strength": 0.0,
+   "unit": "%"
+  },
+  {
+   "about": "part:330010",
+   "figure": 5.6,
+   "helps_buyer": true,
+   "ids": [
+    "fc:330010@2026-09"
+   ],
+   "kind": "fc",
+   "private": false,
+   "statement": "Our forecast fc:330010@2026-09 expects 8,980 units a year, a change of +5.6 %.",
+   "strength": 1.12,
+   "unit": "%"
+  }
+ ],
  "contact": null,
  "contract": {
   "id": "ctr:4600070310",
