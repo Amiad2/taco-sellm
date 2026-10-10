@@ -112,3 +112,12 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Claims: 8 verified, 8 duplicate (same ID cited again), none in P05, P07, P08. Suppliers asked for data in P03, P04, P05, P10.
 - Where a plant-specific should-cost exists, the price at C_best is 0.98-1.16 times should-cost; in P10 we closed at 1.38 times.
 - Open: in P08, P18 and P10 C_best lies 6-19 % below the current price and we do not know which fact unlocks it.
+
+## 2026-10-10 15:52 CEST · Amiad @ fedora
+**[decision] Build a local supplier simulator (lab) after all; PLAN.md section 9 reversed**
+- Why: 189 practice sessions must last until the final, and screening strategy variants (levers, accept timing, moves after final_offer, several sheets, RFQ) needs hundreds of full negotiations. Sandbox has only 2 cases and 3 demo suppliers.
+- Why it can work: the real suppliers' reasons in our traces are templated ('it holds, but it does not change our calculation', 'Without movement from your side we cannot move either'), i.e. an engine with hidden numbers plus LLM prose, which a model can approximate.
+- What: sellm/lab/ - an in-process table with the RemoteTable interface (kit play() and every agent run unchanged, no clock, no HTTP), twins of the 11 suppliers we played calibrated so the best acceptable package costs exactly the case's C_best, invented suppliers on generated cases, a tournament runner, reports in runs/lab/.
+- Guard: lab results are hypotheses. The lab is backtested against our 13 real sessions first; winners are confirmed in sandbox D01/D02, then on single practice cases. arena_kit/ stays untouched; the lab makes no arena calls.
+- Owner: Amiad (Claude Code), claimed in docs/STATUS.md.
+- Setup trap on this machine, worth checking on yours: arena_kit load_env takes the FIRST value of a duplicated key in .env. With the Anthropic block of .env.example left in, LLM_PROVIDER=anthropic wins and, with an empty ANTHROPIC_API_KEY, every LLM call fails silently into the naive move. Comment out the block you do not use.

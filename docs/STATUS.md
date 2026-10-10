@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-10 15:50 CEST by Jonathan (Claude Code).
+Last updated: 2026-10-10 16:00 CEST by Amiad (Claude Code).
 
 ## Now
 
@@ -17,6 +17,7 @@ Last updated: 2026-10-10 15:50 CEST by Jonathan (Claude Code).
 | Who | What | Files | Since |
 |---|---|---|---|
 | Jonathan (Claude Code) | Sandbox probes for H1-H3 of `runs/BASELINE.md` (accept an alternative sheet, moves after `final_offer`, RFQ threads in parallel). Sandbox only, no quota | `experiments/sandbox_probes.py`, `runs/sandbox/` | Sat 16:05 |
+| Amiad (Claude Code) | **Lab**: a local supplier simulator (twins of the 11 suppliers we have played, calibrated to each case's `C_best`, plus invented suppliers) and a tournament runner to test buyer strategies without quota. Backtested against our real sessions before anyone trusts it. No arena calls | `sellm/lab/`, `tests/test_lab.py`, `runs/lab/` | Sat 16:00 |
 
 ## Next up
 

@@ -89,6 +89,15 @@ a hypothesis written down first is a wasted session.
 
 1. **Offline first.** With `C_open` and `C_best` known, `total_cost` gives the score of any term
    sheet for free. Most of part 1 above is tested this way.
+   **Lab** (`sellm/lab/`, decided Sat 16:00): a local simulator of the suppliers, so whole
+   negotiations can be played for free and by the thousand. Twins of the suppliers we have played,
+   each calibrated so that the best package it would accept costs exactly the case's `C_best`, plus
+   invented suppliers on generated cases against overfitting. A tournament runner plays strategy
+   variants against all of them and reports mean, worst case and the held-out cases. The lab is
+   only as good as its model of the suppliers: it is backtested against our real sessions, and a
+   strategy that wins there is a hypothesis until the sandbox or one practice case confirms it.
+   Good for structure (levers, accept timing, final offers, several sheets, RFQ) and robustness;
+   weak for wording and tone.
 2. **Sandbox for behaviour** (free, real supplier bots): Does pushing on after `agreed` work or
    backfire? How many rounds until `final_offer`? Does an RFQ thread time out while we wait on
    another? What does a cost-breakdown request return? Which opening gets the largest first move?
@@ -151,6 +160,7 @@ after which the calculator's move is sent without the LLM. Nothing in a move may
 ## 9. Not doing
 
 - No vector database or embedding search (section 8).
-- No supplier simulator of our own: too much work for what it would prove before Sunday.
+- ~~No supplier simulator of our own~~: reversed Sat 16:00 (Amiad), see section 6 and `docs/LOG.md`.
+  It replaces practice sessions only for screening; confirmation still happens in sandbox and practice.
 - No tuning on a single practice case until it scores 1.0: the final cases are different ones.
 - No changes to `arena_kit/` beyond registering our agent, so upstream fixes stay easy to take.
