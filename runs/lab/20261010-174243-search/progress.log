@@ -1,0 +1,6 @@
+17:42:50 pools: train 169 (9 twins), test 83 (3 twins); options {'clock': True, 'mode': 'parallel', 'wave_cap_s': 480.0, 'think_s': 2.0, 'vary': True, 'reader': 'keywords'}
+17:43:55 time is up: 1488 negotiations of this round not played
+17:43:55 round 1: 64 variants on 21 train scenarios, best 50.4
+17:43:56 test phase: 9 strategies on 83 test scenarios, 3 seeds
+17:45:13 search done
+17:45:14 report: runs/lab/20261010-174243-search/report.md
