@@ -279,9 +279,14 @@ a `*` field needs a `schema_version` bump and a `[decision]` in the log.
 - `uv run python -m sellm.intel build` writes `sellm/dossiers/<supplier number>.json` for every
   detailed supplier plus `index.json`. Deterministic (sorted keys, no LLM, no network), under 10 s,
   **committed**, so the final machine needs no rebuild. Rebuild and commit after the Sunday release.
-- `dossier(supplier_id, part_ids, case=None, opening=None) -> dict`: the stored dossier restricted
-  to `part_ids`, with the case overlay merged in. Never raises; for an unknown supplier it returns
-  the overlay alone (`coverage: "case_only"`).
+- `dossier(supplier_id, part_ids, case=None, opening=None, package=None) -> dict`: the stored
+  dossier restricted to `part_ids` (parts it does not supply are built live from the package), with
+  the case overlay merged in. `opening` is the threads dict as in `decide(case, threads)` (a thread
+  may be a list or `{"messages": [...]}`); `package` a DataPackage or its path, default
+  `$ARENA_DATA`. Never raises; for an unknown supplier it returns the overlay alone
+  (`coverage: "case_only"`). A blocked old vendor record whose company lives on under a detailed
+  record of the same name is mapped to it (in the data: `sup:71999` -> `sup:70210`), with a warning.
+  About 1 ms per call once the package is loaded (the first call loads it, about 0.1 s).
 - `citable` is filled by `sellm.claims.citable_for(package, supplier_id, part_ids)` (group C); the
   builder and the overlay call it. `arguments(case, supplier_id, dossier)` (group C) turns it into
   sentences for the negotiator.
@@ -317,6 +322,13 @@ a `*` field needs a `schema_version` bump and a `[decision]` in the log.
 | `documents` | id, date, kind, subject, author, full text | `documents`, `correspondence/` |
 | `news` | id, date, topic, headline, `noise` flag | `news` |
 | `profile_text` | at most 120 words, written from the fields by a template (no LLM) | |
+| `market_news` (added Sat 18:36) | market news without a supplier that match the categories of its parts (power, labour, castings, steel, copper ...): context only, not citable | `news` with no supplier |
+| `own_quotes` (added) | its past quotes `{quote_id, part_id, date, unit_price, price_unit, lead_time_days, payment_days, incoterm, remarks}` | `quotes` |
+| `contact` (added, overlay) | `{name, role, company, address}` from the opening e-mail: the name above the "Role, Company" signature line | opening e-mail |
+| `stated_drivers` (added, overlay) | each "<series> rose x % in twelve months and is y % of our cost" in the opening e-mail: `{series, direction, stated_change_pct, cost_share_pct, true_change_12m_pct, ids_12m, matches}` (matches: within 0.5 points of the index) | opening e-mail, `facts.json` |
+| `opening_offer` (added, overlay) | `{offer_id, terms, stated, standard, fixed, validity_days, missing_fields}` from the first term sheet and the quote PDF | opening e-mail |
+| `case_facts` (added, overlay) | the case's own `facts`, as a dict by ID (a list is converted) | case file |
+| `warnings` (added) | what could not be read or built; empty normally | |
 
 **Rules for the derived fields.** Initial rules; calibrate them in the lab and change them only in
 the builder.
@@ -380,6 +392,9 @@ its topic and by its words counts once. Noise news and market news never count. 
 - `alternatives` from `buyer.alternative` and, in an RFQ, the other suppliers' offers (their
   `offer:` IDs are citable in the session).
 - Merge: lists are united by ID; scalar values from the case win.
+- `alternatives` entries from the case carry a `kind`: `buyer_alternative` (our alternative quote,
+  marked on the existing entry if the quote is already listed), `current_contract`, `rfq_rival`
+  (another bidder's opening offer with its `offer_id`). All are buyer-private.
 
 **Checks**: every detailed supplier gets a dossier; two builds are byte-identical;
 `dossier()` on an unknown supplier and on every case file in `sellm/lab/cases/` returns the schema

@@ -36,15 +36,15 @@ def real_pkg():
     return DataPackage(REAL)
 
 
-def test_the_stub_carries_every_field_of_the_contract():
-    d = dossier("sup:70130", ["part:310011"])
+def test_a_stranger_gets_every_field_of_the_contract():
+    d = dossier("sup:99999", ["part:310011"])
     assert set(d) == set(TOP_KEYS) and set(CORE_FIELDS) <= set(d)
     assert d["schema_version"] == SCHEMA_VERSION == 1
-    assert d["supplier_id"] == "sup:70130" and d["coverage"] == "case_only"
+    assert d["supplier_id"] == "sup:99999" and d["coverage"] == "case_only"
     assert isinstance(d["economics"]["cost_of_money"], float) and 0 < d["economics"]["cost_of_money"] <= 1
     assert d["economics"]["cash_pressure"] in ("low", "medium", "high")
     assert isinstance(d["signals"], list) and isinstance(d["citable"], list)
-    assert set(d["parts"]) == {"part:310011"} and d["parts"]["part:310011"]["drivers"] == []
+    assert set(d["parts"]) == {"part:310011"} and isinstance(d["parts"]["part:310011"]["drivers"], list)
     assert "informal_costing" in SIGNAL_KINDS
 
 
@@ -56,14 +56,15 @@ def test_dossier_never_raises(sid, parts):
     assert d["schema_version"] == 1 and isinstance(d["parts"], dict)
 
 
-def test_the_stub_is_fast():
+def test_dossier_is_fast():
+    dossier("sup:70130", ["part:310011"])
     t0 = time.perf_counter()
     for _ in range(100):
         dossier("sup:70130", ["part:310011", "part:310012"])
     assert (time.perf_counter() - t0) / 100 < 0.005
 
 
-def test_the_stub_is_valid():
+def test_a_stored_dossier_is_valid():
     assert validate(dossier("sup:70130", ["part:310011"])) == []
 
 
@@ -392,3 +393,135 @@ def test_the_committed_dossiers_are_current(real_pkg):
     if not (DOSSIERS / "index.json").is_file():
         pytest.skip("no dossiers built yet")
     assert cli(["--data", str(REAL), "--out", str(DOSSIERS), "check"]) == 0
+
+
+CASES = Path(__file__).resolve().parents[1] / "sellm" / "lab" / "cases"
+RUNS = Path(__file__).resolve().parents[1] / "runs"
+
+
+def _openings():
+    seen, out = set(), []
+    for f in sorted(RUNS.glob("practice/*/*.json")) + sorted(RUNS.glob("sandbox/*/*.json")):
+        s = json.loads(f.read_text(encoding="utf-8"))
+        if not isinstance(s, dict) or "threads" not in s:
+            continue
+        for sid in s["case"]["suppliers"]:
+            if (s["case_id"], sid) not in seen and s["threads"].get(sid, {}).get("messages"):
+                seen.add((s["case_id"], sid))
+                out.append((s["case"], s["threads"], sid))
+    return out
+
+
+def test_overlay_on_every_case_file(real_pkg):
+    files = sorted(CASES.glob("*.json"))
+    assert len(files) == 21
+    for f in files:
+        case = json.loads(f.read_text(encoding="utf-8"))
+        for sid in case["suppliers"]:
+            d = dossier(sid, case["parts"], case=case, package=real_pkg)
+            assert validate(d) == [] and set(d["parts"]) == set(case["parts"]), (case["case_id"], sid)
+            assert d["built_from"]["case_id"] == case["case_id"]
+            assert not any("failed" in w or "overlay:" in w for w in d["warnings"]), d["warnings"]
+
+
+def test_overlay_reads_the_opening_e_mails(real_pkg):
+    from arena_kit.docs import standard_terms
+
+    openings = _openings()
+    assert len(openings) >= 15
+    for case, threads, sid in openings:
+        d = dossier(sid, case["parts"], case=case, opening=threads, package=real_pkg)
+        msg = threads[sid]["messages"][0]
+        assert validate(d) == [], (case["case_id"], sid)
+        std = standard_terms([msg])
+        assert all(d["standard_terms"][k] == v for k, v in std.items() if k in d["standard_terms"])
+        assert d["standard_terms"]["source"] == ("quote_pdf" if std else d["standard_terms"]["source"])
+        assert d["contact"]["role"] == msg["from_name"].split(",")[0].strip() and d["contact"]["name"]
+        assert d["opening_offer"]["offer_id"] == msg["term_sheets"][0]["term_sheet_id"]
+    p01 = next((c, t, s) for c, t, s in openings if c["case_id"] == "case:P01")
+    d = dossier(p01[2], p01[0]["parts"], case=p01[0], opening=p01[1], package=real_pkg)
+    assert (d["contact"]["name"], d["contact"]["role"]) == ("Thomas Brandlhuber", "Owner")
+    assert [
+        (x["series"], x["stated_change_pct"], x["cost_share_pct"], x["true_change_12m_pct"], x["matches"])
+        for x in d["stated_drivers"]
+    ] == [
+        ("LCI-C", 2.7, 30.0, 2.66, True),
+        ("PPI-C241", 6.5, 24.0, 6.54, True),
+    ]
+    assert d["standard_terms"]["payment_days"] == 30 and d["opening_offer"]["offer_id"] == "offer:70110-0"
+    buyer = [a for a in d["parts"]["part:310010"]["alternatives"] if a.get("kind") == "buyer_alternative"]
+    assert [(a["supplier_id"], a["quote_id"]) for a in buyer] == [("sup:70140", "quote:7200001")]
+
+
+def test_an_rfq_shows_each_bidder_its_rivals(real_pkg):
+    case, threads, _ = next(o for o in _openings() if o[0]["case_id"] == "case:P05")
+    for sid in case["suppliers"]:
+        d = dossier(sid, case["parts"], case=case, opening=threads, package=real_pkg)
+        rivals = [a for a in d["parts"][case["parts"][0]]["alternatives"] if a.get("kind") == "rfq_rival"]
+        assert len(rivals) == 2 and all(a["private"] and a["offer_id"].startswith("offer:") for a in rivals)
+        assert sid not in {a["supplier_id"] for a in rivals}
+
+
+@pytest.mark.parametrize("facts", ["dict", "list"])
+def test_a_stranger_gets_a_dossier_from_the_case_alone(fixture_pkg, facts):
+    fact = {"part": "part:X1", "supplier": "sup:99999", "unit_cost": 10.0}
+    case_facts = {"cost:X1": fact} if facts == "dict" else [{"id": "cost:X1", **fact}]
+    case = {"case_id": "case:H1", "parts": ["part:X1"], "suppliers": ["sup:99999"], "facts": case_facts}
+    d = dossier("sup:99999", ["part:X1"], case=case, package=fixture_pkg)
+    assert validate(d) == [] and d["coverage"] == "case_only"
+    part = d["parts"]["part:X1"]
+    assert part["should_cost"]["unit_cost"] == 10.0 and part["should_cost"]["plant_specific"] is True
+    assert part["floor_estimate"]["value"] == 10.0 and d["case_facts"] == {"cost:X1": fact}
+
+
+def test_the_old_record_maps_to_the_living_company(real_pkg):
+    d = dossier("sup:71999", ["part:330010"], package=real_pkg)
+    assert d["supplier_id"] == "sup:70210" and any("old, blocked record" in w for w in d["warnings"])
+
+
+def test_without_a_package_the_stored_dossier_still_comes(tmp_path):
+    d = dossier("sup:70130", ["part:310012"], package=tmp_path / "nothing")
+    assert validate(d) == [] and any("no data package" in w for w in d["warnings"])
+    if (DOSSIERS / "70130.json").is_file():
+        assert d["coverage"] == "full" and d["parts"]["part:310012"]["should_cost"]["id"] == "cost:310012"
+
+
+def test_dossier_survives_garbage(fixture_pkg):
+    import random
+
+    rng = random.Random(42)
+    junk = [None, 0, "x", [], {}, [None], {"messages": "x"}, {"sup:1": [1, 2]}, {"suppliers": 5}, 3.5]
+    for _ in range(200):
+        case = rng.choice(
+            [
+                None,
+                {},
+                {
+                    "case_id": rng.choice(junk),
+                    "suppliers": rng.choice(junk),
+                    "facts": rng.choice(junk),
+                    "buyer": rng.choice(junk),
+                    "briefing": rng.choice(junk),
+                    "trigger_doc": rng.choice(junk),
+                },
+            ]
+        )
+        d = dossier(
+            rng.choice(["sup:1", "sup:2", "sup:404", None, 7]),
+            rng.choice(junk + [["part:A"]]),
+            case=case,
+            opening=rng.choice(junk),
+            package=fixture_pkg,
+        )
+        assert validate(d) == [], (case, d["warnings"])
+
+
+def test_the_overlay_is_fast(real_pkg):
+    calls = []
+    for case, threads, sid in _openings():
+        dossier(sid, case["parts"], case=case, opening=threads, package=real_pkg)
+        t0 = time.perf_counter()
+        dossier(sid, case["parts"], case=case, opening=threads, package=real_pkg)
+        calls.append(time.perf_counter() - t0)
+    calls.sort()
+    assert calls[int(len(calls) * 0.95) - 1] < 0.1

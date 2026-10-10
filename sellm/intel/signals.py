@@ -22,6 +22,7 @@ TEXT_RULES = {
     "ownership_change": r"new owner|successor|succession|restructur|refocus",
     "approval_ladder": r"head office|headquarters|\bapproval\b|pricing committee",
     "informal_costing": r"own spreadsheet|not followed|last updated|does the costing|where we get our index figures",
+    "price_claim": r"\b[A-Z][A-Z0-9.-]+ (?:rose|fell) \d+(?:\.\d+)? % in twelve months",
 }
 SUBJECT_RULES = {}
 NEWS_TOPICS = {
