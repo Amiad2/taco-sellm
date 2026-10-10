@@ -1,0 +1,49 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4K6WVAN4HXDHF4Z67WVENK4",
+  "session_id": "bc80161e-03a4-4665-86fa-dc14803965bc",
+  "strategy": "manual-commit",
+  "created_at": "2026-10-10T15:28:56.604925577Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "docs/LOG.md",
+    "runs/lab/BACKTEST.md",
+    "runs/lab/VALIDATION.md",
+    "sellm/lab/__main__.py",
+    "sellm/lab/backtest.py",
+    "sellm/lab/invent.py",
+    "sellm/lab/strategies.py",
+    "sellm/lab/stress.py",
+    "sellm/lab/tournament.py",
+    "sellm/lab/twins.json"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-5-5",
+  "turn_id": "fc3a7b36e1b8",
+  "checkpoint_transcript_start": 1455,
+  "transcript_lines_at_start": 1455,
+  "compact_transcript_start": 199,
+  "token_usage": {
+    "input_tokens": 30,
+    "cache_creation_tokens": 33007,
+    "cache_read_tokens": 8822854,
+    "output_tokens": 27945,
+    "api_call_count": 15
+  },
+  "session_metrics": {
+    "turn_count": 9
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-10-10T15:28:56.314834855Z",
+    "agent_lines": 297,
+    "agent_removed": 86,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 297,
+    "total_lines_changed": 383,
+    "agent_percentage": 100,
+    "metric_version": 2
+  }
+}
