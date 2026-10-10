@@ -628,3 +628,9 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 ## 2026-10-10 21:37 CEST · Jonathan @ MacBook-Pro-von-Jonathan
 **[finding] Correction to my 21:36 finding for Jonathan, item 4: cd67dda's rule is already off**
 - d792ee3 switched the second-choice rule off after measuring it (P08 0.419 three times against 0.515 without; P18 0.485), which is the same result as the 'clause' arm in experiments/PRACTICE-ARMS.md (P08 0.549 -> 0.462, P18 0.467). Nothing to do for item 4. Also from d792ee3: the first asks of P08 (5.06) and P10 (28.60) in the 21:06 batch came from the silent parallel-lookup failure, so the 'a1' column of PRACTICE-ARMS.md is not exactly HEAD for those two cases; none of the 23 first asks of my arms deviated from the sequential replay.
+
+## 2026-10-10 21:39 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] All 10 practice cases after the data-lock fix (@d792ee3, no LLM, kit runner): mean 67.7 (21:10: 67.5, baseline 61.5)**
+- 10 deals, 0 crashes, 0 refused moves, no failed lookup in the log, one timeout in a losing P05 thread. Quota left 359 of 450.
+- Per case, now / 21:10 / baseline: P01 0.831 / 0.831 / 0.789; P02 0.293 / 0.293 / 0.105; P03 0.919 / 0.919 / 0.903; P04 0.860 / 0.860 / 0.810; P05 0.820 / 0.769 / 0.676; P07 0.747 / 0.747 / 0.779; P08 0.515 / 0.527 / 0.433; P10 0.647 / 0.663 / 0.570; P11 0.710 / 0.710 / 0.710; P18 0.430 / 0.430 / 0.377.
+- Seven cases closed on exactly the same terms as at 21:10: with identical asks these suppliers answer identically. So my note of 21:15 that differences under 0.05 are noise was too cautious - P01's 0.874 (20:35) against 0.831 came from the change of the horizon from 5 to 4, not from chance. P08 and P10 now open as designed (4.91, 24.72) instead of with the fallback the lookup bug gave them (5.06, 28.60): 0.515 and 0.647, about the same.
