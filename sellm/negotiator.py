@@ -60,6 +60,10 @@ DEFAULTS = dict(
     # practice Sat 21:45 - one supplier gave the wider deadband for nothing (+0.06), another charged its worth or
     # ignored it and said final_offer a round earlier (-0.10 three times)
     recent_cap=True,  # without a cost estimate: aim no higher than its lowest own price of the last twelve months
+    bank=True,  # when no rival offer, should-cost or falling index applies: the next fact of sellm.claims
+    one_per_topic=True,  # the arena calls a second fact of a topic (forecast, complaint ...) `duplicate`
+    ppm="plain",  # ppm figures without a thousands comma ("2,376 ppm" came back contradicted 3 of 3): plain | skip | asis
+    signals=True,  # the dossier's signals move the share of its opening we aim at (see `share`)
     writer="template",
 )
 # Where deals could end, as a share of the supplier's opening price, when no should-cost of its own
@@ -173,6 +177,8 @@ class Negotiator:
         self.k = {**DEFAULTS, **knobs}
         if writer:
             self.k["writer"] = writer
+        if isinstance(dossier, bool):  # make_agent(package, dossier=False): the knob, not an object
+            self.k["dossier"] = dossier
         self.package, self.chat, self.dossier = package, chat, dossier
         self.fallback = self  # the numbers need no LLM, so the fallback is this agent
         self.stats = {"moves": 0, "errors": 0, "fallbacks": 0}
@@ -460,7 +466,7 @@ class Negotiator:
             return round(sum(_distance(s.get(f), base.get(f)) for f in s), 6)
 
         if self.k["levers"] == "ours":
-            share = self.k["floor_share"] or TARGET_SHARE[b.get("category_goal") in RELATIONSHIP_GOALS]
+            share = self.share(case, v, b.get("category_goal") in RELATIONSHIP_GOALS)
             keep = {f: base[f] for f in CASH_FIELDS if f in base and f != "payment_days"}
             if "payment_days" in base and self.cash(case, v) != "low":
                 keep["payment_days"] = base["payment_days"]  # not known to be relaxed about cash: its own days
@@ -489,6 +495,26 @@ class Negotiator:
 
         self._memo[key] = min(candidates, key=rank)
         return self._memo[key]
+
+    def share(self, case, v, relationship):
+        """Where we expect a deal to end, as a share of its opening, when no should-cost of its own
+        plant exists. The dossier's reading of the supplier moves it (docs/PLAN.md section 10): a
+        list price it cannot move or a margin it will not give up puts the end close to its opening,
+        a supplier that wants volume deeper. Measured on practice Sat 21:30 (experiments/
+        PRACTICE-ARMS.md, F8): better in two cases, equal in one - but formulated with those cases'
+        floors known, so the hidden suppliers have to confirm it."""
+        base = self.k["floor_share"] or TARGET_SHARE[bool(relationship)]
+        if not self.k["signals"]:
+            return base
+        found = self.intel(case, v)
+        if found.get("coverage") != "full":
+            return base
+        kinds = {sig.get("kind"): sig.get("strength") or 0 for sig in found.get("signals") or []}
+        if kinds.get("list_price_fixed", 0) >= 2 or kinds.get("margin_floor", 0) >= 1:
+            return max(base, 0.96)
+        if kinds.get("wants_volume", 0) >= 2:
+            return min(base, 0.84)
+        return base
 
     def payment_trade(self, case, v, s, price):
         """Payment days are cash to both sides, at different rates: where its cost of money (dossier)
@@ -683,10 +709,11 @@ class Negotiator:
                 target = min(grid, key=lambda p: v.c({**s0, "unit_price": p}, supplier))
         else:
             source = "prior"
-            share = self.k["floor_share"] or TARGET_SHARE[bool(relationship)]
+            share = self.share(case, v, bool(relationship))
             target = share * min(reference, market)
             charged = calculator.recent_low(calculator.supplier_cost(case, v.sid, None, self.package))
-            if charged and self.k["recent_cap"]:  # a price it charged within twelve months is one it can go back to
+            # a price it charged within twelve months is one it can go back to - unless its list price is fixed
+            if charged and self.k["recent_cap"] and share < 0.96:
                 target = min(target, charged)
             if v.opening and v1 > v0:  # the same worth to it on the structure we ask
                 its = v.filled(v.opening["term_sheets"][0]["terms"])
@@ -745,6 +772,38 @@ class Negotiator:
         for ref, sentence in self.index_claims(case):
             if ref not in cited:
                 return [sentence]
+        return self.banked(case, v, cited, ours_here, price) if self.k["bank"] else []
+
+    def banked(self, case, v, cited, ours_here, price):
+        """The next fact of the argument bank (group C, sellm/claims.py): checked against the data,
+        its figure next to its ID. Never one cited before, never a rival's quote (it reveals what we
+        hold), and one fact per topic - the arena calls a second forecast or complaint `duplicate`."""
+        try:
+            from . import claims
+
+            def topic(ref):
+                head = ref.split(":", 1)[0]
+                return {"ctr": "doc"}.get(head, head)
+
+            used = {topic(i) for i in cited}
+            with calculator.LOCK:
+                found = claims.arguments(
+                    case, v.sid, self.intel(case, v), package=self.package, used=cited, price=price
+                )
+            for a in found:
+                if a["kind"] == "quote" or a["sentence"] in ours_here or not a.get("ids"):
+                    continue
+                if self.k["one_per_topic"] and topic(a["ids"][0]) in used:
+                    continue
+                sentence = a["sentence"]
+                if a["kind"] in ("sc_ppm", "qn") or "ppm" in sentence:
+                    if self.k["ppm"] == "skip":
+                        continue
+                    if self.k["ppm"] == "plain":
+                        sentence = re.sub(r"(\d),(\d{3})(?=\s*ppm)", r"\1\2", sentence)
+                return [sentence]
+        except Exception as e:  # an argument less, never a lost move
+            log.warning("%s %s: argument bank failed (%s: %s)", case.get("case_id"), v.sid, type(e).__name__, e)
         return []
 
     def index_claims(self, case):
