@@ -1,3 +1,4 @@
+# ruff: noqa: E501  (report lines)
 """Experiment (Sun 00:30, Omar): the price path of `--agent sellm`, swept in the lab.
 
 Questions (experiments/PRICE-PATH.md): does a lower or a different first ask pay (`open_below`, now
