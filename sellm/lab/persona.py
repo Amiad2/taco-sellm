@@ -19,12 +19,14 @@ structure - a later start, faster payment, a longer lead time - moves the price 
 the supplier's cash, as the real suppliers' alternative sheets do.
 """
 
+import copy
 import math
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, fields
 
-from arena_kit.cost import RELATIONSHIP_GOALS, closing_terms, must_haves_ok, supplier_value, total_cost
+from arena_kit.cost import OPS, RELATIONSHIP_GOALS, closing_terms, must_haves_ok, supplier_value, total_cost
 
-OPS = {"<=": lambda a, b: a <= b, ">=": lambda a, b: a >= b, "==": lambda a, b: a == b}
+# dynamics a twin family varies (see Persona.ranges and Persona.vary)
+VARIED = ("first_step", "mirror", "cap", "cap_decay", "patience", "claim_w", "walk_on_push", "noise")
 
 
 @dataclass
@@ -56,6 +58,16 @@ class Persona:
     leak: float = 0.6  # multiplies `mirror` once we leak urgency, a budget or no alternative
     discloses: bool = False  # sends a cost breakdown when asked
     alternatives: bool = True  # adds a second package to its counters
+    noise: float = 0.1  # relative spread of each concession: identical e-mails need not get identical replies
+    approval_at: float | None = (
+        None  # after giving this share of (opening - floor) its boss must approve: one round on hold
+    )
+    no_bid: bool = False  # it declines to quote (an RFQ bidder that does not bid)
+    tone_walk: float = 0.0  # chance it ends the talks after an ultimatum or an insult
+    withdraw_on_wait: float = 0.5  # chance it withdraws when left waiting at final_offer (sandbox D02)
+    asks_data: bool = True  # asks 'Which figures is that based on?' when we ask a lot without data
+    archetype: str = "twin"  # twin, family, group, job_shop, monopolist, trader, quality, capacity, generous
+    ranges: dict = field(default_factory=dict)  # param -> plausible values (the twin's family)
     style: str = "corporate"  # family, corporate, casual
     sender: str = ""
     sender_name: str = ""
@@ -69,7 +81,16 @@ class Persona:
 
     @classmethod
     def from_dict(cls, d):
-        return cls(**d)
+        known = {f.name for f in fields(cls)}
+        return cls(**{k: v for k, v in d.items() if k in known})
+
+    def vary(self, rng):
+        """A member of its family: each varied parameter drawn from its plausible values."""
+        out = copy.copy(self)
+        for k, values in self.ranges.items():
+            if k in VARIED and values:
+                setattr(out, k, rng.choice(values))
+        return out
 
     # -- what a package is worth to it --------------------------------------------------------
     def closing(self, case, terms):

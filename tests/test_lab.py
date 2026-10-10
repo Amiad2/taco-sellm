@@ -158,3 +158,55 @@ def test_calculator_never_breaks_a_must_have():
     for s in SCENARIOS:
         result = play(LocalTable(s, {}, seed=0), s.case["case_id"], Calculator(None))
         assert not result["deal"] or result["must_haves_ok"]
+
+
+def _scenario(name):
+    return next(s for s in SCENARIOS if s.name == name)
+
+
+def test_clock_rfq_one_thread_at_a_time_times_out_the_others():
+    from sellm.lab.strategies import Calculator
+    from sellm.lab.table import play_lab
+
+    s = _scenario("P05")
+    seq = [play_lab(LocalTable(s, {}, seed=i, clock=True, think_s=2.0), Calculator(None)) for i in range(3)]
+    par = [
+        play_lab(LocalTable(s, {}, seed=i, clock=True, think_s=2.0), Calculator(None), mode="parallel")
+        for i in range(3)
+    ]
+    assert sum(r["timeouts"] for r in seq) > sum(r["timeouts"] for r in par)
+
+
+def test_wave_cap_ends_the_session_without_a_deal():
+    s = _scenario("P01")
+    table = LocalTable(s, {}, clock=True, think_s=2.0, wave_cap_s=100)
+    case, _ = table.open()
+    sid = case["suppliers"][0]
+    terms = {"unit_price": 120.0, "effective_date": "2027-01-01", "payment_days": 30}
+    with pytest.raises(ArenaError):
+        for _ in range(10):
+            table.send(sid, {"body": "x", "term_sheets": [{"terms": terms}]})
+    assert table.outcome["end_reason"] in ("wave_cap", "no_deal") and not table.outcome["deal"]
+
+
+def test_a_timeout_replaces_the_offer_id():
+    s = _scenario("P01")
+    table = LocalTable(s, {}, clock=True, think_s=61.0)
+    case, threads = table.open()
+    sid = case["suppliers"][0]
+    old = threads[sid][0]["term_sheets"][0]["term_sheet_id"]
+    with pytest.raises(ArenaError) as e:  # we waited 61 s: late, and the old ID is gone
+        table.close(sid, {"action": {"type": "accept", "term_sheet_id": old}})
+    assert e.value.status == 422
+    assert table.threads[sid].standing["term_sheet_id"] != old
+
+
+def test_a_sheet_may_use_the_suppliers_standard_value():
+    s = _scenario("D02")
+    table = LocalTable(s, {})
+    case, _ = table.open()
+    sid = "sup:DEMO-C1"
+    std = table.personas[sid].standard["lead_time_days"]  # 45, not one of the options
+    assert std not in case["term_options"]["lead_time_days"]
+    sheet = {"unit_price": 15.0, "payment_days": 30, "lead_time_days": std, "incoterm": "DAP"}
+    table.send(sid, {"body": "x", "term_sheets": [{"terms": sheet}]})

@@ -46,7 +46,7 @@ def replay(scenario, session, facts, params=None):
         persona = copy.copy(scenario.personas[sid])
         for k, v in (params or {}).items():
             setattr(persona, k, v)
-        persona.alternatives = False  # the ask is what is compared; skip the slow variant search
+        persona.alternatives, persona.noise = False, 0.0  # compare the ask itself, deterministically
         bots[sid] = SupplierThread(persona, case, random.Random(0), shared)
         bots[sid].opening()
     for sid, thread in session["threads"].items():

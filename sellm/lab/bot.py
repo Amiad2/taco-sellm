@@ -68,6 +68,24 @@ def quote_text(persona, case, offer_id, stated, title="Angebot / Quote"):
     return "\n".join(lines)
 
 
+def schedule_text(persona, case, standing):
+    terms = (standing or {}).get("terms", {})
+    volume = terms.get("volume_per_year") or persona.standard.get("volume_per_year") or case["buyer"]["need_per_year"]
+    lead = terms.get("lead_time_days") or persona.standard.get("lead_time_days")
+    rows = [f"{m} | {round(volume / 12)} | {round(volume / 12) * m}" for m in range(1, 13)]
+    return "[Delivery schedule]\nMonth | Quantity | Cumulative\n" + "\n".join(rows) + f"\nLead time (days) | {lead} |"
+
+
+def eight_d_text(persona, case):
+    ppm = persona.ppm_real if persona.ppm_real is not None else persona.standard.get("ppm_commitment")
+    commit = persona.standard.get("ppm_commitment") or ppm
+    return (
+        f"8D report - {persona.name}\nPart(s): {', '.join(case['parts'])}\nD1 Team: quality manager, production\n"
+        f"D2 Problem: defect rate {ppm} ppm (rolling 12 months)\nD4 Root cause: process variation\n"
+        f"D5-D7 Actions: added inspection, process capability study\nppm commitment: {commit}"
+    )
+
+
 def breakdown_text(persona, price):
     shares = [("Material", 0.45), ("Conversion", 0.33), ("Overhead", 0.14)]
     cost = persona.full_cost
@@ -87,6 +105,7 @@ class SupplierThread:
         self.a0 = self.ask
         self.mirror = persona.mirror
         self.best_ours, self.leaked, self.warm, self.counters = None, False, False, 0
+        self.timeouts, self.approved, self.pending = 0, False, 0.0
         self.standing, self.messages, self.reasons = None, [], []
 
     # -- messages ------------------------------------------------------------------------------
@@ -138,6 +157,10 @@ class SupplierThread:
 
     def opening(self):
         terms = dict(self.p.opening)
+        if self.p.no_bid:
+            self.closed = "no_bid"
+            lines = ["Thank you for your enquiry. Unfortunately we are not in a position to quote for this part."]
+            return self._mail("no_bid", [], lines, subject=f"Re: {self.case['title']}")
         if self.p.opening_body:
             msg = self._mail("open", [terms], [])
             msg["body"] = self.p.opening_body
@@ -149,9 +172,20 @@ class SupplierThread:
         lines.append(f"We offer €{terms['unit_price']:.2f} per unit. This offer remains valid for 30 days.")
         return self._mail("open", [terms], lines, subject=f"Quote from {self.p.name}: {self.case['title']}")
 
-    def timeout(self):
-        """Our message came too late: the offer stands, re-issued."""
+    def timeout(self, last_round=False):
+        """We left it waiting more than 60 s: the offer stands, re-issued with a new ID, and its
+        patience drops. Left waiting at its final offer it may withdraw; the third timeout in a row
+        (or one after the last round) ends the thread."""
         self.round += 1
+        self.timeouts += 1
+        self.pressure += 1
+        if self.status == "final_offer" and self.rng.random() < self.p.withdraw_on_wait:
+            self.closed = "walked_away"
+            line = "We need to plan our capacity, so we are closing this enquiry. We wish you all the best."
+            return self._mail("walked_away", [], [line])
+        if self.timeouts >= 3 or last_round:
+            self.closed = "timeout"
+            return self._mail("walked_away", [], ["Without an answer from your side we close this enquiry."])
         sheets = [self.standing["terms"]] if self.standing else []
         return self._mail(self.status, sheets, ["Without movement from your side we cannot move either."])
 
@@ -159,8 +193,9 @@ class SupplierThread:
     def respond(self, msg):
         p, case = self.p, self.case
         self.round += 1
+        self.timeouts = 0
         body = msg.get("body") or ""
-        feats = read(body)
+        feats = read(body, self.session.reader if self.session is not None else None)
         lines, attach = [], []
         tol = 0.0005 * self.a0
 
@@ -195,6 +230,12 @@ class SupplierThread:
 
         # tone
         if feats["ultimatum"] or feats["hostile"]:
+            if self.rng.random() < p.tone_walk:
+                self.closed = "walked_away"
+                lines.append("We are not prepared to continue on this basis. We end our offer here.")
+                reply = self._mail("walked_away", [], lines)
+                reply["claim_results"] = r_out
+                return reply
             self.mirror *= p.ultimatum
             self.pressure += 1
             lines.append("We do not negotiate under pressure; our offer reflects our costs.")
@@ -214,6 +255,15 @@ class SupplierThread:
                 lines.append("Our calculation is our property; we do not share a breakdown.")
         if feats["asks_margin"] and not p.discloses:
             lines.append("Our margin and our limits stay internal.")
+        neg = case["negotiable"]
+        if feats["asks_capacity"] and (
+            {"lead_time_days", "volume_per_year"} & set(neg) or "capacity_tight" in p.traits
+        ):
+            attach.append(("delivery-schedule", schedule_text(p, case, self.standing)))
+            lines.append("Please find our delivery schedule attached.")
+        if feats["quality"] and ("ppm_commitment" in neg or p.archetype == "quality"):
+            attach.append(("8d-report", eight_d_text(p, case)))
+            lines.append("Our 8D report with the corrective actions is attached.")
 
         sheets = [ts.get("terms", ts) for ts in msg.get("term_sheets") or []]
         if not sheets:  # a question or a holding message: the offer stands, re-issued
@@ -226,6 +276,9 @@ class SupplierThread:
         values = [p.value(case, s) for s in sheets]
         i = max(range(len(sheets)), key=values.__getitem__)
         ours, best_sheet = values[i], sheets[i]
+        verified = any(r["result"] == "verified" for r in results)
+        if p.asks_data and not verified and ours < self.ask - 0.06 * self.a0:
+            lines.append("Which figures is that based on? Please send us the data.")
         structure = {k: v for k, v in best_sheet.items() if k != "unit_price"}
         step = ours - self.best_ours if self.best_ours is not None else None
         self.best_ours = ours if self.best_ours is None else max(self.best_ours, ours)
@@ -257,7 +310,22 @@ class SupplierThread:
             concession = 0.0
             self.pressure += 1
             lines.append("Without movement from your side we cannot move either.")
-        self.ask = max(p.full_cost, self.ask - concession - bonus)
+        if p.noise and concession > 0:
+            concession *= max(0.0, self.rng.gauss(1.0, p.noise))
+        concession += bonus + self.pending
+        self.pending = 0.0
+        if (
+            p.approval_at
+            and not self.approved
+            and self.a0 - self.ask + concession > p.approval_at * (self.a0 - p.full_cost)
+        ):
+            # a bigger move needs the boss: this round it holds, the next brings the step
+            self.approved, self.pending = True, concession
+            lines.append("A further step needs the approval of our managing director; we will come back to you.")
+            reply = self._mail("open", [self.standing["terms"]] if self.standing else [], lines, attach)
+            reply["claim_results"] = r_out
+            return reply
+        self.ask = max(p.full_cost, self.ask - concession)
 
         if ours >= self.ask - tol and p.allows(best_sheet):
             reply = self._agree(best_sheet, lines, attach)
