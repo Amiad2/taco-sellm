@@ -84,6 +84,7 @@
  "4c5cca3dbb6528eb": "EVAL bank: a1 + argument bank @19b339f (claude eval session)",
  "4c7970d2ee181e31": "sellm negotiator v1.1 @2dadddb, kit runner, no LLM",
  "4d7836eeda3ef932": "ab nego-template @ebcdcd6+local",
+ "4e8673b899591ea3": "Codex P02 one-euro branch 369.03 @8596ee0",
  "4ed6d0d3b0597b53": "sellm + two rules + LLM writer, verdict APPLIED (gpt-6-sol) @e7a8fd7, kit runner",
  "5072746cc7be312d": "sellm negotiator v1.1 @2dadddb, kit runner, no LLM",
  "50b0321e4a3c8d92": "probe h13-a",

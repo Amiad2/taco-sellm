@@ -817,3 +817,7 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 ## 2026-10-11 00:27 CEST · Amiad @ fedora
 **[run] P02 one-euro branch at EUR 370.00: Nordmark withdrew**
 - One practice session with gpt-6-sol. Ladder EUR 1.00, 46.89, 92.78; Nordmark said final_offer at EUR 373.95 (90-day terms). Our post-final offer of EUR 370.00 led to withdrawal in round 4, no deal, score 0.000. Replay https://arena.tacto.ai/replay/25746cb95112af8a; saved under runs/practice/P02/. Quota after run: 271/450 left.
+
+## 2026-10-11 00:30 CEST · Amiad @ fedora
+**[run] P02 one-euro branch at EUR 369.03: Nordmark withdrew**
+- One practice session with gpt-6-sol. Ladder EUR 1.00, 46.89, 92.78; Nordmark said final_offer at EUR 373.90 (90-day terms). Our post-final offer of EUR 369.03 led to withdrawal in round 4, no deal, score 0.000. Replay https://arena.tacto.ai/replay/4e8673b899591ea3; saved under runs/practice/P02/. Quota after run: 270/450 left.
