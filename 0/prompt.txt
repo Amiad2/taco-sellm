@@ -1,0 +1,13 @@
+ok aber was bringt uns das jetzt konkret?
+
+---
+
+ja aber was bringt es mir dann daslokal laufen zu lassen?
+
+---
+
+ok also am besten ist, ich lasse dich das laufen lassen, kurze runden, viele änderungen, viele tests, versuche usw. und dann immer anpassen? mach das nicht sondern sag ob das am besten ist? und entspricht das dann überhaupt dem was wir bauen wollen und sollen
+
+---
+
+ja, aber das lab soll ja genau die originale test umgebung wiederspiegeln. mit runden, antworten, dafür ist ja der openai key da, für die simulation eben. ich hab dir hundert mal gesagt es soll perfekt sein, also warum baust dus so schlecht?? du sollst eine perfekte simulation bauen, llm tokens können wir verwenden, nur nicht die 200 versuche. mach es jetzt endlich fertig und perfekt.
