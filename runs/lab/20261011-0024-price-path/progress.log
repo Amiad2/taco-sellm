@@ -1,0 +1,3 @@
+00:24:54 pools: train 212 (12 twins), test 0 (0 twins); options {'clock': True, 'mode': 'parallel', 'wave_cap_s': 480, 'think_s': 2.0, 'vary': False, 'reader': 'keywords', 'supplier': 'engine', 'no_cache': False}
+00:24:54 price path: 29 variants x 212 scenarios x 3 seeds = 18444 negotiations
+00:29:21 done in 267 s

@@ -43,6 +43,10 @@ VARIANTS = {
     "target_0.94": {"target_scale": 0.94},
     "target_0.90": {"target_scale": 0.90},
     "target_0.85": {"target_scale": 0.85},
+    # ... and pushed higher: an estimate biased upwards (the oracle says a too-low floor costs more)
+    "target_1.03": {"target_scale": 1.03},
+    "target_1.05": {"target_scale": 1.05},
+    "target_1.08": {"target_scale": 1.08},
     # rounds until our price should meet its price; 4 is today's
     "horizon_3": {"horizon": 3},
     "horizon_6": {"horizon": 6},
