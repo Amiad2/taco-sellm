@@ -17,13 +17,15 @@ experiments/RESULTS.md section 3):
   back so far - so that the two prices meet at the last round. No step size is fixed in advance.
   We never ask at or above its price, and we accept its final offer.
 
-The terms around the price: our first ask takes every lever that costs the supplier no cash in the
-arena's own value model (contract length, volume, start date, lead time, quality commitment, index
-clause) where our total cost C says it pays, and leaves its cash terms (payment days, Incoterm,
-tooling, chargeback) as it quoted them. Real suppliers answer on the structure we send and put
-their price on it (300 of 310 replies in runs/), so its counter shows what a lever costs; from then
-on we ask on whichever structure it has quoted that is cheapest for us in C. The price path runs
-in price, on whatever structure we ask; C decides between structures and between offers.
+The terms around the price come from the cost calculator (`sellm/calculator.py`): our first ask is
+the package that costs us least at the price we expect to end at - C prices uncovered need at the
+fallback, so it decides how long and how much to commit, and it wants payment as late as possible.
+Payment days are cash to the supplier too: we ask for the latest ones only from a supplier the
+dossier calls relaxed about cash, keep the quoted ones for one short of cash, and send both as two
+offers that cost us the same when we know nothing about it (a supplier answers the offer worth most
+to it). Real suppliers answer on the structure we send and put their price on it (294 of 304
+replies in runs/); from then on we ask on whichever structure it has quoted that is cheapest for
+us in C. The price path runs in price; C decides between structures and between offers.
 """
 
 import itertools
@@ -38,20 +40,21 @@ from arena_kit.cost import RELATIONSHIP_GOALS, closing_terms, complete_offer, mu
 from arena_kit.docs import quote_terms, standard_terms
 from arena_kit.play import ENDED, moves_left
 
+from . import calculator
 from .writer import compose
 
 log = logging.getLogger("sellm")
 
 DEFAULTS = dict(
     open_below=0.06,  # we open this share below our estimate of where it can end
-    horizon=5,  # our messages until the prices should meet: suppliers said `final_offer` after 2 to 6 of them
+    horizon=4,  # our messages until the prices should meet: suppliers said `final_offer` after 1 to 6 of them (median 4)
     pace=0.5,  # the share of our steps a supplier gives back, until the thread has shown its own
     keep_below=0.006,  # never ask closer than this share to its standing offer: it should make the last move
     floor_share=None,  # our target as a share of its opening when no should-cost exists; None: TARGET_SHARE
     rate_guess=0.08,  # its cost of money when the dossier does not say (ours: no bias on payment days)
     claims="bank",  # none | bank (one new checked figure per e-mail)
     max_holds=2,  # holding e-mails per RFQ thread whose offer waits while the others still move; then we close
-    levers="ours",  # first ask: ours (every lever that is no cash to it, by our C) | theirs (its terms, need covered)
+    levers="ours",  # first ask: ours (the calculator's cheapest package) | theirs (its terms, need covered)
     dossier=True,  # read its cost of money from sellm.intel when a dossier exists
     writer="template",
 )
@@ -308,7 +311,7 @@ class Negotiator:
         return {
             "kind": "ask",
             "sid": v.sid,
-            "sheets": [plan["sheet"]],
+            "sheets": [plan["sheet"], *(self.menu(case, v, plan["sheet"]) if not v.asks else [])],
             "arguments": arguments,
             "n": len(v.asks),
             "flags": flags,
@@ -373,8 +376,11 @@ class Negotiator:
             price = last["unit_price"] + max(step, 0.0)  # never below our own last price
         else:
             price = last["unit_price"]
-        price = round(max(0.01, min(price, ceiling)), 2)
         same = last is not None and {f: x for f, x in last.items() if f != "unit_price"} == s
+        price = min(price, ceiling)
+        if same:  # on an unchanged structure our price never goes back, whatever it quotes
+            price = max(price, last["unit_price"])
+        price = round(max(0.01, price), 2)
         capped = same and price <= last["unit_price"] + EPS  # no visible step left below its price
         sheet = complete_offer(case, {**s, "unit_price": price})
         enough = aim["stop_at_target"] and their <= v.c({**s0, "unit_price": aim["target"]}) * (1 + EPS)
@@ -448,10 +454,23 @@ class Negotiator:
             return round(sum(_distance(s.get(f), base.get(f)) for f in s), 6)
 
         if self.k["levers"] == "ours":
-            keep = [s for s in candidates if all(s.get(f) == base.get(f) for f in CASH_FIELDS if f in s)]
-            best = min(keep or candidates, key=lambda s: (round(v.c({**s, "unit_price": price})), away(s)))
-            self._memo[key] = self.payment_trade(case, v, best, price)
-            return self._memo[key]
+            share = self.k["floor_share"] or TARGET_SHARE[b.get("category_goal") in RELATIONSHIP_GOALS]
+            keep = {f: base[f] for f in CASH_FIELDS if f in base and f != "payment_days"}
+            if "payment_days" in base and self.cash(case, v) != "low":
+                keep["payment_days"] = base["payment_days"]  # not known to be relaxed about cash: its own days
+            ranked = calculator.packages(case, v.std, price * share, keep) or calculator.packages(
+                case, v.std, price * share
+            )
+            if not ranked:
+                self._memo[key] = base
+                return base
+            cheapest = ranked[0][0]
+            near = [s for c, s in ranked if c <= cheapest * (1 + 1e-4)]  # C does not care: commit longer, stay closer
+            best = min(near, key=lambda s: (-(s.get("contract_months") or 0), away(s)))
+            if self.cash(case, v) in ("medium", "high"):
+                best = self.payment_trade(case, v, best, price * share)
+            self._memo[key] = best
+            return best
 
         def rank(s):  # cover the need, commit no more than the need, else stay as close to its terms as possible
             t = closing_terms(case, {**s, "unit_price": 1.0}, v.std)
@@ -523,19 +542,53 @@ class Negotiator:
             self._memo[key] = {"standard": self.full_standard(case, v), "interest_rate": self.rate(case, v)}
         return self._memo[key]
 
+    def intel(self, case, v):
+        """Its dossier (group B), or {} - a missing dossier is no reason to lose a move."""
+        key = (case.get("case_id"), v.sid, "intel")
+        if key not in self._memo:
+            found = {}
+            if self.k["dossier"]:
+                try:
+                    from .intel import dossier
+
+                    found = dossier(v.sid, case.get("parts") or [], case, v.opening) or {}
+                except Exception:
+                    log.debug("%s %s: no dossier", case.get("case_id"), v.sid)
+            self._memo[key] = found
+        return self._memo[key]
+
+    def cash(self, case, v):
+        """low | medium | high as the dossier reads it from the supplier's data; None for a supplier
+        we hold no data on (the dossier then knows the case only)."""
+        found = self.intel(case, v)
+        if not found or found.get("coverage") != "full":
+            return None
+        pressure = (found.get("economics") or {}).get("cash_pressure")
+        return pressure if pressure in ("low", "medium", "high") else None
+
+    def menu(self, case, v, sheet):
+        """A second offer for a supplier whose cash position we do not know: the same package with
+        the latest payment days, at the price that costs us the same. It answers the one worth more
+        to it (65 of 79 replies), so its choice costs us nothing and shows what it values."""
+        options = case.get("term_options", {}).get("payment_days") or []
+        if "payment_days" not in sheet or self.cash(case, v) is not None or not options:
+            return []
+        late = max(options)
+        if late <= sheet["payment_days"]:
+            return []
+        structure = {f: x for f, x in sheet.items() if f != "unit_price"}
+        price = calculator.price_for(case, v.std, {**structure, "payment_days": late}, v.c(sheet))
+        if price is None or price <= 0:
+            return []
+        other = complete_offer(case, {**structure, "payment_days": late, "unit_price": round(price, 2)})
+        return [other] if v.valid(other) and other != sheet else []
+
     def rate(self, case, v):
         """Its cost of money: from the dossier where one exists (measured from its cash discount, or
         by owner type), else our guess."""
-        if self.k["dossier"]:
-            try:
-                from .intel import dossier
-
-                found = dossier(v.sid, case.get("parts") or [], case, v.opening)
-                rate = (found.get("economics") or {}).get("cost_of_money")
-                if isinstance(rate, int | float) and 0 < rate < 1:
-                    return float(rate)
-            except Exception:  # no dossier is no reason to lose a move
-                log.debug("%s %s: no dossier", case.get("case_id"), v.sid)
+        rate = (self.intel(case, v).get("economics") or {}).get("cost_of_money")
+        if isinstance(rate, int | float) and 0 < rate < 1:
+            return float(rate)
         return self.k["rate_guess"]
 
     def value(self, case, v, terms):
@@ -583,6 +636,9 @@ class Negotiator:
             source = "prior"
             share = self.k["floor_share"] or TARGET_SHARE[bool(relationship)]
             target = share * min(reference, market)
+            charged = calculator.recent_low(calculator.supplier_cost(case, v.sid, None, self.package))
+            if charged:  # a price it charged for this part within twelve months is one it can go back to
+                target = min(target, charged)
             if v.opening and v1 > v0:  # the same worth to it on the structure we ask
                 its = v.filled(v.opening["term_sheets"][0]["terms"])
                 target = (self.value(case, v, {**its, "unit_price": target}) - v0) / (v1 - v0)

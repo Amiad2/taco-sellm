@@ -9,9 +9,9 @@ from pathlib import Path
 
 import pytest
 
-from arena_kit.cost import must_haves_ok, total_cost
+from arena_kit.cost import RELATIONSHIP_GOALS, must_haves_ok, total_cost
 from sellm.agent import make_agent
-from sellm.negotiator import Negotiator, Thread
+from sellm.negotiator import TARGET_SHARE, Negotiator, Thread
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "package"
@@ -102,8 +102,8 @@ def test_a_move_is_a_pure_function_of_the_thread(package):
 
 
 def test_our_ask_never_goes_back(package):
-    """Played against the supplier's real replies: our price never falls, and while the structure
-    stays the same each ask costs us at least as much as the last."""
+    """Played against the supplier's real replies: while the structure stays the same, our price
+    never falls and each ask costs us at least as much as the last."""
     for record in sessions():
         case = record["case"]
         for sid, thread in record["threads"].items():
@@ -124,18 +124,19 @@ def test_our_ask_never_goes_back(package):
                     break
                 threads[sid] = threads[sid] + [{**message, "from": "buyer"}, reply]
             for (a, cost_a), (b, cost_b) in zip(asks, asks[1:], strict=False):
-                assert b["unit_price"] >= a["unit_price"], (
-                    f"{case['case_id']} {sid}: {[x[0]['unit_price'] for x in asks]}"
-                )
                 if {f: x for f, x in a.items() if f != "unit_price"} == {
                     f: x for f, x in b.items() if f != "unit_price"
                 }:
+                    assert b["unit_price"] >= a["unit_price"], (
+                        f"{case['case_id']} {sid}: {[x[0]['unit_price'] for x in asks]}"
+                    )
                     assert cost_b >= cost_a
 
 
-def test_first_ask_is_no_dearer_for_us_than_its_own_terms(package):
-    """At its own price our structure costs us no more than the one it quoted, and keeps its cash
-    terms; payment days change only where its cost of money is known."""
+def test_first_ask_costs_us_less_than_its_own_terms_at_the_price_we_aim_for(package):
+    """The calculator's package: at the price we expect to end at it costs us no more than the
+    structure the supplier quoted; its Incoterm stays; payment days later than quoted are asked
+    only of a supplier the dossier calls relaxed about cash, or as a second offer of equal cost."""
     for record in sessions():
         case = record["case"]
         threads = {s: [t["messages"][0]] for s, t in record["threads"].items()}
@@ -145,15 +146,23 @@ def test_first_ask_is_no_dearer_for_us_than_its_own_terms(package):
             if its.get("unit_price") is None or not view.valid(its):
                 continue
             agent = make_agent(package)
-            sheet = agent.decide(case, threads, focus=sid)["message"]["term_sheets"][0]["terms"]
-            if "incoterm" in sheet:
-                assert sheet["incoterm"] == its["incoterm"]
-            if sheet.get("payment_days") != its.get("payment_days"):  # only where its cost of money is known to differ
-                assert agent.supplier(case, view)["interest_rate"] != agent.k["rate_guess"]
-                sheet = {**sheet, "payment_days": its["payment_days"]}
-            assert view.c({**sheet, "unit_price": its["unit_price"]}) <= view.c(its) + 0.01, (
-                f"{case['case_id']}: {sheet}"
+            sheets = [s["terms"] for s in agent.decide(case, threads, focus=sid)["message"]["term_sheets"]]
+            first = sheets[0]
+            if "incoterm" in first:
+                assert first["incoterm"] == its["incoterm"]
+            if first.get("payment_days", 0) > its.get("payment_days", 0):
+                assert agent.cash(case, view) == "low"
+            if first.get("payment_days", 0) < its.get("payment_days", 0):  # faster payment for a supplier short of cash
+                assert agent.cash(case, view) in ("medium", "high")
+                first = {**first, "payment_days": its["payment_days"]}
+            price = its["unit_price"] * TARGET_SHARE[case["buyer"].get("category_goal") in RELATIONSHIP_GOALS]
+            assert view.c({**first, "unit_price": price}) <= view.c({**its, "unit_price": price}) + 0.01, (
+                f"{case['case_id']}: {first}"
             )
+            for other in sheets[1:]:  # a second offer costs us the same as the first
+                assert abs(view.c(other) - view.c(first)) <= max(1.0, 0.002 * view.c(first)), (
+                    f"{case['case_id']}: {sheets}"
+                )
 
 
 def one_supplier(record):
