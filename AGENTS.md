@@ -11,7 +11,8 @@ Final: Sunday 11 Oct 2026, 12:00 CEST.** Everything about the challenge is in `d
 ## 1. Start of every session, before anything else
 
 1. `scripts/sync` - get the team's latest state (pull --rebase, push).
-2. Read `docs/STATUS.md` - where we are, who is working on what, what is next.
+2. Read `docs/STATUS.md` - where we are, who is working on what, what is next - and `docs/PLAN.md`
+   for the workstream your task belongs to.
 3. Read the newest entries of `docs/LOG.md` - `scripts/session-start` prints both.
 4. Read `docs/CONTEXT.md` if it is not already in your context, and `docs/LEARNINGS.md` before you
    touch negotiation behaviour.
@@ -69,6 +70,7 @@ Each file has one job. Do not mix them:
 |---|---|---|
 | `docs/CONTEXT.md` | facts about the challenge: rules, scoring, API, data, kit | rarely; when the brief, FAQ or data changes |
 | `docs/STATUS.md` | the present: state, claims, next steps, scoreboard, decisions | constantly; keep it short and true |
+| `docs/PLAN.md` | the plan: where the points are, the parts of the agent, workstreams, timeline, quota budget | when the team changes the plan |
 | `docs/LEARNINGS.md` | what works and what fails in negotiations, with evidence | when a replay teaches something |
 | `docs/LOG.md` | history: what happened when, by whom | append only |
 

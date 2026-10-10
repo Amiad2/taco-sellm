@@ -227,6 +227,11 @@ GET  /v1/sessions?set=practice                       our sessions: case, status,
 GET  /replay/{sid}                                   the replay page: every e-mail, the supplier's reasons
 ```
 
+The back office is thin (seen on P01 and D01): one line per step such as "My call: counter." or
+"The buyer asks something for Quality Manager". The supplier's reasons are in the `trace` of
+`GET /v1/sessions/{sid}`, not there. `GET /v1/sessions?set=practice|sandbox` lists every session
+of the team, whoever played it, so all runs can be pulled into the repo.
+
 Structured path for agents that skip prose: `POST /v1/sessions/{sid}/moves`, `.../accept`,
 `.../walk_away`. Same supplier, same rules.
 
@@ -414,6 +419,13 @@ squeezes `secure_supply`, kits and bundles `routine`.
 Should-cost: for strategic and bottleneck parts the estimate models the current supplier's own
 plant (error about 5 %); other rows use a German cost base (error 5-15 %). Full cost relative to
 Germany: AT and CH 1.0-1.1, CZ/PL/HU 0.8-0.85, TR 0.75, CN 0.7.
+
+Coverage (checked Sat 15:15): the 19 practice cases use 22 of the 46 detailed suppliers. The
+other 24 have about four documents each (e-mails, meeting notes, call notes, letters) and are the
+likely pool for the hidden cases. `negotiation_history` has, per supplier and part, past price
+events with asked and settled change and a note, e.g. "accepted below full cost to keep the
+volume". `supplier_intel` has owner type, group parent, staff, turnover, equity ratio and credit
+index now and 12 months ago; `suppliers` has standard payment days and cash discount terms.
 
 Data quirks that are not errors (`data/package/KNOWN_ISSUES.md`): prices are per `price_unit` (1,
 100 or 1,000); `sup:71999` is the old record of `sup:70210`; some PO lines carry a stale price;

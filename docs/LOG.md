@@ -71,3 +71,15 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 **[change] OpenAI provider is working; claim in STATUS released**
 - LLM_PROVIDER=openai, LLM_MODEL=gpt-6.1-sol, LLM_API_KEY in taco-sellm/.env (values were in the old negotiation-arena-kit/starter-kit/.env and were copied over; the old file can be deleted).
 - arena_kit/agents/llm.py was not changed. Smoke test of llm_from_env returned in 2.1 s.
+
+## 2026-10-10 15:13 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[change] Proposed team plan in docs/PLAN.md (not yet agreed)**
+- Three workstreams: A numbers and strategy (calculator + negotiator), B data and arguments (dossiers for all 46 suppliers + checked argument bank), C arena, measurement and final (runner, runs/, rehearsal, submission).
+- Timeline to Sun 12:00 and a budget for the 199 sessions (10 baseline, 30 full runs, 80 experiments, 25 Sunday, 54 reserve).
+- Proposes a separate package sellm/ for our code. Owners are open: claim a workstream in docs/STATUS.md.
+
+## 2026-10-10 15:13 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[finding] 24 of 46 detailed suppliers appear in no practice case; the back office is thin**
+- The 19 practice cases use 22 detailed suppliers. The other 24 have about 4 documents each: likely the hidden cases' suppliers, so dossiers should cover all 46.
+- negotiation_history has notes per supplier and part, e.g. Brandlhuber on part:310010: 'accepted below full cost to keep the volume'.
+- GET /v1/sessions/{sid}/backoffice only shows who asked whom ('My call: counter.'). The supplier's reasons are in the session trace.
