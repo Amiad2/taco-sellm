@@ -63,6 +63,24 @@ It is built in, so it cannot be forgotten:
   starting it. `ARENA_NO_PULL=1` switches the check off.
 - If origin cannot be reached it warns and runs the local code. Then say so in the `[run]` entry.
 
+### Every result names its commit
+
+So that a better earlier version can always be found and restored, **every result says which commit
+produced it**: each `[run]` entry, each scoreboard line in `docs/STATUS.md`, each results table in
+`experiments/` and each lab report carries the short hash and the branch, e.g. `omars_branch@680799f`
+(`git branch --show-current`, `git rev-parse --short HEAD`; `scripts/pull-first` prints the commit
+before every run).
+
+- The commit must be pushed and the working tree clean when the run starts; commit and push first.
+  A hash that exists only on one laptop cannot be restored by anyone.
+- Label the sessions with it: `scripts/pull-runs --label "<agent and model> <branch>@<hash>"`.
+- To go back: find the hash of the better result in `docs/LOG.md` or `runs/README.md`, look at or
+  test it with `git switch -c restore-<hash> <hash>`, and bring it back onto your branch with
+  `git revert` of the later commits or by merging the restore branch. Never `git reset --hard` over
+  pushed work.
+- Mark a version worth keeping with a tag:
+  `git tag -a best-<branch>-<score> <hash> -m "<run and result>" && git push origin best-<branch>-<score>`.
+
 ## 3. The log (`docs/LOG.md`)
 
 Append-only, newest at the bottom, written with `scripts/log`, never edited by hand except to fix
@@ -70,6 +88,7 @@ a wrong fact (then log the correction too).
 
 ```bash
 scripts/log "[run] P01 with llm agent: 0.71" \
+  "commit omars_branch@680799f (pushed, clean tree)" \
   "replay https://arena.tacto.ai/replay/<sid>" \
   "moved effective_date to April; supplier accepted after cost-breakdown question" \
   "quota left 187"
@@ -80,7 +99,7 @@ Write an entry whenever one of these happens. Start the title with its type:
 | Type | When |
 |---|---|
 | `[change]` | you changed how the agent, runner or tooling behaves |
-| `[run]` | you played practice or sandbox sessions: cases, agent version, scores, replay links, quota left. **Then run `scripts/pull-runs --label "<agent and model>"` and commit `runs/`**, so everyone has the full sessions |
+| `[run]` | you played practice or sandbox sessions: cases, agent version, **the commit as `<branch>@<hash>`**, scores, replay links, quota left. **Then run `scripts/pull-runs --label "<agent and model> <branch>@<hash>"` and commit `runs/`**, so everyone has the full sessions |
 | `[finding]` | you learned something about a supplier, the API, the scoring or the data |
 | `[decision]` | a choice was made that others must follow, and why |
 | `[blocker]` | something is broken or blocked, and what you tried |
