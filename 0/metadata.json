@@ -1,0 +1,101 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4KFRNKE5WBFBR7BSG0QMX06",
+  "session_id": "bc80161e-03a4-4665-86fa-dc14803965bc",
+  "strategy": "manual-commit",
+  "created_at": "2026-10-10T18:03:55.525370575Z",
+  "branch": "main",
+  "checkpoints_count": 3,
+  "save_step_count": 2,
+  "files_touched": [
+    "sellm/lab/__main__.py",
+    "sellm/lab/backtest.py",
+    "sellm/lab/bot.py",
+    "sellm/lab/persona.py",
+    "sellm/lab/strategies.py",
+    "sellm/lab/twins.json",
+    "tests/test_lab.py"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-5-5",
+  "turn_id": "1741feab3944",
+  "checkpoint_transcript_start": 2238,
+  "transcript_lines_at_start": 2238,
+  "compact_transcript_start": 308,
+  "token_usage": {
+    "input_tokens": 48,
+    "cache_creation_tokens": 791568,
+    "cache_read_tokens": 15920207,
+    "output_tokens": 20888,
+    "api_call_count": 21
+  },
+  "session_metrics": {
+    "turn_count": 24
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-10-10T18:03:54.91481205Z",
+    "agent_lines": 0,
+    "agent_removed": 72,
+    "human_added": 1327,
+    "human_modified": 222,
+    "human_removed": 0,
+    "total_committed": 1327,
+    "total_lines_changed": 1646,
+    "agent_percentage": 4.374240583232078,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 1229,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        ".agents/hooks.json": 28,
+        ".codex/hooks.json": 88,
+        "runs/lab/20261010-184634-stress-baseline-champion/parallel/progress.log": 2,
+        "runs/lab/20261010-184634-stress-baseline-champion/report.md": 43,
+        "runs/lab/20261010-184634-stress-baseline-champion/sequential/progress.log": 2,
+        "runs/lab/20261010-184910-compare-test-clone1/best.json": 170,
+        "runs/lab/20261010-184910-compare-test-clone1/progress.log": 4,
+        "runs/lab/20261010-184910-compare-test-clone1/report.md": 51,
+        "runs/lab/20261010-185035-compare-compare-clone-fixed/best.json": 170,
+        "runs/lab/20261010-185035-compare-compare-clone-fixed/progress.log": 4,
+        "runs/lab/20261010-185035-compare-compare-clone-fixed/report.md": 43,
+        "runs/lab/20261010-185145-compare-compare-clone-v2/best.json": 170,
+        "runs/lab/20261010-185145-compare-compare-clone-v2/progress.log": 4,
+        "runs/lab/20261010-185145-compare-compare-clone-v2/report.md": 43,
+        "runs/lab/20261010-185330-compare-compare-clone-v3/best.json": 170,
+        "runs/lab/20261010-185330-compare-compare-clone-v3/progress.log": 4,
+        "runs/lab/20261010-185330-compare-compare-clone-v3/report.md": 43,
+        "runs/lab/20261010-185451-stress-clone-final-stress/parallel/progress.log": 2,
+        "runs/lab/20261010-185451-stress-clone-final-stress/report.md": 43,
+        "runs/lab/20261010-185451-stress-clone-final-stress/sequential/progress.log": 2,
+        "sellm/lab/clone_agent.py": 143
+      }
+    },
+    {
+      "checkpoint_number": 2,
+      "user_lines_added": 0,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0
+    },
+    {
+      "checkpoint_number": 3,
+      "user_lines_added": 862,
+      "user_lines_removed": 111,
+      "agent_lines_added": 1385,
+      "agent_lines_removed": 658,
+      "user_added_per_file": {
+        ".agents/hooks.json": 28,
+        ".codex/hooks.json": 88,
+        "sellm/lab/twins.json": 746
+      },
+      "user_removed_per_file": {
+        "sellm/lab/twins.json": 111
+      }
+    }
+  ]
+}
