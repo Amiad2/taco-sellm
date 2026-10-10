@@ -43,7 +43,7 @@ over the per-move deadline from A and the argument bank and research from B at 1
 and the **dossier and mini-dossier schema** (**section 10**: fields, frozen core fields, rules,
 signal vocabulary). Build against section 10; add fields freely, rename core fields only by decision.
 
-1. Each person claims one group in the table above. Group C is still open.
+1. Each person claims one group in the table above: A Jonathan, B Omar, C Amiad.
    **For group A:** the stub is in. Code against
    `from sellm.intel import dossier; d = dossier(supplier_id, case["parts"], case=case, opening=threads, package=package)`.
    **It now serves real values** (Sat 18:37): the 46 built dossiers in `sellm/dossiers/` plus the case
