@@ -1,0 +1,120 @@
+--- a/sellm/negotiator.py
++++ b/sellm/negotiator.py
+@@ -57,6 +57,9 @@
+     levers="ours",  # first ask: ours (the calculator's cheapest package) | theirs (its terms, need covered)
+     dossier=True,  # read its cost of money from sellm.intel when a dossier exists
+     writer="template",
++    bank=False,  # EVAL: when no rival/should-cost/falling index applies, cite the next fact of sellm.claims
++    signals=False,  # EVAL: the dossier's signals move the share of its opening we aim at
++    clause=False,  # EVAL: where it insists on an index clause, ask the variant that costs us least
+ )
+ # Where deals could end, as a share of the supplier's opening price, when no should-cost of its own
+ # plant exists. Two numbers on purpose (few cases, so no finer split): cases with a relationship term,
+@@ -454,7 +457,7 @@
+             return round(sum(_distance(s.get(f), base.get(f)) for f in s), 6)
+ 
+         if self.k["levers"] == "ours":
+-            share = self.k["floor_share"] or TARGET_SHARE[b.get("category_goal") in RELATIONSHIP_GOALS]
++            share = self.share(case, v, b.get("category_goal") in RELATIONSHIP_GOALS)
+             keep = {f: base[f] for f in CASH_FIELDS if f in base and f != "payment_days"}
+             if "payment_days" in base and self.cash(case, v) != "low":
+                 keep["payment_days"] = base["payment_days"]  # not known to be relaxed about cash: its own days
+@@ -483,6 +486,24 @@
+ 
+         self._memo[key] = min(candidates, key=rank)
+         return self._memo[key]
++
++    def share(self, case, v, relationship):
++        """Where we expect the deal to end, as a share of its opening, when no should-cost of its own
++        plant exists. EVAL arm `signals`: the dossier's own reading of the supplier moves it - a list
++        price it cannot move or a margin it will not give up (docs/PLAN.md section 10: "the price is
++        near its floor") puts it close to the opening, a supplier that wants volume deeper."""
++        base = self.k["floor_share"] or TARGET_SHARE[bool(relationship)]
++        if not self.k.get("signals"):
++            return base
++        found = self.intel(case, v)
++        if found.get("coverage") != "full":
++            return base
++        kinds = {s["kind"]: s.get("strength", 0) for s in found.get("signals") or []}
++        if kinds.get("list_price_fixed", 0) >= 2 or kinds.get("margin_floor", 0) >= 1:
++            return max(base, 0.96)
++        if kinds.get("wants_volume", 0) >= 2:
++            return min(base, 0.84)
++        return base
+ 
+     def payment_trade(self, case, v, s, price):
+         """Payment days are cash to both sides, at different rates: where its cost of money (dossier)
+@@ -526,8 +547,28 @@
+             return previous
+         stay = next((o for o in options if o[1] == previous), options[0])
+         best = min(options, key=lambda o: o[0])
+-        return best[1] if best[0] < stay[0] * (1 - 0.002) else stay[1]
++        chosen = best[1] if best[0] < stay[0] * (1 - 0.002) else stay[1]
++        if self.k.get("clause") and isinstance(chosen.get("index_clause"), dict):
++            chosen = self.widest_deadband(case, v, chosen)
++        return chosen
+ 
++    def widest_deadband(self, case, v, s):
++        """EVAL arm `clause`: it insists on an index clause, so the clause stays - but the options hold
++        the same series with a deadband, and the arena's C says which variant costs us least (P08: a
++        deadband of 5 % is worth 22,823 against 0 % at the same price). Ask that one; if it refuses,
++        its next sheet brings its own clause back and we continue on that."""
++        clause = s["index_clause"]
++        options = [
++            o
++            for o in case.get("term_options", {}).get("index_clause") or []
++            if isinstance(o, dict) and o.get("series") == clause.get("series")
++        ]
++        if len(options) < 2:
++            return s
++        price = v.standing[1].get("unit_price") or 1.0
++        best = min(options, key=lambda o: v.c({**s, "index_clause": o, "unit_price": price}))
++        return {**s, "index_clause": best}
++
+     def full_standard(self, case, v):
+         """Its standard terms with every field the cost and value functions read."""
+         theirs = v.opening["term_sheets"][0]["terms"] if v.opening else {}
+@@ -634,10 +675,10 @@
+                 target = min(grid, key=lambda p: v.c({**s0, "unit_price": p}, supplier))
+         else:
+             source = "prior"
+-            share = self.k["floor_share"] or TARGET_SHARE[bool(relationship)]
++            share = self.share(case, v, bool(relationship))
+             target = share * min(reference, market)
+             charged = calculator.recent_low(calculator.supplier_cost(case, v.sid, None, self.package))
+-            if charged:  # a price it charged for this part within twelve months is one it can go back to
++            if charged and not (self.k.get("signals") and share >= 0.96):  # a price it charged within twelve months is one it can go back to - unless its list price is fixed (EVAL arm signals)
+                 target = min(target, charged)
+             if v.opening and v1 > v0:  # the same worth to it on the structure we ask
+                 its = v.filled(v.opening["term_sheets"][0]["terms"])
+@@ -707,6 +748,30 @@
+         for ref, sentence in self.index_claims(case):
+             if ref not in cited:
+                 return [sentence]
++        if self.k.get("bank"):  # EVAL: the next fact of group C's argument bank, never one used before
++            try:
++                from . import claims
++
++                def family(ids):  # the arena marked a second forecast of another part `duplicate` (P07): one fact per topic
++                    head = ids[0].split(":", 1)[0]
++                    return {"ctr": "doc"}.get(head, head)
++
++                used = {family([i]) for i in cited}
++                ppm = self.k.get("ppm", "skip")
++                for a in claims.arguments(case, v.sid, self.intel(case, v), package=self.package, used=cited, price=price):
++                    if a["kind"] == "quote" or a["sentence"] in ours_here:
++                        continue
++                    if self.k.get("one_per_topic", True) and family(a["ids"]) in used:
++                        continue
++                    sentence = a["sentence"]
++                    if a["kind"] in ("sc_ppm", "qn"):  # 3 of 3 ppm sentences with "2,376 ppm" came back contradicted
++                        if ppm == "skip":
++                            continue
++                        if ppm == "plain":
++                            sentence = re.sub(r"(\d),(\d{3})(?=\s*ppm)", r"\1\2", sentence)
++                    return [sentence]
++            except Exception:
++                log.warning("%s %s: argument bank failed", case.get("case_id"), v.sid, exc_info=True)
+         return []
+ 
+     def index_claims(self, case):

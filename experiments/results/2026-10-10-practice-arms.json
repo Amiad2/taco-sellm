@@ -1,0 +1,364 @@
+{
+ "what": "Practice-arena arms, Sat 2026-10-10 21:15-21:35 CEST: 30 practice sessions + 2 free sandbox sessions. See experiments/PRACTICE-ARMS.md.",
+ "base_commit": "19b339f (+ f6e083b claims bank); the patch is experiments/arms/negotiator-arms.patch",
+ "score_per_case": {
+  "bank": {
+   "P02": {
+    "score": 0.5212,
+    "session_id": "901d9efb9d6bbf25",
+    "time": "21:16"
+   },
+   "P03": {
+    "score": 0.9231,
+    "session_id": "9fb7f3ef319a7b3b",
+    "time": "21:16"
+   },
+   "P01": {
+    "score": 0.9147,
+    "session_id": "fd9ba2869877607c",
+    "time": "21:16"
+   },
+   "P04": {
+    "score": 0.8604,
+    "session_id": "3bc9d119fef3e7fe",
+    "time": "21:16"
+   },
+   "P05": {
+    "score": 0.6586,
+    "session_id": "5da6804eb45f6e84",
+    "time": "21:16"
+   },
+   "P07": {
+    "score": 0.7405,
+    "session_id": "4c5cca3dbb6528eb",
+    "time": "21:16"
+   },
+   "P10": {
+    "score": 0.6473,
+    "session_id": "c96b75dc1a71020e",
+    "time": "21:16"
+   },
+   "P11": {
+    "score": 0.5427,
+    "session_id": "35024fbd44b51e65",
+    "time": "21:16"
+   },
+   "P18": {
+    "score": 0.3861,
+    "session_id": "a138a57c3bd271e2",
+    "time": "21:16"
+   },
+   "P08": {
+    "score": 0.5487,
+    "session_id": "06d1d893996e451d",
+    "time": "21:17"
+   }
+  },
+  "bank2s": {
+   "P04": {
+    "score": 0.8604,
+    "session_id": "0ba017ff36c8cf05",
+    "time": "21:21"
+   },
+   "P11": {
+    "score": 0.7099,
+    "session_id": "7b4ec17cb852749e",
+    "time": "21:21"
+   },
+   "P18": {
+    "score": 0.467,
+    "session_id": "8c949023232100f2",
+    "time": "21:21"
+   }
+  },
+  "bank2": {
+   "P02": {
+    "score": 0.5223,
+    "session_id": "1fa57b7c86d67ede",
+    "time": "21:21"
+   },
+   "P07": {
+    "score": 0.747,
+    "session_id": "d773e327280de2a4",
+    "time": "21:21"
+   },
+   "P11": {
+    "score": 0.7099,
+    "session_id": "e65ea7db1ee222d8",
+    "time": "21:21"
+   }
+  },
+  "ppmfix": {
+   "P02": {
+    "score": 0.5311,
+    "session_id": "27abfcc63ed8b192",
+    "time": "21:21"
+   },
+   "P11": {
+    "score": 0.7099,
+    "session_id": "240249c66058fc81",
+    "time": "21:21"
+   }
+  },
+  "clause": {
+   "P18": {
+    "score": 0.467,
+    "session_id": "d0ecab10d1e6dc9b",
+    "time": "21:25"
+   },
+   "P08": {
+    "score": 0.4622,
+    "session_id": "81d4af9f26c56a59",
+    "time": "21:25"
+   }
+  },
+  "no dossier": {
+   "P02": {
+    "score": 0.5101,
+    "session_id": "037ef7c1b42e5d1d",
+    "time": "21:27"
+   },
+   "P01": {
+    "score": 0.8639,
+    "session_id": "95b54127befce9c9",
+    "time": "21:27"
+   },
+   "P04": {
+    "score": 0.8604,
+    "session_id": "8cb5fda37b78c26d",
+    "time": "21:27"
+   },
+   "P07": {
+    "score": 0.7393,
+    "session_id": "61fc52fd73765aa9",
+    "time": "21:27"
+   },
+   "P08": {
+    "score": 0.4823,
+    "session_id": "7f3e03dc282d90db",
+    "time": "21:27"
+   },
+   "P18": {
+    "score": 0.406,
+    "session_id": "a576913fd88dda98",
+    "time": "21:27"
+   }
+  },
+  "full": {
+   "P04": {
+    "score": 0.8604,
+    "session_id": "701ba2dfc9df3a90",
+    "time": "21:27"
+   },
+   "P11": {
+    "score": 0.7785,
+    "session_id": "b3eb672fd683c567",
+    "time": "21:27"
+   },
+   "P18": {
+    "score": 0.467,
+    "session_id": "efeba2d2eed6a7e7",
+    "time": "21:27"
+   }
+  },
+  "a1@HEAD (P10 only)": {
+   "P10": {
+    "score": 0.6473,
+    "session_id": "752e62294db4cb1f",
+    "time": "21:30"
+   }
+  }
+ },
+ "reference": {
+  "kit-llm": {
+   "P02": {
+    "score": 0.1052,
+    "session_id": "3c2bf69b85674a60"
+   },
+   "P03": {
+    "score": 0.9034,
+    "session_id": "4b469202363ab4c1"
+   },
+   "P01": {
+    "score": 0.7894,
+    "session_id": "edd91daa7e17280b"
+   },
+   "P04": {
+    "score": 0.8098,
+    "session_id": "fff76670fe248a29"
+   },
+   "P05": {
+    "score": 0.6762,
+    "session_id": "5f15d1920cec3f32"
+   },
+   "P08": {
+    "score": 0.4331,
+    "session_id": "a87c247a68873a71"
+   },
+   "P07": {
+    "score": 0.7795,
+    "session_id": "b6759d5e9b760a5b"
+   },
+   "P10": {
+    "score": 0.5703,
+    "session_id": "4654ba8d94f5ea9e"
+   },
+   "P18": {
+    "score": 0.377,
+    "session_id": "ed5f9251a6dce645"
+   },
+   "P11": {
+    "score": 0.7099,
+    "session_id": "878779258c7d07cc"
+   }
+  },
+  "v1.1": {
+   "P03": {
+    "score": 0.855,
+    "session_id": "6ffde165101af3ac"
+   },
+   "P01": {
+    "score": 0.8741,
+    "session_id": "6254f7fbad799c3f"
+   },
+   "P04": {
+    "score": 0.0,
+    "session_id": "e654772059edf691"
+   },
+   "P05": {
+    "score": 0.7688,
+    "session_id": "844427004b8d7468"
+   },
+   "P02": {
+    "score": 0.1831,
+    "session_id": "e22ce1eafbf6625f"
+   },
+   "P07": {
+    "score": 0.7196,
+    "session_id": "5072746cc7be312d"
+   },
+   "P08": {
+    "score": 0.1522,
+    "session_id": "63971c870bbbf17d"
+   },
+   "P10": {
+    "score": 0.6551,
+    "session_id": "4c7970d2ee181e31"
+   },
+   "P18": {
+    "score": 0.406,
+    "session_id": "17cc1fd397091bdf"
+   },
+   "P11": {
+    "score": 0.7099,
+    "session_id": "6e381ccb4a7215cc"
+   }
+  },
+  "a1": {
+   "P01": {
+    "score": 0.8308,
+    "session_id": "6f32f81e32f6d229"
+   },
+   "P03": {
+    "score": 0.9195,
+    "session_id": "482138b5b6a218b6"
+   },
+   "P05": {
+    "score": 0.7688,
+    "session_id": "b4105401f739c2ff"
+   },
+   "P07": {
+    "score": 0.747,
+    "session_id": "48ba9fbba0bdab0a"
+   },
+   "P08": {
+    "score": 0.5266,
+    "session_id": "01780f60530444ef"
+   },
+   "P10": {
+    "score": 0.6629,
+    "session_id": "e88ab062bc7d477b"
+   },
+   "P02": {
+    "score": 0.2934,
+    "session_id": "d3c1bb9888781245"
+   },
+   "P04": {
+    "score": 0.8604,
+    "session_id": "956863769c8d5661"
+   },
+   "P11": {
+    "score": 0.7099,
+    "session_id": "2e0918a1746ab183"
+   },
+   "P18": {
+    "score": 0.4295,
+    "session_id": "328a2f62273b6e51"
+   }
+  }
+ },
+ "full_candidate_per_case": {
+  "P01": 0.915,
+  "P02": 0.531,
+  "P03": 0.923,
+  "P04": 0.86,
+  "P05": "0.659-0.769 (RFQ, noisy)",
+  "P07": 0.747,
+  "P08": 0.549,
+  "P10": 0.647,
+  "P11": 0.778,
+  "P18": 0.467,
+  "how": "measured as one object for P04, P11, P18; the others from the arm that sent identical moves (replay)",
+  "mean_with_P05_0.659": 70.8,
+  "mean_with_P05_0.769": 71.9
+ },
+ "sandbox_full": {
+  "D01": 0.921,
+  "D02": 0.567
+ },
+ "dossier_ablation_6_cases": {
+  "full": [
+   0.915,
+   0.531,
+   0.86,
+   0.747,
+   0.549,
+   0.467
+  ],
+  "no_dossier": [
+   0.864,
+   0.51,
+   0.86,
+   0.739,
+   0.482,
+   0.406
+  ],
+  "cases": [
+   "P01",
+   "P02",
+   "P04",
+   "P07",
+   "P08",
+   "P18"
+  ]
+ },
+ "claim_results_seen": {
+  "verified": [
+   "idx",
+   "doc+ctr",
+   "cost",
+   "fc",
+   "po",
+   "sc on-time delivery",
+   "sc quality ppm written without thousands comma"
+  ],
+  "contradicted": [
+   "sc quality ppm written '2,376 ppm' (2 of 2)",
+   "qn complaint ppm written '5,263 ppm' / '27,778 ppm' (2 of 2)"
+  ],
+  "duplicate": [
+   "a second fc of another part after one fc (P07, 2 of 2)",
+   "qn after sc quality in one case (P11)"
+  ]
+ }
+}

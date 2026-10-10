@@ -37,6 +37,40 @@ Tacto's docs or FAQ, not yet seen by us). Raw history goes to `docs/LOG.md`.
   rolling scorecard. Pick the right reference before citing, and build the argument bank only from
   IDs checked against `facts.json`, never from a supplier's stated reasons.
 
+## From the practice arms (Sat 21:15-21:35, 30 practice sessions; `experiments/PRACTICE-ARMS.md`)
+
+One change per arm on the real practice suppliers, base `19b339f`. Per-case scores and the code of
+the arms are in `experiments/PRACTICE-ARMS.md` and `experiments/arms/`.
+
+- **Practice suppliers answer identical messages with identical numbers** (confirmed: v1.1 twice,
+  9 of 10 cases identical; D01 x3). One session per single-supplier case is a fair comparison; only
+  RFQ threads move with timing (P05 0.659-0.769). Replaying a variant over recorded sessions says
+  which cases it changes before any session is spent (`experiments/arms/tools/replay.py`).
+- **A verified fact moves a supplier by 1-2 %, on some suppliers** (confirmed): P01 0.831 -> 0.915
+  (notice letter `doc`+`ctr`, should-cost, forecast; "we did not know that - a fair point"), P02
+  0.293 -> 0.531 (price history `po`, forecast, OTD). It did not move P04, P07, P08, P18 ("it holds,
+  but it does not change our calculation").
+- **The arena reads integers with a thousands comma as something else** (confirmed 4 of 4):
+  "2,376 ppm", "5,263 ppm", "27,778 ppm" came back `contradicted` and cost trust ("That costs
+  trust"); "2376 ppm" was `verified`. EUR amounts with decimals and forecast units were fine.
+  Write ppm and other integer figures without a thousands separator.
+- **Topics count once per case, not IDs** (confirmed, P07, P11): after one forecast `fc:` of one part
+  another part's forecast is `duplicate`; a complaint `qn:` after the scorecard's quality `sc:` is
+  `duplicate`. Verified together in one case: index, notice letter + contract, should-cost, price
+  history, forecast, on-time delivery, quality record.
+- **The supplier's final price on a given structure does not depend on our first ask** (confirmed
+  on P04 4.09 vs 4.54, P11 38.88 vs 42.41, P18 5.02 vs 4.89): suppliers follow their own concession
+  schedule. What our ask changes is which alternative sheets they put next to their offer.
+- **Asking for an index clause's deadband is priced by the supplier** (confirmed, mixed): P08 it
+  moved from 5.35 to 5.55-5.59 (0.549 -> 0.42-0.46), P18 it gave the 5 % variant for +0.10
+  (0.386 -> 0.467-0.485). Take a deadband variant the supplier quotes when C prefers it; do not
+  assume the price stays.
+- **The dossier is worth about 3.5 points on the six cases tested** (confirmed, 6 cases: 5 better,
+  1 equal, `no dossier` vs `full`). For a supplier without one the agent sends two equal-C offers
+  (quoted days and 90 days) and loses little.
+- **Bundles: contract length beyond the horizon is not free** (open, P07): 5.41 for 36 months here,
+  5.36 for 24 months from the kit agent; not yet tested one against the other.
+
 ## From the negotiator's sandbox runs (Sat 18:40-20:20, 29 free sessions; `experiments/RESULTS.md` section 7)
 
 - **Suppliers price in value** (`arena_kit.cost.supplier_value`): a later start date or longer

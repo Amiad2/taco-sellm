@@ -3,7 +3,7 @@
  "case_id": "case:P07",
  "set": "practice",
  "created_at": "2026-10-10T21:21:21+02:00",
- "label": "sellm negotiator v1.3 (second choice) @cd67dda, kit runner, no LLM",
+ "label": "EVAL bank2: bank, one fact per topic, no ppm sentences @19b339f (claude eval session)",
  "replay": "https://arena.tacto.ai/replay/d773e327280de2a4",
  "case": {
   "case_id": "case:P07",

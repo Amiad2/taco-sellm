@@ -3,7 +3,7 @@
  "case_id": "case:P11",
  "set": "practice",
  "created_at": "2026-10-10T21:16:53+02:00",
- "label": "sellm negotiator v1.3 (second choice) @cd67dda, kit runner, no LLM",
+ "label": "EVAL bank: a1 + argument bank @19b339f (claude eval session)",
  "replay": "https://arena.tacto.ai/replay/35024fbd44b51e65",
  "case": {
   "case_id": "case:P11",

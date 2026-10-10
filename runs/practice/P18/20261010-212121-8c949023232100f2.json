@@ -3,7 +3,7 @@
  "case_id": "case:P18",
  "set": "practice",
  "created_at": "2026-10-10T21:21:21+02:00",
- "label": "sellm negotiator v1.3 (second choice) @cd67dda, kit runner, no LLM",
+ "label": "EVAL bank2s: bank2 + dossier signals set the aimed share @19b339f (claude eval session)",
  "replay": "https://arena.tacto.ai/replay/8c949023232100f2",
  "case": {
   "case_id": "case:P18",

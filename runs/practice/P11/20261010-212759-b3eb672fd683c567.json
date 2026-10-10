@@ -3,7 +3,7 @@
  "case_id": "case:P11",
  "set": "practice",
  "created_at": "2026-10-10T21:27:59+02:00",
- "label": "P08 single runs, negotiator knobs second_choice / recent_cap (see experiments/results/2026-10-10-p08-2x2.json)",
+ "label": "EVAL full: bank (ppm plain, one per topic) + signals @19b339f (claude eval session)",
  "replay": "https://arena.tacto.ai/replay/b3eb672fd683c567",
  "case": {
   "case_id": "case:P11",
