@@ -1,0 +1,54 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4KMTN2R5WTJNXDX3BQW3X8C",
+  "session_id": "bc80161e-03a4-4665-86fa-dc14803965bc",
+  "strategy": "manual-commit",
+  "created_at": "2026-10-10T19:32:29.558469643Z",
+  "branch": "main",
+  "checkpoints_count": 2,
+  "files_touched": [
+    "docs/STATUS.md",
+    "sellm/lab/playbooks.py"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-opus-5-5",
+  "turn_id": "a0a0aedeb8ba",
+  "checkpoint_transcript_start": 4067,
+  "transcript_lines_at_start": 4067,
+  "compact_transcript_start": 563,
+  "token_usage": {
+    "input_tokens": 16,
+    "cache_creation_tokens": 287143,
+    "cache_read_tokens": 2002400,
+    "output_tokens": 9904,
+    "api_call_count": 8
+  },
+  "session_metrics": {
+    "turn_count": 36
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-10-10T19:32:27.816313941Z",
+    "agent_lines": 98,
+    "agent_removed": 0,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 98,
+    "total_lines_changed": 98,
+    "agent_percentage": 100,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 116,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        ".agents/hooks.json": 28,
+        ".codex/hooks.json": 88
+      }
+    }
+  ]
+}

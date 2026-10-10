@@ -1,0 +1,6 @@
+wir haben jetzt gerade insgesamt iwie 6h gearbeitet und dann einmal alle 10 real getetstet undsind einfahc schlechter geworden. sollen wir was grundsätzliches ändern oder ich habe die idee, das wir für jeden dieser 10-12 beispiele eine taktik finden im lab wo der wert 0,9-1 ist, und dann lassen wir konkret für jede challenges die perfekte persönlichkeit laufen. erstmal wie findest du diese idee. danach müsste man entscheiden ob man alle persönlichkeiten zusammenfasst oder den agent je nach dossier und infos etc eine persönlichkeit mit gewisser confidence auswählen lässt. was hälst du von dieser idee? mach noch nichts. wichtig ist das darf nurnebenher getestet werden, weil jonathan testet gerade die bewährte taktik und wir können obv nicht gleichzeitig das machen. sag erstmal denkst du das ist eine gute idee
+
+---
+
+ja geh das so an. finde erstmal fürjedes p und jedes d etwas das im lab mit openai 0,95-1 erreicht, dann teste es online mit den versuchen und vergleiche bis wir auch online bei so 0,95 oder 0,9 sind. dann teste einmal wie das mit 
+  neu ausgedachten persönlichkeiten mit auswählen oder mit zusammenfassen. benutze maximal 25/450 tokens
