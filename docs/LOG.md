@@ -34,3 +34,10 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - scripts/sync (pull --rebase + push), scripts/log (this log), scripts/session-start and scripts/stop-check (Claude Code hooks in .claude/settings.json).
 - docs/LOG.md merges with merge=union (.gitattributes), so parallel entries from two machines do not conflict.
 - Next: see 'Next up' in docs/STATUS.md.
+
+## 2026-10-10 14:49 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] Sandbox D01 with the kit's naive agent: 0.200, quota unchanged**
+- Sat 14:49, session b395491ef29942ff, replay https://arena.tacto.ai/replay/b395491ef29942ff
+- Deal with sup:DEMO-F1 at 50.90, 30 days, 12 months, effective 2026-12-01. c_open 448,811, c_deal 440,757, c_best 408,624.
+- Verified: 'uv run arena me' shows used 1 / left 199 before and after, so the sandbox does not touch the practice quota.
+- The naive agent left contract_months at 12 although the horizon is 2 years, so half the need is uncovered at the fallback price.
