@@ -52,3 +52,10 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 ## 2026-10-10 14:51 CEST · Jonathan @ MacBook-Pro-von-Jonathan
 **[decision] Team LLM provider is OpenAI**
 - Jonathan is wiring LLM_PROVIDER=openai (LLM_MODEL, LLM_API_KEY in .env). Claim is in docs/STATUS.md. Do not edit arena_kit/agents/llm.py until it is released there.
+
+## 2026-10-10 14:56 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[change] Entire enabled for Claude Code (local checkpoints, no session push)**
+- Installed Entire CLI 0.11.4 (checksum verified) and ran: entire enable --agent claude-code --skip-push-sessions --telemetry=false.
+- Committed: .entire/settings.json, .entire/.gitignore, Entire's hooks merged into .claude/settings.json next to our session-start and stop-check (both kept).
+- Not shared by git: Entire's git hooks in .git/hooks. Every teammate must install the CLI and run 'entire enable' once (AGENTS.md section 7).
+- push_sessions=false on purpose: transcripts may contain keys and this repo is read by the jury. Changing it is a team decision.

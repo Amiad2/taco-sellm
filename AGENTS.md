@@ -123,6 +123,16 @@ Each file has one job. Do not mix them:
 New machine: `uv sync --all-extras`, `cp .env.example .env`, put in the team's `ARENA_API_KEY`
 (from a teammate, never through git) and your own LLM key, `uv run arena data`, `uv run arena me`.
 
+**Entire** (session checkpoints, installed Sat 14:55, CLI 0.11.4) is enabled in this repo for Claude
+Code: `.entire/settings.json` and its hooks in `.claude/settings.json` are committed, but its git
+hooks live in each clone's `.git/hooks`. On every machine run once, after pulling:
+`curl -fsSL https://entire.io/install.sh | bash` (adds `~/.local/bin`, put it on your `PATH`), then
+`entire enable --agent claude-code --skip-push-sessions --telemetry=false`. Without it the Claude
+Code hooks stay silent except for one "Entire CLI is not installed" notice at session start; nothing breaks.
+**Session logs are not pushed** (`push_sessions: false`): transcripts can contain keys and internal
+prompts, and this repo goes to the jury. Do not turn that on without the team deciding it in
+`docs/STATUS.md`. `docs/LOG.md` stays the shared memory; checkpoints are the per-session detail.
+
 ## 8. Before you stop
 
 - `git status` is clean and `scripts/sync` succeeded, or you told your human exactly what is not
