@@ -44,11 +44,23 @@ def package():
     return pkg
 
 
+def champion_knobs():
+    """The knobs of our agent as it stands (sellm/agent.py, group A's file)."""
+    import sellm.agent
+
+    return dict(getattr(sellm.agent, "KNOBS", {}))
+
+
 def parse_knobs(text):
-    """A JSON object, or path/to/best.json[#rank] from an earlier run."""
+    """A JSON object; 'champion' (our agent's knobs) optionally '+{json}' on top; or
+    path/to/best.json[#rank] from an earlier run."""
     if not text:
         return {}
-    if text.strip().startswith("{"):
+    text = text.strip()
+    if text.startswith("champion"):
+        extra = text[len("champion") :].lstrip("+").strip()
+        return {**champion_knobs(), **(json.loads(extra) if extra else {})}
+    if text.startswith("{"):
         return json.loads(text)
     path, _, rank = text.partition("#")
     best = json.loads(Path(path).read_text(encoding="utf-8"))
@@ -145,12 +157,66 @@ def cmd_tournament(a):
             rows = t.compare(run, a.agents, a.seeds, knobs)
             title = f"Lab compare {out.name}: {' vs '.join(a.agents)}"
         else:
-            rows = t.search(run, a.minutes, a.start, a.seeds, a.seed)
+            base = parse_knobs(a.around) if a.around else None
+            rows = t.search(run, a.minutes, a.start, a.seeds, a.seed, around=base)
             title = f"Lab search {out.name}: {a.minutes:g} min, {a.start} random variants to start"
         text = t.write(run, rows, title)
         text += f"\nRun: `python -m sellm.lab {' '.join(sys.argv[1:])}`, {time.time() - t0:.0f} s, options {o}.\n"
         (out / "report.md").write_text(text, encoding="utf-8")
         run.log(f"report: {out / 'report.md'}")
+        print(text)
+    finally:
+        run.close()
+
+
+def cmd_challenge(a):
+    """One change against the champion, paired on the unseen test pool: adopt it or not."""
+    from . import tournament as t
+
+    pkg = package()
+    challenger = parse_knobs(a.knobs if a.knobs.startswith(("champion", "{", "runs")) else "champion+" + a.knobs)
+    champ = champion_knobs()
+    delta = {k: v for k, v in challenger.items() if champ.get(k) != v}
+    out = run_dir("challenge", a.label or "-".join(f"{k}-{v}" for k, v in delta.items())[:60])
+    print(f"run folder: {out}\nchallenger = champion + {delta}", flush=True)
+    o = opts_of(a)
+    workers = a.workers or (24 if a.supplier == "llm" else None)
+    train, test = t.build_pools(0, a.invent_seed, a.test, pkg)
+    run = t.Run(out, o, [], train + test if a.all_twins else test, workers)
+    try:
+        jobs = [(name, k, s.name, seed) for name, k in (("calc", champ), ("calc", challenger))
+                for s in run.test for seed in range(a.seeds)]  # fmt: skip
+        rows = run.play(jobs)
+        d, se, n = t.paired(rows, t._key("calc", challenger), t._key("calc", champ))
+        verdict = (
+            "ADOPT: clearly better"
+            if d > 2 * se
+            else "REJECT: clearly worse"
+            if d < -2 * se
+            else "TIE: not distinguishable"
+        )
+        stats = t.summarise(rows)
+        lines = [f"# Challenge {out.name}", "", f"Challenger = champion (sellm/agent.py KNOBS) + `{json.dumps(delta)}`",
+                 f"Options {o}; {n} test scenarios x {a.seeds} seeds.", "",
+                 f"**{verdict}**: {100 * d:+.1f} ± {100 * se:.1f} points (paired)", "",
+                 "| | Test | Twins | Case files | Invented | Worst 10 % | Crash | 422 | Broken | Worse | No deal |",
+                 "|---|---|---|---|---|---|---|---|---|---|---|"]  # fmt: skip
+        for label, k in (("champion", champ), ("challenger", challenger)):
+            s = stats[t._key("calc", k)]
+            lines.append(
+                f"| {label} | {100 * s['test']:.1f} | {100 * s['twins']:.1f} | {100 * s['data']:.1f} | "
+                f"{100 * s['invented']:.1f} | {100 * s['worst10']:.1f} | {s['crashes']} | {s['rejected']} | "
+                f"{s['broken']} | {s['worse']} | {s['no_deal']} |"
+            )
+        lines += ["", "By case type (champion / challenger): " + ", ".join(
+            f"{k} {100 * stats[t._key('calc', champ)]['by']['type'].get(k, 0):.0f}/"
+            f"{100 * stats[t._key('calc', challenger)]['by']['type'].get(k, 0):.0f}"
+            for k in sorted(stats[t._key("calc", champ)]["by"]["type"]))]  # fmt: skip
+        text = "\n".join(lines) + "\n"
+        (out / "report.md").write_text(text, encoding="utf-8")
+        (out / "best.json").write_text(
+            json.dumps([{"knobs": challenger, "delta": delta, "diff": d, "se": se}], indent=1)
+        )
         print(text)
     finally:
         run.close()
@@ -302,10 +368,17 @@ def main(argv=None):
             t.add_argument("--minutes", type=float, default=10)
             t.add_argument("--start", type=int, default=64, help="random variants in the first round")
             t.add_argument("--seed", type=int, default=0)
+            t.add_argument("--around", default="", help="'champion': start from our agent's knobs and their neighbours")
         t.add_argument("--invented", type=int, default=160, help="generated scenarios for training")
         t.add_argument("--test", type=int, default=80, help="generated scenarios for the test")
         t.add_argument("--seeds", type=int, default=2, help="runs per strategy and scenario")
         lab_opts(t)
+    ch = sub.add_parser("challenge", help="a change against the champion: 'challenge {\"adaptive\": true}'")
+    ch.add_argument("knobs", help="JSON added to the champion's knobs, or champion+{...}, or a best.json")
+    ch.add_argument("--test", type=int, default=160, help="generated test scenarios (plus the held-out twins)")
+    ch.add_argument("--seeds", type=int, default=2)
+    ch.add_argument("--all-twins", action="store_true", help="also play all twins and the train pool's case files")
+    lab_opts(ch)
     s = sub.add_parser("stress")
     s.add_argument("--agent", default="calc")
     s.add_argument("--knobs", default="")
@@ -366,6 +439,8 @@ def main(argv=None):
         cmd_play(a)
     elif a.cmd in ("compare", "search"):
         cmd_tournament(a)
+    elif a.cmd == "challenge":
+        cmd_challenge(a)
     elif a.cmd == "stress":
         cmd_stress(a)
     elif a.cmd == "status":

@@ -14,6 +14,8 @@ thousands of negotiations cost nothing - and has knobs for what we want to compa
   adaptive       shrink our step when the supplier gives back much less than it (its per-round limit
                  binds), so our price stays low for more rounds
   learn          when the supplier counters on one of our variant sheets, ask on that structure
+  rel_estimate   the supplier's full cost for the relationship term: should_cost | offer (rel_margin x
+                 its lowest offer so far, which bounds its cost) | max (the higher of the two)
   hold_others    with one loop per thread: keep a finished thread alive with a holding e-mail while
                  the others still negotiate (a supplier left waiting at its final offer may withdraw)
 
@@ -46,6 +48,8 @@ DEFAULTS = dict(
     accept_gap=0.002,
     adaptive=False,
     learn=False,
+    rel_estimate="should_cost",
+    rel_margin=0.97,
     hold_others=True,
     mirror_guess=0.6,
 )
@@ -89,7 +93,20 @@ class Calculator:
             sc = sc or (self._should_cost_any(case))
             full = sc[1] if sc else self.k["floor_guess"] * self._sup_value(case, std, terms)
             self.estimates[sid] = {"standard": std, "interest_rate": self.k["guess_rate"], "full_cost": full}
-        return self.estimates[sid]
+        est = self.estimates[sid]
+        if self.k["rel_estimate"] != "should_cost":
+            # it never sells below its full cost: its lowest offer so far bounds that cost from above, and
+            # suppliers settle close to it - so a squeezed deal costs more relationship than the should-cost says
+            values = [
+                self._sup_value(case, est["standard"], m["term_sheets"][0]["terms"])
+                for m in events
+                if m.get("from") != "buyer" and m.get("term_sheets") and m["term_sheets"][0]["terms"].get("unit_price")
+            ]
+            if values:
+                from_offers = self.k["rel_margin"] * min(values)
+                full = from_offers if self.k["rel_estimate"] == "offer" else max(est["full_cost"], from_offers)
+                return {**est, "full_cost": full}
+        return est
 
     def _should_cost_any(self, case):
         """The should-cost estimate, whether or not the strategy uses it for its opening."""
@@ -395,6 +412,9 @@ SPACE = {
     "tone": ["warm", "neutral", "hard"],
     "ask_breakdown": [False, True],
     "accept_gap": [0.0, 0.002, 0.005, 0.01],
+    "rel_estimate": ["should_cost", "offer", "max"],
+    "rel_margin": [0.93, 0.97, 1.0],
+    "adaptive": [False, True],
 }
 
 

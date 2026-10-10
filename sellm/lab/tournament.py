@@ -211,9 +211,10 @@ def compare(run, names, seeds=2, knobs=None):
     return rows
 
 
-def search(run, minutes=10, start=64, seeds=2, seed=0, test_top=8, test_seeds=3, baselines=("naive",)):
+def search(run, minutes=10, start=64, seeds=2, seed=0, test_top=8, test_seeds=3, baselines=("naive",), around=None):
     """Successive halving over random Calculator knobs on the train pool, then the best `test_top`
-    variants, the default and the baselines on the test pool."""
+    variants, the default and the baselines on the test pool. `around`: start from these knobs and
+    their neighbours (one or two knobs changed) instead of random ones - a local search."""
     rng = random.Random(seed)
     names = [s.name for s in run.train]
     rng.shuffle(names)
@@ -222,7 +223,10 @@ def search(run, minutes=10, start=64, seeds=2, seed=0, test_top=8, test_seeds=3,
     if start > fits:
         run.log(f"{minutes:g} min fit about {fits} variants in a first round, not {start}: starting with {fits}")
         start = fits
-    variants = [("calc", {})] + [("calc", sample_knobs(rng)) for _ in range(start - 1)]
+    if around is not None:
+        variants = [("calc", dict(around)), ("calc", {})] + [("calc", mutate(rng, around)) for _ in range(start - 2)]
+    else:
+        variants = [("calc", {})] + [("calc", sample_knobs(rng)) for _ in range(start - 1)]
     size, played = max(12, len(names) // 8), {}
     rows = run.play([(b, {}, n, k) for b in baselines for n in names for k in range(seeds)])
     rnd = 0
@@ -257,6 +261,8 @@ def search(run, minutes=10, start=64, seeds=2, seed=0, test_top=8, test_seeds=3,
     if not top:  # nothing was played on every train scenario: take the widest-played ones
         top = sorted(summarise(calc_rows).values(), key=lambda x: (-x["scenarios"], -x["mean"]))[:test_top]
     cands = [("calc", t["knobs"]) for t in top] + [(b, {}) for b in baselines]
+    if around is not None and not any(n == "calc" and k == around for n, k in cands):
+        cands.append(("calc", dict(around)))  # the champion is always scored on the test pool
     if not any(n == "calc" and not k for n, k in cands):
         cands.append(("calc", {}))
     run.log(f"test phase: {len(cands)} strategies on {len(run.test)} test scenarios, {test_seeds} seeds")

@@ -1,0 +1,12 @@
+[
+ {
+  "knobs": {
+   "rel_estimate": "max"
+  },
+  "delta": {
+   "rel_estimate": "max"
+  },
+  "diff": -0.0351438124134193,
+  "se": 0.010717037825785399
+ }
+]
