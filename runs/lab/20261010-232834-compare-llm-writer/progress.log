@@ -1,0 +1,4 @@
+23:28:34 pools: train 9 (9 twins), test 3 (3 twins); options {'clock': True, 'mode': 'parallel', 'wave_cap_s': 480, 'think_s': None, 'vary': False, 'reader': 'keywords', 'supplier': 'llm', 'no_cache': False}
+23:28:34 compare ['sellm.agent:make_agent', 'experiments.llm_writer:make_agent']: 24 negotiations
+23:34:13 done in 339 s
+23:34:13 report: runs/lab/20261010-232834-compare-llm-writer/report.md

@@ -754,3 +754,9 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - T3, the first ask as two offers of equal cost that differ in payment days: P18 0.419 (0.467), P05 0.762 (within its spread). No gain.
 - T4, facts by signal for suppliers that want volume (forecast first, then also a call-off schedule in the text): P04 unchanged at 0.860, P18 0.430 and 0.467 (0.467). No gain. A binding volume above the need can never pay by the cost function (P03: +20 % volume = 786,803 EUR, a price cut of 16.7 % to break even).
 - Proposal, nothing switched on: past_target + fast_pay. Replayed over 157 recorded decision states they change only P01 and D01's accept.
+
+## 2026-10-10 23:45 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
+**[run] Lab: LLM-written e-mails around the negotiator's moves score 3.1 points below the template (62.0 vs 65.2)**
+- Same moves, term sheets and checked facts; gpt-6-sol rewrote only the wording (experiments/llm_writer.py, guarded). Lab against LLM suppliers on the 12 twins, one run each: better in 2 (D02 +0.027, P11 +0.017), worse in 5 (P18 -0.240, P02 -0.110, P01 -0.029, P10 -0.027, P07 -0.013), equal in 5. Report runs/lab/20261010-232834-compare-llm-writer/report.md, write-up experiments/LLM-WRITER.md.
+- The writer itself is safe: 54/54 e-mails passed the guards, 4.3 s median, 6.0 s max. The LLM supplier gives the same deal for the same e-mail (P18 template cached and fresh: 0.320), so the differences come from wording; their size is not stable (P18 via play: -0.027 instead of -0.240), the sign held.
+- Why: the LLM's e-mails repeat the supplier's price and concede its points ('We understand your concern about material-price risk'); the position reads softer. Decision for now (Omar): the template stays in --agent sellm. Limits: our lab's LLM suppliers, not Tacto's bots, and the same model on both sides. About 190 LLM calls on Omar's key.

@@ -1,0 +1,126 @@
+[
+ {
+  "strategy": "sellm.agent:make_agent",
+  "knobs": {},
+  "scenarios": 12,
+  "negotiations": 12,
+  "mean": 0.6515431321259607,
+  "train": 0.6529594102809878,
+  "test": 0.6472942976608794,
+  "test_se": 0.12689976726732033,
+  "key": "sellm.agent:make_agent",
+  "twins": 0.6515431321259607,
+  "data": NaN,
+  "invented": NaN,
+  "worst10": 0.2806051682834446,
+  "crashes": 0,
+  "rejected": 0,
+  "broken": 0,
+  "worse": 0,
+  "no_deal": 0,
+  "below_alt": 0,
+  "wave_cap": 0,
+  "timeouts": 0,
+  "seconds": 155.14166666666668,
+  "llm_calls": 58,
+  "llm_fail": 0,
+  "per_twin": {
+   "D01": 0.913,
+   "D02": 0.631,
+   "P01": 0.827,
+   "P02": 0.281,
+   "P03": 0.942,
+   "P04": 0.86,
+   "P05": 0.304,
+   "P07": 0.818,
+   "P08": 0.484,
+   "P10": 0.66,
+   "P11": 0.676,
+   "P18": 0.421
+  },
+  "by": {
+   "type": {
+    "bundling": 0.818,
+    "capacity": 0.66,
+    "price_increase": 0.674,
+    "quality": 0.676,
+    "raw_material": 0.453,
+    "renewal": 0.901,
+    "rfq": 0.467
+   },
+   "goal": {
+    "leverage": 0.46,
+    "quality_first": 0.676,
+    "routine": 0.839,
+    "secure_supply": 0.66,
+    "stabilise": 0.741
+   },
+   "archetypes": {
+    "twin": 0.652
+   },
+   "tags": {}
+  }
+ },
+ {
+  "strategy": "experiments.llm_writer:make_agent",
+  "knobs": {},
+  "scenarios": 12,
+  "negotiations": 12,
+  "mean": 0.6202456151510665,
+  "train": 0.6409836326128818,
+  "test": 0.5580315627656205,
+  "test_se": 0.19967957873852532,
+  "key": "experiments.llm_writer:make_agent",
+  "twins": 0.6202456151510665,
+  "data": NaN,
+  "invented": NaN,
+  "worst10": 0.17015574792455118,
+  "crashes": 0,
+  "rejected": 0,
+  "broken": 0,
+  "worse": 0,
+  "no_deal": 0,
+  "below_alt": 0,
+  "wave_cap": 0,
+  "timeouts": 0,
+  "seconds": 174.59166666666667,
+  "llm_calls": 57,
+  "llm_fail": 0,
+  "per_twin": {
+   "D01": 0.913,
+   "D02": 0.658,
+   "P01": 0.798,
+   "P02": 0.17,
+   "P03": 0.943,
+   "P04": 0.86,
+   "P05": 0.304,
+   "P07": 0.805,
+   "P08": 0.484,
+   "P10": 0.633,
+   "P11": 0.693,
+   "P18": 0.181
+  },
+  "by": {
+   "type": {
+    "bundling": 0.805,
+    "capacity": 0.633,
+    "price_increase": 0.627,
+    "quality": 0.693,
+    "raw_material": 0.332,
+    "renewal": 0.902,
+    "rfq": 0.481
+   },
+   "goal": {
+    "leverage": 0.407,
+    "quality_first": 0.693,
+    "routine": 0.833,
+    "secure_supply": 0.633,
+    "stabilise": 0.706
+   },
+   "archetypes": {
+    "twin": 0.62
+   },
+   "tags": {}
+  }
+ }
+]
