@@ -65,6 +65,8 @@ DEFAULTS = dict(
     ppm="plain",  # ppm figures without a thousands comma ("2,376 ppm" came back contradicted 3 of 3): plain | skip | asis
     signals=True,  # the dossier's signals move the share of its opening we aim at (see `share`)
     writer="template",
+    contract="longest",  # where C does not care how long we commit: longest | horizon (the shortest option that covers it)
+    idx_recent=None,  # a % (e.g. 2.0): also cite a cost-driver index that fell at least this much from its peak of the last 12 months
 )
 # Where deals could end, as a share of the supplier's opening price, when no should-cost of its own
 # plant exists. Two numbers on purpose (few cases, so no finer split): cases with a relationship term,
@@ -482,6 +484,9 @@ class Negotiator:
             cheapest = ranked[0][0]
             near = [s for c, s in ranked if c <= cheapest * (1 + 1e-4)]  # C does not care: commit longer, stay closer
             best = min(near, key=lambda s: (-(s.get("contract_months") or 0), away(s)))
+            covering = [s for s in near if (s.get("contract_months") or 0) >= 12 * b["horizon_years"]]
+            if self.k["contract"] == "horizon" and covering:  # no longer than the horizon: a longer fixed price is a risk it prices
+                best = min(covering, key=lambda s: (s.get("contract_months") or 0, away(s)))
             if self.cash(case, v) in ("medium", "high"):
                 best = self.payment_trade(case, v, best, price * share)
             self._memo[key] = best
@@ -818,7 +823,7 @@ class Negotiator:
         key = (case.get("case_id"), "idx")
         if key in self._memo:
             return self._memo[key]
-        out = []
+        out, recent = [], []
         parts = case.get("parts") or []
         if self.package and parts:
             try:
@@ -827,6 +832,11 @@ class Negotiator:
                     rows = self.package.query(
                         f"select distinct series_id from cost_drivers where part_id in ({marks})", tuple(parts)
                     )
+                    weights = self.package.query(
+                        f"select series_id, max(weight) as weight from cost_drivers where part_id in ({marks}) group by series_id",
+                        tuple(parts),
+                    )
+                    weight = {w["series_id"]: w["weight"] or 0.0 for w in weights}
                     for r in rows:
                         ids = self.package.ids(f"idx:{r['series_id']}@")
                         if len(ids) < 13:
@@ -841,6 +851,21 @@ class Negotiator:
                                     f"The index {r['series_id']} changed {change:+.1f} % from {months[0]} to {months[1]} ({a}, {b}).",
                                 )
                             )
+                        elif self.k["idx_recent"]:
+                            # rose over the year but fell since its peak: a window of at most 12 months that ends
+                            # with the data is checked like the yearly one (docs/CONTEXT.md section 7)
+                            peak = max(ids[-13:-1], key=lambda i: self.package.lookup(i)["value"])
+                            change = (self.package.lookup(b)["value"] / self.package.lookup(peak)["value"] - 1) * 100
+                            if change <= -self.k["idx_recent"]:
+                                months = (peak.split("@", 1)[1], b.split("@", 1)[1])
+                                recent.append(
+                                    (
+                                        change * weight.get(r["series_id"], 0.0),
+                                        b,
+                                        f"The index {r['series_id']} changed {change:+.1f} % from {months[0]} to {months[1]} ({peak}, {b}).",
+                                    )
+                                )
+                    out += [(b, sentence) for _, b, sentence in sorted(recent)[:1]]  # the largest fall in our cost; one, a second may count as duplicate
             except Exception:  # an argument less, never a lost move
                 log.warning("%s: index arguments not available", case.get("case_id"))
         self._memo[key] = out
