@@ -478,6 +478,7 @@ section 10):
 - `facts.json` holds 10,356 IDs: `po` 5,400, `idx` 2,258, `qn` 1,033, `fc` 495 (with `change_pct`
   and `volume_per_year`), `sc` 414, `ctr` 326, `doc` 208, `quote` 108, `rfq` 47, `news` 39, `cost` 28.
 - No practice or sandbox case file carries `facts`; only hidden cases will.
+- **Many notes are templates, reused across suppliers** (checked Sat 18:30 over all 208 documents): "Could you pay our invoices within 10 days? In return we would grant a cash discount."; "reviewing small accounts and will focus on customers with volume"; "price changes above 2 % need the approval of their pricing committee"; "no room on price this year: head office has frozen all price reductions until December 2027"; "kept supplying at the old price for a quarter and ... expects partnership in return"; "had not followed his material and energy prices closely since the 2022 peak" / "works from his own spreadsheet". The subject "Visit by the owner" carries different contents. The vendor-master `created` date is 1996-01-01 for 36 of 46 suppliers (a migration date, not the start of the relationship).
 - **A final-pool supplier, for illustration**: `sup:70130` Wimbacher (in no practice case) asks
   three times to be paid within 10 days, has idle shifts and "the bank is watching every month",
   says "I cannot sign anything that lowers our margin" and is "focusing on customers with volume":

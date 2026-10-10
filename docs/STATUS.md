@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-10 18:16 CEST by Jonathan (Claude Code).
+Last updated: 2026-10-10 18:41 CEST by Omar (Claude Code).
 
 ## Now
 
@@ -13,6 +13,7 @@ Last updated: 2026-10-10 18:16 CEST by Jonathan (Claude Code).
 - Every session the team plays is saved in full under `runs/` by `scripts/pull-runs`. Quota left: 189.
 - Sandbox probes (33 free sessions) show how suppliers react: only the first sheet can be accepted, a final offer is final, the supplier mirrors the size of our concessions, RFQ threads need their own loops. Rules for the agent: `experiments/RESULTS.md` section 5.
 - **Lab** (`sellm/lab/`, Sat 17:45; guide `sellm/lab/README.md`): test any agent locally, free, no quota. `scripts/lab play P01`, `scripts/lab compare naive calc`, `scripts/lab search 60` (background), `scripts/lab stress calc`, `scripts/lab status`. Scenarios: twins of our 15 played suppliers (families of plausible variants), the 9 unplayed practice case files with their real suppliers, and invented ones (all 7 types, all fields, 8 supplier archetypes, 12 edge cases). Simulated clock: 20-60 s replies, 60-s timeouts with re-issued offer IDs, 8-min wave cap; `--mode parallel` (one loop per thread) or `sequential` (the kit's `play()`). Backtest: 0.79 % mean error on 237 real replies; kit LLM agent 59.8 in the lab vs 61.5 in the arena (`runs/lab/BACKTEST.md`, `VALIDATION.md`). **Found: the kit's sequential `play()` times RFQ threads out and can crash on a stale offer ID; the final runner needs one loop per thread.**
+- **Dossiers (group B, Sat 18:40)**: `sellm.intel.dossier(supplier_id, parts, case=, opening=, package=)` serves the 46 built dossiers (`sellm/dossiers/`, committed) plus the case overlay; strangers get a dossier from the case alone. `uv run python -m sellm.intel show 70130` prints one; `uv run python -m sellm.intel verify` runs checks V1-V10 (all PASS). Schema and rules: `docs/PLAN.md` section 10.
 - Team memory is in place: `AGENTS.md`, `docs/CONTEXT.md`, this file, `docs/LEARNINGS.md`, `docs/LOG.md`.
 
 ## In progress (claim before you start, remove when done)
@@ -20,7 +21,7 @@ Last updated: 2026-10-10 18:16 CEST by Jonathan (Claude Code).
 | Who | What | Files | Since |
 |---|---|---|---|
 | Amiad (Claude Code) | **Lab** upkeep and strategy search: suppliers, scenarios, tournament, stress test, the `Calculator` strategy and its knobs. No arena calls | `sellm/lab/`, `scripts/lab`, `tests/test_lab.py`, `runs/lab/` | Sat 16:00 |
-| Omar (Claude Code) | **Group B - Data** (`docs/PLAN.md` sections 3 and 10): stub `dossier()` first, then the dossier builder for all 46 detailed suppliers, signal rules and derived fields, the case overlay (mini-dossier), the Sunday rebuild. No arena calls | `sellm/intel/` (package), `sellm/dossiers/`, `tests/test_intel.py` | Sat 17:48 |
+| Omar (Claude Code) | **Group B - Data**: built and verified (S0-S12). Open: the human check of the signals against blind labels (V11), the Sunday 08:00 rebuild. No arena calls | `sellm/intel/` (package), `sellm/dossiers/`, `tests/test_intel.py` | Sat 17:48 |
 | Jonathan (Claude Code) | **Group A - Negotiation** (`docs/PLAN.md` section 3): the negotiator behind `make_agent` - guards so no move is invalid, a writer (LLM prose around term sheets and arguments that code fixes; template fallback), reading the supplier's reply, use of the dossier. Plays the free sandbox itself to measure wording; practice only up to 10 sessions, each logged | `sellm/negotiator.py`, `sellm/writer.py`, `sellm/llm.py`, `sellm/reading.py`, `sellm/agent.py`, `tests/test_negotiator.py`, `experiments/ab_sandbox.py` | Sat 18:16 |
 
 ## Next up
@@ -45,6 +46,7 @@ signal vocabulary). Build against section 10; add fields freely, rename core fie
    Try `uv run python -m sellm.intel show 70130`. Fields: `docs/PLAN.md` section 10.
 2. Baseline and the sandbox probes H1-H3 are done (`runs/BASELINE.md`, `experiments/RESULTS.md`). Next probes: H12-H15 in `experiments/RESULTS.md` section 6 (H12, H13, H15 are free), then H4-H7 on practice cases, one session each.
 3. Then follow the timeline in `docs/PLAN.md` section 4.
+4. **Sunday 08:00, group B** (about 15 min, before our 11:00 freeze): `scripts/sync`; `uv run arena data`; `uv run python -m sellm.intel build`; `check` shows which dossiers changed; `verify` must PASS; read the new letters and news (`signals-report`) and add signal patterns for new wording; commit `sellm/dossiers` with a `[change]` log entry; `scripts/sync`.
 
 ## Scoreboard
 
