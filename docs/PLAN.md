@@ -1,7 +1,7 @@
 # PLAN - how three people get the best agent running by Sunday 12:00
 
-Status: proposed Sat 15:10 by Jonathan (with Claude Code). **Decided Sat 18:30 (Omar): the three
-groups and their tasks (section 3, rebalanced 18:50) and the dossier schema (section 10).** Owners
+Status: proposed Sat 15:10 by Jonathan (with Claude Code). **Decided Sat 17:41 (Omar): the three
+groups and their tasks (section 3, rebalanced 17:45) and the dossier schema (section 10).** Owners
 are open: claim a group in `docs/STATUS.md`. Change this file when the team changes the plan, and
 log the change as a `[decision]`.
 
@@ -36,12 +36,12 @@ files. Our code lives in `sellm/` next to `arena_kit/`; the kit is untouched exc
 | **Negotiator** behind `make_agent` in `sellm/agent.py` (registered as `--agent sellm`; today it returns the Calculator) | The round plan and the e-mail. Code decides the term sheets and which arguments are allowed; the LLM chooses among them and writes. Falls back to the calculator's move, never to the naive agent | `make_agent(package) -> agent with decide(case, threads) -> {supplier_id, message}` |
 | **Runner and measurement** `sellm/runner.py`, `scripts/pull-runs` | All threads of an RFQ in parallel, a round budget from the time left in the wave, logs to a file, resumes after a crash. Saves every session of the team (transcript, trace, breakdown) to `runs/` so nobody replays a case to see what happened | `uv run arena run ... --agent sellm` |
 
-## 3. Groups and their tasks (decided Sat 18:30)
+## 3. Groups and their tasks (decided Sat 17:41)
 
 Three groups, one person each, each with its own agent sessions. Claim one in `docs/STATUS.md`.
 Each group owns its files; the groups meet only at four interfaces: `make_agent` with its
 `fallback` (`sellm/agent.py`), `dossier()`, `citable_for()` and `arguments()` (section 10).
-Rebalanced Sat 18:50: three tasks moved to C (see "Why this split" below).
+Rebalanced Sat 17:45: three tasks moved to C (see "Why this split" below).
 
 **Priorities**, by effect on the final score:
 
@@ -152,7 +152,7 @@ only to a better alternative).
 | When | Milestone |
 |---|---|
 | Sat 15:30 | **Baseline** (done, see `runs/README.md`): kit LLM agent on all 10 hosted cases and on D02. We then know `C_open` and `C_best` of every case and can score any term sheet offline |
-| Sat 18:30 | Groups and the dossier schema decided (sections 3 and 10); `runs/` in the repo; `--agent sellm` registered |
+| Sat 17:41 | Groups and the dossier schema decided (sections 3 and 10); `runs/` in the repo; `--agent sellm` registered |
 | Sat 19:00 | Each part works alone: calculator offline, dossiers for the practice suppliers, runner on `arena-sim` |
 | Sat 20:30 | Agent v1 integrated, plays D01 and D02 without errors; **full practice run 1** |
 | Sat 23:00 | v2 after reading the replays; **full practice run 2**. Slides skeleton. Then sleep |
@@ -257,7 +257,7 @@ after which the calculator's move is sent without the LLM. Nothing in a move may
 - No tuning on a single practice case until it scores 1.0: the final cases are different ones.
 - No changes to `arena_kit/` beyond registering our agent, so upstream fixes stay easy to take.
 
-## 10. The dossier and the mini-dossier (schema decided Sat 18:30)
+## 10. The dossier and the mini-dossier (schema decided Sat 17:41)
 
 One schema for both. The **dossier** is built offline for each of the 46 detailed suppliers. The
 **case overlay** is added at session open from the case file and the opening e-mails; for a

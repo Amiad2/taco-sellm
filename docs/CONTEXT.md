@@ -306,7 +306,7 @@ The sandbox does not touch the practice quota. Which free option to use for what
 | **Agent behaviour against real supplier bots**: arguments, tone, term-sheet strategy, LLM prompts | **sandbox `D01`, `D02`** (free, replay after each run, result shows `C_open`, `C_best` and the breakdown) | `arena-sim`: its supplier is a script that concedes a fixed 2 % per sheet and only checks that cited IDs exist, so a strategy that wins there says nothing |
 | Behaviour on the real case types (renewal, capacity, quality, raw material, bundling) | practice case, costs one session | the sandbox: it only has a price increase and an RFQ |
 
-Running `arena-sim` by hand (checked Sat 17:25): `uv run arena-sim serve --no-clock --port 8765
+Running `arena-sim` by hand (checked Sat 17:15): `uv run arena-sim serve --no-clock --port 8765
 --data data/package`, then `ARENA_URL=http://127.0.0.1:8765 uv run arena register <name> sim` prints
 a simulator key; play with `ARENA_URL=http://127.0.0.1:8765 ARENA_API_KEY=<key> uv run arena play
 case:S01 --agent sellm`. On localhost `pull_first` is skipped. **The "practice sessions left today"
@@ -323,7 +323,7 @@ from the public data (Tacto suggests it). It would only be as good as our model 
 ### LLM provider
 
 The kit's `llm_from_env()` supports `LLM_PROVIDER=anthropic` and `LLM_PROVIDER=openai`. The team
-uses OpenAI: `LLM_PROVIDER=openai`, `LLM_MODEL=gpt-6-sol` (decided Sat 19:05), `LLM_API_KEY` (and
+uses OpenAI: `LLM_PROVIDER=openai`, `LLM_MODEL=gpt-6-sol` (decided Sat 17:50), `LLM_API_KEY` (and
 `LLM_BASE_URL` only for a non-OpenAI endpoint). `LLM_EFFORT` and `ANTHROPIC_API_KEY` apply to
 Anthropic only.
 
@@ -445,7 +445,7 @@ events with asked and settled change and a note, e.g. "accepted below full cost 
 volume". `supplier_intel` has owner type, group parent, staff, turnover, equity ratio and credit
 index now and 12 months ago; `suppliers` has standard payment days and cash discount terms.
 
-What the data says about suppliers (checked Sat 18:20; used by the dossier schema, `docs/PLAN.md`
+What the data says about suppliers (checked Sat 17:40; used by the dossier schema, `docs/PLAN.md`
 section 10):
 
 - **The 46 detailed suppliers**: owner type family 22, founder 9, group 9, private 6; DE 32, AT 5,
