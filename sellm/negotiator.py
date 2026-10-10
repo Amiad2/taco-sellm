@@ -225,6 +225,9 @@ class Negotiator:
         live = [v for v in views.values() if v.theirs and v.status not in ENDED]
         if not live:
             return {"kind": "walk_away", "sid": next(iter(threads))}
+        key = (case.get("case_id"), "openings")
+        if key not in self._memo:  # every bidder's opening e-mail, which the dossier's case overlay reads (rivals too)
+            self._memo[key] = {w.sid: [w.opening] for w in views.values() if w.opening}
         key = (case.get("case_id"), "cheapest")
         if key not in self._memo:  # openings never change: the market level an RFQ bidder has to beat
             opened = [v.opening["term_sheets"][0]["terms"].get("unit_price") for v in views.values() if v.opening]
@@ -625,8 +628,11 @@ class Negotiator:
                 try:
                     from .intel import dossier
 
+                    # the openings of all threads, as {supplier: [messages]}: one e-mail alone is not a thread
+                    # to the overlay, which then saw neither this opening nor the rivals' (until Sat 22:40)
+                    openings = self._memo.get((case.get("case_id"), "openings")) or {v.sid: [v.opening] if v.opening else []}
                     with calculator.LOCK:  # one cache for all cases played at once
-                        found = dossier(v.sid, case.get("parts") or [], case, v.opening) or {}
+                        found = dossier(v.sid, case.get("parts") or [], case, openings) or {}
                 except Exception as e:
                     log.warning("%s %s: no dossier (%s: %s)", case.get("case_id"), v.sid, type(e).__name__, e)
             self._memo[key] = found
@@ -781,9 +787,9 @@ class Negotiator:
         try:
             from . import claims
 
-            def topic(ref):
+            def topic(ref):  # the arena's topics: a complaint qn: after any scorecard sc: is `duplicate` (P02, P11)
                 head = ref.split(":", 1)[0]
-                return {"ctr": "doc"}.get(head, head)
+                return {"ctr": "doc", "qn": "sc"}.get(head, head)
 
             used = {topic(i) for i in cited}
             with calculator.LOCK:

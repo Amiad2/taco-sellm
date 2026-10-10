@@ -347,3 +347,41 @@ def test_cases_played_at_the_same_time_decide_as_they_do_alone(package):
     with ThreadPoolExecutor(max_workers=10) as pool:
         for case_id, asks in pool.map(first_asks, list(openings) * 8):
             assert asks == alone[case_id], case_id
+
+
+def test_the_dossier_reads_every_opening_not_one_email(package):
+    """The case overlay reads the openings as threads: this supplier's (contact, stated drivers) and
+    the rivals' (an RFQ bidder has alternatives, so it is no monopolist). Given one e-mail it saw
+    neither, and P05's job shop 70240 was priced at 10 % instead of 25 % a year (Sat 22:40)."""
+    from sellm.intel import dossier
+
+    record = next((r for r in sessions() if r["case_id"] == "case:P05" and "sup:70240" in r["threads"]), None)
+    if record is None or package is None:
+        pytest.skip("no P05 session or no data package")
+    case = record["case"]
+    threads = {s: [t["messages"][0]] for s, t in record["threads"].items()}
+    agent = Negotiator(package)
+    agent.decide(case, threads, focus="sup:70240")
+    found = agent.intel(case, Thread(case, "sup:70240", threads["sup:70240"]))
+    assert found["economics"] == dossier("sup:70240", case["parts"], case, threads)["economics"]
+    assert found["economics"]["archetype"] == "job_shop" and found["economics"]["cost_of_money"] >= 0.2
+    assert found.get("contact"), "the overlay read its opening e-mail"
+    alone = Negotiator(package)  # asked before any move: its own opening at least
+    assert alone.intel(case, Thread(case, "sup:70240", threads["sup:70240"])).get("contact")
+
+
+def test_no_complaint_is_cited_after_a_scorecard(package):
+    """The arena counts a complaint `qn:` after any scorecard `sc:` of the case as `duplicate`
+    (P02 after on-time delivery, P11 after ppm): one topic, one argument."""
+    import re
+
+    played = 0
+    for record in sessions():
+        case = record["case"]
+        for sid, threads in states(record):
+            message = make_agent(package).decide(case, threads, focus=sid)["message"]
+            earlier = " ".join(m.get("body") or "" for t in threads.values() for m in t if m.get("from") == "buyer")
+            if re.search(r"\bsc:", earlier):
+                assert not re.search(r"\bqn:", message.get("body") or ""), (case["case_id"], sid)
+                played += 1
+    assert played
