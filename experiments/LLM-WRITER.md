@@ -1,6 +1,6 @@
 # LLM-written e-mails vs the template (lab, Sat 23:28, Omar)
 
-**Result: no gain from LLM wording. The template stays.** Same moves, same term sheets and the same checked
+**Result: no gain from LLM wording. Recommendation (not yet decided): keep the template.** Same moves, same term sheets and the same checked
 facts; only the e-mail text differed. Against LLM suppliers on the 12 twins the LLM writer scored 62.0
 against 65.2 for the template (-3.1 points; better in 2, worse in 5, equal in 5).
 
