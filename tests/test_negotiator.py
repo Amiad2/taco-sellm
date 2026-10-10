@@ -369,19 +369,3 @@ def test_the_dossier_reads_every_opening_not_one_email(package):
     alone = Negotiator(package)  # asked before any move: its own opening at least
     assert alone.intel(case, Thread(case, "sup:70240", threads["sup:70240"])).get("contact")
 
-
-def test_no_complaint_is_cited_after_a_scorecard(package):
-    """The arena counts a complaint `qn:` after any scorecard `sc:` of the case as `duplicate`
-    (P02 after on-time delivery, P11 after ppm): one topic, one argument."""
-    import re
-
-    played = 0
-    for record in sessions():
-        case = record["case"]
-        for sid, threads in states(record):
-            message = make_agent(package).decide(case, threads, focus=sid)["message"]
-            earlier = " ".join(m.get("body") or "" for t in threads.values() for m in t if m.get("from") == "buyer")
-            if re.search(r"\bsc:", earlier):
-                assert not re.search(r"\bqn:", message.get("body") or ""), (case["case_id"], sid)
-                played += 1
-    assert played

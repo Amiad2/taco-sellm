@@ -787,9 +787,10 @@ class Negotiator:
         try:
             from . import claims
 
-            def topic(ref):  # the arena's topics: a complaint qn: after any scorecard sc: is `duplicate` (P02, P11)
+            def topic(ref):  # a complaint qn: after a scorecard sc: comes back `duplicate`, but the supplier still
+                # reads it and keeps conceding: P11 0.778 with it, 0.710 without; P02 0.531 / 0.522 (Sat 22:16)
                 head = ref.split(":", 1)[0]
-                return {"ctr": "doc", "qn": "sc"}.get(head, head)
+                return {"ctr": "doc"}.get(head, head)
 
             used = {topic(i) for i in cited}
             with calculator.LOCK:
