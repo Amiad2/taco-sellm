@@ -1,0 +1,2634 @@
+{
+ "shadow_full_run": [
+  {
+   "case": "case:P07",
+   "sid": "sup:70610",
+   "n": 0,
+   "status": "open",
+   "their_price": 5.74,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - This is an opening offer, and its total cost exceeds our alternative by EUR 11,111.",
+   "tools": [],
+   "s": 1.15,
+   "t": 1791669274.8
+  },
+  {
+   "case": "case:P03",
+   "sid": "sup:70530",
+   "n": 0,
+   "status": "open",
+   "their_price": 438.21,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and we have checked facts to support a first request for a modest concession.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    }
+   ],
+   "s": 2.36,
+   "t": 1791669275.7
+  },
+  {
+   "case": "case:P04",
+   "sid": "sup:70620",
+   "n": 0,
+   "status": "open",
+   "their_price": 4.96,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - This is an opening offer, and our checked purchase history and volume forecast give us grounds to ask for a better price.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 4.8
+     }
+    }
+   ],
+   "s": 2.48,
+   "t": 1791669275.8
+  },
+  {
+   "case": "case:P08",
+   "sid": "sup:70710",
+   "n": 0,
+   "status": "open",
+   "their_price": 6.05,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - This is an opening offer, not a final one, and a modest price concession would lower our total cost.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 5.99
+     }
+    }
+   ],
+   "s": 2.4,
+   "t": 1791669276.2
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70210",
+   "n": 0,
+   "status": "open",
+   "their_price": 36.0,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and a modest, fact-backed price request may lower our total cost.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 35
+     }
+    }
+   ],
+   "s": 2.51,
+   "t": 1791669276.6
+  },
+  {
+   "case": "case:P02",
+   "sid": "sup:70510",
+   "n": 0,
+   "status": "open",
+   "their_price": 370.96,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and we have checked facts to support a measured request for a concession.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 370.96
+     }
+    }
+   ],
+   "s": 3.31,
+   "t": 1791669276.7
+  },
+  {
+   "case": "case:P01",
+   "sid": "sup:70110",
+   "n": 0,
+   "status": "open",
+   "their_price": 138.55,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and the notice-period discrepancy gives us a checked basis to negotiate.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 135.8
+     }
+    }
+   ],
+   "s": 3.58,
+   "t": 1791669276.9
+  },
+  {
+   "case": "case:P10",
+   "sid": "sup:70410",
+   "n": 1,
+   "status": "final_offer",
+   "their_price": 33.7,
+   "code": "accept",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - Accept the final offer; another request risks losing the deal, and we have no alternative.",
+   "tools": [],
+   "s": 1.09,
+   "t": 1791669284.1
+  },
+  {
+   "case": "case:P03",
+   "sid": "sup:70530",
+   "n": 1,
+   "status": "open",
+   "their_price": 431.92,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - The standing offer is open, and the remaining facts offer little prospect of a better total cost.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 426.35
+     }
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 425
+     }
+    }
+   ],
+   "s": 2.68,
+   "t": 1791669286.4
+  },
+  {
+   "case": "case:P04",
+   "sid": "sup:70620",
+   "n": 1,
+   "status": "open",
+   "their_price": 4.94,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and our unused volume forecast gives us a checked fact to support one more request.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    }
+   ],
+   "s": 2.18,
+   "t": 1791669287.0
+  },
+  {
+   "case": "case:P02",
+   "sid": "sup:70510",
+   "n": 1,
+   "status": "open",
+   "their_price": 373.77,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, not final, and we have unused checked facts to support another request.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    }
+   ],
+   "s": 2.32,
+   "t": 1791669288.1
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70250",
+   "n": 0,
+   "status": "open",
+   "their_price": 38.5,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - This is an opening offer, not a final one, and a checked cost or index fact gives us a chance to negotiate a lower price.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    }
+   ],
+   "s": 2.41,
+   "t": 1791669288.2
+  },
+  {
+   "case": "case:P07",
+   "sid": "sup:70610",
+   "n": 1,
+   "status": "open",
+   "their_price": 5.51,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and we have unused checked facts to support another modest price request.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 5.51
+     }
+    }
+   ],
+   "s": 2.61,
+   "t": 1791669288.7
+  },
+  {
+   "case": "case:P01",
+   "sid": "sup:70110",
+   "n": 1,
+   "status": "open",
+   "their_price": 139.3,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, not final, and we have unused checked facts that may support another concession.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 139.3
+     }
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 138.55
+     }
+    }
+   ],
+   "s": 2.72,
+   "t": 1791669289.5
+  },
+  {
+   "case": "case:P08",
+   "sid": "sup:70710",
+   "n": 1,
+   "status": "open",
+   "their_price": 5.53,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and the unused delivery-performance fact gives us a reason to seek another concession.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 5.4
+     }
+    }
+   ],
+   "s": 2.42,
+   "t": 1791669294.2
+  },
+  {
+   "case": "case:P11",
+   "sid": "sup:70140",
+   "n": 1,
+   "status": "open",
+   "their_price": 46.5,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and we can use the unused quality and delivery facts to seek better terms without risking a final offer.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 46.5
+     }
+    }
+   ],
+   "s": 2.32,
+   "t": 1791669294.5
+  },
+  {
+   "case": "case:P04",
+   "sid": "sup:70620",
+   "n": 2,
+   "status": "open",
+   "their_price": 4.94,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and unused delivery and quality facts give us a reason to seek a modest reduction.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 4.94
+     }
+    }
+   ],
+   "s": 2.5,
+   "t": 1791669297.0
+  },
+  {
+   "case": "case:P03",
+   "sid": "sup:70530",
+   "n": 2,
+   "status": "open",
+   "their_price": 431.71,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - This is not a final offer, and we still have a checked delivery fact to support another request.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 426.14
+     }
+    }
+   ],
+   "s": 2.43,
+   "t": 1791669298.4
+  },
+  {
+   "case": "case:P07",
+   "sid": "sup:70610",
+   "n": 2,
+   "status": "open",
+   "their_price": 5.42,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and we have unused volume forecasts to support one more modest ask.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    }
+   ],
+   "s": 2.1,
+   "t": 1791669298.4
+  },
+  {
+   "case": "case:P02",
+   "sid": "sup:70510",
+   "n": 2,
+   "status": "open",
+   "their_price": 371.81,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - Keep negotiating: this is not a final offer, and an unused delivery-performance fact may support another small concession.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    }
+   ],
+   "s": 2.29,
+   "t": 1791669299.4
+  },
+  {
+   "case": "case:P01",
+   "sid": "sup:70110",
+   "n": 2,
+   "status": "open",
+   "their_price": 135.6,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "A",
+   "p": 0.9521,
+   "reason": "A - The offer is not final, but a further price cut could raise our total cost.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 133.6
+     }
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 134.6
+     }
+    }
+   ],
+   "s": 4.07,
+   "t": 1791669302.7
+  },
+  {
+   "case": "case:P08",
+   "sid": "sup:70710",
+   "n": 2,
+   "status": "open",
+   "their_price": 5.46,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and one more counteroffer may reduce our cost without the withdrawal risk of a final offer.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 5.35
+     }
+    }
+   ],
+   "s": 3.22,
+   "t": 1791669305.3
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70250",
+   "n": 1,
+   "status": "open",
+   "their_price": 30.5,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and the supplier says it will come back on price after an internal review.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 30.5
+     }
+    }
+   ],
+   "s": 2.31,
+   "t": 1791669306.1
+  },
+  {
+   "case": "case:P04",
+   "sid": "sup:70620",
+   "n": 3,
+   "status": "final_offer",
+   "their_price": 4.94,
+   "code": "accept",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - The supplier has made a final offer, and losing the deal would cost more than another small price reduction could save.",
+   "tools": [],
+   "s": 1.27,
+   "t": 1791669308.7
+  },
+  {
+   "case": "case:P02",
+   "sid": "sup:70510",
+   "n": 3,
+   "status": "open",
+   "their_price": 371.81,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - Keep negotiating: the offer is still open, and unused quality records give us a factual basis for another ask.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    }
+   ],
+   "s": 2.32,
+   "t": 1791669308.9
+  },
+  {
+   "case": "case:P07",
+   "sid": "sup:70610",
+   "n": 3,
+   "status": "final_offer",
+   "their_price": 5.38,
+   "code": "accept",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - The supplier has called this its final offer, and accepting it costs less than the alternative.",
+   "tools": [],
+   "s": 1.09,
+   "t": 1791669309.0
+  },
+  {
+   "case": "case:P03",
+   "sid": "sup:70530",
+   "n": 3,
+   "status": "open",
+   "their_price": 431.71,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - The offer is still open, but no checked facts remain to support another price request, and the potential gain is small relative to the risk of losing the deal.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 426.14
+     }
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 431.71
+     }
+    }
+   ],
+   "s": 3.13,
+   "t": 1791669311.3
+  },
+  {
+   "case": "case:P18",
+   "sid": "sup:70740",
+   "n": 0,
+   "status": "open",
+   "their_price": 6.1,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - This is an opening offer, not a final one, and we have checked facts to support a price request.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 6.0
+     }
+    }
+   ],
+   "s": 2.4,
+   "t": 1791669313.4
+  },
+  {
+   "case": "case:P01",
+   "sid": "sup:70110",
+   "n": 3,
+   "status": "open",
+   "their_price": 134.7,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, not final, and unused facts give us a chance to seek a modest improvement.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 134.7
+     }
+    }
+   ],
+   "s": 2.34,
+   "t": 1791669314.2
+  },
+  {
+   "case": "case:P08",
+   "sid": "sup:70710",
+   "n": 3,
+   "status": "open",
+   "their_price": 5.42,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and one more counteroffer may lower our cost without the withdrawal risk of challenging a final offer.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 5.35
+     }
+    }
+   ],
+   "s": 2.61,
+   "t": 1791669317.8
+  },
+  {
+   "case": "case:P02",
+   "sid": "sup:70510",
+   "n": 4,
+   "status": "final_offer",
+   "their_price": 371.81,
+   "code": "accept",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - Accept the final offer; another request risks losing a deal far cheaper than the alternative.",
+   "tools": [],
+   "s": 1.31,
+   "t": 1791669317.9
+  },
+  {
+   "case": "case:P11",
+   "sid": "sup:70140",
+   "n": 2,
+   "status": "open",
+   "their_price": 46.0,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is not final, and faster payment may help secure better quality terms.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 45
+     }
+    }
+   ],
+   "s": 2.58,
+   "t": 1791669318.0
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70210",
+   "n": 1,
+   "status": "open",
+   "their_price": 32.5,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and the unused delivery and quality facts give us grounds to seek another concession.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 31.5
+     }
+    }
+   ],
+   "s": 2.64,
+   "t": 1791669319.0
+  },
+  {
+   "case": "case:P03",
+   "sid": "sup:70530",
+   "n": 4,
+   "status": "open",
+   "their_price": 431.71,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - With no checked facts left to support a lower price, further negotiation is unlikely to improve the standing offer.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 431.71
+     }
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 426.14
+     }
+    }
+   ],
+   "s": 2.66,
+   "t": 1791669321.3
+  },
+  {
+   "case": "case:P18",
+   "sid": "sup:70740",
+   "n": 1,
+   "status": "open",
+   "their_price": 5.6,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open after one exchange, and our volume forecast gives us a checked fact to support another modest ask.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 5.45
+     }
+    }
+   ],
+   "s": 3.54,
+   "t": 1791669325.5
+  },
+  {
+   "case": "case:P01",
+   "sid": "sup:70110",
+   "n": 4,
+   "status": "open",
+   "their_price": 133.1,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - Accept the open offer: it is not marked final, but the checked lower prices carry higher total cost once relationship costs are included.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 132.26
+     }
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 131.12
+     }
+    }
+   ],
+   "s": 2.51,
+   "t": 1791669327.1
+  },
+  {
+   "case": "case:P11",
+   "sid": "sup:70140",
+   "n": 3,
+   "status": "open",
+   "their_price": 45.5,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - Keep negotiating: the offer is still open, and the supplier has asked for quality data we can provide.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    }
+   ],
+   "s": 2.23,
+   "t": 1791669328.3
+  },
+  {
+   "case": "case:P08",
+   "sid": "sup:70710",
+   "n": 4,
+   "status": "final_offer",
+   "their_price": 5.4,
+   "code": "accept",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - The supplier calls this its final offer, and accepting it costs less than using the alternative.",
+   "tools": [],
+   "s": 1.57,
+   "t": 1791669329.8
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70240",
+   "n": 1,
+   "status": "open",
+   "their_price": 35.0,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, not final, and we have unused checked facts to support another ask.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 35
+     }
+    }
+   ],
+   "s": 2.41,
+   "t": 1791669330.1
+  },
+  {
+   "case": "case:P03",
+   "sid": "sup:70530",
+   "n": 5,
+   "status": "open",
+   "their_price": 431.71,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 0.8648,
+   "reason": "B - The offer is still open, and the supplier has invited fact-based discussion rather than called it final.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 426.14
+     }
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 431.71
+     }
+    }
+   ],
+   "s": 3.76,
+   "t": 1791669334.6
+  },
+  {
+   "case": "case:P01",
+   "sid": "sup:70110",
+   "n": 5,
+   "status": "agreed",
+   "their_price": 132.28,
+   "code": "accept",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - The supplier has accepted our terms at \u20ac132.28; further negotiation risks a deal that is cheaper than our alternative.",
+   "tools": [],
+   "s": 1.39,
+   "t": 1791669338.2
+  },
+  {
+   "case": "case:P11",
+   "sid": "sup:70140",
+   "n": 4,
+   "status": "open",
+   "their_price": 45.5,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is not final, and the unused quality complaints give us a reason to seek better terms.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 45.0
+     }
+    }
+   ],
+   "s": 2.52,
+   "t": 1791669338.2
+  },
+  {
+   "case": "case:P18",
+   "sid": "sup:70740",
+   "n": 2,
+   "status": "open",
+   "their_price": 5.5,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and an unused delivery-performance fact gives us a basis to seek a modest further concession.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 5.4
+     }
+    }
+   ],
+   "s": 2.83,
+   "t": 1791669338.2
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70250",
+   "n": 2,
+   "status": "open",
+   "their_price": 28.5,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and an unused price-index fact gives us a reason to seek another concession.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 27.5
+     }
+    }
+   ],
+   "s": 2.64,
+   "t": 1791669342.1
+  },
+  {
+   "case": "case:P03",
+   "sid": "sup:70530",
+   "n": 6,
+   "status": "final_offer",
+   "their_price": 431.71,
+   "code": "accept",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - The supplier has declared its offer final, and losing the deal would cost more than a further price reduction could save.",
+   "tools": [],
+   "s": 1.31,
+   "t": 1791669344.9
+  },
+  {
+   "case": "case:P11",
+   "sid": "sup:70140",
+   "n": 5,
+   "status": "agreed",
+   "their_price": 45.09,
+   "code": "accept",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - The supplier has accepted our terms, and the standing offer costs substantially less than the alternative.",
+   "tools": [],
+   "s": 1.76,
+   "t": 1791669347.7
+  },
+  {
+   "case": "case:P18",
+   "sid": "sup:70740",
+   "n": 3,
+   "status": "open",
+   "their_price": 5.5,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 0.9516,
+   "reason": "B - The offer is still open, not final, and another small concession could lower our cost.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 5.4
+     }
+    }
+   ],
+   "s": 2.32,
+   "t": 1791669348.0
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70210",
+   "n": 2,
+   "status": "open",
+   "their_price": 29.5,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - Keep negotiating: the offer is still open, and the supplier says it will come back on price after an internal review.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 29.5
+     }
+    }
+   ],
+   "s": 2.73,
+   "t": 1791669353.5
+  },
+  {
+   "case": "case:P18",
+   "sid": "sup:70740",
+   "n": 4,
+   "status": "agreed",
+   "their_price": 5.41,
+   "code": "accept",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - The supplier has accepted our terms, and the standing offer costs substantially less than our alternative.",
+   "tools": [
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 5.41
+     }
+    }
+   ],
+   "s": 2.21,
+   "t": 1791669357.5
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70240",
+   "n": 2,
+   "status": "open",
+   "their_price": 34.0,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, not final, and we have unused checked facts to support another request.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 34
+     }
+    }
+   ],
+   "s": 2.4,
+   "t": 1791669363.4
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70240",
+   "n": 3,
+   "status": "open",
+   "their_price": 33.5,
+   "code": "ask",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and an unused index fact gives us a basis to seek a modest reduction.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 32.5
+     }
+    }
+   ],
+   "s": 3.03,
+   "t": 1791669376.7
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70250",
+   "n": 3,
+   "status": "final_offer",
+   "their_price": 28.0,
+   "code": "hold",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - Accept: the supplier has explicitly made its final offer, and pushing further risks losing the deal.",
+   "tools": [],
+   "s": 1.35,
+   "t": 1791669386.9
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70250",
+   "n": 4,
+   "status": "final_offer",
+   "their_price": 28.0,
+   "code": "accept",
+   "mode": "shadow",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - The supplier has made a final offer, and pushing again risks losing the only available deal.",
+   "tools": [],
+   "s": 1.4,
+   "t": 1791669389.8
+  }
+ ],
+ "apply_five_runs": [
+  {
+   "case": "case:P01",
+   "sid": "sup:70110",
+   "n": 0,
+   "status": "open",
+   "their_price": 138.55,
+   "code": "ask",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - This is an opening offer, not a final one, and we have checked facts that support asking for a better price.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 135
+     }
+    }
+   ],
+   "s": 2.82,
+   "t": 1791669649.7
+  },
+  {
+   "case": "case:P07",
+   "sid": "sup:70610",
+   "n": 0,
+   "status": "open",
+   "their_price": 5.74,
+   "code": "ask",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - Keep negotiating: this is an opening offer, and its total cost exceeds our alternative.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 5.74
+     }
+    }
+   ],
+   "s": 2.82,
+   "t": 1791669649.7
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70210",
+   "n": 0,
+   "status": "open",
+   "their_price": 36.0,
+   "code": "ask",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - This is an opening offer, not a final one, and we have checked facts to support a lower price.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 36
+     }
+    }
+   ],
+   "s": 2.7,
+   "t": 1791669649.9
+  },
+  {
+   "case": "case:P02",
+   "sid": "sup:70510",
+   "n": 0,
+   "status": "open",
+   "their_price": 370.96,
+   "code": "ask",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - This is an opening offer, and we have checked purchase-price and volume facts to support a modest counteroffer.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 370.96
+     }
+    }
+   ],
+   "s": 3.17,
+   "t": 1791669650.0
+  },
+  {
+   "case": "case:P18",
+   "sid": "sup:70740",
+   "n": 0,
+   "status": "open",
+   "their_price": 6.1,
+   "code": "ask",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - This is an opening offer, not a final one, and we have checked purchase prices and volume to support a counteroffer.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    }
+   ],
+   "s": 3.39,
+   "t": 1791669650.3
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70250",
+   "n": 0,
+   "status": "open",
+   "their_price": 38.5,
+   "code": "ask",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - This is an opening offer, and we have checked facts to support a counteroffer without risking withdrawal yet.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    }
+   ],
+   "s": 2.54,
+   "t": 1791669675.2
+  },
+  {
+   "case": "case:P07",
+   "sid": "sup:70610",
+   "n": 1,
+   "status": "open",
+   "their_price": 5.58,
+   "code": "ask",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and the supplier has invited a volume commitment that could improve the price.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 5.53
+     }
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 5.4
+     }
+    }
+   ],
+   "s": 2.57,
+   "t": 1791669676.1
+  },
+  {
+   "case": "case:P02",
+   "sid": "sup:70510",
+   "n": 1,
+   "status": "open",
+   "their_price": 373.77,
+   "code": "ask",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and we have unused facts that could support another request for a concession.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 373.77
+     }
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 369.65
+     }
+    }
+   ],
+   "s": 2.6,
+   "t": 1791669678.2
+  },
+  {
+   "case": "case:P01",
+   "sid": "sup:70110",
+   "n": 1,
+   "status": "open",
+   "their_price": 140.7,
+   "code": "ask",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is not final, and we still have a checked notice-period fact to support another request.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 136.5
+     }
+    }
+   ],
+   "s": 2.85,
+   "t": 1791669684.5
+  },
+  {
+   "case": "case:P18",
+   "sid": "sup:70740",
+   "n": 1,
+   "status": "open",
+   "their_price": 5.6,
+   "code": "ask",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and the unused volume forecast gives us a reason to seek another small concession.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 5.5
+     }
+    }
+   ],
+   "s": 2.91,
+   "t": 1791669687.5
+  },
+  {
+   "case": "case:P02",
+   "sid": "sup:70510",
+   "n": 2,
+   "status": "open",
+   "their_price": 372.56,
+   "code": "ask",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and the supplier has invited a volume commitment that could improve the price.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 372.56
+     }
+    }
+   ],
+   "s": 2.52,
+   "t": 1791669702.8
+  },
+  {
+   "case": "case:P07",
+   "sid": "sup:70610",
+   "n": 2,
+   "status": "open",
+   "their_price": 5.48,
+   "code": "ask",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and an unused volume forecast may support another small concession without the risk of pushing past a final offer.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 5.38
+     }
+    }
+   ],
+   "s": 2.58,
+   "t": 1791669708.0
+  },
+  {
+   "case": "case:P18",
+   "sid": "sup:70740",
+   "n": 2,
+   "status": "open",
+   "their_price": 5.6,
+   "code": "ask",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and one checked delivery fact remains to support another modest request.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 5.5
+     }
+    }
+   ],
+   "s": 2.48,
+   "t": 1791669713.5
+  },
+  {
+   "case": "case:P01",
+   "sid": "sup:70110",
+   "n": 2,
+   "status": "open",
+   "their_price": 135.5,
+   "code": "ask",
+   "mode": "apply",
+   "applied": true,
+   "verdict": "A",
+   "p": 0.9398,
+   "reason": "A - Accept: the offer is open, and a further price cut could raise our total cost rather than lower it.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 134.15
+     }
+    }
+   ],
+   "s": 2.87,
+   "t": 1791669721.8
+  },
+  {
+   "case": "case:P02",
+   "sid": "sup:70510",
+   "n": 3,
+   "status": "open",
+   "their_price": 371.85,
+   "code": "ask",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and another modest concession is possible without the withdrawal risk of a final offer.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 370.96
+     }
+    }
+   ],
+   "s": 2.28,
+   "t": 1791669729.1
+  },
+  {
+   "case": "case:P07",
+   "sid": "sup:70610",
+   "n": 3,
+   "status": "final_offer",
+   "their_price": 5.42,
+   "code": "accept",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - The supplier has called \u20ac5.42 its final offer, and accepting it costs less than the alternative without this supplier.",
+   "tools": [],
+   "s": 1.32,
+   "t": 1791669743.5
+  },
+  {
+   "case": "case:P02",
+   "sid": "sup:70510",
+   "n": 4,
+   "status": "final_offer",
+   "their_price": 371.66,
+   "code": "accept",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - The supplier has called this its final offer, and losing the deal would cost far more than another concession could save.",
+   "tools": [],
+   "s": 1.3,
+   "t": 1791669756.5
+  },
+  {
+   "case": "case:P18",
+   "sid": "sup:70740",
+   "n": 3,
+   "status": "open",
+   "their_price": 5.6,
+   "code": "ask",
+   "mode": "apply",
+   "applied": true,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - The supplier has held at \u20ac5.60 despite our moves and a checked fact; risking a \u20ac35,029 advantage over the alternative for a small further saving is not worthwhile.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 5.5
+     }
+    }
+   ],
+   "s": 2.76,
+   "t": 1791669757.8
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70250",
+   "n": 1,
+   "status": "open",
+   "their_price": 31.0,
+   "code": "ask",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and we have unused facts to support another small concession.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 31
+     }
+    }
+   ],
+   "s": 2.99,
+   "t": 1791669758.5
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70210",
+   "n": 1,
+   "status": "open",
+   "their_price": 32.5,
+   "code": "ask",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and a checked performance fact gives us a chance to improve the price.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 31.85
+     }
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 32.5
+     }
+    }
+   ],
+   "s": 2.83,
+   "t": 1791669807.2
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70240",
+   "n": 1,
+   "status": "open",
+   "their_price": 35.0,
+   "code": "ask",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - Keep negotiating: this is not a final offer, and the supplier has offered \u20ac31 on different terms worth evaluating.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 31
+     }
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 35
+     }
+    }
+   ],
+   "s": 3.23,
+   "t": 1791669843.0
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70240",
+   "n": 2,
+   "status": "open",
+   "their_price": 34.0,
+   "code": "ask",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "B",
+   "p": 1.0,
+   "reason": "B - The offer is still open, and we have an unused checked fact that may support a further concession.",
+   "tools": [
+    {
+     "tool": "supplier_profile",
+     "args": {}
+    },
+    {
+     "tool": "facts_left",
+     "args": {}
+    },
+    {
+     "tool": "cost_of_price",
+     "args": {
+      "unit_price": 33
+     }
+    }
+   ],
+   "s": 2.73,
+   "t": 1791669874.0
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70250",
+   "n": 2,
+   "status": "final_offer",
+   "their_price": 29.0,
+   "code": "hold",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - Accept the final offer; another request risks losing a deal with no alternative.",
+   "tools": [],
+   "s": 1.1,
+   "t": 1791669914.5
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70240",
+   "n": 3,
+   "status": "final_offer",
+   "their_price": 34.0,
+   "code": "hold",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - Accept the final offer; pressing further risks losing the deal, and we have no alternative.",
+   "tools": [],
+   "s": 2.06,
+   "t": 1791669916.8
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70240",
+   "n": 4,
+   "status": "final_offer",
+   "their_price": 34.0,
+   "code": "accept",
+   "mode": "apply",
+   "applied": false,
+   "verdict": "A",
+   "p": 1.0,
+   "reason": "A - The supplier has called this its final offer, and with no alternative, another ask risks losing the deal.",
+   "tools": [],
+   "s": 1.59,
+   "t": 1791669929.4
+  }
+ ],
+ "writer_full_run": [
+  {
+   "case": "case:P07",
+   "sid": "sup:70610",
+   "n": 0,
+   "ok": true,
+   "reason": null,
+   "s": 3.96,
+   "words": 116,
+   "t": 1791669278.8
+  },
+  {
+   "case": "case:P10",
+   "sid": "sup:70410",
+   "n": 0,
+   "ok": true,
+   "reason": null,
+   "s": 5.13,
+   "words": 117,
+   "t": 1791669279.0
+  },
+  {
+   "case": "case:P04",
+   "sid": "sup:70620",
+   "n": 0,
+   "ok": true,
+   "reason": null,
+   "s": 3.84,
+   "words": 105,
+   "t": 1791669279.7
+  },
+  {
+   "case": "case:P03",
+   "sid": "sup:70530",
+   "n": 0,
+   "ok": true,
+   "reason": null,
+   "s": 4.31,
+   "words": 111,
+   "t": 1791669280.0
+  },
+  {
+   "case": "case:P08",
+   "sid": "sup:70710",
+   "n": 0,
+   "ok": true,
+   "reason": null,
+   "s": 4.35,
+   "words": 121,
+   "t": 1791669280.6
+  },
+  {
+   "case": "case:P02",
+   "sid": "sup:70510",
+   "n": 0,
+   "ok": true,
+   "reason": null,
+   "s": 3.88,
+   "words": 105,
+   "t": 1791669280.6
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70210",
+   "n": 0,
+   "ok": true,
+   "reason": null,
+   "s": 4.43,
+   "words": 107,
+   "t": 1791669281.1
+  },
+  {
+   "case": "case:P01",
+   "sid": "sup:70110",
+   "n": 0,
+   "ok": true,
+   "reason": null,
+   "s": 4.83,
+   "words": 111,
+   "t": 1791669281.8
+  },
+  {
+   "case": "case:P11",
+   "sid": "sup:70140",
+   "n": 0,
+   "ok": true,
+   "reason": null,
+   "s": 4.17,
+   "words": 108,
+   "t": 1791669288.6
+  },
+  {
+   "case": "case:P03",
+   "sid": "sup:70530",
+   "n": 1,
+   "ok": true,
+   "reason": null,
+   "s": 4.33,
+   "words": 119,
+   "t": 1791669290.7
+  },
+  {
+   "case": "case:P04",
+   "sid": "sup:70620",
+   "n": 1,
+   "ok": true,
+   "reason": null,
+   "s": 4.22,
+   "words": 105,
+   "t": 1791669291.2
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70250",
+   "n": 0,
+   "ok": true,
+   "reason": null,
+   "s": 3.33,
+   "words": 104,
+   "t": 1791669291.6
+  },
+  {
+   "case": "case:P02",
+   "sid": "sup:70510",
+   "n": 1,
+   "ok": true,
+   "reason": null,
+   "s": 4.38,
+   "words": 128,
+   "t": 1791669292.5
+  },
+  {
+   "case": "case:P07",
+   "sid": "sup:70610",
+   "n": 1,
+   "ok": true,
+   "reason": null,
+   "s": 4.29,
+   "words": 121,
+   "t": 1791669293.0
+  },
+  {
+   "case": "case:P01",
+   "sid": "sup:70110",
+   "n": 1,
+   "ok": true,
+   "reason": null,
+   "s": 4.87,
+   "words": 114,
+   "t": 1791669294.3
+  },
+  {
+   "case": "case:P08",
+   "sid": "sup:70710",
+   "n": 1,
+   "ok": true,
+   "reason": null,
+   "s": 4.37,
+   "words": 124,
+   "t": 1791669298.6
+  },
+  {
+   "case": "case:P11",
+   "sid": "sup:70140",
+   "n": 1,
+   "ok": true,
+   "reason": null,
+   "s": 4.56,
+   "words": 127,
+   "t": 1791669299.1
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70240",
+   "n": 0,
+   "ok": true,
+   "reason": null,
+   "s": 5.12,
+   "words": 102,
+   "t": 1791669300.2
+  },
+  {
+   "case": "case:P04",
+   "sid": "sup:70620",
+   "n": 2,
+   "ok": true,
+   "reason": null,
+   "s": 4.36,
+   "words": 119,
+   "t": 1791669301.4
+  },
+  {
+   "case": "case:P07",
+   "sid": "sup:70610",
+   "n": 2,
+   "ok": true,
+   "reason": null,
+   "s": 3.99,
+   "words": 108,
+   "t": 1791669302.4
+  },
+  {
+   "case": "case:P02",
+   "sid": "sup:70510",
+   "n": 2,
+   "ok": true,
+   "reason": null,
+   "s": 3.99,
+   "words": 113,
+   "t": 1791669303.4
+  },
+  {
+   "case": "case:P03",
+   "sid": "sup:70530",
+   "n": 2,
+   "ok": true,
+   "reason": null,
+   "s": 5.48,
+   "words": 131,
+   "t": 1791669303.9
+  },
+  {
+   "case": "case:P01",
+   "sid": "sup:70110",
+   "n": 2,
+   "ok": true,
+   "reason": null,
+   "s": 4.97,
+   "words": 110,
+   "t": 1791669307.6
+  },
+  {
+   "case": "case:P08",
+   "sid": "sup:70710",
+   "n": 2,
+   "ok": true,
+   "reason": null,
+   "s": 4.47,
+   "words": 117,
+   "t": 1791669309.7
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70250",
+   "n": 1,
+   "ok": true,
+   "reason": null,
+   "s": 4.38,
+   "words": 98,
+   "t": 1791669310.4
+  },
+  {
+   "case": "case:P02",
+   "sid": "sup:70510",
+   "n": 3,
+   "ok": true,
+   "reason": null,
+   "s": 4.1,
+   "words": 120,
+   "t": 1791669313.0
+  },
+  {
+   "case": "case:P03",
+   "sid": "sup:70530",
+   "n": 3,
+   "ok": true,
+   "reason": null,
+   "s": 3.93,
+   "words": 107,
+   "t": 1791669315.3
+  },
+  {
+   "case": "case:P18",
+   "sid": "sup:70740",
+   "n": 0,
+   "ok": true,
+   "reason": null,
+   "s": 4.62,
+   "words": 109,
+   "t": 1791669318.0
+  },
+  {
+   "case": "case:P01",
+   "sid": "sup:70110",
+   "n": 3,
+   "ok": true,
+   "reason": null,
+   "s": 3.95,
+   "words": 105,
+   "t": 1791669318.1
+  },
+  {
+   "case": "case:P11",
+   "sid": "sup:70140",
+   "n": 2,
+   "ok": true,
+   "reason": null,
+   "s": 3.92,
+   "words": 110,
+   "t": 1791669322.0
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70210",
+   "n": 1,
+   "ok": true,
+   "reason": null,
+   "s": 3.37,
+   "words": 116,
+   "t": 1791669322.4
+  },
+  {
+   "case": "case:P08",
+   "sid": "sup:70710",
+   "n": 3,
+   "ok": true,
+   "reason": null,
+   "s": 4.75,
+   "words": 119,
+   "t": 1791669322.5
+  },
+  {
+   "case": "case:P03",
+   "sid": "sup:70530",
+   "n": 4,
+   "ok": true,
+   "reason": null,
+   "s": 4.01,
+   "words": 118,
+   "t": 1791669325.3
+  },
+  {
+   "case": "case:P18",
+   "sid": "sup:70740",
+   "n": 1,
+   "ok": true,
+   "reason": null,
+   "s": 4.58,
+   "words": 125,
+   "t": 1791669330.1
+  },
+  {
+   "case": "case:P01",
+   "sid": "sup:70110",
+   "n": 4,
+   "ok": true,
+   "reason": null,
+   "s": 4.83,
+   "words": 102,
+   "t": 1791669332.0
+  },
+  {
+   "case": "case:P11",
+   "sid": "sup:70140",
+   "n": 3,
+   "ok": true,
+   "reason": null,
+   "s": 4.9,
+   "words": 105,
+   "t": 1791669333.2
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70240",
+   "n": 1,
+   "ok": true,
+   "reason": null,
+   "s": 4.24,
+   "words": 99,
+   "t": 1791669334.4
+  },
+  {
+   "case": "case:P03",
+   "sid": "sup:70530",
+   "n": 5,
+   "ok": true,
+   "reason": null,
+   "s": 4.19,
+   "words": 112,
+   "t": 1791669338.7
+  },
+  {
+   "case": "case:P18",
+   "sid": "sup:70740",
+   "n": 2,
+   "ok": true,
+   "reason": null,
+   "s": 3.99,
+   "words": 121,
+   "t": 1791669342.2
+  },
+  {
+   "case": "case:P11",
+   "sid": "sup:70140",
+   "n": 4,
+   "ok": true,
+   "reason": null,
+   "s": 4.72,
+   "words": 100,
+   "t": 1791669342.9
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70250",
+   "n": 2,
+   "ok": true,
+   "reason": null,
+   "s": 4.33,
+   "words": 98,
+   "t": 1791669346.5
+  },
+  {
+   "case": "case:P18",
+   "sid": "sup:70740",
+   "n": 3,
+   "ok": true,
+   "reason": null,
+   "s": 4.21,
+   "words": 123,
+   "t": 1791669352.2
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70210",
+   "n": 2,
+   "ok": true,
+   "reason": null,
+   "s": 4.13,
+   "words": 112,
+   "t": 1791669357.7
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70240",
+   "n": 2,
+   "ok": true,
+   "reason": null,
+   "s": 3.99,
+   "words": 125,
+   "t": 1791669367.4
+  },
+  {
+   "case": "case:P05",
+   "sid": "sup:70240",
+   "n": 3,
+   "ok": true,
+   "reason": null,
+   "s": 5.43,
+   "words": 126,
+   "t": 1791669382.1
+  }
+ ]
+}
