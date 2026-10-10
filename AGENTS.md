@@ -1,0 +1,128 @@
+# AGENTS.md - how every agent works in this repo
+
+You are one of several AI agents (and humans) working on this repo at the same time, from different
+machines, with no shared memory except this repo. **The repo is the team's memory.** Anything you
+learn, decide or change that is not committed, logged and pushed does not exist for the others.
+These rules apply to every session, whether or not the prompt mentions them.
+
+The project: team **sellm**'s buyer agent for the Tacto Negotiation Arena. **Code freeze and Live
+Final: Sunday 11 Oct 2026, 12:00 CEST.** Everything about the challenge is in `docs/CONTEXT.md`.
+
+## 1. Start of every session, before anything else
+
+1. `scripts/sync` - get the team's latest state (pull --rebase, push).
+2. Read `docs/STATUS.md` - where we are, who is working on what, what is next.
+3. Read the newest entries of `docs/LOG.md` - `scripts/session-start` prints both.
+4. Read `docs/CONTEXT.md` if it is not already in your context, and `docs/LEARNINGS.md` before you
+   touch negotiation behaviour.
+5. If the task you were given overlaps something under "In progress" in `docs/STATUS.md`, say so to
+   your human before you start.
+
+In Claude Code a SessionStart hook runs `scripts/session-start` for you and `CLAUDE.md` loads this
+file and `docs/CONTEXT.md`. In any other tool, do the steps by hand.
+
+## 2. The work loop
+
+1. **Claim** - add a line under "In progress" in `docs/STATUS.md` (who, what, which files), commit
+   and `scripts/sync`. Now the others know.
+2. **Change** - small steps. Keep `uv run pytest` and `uv run ruff check .` green.
+3. **Log** - `scripts/log "[type] title" "detail" ...` (section 3).
+4. **Commit** - code and its log entry in the same commit, with a message that says what and why.
+5. **Push** - `scripts/sync`. It rebases on the team's work and pushes.
+6. When the task is done, remove your claim from `docs/STATUS.md`, update the rest of that file and
+   put durable findings into `docs/LEARNINGS.md`.
+
+**Commit and push after every working step, at least every 30 minutes of work, and always before
+you stop or hand back to your human.** Unpushed work is the main way two agents end up building the
+same thing or breaking each other. The one exception: do not push a state that breaks the tests or
+the runner on `main`; finish the step or stash it, and say so.
+
+## 3. The log (`docs/LOG.md`)
+
+Append-only, newest at the bottom, written with `scripts/log`, never edited by hand except to fix
+a wrong fact (then log the correction too).
+
+```bash
+scripts/log "[run] P01 with llm agent: 0.71" \
+  "replay https://arena.tacto.ai/replay/<sid>" \
+  "moved effective_date to April; supplier accepted after cost-breakdown question" \
+  "quota left 187"
+```
+
+Write an entry whenever one of these happens. Start the title with its type:
+
+| Type | When |
+|---|---|
+| `[change]` | you changed how the agent, runner or tooling behaves |
+| `[run]` | you played practice or sandbox sessions: cases, agent version, scores, replay links, quota left |
+| `[finding]` | you learned something about a supplier, the API, the scoring or the data |
+| `[decision]` | a choice was made that others must follow, and why |
+| `[blocker]` | something is broken or blocked, and what you tried |
+| `[handoff]` | you stop with work unfinished: the state, what is next, where the traps are |
+
+Write for a teammate who was not there: what, why, the result, and what follows from it. Include
+numbers, case IDs, replay links and file names. Do not log typos or formatting.
+
+Each file has one job. Do not mix them:
+
+| File | Holds | Changes |
+|---|---|---|
+| `docs/CONTEXT.md` | facts about the challenge: rules, scoring, API, data, kit | rarely; when the brief, FAQ or data changes |
+| `docs/STATUS.md` | the present: state, claims, next steps, scoreboard, decisions | constantly; keep it short and true |
+| `docs/LEARNINGS.md` | what works and what fails in negotiations, with evidence | when a replay teaches something |
+| `docs/LOG.md` | history: what happened when, by whom | append only |
+
+## 4. Git
+
+- Work on `main`. Small commits. `scripts/sync` before you start and after every commit.
+- Use a branch only for an experiment that would break `main` for hours, and say so in `docs/STATUS.md`.
+- Never force-push, never rewrite pushed history, never `git reset --hard` over work you did not write.
+- On a rebase conflict: keep both sides' intent, run the tests, continue. `docs/LOG.md` merges by
+  itself (`merge=union` in `.gitattributes`); if entries end up interleaved, leave them.
+- Never commit `.env`, keys, `data/` or `.venv/`. Check `git status` before `git add`.
+
+## 5. Things the whole team shares
+
+- **Practice quota: about 200 sessions in total until the final, for all of us together.** It is
+  "per rolling 24 hours", and sessions used on Saturday afternoon free up only after the final.
+  Before any practice run: `uv run arena me`. Play single cases, not the whole set, unless a full
+  rehearsal is planned in `docs/STATUS.md`. Log every `[run]` with the quota left. Keep at least 40
+  sessions for Sunday (pre-flight and one full rehearsal).
+- **Free first**: score term sheets offline with `arena_kit.total_cost`; test plumbing on
+  `arena-sim`; test behaviour in the sandbox (`case:D01`, `case:D02`, outside the quota).
+- **One API key, 10 open sessions, 10 calls per second, for all of us.** Two parallel runs from two
+  machines can starve each other: check `docs/STATUS.md` before a parallel run.
+- **LLM spend** is each developer's own key. Do not loop expensive models over the full case set.
+- **Only one machine runs the Live Final.** Which one is in `docs/STATUS.md`.
+
+## 6. Rules of the competition that code must never break
+
+- The agent **must not call** `/v1/events`, `/v1/events/stream`, `/screen`, `/v1/screen`,
+  `/leaderboard`, `/v1/leaderboard`, `/results` or `/v1/results`. Reading the live feed during the
+  final is forbidden. Humans may look at them; the agent's code path may not.
+- No human in the loop during the Live Final: nothing in the final runner may wait for input.
+- No second API key, no attacks on the service or other teams.
+- No commits after the freeze (Sun 12:00). The submitted commit hash is what runs.
+
+## 7. Where things are
+
+| Path | What |
+|---|---|
+| `docs/` | the team's memory (section 3) |
+| `brief/` | the official brief, API docs and submission guide. Source of truth |
+| `arena_kit/` | the official starter kit (client, runner, cost function, example agents, simulator). Upstream: github.com/tacto-ai/negotiation-arena-kit |
+| `tests/` | the kit's contract tests against `arena-sim` |
+| `data/package/` | the data package. Not in git: `uv run arena data` |
+| `scripts/` | `sync`, `log`, `session-start`, `stop-check` |
+| `KIT-README.md` | the kit's own README with worked examples |
+
+New machine: `uv sync --all-extras`, `cp .env.example .env`, put in the team's `ARENA_API_KEY`
+(from a teammate, never through git) and your own LLM key, `uv run arena data`, `uv run arena me`.
+
+## 8. Before you stop
+
+- `git status` is clean and `scripts/sync` succeeded, or you told your human exactly what is not
+  pushed and why.
+- Your claim in `docs/STATUS.md` is removed or updated; "Next up" is true.
+- Unfinished work has a `[handoff]` entry.
+- Report to your human in plain words what changed, what was verified and what is still open.

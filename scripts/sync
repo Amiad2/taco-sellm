@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Get the team's latest commits and push ours: pull --rebase, then push. Safe to run any time.
+# Usage: scripts/sync
+set -uo pipefail
+cd "$(dirname "$0")/.." || exit 1
+branch=$(git rev-parse --abbrev-ref HEAD)
+for attempt in 1 2 3; do
+  if ! git pull --rebase --autostash --quiet origin "$branch"; then
+    echo "sync: pull --rebase stopped (conflict or no network)." >&2
+    echo "sync: on a conflict fix the files, 'git add' them, 'git rebase --continue', then run scripts/sync again." >&2
+    exit 1
+  fi
+  if [ "$(git rev-list --count "origin/$branch..HEAD")" = "0" ]; then
+    echo "sync: up to date with origin/$branch at $(git rev-parse --short HEAD)"
+    exit 0
+  fi
+  if git push --quiet origin "$branch"; then
+    echo "sync: pushed, origin/$branch is at $(git rev-parse --short HEAD)"
+    exit 0
+  fi
+  echo "sync: push rejected (someone pushed first?), retrying ($attempt/3)" >&2
+  sleep 2
+done
+echo "sync: could not push after 3 attempts - check the network and your access to the repo" >&2
+exit 1

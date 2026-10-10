@@ -1,0 +1,2 @@
+# docs/LOG.md is append-only and written from many machines: keep both sides on a merge.
+docs/LOG.md merge=union

@@ -17,6 +17,24 @@ uv run arena play case:P01 --agent llm -v
 uv run arena run --set final --agent llm --parallel 10   # Live Final, start before 12:00
 ```
 
+## Working on this repo (humans and agents)
+
+Several people and AI agents work here in parallel. Read [AGENTS.md](AGENTS.md) first: it is the
+working protocol (sync, claim, log, commit, push). The team's memory lives in `docs/`:
+
+| File | What |
+|---|---|
+| [docs/CONTEXT.md](docs/CONTEXT.md) | the challenge condensed: rules, scoring, API, data, kit |
+| [docs/STATUS.md](docs/STATUS.md) | where we are now, who works on what, what is next |
+| [docs/LEARNINGS.md](docs/LEARNINGS.md) | what works in negotiations, with evidence |
+| [docs/LOG.md](docs/LOG.md) | history, appended with `scripts/log` |
+
+```bash
+scripts/sync                                   # pull --rebase + push
+scripts/log "[finding] title" "detail" ...     # add a log entry, then commit it with the change
+scripts/session-start                          # print the team's live state
+```
+
 ## Final submission
 
 - Commit hash run in the final: _TODO_

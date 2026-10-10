@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# Print the team's live state for a new session: sync state, time left, STATUS, newest LOG entries.
+# Claude Code runs this as a SessionStart hook; in any other tool run it by hand.
+cd "$(dirname "$0")/.." || exit 0
+git rev-parse --git-dir >/dev/null 2>&1 || exit 0
+FREEZE=1791712800 # Sun 2026-10-11 12:00 CEST: code freeze and Live Final
+RELEASE=1791698400 # Sun 2026-10-11 08:00 CEST: Sunday data release
+branch=$(git rev-parse --abbrev-ref HEAD)
+
+echo "=== taco-sellm: team state at session start (scripts/session-start) ==="
+now=$(date +%s)
+left() { local s=$(($1 - now)); [ "$s" -gt 0 ] && printf '%dh %02dm' $((s / 3600)) $((s % 3600 / 60)) || printf 'PASSED'; }
+echo "Now $(date '+%a %Y-%m-%d %H:%M %Z'). Code freeze + Live Final in $(left $FREEZE). Sunday data release in $(left $RELEASE)."
+
+# fetch, but never hang a session start on a bad network
+git fetch --quiet origin 2>/dev/null &
+fetch=$!
+(sleep 10 && kill "$fetch" 2>/dev/null) &
+watchdog=$!
+wait "$fetch" 2>/dev/null && fetched=yes || fetched=no
+kill "$watchdog" 2>/dev/null
+wait "$watchdog" 2>/dev/null
+
+if git rev-parse --verify --quiet "origin/$branch" >/dev/null; then
+  ahead=$(git rev-list --count "origin/$branch..HEAD")
+  behind=$(git rev-list --count "HEAD..origin/$branch")
+  if [ "$behind" -gt 0 ] && [ "$ahead" = "0" ] && git merge --ff-only --quiet "origin/$branch" 2>/dev/null; then
+    echo "Git: fast-forwarded $behind new commit(s) from origin/$branch."
+    behind=0
+  fi
+  echo "Git: branch $branch, $ahead commit(s) not pushed, $behind commit(s) not pulled, $(git status --porcelain | wc -l | tr -d ' ') file(s) changed locally."
+  [ "$behind" -gt 0 ] && echo "ACTION: you are behind the team. Run scripts/sync before you edit anything."
+  [ "$ahead" -gt 0 ] && echo "ACTION: there are unpushed commits. Run scripts/sync."
+fi
+[ "$fetched" = no ] && echo "WARNING: could not reach origin; the state below may be stale. Retry scripts/sync."
+
+echo
+echo "--- last commits ---"
+git log -8 --format='%h %ad %an: %s' --date=format:'%a %H:%M'
+echo
+echo "--- docs/STATUS.md ---"
+head -n 120 docs/STATUS.md 2>/dev/null
+echo
+echo "--- docs/LOG.md, newest entries (older ones are in the file) ---"
+if [ -f docs/LOG.md ]; then
+  start=$(grep -n '^## ' docs/LOG.md | tail -n 6 | head -n 1 | cut -d: -f1)
+  tail -n +"${start:-1}" docs/LOG.md | tail -n 90
+fi
+echo
+echo "=== Rules (AGENTS.md): claim your task in docs/STATUS.md; after every working step: scripts/log, commit, scripts/sync; the practice quota is shared and does not refill before the final. ==="
+exit 0

@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Claude Code Stop hook: when a turn ends with work the team cannot see (uncommitted or unpushed),
+# send the agent back once to log, commit and push. It never blocks twice in a row.
+input=""
+[ -t 0 ] || input=$(cat 2>/dev/null)
+case "$input" in *'"stop_hook_active":true'* | *'"stop_hook_active": true'*) exit 0 ;; esac
+cd "$(dirname "$0")/.." || exit 0
+git rev-parse --git-dir >/dev/null 2>&1 || exit 0
+branch=$(git rev-parse --abbrev-ref HEAD)
+dirty=$(git status --porcelain 2>/dev/null)
+ahead=0
+git rev-parse --verify --quiet "origin/$branch" >/dev/null && ahead=$(git rev-list --count "origin/$branch..HEAD")
+[ -z "$dirty" ] && [ "$ahead" = "0" ] && exit 0
+{
+  echo "taco-sellm: the team cannot see this work yet (AGENTS.md, section 2)."
+  [ -n "$dirty" ] && echo "Uncommitted changes:" && echo "$dirty" | head -n 15
+  [ "$ahead" != "0" ] && echo "$ahead commit(s) not pushed to origin/$branch."
+  changed=$({ git diff --name-only HEAD 2>/dev/null; git ls-files --others --exclude-standard; [ "$ahead" != "0" ] && git diff --name-only "origin/$branch..HEAD"; } | sort -u)
+  if ! echo "$changed" | grep -qx 'docs/LOG.md' && echo "$changed" | grep -qv '^docs/'; then
+    echo "No docs/LOG.md entry covers these changes: add one with scripts/log \"[type] title\" \"detail\"."
+  fi
+  echo "If this is a working state: log it, commit, run scripts/sync, and update docs/STATUS.md."
+  echo "If it would break main or is deliberately unfinished: leave it, and tell your human exactly what is not pushed and why."
+} >&2
+exit 2

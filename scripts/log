@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Append one entry to docs/LOG.md, the team's shared history. Commit it with the change it describes.
+# Usage: scripts/log "[type] title" ["detail line" ...]
+#   types: [change] [run] [finding] [decision] [blocker] [handoff]   (see AGENTS.md, section 3)
+set -euo pipefail
+cd "$(dirname "$0")/.."
+if [ $# -lt 1 ] || [ -z "$1" ]; then
+  echo 'usage: scripts/log "[type] title" ["detail line" ...]' >&2
+  exit 2
+fi
+title=$1
+shift
+who=$(git config user.name 2>/dev/null || echo unknown)
+host=$(hostname -s 2>/dev/null || hostname)
+{
+  printf '\n## %s · %s @ %s\n**%s**\n' "$(date '+%Y-%m-%d %H:%M %Z')" "$who" "$host" "$title"
+  for line in "$@"; do
+    printf -- '- %s\n' "$line"
+  done
+} >> docs/LOG.md
+echo "log: added '$title' to docs/LOG.md - commit it with your change, then scripts/sync"
