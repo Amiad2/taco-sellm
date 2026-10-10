@@ -38,9 +38,9 @@ def openings():
 
 
 def test_a_dossier_gets_one_cash_persona_and_at_most_one_for_price():
-    known = {"coverage": "full", "economics": {"cash_pressure": "low", "cost_of_money": 0.065, "cost_of_money_basis": "rule"},
-             "signals": [{"kind": "list_price_fixed", "strength": 3, "excerpt": "List conditions.", "evidence": ["doc:1"]},
-                         {"kind": "wants_volume", "strength": 3}]}  # fmt: skip
+    fixed = {"kind": "list_price_fixed", "strength": 3, "excerpt": "List conditions.", "evidence": ["doc:1"]}
+    economics = {"cash_pressure": "low", "cost_of_money": 0.065, "cost_of_money_basis": "rule"}
+    known = {"coverage": "full", "economics": economics, "signals": [fixed, {"kind": "wants_volume", "strength": 3}]}
     assert [p for p, _ in traits(known)] == ["relaxed_about_cash", "fixed_list_price"], (
         "a fixed list price goes before volume"
     )
