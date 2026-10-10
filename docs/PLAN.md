@@ -332,33 +332,40 @@ the builder.
   at 10 days instead of 30 is 0.36); else archetype `job_shop` or `cash_short` strength 2 or more:
   0.25 (P05's Czech job shop measured about 0.35); else group 0.065 (P02, P08), family 0.09 (D01),
   founder or private 0.10; plus 0.05 if the credit index is 300 or more or rose 20 points or more in
-  12 months.
+  12 months. The skonto rate is measured, so it gets no surcharge (calibrated Sat 18:30).
+  The credit index is higher-is-worse (groups 147-178; the two cash-short skonto suppliers rose to 302
+  and 343).
 - `cash_pressure`: `high` with skonto terms or `cash_short` strength 2 or more; `medium` with an
   equity ratio under 25 %, a credit index of 250 or more, or a rising credit index; else `low`.
 - `archetype`: `group` if the owner type is group; else `job_shop` if staff < 80 or cash pressure is
-  high; else `family` if family-owned; else `trader` for raw material; `monopolist` overrides when
+  high; else `family` if family-owned; else `trader` for raw material or a quote remark "supply from
+  stock"; `monopolist` overrides when
   `capacity_tight` or `list_price_fixed` is signalled and the part has no alternative; else `other`.
 - `citable`: only what the arena accepts (an `idx` pair is one series, at most 12 months apart,
   ending within the last 12 months of the data). Every entry is checked with `sellm/lab/claims.py`
   at build time: 0 `contradicted`. Facts that help the supplier (a rising index) stay in with
   `helps_buyer: false`, so A knows what the supplier may cite.
 
-**Signal kinds** (`signals[].kind`, frozen vocabulary: add kinds, do not rename)
+**Signal kinds** (`signals[].kind`, frozen vocabulary: add kinds, do not rename). Strength is
+min(3, distinct pieces of evidence): one per text, one per structured condition; a news item found by
+its topic and by its words counts once. Noise news and market news never count. Rules and patterns:
+`sellm/intel/signals.py` (calibrated Sat 18:30 against all 46 suppliers' texts).
 
 | Kind | Evidence in the data | What it means for us |
 |---|---|---|
-| `cash_short` | asks to be paid faster, liquidity, "the bank", skonto terms, news `credit_downgrade`, `credit_watch`, `short_time_work`, low equity | trade faster payment for price; it values payment days at its high cost of money; do not squeeze its margin |
+| `cash_short` | "Could you pay our invoices within 10 days?", liquidity, "the bank", skonto terms, quote remark "Payment within 10 days requested", news `credit_downgrade`, `credit_watch`, `short_time_work`. A low equity ratio is not evidence here; it raises `cash_pressure` to `medium` | trade faster payment for price; it values payment days at its high cost of money; do not squeeze its margin |
 | `wants_volume` | "focus on customers with volume", idle shop floor, news `free_capacity`, "accepted below full cost to keep the volume" | a longer contract, full-need coverage or a bundle buys price |
 | `capacity_tight` | news `allocation`, `full_order_book`, `big_order`, `chip_shortage` | secure volume and lead time first; price moves little |
-| `list_price_fixed` | "head-office directive", "list conditions" in quote remarks | do not fight the list price; move payment, start date, freight, chargeback |
+| `list_price_fixed` | "head-office directive", "list conditions" in quote remarks; "no room on price this year: head office has frozen all price reductions" | do not fight the list price; move payment, start date, freight, chargeback |
 | `material_hedged` | "material covered until ..." | index arguments are weak until then; ask for a later start or a fixed price |
-| `partnership` | owner visits, past favours ("kept supplying at the old price"), a long relationship | appreciation and reciprocity; never an ultimatum |
-| `margin_floor` | "cannot sign anything that lowers our margin" | the price is near its floor; trade terms, not price |
-| `quality_problem` | red or amber scorecard, ppm above target, overdue 8D | lever for ppm commitment and chargeback; cite `sc` and `qn` |
-| `delivery_problem` | on-time delivery below the 95 % target | cite OTD; ask for a lead-time commitment |
+| `partnership` | past favours and the reciprocity asked for ("kept supplying at the old price ... expects partnership in return"), "long-standing", "for generations". Read from the text, not the subject: "Visit by the owner" notes are often about something else, and the vendor-master date is 1996-01-01 for 36 of 46 suppliers | appreciation and reciprocity; never an ultimatum |
+| `margin_floor` | "cannot sign anything that lowers our margin"; a part priced at or below its plant-specific should-cost (e.g. Wimbacher 310012 at 0.97) | the price is near its floor; trade terms, not price |
+| `quality_problem` | latest scorecard amber or red, ppm above 1,500, an overdue 8D (each condition counts once), 8D/complaint/defect in its texts | lever for ppm commitment and chargeback; cite `sc` and `qn` |
+| `delivery_problem` | latest on-time delivery below 75 % (9 of 46; below the 95 % target are 43 of 46, which says nothing); strength 2 below 65 %, 3 below 55 % | cite OTD; ask for a lead-time commitment |
 | `ownership_change` | news `new_owner`, `succession`, `restructuring`, `refocus` | new decision makers, risk that it walks; be clear and fair |
-| `approval_ladder` | a group parent, "head office" | expect a round on hold before a bigger move; be patient |
-| `price_claim` | a letter with `asked_pct` and stated reasons | check each stated cost driver against its index; cite the ones that fell |
+| `approval_ladder` | owner type group or a group parent, "head office", "price changes above 2 % need the approval of their pricing committee" | expect a round on hold before a bigger move; be patient |
+| `price_claim` | a letter with `asked_pct` and stated reasons; in the opening e-mail "<series> rose x % in twelve months and is y % of our cost" | check each stated cost driver against its index; cite the ones that fell |
+| `informal_costing` (added Sat 18:30) | "works from his own spreadsheet, last updated two years ago", "had not followed his material and energy prices closely since the 2022 peak; his office manager does the costing" | the supplier does not track its own costs: one verified index figure can disarm it ("we didn't know that"); bring exactly one strong figure |
 
 **The case overlay** (mini-dossier): at session open, before the first move, under 100 ms, no LLM.
 

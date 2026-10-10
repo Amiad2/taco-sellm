@@ -7,7 +7,7 @@ import pytest
 from intel_fixture import make_package
 
 from arena_kit.data import DataPackage
-from sellm.intel import SCHEMA_VERSION, dossier
+from sellm.intel import SCHEMA_VERSION, dossier, signals
 from sellm.intel.assemble import build_supplier
 from sellm.intel.extract import Source, body
 from sellm.intel.schema import CORE_FIELDS, SIGNAL_KINDS, TOP_KEYS, validate
@@ -22,7 +22,7 @@ def fixture_pkg(tmp_path):
 
 @pytest.fixture
 def release_pkg(tmp_path):
-    return DataPackage(make_package(tmp_path / "pkg", release=True))
+    return DataPackage(make_package(tmp_path / "pkg-release", release=True))
 
 
 @pytest.fixture(scope="module")
@@ -257,3 +257,87 @@ def test_the_real_package_in_numbers(real_pkg):
     assert sum(len(d["news"]) for d in ds) == 32
     market = {"news:20260910-27", "news:20260912-30", "news:20260914-31", "news:20260916-32"}
     assert not any(n["id"] in market for d in ds for n in d["news"])
+
+
+def _signals(d):
+    return {s["kind"]: s["strength"] for s in d["signals"]}
+
+
+def test_signals_and_economics_on_the_fixture(fixture_pkg, release_pkg):
+    src = Source(fixture_pkg)
+    one = signals.apply(build_supplier(src, "sup:1"))
+    assert _signals(one) == {
+        "cash_short": 2,
+        "margin_floor": 1,
+        "ownership_change": 1,
+        "price_claim": 1,
+        "wants_volume": 2,
+    }
+    assert one["economics"]["cash_pressure"] == "high" and one["economics"]["archetype"] == "job_shop"
+    assert one["economics"]["cost_of_money"] == 0.25
+    cash = next(s for s in one["signals"] if s["kind"] == "cash_short")
+    assert cash["evidence"] == ["doc:1", "quote:1"] and "bank is watching" in cash["excerpt"]
+    two = signals.apply(build_supplier(src, "sup:2"))
+    assert _signals(two) == {"cash_short": 1, "delivery_problem": 2, "material_hedged": 1, "quality_problem": 3}
+    assert two["economics"]["cost_of_money"] == 0.36 and "measured" in two["economics"]["cost_of_money_basis"]
+    assert "ownership_change" not in _signals(two)  # its 'new managing director' news is noise
+    three = signals.apply(build_supplier(src, "sup:3"))
+    assert _signals(three) == {"approval_ladder": 1} and three["economics"]["archetype"] == "group"
+    assert three["economics"]["cost_of_money"] == 0.065 and three["economics"]["cash_pressure"] == "low"
+    later = signals.apply(build_supplier(Source(release_pkg), "sup:3"))
+    assert _signals(later)["capacity_tight"] == 2 and later["economics"]["archetype"] == "monopolist"
+    assert all(validate(d) == [] for d in (one, two, three, later))
+
+
+GOLDEN_SIGNALS = {
+    "sup:70130": (
+        {"cash_short": 3, "wants_volume": 2, "margin_floor": 2, "ownership_change": 1},
+        "high",
+        "job_shop",
+        0.25,
+    ),
+    "sup:70110": (
+        {"partnership": 2, "cash_short": 1, "informal_costing": 2, "price_claim": 1, "quality_problem": 1},
+        "medium",
+        "family",
+        0.09,
+    ),
+    "sup:70210": ({}, "high", "job_shop", 0.36),
+    "sup:70280": ({}, "high", None, 0.54),
+    "sup:70230": ({}, "high", None, 0.45),
+    "sup:70350": ({}, "high", None, 0.36),
+    "sup:70510": ({"approval_ladder": 1}, "low", "group", 0.065),
+    "sup:70240": ({}, None, "job_shop", 0.25),
+    "sup:70420": ({"list_price_fixed": 1, "approval_ladder": 1}, None, None, None),
+    "sup:70190": ({"material_hedged": 1}, None, None, None),
+    "sup:70620": ({"list_price_fixed": 1}, None, None, None),
+}
+
+
+@pytest.mark.parametrize("sid", sorted(GOLDEN_SIGNALS))
+def test_golden_signals_on_the_real_package(real_pkg, sid):
+    at_least, pressure, arche, rate = GOLDEN_SIGNALS[sid]
+    d = signals.apply(build_supplier(Source(real_pkg), sid))
+    got = _signals(d)
+    assert all(got.get(k, 0) >= v for k, v in at_least.items()), got
+    if sid == "sup:70130":
+        assert got["cash_short"] == 3 and got["ownership_change"] == 1
+    if sid == "sup:70110":
+        assert got["cash_short"] == 1
+    ec = d["economics"]
+    assert pressure is None or ec["cash_pressure"] == pressure
+    assert arche is None or ec["archetype"] == arche
+    assert rate is None or ec["cost_of_money"] == rate
+
+
+def test_noise_and_market_news_never_make_a_signal(real_pkg):
+    src = Source(real_pkg)
+    ds = [signals.apply(build_supplier(src, s)) for s in src.detailed_ids()]
+    noise = {n["id"] for d in ds for n in d["news"] if n["noise"]}
+    market = {n["id"] for n in src.market_news()}
+    assert len(noise) == 10 and len(market) == 7
+    assert not any(e in noise | market for d in ds for s in d["signals"] for e in s["evidence"])
+    by_id = {d["supplier_id"]: _signals(d) for d in ds}
+    assert "ownership_change" not in by_id["sup:70230"] and "ownership_change" not in by_id["sup:70160"]
+    assert sum("quality_problem" in s for s in by_id.values()) == 17
+    assert sum("delivery_problem" in s for s in by_id.values()) == 9
