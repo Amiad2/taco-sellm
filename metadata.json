@@ -1,0 +1,28 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4KACCSW4ND53DKQN1ZR9KXE",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "runs/lab/20261010-182433-stress-champion/parallel/progress.log",
+    "runs/lab/20261010-182433-stress-champion/sequential/progress.log",
+    "runs/lab/20261010-182737-challenge-rel_estimate-max/progress.log"
+  ],
+  "sessions": [
+    {
+      "metadata": "/0/metadata.json",
+      "transcript": "/0/full.jsonl",
+      "compact_transcript": "/0/transcript.jsonl",
+      "content_hash": "/0/content_hash.txt",
+      "prompt": ""
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 2,
+    "cache_creation_tokens": 1365,
+    "cache_read_tokens": 770746,
+    "output_tokens": 971,
+    "api_call_count": 1
+  }
+}
