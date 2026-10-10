@@ -329,3 +329,8 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Closed loop (runs/lab/VALIDATION.md): kit naive agent P01 0.554 (arena 0.583, engine 0.590), D01 0.235 (0.200, 0.239); D01 step probes 0.652/0.707/0.716/0.774/0.814 - the arena's order, levels 0.03-0.07 below (6 members each, SE about 0.03). Replay of the 237 real replies: 0.87 % mean error, status 190/237 (engine 0.77 %, 217/237, but fitted on them).
 - Without bounds the LLM played its own idea of the supplier and was far too hard: it held still on the naive agent's first lowball (naive P01 0.096 vs 0.583), while the real Brandlhuber answered with a first counter. The numbers must come from the calibrated dynamics; the LLM varies them, reads and writes.
 - In character without being told: the LLM Brandlhuber wrote 'The 14-day payment term is essential for this offer', as the real one did in our practice session. LLM spend for building and validating: about 1,300 calls on Amiad's key.
+
+## 2026-10-10 18:15 CEST · Amiad @ fedora
+**[finding] Model check (answer to the 17:50 decision): Amiad's lab runs used gpt-6.1-sol; .env now follows the team**
+- The lab's kit-LLM validation (59.8 vs 61.5) and the LLM-supplier validation ran with LLM_MODEL=gpt-6.1-sol on Amiad's key. Both gpt-6-sol and gpt-6.1-sol answer on that key (1.1 s and 1.6 s for a ping).
+- Amiad's .env now has LLM_MODEL=gpt-6-sol (team decision) and LAB_SUPPLIER_MODEL=gpt-6.1-sol, so the lab's suppliers keep the model they were validated with; agents use the team's model. To validate the suppliers on gpt-6-sol: set LAB_SUPPLIER_MODEL=gpt-6-sol and run 'python -m sellm.lab validate --supplier llm' (about 200 calls).
