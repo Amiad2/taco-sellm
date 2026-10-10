@@ -1,24 +1,25 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-10 14:55 CEST by Jonathan (Claude Code).
+Last updated: 2026-10-10 15:05 CEST by Jonathan (Claude Code).
 
 ## Now
 
 - Repo is set up on the official starter kit; tests pass (31 passed, 1 skipped).
 - Team key works: team **sellm**, active. `uv run arena me` is the source of truth for quota and best scores.
-- Only the kit's naive agent has played so far. No agent of our own exists yet.
+- **OpenAI works with the kit's LLM agent** (`LLM_PROVIDER=openai`, model `gpt-6.1-sol`, Sat 15:00): D01 scored 0.786 against 0.200 for the naive agent, no `LLM failed` in the log. Each machine needs the values in its own `.env`; `llm_from_env` was not changed.
+- No agent of our own exists yet; the kit's LLM agent is the baseline to beat.
 - Team memory is in place: `AGENTS.md`, `docs/CONTEXT.md`, this file, `docs/LEARNINGS.md`, `docs/LOG.md`.
 
 ## In progress (claim before you start, remove when done)
 
 | Who | What | Files | Since |
 |---|---|---|---|
-| Jonathan | Connect the OpenAI key / provider to the LLM agent and check it runs without the silent naive fallback | `.env`, `arena_kit/agents/llm.py` (`llm_from_env`) | Sat 14:55 |
+| - | - | - | - |
 
 ## Next up (in this order unless a human says otherwise)
 
-1. Baseline: run the kit's LLM agent on sandbox `D01` and `D02` (free), read the replays, write the findings to `docs/LEARNINGS.md`.
+1. Baseline: `D01` is done (0.786, see `docs/LEARNINGS.md`). Run the kit's LLM agent on sandbox `D02` (RFQ, two suppliers), read the replay, write the findings to `docs/LEARNINGS.md`.
 2. Verify the RFQ clock: does a sequential `play()` cause timeouts on the other threads? Test in `D02`.
 3. Supplier dossiers: per supplier, mine notes, letters, news, scorecards, price history, should-cost and cost drivers into a cached brief the agent gets before round 1.
 4. Strategy in code: enumerate term sheets over `term_options`, price each with `total_cost`, estimate the supplier's margin for `stabilise` and `secure_supply` cases, let the LLM only choose arguments and wording.

@@ -48,3 +48,30 @@ Offline C for term sheets (computed with `total_cost`, relationship term not inc
   partnership" and "craftsmanship". Score 0.583.
 - The supplier's stated cost drivers: LCI-C (labour) and PPI-C241 (iron and steel) rose;
   electricity (PPI-D351) fell 3.7 % from 2025-08 to 2026-08, although the letter blames energy.
+
+## Sandbox D01 - Demo Gießerei (sup:DEMO-F1), price increase, `stabilise`, no alternative
+
+Case numbers: need 4,000 a year, horizon 2 years. The opening is 52.90 at 30 days, a 12-month
+contract, effective 2026-12-01: `C_open` 448,811, `C_best` 408,624. `contract_months` is negotiable.
+
+| Run | Terms | C | Score |
+|---|---|---|---|
+| kit naive agent | 50.90, 30 d, **12 months**, Dec 2026 | 440,757 | 0.200 |
+| kit LLM agent, OpenAI `gpt-6.1-sol` | 50.80, 30 d, **24 months**, Feb 2027 | 417,205 | 0.786 |
+
+- **The jump comes from covering the horizon and the later start** (confirmed, replay
+  bb64095ce8935924): the LLM agent opened with a 24-month term and an effective date of February,
+  offered 60 days of payment, and got a *worse* counter on price (51.90 at 60 days) than at 30 days.
+  The naive agent kept 12 months, so half the 2-year need was bought at the fallback price.
+- **The supplier said no to 60 days** ("not feasible for our operations") and gave a price
+  step only after we went back to 30 days: 51.90, 51.10, 50.90, 50.80. Whether "pays faster" is
+  worth something depends on the supplier's cash position (see its notes), not on the term itself.
+- **Two term sheets per message worked as a probe**: 50.70 for February against 50.90 for April.
+  The supplier chose the February sheet and conceded.
+- **No data was cited**: `claim_results` was empty in every round. The agent asked for a cost
+  bridge and the margin and got "our margin and limits stay internal". The kit's LLM agent only
+  sees what the case's `refs` point to; the supplier itself cited WAGES-METAL +3.1 %.
+- **The agent accepted as soon as the supplier said `agreed`** at 50.80. The gap to `C_best` is
+  8,580 (score 0.786 -> 1.0); we used 4 of 10 rounds.
+- Rounds took 24-34 s each, including the supplier's reply. No decision exceeded the kit's 45 s
+  warning limit, but the 60 s rule makes a slower model or a longer prompt a risk to watch.

@@ -59,3 +59,15 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Committed: .entire/settings.json, .entire/.gitignore, Entire's hooks merged into .claude/settings.json next to our session-start and stop-check (both kept).
 - Not shared by git: Entire's git hooks in .git/hooks. Every teammate must install the CLI and run 'entire enable' once (AGENTS.md section 7).
 - push_sessions=false on purpose: transcripts may contain keys and this repo is read by the jury. Changing it is a team decision.
+
+## 2026-10-10 15:02 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] Sandbox D01 with the kit's LLM agent on OpenAI: 0.786 (naive 0.200), quota unchanged**
+- Sat 15:00, session bb64095ce8935924, replay https://arena.tacto.ai/replay/bb64095ce8935924, model gpt-6.1-sol, no 'LLM failed' in the -v log.
+- Deal with sup:DEMO-F1 at 50.80, 30 days, 24 months, effective 2027-02-01. c_open 448,811, c_deal 417,205, c_best 408,624.
+- Price steps 51.90 -> 51.10 -> 50.90 -> 50.80 over 4 rounds; supplier refused 60-day payment. No data IDs cited (claim_results empty).
+- Round time 24-34 s including the supplier reply. Quota still 199 left (sandbox).
+
+## 2026-10-10 15:02 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[change] OpenAI provider is working; claim in STATUS released**
+- LLM_PROVIDER=openai, LLM_MODEL=gpt-6.1-sol, LLM_API_KEY in taco-sellm/.env (values were in the old negotiation-arena-kit/starter-kit/.env and were copied over; the old file can be deleted).
+- arena_kit/agents/llm.py was not changed. Smoke test of llm_from_env returned in 2.1 s.
