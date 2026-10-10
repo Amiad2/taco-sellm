@@ -27,6 +27,8 @@ Knobs (all off by default, so `Persistent()` plays exactly like the negotiator):
                  would have accepted already
 - `creep`        a fraction: no step closes more than this share of the gap to its price (None: the
                  negotiator's pace)
+- `push_final`, `fast_pay`, `pay_probe`, `signal_facts`, `soft_give`: see DEFAULTS; tests of what a
+                 supplier gives for what it wants (experiments/PERSISTENCE.md section 6)
 - `zone`         a fraction: once the supplier repeats its offer (`stall_after` times) we ask this
                  share below it at once. Suppliers took asks about 1 % below their standing offer
                  (P01 1.03 %, P11 0.90 %, P18 1.8 %; P11 not 1.08 %), and one that stalls says
@@ -38,9 +40,26 @@ import math
 
 from arena_kit.cost import complete_offer
 
-from .negotiator import EPS, Negotiator, _key
+from . import calculator
+from .negotiator import EPS, Negotiator, _key, log
 
-DEFAULTS = dict(past_target=False, estimate_error=0.05, past_creep=None, creep=None, zone=None, stall_after=1)
+DEFAULTS = dict(
+    past_target=False,
+    estimate_error=0.05,
+    past_creep=None,
+    creep=None,
+    zone=None,
+    stall_after=1,
+    push_final=None,  # a fraction: after its first final offer, ask once this share below it instead of accepting
+    fast_pay=False,  # a supplier the dossier calls short of cash: the fastest payment in the first ask
+    pay_probe=False,  # first ask as two offers of equal cost to us that differ in payment days only
+    signal_facts=False,  # a supplier that wants volume hears the forecast first
+    soft_give=False,  # ... and is offered a fixed call-off schedule in the first e-mail (not binding)
+)
+SOFT_GIVE = (
+    "We can give you a fixed call-off schedule and a rolling twelve-month forecast, so that you can plan your capacity."
+)
+PREFER = {"wants_volume": ("fc",)}  # dossier signal -> the kinds of fact (sellm/claims.py) that speak to it
 
 
 class Persistent(Negotiator):
@@ -50,8 +69,118 @@ class Persistent(Negotiator):
         self.e = {**DEFAULTS, **own}
         self.name = "persistent " + " ".join(f"{k}={v}" for k, v in {**own, **knobs}.items())
 
+    # -- what the supplier wants (tests of Sat 23:15, see experiments/PERSISTENCE.md section 6) --------
+    def signal(self, case, v, kind):
+        found = self.intel(case, v)
+        if found.get("coverage") != "full":
+            return 0
+        return max(
+            (sig.get("strength") or 1 for sig in found.get("signals") or [] if sig.get("kind") == kind), default=0
+        )
+
+    def opening_structure(self, case, v):
+        s = super().opening_structure(case, v)
+        if self.e["fast_pay"] and "payment_days" in s:
+            if self.signal(case, v, "cash_short") or self.cash(case, v) in ("medium", "high"):
+                days = [
+                    d
+                    for d in case.get("term_options", {}).get("payment_days") or []
+                    if v.valid({**s, "payment_days": d, "unit_price": 1.0})
+                ]
+                if days and min(days) < s["payment_days"]:
+                    s = {**s, "payment_days": min(days)}
+                    self._memo[(case.get("case_id"), v.sid, "s0")] = s
+        return s
+
+    def ask(self, case, v, views, live, rival=math.inf):
+        draft = super().ask(case, v, views, live, rival)
+        if draft.get("kind") != "ask" or v.asks:
+            return draft
+        sheet = draft["sheets"][0]
+        if self.e["pay_probe"] and len(draft["sheets"]) == 1 and "payment_days" in sheet:
+            other = self.other_payment(case, v, sheet)
+            if other:
+                draft = {**draft, "sheets": [sheet, other]}
+        if self.e["soft_give"] and self.signal(case, v, "wants_volume"):
+            draft = {**draft, "arguments": [SOFT_GIVE, *(draft.get("arguments") or [])]}
+        return draft
+
+    def other_payment(self, case, v, sheet):
+        """The same package with the other payment days - its quoted ones if we ask for later, else
+        the latest - at the price that costs us the same."""
+        options = case.get("term_options", {}).get("payment_days") or []
+        quoted = v.filled(v.opening["term_sheets"][0]["terms"]).get("payment_days") if v.opening else None
+        days = quoted if quoted is not None and quoted != sheet["payment_days"] else max(options, default=None)
+        if days is None or days == sheet["payment_days"] or days not in options:
+            return None
+        structure = {f: x for f, x in sheet.items() if f != "unit_price"}
+        price = calculator.price_for(case, v.std, {**structure, "payment_days": days}, v.c(sheet))
+        if price is None or price <= 0:
+            return None
+        other = complete_offer(case, {**structure, "payment_days": days, "unit_price": round(price, 2)})
+        return other if v.valid(other) else None
+
+    def banked(self, case, v, cited, ours_here, price):
+        """The negotiator's next fact, except that the kinds of fact the dossier's signals point to come first."""
+        kinds = [k for sig, ks in PREFER.items() if self.signal(case, v, sig) for k in ks]
+        if not (self.e["signal_facts"] and kinds):
+            return super().banked(case, v, cited, ours_here, price)
+        try:
+            from . import claims
+
+            def topic(ref):
+                head = ref.split(":", 1)[0]
+                return {"ctr": "doc"}.get(head, head)
+
+            used = {topic(i) for i in cited}
+            with calculator.LOCK:
+                found = claims.arguments(
+                    case, v.sid, self.intel(case, v), package=self.package, used=cited, price=price
+                )
+            for a in sorted(found, key=lambda a: a["kind"] not in kinds):  # stable: the bank's order within each group
+                if a["kind"] == "quote" or a["sentence"] in ours_here or not a.get("ids") or topic(a["ids"][0]) in used:
+                    continue
+                if "ppm" in a["sentence"]:
+                    continue
+                return [a["sentence"]]
+        except Exception as e:  # an argument less, never a lost move
+            log.warning("%s %s: argument bank failed (%s: %s)", case.get("case_id"), v.sid, type(e).__name__, e)
+        return []
+
+    # -- after its final offer ---------------------------------------------------------------------
+    def push_price(self, case, v):
+        """One ask below its first final offer, or None: we asked since, no message is left, or there is no room."""
+        if not self.e["push_final"] or v.status != "final_offer" or v.left <= 1:
+            return None
+        first = next(i for i, m in enumerate(v.events) if m.get("from") != "buyer" and m.get("status") == "final_offer")
+        if any(m.get("from") == "buyer" and m.get("term_sheets") for m in v.events[first + 1 :]):
+            return None
+        terms = v.filled(v.standing[1])
+        if terms.get("unit_price") is None or not v.valid(terms):
+            return None
+        price = round(terms["unit_price"] * (1 - self.e["push_final"]), 2)
+        last = complete_offer(case, v.asks[-1]) if v.asks else None
+        if last and all(last.get(f) == x for f, x in terms.items() if f != "unit_price"):
+            price = max(price, last["unit_price"])
+        return price if price < terms["unit_price"] - 0.005 else None
+
+    def ready(self, case, v, rival=math.inf):
+        if self.push_price(case, v) is not None:
+            return False
+        return super().ready(case, v, rival)
+
     def plan(self, case, v, rival=math.inf):
         plan = super().plan(case, v, rival)
+        push = self.push_price(case, v)
+        if push is not None:
+            s = {f: x for f, x in v.filled(v.standing[1]).items() if f != "unit_price"}
+            return {
+                **plan,
+                "sheet": complete_offer(case, {**s, "unit_price": push}),
+                "structure": s,
+                "capped": False,
+                "enough": False,
+            }
         if v.asks and v.status == "open":
             stalled = self.e["zone"] and self.stalls(case, v, plan["structure"]) >= self.e["stall_after"]
             if stalled:
