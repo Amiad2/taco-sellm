@@ -1,0 +1,76 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4K342CESQQPM50MHJAZA62B",
+  "session_id": "bc80161e-03a4-4665-86fa-dc14803965bc",
+  "strategy": "manual-commit",
+  "created_at": "2026-10-10T14:22:59.156541867Z",
+  "branch": "main",
+  "checkpoints_count": 2,
+  "files_touched": [
+    "sellm/__init__.py",
+    "sellm/lab/__init__.py",
+    "sellm/lab/__main__.py",
+    "sellm/lab/backtest.py",
+    "sellm/lab/bot.py",
+    "sellm/lab/claims.py",
+    "sellm/lab/persona.py",
+    "sellm/lab/reader.py",
+    "sellm/lab/table.py",
+    "sellm/lab/twins.py",
+    "tests/test_lab.py"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-5-5",
+  "turn_id": "0cc2aa131541",
+  "checkpoint_transcript_start": 236,
+  "transcript_lines_at_start": 236,
+  "compact_transcript_start": 34,
+  "token_usage": {
+    "input_tokens": 92,
+    "cache_creation_tokens": 145888,
+    "cache_read_tokens": 11226951,
+    "output_tokens": 99866,
+    "api_call_count": 46
+  },
+  "session_metrics": {
+    "turn_count": 2
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-10-10T14:22:58.950201289Z",
+    "agent_lines": 0,
+    "agent_removed": 0,
+    "human_added": 102,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 102,
+    "total_lines_changed": 104,
+    "agent_percentage": 0,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 3967,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        ".agents/hooks.json": 28,
+        ".codex/hooks.json": 88,
+        "sellm/__init__.py": 5,
+        "sellm/lab/__init__.py": 14,
+        "sellm/lab/__main__.py": 94,
+        "sellm/lab/backtest.py": 159,
+        "sellm/lab/bot.py": 313,
+        "sellm/lab/claims.py": 179,
+        "sellm/lab/persona.py": 187,
+        "sellm/lab/reader.py": 32,
+        "sellm/lab/strategies.py": 268,
+        "sellm/lab/table.py": 183,
+        "sellm/lab/twins.json": 2063,
+        "sellm/lab/twins.py": 218,
+        "tests/test_lab.py": 136
+      }
+    }
+  ]
+}
