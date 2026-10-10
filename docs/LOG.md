@@ -835,3 +835,7 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 **[run] Arena check of the price-path findings, interim: D01 (sandbox, free) base 0.947, horizon 6 0.921, oracle first ask 3 % below the floor 0.935, relationship target x0.95 0.959**
 - experiments/price_path_arena.py, agent = sellm.agent.make_agent @130210e plus the variant's switches; sessions 5ff58542 (base), e4c4ca36 (horizon_6), 35d25878 (oracle+open_0.03), 1c9f860f (rel_target_0.95). D01 varies 0.921-0.947 for the same agent, so one session each shows a direction only.
 - Practice sessions running one at a time (horizon 6: P07 P11 P18; oracle: P02 P07 P11 P18; relationship x0.95: P02); results and pull-runs follow in one entry.
+## 2026-10-11 00:44 CEST · Amiad @ fedora
+**[run] P02 one-euro ladder with fact-based rebuttal: EUR 370 offer rejected**
+- One practice session with gpt-6-sol. Buyer ladder EUR 1.00, 46.89, 92.78, 138.68; Nordmark's final_offer was EUR 373.80. Our round-5 offer at EUR 370.00 included detailed rebuttals on the input weights, historical purchase prices, payment premium and lack of a price bridge; the supplier withdrew. No deal, score 0.000. All five LLM calls succeeded. Replay https://arena.tacto.ai/replay/80108787b179d871; transcript and raw session saved in runs/practice/P02/. Quota after run: 268/450 left.
+- pull-runs also downloaded three unrelated D01 sandbox sessions; their labels were corrected to unlabelled, and only our P02 session retains this run label.

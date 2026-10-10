@@ -116,6 +116,10 @@ Evidence and tables: `experiments/RESULTS.md`. Measured on the sandbox's demo su
   withdrew. Do not push after `final_offer`; the one-euro anchor also did not bring the supplier near
   the buyer's EUR 368.14 target. Three follow-up branches at EUR 370.00, 369.03, and 368.14 after
   `final_offer` (EUR 373.95, 373.90, 373.85 respectively) all ended in withdrawal and score 0.000.
+  A fourth run offered EUR 370.00 after `final_offer` at EUR 373.80 and answered Nordmark's stated
+  arguments point by point: weighted input exposure, historic purchase prices, financing premium,
+  and the missing price bridge. The seller still withdrew (replay `80108787b179d871`); stronger
+  argumentation did not change the post-final-offer outcome.
 - **The supplier mirrors our steps, not our level** (confirmed on D01, 20 sessions). Its first
   counter did not depend on our opening. It then gave back 0.6-0.85 of each step we made and said
   `final_offer` at our 6th message. Opening 1.00 lower with the same steps changed nothing; steps
