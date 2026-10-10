@@ -12,20 +12,20 @@ runs are in `runs/logs/`.
 
 | Case | Type / goal | C_open | C_best | C_alt | Best score | By | Sessions |
 |---|---|---|---|---|---|---|---|
-| P01 (practice) | price_increase / stabilise | 1,153,780 | 1,096,816 | 1,176,178 | 0.789 | kit llm, gpt-6.1-sol | 2 |
-| P02 (practice) | price_increase / stabilise | 2,282,867 | 2,235,514 | 2,604,228 | 0.105 | kit llm, gpt-6.1-sol | 1 |
-| P03 (practice) | renewal / stabilise | 4,246,314 | 3,909,043 | 4,332,546 | 0.903 | kit llm, gpt-6.1-sol | 1 |
-| P04 (practice) | renewal / routine | 198,846 | 196,529 | 203,169 | 0.810 | kit llm, gpt-6.1-sol | 1 |
-| P05 (practice) | rfq / leverage | 305,545 | 223,424 | - | 0.676 | kit llm, gpt-6.1-sol | 1 |
-| P07 (practice) | bundling / routine | 391,027 | 299,241 | 379,916 | 0.779 | kit llm, gpt-6.1-sol | 1 |
-| P08 (practice) | raw_material / leverage | 1,135,887 | 960,309 | 1,157,020 | 0.433 | kit llm, gpt-6.1-sol | 1 |
-| P10 (practice) | capacity / secure_supply | 1,932,492 | 1,328,927 | - | 0.570 | kit llm, gpt-6.1-sol | 1 |
-| P11 (practice) | quality / quality_first | 817,578 | 722,500 | 894,383 | 0.710 | kit llm, gpt-6.1-sol | 1 |
-| P18 (practice) | raw_material / leverage | 295,173 | 222,651 | 301,088 | 0.377 | kit llm, gpt-6.1-sol | 1 |
+| P01 (practice) | price_increase / stabilise | 1,153,780 | 1,096,816 | 1,176,178 | 0.874 | sellm negotiator v1.1 @2dadddb, kit runner, no LLM | 3 |
+| P02 (practice) | price_increase / stabilise | 2,282,867 | 2,235,514 | 2,604,228 | 0.183 | sellm negotiator v1.1 @2dadddb, kit runner, no LLM | 2 |
+| P03 (practice) | renewal / stabilise | 4,246,314 | 3,909,043 | 4,332,546 | 0.903 | kit llm, gpt-6.1-sol | 2 |
+| P04 (practice) | renewal / routine | 198,846 | 196,529 | 203,169 | 0.810 | kit llm, gpt-6.1-sol | 2 |
+| P05 (practice) | rfq / leverage | 305,545 | 223,424 | - | 0.769 | sellm negotiator v1.1 @2dadddb, kit runner, no LLM | 2 |
+| P07 (practice) | bundling / routine | 391,027 | 299,241 | 379,916 | 0.779 | kit llm, gpt-6.1-sol | 2 |
+| P08 (practice) | raw_material / leverage | 1,135,887 | 960,309 | 1,157,020 | 0.433 | kit llm, gpt-6.1-sol | 2 |
+| P10 (practice) | capacity / secure_supply | 1,932,492 | 1,328,927 | - | 0.655 | sellm negotiator v1.1 @2dadddb, kit runner, no LLM | 2 |
+| P11 (practice) | quality / quality_first | 817,578 | 722,500 | 894,383 | 0.710 | kit llm, gpt-6.1-sol | 2 |
+| P18 (practice) | raw_material / leverage | 295,173 | 222,651 | 301,088 | 0.406 | sellm negotiator v1.1 @2dadddb, kit runner, no LLM | 2 |
 | D01 (sandbox) | price_increase / stabilise | 448,811 | 408,624 | - | 0.957 | probe h13-a | 56 |
 | D02 (sandbox) | rfq / leverage | 214,296 | 156,739 | 238,800 | 0.535 | ab nego-template @ebcdcd6+local | 17 |
 
-Mean of our best per practice case played: 61.5 (10 cases).
+Mean of our best per practice case played: 65.2 (10 cases).
 
 ## Every session
 
@@ -38,15 +38,25 @@ price would beat C_best, so the supplier would not give all of them at this pric
 |---|---|---|---|---|---|---|---|---|---|---|
 | P01 | 10-10 14:13 | kit naive | 0.583 | accepted | 5 | unit_price=135.4, effective_date=2026-11-01, payment_days=60 | 23,764 | 37,064 | -13,300 | [md](practice/P01/20261010-141339-a4159c31bf9b86d8.md) · [json](practice/P01/20261010-141339-a4159c31bf9b86d8.json) · [replay](https://arena.tacto.ai/replay/a4159c31bf9b86d8) |
 | P01 | 10-10 15:27 | kit llm, gpt-6.1-sol | 0.789 | accepted | 6 | unit_price=133.7, effective_date=2027-01-01, payment_days=14 | 11,995 | 32,551 | -20,556 | [md](practice/P01/20261010-152741-edd91daa7e17280b.md) · [json](practice/P01/20261010-152741-edd91daa7e17280b.json) · [replay](https://arena.tacto.ai/replay/edd91daa7e17280b) |
+| P01 | 10-10 20:32 | sellm negotiator v1.1 @2dadddb, kit runner, no LLM | 0.874 | accepted | 7 | unit_price=136.0, effective_date=2027-04-01, payment_days=30 | 7,170 | 14,353 | -7,183 | [md](practice/P01/20261010-203233-6254f7fbad799c3f.md) · [json](practice/P01/20261010-203233-6254f7fbad799c3f.json) · [replay](https://arena.tacto.ai/replay/6254f7fbad799c3f) |
 | P02 | 10-10 15:27 | kit llm, gpt-6.1-sol | 0.105 | accepted | 5 | unit_price=370.15, payment_days=30, index_clause=none | 42,371 | 30,155 | 12,216 | [md](practice/P02/20261010-152741-3c2bf69b85674a60.md) · [json](practice/P02/20261010-152741-3c2bf69b85674a60.json) · [replay](https://arena.tacto.ai/replay/3c2bf69b85674a60) |
+| P02 | 10-10 20:32 | sellm negotiator v1.1 @2dadddb, kit runner, no LLM | 0.183 | accepted | 5 | unit_price=369.55, payment_days=30, index_clause=none | 38,681 | 30,106 | 8,575 | [md](practice/P02/20261010-203234-e22ce1eafbf6625f.md) · [json](practice/P02/20261010-203234-e22ce1eafbf6625f.json) · [replay](https://arena.tacto.ai/replay/e22ce1eafbf6625f) |
 | P03 | 10-10 15:27 | kit llm, gpt-6.1-sol | 0.903 | accepted | 5 | unit_price=432.94, payment_days=90, contract_months=36, volume_per_year=4580 | 32,587 | 0 | 32,587 | [md](practice/P03/20261010-152741-4b469202363ab4c1.md) · [json](practice/P03/20261010-152741-4b469202363ab4c1.json) · [replay](https://arena.tacto.ai/replay/4b469202363ab4c1) |
+| P03 | 10-10 20:32 | sellm negotiator v1.1 @2dadddb, kit runner, no LLM | 0.855 | accepted | 7 | unit_price=429.0, payment_days=30, contract_months=24, volume_per_year=4580 | 48,914 | 52,395 | -3,482 | [md](practice/P03/20261010-203233-6ffde165101af3ac.md) · [json](practice/P03/20261010-203233-6ffde165101af3ac.json) · [replay](https://arena.tacto.ai/replay/6ffde165101af3ac) |
 | P04 | 10-10 15:27 | kit llm, gpt-6.1-sol | 0.810 | accepted | 4 | unit_price=4.91, payment_days=60, contract_months=24 | 441 | 1,309 | -869 | [md](practice/P04/20261010-152741-fff76670fe248a29.md) · [json](practice/P04/20261010-152741-fff76670fe248a29.json) · [replay](https://arena.tacto.ai/replay/fff76670fe248a29) |
+| P04 | 10-10 20:32 | sellm negotiator v1.1 @2dadddb, kit runner, no LLM | 0.000 | accepted | 4 | unit_price=4.96, payment_days=30, contract_months=12 | 2,317 | 1,323 | 994 | [md](practice/P04/20261010-203233-e654772059edf691.md) · [json](practice/P04/20261010-203233-e654772059edf691.json) · [replay](https://arena.tacto.ai/replay/e654772059edf691) |
 | P05 | 10-10 15:27 | kit llm, gpt-6.1-sol | 0.676 | accepted | 12 | unit_price=29.5, payment_days=30, lead_time_days=35 | 26,592 | 3,304 | 23,288 | [md](practice/P05/20261010-152741-5f15d1920cec3f32.md) · [json](practice/P05/20261010-152741-5f15d1920cec3f32.json) · [replay](https://arena.tacto.ai/replay/5f15d1920cec3f32) |
+| P05 | 10-10 20:32 | sellm negotiator v1.1 @2dadddb, kit runner, no LLM | 0.769 | accepted | 12 | unit_price=28.5, payment_days=14, lead_time_days=28 | 18,988 | 4,043 | 14,944 | [md](practice/P05/20261010-203233-844427004b8d7468.md) · [json](practice/P05/20261010-203233-844427004b8d7468.json) · [replay](https://arena.tacto.ai/replay/844427004b8d7468) |
 | P07 | 10-10 15:27 | kit llm, gpt-6.1-sol | 0.779 | accepted | 5 | unit_price=5.36, payment_days=90, contract_months=24 | 20,243 | 0 | 20,243 | [md](practice/P07/20261010-152742-b6759d5e9b760a5b.md) · [json](practice/P07/20261010-152742-b6759d5e9b760a5b.json) · [replay](https://arena.tacto.ai/replay/b6759d5e9b760a5b) |
+| P07 | 10-10 20:32 | sellm negotiator v1.1 @2dadddb, kit runner, no LLM | 0.720 | accepted | 4 | unit_price=5.38, payment_days=30, contract_months=24 | 25,739 | 4,304 | 21,435 | [md](practice/P07/20261010-203236-5072746cc7be312d.md) · [json](practice/P07/20261010-203236-5072746cc7be312d.json) · [replay](https://arena.tacto.ai/replay/5072746cc7be312d) |
 | P08 | 10-10 15:27 | kit llm, gpt-6.1-sol | 0.433 | accepted | 6 | unit_price=5.54, index_clause=AS-14404 45% db5.0, payment_days=60, contract_months=36 | 99,528 | 16,456 | 83,072 | [md](practice/P08/20261010-152742-a87c247a68873a71.md) · [json](practice/P08/20261010-152742-a87c247a68873a71.json) · [replay](https://arena.tacto.ai/replay/a87c247a68873a71) |
+| P08 | 10-10 20:32 | sellm negotiator v1.1 @2dadddb, kit runner, no LLM | 0.152 | accepted | 4 | unit_price=5.77, index_clause=none, payment_days=30, contract_months=12 | 148,857 | 22,468 | 126,389 | [md](practice/P08/20261010-203236-63971c870bbbf17d.md) · [json](practice/P08/20261010-203236-63971c870bbbf17d.json) · [replay](https://arena.tacto.ai/replay/63971c870bbbf17d) |
 | P10 | 10-10 15:27 | kit llm, gpt-6.1-sol | 0.570 | accepted | 3 | unit_price=33.6, volume_per_year=23400, contract_months=36, lead_time_days=42 | 259,372 | 0 | 259,372 | [md](practice/P10/20261010-152742-4654ba8d94f5ea9e.md) · [json](practice/P10/20261010-152742-4654ba8d94f5ea9e.json) · [replay](https://arena.tacto.ai/replay/4654ba8d94f5ea9e) |
+| P10 | 10-10 20:32 | sellm negotiator v1.1 @2dadddb, kit runner, no LLM | 0.655 | accepted | 3 | unit_price=31.8, volume_per_year=23400, contract_months=24, lead_time_days=56 | 208,170 | 33,600 | 174,570 | [md](practice/P10/20261010-203236-4c7970d2ee181e31.md) · [json](practice/P10/20261010-203236-4c7970d2ee181e31.json) · [replay](https://arena.tacto.ai/replay/4c7970d2ee181e31) |
 | P11 | 10-10 15:27 | kit llm, gpt-6.1-sol | 0.710 | accepted | 6 | unit_price=45.5, ppm_commitment=300, chargeback_eur_per_complaint=0.0 | 27,582 | 2,146 | 25,436 | [md](practice/P11/20261010-152742-878779258c7d07cc.md) · [json](practice/P11/20261010-152742-878779258c7d07cc.json) · [replay](https://arena.tacto.ai/replay/878779258c7d07cc) |
+| P11 | 10-10 20:33 | sellm negotiator v1.1 @2dadddb, kit runner, no LLM | 0.710 | accepted | 7 | unit_price=45.5, ppm_commitment=300, chargeback_eur_per_complaint=0.0 | 27,582 | 2,146 | 25,436 | [md](practice/P11/20261010-203331-6e381ccb4a7215cc.md) · [json](practice/P11/20261010-203331-6e381ccb4a7215cc.json) · [replay](https://arena.tacto.ai/replay/6e381ccb4a7215cc) |
 | P18 | 10-10 15:27 | kit llm, gpt-6.1-sol | 0.377 | accepted | 4 | unit_price=5.6, index_clause=AS-14404 45% db5.0, payment_days=60, contract_months=24 | 45,178 | 4,159 | 41,019 | [md](practice/P18/20261010-152742-ed5f9251a6dce645.md) · [json](practice/P18/20261010-152742-ed5f9251a6dce645.json) · [replay](https://arena.tacto.ai/replay/ed5f9251a6dce645) |
+| P18 | 10-10 20:33 | sellm negotiator v1.1 @2dadddb, kit runner, no LLM | 0.406 | accepted | 5 | unit_price=5.4, index_clause=AS-14404 45% db0.0, payment_days=30, contract_months=24 | 43,078 | 11,476 | 31,602 | [md](practice/P18/20261010-203329-17cc1fd397091bdf.md) · [json](practice/P18/20261010-203329-17cc1fd397091bdf.json) · [replay](https://arena.tacto.ai/replay/17cc1fd397091bdf) |
 | D01 | 10-10 14:49 | kit naive | 0.200 | accepted | 5 | unit_price=50.9, payment_days=30, contract_months=12, effective_date=2026-12-01 | 32,133 | 27,007 | 5,126 | [md](sandbox/D01/20261010-144953-b395491ef29942ff.md) · [json](sandbox/D01/20261010-144953-b395491ef29942ff.json) · [replay](https://arena.tacto.ai/replay/b395491ef29942ff) |
 | D01 | 10-10 14:59 | kit llm, gpt-6.1-sol | 0.786 | accepted | 5 | unit_price=50.8, payment_days=30, contract_months=24, effective_date=2027-02-01 | 8,581 | 4,122 | 4,459 | [md](sandbox/D01/20261010-145942-bb64095ce8935924.md) · [json](sandbox/D01/20261010-145942-bb64095ce8935924.json) · [replay](https://arena.tacto.ai/replay/bb64095ce8935924) |
 | D01 | 10-10 15:42 | probe h1a | 0.676 | accepted | 3 | unit_price=51.4, payment_days=30, contract_months=24, effective_date=2027-02-01 | 13,002 | 4,539 | 8,463 | [md](sandbox/D01/20261010-154240-b0dcdcde9396a38a.md) · [json](sandbox/D01/20261010-154240-b0dcdcde9396a38a.json) · [replay](https://arena.tacto.ai/replay/b0dcdcde9396a38a) |
