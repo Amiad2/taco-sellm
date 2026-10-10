@@ -525,3 +525,59 @@ def test_the_overlay_is_fast(real_pkg):
         calls.append(time.perf_counter() - t0)
     calls.sort()
     assert calls[int(len(calls) * 0.95) - 1] < 0.1
+
+
+def test_citable_for_is_called_once_group_c_ships_it(monkeypatch, fixture_pkg):
+    import sys
+    import types
+
+    entry = {
+        "ids": ["cost:A"],
+        "kind": "cost",
+        "figure": 101.0,
+        "unit": "EUR",
+        "about": "part:A",
+        "statement": "Our estimate cost:A is EUR 101.0.",
+        "helps_buyer": True,
+        "private": False,
+    }
+    module = types.ModuleType("sellm.claims")
+    module.citable_for = lambda pkg, sid, parts: [entry] if sid == "sup:1" else []
+    monkeypatch.setitem(sys.modules, "sellm.claims", module)
+    assert build_one(Source(fixture_pkg), "sup:1")["citable"] == [entry]
+    assert dossier("sup:1", ["part:A"], package=fixture_pkg)["citable"] == [entry]
+
+    def broken(pkg, sid, parts):
+        raise RuntimeError("boom")
+
+    module.citable_for = broken
+    d = build_one(Source(fixture_pkg), "sup:1")
+    assert d["citable"] == [] and any("citable_for failed" in w for w in d["warnings"]) and validate(d) == []
+
+
+def test_verify_checks_pass_on_the_fixture(tmp_path, fixture_pkg):
+    from sellm.intel import verify
+
+    out = tmp_path / "dossiers"
+    write_all(build_all(fixture_pkg), out)
+    data = str(fixture_pkg.root)
+    for check in (
+        verify.v2_schema,
+        verify.v3_determinism,
+        verify.v4_completeness,
+        verify.v5_numbers,
+        verify.v6_citations,
+        verify.v9_sunday,
+    ):
+        ok, detail = check(data, out)
+        assert ok, (check.__name__, detail)
+    (out / "1.json").write_text((out / "1.json").read_text().replace('"price": 102.0', '"price": 99.0'))
+    assert not verify.v5_numbers(data, out)[0] and not verify.v3_determinism(data, out)[0]
+
+
+@pytest.mark.parametrize("case_id, lab_floor", [("P01", 129.91), ("P02", 363.96), ("P03", 397.46), ("P10", 25.64)])
+def test_golden_floors_match_the_lab_within_ten_percent(real_pkg, case_id, lab_floor):
+    case = json.loads((CASES / f"{case_id}.json").read_text(encoding="utf-8"))
+    d = dossier(case["suppliers"][0], case["parts"], case=case, package=real_pkg)
+    value = d["parts"][case["parts"][0]]["floor_estimate"]["value"]
+    assert abs(lab_floor - value) / value <= 0.10, (value, lab_floor)
