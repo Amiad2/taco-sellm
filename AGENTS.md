@@ -55,6 +55,8 @@ It is built in, so it cannot be forgotten:
 - `scripts/pull-runs` and `experiments/sandbox_probes.py` do the same.
 - **Any new script or runner that opens arena sessions must call
   `arena_kit.cli.pull_first()` first**, or `scripts/pull-first` from a shell.
+- On a branch it pulls that branch only (`origin/<branch>`); `main` reaches your branch through
+  `git merge main` (section 4).
 - Read its one-line report: it names the commit the run uses and how many of your own commits and
   files are not pushed. A run on unpushed code cannot be reproduced by anyone else, so push first
   when the result matters.
@@ -121,8 +123,17 @@ Each file has one job. Do not mix them:
 
 ## 4. Git
 
-- Work on `main`. Small commits. `scripts/sync` before you start and after every commit.
-- Use a branch only for an experiment that would break `main` for hours, and say so in `docs/STATUS.md`.
+- **Each team member builds an independent version of the agent on an own branch** (decided Sun
+  01:20; Omar: `omars_branch`), listed in `docs/STATUS.md` under Decisions. The team picks the best
+  version by its measured results (`<branch>@<hash>`, section 2) and merges it into `main` **before
+  our freeze at 11:00** (official freeze 12:00): the Live Final runs `main`.
+- Your agent code and its experiments live on your branch. What the whole team reads stays on
+  `main`: `AGENTS.md`, `docs/` (CONTEXT, STATUS, PLAN, LEARNINGS, LOG) and `runs/`. Change those on
+  `main` (`git switch main`, `scripts/sync`, change, commit, `scripts/sync`, `git switch <your
+  branch>`), and bring `main` into your branch regularly with `git merge main`.
+- `scripts/sync` and `scripts/pull-first` work on the branch you are on: they pull and push
+  `origin/<that branch>`, not `main`. Push a new branch once with `git push -u origin <branch>`.
+- Small commits. `scripts/sync` before you start and after every commit.
 - Never force-push, never rewrite pushed history, never `git reset --hard` over work you did not write.
 - On a rebase conflict: keep both sides' intent, run the tests, continue. `docs/LOG.md` merges by
   itself (`merge=union` in `.gitattributes`); if entries end up interleaved, leave them.

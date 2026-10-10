@@ -65,7 +65,7 @@ Weakest: P02 0.105, P18 0.377, P08 0.433, P10 0.570. Analysis and hypotheses: `r
 ## Decisions
 
 - **Groups: A Jonathan, B Omar, C Amiad** (Sat 20:50). **The Live Final runs on Jonathan's machine** (MacBook; decided by Amiad Sat 20:45): the runner and the pre-flight must work on macOS, Jonathan starts the final.
-- Work on `main`, small commits, `scripts/sync` after each one (`AGENTS.md`).
+- **Each member builds an own version on an own branch** (Sun 01:20, asked by Omar for the team): Omar `omars_branch`; Jonathan and Amiad add theirs here. Shared files (`AGENTS.md`, `docs/`, `runs/`) stay on `main`; the best version, chosen by its measured results (`<branch>@<hash>`), is merged into `main` before 11:00 for the final (`AGENTS.md` section 4).
 - **Pull before every run.** `arena play`, `arena run`, `scripts/pull-runs` and the probe scripts call `scripts/pull-first` themselves and restart on the new code; new runners must call `arena_kit.cli.pull_first()` (`AGENTS.md` section 2).
 - Docs and logs are written in English: the jury and tum.ai read the repo.
 - Our code lives in `sellm/` (lab in `sellm/lab/`, the agent's entry point `sellm/agent.py`); `arena_kit/` stays the kit except for `pull_first` and the `--agent sellm` registration.
