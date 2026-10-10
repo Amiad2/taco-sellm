@@ -23,6 +23,11 @@ Knobs (all off by default, so `Persistent()` plays exactly like the negotiator):
                  `estimate_error` (5 %) would give
 - `creep`        a fraction: no step closes more than this share of the gap to its price (None: the
                  negotiator's pace)
+- `zone`         a fraction: once the supplier repeats its offer (`stall_after` times) we ask this
+                 share below it at once. Suppliers took asks about 1 % below their standing offer
+                 (P01 1.03 %, P11 0.90 %, P18 1.8 %; P11 not 1.08 %), and one that stalls says
+                 `final_offer` a few messages later (P04 after 3, P11 after 7) - creeping towards it
+                 then loses the race (P11: 0.710 against 0.778)
 """
 
 import math
@@ -31,7 +36,7 @@ from arena_kit.cost import complete_offer
 
 from .negotiator import EPS, Negotiator, _key
 
-DEFAULTS = dict(past_target=False, estimate_error=0.05, creep=None)
+DEFAULTS = dict(past_target=False, estimate_error=0.05, creep=None, zone=None, stall_after=1)
 
 
 class Persistent(Negotiator):
@@ -43,8 +48,12 @@ class Persistent(Negotiator):
 
     def plan(self, case, v, rival=math.inf):
         plan = super().plan(case, v, rival)
-        if self.e["creep"] and v.asks:
-            plan = self.crept(case, v, plan)
+        if v.asks and v.status == "open":
+            stalled = self.e["zone"] and self.stalls(case, v, plan["structure"]) >= self.e["stall_after"]
+            if stalled:
+                plan = self.zoned(case, v, plan)
+            elif self.e["creep"]:
+                plan = self.crept(case, v, plan)
         if self.e["past_target"] and plan["enough"]:
             plan = self.past(case, v, plan)
         return plan
@@ -74,6 +83,35 @@ class Persistent(Negotiator):
         return plan
 
     # -- pace ------------------------------------------------------------------------------------
+    def stalls(self, case, v, s):
+        """How many times in a row it has repeated its price for the structure we ask on."""
+        prices = []
+        for m in v.theirs:
+            sheets = m.get("term_sheets") or []
+            if not sheets:
+                continue
+            terms = v.filled(sheets[0]["terms"])
+            same = {f: x for f, x in terms.items() if f != "unit_price"} == s
+            prices.append(terms.get("unit_price") if same else None)
+        count = 0
+        while len(prices) - count >= 2 and prices[-1 - count] is not None and prices[-2 - count] is not None:
+            if prices[-2 - count] - prices[-1 - count] > 0.005:
+                break
+            count += 1
+        return count
+
+    def zoned(self, case, v, plan):
+        """It has stopped moving: ask just below its offer now, where suppliers have said yes at once."""
+        s = plan["structure"]
+        last = complete_offer(case, v.asks[-1])
+        quoted = self.quoted(case, v).get(_key(s))
+        if quoted is None or {f: x for f, x in last.items() if f != "unit_price"} != s:
+            return plan
+        price = round(quoted * (1 - self.e["zone"]), 2)
+        if price <= last["unit_price"] + EPS:
+            return plan  # we are in the zone already: the negotiator's rule decides (step or take its offer)
+        return {**plan, "sheet": complete_offer(case, {**s, "unit_price": price}), "capped": False}
+
     def crept(self, case, v, plan):
         """The same ask, but no further up than `creep` of the way to the price it quotes for this
         structure. With nothing visible left to give, the plan says `capped` as the negotiator's does."""
