@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-10 17:45 CEST by Amiad (Claude Code).
+Last updated: 2026-10-10 18:30 CEST by Omar (Claude Code).
 
 ## Now
 
@@ -27,10 +27,13 @@ threads out in the lab as in the sandbox, and a stale offer ID after a timeout i
 it. Before any arena run of `--agent sellm`: `scripts/lab stress sellm.agent:make_agent` must PASS.
 Then confirm the lab's best knobs in the free sandbox (D01, D02) before spending practice quota.
 
-The plan is in `docs/PLAN.md`: three workstreams (A numbers and strategy, B data and arguments,
-C arena, measurement and final), a timeline and the quota budget. It is **proposed, not yet agreed**.
+**Decided Sat 18:30** (`docs/PLAN.md`): three groups with their tasks, priorities and the skills
+they need (**section 3**: A negotiation, B data and arguments, C runner, measurement and final),
+and the **dossier and mini-dossier schema** (**section 10**: fields, frozen core fields, rules,
+signal vocabulary). Build against section 10; add fields freely, rename core fields only by decision.
 
-1. Team: read `docs/PLAN.md`, agree or change it, and each claim a workstream in the table above.
+1. Each person claims one group in the table above. B's first deliverable is a stub `dossier()`
+   returning the schema, so A can code against it.
 2. Baseline and the sandbox probes H1-H3 are done (`runs/BASELINE.md`, `experiments/RESULTS.md`). Next probes: H12-H15 in `experiments/RESULTS.md` section 6 (H12, H13, H15 are free), then H4-H7 on practice cases, one session each.
 3. Then follow the timeline in `docs/PLAN.md` section 4.
 
@@ -51,6 +54,7 @@ Weakest: P02 0.105, P18 0.377, P08 0.433, P10 0.570. Analysis and hypotheses: `r
 
 - Which machine runs the Live Final, and is it a cloud VM or a laptop?
 - Which LLM and whose key for the final; is there budget for an hour of parallel play?
-- Who takes workstream A, B and C?
+- Who takes group A, B and C (`docs/PLAN.md` section 3)?
+- Which agent plays the final? Proposed: `sellm` replaces `llm` only if its mean is higher in lab, sandbox and one full practice run including the hold-out cases P04, P10, P18.
 - How do the final score and the jury score combine for places 1-3? Ask at the Tacto desk.
 - When does Tacto go offline on Saturday night?

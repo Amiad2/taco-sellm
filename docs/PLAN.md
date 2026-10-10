@@ -1,8 +1,9 @@
 # PLAN - how three people get the best agent running by Sunday 12:00
 
-Status: **proposed Sat 15:10 by Jonathan (with Claude Code), not yet agreed by the team.** Owners
-are open: claim a workstream in `docs/STATUS.md`. Change this file when the team changes the plan,
-and log the change as a `[decision]`.
+Status: proposed Sat 15:10 by Jonathan (with Claude Code). **Decided Sat 18:30 (Omar): the three
+groups and their tasks (section 3) and the dossier schema (section 10).** Owners are open: claim a
+group in `docs/STATUS.md`. Change this file when the team changes the plan, and log the change as a
+`[decision]`.
 
 ## 1. Where the points are
 
@@ -25,47 +26,107 @@ We do it in code first.
 ## 2. The agent we build
 
 Four parts with fixed interfaces, so three people can build in parallel without editing the same
-files. Proposed location: a new package `sellm/` next to `arena_kit/` (the kit stays untouched
-except for registering our agent in `cli.py`; add `sellm` to the wheel packages in `pyproject.toml`).
+files. Our code lives in `sellm/` next to `arena_kit/`; the kit is untouched except for
+`pull_first` and the `--agent sellm` registration, and `sellm` is in the wheel.
 
 | Part | Does | Interface |
 |---|---|---|
-| **Calculator** `sellm/calc.py` | For a case and a standing offer: enumerate term sheets over `term_options`, price each with `total_cost`, say what each lever is worth to us, guard must-haves and coverage, set a target and a walk-away value, estimate the supplier's margin for the relationship term | `plan(case, threads, dossier) -> {sheets ranked by C, lever values, target, floor estimate, walk_away}` |
-| **Intel** `sellm/intel.py`, `sellm/claims.py` | Built once for **all 46 detailed suppliers**, cached as files: who they are (family firm, group, job shop, monopolist), cash position, capacity, quality record, how past negotiations ended, what their notes and letters say they care about. Plus an argument bank per supplier and part with figures computed in code and checked against `facts.json` | `dossier(supplier_id, part_ids) -> text + fields`; `arguments(case, supplier_id) -> [{sentence, ids}]` |
-| **Negotiator** `sellm/agent.py` | The round plan and the e-mail. Code decides the term sheets and which arguments are allowed; the LLM chooses among them and writes. Falls back to the calculator's move, never to the naive agent | `decide(case, threads) -> {supplier_id, message}` |
+| **Calculator** `Calculator` in `sellm/lab/strategies.py` (exists, lab-tuned) | For a case and a standing offer: enumerate term sheets over `term_options`, price each with `total_cost`, say what each lever is worth to us, guard must-haves and coverage, set a target and a walk-away value, estimate the supplier's margin for the relationship term | `decide(case, threads)`; `plan(case, sid, events)` per thread |
+| **Intel** `sellm/intel.py`, `sellm/claims.py` | Built once for **all 46 detailed suppliers**, cached as files, plus a case overlay for any supplier at session open (section 10). Plus an argument bank per supplier and part with figures computed in code and checked against `facts.json` | `dossier(supplier_id, part_ids, case, opening) -> dict` (section 10); `arguments(case, supplier_id) -> [{sentence, ids}]` |
+| **Negotiator** behind `make_agent` in `sellm/agent.py` (registered as `--agent sellm`; today it returns the Calculator) | The round plan and the e-mail. Code decides the term sheets and which arguments are allowed; the LLM chooses among them and writes. Falls back to the calculator's move, never to the naive agent | `make_agent(package) -> agent with decide(case, threads) -> {supplier_id, message}` |
 | **Runner and measurement** `sellm/runner.py`, `scripts/pull-runs` | All threads of an RFQ in parallel, a round budget from the time left in the wave, logs to a file, resumes after a crash. Saves every session of the team (transcript, trace, breakdown) to `runs/` so nobody replays a case to see what happened | `uv run arena run ... --agent sellm` |
 
-## 3. Workstreams (one per person, each with its own agent sessions)
+## 3. Groups and their tasks (decided Sat 18:30)
 
-**A - Numbers and strategy** (calculator + negotiator). Read `experiments/RESULTS.md` first: it fixes
-the concession policy (open low, about five large steps, nothing after `final_offer`) and how to
-take a supplier's second package. First deliverable: `plan()` reproduces the
-P01 and D01 tables in `docs/LEARNINGS.md` and proposes the first two term sheets for every hosted
-case. Then the round policy: open with a question and two or three sheets that probe what the
-supplier values, trade one lever per round, never accept before the target unless the status is
-`final_offer`, close on the best standing sheet when time or rounds run out.
+Three groups, one person each, each with its own agent sessions. Claim one in `docs/STATUS.md`.
+Each group owns its files; the groups meet only at three interfaces: `make_agent`
+(`sellm/agent.py`), `dossier()` and `arguments()` (section 10).
 
-**B - Data and arguments** (intel + claims). First deliverable: dossiers for the 22 practice
-suppliers, checked by hand against two replays; then all 46. The 24 detailed suppliers that appear
-in no practice case have about four documents each and are the likely pool for the hidden cases.
-`negotiation_history` carries notes such as "accepted below full cost to keep the volume"
-(Brandlhuber, the P01 part). Sunday 08:00: rebuild with the new release, it must be one command.
+**Priorities**, by effect on the final score:
 
-**C - Arena, measurement, final** (runner + runs + submission). The RFQ runner needs one loop per
-thread and must accept or hold a thread at `final_offer` inside its 60 seconds
-(`experiments/RESULTS.md` section 4; a prototype is `h3_par` in `experiments/sandbox_probes.py`). First deliverable: the baseline
-below and `scripts/pull-runs`. Then: RFQ threads in parallel, the 8-minute budget, the final
-machine, the rehearsal, the README run instructions, the approach text and the slides.
+1. **Never lose a case** (C). Every case weighs the same; a crash, a timeout or the wave cap scores
+   no deal. P05 twin in the lab: threads one at a time 0.04-0.13, one loop per thread 0.12-0.48.
+2. **Structure of the deal in code** (A). D01 went from 0.20 to 0.79 on contract length and start
+   date alone; on P01 the April start is worth more than EUR 2.40 of price.
+3. **Price towards the floor** (A, with B's floor estimate). The kit LLM agent closed 1-31 % above
+   the floor; the room is largest in P10, P18, P08.
+4. **Tone and wording** (A). FAQ P01 recording: ultimatum instead of appreciation, about EUR 13,700
+   a year worse.
+5. **Checked arguments** (B). Moved the supplier in P01, P03, P11, D02, not in P02, P04, P10, P18; a
+   wrong figure is `contradicted` and costs trust.
+6. **Depth of the dossier** (B). Indirect: it tells A which trade the supplier wants, e.g. payment
+   days for a supplier short of cash.
 
-Integration points: A needs B's dossier format by Sat 17:00 (agree the fields first, fill them
-later). C runs every new agent version and reports per case what the cost breakdown says we lost.
+**A - Negotiation** (`sellm/agent.py`; the Calculator in `sellm/lab/strategies.py` together with
+the lab's owner). Read `experiments/RESULTS.md` section 5 first.
+
+1. The negotiator behind `make_agent`: code decides term sheets, target, walk-away and which
+   arguments are allowed; the LLM chooses among them, writes the e-mail and reads the reply
+   (questions such as "Which figures is that based on?", signals). It never writes a number or an
+   ID that code did not give it.
+2. Time budget per move: 15 s target, 40 s hard; after that the calculator's move is sent without
+   the LLM, and every fallback is logged.
+3. Levers beyond price: cover the horizon, start date, payment days; price every sheet the supplier
+   sends by C; take its second package by sending it back as our sheet.
+4. Use the dossier: `economics.cost_of_money` and `parts.<part>.floor_estimate` instead of the
+   global `guess_rate` and `floor_guess`; signals choose the trade (section 10); the relationship
+   term in `stabilise` and `secure_supply`.
+5. Test in this order: `scripts/lab stress sellm.agent:make_agent` PASS, lab tournament, sandbox
+   D01/D02, then one practice case per written hypothesis.
+
+Needs: a feel for procurement and negotiation, prompt engineering, Python, the cost function
+(`docs/CONTEXT.md` section 5).
+
+**B - Data and arguments** (`sellm/intel.py`, `sellm/claims.py`, `sellm/dossiers/`).
+
+0. First, within the hour: a stub `dossier()` that returns the section 10 schema with empty
+   values, so A can code against it.
+1. The dossier builder: one command, all 46 detailed suppliers, exactly the schema of section 10,
+   deterministic, no LLM, no network.
+2. The case overlay (mini-dossier) at session open from the case file and the opening e-mails;
+   never raises for a supplier we have no data on.
+3. The argument bank `arguments(case, supplier_id)`: sentences built from `citable`, each checked
+   with `sellm/lab/claims.py` before it is offered; at most 3 per e-mail, each ID once per case,
+   a letter and its contract as one argument, rival quotes marked private.
+4. Research: which data unlock P08, P18, P10 (`C_best` 6-19 % below the current price), and which
+   signals go with "it holds and we took it into account".
+5. Sunday 08:00: `uv run arena data`, rebuild, commit; read the new letters, news and memo.
+
+Needs: SQL, careful reading of texts, procurement sense, precision (one wrong figure costs trust).
+
+**C - Runner, measurement, final** (`sellm/runner.py`, `scripts/pull-runs`, README, slides).
+
+1. RFQ runner: one loop per thread; re-read the thread before every accept (after a timeout the
+   offer ID changes, and the old ID is a 422 that crashes the kit's `play()` and loses the case);
+   accept or hold a thread at `final_offer` inside its 60 s. Prototypes: `play_lab(mode='parallel')`
+   in the lab, `h3_par` in `experiments/sandbox_probes.py`.
+2. Waves: all cases of a wave in parallel (at most 10 sessions), a round budget from
+   `seconds_left`, close 90 s before the cap, resume after a crash, log to a file, count fallbacks.
+3. Measurement: every agent version through lab, sandbox and one full practice run;
+   `scripts/pull-runs`; keep the quota (at least 40 for Sunday).
+4. Final machine (Tacto advises a cloud VM), LLM key and rate limits for an hour of 10 parallel
+   cases; pre-flight 09:00, rehearsal 10:00.
+5. Submission: README, commit hash, approach text, slides (walk through one replay).
+
+Needs: Python concurrency (threads, asyncio), robust error handling, ops (VM, logs), organisation;
+for the slides, presenting.
+
+**Order and dependencies.** A and B depend only on section 10, not on each other's progress. C is
+independent of both: the runner plays any `make_agent`. Integration at Sat 20:30 (section 4).
+
+**Still to agree as a team** (proposed defaults in brackets): which agent plays the final (`sellm`
+replaces `llm` only if its mean is higher in lab, sandbox and one full practice run including the
+hold-out cases P04, P10, P18); LLM model, whose key, budget; the final machine and who is on duty
+(nobody else uses the key during the final); quota per group; default policies (accept a
+`final_offer`, warm tone and no ultimatum, never close worse than the cheapest opening, walk away
+only to a better alternative).
 
 ## 4. Timeline (CEST)
 
 | When | Milestone |
 |---|---|
 | Sat 15:30 | **Baseline** (done, see `runs/README.md`): kit LLM agent on all 10 hosted cases and on D02. We then know `C_open` and `C_best` of every case and can score any term sheet offline |
-| Sat 17:00 | Interfaces agreed; `runs/` in the repo; lever table for all 10 cases |
+| Sat 18:30 | Groups and the dossier schema decided (sections 3 and 10); `runs/` in the repo; `--agent sellm` registered |
 | Sat 19:00 | Each part works alone: calculator offline, dossiers for the practice suppliers, runner on `arena-sim` |
 | Sat 20:30 | Agent v1 integrated, plays D01 and D02 without errors; **full practice run 1** |
 | Sat 23:00 | v2 after reading the replays; **full practice run 2**. Slides skeleton. Then sleep |
@@ -130,9 +191,10 @@ and notes together are 46 KB; everything written about one supplier is at most a
 reading it by `supplier_id` takes 0.1 ms. Similarity search would add a dependency, latency and
 wrong hits and solve a problem we do not have. Instead:
 
-- **Dossier cache**: one command builds a file per supplier (and per part) from SQL plus the full
-  text of its documents, with an LLM summary written offline. Runtime is a dictionary lookup by the
-  case's `suppliers` and `parts`. Sunday 08:00: `uv run arena data`, run the command again, commit.
+- **Dossier cache**: one command builds a file per supplier from SQL plus the full text of its
+  documents; no LLM summary (the texts are short enough to pass whole). Runtime is a dictionary
+  lookup by the case's `suppliers` and `parts`. Sunday 08:00: `uv run arena data`, run the command
+  again, commit. Schema: section 10.
 - **Optimal values are computed, never retrieved.** The best term sheet depends on the case's
   rates, options and must-haves, which are new in every hidden case. The calculator derives it from
   the case file in milliseconds. Storing "what worked on P01" and looking it up is overfitting.
@@ -168,3 +230,116 @@ after which the calculator's move is sent without the LLM. Nothing in a move may
   It replaces practice sessions only for screening; confirmation still happens in sandbox and practice.
 - No tuning on a single practice case until it scores 1.0: the final cases are different ones.
 - No changes to `arena_kit/` beyond registering our agent, so upstream fixes stay easy to take.
+
+## 10. The dossier and the mini-dossier (schema decided Sat 18:30)
+
+One schema for both. The **dossier** is built offline for each of the 46 detailed suppliers. The
+**case overlay** is added at session open from the case file and the opening e-mails; for a
+supplier we have no data on it is the whole dossier (the mini-dossier). Fixed now so A and B build
+against the same thing. A better data point found later costs little: add the field, run the
+builder again.
+
+**Change rule.** Fields marked `*` are read by code (calculator, argument bank): their names and
+meaning are frozen for `schema_version` 1. Any field may be added at any time. Renaming or removing
+a `*` field needs a `schema_version` bump and a `[decision]` in the log.
+
+**Interface** (`sellm/intel.py`):
+
+- `uv run python -m sellm.intel build` writes `sellm/dossiers/<supplier number>.json` for every
+  detailed supplier plus `index.json`. Deterministic (sorted keys, no LLM, no network), under 10 s,
+  **committed**, so the final machine needs no rebuild. Rebuild and commit after the Sunday release.
+- `dossier(supplier_id, part_ids, case=None, opening=None) -> dict`: the stored dossier restricted
+  to `part_ids`, with the case overlay merged in. Never raises; for an unknown supplier it returns
+  the overlay alone (`coverage: "case_only"`).
+- Units as in the data: prices per the part's `price_unit`; yearly rates as fractions (0.09);
+  percentages as numbers (9.5).
+
+**Fields** (`*` = read by code, frozen)
+
+| Field | Content | Source |
+|---|---|---|
+| `schema_version`*, `supplier_id`*, `coverage`* | `1`; `sup:...`; `full` (detailed supplier), `thin` (vendor master and spend only), `case_only` | |
+| `built_from` | package version, Sunday release merged, case ID of the overlay | |
+| `identity` | name, country, category, legal_form, founded, owner_type, group_parent, staff, turnover_eur (or band), equity_ratio_pct, credit_index now and 12 months ago, vda63_grade, abc_class, supplier_since | `suppliers`, `supplier_intel` |
+| `standard_terms`* | payment_days, skonto_days, skonto_pct, incoterm, lead_time_days | `suppliers`; in a case the quote PDF wins |
+| `economics.cost_of_money`* | its yearly cost of money, and `cost_of_money_basis` (text) | rule below |
+| `economics.cash_pressure`* | `low`, `medium`, `high` | rule below |
+| `economics.archetype`* | `family`, `group`, `job_shop`, `monopolist`, `trader`, `other` (the lab's names) | rule below |
+| `economics.our_share_of_turnover_pct` | our spend in the last fiscal year / its turnover: how much it needs us | `spend_cube`, `supplier_intel` |
+| `economics.our_spend_eur` | per fiscal year | `spend_cube` |
+| `economics.we_pay_late_days` | mean days we paid after the due date (paying on time is a cheap gift) | `invoices` |
+| `signals`* | list of `{kind, strength 1-3, evidence: [IDs], excerpt}`, `kind` from the table below | documents, news (not `noise`), quote remarks, history notes; in a case also briefing, trigger doc, quote e-mail and PDF remarks |
+| `contract` | id, valid_to, notice_days, price_basis, payment_days, incoterm, index clauses `{id, series, material_share, deadband_pct}` | `contracts`, `contract_clauses` |
+| `parts.<part>` | description, category, material_group, uom, `price_unit`*, quota_pct, tooling_owner, planned_lead_time_days | `parts`, `sourcing` |
+| `parts.<part>.current_price`* | price, valid_from | `price_conditions` |
+| `parts.<part>.history` | per event: date, type, asked_pct, settled_pct, note; plus `mean_give_pct` (asked minus settled) and `below_full_cost` | `negotiation_history` |
+| `parts.<part>.should_cost`* | id, unit_cost, plant_specific, cost_base, confidence_pct, material/conversion/overhead EUR | `should_cost`, matched on part **and** supplier (rule below) |
+| `parts.<part>.floor_estimate`* | value, low, high, basis | rule below |
+| `parts.<part>.drivers` | per cost-driver series: weight, last month, change over 6 and 12 months, the two `idx:` IDs of each window | `cost_drivers`, `index_values` |
+| `parts.<part>.forecast` | latest `fc:` ID, volume next 12 months, change_pct | `forecasts` |
+| `parts.<part>.alternatives`* | other approved suppliers and rival quotes `{supplier_id, quote_id, unit_price, date}`. **Buyer-private**: never in an e-mail unless the strategy cites it on purpose | `sourcing`, `quotes` |
+| `performance` | latest scorecard (id, otd_pct, ppm, colour), mean of the last 4 quarters with their IDs, trend, supplier-caused complaints in 12 months, overdue 8D | `scorecards`, `quality_notifications` |
+| `citable`* | list of `{ids, kind, figure, unit, about, statement, helps_buyer, private}`: every fact the argument bank may use, with the figure the arena checks (`docs/CONTEXT.md` section 7) | `facts.json`; in a case its `facts` and `refs` |
+| `documents` | id, date, kind, subject, author, full text | `documents`, `correspondence/` |
+| `news` | id, date, topic, headline, `noise` flag | `news` |
+| `profile_text` | at most 120 words, written from the fields by a template (no LLM) | |
+
+**Rules for the derived fields.** Initial rules; calibrate them in the lab and change them only in
+the builder.
+
+- `should_cost`: the row whose `supplier_id` is this supplier (`cost:310012-70110` for Brandlhuber,
+  not `cost:310012`, which is Wimbacher's plant); else the generic row without a supplier. Another
+  supplier's plant estimate is never this supplier's should-cost and is not cited to it.
+- `floor_estimate`: plant-specific should-cost, value = unit_cost, band = its `confidence_pct`
+  (floors came out within 3-5 % of it, `docs/LEARNINGS.md`); generic German should-cost times the
+  country factor (AT, CH 1.05; CZ, PL, HU 0.825; TR 0.75; CN 0.7), band 15 %; none: null, and the
+  calculator falls back to a share of the opening.
+- `cost_of_money`: with skonto terms, `skonto_pct / 100 * 360 / (payment_days - skonto_days)` (2 %
+  at 10 days instead of 30 is 0.36); else archetype `job_shop` or `cash_short` strength 2 or more:
+  0.25 (P05's Czech job shop measured about 0.35); else group 0.065 (P02, P08), family 0.09 (D01),
+  founder or private 0.10; plus 0.05 if the credit index is 300 or more or rose 20 points or more in
+  12 months.
+- `cash_pressure`: `high` with skonto terms or `cash_short` strength 2 or more; `medium` with an
+  equity ratio under 25 %, a credit index of 250 or more, or a rising credit index; else `low`.
+- `archetype`: `group` if the owner type is group; else `job_shop` if staff < 80 or cash pressure is
+  high; else `family` if family-owned; else `trader` for raw material; `monopolist` overrides when
+  `capacity_tight` or `list_price_fixed` is signalled and the part has no alternative; else `other`.
+- `citable`: only what the arena accepts (an `idx` pair is one series, at most 12 months apart,
+  ending within the last 12 months of the data). Every entry is checked with `sellm/lab/claims.py`
+  at build time: 0 `contradicted`. Facts that help the supplier (a rising index) stay in with
+  `helps_buyer: false`, so A knows what the supplier may cite.
+
+**Signal kinds** (`signals[].kind`, frozen vocabulary: add kinds, do not rename)
+
+| Kind | Evidence in the data | What it means for us |
+|---|---|---|
+| `cash_short` | asks to be paid faster, liquidity, "the bank", skonto terms, news `credit_downgrade`, `credit_watch`, `short_time_work`, low equity | trade faster payment for price; it values payment days at its high cost of money; do not squeeze its margin |
+| `wants_volume` | "focus on customers with volume", idle shop floor, news `free_capacity`, "accepted below full cost to keep the volume" | a longer contract, full-need coverage or a bundle buys price |
+| `capacity_tight` | news `allocation`, `full_order_book`, `big_order`, `chip_shortage` | secure volume and lead time first; price moves little |
+| `list_price_fixed` | "head-office directive", "list conditions" in quote remarks | do not fight the list price; move payment, start date, freight, chargeback |
+| `material_hedged` | "material covered until ..." | index arguments are weak until then; ask for a later start or a fixed price |
+| `partnership` | owner visits, past favours ("kept supplying at the old price"), a long relationship | appreciation and reciprocity; never an ultimatum |
+| `margin_floor` | "cannot sign anything that lowers our margin" | the price is near its floor; trade terms, not price |
+| `quality_problem` | red or amber scorecard, ppm above target, overdue 8D | lever for ppm commitment and chargeback; cite `sc` and `qn` |
+| `delivery_problem` | on-time delivery below the 95 % target | cite OTD; ask for a lead-time commitment |
+| `ownership_change` | news `new_owner`, `succession`, `restructuring`, `refocus` | new decision makers, risk that it walks; be clear and fair |
+| `approval_ladder` | a group parent, "head office" | expect a round on hold before a bigger move; be patient |
+| `price_claim` | a letter with `asked_pct` and stated reasons | check each stated cost driver against its index; cite the ones that fell |
+
+**The case overlay** (mini-dossier): at session open, before the first move, under 100 ms, no LLM.
+
+- `identity` from the vendor master if the ID is known (also the about 400 suppliers known only by
+  name, category and spend), else the name from the opening e-mail.
+- `standard_terms` from the quote PDF (`arena_kit.docs.standard_terms`), overriding stored values.
+- `signals` from the briefing, the trigger doc, the quote e-mail and PDF remarks, and any `doc:` or
+  `news:` in the case's `facts`.
+- `citable` from the case's `facts` (a dict keyed by ID like `facts.json`, as the Calculator already
+  reads it; accept a list too) and its `refs`.
+- `should_cost` and `floor_estimate` from a `cost:` fact of the case.
+- `alternatives` from `buyer.alternative` and, in an RFQ, the other suppliers' offers (their
+  `offer:` IDs are citable in the session).
+- Merge: lists are united by ID; scalar values from the case win.
+
+**Checks** (B's tests): every detailed supplier gets a dossier; two builds are byte-identical;
+0 `contradicted` in `citable`; `dossier()` on an unknown supplier and on every case file in
+`sellm/lab/cases/` returns the schema without raising.
