@@ -1,0 +1,74 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4K562BDMKN68S2ZEZW23HAX",
+  "session_id": "bc80161e-03a4-4665-86fa-dc14803965bc",
+  "strategy": "manual-commit",
+  "created_at": "2026-10-10T14:59:01.575601752Z",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "sellm/lab/table.py"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-5-5",
+  "turn_id": "fc3a7b36e1b8",
+  "checkpoint_transcript_start": 995,
+  "transcript_lines_at_start": 995,
+  "compact_transcript_start": 139,
+  "token_usage": {
+    "input_tokens": 40,
+    "cache_creation_tokens": 63055,
+    "cache_read_tokens": 8605628,
+    "output_tokens": 44716,
+    "api_call_count": 20
+  },
+  "session_metrics": {
+    "turn_count": 9
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-10-10T14:59:01.373905575Z",
+    "agent_lines": 210,
+    "agent_removed": 34,
+    "human_added": 199,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 409,
+    "total_lines_changed": 454,
+    "agent_percentage": 53.74449339207048,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 2055,
+      "user_lines_removed": 0,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        ".agents/hooks.json": 28,
+        ".codex/hooks.json": 88,
+        "sellm/lab/cases/D01.json": 77,
+        "sellm/lab/cases/D02.json": 89,
+        "sellm/lab/cases/P01.json": 88,
+        "sellm/lab/cases/P02.json": 106,
+        "sellm/lab/cases/P03.json": 94,
+        "sellm/lab/cases/P04.json": 87,
+        "sellm/lab/cases/P05.json": 84,
+        "sellm/lab/cases/P06.json": 89,
+        "sellm/lab/cases/P07.json": 87,
+        "sellm/lab/cases/P08.json": 109,
+        "sellm/lab/cases/P09.json": 102,
+        "sellm/lab/cases/P10.json": 86,
+        "sellm/lab/cases/P11.json": 94,
+        "sellm/lab/cases/P12.json": 94,
+        "sellm/lab/cases/P13.json": 86,
+        "sellm/lab/cases/P14.json": 100,
+        "sellm/lab/cases/P15.json": 86,
+        "sellm/lab/cases/P16.json": 109,
+        "sellm/lab/cases/P17.json": 76,
+        "sellm/lab/cases/P18.json": 109,
+        "sellm/lab/cases/P19.json": 87
+      }
+    }
+  ]
+}

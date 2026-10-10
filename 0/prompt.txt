@@ -1,0 +1,9 @@
+fix jetzt auf einmal alles. ich brauche eine perfekte simulation die wirklich alles ausprobiert, alles testet und fixxxt, verändert usw. setz deine punkte um und denk dan aber wirklich nochmal nach was du hinzufügen könntest, was du am logischsten verändern könntest, wie du alles akkurater und realistischer und perfekt machst. es muss wirklichperfekt vorraussehen und verbessern können. der api key ist jetzt auch drinne, aber wie gesagt, benutz keinen der 189 versuche. runne erstmal nicht, sondern mach erstmal alles andere bzw die umgebung perfekt. und kann ich die tests auch iwie so starten mit konkreter ausgabe ohne über dich. und bedenke, das im finale iwaskommen kann, also der ai agent muss für alles was kommt perfekt sein, nicht nur was du hast
+
+---
+
+<task-notification>
+<task-id>btbv28t77</task-id>
+<summary>Monitor event: "10-minute lab strategy search finishing"</summary>
+<event>[Monitor expired after 20m with no events delivered. Re-arm it if you still need the watch — and widen the filter if silence was unexpected.]</event>
+</task-notification>
