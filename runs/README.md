@@ -12,7 +12,7 @@ runs are in `runs/logs/`.
 
 | Case | Type / goal | C_open | C_best | C_alt | Best score | By | Sessions |
 |---|---|---|---|---|---|---|---|
-| P01 (practice) | price_increase / stabilise | 1,153,780 | 1,096,816 | 1,176,178 | 0.915 | EVAL bank: a1 + argument bank @19b339f (claude eval session) | 9 |
+| P01 (practice) | price_increase / stabilise | 1,153,780 | 1,096,816 | 1,176,178 | 0.953 | TEST past-target (one-off, not in the agent): keep asking past the relationship target while the supplier moves | 10 |
 | P02 (practice) | price_increase / stabilise | 2,282,867 | 2,235,514 | 2,604,228 | 0.531 | EVAL ppmfix: bank2 with ppm written without thousands comma @19b339f (claude eval session) | 11 |
 | P03 (practice) | renewal / stabilise | 4,246,314 | 3,909,043 | 4,332,546 | 0.923 | EVAL bank: a1 + argument bank @19b339f (claude eval session) | 7 |
 | P04 (practice) | renewal / routine | 198,846 | 196,529 | 203,169 | 0.860 | sellm negotiator v1.2 + calculator @19b339f, kit runner, no LLM | 10 |
@@ -25,7 +25,7 @@ runs are in `runs/logs/`.
 | D01 (sandbox) | price_increase / stabilise | 448,811 | 408,624 | - | 0.957 | probe h13-a | 64 |
 | D02 (sandbox) | rfq / leverage | 214,296 | 156,739 | 238,800 | 0.567 | runner v1.2 (no network under the case lock), sellm (negotiator v1.1) | 30 |
 
-Mean of our best per practice case played: 73.2 (10 cases).
+Mean of our best per practice case played: 73.5 (10 cases).
 
 ## Every session
 
@@ -45,6 +45,7 @@ price would beat C_best, so the supplier would not give all of them at this pric
 | P01 | 10-10 21:27 | EVAL nodossier: full without dossier = a supplier we hold no data on @19b339f (claude eval session) | 0.864 | accepted | 4 | unit_price=136.2, effective_date=2027-04-01, payment_days=30 | 7,751 | 14,366 | -6,614 | [md](practice/P01/20261010-212759-95b54127befce9c9.md) · [json](practice/P01/20261010-212759-95b54127befce9c9.json) · [replay](https://arena.tacto.ai/replay/95b54127befce9c9) |
 | P01 | 10-10 21:36 | sellm negotiator v1.3 (data lock) @d792ee3, kit runner, no LLM | 0.831 | accepted | 6 | unit_price=136.8, effective_date=2027-04-01, payment_days=30 | 9,639 | 14,404 | -4,765 | [md](practice/P01/20261010-213619-d4aba10940dde63d.md) · [json](practice/P01/20261010-213619-d4aba10940dde63d.json) · [replay](https://arena.tacto.ai/replay/d4aba10940dde63d) |
 | P01 | 10-10 21:49 | sellm negotiator v1.4 (argument bank + signals) @cdd9cf8, kit runner, no LLM | 0.915 | accepted | 5 | unit_price=135.1, effective_date=2027-04-01, payment_days=30 | 4,858 | 14,296 | -9,437 | [md](practice/P01/20261010-214925-6155db215b9c9336.md) · [json](practice/P01/20261010-214925-6155db215b9c9336.json) · [replay](https://arena.tacto.ai/replay/6155db215b9c9336) |
+| P01 | 10-10 22:12 | TEST past-target (one-off, not in the agent): keep asking past the relationship target while the supplier moves | 0.953 | accepted | 6 | unit_price=133.96, effective_date=2027-04-01, payment_days=30 | 2,656 | 14,223 | -11,567 | [md](practice/P01/20261010-221240-00d6fd0029b1a48c.md) · [json](practice/P01/20261010-221240-00d6fd0029b1a48c.json) · [replay](https://arena.tacto.ai/replay/00d6fd0029b1a48c) |
 | P02 | 10-10 15:27 | kit llm, gpt-6.1-sol | 0.105 | accepted | 5 | unit_price=370.15, payment_days=30, index_clause=none | 42,371 | 30,155 | 12,216 | [md](practice/P02/20261010-152741-3c2bf69b85674a60.md) · [json](practice/P02/20261010-152741-3c2bf69b85674a60.json) · [replay](https://arena.tacto.ai/replay/3c2bf69b85674a60) |
 | P02 | 10-10 20:32 | sellm negotiator v1.1 @2dadddb, kit runner, no LLM | 0.183 | accepted | 5 | unit_price=369.55, payment_days=30, index_clause=none | 38,681 | 30,106 | 8,575 | [md](practice/P02/20261010-203234-e22ce1eafbf6625f.md) · [json](practice/P02/20261010-203234-e22ce1eafbf6625f.json) · [replay](https://arena.tacto.ai/replay/e22ce1eafbf6625f) |
 | P02 | 10-10 21:03 | runner v1.1, sellm (negotiator v1.1 @2dadddb) | 0.183 | accepted | 5 | unit_price=369.55, payment_days=30, index_clause=none | 38,681 | 30,106 | 8,575 | [md](practice/P02/20261010-210342-92878bb27afb14cd.md) · [json](practice/P02/20261010-210342-92878bb27afb14cd.json) · [replay](https://arena.tacto.ai/replay/92878bb27afb14cd) |

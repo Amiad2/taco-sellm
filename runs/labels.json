@@ -1,4 +1,5 @@
 {
+ "00d6fd0029b1a48c": "TEST past-target (one-off, not in the agent): keep asking past the relationship target while the supplier moves",
  "0101f1903af80590": "ab nego-template @ebcdcd6+local",
  "01780f60530444ef": "sellm negotiator v1.2 + calculator @19b339f, kit runner, no LLM",
  "03539a83f1368400": "ab calc @29e2d11+local",

@@ -673,3 +673,9 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 **[finding] Correction to the D01 test entry: the unchanged agent already ranges from 0.921 to 0.947 on D01**
 - I wrote that three sessions of the committed agent were identical at 0.921. Wrong: tonight's four D01 sessions of it scored 0.921, 0.921, 0.935 and 0.947 - the demo foundry does not always answer the same (in one it went 50.90, 50.40, 50.00 by itself).
 - What the test does show: its session followed the 0.921 path number for number up to the supplier's 50.20, the point where the committed agent accepts; one more ask (49.83) brought 50.00. So on that path the extra round was worth +0.026. The size is the same as the run-to-run spread on D01, so one session does not prove a gain on average.
+
+## 2026-10-10 22:13 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] One-off test on P01, agent unchanged: past the relationship target - 0.953 against 0.915**
+- Approved by Jonathan as a single practice session (00d6fd0029b1a48c, replay https://arena.tacto.ai/replay/00d6fd0029b1a48c). Same scratch variant as on D01, committed negotiator @3b49364 otherwise. Quota left 348 of 450.
+- The session followed the reference (6155db215b9c9336, 0.915) number for number up to the supplier's 135.10 (141.70, 137.50, 136.50, 135.10 with the same four verified facts), the point where the committed agent accepts. The variant asked 133.96; the supplier agreed to it at once. Deal 133.96, score 0.953 (+0.038). The arena's relationship term rose from 5,287 to 8,266 EUR, the price fell by more.
+- With the D01 test (+0.026 on its path) that is two of two. The supplier took our ask without a counter, so the room below 133.96 is not explored. Still not built in: waiting for Jonathan's go.
