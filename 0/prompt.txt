@@ -1,0 +1,5 @@
+mach dich mit dem projekt komplett vertraut. wir haben bis jetzt einen durchlauf gehabt und 11/200versuchen verbraucht. die daten daher müsten hier im ordner sein. siehst du die? ich will jetzt diese tests lokal machen, so das wir die versuche nicht verbrauchen. so automatisch, das ich bspw sagen kann, ja teste jetzt 1h verschiedene strategien bei verschiedenen leuten, auc selbs erfundene und schau waswo am besten funktioniert. mach vor jeder änderung ein pull erstmal und check ob sich was bei meinen kollegen verändert hat und push am ende. bevor du iwas schreibst sag erstmal wie du das am besten umsetzen würdest
+
+---
+
+ja passt alles, leg los mit schritt 1
