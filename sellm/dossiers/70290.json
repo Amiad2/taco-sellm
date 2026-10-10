@@ -1,0 +1,429 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070290",
+  "incoterm": "EXW",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 30,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Feinmechanik Rottaler GmbH",
+   "date": "2025-10-14",
+   "effective_date": null,
+   "id": "doc:20251014-70290-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "ISO 9001 certificate",
+   "text": "Please find attached our renewed ISO 9001 certificate."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Feinmechanik Rottaler GmbH",
+   "date": "2026-03-15",
+   "effective_date": null,
+   "id": "doc:20260315-70290-M1",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "New volumes",
+   "text": "Order intake is very strong. We can confirm additional volumes only against a binding 12-month commitment."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Feinmechanik Rottaler GmbH",
+   "date": "2026-05-01",
+   "effective_date": null,
+   "id": "doc:20260501-70290-M2",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Payment of invoices",
+   "text": "Could you pay our invoices within 10 days? In return we would grant a cash discount."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Feinmechanik Rottaler GmbH",
+   "date": "2026-06-19",
+   "effective_date": null,
+   "id": "doc:20260619-70290-M3",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "New volumes",
+   "text": "Order intake is very strong. We can confirm additional volumes only against a binding 12-month commitment."
+  }
+ ],
+ "economics": {
+  "archetype": "job_shop",
+  "archetype_basis": "staff 25 < 80",
+  "cash_pressure": "medium",
+  "cost_of_money": 0.25,
+  "cost_of_money_basis": "rule: job shop or short of cash",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 6.25,
+  "our_spend_eur": {
+   "FY2024": 191949.36,
+   "FY2025": 215910.37,
+   "FY2026": 218807.7
+  },
+  "we_pay_late_days": 9.8
+ },
+ "identity": {
+  "abc_class": "B",
+  "blocked": false,
+  "category": "machined parts",
+  "certifications": [
+   "ISO 9001"
+  ],
+  "country": "DE",
+  "credit_index": 231,
+  "credit_index_12m_ago": 231,
+  "equity_ratio_pct": 21.7,
+  "founded": 1993,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Feinmechanik Rottaler GmbH",
+  "owner_type": "founder",
+  "staff": 25,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "2-5 M EUR",
+  "turnover_estimated": true,
+  "turnover_eur": null,
+  "vda63_grade": "B"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "The alloy surcharge for 1.4404 stands at EUR 3,008/t, +6 % on a year ago.",
+   "date": "2026-09-16",
+   "headline": "Alloy surcharge 1.4404 at EUR 3,008 per tonne",
+   "id": "news:20260916-32"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  },
+  {
+   "body": "Producer prices for basic iron and steel are +7.3 % above January.",
+   "date": "2026-09-22",
+   "headline": "Steel prices +7.3 % since January",
+   "id": "news:20260922-35"
+  }
+ ],
+ "news": [
+  {
+   "body": "Feinmechanik Rottaler GmbH has won a multi-year contract from a hydraulics maker that will occupy most of its turning capacity from the summer.",
+   "date": "2026-03-23",
+   "headline": "Feinmechanik Rottaler GmbH wins large hydraulics contract",
+   "id": "news:20260323-06",
+   "noise": false,
+   "source": "Gießerei-Rundschau Süd",
+   "topic": "big_order"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2025-06-21",
+   "incoterm": null,
+   "lead_time_days": 41,
+   "part_id": "part:320010",
+   "payment_days": null,
+   "price_unit": 1,
+   "quote_id": "quote:7100018",
+   "remarks": "",
+   "unit_price": 27.0
+  }
+ ],
+ "parts": {
+  "part:320010": {
+   "abc_class": "B",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Zerspanung Dralveck GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 30,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70210",
+     "unit_price": null
+    },
+    {
+     "date": "2025-06-21",
+     "name": "Zerspanung Dralveck GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100019",
+     "status": null,
+     "supplier_id": "sup:70210",
+     "unit_price": 26.0
+    }
+   ],
+   "category": "machined parts",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70290-320010",
+    "price": 24.92,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Pump shaft HN 24 mm",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.33
+    },
+    {
+     "change_12m_pct": 12.26,
+     "change_6m_pct": 9.69,
+     "ids_12m": [
+      "idx:PPI-C2431@2025-08",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2431@2026-02",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 129.1,
+     "series": "PPI-C2431",
+     "weight": 0.19
+    },
+    {
+     "change_12m_pct": 5.92,
+     "change_6m_pct": -0.26,
+     "ids_12m": [
+      "idx:AS-14404@2025-09",
+      "idx:AS-14404@2026-09"
+     ],
+     "ids_6m": [
+      "idx:AS-14404@2026-03",
+      "idx:AS-14404@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 3007.8019,
+     "series": "AS-14404",
+     "weight": 0.12
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.01
+    }
+   ],
+   "floor_estimate": {
+    "basis": "plant-specific should-cost cost:320010",
+    "high": 26.48,
+    "low": 23.96,
+    "value": 25.22
+   },
+   "forecast": {
+    "change_pct": 18.1,
+    "id": "fc:320010@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 14650,
+    "volume_per_year": 14650
+   },
+   "grade": "1.4404",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-07",
+      "event_id": "EV-2023-70290-320010",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -0.1,
+      "date": "2023-11-12",
+      "event_id": "EV-2024-70290-320010",
+      "note": "",
+      "settled_pct": -2.7,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.7,
+      "date": "2024-12-02",
+      "event_id": "EV-2025-70290-320010",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": -1.2,
+      "date": "2025-11-19",
+      "event_id": "EV-2026-70290-320010",
+      "note": "",
+      "settled_pct": -2.9,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 0.8,
+    "mean_give_pct": 2.67,
+    "mean_settled_pct": -1.87
+   },
+   "material_group": "mach_inox",
+   "planned_lead_time_days": 35,
+   "price_to_should_cost": 0.9881,
+   "price_unit": 1,
+   "should_cost": {
+    "confidence_pct": 5,
+    "conversion_eur": 11.47,
+    "cost_base": "DE",
+    "id": "cost:320010",
+    "material_eur": 8.83,
+    "overhead_eur": 4.92,
+    "plant_specific": true,
+    "price_unit": 1,
+    "unit_cost": 25.22
+   },
+   "sourcing": {
+    "approved_since": "2011-07-01",
+    "quota_pct": 70,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "B",
+   "colour": "amber",
+   "id": "sc:70290@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 79.3,
+   "otd_pct": 75.9,
+   "ppm": 921,
+   "quarter": "2026Q3",
+   "score": 83.3
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70290@2025Q4",
+    "sc:70290@2026Q1",
+    "sc:70290@2026Q2",
+    "sc:70290@2026Q3"
+   ],
+   "otd_pct": 75.22,
+   "ppm": 732.75
+  },
+  "qn_12m": 8,
+  "qn_ids_12m": [
+   "qn:20004699",
+   "qn:20004766",
+   "qn:20004792",
+   "qn:20004859",
+   "qn:20004957",
+   "qn:20004962",
+   "qn:20004965",
+   "qn:20005019"
+  ],
+  "qn_supplier_caused_12m": 8,
+  "trend": "better"
+ },
+ "profile_text": "Feinmechanik Rottaler GmbH (DE; founder; 25 staff; turnover 2-5 M EUR). Our spend FY2026 EUR 218,808 (6.25 % of its turnover). Standard terms: 30 days net, EXW, lead time 35 days. Cost of money about 25 % a year; cash pressure medium; type job shop. Signals: capacity tight (1), cash short (1), margin floor (1), quality problem (1). Performance 2026Q3: amber, OTD 75.9 %, 921 ppm. Parts: part:320010 Pump shaft HN 24 mm: price 24.92 per 1, 0.99x should-cost.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "news:20260323-06"
+   ],
+   "excerpt": "Feinmechanik Rottaler GmbH wins large hydraulics contract",
+   "kind": "capacity_tight",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "doc:20260501-70290-M2"
+   ],
+   "excerpt": "Could you pay our invoices within 10 days?",
+   "kind": "cash_short",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "cost:320010#below"
+   ],
+   "excerpt": "part:320010 is priced at 0.99 x its should-cost.",
+   "kind": "margin_floor",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "sc:70290@2026Q3"
+   ],
+   "excerpt": "Scorecard 2026Q3 is amber.",
+   "kind": "quality_problem",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "EXW",
+  "lead_time_days": 35,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70290",
+ "warnings": []
+}

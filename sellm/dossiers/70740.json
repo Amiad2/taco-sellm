@@ -1,0 +1,742 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070740",
+  "incoterm": "DAP",
+  "index_clauses": [
+   {
+    "deadband_pct": 3,
+    "id": "ctr:4600070740#3.2",
+    "material_share": 0.8,
+    "series": "PPI-C2431"
+   }
+  ],
+  "notice_days": 60,
+  "payment_days": 30,
+  "price_basis": "index clause",
+  "valid_from": "2024-01-01",
+  "valid_to": "2026-12-31"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Blankstahl Werdenfels GmbH",
+   "date": "2025-10-09",
+   "effective_date": null,
+   "id": "doc:20251009-70740-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "New contact person",
+   "text": "From 1 October your contact in sales is our new colleague in inside sales; all other contacts stay the same."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-05-14",
+   "effective_date": null,
+   "id": "doc:20260514-70740-M6",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Price discussion",
+   "text": "Call with the owner of Blankstahl Werdenfels GmbH: he offered to walk us through their calculation (hourly rates and material) if that helps to settle prices."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-06-01",
+   "effective_date": null,
+   "id": "doc:20260601-70740-M4",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Customer portfolio",
+   "text": "The sales director of Blankstahl Werdenfels GmbH said they are reviewing small accounts and will focus on customers with volume."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-08-12",
+   "effective_date": null,
+   "id": "doc:20260812-70740-M3",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Annual review",
+   "text": "Annual review with Blankstahl Werdenfels GmbH. Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-08-13",
+   "effective_date": null,
+   "id": "doc:20260813-70740-M2",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Customer portfolio",
+   "text": "The sales director of Blankstahl Werdenfels GmbH said they are reviewing small accounts and will focus on customers with volume."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-09-04",
+   "effective_date": null,
+   "id": "doc:20260904-70740-M1",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Price discussion",
+   "text": "Call with the owner of Blankstahl Werdenfels GmbH: he offered to walk us through their calculation (hourly rates and material) if that helps to settle prices."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-09-16",
+   "effective_date": null,
+   "id": "doc:20260916-70740-M5",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Customer portfolio",
+   "text": "The sales director of Blankstahl Werdenfels GmbH said they are reviewing small accounts and will focus on customers with volume."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Blankstahl Werdenfels GmbH",
+   "date": "2026-09-22",
+   "effective_date": null,
+   "id": "doc:20260922-70740-P18",
+   "kind": "letter",
+   "notice_days": null,
+   "part_ids": [
+    "part:370010"
+   ],
+   "subject": "Price basis and surcharge clause for the coming period",
+   "text": "Dear Sir or Madam,\n\nfor Round bar 1.4404 dia 30 mm, peeled (part:370010) we propose to agree the price basis for the coming period, including a price adjustment clause based on AS-14404. Please let us know your view.\n\nYours faithfully,\nBlankstahl Werdenfels GmbH"
+  }
+ ],
+ "economics": {
+  "archetype": "family",
+  "archetype_basis": "owner type family",
+  "cash_pressure": "low",
+  "cost_of_money": 0.09,
+  "cost_of_money_basis": "rule: owner type family",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 0.44,
+  "our_spend_eur": {
+   "FY2024": 453954.51,
+   "FY2025": 419914.66,
+   "FY2026": 428119.02
+  },
+  "we_pay_late_days": 3.2
+ },
+ "identity": {
+  "abc_class": "A",
+  "blocked": false,
+  "category": "raw material",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001"
+  ],
+  "country": "DE",
+  "credit_index": 148,
+  "credit_index_12m_ago": 148,
+  "equity_ratio_pct": 39.3,
+  "founded": 1961,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Blankstahl Werdenfels GmbH",
+  "owner_type": "family",
+  "staff": 200,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "50-100 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 98200000,
+  "vda63_grade": "A"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "The alloy surcharge for 1.4404 stands at EUR 3,008/t, +6 % on a year ago.",
+   "date": "2026-09-16",
+   "headline": "Alloy surcharge 1.4404 at EUR 3,008 per tonne",
+   "id": "news:20260916-32"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  },
+  {
+   "body": "Producer prices for basic iron and steel are +7.3 % above January.",
+   "date": "2026-09-22",
+   "headline": "Steel prices +7.3 % since January",
+   "id": "news:20260922-35"
+  }
+ ],
+ "news": [
+  {
+   "body": "Blankstahl Werdenfels GmbH presents its products at a regional supplier fair.",
+   "date": "2026-06-19",
+   "headline": "Blankstahl Werdenfels GmbH at the trade fair",
+   "id": "news:20260619-14",
+   "noise": true,
+   "source": "Metall-Kurier",
+   "topic": "noise"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2025-05-18",
+   "incoterm": "DAP",
+   "lead_time_days": 14,
+   "part_id": "part:370010",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100065",
+   "remarks": "",
+   "unit_price": 5.41
+  },
+  {
+   "date": "2025-05-20",
+   "incoterm": "DAP",
+   "lead_time_days": 15,
+   "part_id": "part:370012",
+   "payment_days": 30,
+   "price_unit": 100,
+   "quote_id": "quote:7100066",
+   "remarks": "",
+   "unit_price": 131.74
+  },
+  {
+   "date": "2026-09-09",
+   "incoterm": "DAP",
+   "lead_time_days": 14,
+   "part_id": "part:370010",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7200008",
+   "remarks": "",
+   "unit_price": 6.06
+  },
+  {
+   "date": "2026-09-17",
+   "incoterm": "DAP",
+   "lead_time_days": 14,
+   "part_id": "part:370020",
+   "payment_days": 30,
+   "price_unit": 100,
+   "quote_id": "quote:7200016",
+   "remarks": "",
+   "unit_price": 96.37
+  }
+ ],
+ "parts": {
+  "part:370010": {
+   "abc_class": "A",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Edelstahl-Service Donautal GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 80,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70710",
+     "unit_price": null
+    },
+    {
+     "date": "2025-05-18",
+     "name": "Edelstahl-Service Donautal GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100064",
+     "status": null,
+     "supplier_id": "sup:70710",
+     "unit_price": 5.34
+    },
+    {
+     "date": "2026-09-10",
+     "name": "Edelstahl-Service Donautal GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7300008",
+     "status": null,
+     "supplier_id": "sup:70710",
+     "unit_price": 5.45
+    },
+    {
+     "date": "2026-09-19",
+     "name": "Edelstahl-Service Donautal GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7200018",
+     "status": null,
+     "supplier_id": "sup:70710",
+     "unit_price": 6.31
+    }
+   ],
+   "category": "raw material",
+   "current_price": {
+    "basis": "index_adjustment",
+    "event_id": "EV-2026-70740-370010-Q3",
+    "price": 5.84,
+    "price_unit": 1,
+    "valid_from": "2026-07-01",
+    "valid_to": null
+   },
+   "description": "Round bar 1.4404 dia 30 mm, peeled",
+   "drivers": [
+    {
+     "change_12m_pct": 5.92,
+     "change_6m_pct": -0.26,
+     "ids_12m": [
+      "idx:AS-14404@2025-09",
+      "idx:AS-14404@2026-09"
+     ],
+     "ids_6m": [
+      "idx:AS-14404@2026-03",
+      "idx:AS-14404@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 3007.8019,
+     "series": "AS-14404",
+     "weight": 0.43
+    },
+    {
+     "change_12m_pct": 12.26,
+     "change_6m_pct": 9.69,
+     "ids_12m": [
+      "idx:PPI-C2431@2025-08",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2431@2026-02",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 129.1,
+     "series": "PPI-C2431",
+     "weight": 0.36
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.03
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 1.9,
+    "id": "fc:370010@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 118500,
+    "volume_per_year": 118500
+   },
+   "grade": "1.4404",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-21",
+      "event_id": "EV-2023-70740-370010",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -2.4,
+      "date": "2023-12-02",
+      "event_id": "EV-2024-70740-370010",
+      "note": "",
+      "settled_pct": -5.7,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": -2.6,
+      "date": "2024-11-17",
+      "event_id": "EV-2025-70740-370010",
+      "note": "",
+      "settled_pct": -4.5,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": -0.6,
+      "date": "2025-11-15",
+      "event_id": "EV-2026-70740-370010",
+      "note": "",
+      "settled_pct": -4.2,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": -1.87,
+    "mean_give_pct": 2.93,
+    "mean_settled_pct": -4.8
+   },
+   "material_group": "bar_inox",
+   "planned_lead_time_days": 10,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2021-01-01",
+    "quota_pct": 20,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "kg"
+  },
+  "part:370011": {
+   "abc_class": "C",
+   "alternatives": [],
+   "category": "raw material",
+   "current_price": {
+    "basis": "index_adjustment",
+    "event_id": "EV-2026-70740-370011-Q3",
+    "price": 3.2,
+    "price_unit": 1,
+    "valid_from": "2026-07-01",
+    "valid_to": null
+   },
+   "description": "Round bar 1.4021 dia 40 mm, peeled",
+   "drivers": [
+    {
+     "change_12m_pct": 12.26,
+     "change_6m_pct": 9.69,
+     "ids_12m": [
+      "idx:PPI-C2431@2025-08",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2431@2026-02",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 129.1,
+     "series": "PPI-C2431",
+     "weight": 0.82
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.06
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 14.8,
+    "id": "fc:370011@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 90000,
+    "volume_per_year": 90000
+   },
+   "grade": "1.4021",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-13",
+      "event_id": "EV-2023-70740-370011",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 1.8,
+      "date": "2023-11-20",
+      "event_id": "EV-2024-70740-370011",
+      "note": "",
+      "settled_pct": -1.7,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": -0.5,
+      "date": "2024-12-07",
+      "event_id": "EV-2025-70740-370011",
+      "note": "",
+      "settled_pct": -4.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.5,
+      "date": "2025-12-05",
+      "event_id": "EV-2026-70740-370011",
+      "note": "",
+      "settled_pct": 0.7,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 1.27,
+    "mean_give_pct": 2.93,
+    "mean_settled_pct": -1.67
+   },
+   "material_group": "bar_steel",
+   "planned_lead_time_days": 14,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2022-01-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "kg"
+  },
+  "part:370012": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Stahlhandel Rupprecht-Kessel GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 40,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70720",
+     "unit_price": null
+    },
+    {
+     "date": "2025-05-20",
+     "name": "Stahlhandel Rupprecht-Kessel GmbH",
+     "price_unit": 100,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100067",
+     "status": null,
+     "supplier_id": "sup:70720",
+     "unit_price": 129.78
+    }
+   ],
+   "category": "raw material",
+   "current_price": {
+    "basis": "index_adjustment",
+    "event_id": "EV-2026-70740-370012-Q3",
+    "price": 143.39,
+    "price_unit": 100,
+    "valid_from": "2026-07-01",
+    "valid_to": null
+   },
+   "description": "Round bar C45 dia 50 mm, cold drawn",
+   "drivers": [
+    {
+     "change_12m_pct": 12.26,
+     "change_6m_pct": 9.69,
+     "ids_12m": [
+      "idx:PPI-C2431@2025-08",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2431@2026-02",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 129.1,
+     "series": "PPI-C2431",
+     "weight": 0.82
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.06
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 9.2,
+    "id": "fc:370012@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 98700,
+    "volume_per_year": 98700
+   },
+   "grade": "C45",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-17",
+      "event_id": "EV-2023-70740-370012",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -0.3,
+      "date": "2023-11-22",
+      "event_id": "EV-2024-70740-370012",
+      "note": "",
+      "settled_pct": -3.7,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": -1.0,
+      "date": "2024-11-17",
+      "event_id": "EV-2025-70740-370012",
+      "note": "",
+      "settled_pct": -2.4,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.0,
+      "date": "2025-11-27",
+      "event_id": "EV-2026-70740-370012",
+      "note": "",
+      "settled_pct": -0.3,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 0.57,
+    "mean_give_pct": 2.7,
+    "mean_settled_pct": -2.13
+   },
+   "material_group": "bar_steel",
+   "planned_lead_time_days": 14,
+   "price_to_should_cost": null,
+   "price_unit": 100,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2010-01-01",
+    "quota_pct": 60,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "kg"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "A",
+   "colour": "green",
+   "id": "sc:70740@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 83.5,
+   "otd_pct": 81.0,
+   "ppm": 32,
+   "quarter": "2026Q3",
+   "score": 90.3
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70740@2025Q4",
+    "sc:70740@2026Q1",
+    "sc:70740@2026Q2",
+    "sc:70740@2026Q3"
+   ],
+   "otd_pct": 82.5,
+   "ppm": 38.5
+  },
+  "qn_12m": 8,
+  "qn_ids_12m": [
+   "qn:20004685",
+   "qn:20004726",
+   "qn:20004881",
+   "qn:20004901",
+   "qn:20004916",
+   "qn:20004931",
+   "qn:20004980",
+   "qn:20004990"
+  ],
+  "qn_supplier_caused_12m": 5,
+  "trend": "flat"
+ },
+ "profile_text": "Blankstahl Werdenfels GmbH (DE; family; 200 staff; turnover EUR 98.2 M). Our spend FY2026 EUR 428,119 (0.44 % of its turnover). Standard terms: 30 days net, DAP, lead time 14 days. Cost of money about 9 % a year; cash pressure low; type family. Signals: approval ladder (1), wants volume (3). Performance 2026Q3: green, OTD 81.0 %, 32 ppm. Parts: part:370010 Round bar 1.4404 dia 30 mm, peeled: price 5.84 per 1; part:370011 Round bar 1.4021 dia 40 mm, peeled: price 3.2 per 1; part:370012 Round bar C45 dia 50 mm, cold drawn: price 143.39 per 100.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260812-70740-M3"
+   ],
+   "excerpt": "Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks.",
+   "kind": "approval_ladder",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "doc:20260601-70740-M4",
+    "doc:20260813-70740-M2",
+    "doc:20260916-70740-M5"
+   ],
+   "excerpt": "The sales director of Blankstahl Werdenfels GmbH said they are reviewing small accounts and will focus on customers with volume.",
+   "kind": "wants_volume",
+   "strength": 3
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "DAP",
+  "lead_time_days": 14,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70740",
+ "warnings": []
+}

@@ -1,0 +1,369 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070560",
+  "incoterm": "DAP",
+  "index_clauses": [
+   {
+    "deadband_pct": 0,
+    "id": "ctr:4600070560#3.2",
+    "material_share": 0.55,
+    "series": "CU-NOTATION"
+   }
+  ],
+  "notice_days": 60,
+  "payment_days": 30,
+  "price_basis": "index clause",
+  "valid_from": "2024-01-01",
+  "valid_to": "2026-12-31"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Kabelwerk Rhönsberg GmbH",
+   "date": "2025-10-14",
+   "effective_date": null,
+   "id": "doc:20251014-70560-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Packaging",
+   "text": "From November we deliver in returnable boxes instead of cardboard."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-04-15",
+   "effective_date": null,
+   "id": "doc:20260415-70560-M2",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Annual review",
+   "text": "Annual review with Kabelwerk Rhönsberg GmbH. Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-06-17",
+   "effective_date": null,
+   "id": "doc:20260617-70560-M1",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Material purchasing",
+   "text": "Call with Kabelwerk Rhönsberg GmbH: they bought their copper forward until March 2027 and said the market price is 'not our reality' before then."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Kabelwerk Rhönsberg GmbH",
+   "date": "2026-09-10",
+   "effective_date": null,
+   "id": "doc:20260910-70560-P14",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [
+    "part:350040"
+   ],
+   "subject": "Renewal of framework agreement 4600070560",
+   "text": "Hello,\n\nour framework agreement ctr:4600070560 for Motor cable H07RN-F 4G2.5 (part:350040) expires on 31 December 2026. We would like to agree the terms for the coming period and will send our offer when we meet. Please let us know your expected volumes.\n\nBest regards,\nKabelwerk Rhönsberg GmbH"
+  }
+ ],
+ "economics": {
+  "archetype": "group",
+  "archetype_basis": "owner type group",
+  "cash_pressure": "low",
+  "cost_of_money": 0.065,
+  "cost_of_money_basis": "rule: owner type group",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 0.85,
+  "our_spend_eur": {
+   "FY2024": 740130.12,
+   "FY2025": 812884.01,
+   "FY2026": 833606.85
+  },
+  "we_pay_late_days": 2.2
+ },
+ "identity": {
+  "abc_class": "A",
+  "blocked": false,
+  "category": "electrical",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001"
+  ],
+  "country": "DE",
+  "credit_index": 149,
+  "credit_index_12m_ago": 149,
+  "equity_ratio_pct": 32.3,
+  "founded": 1957,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Kabelwerk Rhönsberg GmbH",
+  "owner_type": "group",
+  "staff": 400,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "50-100 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 98100000,
+  "vda63_grade": "A"
+ },
+ "market_news": [
+  {
+   "body": "The copper notation for cables averaged EUR 1,289/100 kg in September, +48 % on a year ago.",
+   "date": "2026-09-10",
+   "headline": "Copper notation at EUR 1,289 per 100 kg",
+   "id": "news:20260910-27"
+  },
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Producer prices for assembled electronic boards rose +41 % in the twelve months to August.",
+   "date": "2026-09-18",
+   "headline": "Electronic boards +41 % year on year",
+   "id": "news:20260918-33"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  }
+ ],
+ "news": [
+  {
+   "body": "Kabelwerk Rhönsberg GmbH presents its products at a regional supplier fair.",
+   "date": "2026-03-03",
+   "headline": "Kabelwerk Rhönsberg GmbH at the trade fair",
+   "id": "news:20260303-02",
+   "noise": true,
+   "source": "Wirtschaftsblatt Niederbayern",
+   "topic": "noise"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2026-09-16",
+   "incoterm": "DAP",
+   "lead_time_days": 14,
+   "part_id": "part:350040",
+   "payment_days": 30,
+   "price_unit": 100,
+   "quote_id": "quote:7300014",
+   "remarks": "Material covered until March 2027; price valid accordingly.",
+   "unit_price": 316.35
+  }
+ ],
+ "parts": {
+  "part:350040": {
+   "abc_class": "A",
+   "alternatives": [],
+   "category": "electrical",
+   "current_price": {
+    "basis": "index_adjustment",
+    "event_id": "EV-2026-70560-350040-Q3",
+    "price": 316.35,
+    "price_unit": 100,
+    "valid_from": "2026-07-01",
+    "valid_to": null
+   },
+   "description": "Motor cable H07RN-F 4G2.5",
+   "drivers": [
+    {
+     "change_12m_pct": 47.73,
+     "change_6m_pct": 15.98,
+     "ids_12m": [
+      "idx:CU-NOTATION@2025-09",
+      "idx:CU-NOTATION@2026-09"
+     ],
+     "ids_6m": [
+      "idx:CU-NOTATION@2026-03",
+      "idx:CU-NOTATION@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 1288.5918,
+     "series": "CU-NOTATION",
+     "weight": 0.56
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.11
+    }
+   ],
+   "floor_estimate": {
+    "basis": "plant-specific should-cost cost:350040",
+    "high": 319.71,
+    "low": 289.27,
+    "value": 304.49
+   },
+   "forecast": {
+    "change_pct": 18.5,
+    "id": "fc:350040@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 342000,
+    "volume_per_year": 342000
+   },
+   "grade": "H07RN-F",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-03",
+      "event_id": "EV-2023-70560-350040",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 2.1,
+      "date": "2023-12-10",
+      "event_id": "EV-2024-70560-350040",
+      "note": "",
+      "settled_pct": -1.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.7,
+      "date": "2024-11-15",
+      "event_id": "EV-2025-70560-350040",
+      "note": "",
+      "settled_pct": 1.6,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 8.6,
+      "date": "2025-11-22",
+      "event_id": "EV-2026-70560-350040",
+      "note": "",
+      "settled_pct": 6.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 4.47,
+    "mean_give_pct": 2.27,
+    "mean_settled_pct": 2.2
+   },
+   "material_group": "cable",
+   "planned_lead_time_days": 14,
+   "price_to_should_cost": 1.039,
+   "price_unit": 100,
+   "should_cost": {
+    "confidence_pct": 5,
+    "conversion_eur": 95.91,
+    "cost_base": "DE",
+    "id": "cost:350040",
+    "material_eur": 167.47,
+    "overhead_eur": 41.11,
+    "plant_specific": true,
+    "price_unit": 100,
+    "unit_cost": 304.49
+   },
+   "sourcing": {
+    "approved_since": "2021-01-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "m"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "A",
+   "colour": "green",
+   "id": "sc:70560@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 92.3,
+   "otd_pct": 88.5,
+   "ppm": 111,
+   "quarter": "2026Q3",
+   "score": 93.7
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70560@2025Q4",
+    "sc:70560@2026Q1",
+    "sc:70560@2026Q2",
+    "sc:70560@2026Q3"
+   ],
+   "otd_pct": 85.88,
+   "ppm": 108.5
+  },
+  "qn_12m": 8,
+  "qn_ids_12m": [
+   "qn:20004712",
+   "qn:20004821",
+   "qn:20004855",
+   "qn:20004900",
+   "qn:20004927",
+   "qn:20004956",
+   "qn:20004971",
+   "qn:20004997"
+  ],
+  "qn_supplier_caused_12m": 8,
+  "trend": "flat"
+ },
+ "profile_text": "Kabelwerk Rhönsberg GmbH (DE; group; 400 staff; turnover EUR 98.1 M). Our spend FY2026 EUR 833,607 (0.85 % of its turnover). Standard terms: 30 days net, DAP, lead time 14 days. Cost of money about 6.5 % a year; cash pressure low; type group. Signals: approval ladder (2), material hedged (1). Performance 2026Q3: green, OTD 88.5 %, 111 ppm. Parts: part:350040 Motor cable H07RN-F 4G2.5: price 316.35 per 100, 1.04x should-cost.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260415-70560-M2",
+    "sup:70560#group"
+   ],
+   "excerpt": "Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks.",
+   "kind": "approval_ladder",
+   "strength": 2
+  },
+  {
+   "evidence": [
+    "quote:7300014"
+   ],
+   "excerpt": "Material covered until March 2027; price valid accordingly.",
+   "kind": "material_hedged",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "DAP",
+  "lead_time_days": 14,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70560",
+ "warnings": []
+}

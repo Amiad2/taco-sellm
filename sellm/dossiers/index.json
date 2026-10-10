@@ -1,0 +1,648 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "schema_version": 1,
+ "suppliers": {
+  "sup:70110": {
+   "coverage": "full",
+   "file": "70110.json",
+   "name": "Gießerei Brandlhuber GmbH & Co. KG",
+   "parts": [
+    "part:310010",
+    "part:310012"
+   ],
+   "signals": [
+    "cash_short",
+    "informal_costing",
+    "margin_floor",
+    "partnership",
+    "price_claim",
+    "quality_problem",
+    "wants_volume"
+   ]
+  },
+  "sup:70120": {
+   "coverage": "full",
+   "file": "70120.json",
+   "name": "Eisengießerei Velkenreith GmbH",
+   "parts": [
+    "part:310030",
+    "part:310031"
+   ],
+   "signals": [
+    "delivery_problem",
+    "margin_floor",
+    "partnership",
+    "quality_problem",
+    "wants_volume"
+   ]
+  },
+  "sup:70130": {
+   "coverage": "full",
+   "file": "70130.json",
+   "name": "Gießerei Wimbacher GmbH",
+   "parts": [
+    "part:310011",
+    "part:310012"
+   ],
+   "signals": [
+    "cash_short",
+    "margin_floor",
+    "ownership_change",
+    "wants_volume"
+   ]
+  },
+  "sup:70140": {
+   "coverage": "full",
+   "file": "70140.json",
+   "name": "Odlewnia Kalwisz Sp. z o.o.",
+   "parts": [
+    "part:310010",
+    "part:310020",
+    "part:310030"
+   ],
+   "signals": [
+    "cash_short",
+    "delivery_problem",
+    "margin_floor",
+    "ownership_change",
+    "quality_problem"
+   ]
+  },
+  "sup:70150": {
+   "coverage": "full",
+   "file": "70150.json",
+   "name": "Tarsevi Döküm Sanayi A.Ş.",
+   "parts": [
+    "part:310060"
+   ],
+   "signals": [
+    "cash_short",
+    "delivery_problem",
+    "margin_floor",
+    "ownership_change",
+    "quality_problem",
+    "wants_volume"
+   ]
+  },
+  "sup:70160": {
+   "coverage": "full",
+   "file": "70160.json",
+   "name": "Meridune Precision Castings Co., Ltd.",
+   "parts": [
+    "part:310051"
+   ],
+   "signals": [
+    "cash_short",
+    "margin_floor",
+    "wants_volume"
+   ]
+  },
+  "sup:70170": {
+   "coverage": "full",
+   "file": "70170.json",
+   "name": "Slévárna Vrbenský s.r.o.",
+   "parts": [
+    "part:310050"
+   ],
+   "signals": [
+    "cash_short",
+    "quality_problem"
+   ]
+  },
+  "sup:70180": {
+   "coverage": "full",
+   "file": "70180.json",
+   "name": "Feinguss Allgäu-Reiter GmbH",
+   "parts": [
+    "part:310050",
+    "part:310051"
+   ],
+   "signals": [
+    "delivery_problem",
+    "partnership",
+    "quality_problem"
+   ]
+  },
+  "sup:70190": {
+   "coverage": "full",
+   "file": "70190.json",
+   "name": "Gießerei Pfaffenreuth GmbH",
+   "parts": [
+    "part:310011",
+    "part:310020",
+    "part:310030",
+    "part:310040",
+    "part:310060"
+   ],
+   "signals": [
+    "material_hedged",
+    "quality_problem"
+   ]
+  },
+  "sup:70210": {
+   "coverage": "full",
+   "file": "70210.json",
+   "name": "Zerspanung Dralveck GmbH",
+   "parts": [
+    "part:320010",
+    "part:320011",
+    "part:320080"
+   ],
+   "signals": [
+    "cash_short",
+    "informal_costing",
+    "quality_problem"
+   ]
+  },
+  "sup:70220": {
+   "coverage": "full",
+   "file": "70220.json",
+   "name": "CNC-Technik Obermaier & Huber GmbH",
+   "parts": [
+    "part:320030"
+   ],
+   "signals": [
+    "capacity_tight",
+    "cash_short",
+    "delivery_problem",
+    "quality_problem"
+   ]
+  },
+  "sup:70230": {
+   "coverage": "full",
+   "file": "70230.json",
+   "name": "Präzisionsteile Lindlbauer KG",
+   "parts": [
+    "part:320020",
+    "part:320031",
+    "part:320060"
+   ],
+   "signals": [
+    "cash_short",
+    "informal_costing",
+    "price_claim"
+   ]
+  },
+  "sup:70240": {
+   "coverage": "full",
+   "file": "70240.json",
+   "name": "Strojírna Hrvelec s.r.o.",
+   "parts": [
+    "part:320030",
+    "part:320031"
+   ],
+   "signals": [
+    "capacity_tight",
+    "delivery_problem",
+    "quality_problem"
+   ]
+  },
+  "sup:70250": {
+   "coverage": "full",
+   "file": "70250.json",
+   "name": "Drehteile Fuchsreiter GmbH",
+   "parts": [
+    "part:320060",
+    "part:320090"
+   ],
+   "signals": [
+    "cash_short",
+    "wants_volume"
+   ]
+  },
+  "sup:70260": {
+   "coverage": "full",
+   "file": "70260.json",
+   "name": "Mechanik Tauvelt GmbH",
+   "parts": [
+    "part:320012"
+   ],
+   "signals": [
+    "cash_short",
+    "partnership",
+    "wants_volume"
+   ]
+  },
+  "sup:70270": {
+   "coverage": "full",
+   "file": "70270.json",
+   "name": "Obrábění Kraslin s.r.o.",
+   "parts": [
+    "part:320050"
+   ],
+   "signals": [
+    "informal_costing",
+    "partnership",
+    "quality_problem",
+    "wants_volume"
+   ]
+  },
+  "sup:70280": {
+   "coverage": "full",
+   "file": "70280.json",
+   "name": "Wälzhammer Präzision GmbH",
+   "parts": [
+    "part:320011"
+   ],
+   "signals": [
+    "cash_short",
+    "margin_floor"
+   ]
+  },
+  "sup:70290": {
+   "coverage": "full",
+   "file": "70290.json",
+   "name": "Feinmechanik Rottaler GmbH",
+   "parts": [
+    "part:320010"
+   ],
+   "signals": [
+    "capacity_tight",
+    "cash_short",
+    "margin_floor",
+    "quality_problem"
+   ]
+  },
+  "sup:70295": {
+   "coverage": "full",
+   "file": "70295.json",
+   "name": "Drehzentrum Ilzauer GmbH",
+   "parts": [
+    "part:320020",
+    "part:320040",
+    "part:320090"
+   ],
+   "signals": [
+    "cash_short",
+    "informal_costing",
+    "quality_problem",
+    "wants_volume"
+   ]
+  },
+  "sup:70310": {
+   "coverage": "full",
+   "file": "70310.json",
+   "name": "Blechtechnik Aichbauer GmbH",
+   "parts": [
+    "part:330010"
+   ],
+   "signals": [
+    "cash_short",
+    "delivery_problem",
+    "quality_problem"
+   ]
+  },
+  "sup:70320": {
+   "coverage": "full",
+   "file": "70320.json",
+   "name": "Stahlbau Ganghofer-Lenz GmbH",
+   "parts": [
+    "part:330011"
+   ],
+   "signals": [
+    "cash_short"
+   ]
+  },
+  "sup:70330": {
+   "coverage": "full",
+   "file": "70330.json",
+   "name": "Lasertechnik Varnoszeg Kft.",
+   "parts": [
+    "part:330040"
+   ],
+   "signals": [
+    "cash_short",
+    "delivery_problem",
+    "quality_problem"
+   ]
+  },
+  "sup:70340": {
+   "coverage": "full",
+   "file": "70340.json",
+   "name": "Metallbau Steinfelder KG",
+   "parts": [
+    "part:330020",
+    "part:330030"
+   ],
+   "signals": [
+    "informal_costing"
+   ]
+  },
+  "sup:70350": {
+   "coverage": "full",
+   "file": "70350.json",
+   "name": "Oberflächentechnik Weißacher GmbH",
+   "parts": [
+    "part:330060"
+   ],
+   "signals": [
+    "cash_short",
+    "delivery_problem",
+    "margin_floor",
+    "quality_problem"
+   ]
+  },
+  "sup:70360": {
+   "coverage": "full",
+   "file": "70360.json",
+   "name": "Kantteile Strasser GmbH",
+   "parts": [
+    "part:330020",
+    "part:330030"
+   ],
+   "signals": [
+    "informal_costing",
+    "quality_problem"
+   ]
+  },
+  "sup:70410": {
+   "coverage": "full",
+   "file": "70410.json",
+   "name": "Dichtungswerk Ravensteiner GmbH",
+   "parts": [
+    "part:340010",
+    "part:340011",
+    "part:340030"
+   ],
+   "signals": [
+    "approval_ladder",
+    "capacity_tight"
+   ]
+  },
+  "sup:70420": {
+   "coverage": "full",
+   "file": "70420.json",
+   "name": "Gleitring-Systeme Kaltenbrunn AG",
+   "parts": [
+    "part:340012"
+   ],
+   "signals": [
+    "approval_ladder",
+    "list_price_fixed"
+   ]
+  },
+  "sup:70430": {
+   "coverage": "full",
+   "file": "70430.json",
+   "name": "Elasto-Dicht Hermannsdorfer GmbH",
+   "parts": [
+    "part:340020",
+    "part:340030",
+    "part:340040"
+   ],
+   "signals": [
+    "wants_volume"
+   ]
+  },
+  "sup:70440": {
+   "coverage": "full",
+   "file": "70440.json",
+   "name": "Kohlering-Technik Pirkheim GmbH",
+   "parts": [
+    "part:340011",
+    "part:340040"
+   ],
+   "signals": [
+    "approval_ladder",
+    "capacity_tight"
+   ]
+  },
+  "sup:70510": {
+   "coverage": "full",
+   "file": "70510.json",
+   "name": "Antriebstechnik Nordmark AG",
+   "parts": [
+    "part:350010",
+    "part:350011",
+    "part:350012",
+    "part:350013"
+   ],
+   "signals": [
+    "approval_ladder",
+    "margin_floor",
+    "price_claim"
+   ]
+  },
+  "sup:70520": {
+   "coverage": "full",
+   "file": "70520.json",
+   "name": "Vesmo Elektromotory a.s.",
+   "parts": [
+    "part:350010",
+    "part:350012"
+   ],
+   "signals": [
+    "approval_ladder",
+    "material_hedged",
+    "wants_volume"
+   ]
+  },
+  "sup:70530": {
+   "coverage": "full",
+   "file": "70530.json",
+   "name": "Selvbrunn Drive Systems GmbH",
+   "parts": [
+    "part:350020",
+    "part:350021"
+   ],
+   "signals": [
+    "approval_ladder",
+    "list_price_fixed"
+   ]
+  },
+  "sup:70540": {
+   "coverage": "full",
+   "file": "70540.json",
+   "name": "Konvertek Antriebselektronik GmbH",
+   "parts": [
+    "part:350020",
+    "part:350021"
+   ],
+   "signals": [
+    "approval_ladder",
+    "capacity_tight",
+    "list_price_fixed",
+    "margin_floor",
+    "wants_volume"
+   ]
+  },
+  "sup:70550": {
+   "coverage": "full",
+   "file": "70550.json",
+   "name": "Platinenwerk Lausitz GmbH",
+   "parts": [
+    "part:350030"
+   ],
+   "signals": [
+    "approval_ladder",
+    "margin_floor",
+    "price_claim",
+    "wants_volume"
+   ]
+  },
+  "sup:70560": {
+   "coverage": "full",
+   "file": "70560.json",
+   "name": "Kabelwerk Rhönsberg GmbH",
+   "parts": [
+    "part:350040"
+   ],
+   "signals": [
+    "approval_ladder",
+    "material_hedged"
+   ]
+  },
+  "sup:70570": {
+   "coverage": "full",
+   "file": "70570.json",
+   "name": "Sensorik Ammertal GmbH",
+   "parts": [
+    "part:350050"
+   ],
+   "signals": [
+    "approval_ladder",
+    "list_price_fixed",
+    "ownership_change"
+   ]
+  },
+  "sup:70580": {
+   "coverage": "full",
+   "file": "70580.json",
+   "name": "Motorenwerk Saalach GmbH",
+   "parts": [
+    "part:350011",
+    "part:350013"
+   ],
+   "signals": [
+    "approval_ladder",
+    "list_price_fixed",
+    "ownership_change",
+    "wants_volume"
+   ]
+  },
+  "sup:70610": {
+   "coverage": "full",
+   "file": "70610.json",
+   "name": "Schraubenhandel Leitner & Sohn GmbH",
+   "parts": [
+    "part:360010",
+    "part:360012",
+    "part:360030"
+   ],
+   "signals": [
+    "approval_ladder"
+   ]
+  },
+  "sup:70620": {
+   "coverage": "full",
+   "file": "70620.json",
+   "name": "Wälzlager-Zentrum Süd GmbH",
+   "parts": [
+    "part:360020",
+    "part:360021",
+    "part:360022"
+   ],
+   "signals": [
+    "list_price_fixed",
+    "ownership_change",
+    "wants_volume"
+   ]
+  },
+  "sup:70630": {
+   "coverage": "full",
+   "file": "70630.json",
+   "name": "Normteile Brucker KG",
+   "parts": [
+    "part:360013",
+    "part:360030"
+   ],
+   "signals": [
+    "approval_ladder",
+    "list_price_fixed"
+   ]
+  },
+  "sup:70640": {
+   "coverage": "full",
+   "file": "70640.json",
+   "name": "Kugellager-Vertrieb Inntal GmbH",
+   "parts": [
+    "part:360020",
+    "part:360021"
+   ],
+   "signals": [
+    "approval_ladder",
+    "wants_volume"
+   ]
+  },
+  "sup:70650": {
+   "coverage": "full",
+   "file": "70650.json",
+   "name": "Verbindungstechnik Mairhofer GmbH",
+   "parts": [
+    "part:360010",
+    "part:360011",
+    "part:360012"
+   ],
+   "signals": [
+    "approval_ladder",
+    "list_price_fixed",
+    "ownership_change",
+    "wants_volume"
+   ]
+  },
+  "sup:70710": {
+   "coverage": "full",
+   "file": "70710.json",
+   "name": "Edelstahl-Service Donautal GmbH",
+   "parts": [
+    "part:370010",
+    "part:370021"
+   ],
+   "signals": [
+    "approval_ladder",
+    "material_hedged"
+   ]
+  },
+  "sup:70720": {
+   "coverage": "full",
+   "file": "70720.json",
+   "name": "Stahlhandel Rupprecht-Kessel GmbH",
+   "parts": [
+    "part:370012",
+    "part:370020"
+   ],
+   "signals": []
+  },
+  "sup:70730": {
+   "coverage": "full",
+   "file": "70730.json",
+   "name": "Inox Center Ostalpen GmbH",
+   "parts": [
+    "part:370021"
+   ],
+   "signals": [
+    "approval_ladder",
+    "material_hedged"
+   ]
+  },
+  "sup:70740": {
+   "coverage": "full",
+   "file": "70740.json",
+   "name": "Blankstahl Werdenfels GmbH",
+   "parts": [
+    "part:370010",
+    "part:370011",
+    "part:370012"
+   ],
+   "signals": [
+    "approval_ladder",
+    "wants_volume"
+   ]
+  }
+ }
+}

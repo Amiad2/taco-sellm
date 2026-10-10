@@ -1,0 +1,633 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070410",
+  "incoterm": "DAP",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 30,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Dichtungswerk Ravensteiner GmbH",
+   "date": "2025-11-08",
+   "effective_date": null,
+   "id": "doc:20251108-70410-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "New contact person",
+   "text": "From 1 October your contact in sales is our new colleague in inside sales; all other contacts stay the same."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-03-10",
+   "effective_date": null,
+   "id": "doc:20260310-70410-M1",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Annual review",
+   "text": "Annual review with Dichtungswerk Ravensteiner GmbH. Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Dichtungswerk Ravensteiner GmbH",
+   "date": "2026-03-27",
+   "effective_date": null,
+   "id": "doc:20260327-70410-M2",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "New volumes",
+   "text": "Order intake is very strong. We can confirm additional volumes only against a binding 12-month commitment."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Dichtungswerk Ravensteiner GmbH",
+   "date": "2026-09-18",
+   "effective_date": null,
+   "id": "doc:20260918-70410-P10",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [
+    "part:340010"
+   ],
+   "subject": "Capacity situation and delivery dates",
+   "text": "Hello,\n\ndue to very high capacity utilisation we cannot confirm your full forecast for Mechanical seal 24 mm, SiC/carbon, EPDM (part:340010) for the coming months. Lead times are currently longer than agreed. We will prioritise customers with firm, long-term commitments.\n\nBest regards,\nDichtungswerk Ravensteiner GmbH"
+  }
+ ],
+ "economics": {
+  "archetype": "group",
+  "archetype_basis": "owner type group",
+  "cash_pressure": "low",
+  "cost_of_money": 0.065,
+  "cost_of_money_basis": "rule: owner type group",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 0.54,
+  "our_spend_eur": {
+   "FY2024": 700404.93,
+   "FY2025": 808344.4,
+   "FY2026": 816440.74
+  },
+  "we_pay_late_days": 1.9
+ },
+ "identity": {
+  "abc_class": "A",
+  "blocked": false,
+  "category": "seals",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001"
+  ],
+  "country": "DE",
+  "credit_index": 159,
+  "credit_index_12m_ago": 159,
+  "equity_ratio_pct": 28.8,
+  "founded": 1958,
+  "group_parent": "Ravensteiner Holding AG",
+  "legal_form": "GmbH",
+  "name": "Dichtungswerk Ravensteiner GmbH",
+  "owner_type": "group",
+  "staff": 650,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "100-250 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 151000000,
+  "vda63_grade": "A"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  }
+ ],
+ "news": [
+  {
+   "body": "Dichtungswerk Ravensteiner GmbH has informed customers that deliveries of standard mechanical seals will be allocated in line with last year's call-offs.",
+   "date": "2026-08-22",
+   "headline": "Dichtungswerk Ravensteiner GmbH allocates volumes",
+   "id": "news:20260822-23",
+   "noise": false,
+   "source": "Metall-Kurier",
+   "topic": "allocation"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2024-04-21",
+   "incoterm": "DAP",
+   "lead_time_days": 45,
+   "part_id": "part:340011",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100037",
+   "remarks": "",
+   "unit_price": 41.55
+  },
+  {
+   "date": "2025-05-23",
+   "incoterm": "DAP",
+   "lead_time_days": 49,
+   "part_id": "part:340030",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100038",
+   "remarks": "",
+   "unit_price": 2.35
+  }
+ ],
+ "parts": {
+  "part:340010": {
+   "abc_class": "B",
+   "alternatives": [],
+   "category": "seals",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70410-340010",
+    "price": 29.89,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Mechanical seal 24 mm, SiC/carbon, EPDM",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.28
+    },
+    {
+     "change_12m_pct": 3.9,
+     "change_6m_pct": 3.2,
+     "ids_12m": [
+      "idx:PPI-C2219@2025-08",
+      "idx:PPI-C2219@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2219@2026-02",
+      "idx:PPI-C2219@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 122.4,
+     "series": "PPI-C2219",
+     "weight": 0.14
+    }
+   ],
+   "floor_estimate": {
+    "basis": "plant-specific should-cost cost:340010",
+    "high": 25.53,
+    "low": 23.09,
+    "value": 24.31
+   },
+   "forecast": {
+    "change_pct": 10.1,
+    "id": "fc:340010@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 21310,
+    "volume_per_year": 21310
+   },
+   "grade": "EN 12756",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-18",
+      "event_id": "EV-2023-70410-340010",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 7.0,
+      "date": "2023-12-10",
+      "event_id": "EV-2024-70410-340010",
+      "note": "",
+      "settled_pct": 3.3,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.0,
+      "date": "2024-11-24",
+      "event_id": "EV-2025-70410-340010",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.5,
+      "date": "2025-11-23",
+      "event_id": "EV-2026-70410-340010",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 3.83,
+    "mean_give_pct": 2.73,
+    "mean_settled_pct": 1.1
+   },
+   "material_group": "seal",
+   "planned_lead_time_days": 42,
+   "price_to_should_cost": 1.2295,
+   "price_unit": 1,
+   "should_cost": {
+    "confidence_pct": 5,
+    "conversion_eur": 14.64,
+    "cost_base": "DE",
+    "id": "cost:340010",
+    "material_eur": 3.4,
+    "overhead_eur": 6.27,
+    "plant_specific": true,
+    "price_unit": 1,
+    "unit_cost": 24.31
+   },
+   "sourcing": {
+    "approved_since": "2020-07-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  },
+  "part:340011": {
+   "abc_class": "B",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Kohlering-Technik Pirkheim GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 60,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70440",
+     "unit_price": null
+    },
+    {
+     "date": "2024-04-21",
+     "name": "Kohlering-Technik Pirkheim GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100036",
+     "status": null,
+     "supplier_id": "sup:70440",
+     "unit_price": 40.23
+    }
+   ],
+   "category": "seals",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70410-340011",
+    "price": 38.29,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Mechanical seal 32 mm, SiC/carbon, EPDM",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.33
+    },
+    {
+     "change_12m_pct": 3.9,
+     "change_6m_pct": 3.2,
+     "ids_12m": [
+      "idx:PPI-C2219@2025-08",
+      "idx:PPI-C2219@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2219@2026-02",
+      "idx:PPI-C2219@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 122.4,
+     "series": "PPI-C2219",
+     "weight": 0.17
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 11.4,
+    "id": "fc:340011@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 12720,
+    "volume_per_year": 12720
+   },
+   "grade": "EN 12756",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-10",
+      "event_id": "EV-2023-70410-340011",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 1.8,
+      "date": "2023-12-02",
+      "event_id": "EV-2024-70410-340011",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 4.9,
+      "date": "2024-11-24",
+      "event_id": "EV-2025-70410-340011",
+      "note": "",
+      "settled_pct": 2.1,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.5,
+      "date": "2025-12-02",
+      "event_id": "EV-2026-70410-340011",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 2.73,
+    "mean_give_pct": 2.03,
+    "mean_settled_pct": 0.7
+   },
+   "material_group": "seal",
+   "planned_lead_time_days": 35,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2021-07-01",
+    "quota_pct": 40,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  },
+  "part:340030": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Elasto-Dicht Hermannsdorfer GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 0,
+     "quote_id": null,
+     "status": "qualified",
+     "supplier_id": "sup:70430",
+     "unit_price": null
+    },
+    {
+     "date": "2025-05-23",
+     "name": "Elasto-Dicht Hermannsdorfer GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100039",
+     "status": null,
+     "supplier_id": "sup:70430",
+     "unit_price": 1.97
+    }
+   ],
+   "category": "seals",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70410-340030",
+    "price": 2.23,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Casing gasket, aramid fibre",
+   "drivers": [
+    {
+     "change_12m_pct": 3.9,
+     "change_6m_pct": 3.2,
+     "ids_12m": [
+      "idx:PPI-C2219@2025-08",
+      "idx:PPI-C2219@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2219@2026-02",
+      "idx:PPI-C2219@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 122.4,
+     "series": "PPI-C2219",
+     "weight": 0.56
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.11
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 10.2,
+    "id": "fc:340030@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 30600,
+    "volume_per_year": 30600
+   },
+   "grade": "aramid",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-14",
+      "event_id": "EV-2023-70410-340030",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 2.2,
+      "date": "2023-12-08",
+      "event_id": "EV-2024-70410-340030",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 5.6,
+      "date": "2024-12-06",
+      "event_id": "EV-2025-70410-340030",
+      "note": "",
+      "settled_pct": 3.7,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.1,
+      "date": "2025-12-07",
+      "event_id": "EV-2026-70410-340030",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 2.97,
+    "mean_give_pct": 1.73,
+    "mean_settled_pct": 1.23
+   },
+   "material_group": "seal_soft",
+   "planned_lead_time_days": 14,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2014-07-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "A",
+   "colour": "green",
+   "id": "sc:70410@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 85.9,
+   "otd_pct": 79.5,
+   "ppm": 270,
+   "quarter": "2026Q3",
+   "score": 88.4
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70410@2025Q4",
+    "sc:70410@2026Q1",
+    "sc:70410@2026Q2",
+    "sc:70410@2026Q3"
+   ],
+   "otd_pct": 80.65,
+   "ppm": 363.25
+  },
+  "qn_12m": 16,
+  "qn_ids_12m": [
+   "qn:20004682",
+   "qn:20004720",
+   "qn:20004772",
+   "qn:20004773",
+   "qn:20004798",
+   "qn:20004828",
+   "qn:20004851",
+   "qn:20004864",
+   "qn:20004870",
+   "qn:20004876",
+   "qn:20004891",
+   "qn:20004920",
+   "qn:20004967",
+   "qn:20004983",
+   "qn:20005011",
+   "qn:20005012"
+  ],
+  "qn_supplier_caused_12m": 14,
+  "trend": "flat"
+ },
+ "profile_text": "Dichtungswerk Ravensteiner GmbH (DE; group; part of Ravensteiner Holding AG; 650 staff; turnover EUR 151.0 M). Our spend FY2026 EUR 816,441 (0.54 % of its turnover). Standard terms: 30 days net, DAP, lead time 42 days. Cost of money about 6.5 % a year; cash pressure low; type group. Signals: approval ladder (2), capacity tight (1). Performance 2026Q3: green, OTD 79.5 %, 270 ppm. Parts: part:340010 Mechanical seal 24 mm, SiC/carbon, EPDM: price 29.89 per 1, 1.23x should-cost; part:340011 Mechanical seal 32 mm, SiC/carbon, EPDM: price 38.29 per 1; part:340030 Casing gasket, aramid fibre: price 2.23 per 1.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260310-70410-M1",
+    "sup:70410#group"
+   ],
+   "excerpt": "Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks.",
+   "kind": "approval_ladder",
+   "strength": 2
+  },
+  {
+   "evidence": [
+    "news:20260822-23"
+   ],
+   "excerpt": "Dichtungswerk Ravensteiner GmbH allocates volumes",
+   "kind": "capacity_tight",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "DAP",
+  "lead_time_days": 42,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70410",
+ "warnings": []
+}

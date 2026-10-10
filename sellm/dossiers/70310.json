@@ -1,0 +1,328 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070310",
+  "incoterm": "DAP",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 45,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Blechtechnik Aichbauer GmbH",
+   "date": "2025-10-03",
+   "effective_date": null,
+   "id": "doc:20251003-70310-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "ISO 9001 certificate",
+   "text": "Please find attached our renewed ISO 9001 certificate."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Blechtechnik Aichbauer GmbH",
+   "date": "2026-09-11",
+   "effective_date": null,
+   "id": "doc:20260911-70310-M1",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Payment of invoices",
+   "text": "Could you pay our invoices within 10 days? In return we would grant a cash discount."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Supplier Quality",
+   "date": "2026-09-24",
+   "effective_date": null,
+   "id": "doc:20260924-70310-P12",
+   "kind": "letter",
+   "notice_days": null,
+   "part_ids": [
+    "part:330010"
+   ],
+   "subject": "Escalation: delivery and quality performance",
+   "text": "To Blechtechnik Aichbauer GmbH\n\nyour rolling 12-month scorecard (sc:70310@2026Q3) is **red**: on-time delivery 63.0 %, 4118 ppm, 0 overdue 8D reports. We expect a binding improvement plan for Base frame HN 50/65, welded, painted (part:330010) and will discuss quality commitments and cost recovery.\n\nHollerau Pumpenwerke, Supplier Quality"
+  }
+ ],
+ "economics": {
+  "archetype": "job_shop",
+  "archetype_basis": "staff 70 < 80",
+  "cash_pressure": "medium",
+  "cost_of_money": 0.25,
+  "cost_of_money_basis": "rule: job shop or short of cash",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 11.33,
+  "our_spend_eur": {
+   "FY2024": 828502.55,
+   "FY2025": 856497.42,
+   "FY2026": 851190.0
+  },
+  "we_pay_late_days": 6.0
+ },
+ "identity": {
+  "abc_class": "A",
+  "blocked": false,
+  "category": "sheet metal",
+  "certifications": [
+   "ISO 9001"
+  ],
+  "country": "DE",
+  "credit_index": 232,
+  "credit_index_12m_ago": 232,
+  "equity_ratio_pct": 24.1,
+  "founded": 1982,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Blechtechnik Aichbauer GmbH",
+  "owner_type": "family",
+  "staff": 70,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "5-10 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 7510000,
+  "vda63_grade": "C"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  },
+  {
+   "body": "Producer prices for basic iron and steel are +7.3 % above January.",
+   "date": "2026-09-22",
+   "headline": "Steel prices +7.3 % since January",
+   "id": "news:20260922-35"
+  }
+ ],
+ "news": [],
+ "opening_offer": null,
+ "own_quotes": [],
+ "parts": {
+  "part:330010": {
+   "abc_class": "A",
+   "alternatives": [],
+   "category": "sheet metal",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70310-330010",
+    "price": 100.14,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Base frame HN 50/65, welded, painted",
+   "drivers": [
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.32
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.29
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.06
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 5.6,
+    "id": "fc:330010@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 8980,
+    "volume_per_year": 8980
+   },
+   "grade": "S235JR",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-20",
+      "event_id": "EV-2023-70310-330010",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -2.2,
+      "date": "2023-12-06",
+      "event_id": "EV-2024-70310-330010",
+      "note": "",
+      "settled_pct": -6.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.2,
+      "date": "2024-11-27",
+      "event_id": "EV-2025-70310-330010",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.6,
+      "date": "2025-11-20",
+      "event_id": "EV-2026-70310-330010",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 1.2,
+    "mean_give_pct": 3.2,
+    "mean_settled_pct": -2.0
+   },
+   "material_group": "sheet",
+   "planned_lead_time_days": 21,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2021-03-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "C",
+   "colour": "red",
+   "id": "sc:70310@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 63.0,
+   "otd_pct": 63.0,
+   "ppm": 4118,
+   "quarter": "2026Q3",
+   "score": 60.9
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70310@2025Q4",
+    "sc:70310@2026Q1",
+    "sc:70310@2026Q2",
+    "sc:70310@2026Q3"
+   ],
+   "otd_pct": 66.7,
+   "ppm": 2848.25
+  },
+  "qn_12m": 7,
+  "qn_ids_12m": [
+   "qn:20004785",
+   "qn:20004801",
+   "qn:20004827",
+   "qn:20004856",
+   "qn:20004913",
+   "qn:20004974",
+   "qn:20005001"
+  ],
+  "qn_supplier_caused_12m": 7,
+  "trend": "worse"
+ },
+ "profile_text": "Blechtechnik Aichbauer GmbH (DE; family; 70 staff; turnover EUR 7.5 M). Our spend FY2026 EUR 851,190 (11.33 % of its turnover). Standard terms: 45 days net, DAP, lead time 21 days. Cost of money about 25 % a year; cash pressure medium; type job shop. Signals: cash short (1), delivery problem (2), quality problem (3). Performance 2026Q3: red, OTD 63.0 %, 4118 ppm. Parts: part:330010 Base frame HN 50/65, welded, painted: price 100.14 per 1.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260911-70310-M1"
+   ],
+   "excerpt": "Could you pay our invoices within 10 days?",
+   "kind": "cash_short",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "sc:70310@2026Q3"
+   ],
+   "excerpt": "On-time delivery 63.0 % in 2026Q3.",
+   "kind": "delivery_problem",
+   "strength": 2
+  },
+  {
+   "evidence": [
+    "doc:20260924-70310-P12",
+    "sc:70310@2026Q3"
+   ],
+   "excerpt": "your rolling 12-month scorecard (sc:70310@2026Q3) is **red**: on-time delivery 63.0 %, 4118 ppm, 0 overdue 8D reports.",
+   "kind": "quality_problem",
+   "strength": 3
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "DAP",
+  "lead_time_days": 21,
+  "payment_days": 45,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70310",
+ "warnings": []
+}

@@ -1,0 +1,789 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070230",
+  "incoterm": "EXW",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 30,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Präzisionsteile Lindlbauer KG",
+   "date": "2025-11-14",
+   "effective_date": null,
+   "id": "doc:20251114-70230-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Holiday shutdown",
+   "text": "Our plant is closed from 23 December to 6 January. Please place call-offs for January by 10 December."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-07-24",
+   "effective_date": null,
+   "id": "doc:20260724-70230-M1",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Visit by the owner",
+   "text": "The owner of Präzisionsteile Lindlbauer KG admitted he had not followed his material and energy prices closely since the 2022 peak; his office manager does the costing."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-08-09",
+   "effective_date": null,
+   "id": "doc:20260809-70230-M3",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Price discussion",
+   "text": "Call with the owner of Präzisionsteile Lindlbauer KG: he offered to walk us through their calculation (hourly rates and material) if that helps to settle prices."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Präzisionsteile Lindlbauer KG",
+   "date": "2026-08-12",
+   "effective_date": null,
+   "id": "doc:20260812-70230-P",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Overdue invoices",
+   "text": "Several of our invoices are overdue again. We ask you to keep to the agreed payment terms; otherwise we will have to review our conditions."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Präzisionsteile Lindlbauer KG",
+   "date": "2026-09-12",
+   "effective_date": null,
+   "id": "doc:20260912-70230-M2",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Payment of invoices",
+   "text": "Could you pay our invoices within 10 days? In return we would grant a cash discount."
+  },
+  {
+   "asked_pct": 7.0,
+   "asked_price": 17.44,
+   "author": "Präzisionsteile Lindlbauer KG",
+   "date": "2026-09-27",
+   "effective_date": "2026-11-01",
+   "id": "doc:20260927-70230-P13",
+   "kind": "letter",
+   "notice_days": 35,
+   "part_ids": [
+    "part:320060"
+   ],
+   "subject": "Price adjustment from 01 November 2026",
+   "text": "Dear Sir or Madam,\n\nwe have supplied Hollerau Pumpenwerke reliably for many years. Owing to the wage increase of April 2026 and higher energy and material costs, we are forced to adjust our prices for Coupling hub (part:320060) by **7.0 %** with effect from **01 November 2026**: from EUR 16.30 to EUR 17.44 per  pc.\n\nWe regret this step and ask for your understanding.\n\nYours faithfully,\nPräzisionsteile Lindlbauer KG"
+  }
+ ],
+ "economics": {
+  "archetype": "job_shop",
+  "archetype_basis": "staff 14 < 80",
+  "cash_pressure": "high",
+  "cost_of_money": 0.45,
+  "cost_of_money_basis": "skonto 2 % at 14 vs 30 days (measured)",
+  "discount_taken_share_pct": 52.65,
+  "our_share_of_turnover_pct": 36.92,
+  "our_spend_eur": {
+   "FY2024": 347544.68,
+   "FY2025": 371169.7,
+   "FY2026": 369165.99
+  },
+  "we_pay_late_days": -3.8
+ },
+ "identity": {
+  "abc_class": "B",
+  "blocked": false,
+  "category": "machined parts",
+  "certifications": [
+   "ISO 9001"
+  ],
+  "country": "DE",
+  "credit_index": 255,
+  "credit_index_12m_ago": 255,
+  "equity_ratio_pct": 37.3,
+  "founded": 1985,
+  "group_parent": null,
+  "legal_form": "KG",
+  "name": "Präzisionsteile Lindlbauer KG",
+  "owner_type": "family",
+  "staff": 14,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "0-2 M EUR",
+  "turnover_estimated": true,
+  "turnover_eur": null,
+  "vda63_grade": "A"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "The alloy surcharge for 1.4404 stands at EUR 3,008/t, +6 % on a year ago.",
+   "date": "2026-09-16",
+   "headline": "Alloy surcharge 1.4404 at EUR 3,008 per tonne",
+   "id": "news:20260916-32"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  },
+  {
+   "body": "Producer prices for basic iron and steel are +7.3 % above January.",
+   "date": "2026-09-22",
+   "headline": "Steel prices +7.3 % since January",
+   "id": "news:20260922-35"
+  }
+ ],
+ "news": [
+  {
+   "body": "Präzisionsteile Lindlbauer KG has appointed a new managing director for sales.",
+   "date": "2026-05-03",
+   "headline": "New managing director at Präzisionsteile Lindlbauer KG",
+   "id": "news:20260503-11",
+   "noise": true,
+   "source": "Gießerei-Rundschau Süd",
+   "topic": "noise"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2024-08-23",
+   "incoterm": null,
+   "lead_time_days": 33,
+   "part_id": "part:320031",
+   "payment_days": null,
+   "price_unit": 1,
+   "quote_id": "quote:7100027",
+   "remarks": "",
+   "unit_price": 27.0
+  },
+  {
+   "date": "2025-02-07",
+   "incoterm": null,
+   "lead_time_days": 33,
+   "part_id": "part:320020",
+   "payment_days": null,
+   "price_unit": 1,
+   "quote_id": "quote:7100023",
+   "remarks": "",
+   "unit_price": 12.9
+  },
+  {
+   "date": "2025-08-17",
+   "incoterm": null,
+   "lead_time_days": 28,
+   "part_id": "part:320060",
+   "payment_days": null,
+   "price_unit": 1,
+   "quote_id": "quote:7100028",
+   "remarks": "",
+   "unit_price": 18.1
+  },
+  {
+   "date": "2026-09-15",
+   "incoterm": null,
+   "lead_time_days": 28,
+   "part_id": "part:320060",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7300013",
+   "remarks": "",
+   "unit_price": 16.3
+  }
+ ],
+ "parts": {
+  "part:320020": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Drehzentrum Ilzauer GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 60,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70295",
+     "unit_price": null
+    },
+    {
+     "date": "2025-02-07",
+     "name": "Drehzentrum Ilzauer GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100022",
+     "status": null,
+     "supplier_id": "sup:70295",
+     "unit_price": 12.4
+    },
+    {
+     "date": "2026-09-14",
+     "name": "Drehzentrum Ilzauer GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7300062",
+     "status": null,
+     "supplier_id": "sup:70295",
+     "unit_price": 30.03
+    }
+   ],
+   "category": "machined parts",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70230-320020",
+    "price": 12.06,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Shaft sleeve",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.34
+    },
+    {
+     "change_12m_pct": 12.26,
+     "change_6m_pct": 9.69,
+     "ids_12m": [
+      "idx:PPI-C2431@2025-08",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2431@2026-02",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 129.1,
+     "series": "PPI-C2431",
+     "weight": 0.19
+    },
+    {
+     "change_12m_pct": 5.92,
+     "change_6m_pct": -0.26,
+     "ids_12m": [
+      "idx:AS-14404@2025-09",
+      "idx:AS-14404@2026-09"
+     ],
+     "ids_6m": [
+      "idx:AS-14404@2026-03",
+      "idx:AS-14404@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 3007.8019,
+     "series": "AS-14404",
+     "weight": 0.14
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.04
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 14.4,
+    "id": "fc:320020@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 21910,
+    "volume_per_year": 21910
+   },
+   "grade": "1.4404",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-20",
+      "event_id": "EV-2023-70230-320020",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -0.5,
+      "date": "2023-11-13",
+      "event_id": "EV-2024-70230-320020",
+      "note": "",
+      "settled_pct": -4.1,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.4,
+      "date": "2024-11-27",
+      "event_id": "EV-2025-70230-320020",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.8,
+      "date": "2025-11-16",
+      "event_id": "EV-2026-70230-320020",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 1.9,
+    "mean_give_pct": 3.27,
+    "mean_settled_pct": -1.37
+   },
+   "material_group": "mach_inox",
+   "planned_lead_time_days": 28,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2013-07-01",
+    "quota_pct": 40,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  },
+  "part:320031": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Strojírna Hrvelec s.r.o.",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 70,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70240",
+     "unit_price": null
+    },
+    {
+     "date": "2024-08-23",
+     "name": "Strojírna Hrvelec s.r.o.",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100026",
+     "status": null,
+     "supplier_id": "sup:70240",
+     "unit_price": 22.0
+    }
+   ],
+   "category": "machined parts",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70230-320031",
+    "price": 25.34,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Flange DN 100 PN 16, machined",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.35
+    },
+    {
+     "change_12m_pct": 12.26,
+     "change_6m_pct": 9.69,
+     "ids_12m": [
+      "idx:PPI-C2431@2025-08",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2431@2026-02",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 129.1,
+     "series": "PPI-C2431",
+     "weight": 0.29
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.01
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 1.3,
+    "id": "fc:320031@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 4420,
+    "volume_per_year": 4420
+   },
+   "grade": "S235JR",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-15",
+      "event_id": "EV-2023-70230-320031",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -2.3,
+      "date": "2023-11-19",
+      "event_id": "EV-2024-70230-320031",
+      "note": "",
+      "settled_pct": -4.3,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.3,
+      "date": "2024-11-26",
+      "event_id": "EV-2025-70230-320031",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.1,
+      "date": "2025-11-23",
+      "event_id": "EV-2026-70230-320031",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 0.37,
+    "mean_give_pct": 1.8,
+    "mean_settled_pct": -1.43
+   },
+   "material_group": "mach_steel",
+   "planned_lead_time_days": 42,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2011-07-01",
+    "quota_pct": 30,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  },
+  "part:320060": {
+   "abc_class": "B",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Drehteile Fuchsreiter GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 0,
+     "quote_id": null,
+     "status": "qualified",
+     "supplier_id": "sup:70250",
+     "unit_price": null
+    },
+    {
+     "date": "2025-08-17",
+     "name": "Drehteile Fuchsreiter GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100029",
+     "status": null,
+     "supplier_id": "sup:70250",
+     "unit_price": 17.3
+    },
+    {
+     "date": "2026-09-14",
+     "name": "Drehteile Fuchsreiter GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7200013",
+     "status": null,
+     "supplier_id": "sup:70250",
+     "unit_price": 17.87
+    }
+   ],
+   "category": "machined parts",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70230-320060",
+    "price": 16.3,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Coupling hub",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.34
+    },
+    {
+     "change_12m_pct": 12.26,
+     "change_6m_pct": 9.69,
+     "ids_12m": [
+      "idx:PPI-C2431@2025-08",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2431@2026-02",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 129.1,
+     "series": "PPI-C2431",
+     "weight": 0.32
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.05
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 20.0,
+    "id": "fc:320060@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 17910,
+    "volume_per_year": 17910
+   },
+   "grade": "C45",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-07",
+      "event_id": "EV-2023-70230-320060",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 0.5,
+      "date": "2023-11-15",
+      "event_id": "EV-2024-70230-320060",
+      "note": "",
+      "settled_pct": -3.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 4.2,
+      "date": "2024-11-19",
+      "event_id": "EV-2025-70230-320060",
+      "note": "",
+      "settled_pct": 0.3,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.4,
+      "date": "2025-11-26",
+      "event_id": "EV-2026-70230-320060",
+      "note": "",
+      "settled_pct": 0.1,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 2.7,
+    "mean_give_pct": 3.57,
+    "mean_settled_pct": -0.87
+   },
+   "material_group": "mach_steel",
+   "planned_lead_time_days": 28,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2014-07-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "A",
+   "colour": "green",
+   "id": "sc:70230@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 88.5,
+   "otd_pct": 82.1,
+   "ppm": 544,
+   "quarter": "2026Q3",
+   "score": 88.3
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70230@2025Q4",
+    "sc:70230@2026Q1",
+    "sc:70230@2026Q2",
+    "sc:70230@2026Q3"
+   ],
+   "otd_pct": 80.72,
+   "ppm": 589.5
+  },
+  "qn_12m": 11,
+  "qn_ids_12m": [
+   "qn:20004697",
+   "qn:20004709",
+   "qn:20004734",
+   "qn:20004738",
+   "qn:20004755",
+   "qn:20004781",
+   "qn:20004783",
+   "qn:20004834",
+   "qn:20004840",
+   "qn:20004899",
+   "qn:20004908"
+  ],
+  "qn_supplier_caused_12m": 9,
+  "trend": "flat"
+ },
+ "profile_text": "Präzisionsteile Lindlbauer KG (DE; family; 14 staff; turnover 0-2 M EUR). Our spend FY2026 EUR 369,166 (36.92 % of its turnover). Standard terms: 30 days net, skonto 2 % at 14 days, EXW, lead time 28 days. Cost of money about 45 % a year; cash pressure high; type job shop. Signals: cash short (2), informal costing (1), price claim (1). Performance 2026Q3: green, OTD 82.1 %, 544 ppm. Parts: part:320020 Shaft sleeve: price 12.06 per 1; part:320031 Flange DN 100 PN 16, machined: price 25.34 per 1; part:320060 Coupling hub: price 16.3 per 1.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260912-70230-M2",
+    "sup:70230#skonto"
+   ],
+   "excerpt": "Could you pay our invoices within 10 days?",
+   "kind": "cash_short",
+   "strength": 2
+  },
+  {
+   "evidence": [
+    "doc:20260724-70230-M1"
+   ],
+   "excerpt": "The owner of Präzisionsteile Lindlbauer KG admitted he had not followed his material and energy prices closely since the 2022 peak; his office manager does t...",
+   "kind": "informal_costing",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "doc:20260927-70230-P13"
+   ],
+   "excerpt": "Letter asks 7.0 % from 2026-11-01.",
+   "kind": "price_claim",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "EXW",
+  "lead_time_days": 28,
+  "payment_days": 30,
+  "skonto_days": 14,
+  "skonto_pct": 2,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70230",
+ "warnings": []
+}

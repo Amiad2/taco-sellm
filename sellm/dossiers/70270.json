@@ -1,0 +1,351 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070270",
+  "incoterm": "EXW",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 45,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Obrábění Kraslin s.r.o.",
+   "date": "2025-12-11",
+   "effective_date": null,
+   "id": "doc:20251211-70270-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Packaging",
+   "text": "From November we deliver in returnable boxes instead of cardboard."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-02-23",
+   "effective_date": null,
+   "id": "doc:20260223-70270-M2",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Customer portfolio",
+   "text": "The sales director of Obrábění Kraslin s.r.o. said they are reviewing small accounts and will focus on customers with volume."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-03-18",
+   "effective_date": null,
+   "id": "doc:20260318-70270-M3",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Visit by the owner",
+   "text": "Visit by the owner of Obrábění Kraslin s.r.o.. He reminded us that in 2022 they kept supplying at the old price for a quarter and said he expects partnership in return."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-08-09",
+   "effective_date": null,
+   "id": "doc:20260809-70270-M1",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Price discussion",
+   "text": "Call with the owner of Obrábění Kraslin s.r.o.: he asked where we get our index figures from - he works from his own spreadsheet, last updated two years ago."
+  }
+ ],
+ "economics": {
+  "archetype": "job_shop",
+  "archetype_basis": "staff 30 < 80",
+  "cash_pressure": "low",
+  "cost_of_money": 0.25,
+  "cost_of_money_basis": "rule: job shop or short of cash",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 2.67,
+  "our_spend_eur": {
+   "FY2024": 75757.6,
+   "FY2025": 88948.4,
+   "FY2026": 93374.4
+  },
+  "we_pay_late_days": 5.4
+ },
+ "identity": {
+  "abc_class": "B",
+  "blocked": false,
+  "category": "machined parts",
+  "certifications": [
+   "ISO 9001"
+  ],
+  "country": "CZ",
+  "credit_index": 245,
+  "credit_index_12m_ago": 245,
+  "equity_ratio_pct": 44.8,
+  "founded": 2008,
+  "group_parent": null,
+  "legal_form": "s.r.o.",
+  "name": "Obrábění Kraslin s.r.o.",
+  "owner_type": "founder",
+  "staff": 30,
+  "supplier_since": "2011-01-01",
+  "turnover_band": "2-5 M EUR",
+  "turnover_estimated": true,
+  "turnover_eur": null,
+  "vda63_grade": "B"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "The alloy surcharge for 1.4404 stands at EUR 3,008/t, +6 % on a year ago.",
+   "date": "2026-09-16",
+   "headline": "Alloy surcharge 1.4404 at EUR 3,008 per tonne",
+   "id": "news:20260916-32"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  },
+  {
+   "body": "Producer prices for basic iron and steel are +7.3 % above January.",
+   "date": "2026-09-22",
+   "headline": "Steel prices +7.3 % since January",
+   "id": "news:20260922-35"
+  }
+ ],
+ "news": [],
+ "opening_offer": null,
+ "own_quotes": [],
+ "parts": {
+  "part:320050": {
+   "abc_class": "C",
+   "alternatives": [],
+   "category": "machined parts",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70270-320050",
+    "price": 15.88,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Adapter piece HI",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.36
+    },
+    {
+     "change_12m_pct": 12.26,
+     "change_6m_pct": 9.69,
+     "ids_12m": [
+      "idx:PPI-C2431@2025-08",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2431@2026-02",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 129.1,
+     "series": "PPI-C2431",
+     "weight": 0.31
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.03
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 13.1,
+    "id": "fc:320050@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 6650,
+    "volume_per_year": 6650
+   },
+   "grade": "C45",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-29",
+      "event_id": "EV-2023-70270-320050",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -4.1,
+      "date": "2023-11-18",
+      "event_id": "EV-2024-70270-320050",
+      "note": "",
+      "settled_pct": -5.4,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 5.8,
+      "date": "2024-12-04",
+      "event_id": "EV-2025-70270-320050",
+      "note": "",
+      "settled_pct": 2.7,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.8,
+      "date": "2025-12-02",
+      "event_id": "EV-2026-70270-320050",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 1.5,
+    "mean_give_pct": 2.4,
+    "mean_settled_pct": -0.9
+   },
+   "material_group": "mach_steel",
+   "planned_lead_time_days": 42,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2018-11-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "B",
+   "colour": "amber",
+   "id": "sc:70270@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 88.5,
+   "otd_pct": 84.6,
+   "ppm": 1531,
+   "quarter": "2026Q3",
+   "score": 84.7
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70270@2025Q4",
+    "sc:70270@2026Q1",
+    "sc:70270@2026Q2",
+    "sc:70270@2026Q3"
+   ],
+   "otd_pct": 77.6,
+   "ppm": 1671.5
+  },
+  "qn_12m": 6,
+  "qn_ids_12m": [
+   "qn:20004679",
+   "qn:20004708",
+   "qn:20004715",
+   "qn:20004838",
+   "qn:20004854",
+   "qn:20004969"
+  ],
+  "qn_supplier_caused_12m": 6,
+  "trend": "better"
+ },
+ "profile_text": "Obrábění Kraslin s.r.o. (CZ; founder; 30 staff; turnover 2-5 M EUR). Our spend FY2026 EUR 93,374 (2.67 % of its turnover). Standard terms: 45 days net, EXW, lead time 42 days. Cost of money about 25 % a year; cash pressure low; type job shop. Signals: informal costing (1), partnership (1), quality problem (2), wants volume (1). Performance 2026Q3: amber, OTD 84.6 %, 1531 ppm. Parts: part:320050 Adapter piece HI: price 15.88 per 1.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260809-70270-M1"
+   ],
+   "excerpt": "Call with the owner of Obrábění Kraslin s.r.o.: he asked where we get our index figures from - he works from his own spreadsheet, last updated two years ago.",
+   "kind": "informal_costing",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "doc:20260318-70270-M3"
+   ],
+   "excerpt": "He reminded us that in 2022 they kept supplying at the old price for a quarter and said he expects partnership in return.",
+   "kind": "partnership",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "sc:70270@2026Q3"
+   ],
+   "excerpt": "Scorecard 2026Q3 is amber.",
+   "kind": "quality_problem",
+   "strength": 2
+  },
+  {
+   "evidence": [
+    "doc:20260223-70270-M2"
+   ],
+   "excerpt": "said they are reviewing small accounts and will focus on customers with volume.",
+   "kind": "wants_volume",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "EXW",
+  "lead_time_days": 42,
+  "payment_days": 45,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70270",
+ "warnings": []
+}

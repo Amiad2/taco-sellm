@@ -1,0 +1,560 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070580",
+  "incoterm": "DAP",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 30,
+  "price_basis": "fixed per year",
+  "valid_from": "2024-01-01",
+  "valid_to": "2026-12-31"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Motorenwerk Saalach GmbH",
+   "date": "2025-11-02",
+   "effective_date": null,
+   "id": "doc:20251102-70580-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Holiday shutdown",
+   "text": "Our plant is closed from 23 December to 6 January. Please place call-offs for January by 10 December."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-03-22",
+   "effective_date": null,
+   "id": "doc:20260322-70580-M2",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Annual review",
+   "text": "Annual review with Motorenwerk Saalach GmbH. Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Motorenwerk Saalach GmbH",
+   "date": "2026-06-12",
+   "effective_date": null,
+   "id": "doc:20260612-70580-P",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Overdue invoices",
+   "text": "Several of our invoices are overdue again. We ask you to keep to the agreed payment terms; otherwise we will have to review our conditions."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-09-08",
+   "effective_date": null,
+   "id": "doc:20260908-70580-M3",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Customer portfolio",
+   "text": "The sales director of Motorenwerk Saalach GmbH said they are reviewing small accounts and will focus on customers with volume."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-09-26",
+   "effective_date": null,
+   "id": "doc:20260926-70580-M1",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Account review",
+   "text": "Their new sales director said Hollerau's volumes are 'not strategic' for Motorenwerk Saalach GmbH any more; replies have become slower since the summer."
+  }
+ ],
+ "economics": {
+  "archetype": "group",
+  "archetype_basis": "owner type group",
+  "cash_pressure": "low",
+  "cost_of_money": 0.065,
+  "cost_of_money_basis": "rule: owner type group",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 0.63,
+  "our_spend_eur": {
+   "FY2024": 897362.5,
+   "FY2025": 1154509.6,
+   "FY2026": 1151451.52
+  },
+  "we_pay_late_days": 19.4
+ },
+ "identity": {
+  "abc_class": "A",
+  "blocked": false,
+  "category": "electrical",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001"
+  ],
+  "country": "DE",
+  "credit_index": 171,
+  "credit_index_12m_ago": 171,
+  "equity_ratio_pct": 30.2,
+  "founded": 1938,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Motorenwerk Saalach GmbH",
+  "owner_type": "group",
+  "staff": 650,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "100-250 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 182000000,
+  "vda63_grade": "A"
+ },
+ "market_news": [
+  {
+   "body": "The copper notation for cables averaged EUR 1,289/100 kg in September, +48 % on a year ago.",
+   "date": "2026-09-10",
+   "headline": "Copper notation at EUR 1,289 per 100 kg",
+   "id": "news:20260910-27"
+  },
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Producer prices for assembled electronic boards rose +41 % in the twelve months to August.",
+   "date": "2026-09-18",
+   "headline": "Electronic boards +41 % year on year",
+   "id": "news:20260918-33"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  }
+ ],
+ "news": [
+  {
+   "body": "Motorenwerk Saalach GmbH will concentrate on larger key accounts and new product lines; smaller customers are to be served increasingly from standard ranges.",
+   "date": "2026-03-27",
+   "headline": "Motorenwerk Saalach GmbH sharpens its focus",
+   "id": "news:20260327-07",
+   "noise": false,
+   "source": "Gießerei-Rundschau Süd",
+   "topic": "refocus"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2024-05-15",
+   "incoterm": "DAP",
+   "lead_time_days": 50,
+   "part_id": "part:350013",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100048",
+   "remarks": "",
+   "unit_price": 1671.86
+  },
+  {
+   "date": "2024-06-19",
+   "incoterm": "DAP",
+   "lead_time_days": 43,
+   "part_id": "part:350011",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100045",
+   "remarks": "",
+   "unit_price": 419.31
+  },
+  {
+   "date": "2026-09-03",
+   "incoterm": "DAP",
+   "lead_time_days": 42,
+   "part_id": "part:350011",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7200002",
+   "remarks": "",
+   "unit_price": 421.06
+  },
+  {
+   "date": "2026-09-09",
+   "incoterm": "DAP",
+   "lead_time_days": 42,
+   "part_id": "part:350013",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7300057",
+   "remarks": "List conditions; supply from stock only.",
+   "unit_price": 1608.32
+  }
+ ],
+ "parts": {
+  "part:350011": {
+   "abc_class": "A",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Antriebstechnik Nordmark AG",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 100,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70510",
+     "unit_price": null
+    },
+    {
+     "date": "2024-06-19",
+     "name": "Antriebstechnik Nordmark AG",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100044",
+     "status": null,
+     "supplier_id": "sup:70510",
+     "unit_price": 381.47
+    }
+   ],
+   "category": "electrical",
+   "current_price": null,
+   "description": "Motor IE3 7.5 kW, 4-pole",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.21
+    },
+    {
+     "change_12m_pct": 47.73,
+     "change_6m_pct": 15.98,
+     "ids_12m": [
+      "idx:CU-NOTATION@2025-09",
+      "idx:CU-NOTATION@2026-09"
+     ],
+     "ids_6m": [
+      "idx:CU-NOTATION@2026-03",
+      "idx:CU-NOTATION@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 1288.5918,
+     "series": "CU-NOTATION",
+     "weight": 0.2
+    },
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.16
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 11.9,
+    "id": "fc:350011@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 6110,
+    "volume_per_year": 6110
+   },
+   "grade": "IE3",
+   "history": {
+    "below_full_cost": false,
+    "events": [],
+    "mean_asked_pct": null,
+    "mean_give_pct": null,
+    "mean_settled_pct": null
+   },
+   "material_group": "motor",
+   "planned_lead_time_days": 35,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2012-09-01",
+    "quota_pct": 0,
+    "status": "qualified",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  },
+  "part:350013": {
+   "abc_class": "A",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Antriebstechnik Nordmark AG",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 0,
+     "quote_id": null,
+     "status": "qualified",
+     "supplier_id": "sup:70510",
+     "unit_price": null
+    },
+    {
+     "date": "2024-05-15",
+     "name": "Antriebstechnik Nordmark AG",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100049",
+     "status": null,
+     "supplier_id": "sup:70510",
+     "unit_price": 1495.59
+    }
+   ],
+   "category": "electrical",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70580-350013",
+    "price": 1608.32,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Motor IE4 30 kW, 4-pole",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.22
+    },
+    {
+     "change_12m_pct": 47.73,
+     "change_6m_pct": 15.98,
+     "ids_12m": [
+      "idx:CU-NOTATION@2025-09",
+      "idx:CU-NOTATION@2026-09"
+     ],
+     "ids_6m": [
+      "idx:CU-NOTATION@2026-03",
+      "idx:CU-NOTATION@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 1288.5918,
+     "series": "CU-NOTATION",
+     "weight": 0.19
+    },
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.17
+    }
+   ],
+   "floor_estimate": {
+    "basis": "plant-specific should-cost cost:350013",
+    "high": 1646.3,
+    "low": 1489.51,
+    "value": 1567.9
+   },
+   "forecast": {
+    "change_pct": 33.9,
+    "id": "fc:350013@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 964,
+    "volume_per_year": 964
+   },
+   "grade": "IE4",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-28",
+      "event_id": "EV-2023-70580-350013",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 2.4,
+      "date": "2023-11-23",
+      "event_id": "EV-2024-70580-350013",
+      "note": "",
+      "settled_pct": -1.5,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.9,
+      "date": "2024-11-19",
+      "event_id": "EV-2025-70580-350013",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.3,
+      "date": "2025-11-18",
+      "event_id": "EV-2026-70580-350013",
+      "note": "",
+      "settled_pct": 1.7,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 3.2,
+    "mean_give_pct": 3.13,
+    "mean_settled_pct": 0.07
+   },
+   "material_group": "motor",
+   "planned_lead_time_days": 42,
+   "price_to_should_cost": 1.0258,
+   "price_unit": 1,
+   "should_cost": {
+    "confidence_pct": 5,
+    "conversion_eur": 724.37,
+    "cost_base": "DE",
+    "id": "cost:350013",
+    "material_eur": 533.09,
+    "overhead_eur": 310.44,
+    "plant_specific": true,
+    "price_unit": 1,
+    "unit_cost": 1567.9
+   },
+   "sourcing": {
+    "approved_since": "2014-09-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "A",
+   "colour": "green",
+   "id": "sc:70580@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 95.8,
+   "otd_pct": 95.8,
+   "ppm": 0,
+   "quarter": "2026Q3",
+   "score": 97.9
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70580@2025Q4",
+    "sc:70580@2026Q1",
+    "sc:70580@2026Q2",
+    "sc:70580@2026Q3"
+   ],
+   "otd_pct": 95.1,
+   "ppm": 0.0
+  },
+  "qn_12m": 0,
+  "qn_ids_12m": [],
+  "qn_supplier_caused_12m": 0,
+  "trend": "better"
+ },
+ "profile_text": "Motorenwerk Saalach GmbH (DE; group; 650 staff; turnover EUR 182.0 M). Our spend FY2026 EUR 1.2 M (0.63 % of its turnover). Standard terms: 30 days net, DAP, lead time 42 days. Cost of money about 6.5 % a year; cash pressure low; type group. Signals: approval ladder (2), list price fixed (1), ownership change (1), wants volume (1). Performance 2026Q3: green, OTD 95.8 %, 0 ppm. Parts: part:350011 Motor IE3 7.5 kW, 4-pole; part:350013 Motor IE4 30 kW, 4-pole: price 1608.32 per 1, 1.03x should-cost.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260322-70580-M2",
+    "sup:70580#group"
+   ],
+   "excerpt": "Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks.",
+   "kind": "approval_ladder",
+   "strength": 2
+  },
+  {
+   "evidence": [
+    "quote:7300057"
+   ],
+   "excerpt": "List conditions; supply from stock only.",
+   "kind": "list_price_fixed",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "news:20260327-07"
+   ],
+   "excerpt": "Motorenwerk Saalach GmbH sharpens its focus",
+   "kind": "ownership_change",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "doc:20260908-70580-M3"
+   ],
+   "excerpt": "The sales director of Motorenwerk Saalach GmbH said they are reviewing small accounts and will focus on customers with volume.",
+   "kind": "wants_volume",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "DAP",
+  "lead_time_days": 42,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70580",
+ "warnings": []
+}

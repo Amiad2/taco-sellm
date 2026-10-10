@@ -1,0 +1,476 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070150",
+  "incoterm": "FCA",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 60,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Tarsevi Döküm Sanayi A.Ş.",
+   "date": "2025-10-17",
+   "effective_date": null,
+   "id": "doc:20251017-70150-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Holiday shutdown",
+   "text": "Our plant is closed from 23 December to 6 January. Please place call-offs for January by 10 December."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-04-14",
+   "effective_date": null,
+   "id": "doc:20260414-70150-M5",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Capacity",
+   "text": "Call with sales at Tarsevi Döküm Sanayi A.Ş.: they could take additional parts at short notice; the second shift has been on hold since spring."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-04-18",
+   "effective_date": null,
+   "id": "doc:20260418-70150-M2",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Price discussion",
+   "text": "Call with the owner of Tarsevi Döküm Sanayi A.Ş.: he offered to walk us through their calculation (hourly rates and material) if that helps to settle prices."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-04-19",
+   "effective_date": null,
+   "id": "doc:20260419-70150-M3",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Capacity",
+   "text": "Call with sales at Tarsevi Döküm Sanayi A.Ş.: they could take additional parts at short notice; the second shift has been on hold since spring."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-06-10",
+   "effective_date": null,
+   "id": "doc:20260610-70150-M1",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Supplier visit",
+   "text": "Visit at Tarsevi Döküm Sanayi A.Ş.: half the shop floor was idle, two shifts are on short hours, and the MD spoke mostly about cash and the banks."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-08-04",
+   "effective_date": null,
+   "id": "doc:20260804-70150-M4",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Liquidity",
+   "text": "Call with the managing director of Tarsevi Döküm Sanayi A.Ş.: he asked twice whether we could pay earlier and said the bank is watching every month. 'I cannot sign anything that lowers our margin now.'"
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Tarsevi Döküm Sanayi A.Ş.",
+   "date": "2026-09-05",
+   "effective_date": null,
+   "id": "doc:20260905-70150-M6",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Payment of invoices",
+   "text": "Could you pay our invoices within 10 days? In return we would grant a cash discount."
+  }
+ ],
+ "economics": {
+  "archetype": "job_shop",
+  "archetype_basis": "cash pressure high",
+  "cash_pressure": "high",
+  "cost_of_money": 0.25,
+  "cost_of_money_basis": "rule: job shop or short of cash",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 3.18,
+  "our_spend_eur": {
+   "FY2024": 455143.0,
+   "FY2025": 503568.4,
+   "FY2026": 503212.1
+  },
+  "we_pay_late_days": 4.9
+ },
+ "identity": {
+  "abc_class": "A",
+  "blocked": false,
+  "category": "castings",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001",
+   "ISO 50001"
+  ],
+  "country": "TR",
+  "credit_index": 228,
+  "credit_index_12m_ago": 228,
+  "equity_ratio_pct": 30.7,
+  "founded": 1988,
+  "group_parent": null,
+  "legal_form": "A.Ş.",
+  "name": "Tarsevi Döküm Sanayi A.Ş.",
+  "owner_type": "family",
+  "staff": 380,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "10-25 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 15800000,
+  "vda63_grade": "C"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Producer prices for iron castings rose +1.8 % in the twelve months to August.",
+   "date": "2026-09-14",
+   "headline": "Iron castings +1.8 % year on year",
+   "id": "news:20260914-31"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  }
+ ],
+ "news": [
+  {
+   "body": "Tarsevi Döküm Sanayi A.Ş. has started a restructuring programme with its banks after two loss-making years; management says customers will not be affected.",
+   "date": "2026-08-09",
+   "headline": "Tarsevi Döküm Sanayi A.Ş. restructures",
+   "id": "news:20260809-22",
+   "noise": false,
+   "source": "Metall-Kurier",
+   "topic": "restructuring"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2025-04-10",
+   "incoterm": "FCA",
+   "lead_time_days": 79,
+   "part_id": "part:310060",
+   "payment_days": 60,
+   "price_unit": 1,
+   "quote_id": "quote:7100016",
+   "remarks": "",
+   "unit_price": 34.0
+  },
+  {
+   "date": "2026-09-20",
+   "incoterm": "FCA",
+   "lead_time_days": 70,
+   "part_id": "part:310060",
+   "payment_days": 10,
+   "price_unit": 1,
+   "quote_id": "quote:7300068",
+   "remarks": "Payment within 10 days requested.",
+   "unit_price": 32.24
+  }
+ ],
+ "parts": {
+  "part:310060": {
+   "abc_class": "A",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Gießerei Pfaffenreuth GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 40,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70190",
+     "unit_price": null
+    },
+    {
+     "date": "2025-04-10",
+     "name": "Gießerei Pfaffenreuth GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100017",
+     "status": null,
+     "supplier_id": "sup:70190",
+     "unit_price": 45.7
+    }
+   ],
+   "category": "castings",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70150-310060",
+    "price": 32.24,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Pump housing HB 40",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.31
+    },
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.22
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.06
+    }
+   ],
+   "floor_estimate": {
+    "basis": "generic DE should-cost cost:310060 x 0.75 (TR)",
+    "high": 34.34,
+    "low": 25.39,
+    "value": 29.87
+   },
+   "forecast": {
+    "change_pct": 2.5,
+    "id": "fc:310060@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 26400,
+    "volume_per_year": 26400
+   },
+   "grade": "EN-GJL-250",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-14",
+      "event_id": "EV-2023-70150-310060",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -0.7,
+      "date": "2023-11-19",
+      "event_id": "EV-2024-70150-310060",
+      "note": "",
+      "settled_pct": -4.5,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.0,
+      "date": "2024-11-17",
+      "event_id": "EV-2025-70150-310060",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 0.7,
+      "date": "2025-12-08",
+      "event_id": "EV-2026-70150-310060",
+      "note": "",
+      "settled_pct": -1.9,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 1.0,
+    "mean_give_pct": 3.13,
+    "mean_settled_pct": -2.13
+   },
+   "material_group": "cast_iron",
+   "planned_lead_time_days": 70,
+   "price_to_should_cost": 0.8096,
+   "price_unit": 1,
+   "should_cost": {
+    "confidence_pct": 12,
+    "conversion_eur": 18.68,
+    "cost_base": "DE",
+    "id": "cost:310060",
+    "material_eur": 13.14,
+    "overhead_eur": 8.0,
+    "plant_specific": false,
+    "price_unit": 1,
+    "unit_cost": 39.82
+   },
+   "sourcing": {
+    "approved_since": "2022-11-01",
+    "quota_pct": 60,
+    "status": "active",
+    "tooling_owner": "supplier"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "C",
+   "colour": "red",
+   "id": "sc:70150@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 56.0,
+   "otd_pct": 52.0,
+   "ppm": 2652,
+   "quarter": "2026Q3",
+   "score": 62.7
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70150@2025Q4",
+    "sc:70150@2026Q1",
+    "sc:70150@2026Q2",
+    "sc:70150@2026Q3"
+   ],
+   "otd_pct": 61.0,
+   "ppm": 2588.75
+  },
+  "qn_12m": 5,
+  "qn_ids_12m": [
+   "qn:20004681",
+   "qn:20004713",
+   "qn:20004770",
+   "qn:20004846",
+   "qn:20004946"
+  ],
+  "qn_supplier_caused_12m": 5,
+  "trend": "worse"
+ },
+ "profile_text": "Tarsevi Döküm Sanayi A.Ş. (TR; family; 380 staff; turnover EUR 15.8 M). Our spend FY2026 EUR 503,212 (3.18 % of its turnover). Standard terms: 60 days net, FCA, lead time 70 days. Cost of money about 25 % a year; cash pressure high; type job shop. Signals: cash short (3), delivery problem (3), margin floor (1), ownership change (1), quality problem (2), wants volume (1). Performance 2026Q3: red, OTD 52.0 %, 2652 ppm. Parts: part:310060 Pump housing HB 40: price 32.24 per 1, 0.81x should-cost.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260610-70150-M1",
+    "doc:20260804-70150-M4",
+    "doc:20260905-70150-M6",
+    "news:20260809-22",
+    "quote:7300068"
+   ],
+   "excerpt": "Payment within 10 days requested.",
+   "kind": "cash_short",
+   "strength": 3
+  },
+  {
+   "evidence": [
+    "sc:70150@2026Q3"
+   ],
+   "excerpt": "On-time delivery 52.0 % in 2026Q3.",
+   "kind": "delivery_problem",
+   "strength": 3
+  },
+  {
+   "evidence": [
+    "doc:20260804-70150-M4"
+   ],
+   "excerpt": "'I cannot sign anything that lowers our margin now.'",
+   "kind": "margin_floor",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "news:20260809-22"
+   ],
+   "excerpt": "restructures.",
+   "kind": "ownership_change",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "sc:70150@2026Q3"
+   ],
+   "excerpt": "Scorecard 2026Q3 is red.",
+   "kind": "quality_problem",
+   "strength": 2
+  },
+  {
+   "evidence": [
+    "doc:20260610-70150-M1"
+   ],
+   "excerpt": "Visit at Tarsevi Döküm Sanayi A.Ş.: half the shop floor was idle, two shifts are on short hours, and the MD spoke mostly about cash and the banks.",
+   "kind": "wants_volume",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "FCA",
+  "lead_time_days": 70,
+  "payment_days": 60,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70150",
+ "warnings": []
+}

@@ -1,0 +1,680 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070610",
+  "incoterm": "DAP",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 30,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Schraubenhandel Leitner & Sohn GmbH",
+   "date": "2025-12-24",
+   "effective_date": null,
+   "id": "doc:20251224-70610-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Trade fair invitation",
+   "text": "We would be pleased to welcome you at our booth at the regional supplier fair in November."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-04-01",
+   "effective_date": null,
+   "id": "doc:20260401-70610-M2",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Capacity",
+   "text": "Call with sales at Schraubenhandel Leitner & Sohn GmbH: they could take additional parts at short notice; the second shift has been on hold since spring."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-05-13",
+   "effective_date": null,
+   "id": "doc:20260513-70610-M1",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Annual review",
+   "text": "Annual review with Schraubenhandel Leitner & Sohn GmbH. Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-05-14",
+   "effective_date": null,
+   "id": "doc:20260514-70610-M3",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Capacity",
+   "text": "Call with sales at Schraubenhandel Leitner & Sohn GmbH: they could take additional parts at short notice; the second shift has been on hold since spring."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-09-09",
+   "effective_date": null,
+   "id": "doc:20260909-70610-P07",
+   "kind": "memo",
+   "notice_days": null,
+   "part_ids": [
+    "part:360010",
+    "part:360011",
+    "part:360012",
+    "part:360030"
+   ],
+   "subject": "One supplier for the kit",
+   "text": "Kit per unit (about 30000 kits a year):\n- 19 x Hex bolt ISO 4017 M12x40 8.8, zinc (part:360010)\n- 6 x Hex bolt ISO 4017 M16x60 8.8, zinc (part:360011)\n- 21 x Hex nut ISO 4032 M12 8, zinc (part:360012)\n- 23 x Washer ISO 7089 M12, zinc (part:360030)\n\nToday these parts come from several suppliers. We want one supplier for the kit."
+  }
+ ],
+ "economics": {
+  "archetype": "family",
+  "archetype_basis": "owner type family",
+  "cash_pressure": "low",
+  "cost_of_money": 0.09,
+  "cost_of_money_basis": "rule: owner type family",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 0.03,
+  "our_spend_eur": {
+   "FY2024": 39550.56,
+   "FY2025": 40086.87,
+   "FY2026": 39959.28
+  },
+  "we_pay_late_days": 2.0
+ },
+ "identity": {
+  "abc_class": "C",
+  "blocked": false,
+  "category": "C-parts",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001"
+  ],
+  "country": "DE",
+  "credit_index": 179,
+  "credit_index_12m_ago": 179,
+  "equity_ratio_pct": 30.0,
+  "founded": 1929,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Schraubenhandel Leitner & Sohn GmbH",
+  "owner_type": "family",
+  "staff": 280,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "100-250 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 139000000,
+  "vda63_grade": "A"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  },
+  {
+   "body": "Producer prices for basic iron and steel are +7.3 % above January.",
+   "date": "2026-09-22",
+   "headline": "Steel prices +7.3 % since January",
+   "id": "news:20260922-35"
+  }
+ ],
+ "news": [],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2025-05-17",
+   "incoterm": "DAP",
+   "lead_time_days": 5,
+   "part_id": "part:360010",
+   "payment_days": 30,
+   "price_unit": 100,
+   "quote_id": "quote:7100054",
+   "remarks": "",
+   "unit_price": 12.68
+  },
+  {
+   "date": "2025-07-12",
+   "incoterm": "DAP",
+   "lead_time_days": 5,
+   "part_id": "part:360012",
+   "payment_days": 30,
+   "price_unit": 100,
+   "quote_id": "quote:7100057",
+   "remarks": "",
+   "unit_price": 4.96
+  },
+  {
+   "date": "2025-08-14",
+   "incoterm": "DAP",
+   "lead_time_days": 6,
+   "part_id": "part:360030",
+   "payment_days": 30,
+   "price_unit": 1000,
+   "quote_id": "quote:7100062",
+   "remarks": "",
+   "unit_price": 13.06
+  }
+ ],
+ "parts": {
+  "part:360010": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Verbindungstechnik Mairhofer GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 60,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70650",
+     "unit_price": null
+    },
+    {
+     "date": "2025-05-17",
+     "name": "Verbindungstechnik Mairhofer GmbH",
+     "price_unit": 100,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100055",
+     "status": null,
+     "supplier_id": "sup:70650",
+     "unit_price": 14.92
+    },
+    {
+     "date": "2026-09-12",
+     "name": "Verbindungstechnik Mairhofer GmbH",
+     "price_unit": 100,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7300085",
+     "status": null,
+     "supplier_id": "sup:70650",
+     "unit_price": 14.52
+    }
+   ],
+   "category": "C-parts",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70610-360010",
+    "price": 12.46,
+    "price_unit": 100,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Hex bolt ISO 4017 M12x40 8.8, zinc",
+   "drivers": [
+    {
+     "change_12m_pct": 1.66,
+     "change_6m_pct": 0.87,
+     "ids_12m": [
+      "idx:PPI-C2594@2025-08",
+      "idx:PPI-C2594@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2594@2026-02",
+      "idx:PPI-C2594@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 116.3,
+     "series": "PPI-C2594",
+     "weight": 0.64
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.08
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 6.0,
+    "id": "fc:360010@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 574000,
+    "volume_per_year": 574000
+   },
+   "grade": "8.8",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-27",
+      "event_id": "EV-2023-70610-360010",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 2.2,
+      "date": "2023-11-23",
+      "event_id": "EV-2024-70610-360010",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.4,
+      "date": "2024-12-06",
+      "event_id": "EV-2025-70610-360010",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.6,
+      "date": "2025-12-06",
+      "event_id": "EV-2026-70610-360010",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 2.73,
+    "mean_give_pct": 2.73,
+    "mean_settled_pct": 0.0
+   },
+   "material_group": "fastener",
+   "planned_lead_time_days": 5,
+   "price_to_should_cost": null,
+   "price_unit": 100,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2018-03-01",
+    "quota_pct": 40,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  },
+  "part:360012": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Verbindungstechnik Mairhofer GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 70,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70650",
+     "unit_price": null
+    },
+    {
+     "date": "2025-07-12",
+     "name": "Verbindungstechnik Mairhofer GmbH",
+     "price_unit": 100,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100056",
+     "status": null,
+     "supplier_id": "sup:70650",
+     "unit_price": 5.82
+    },
+    {
+     "date": "2026-09-24",
+     "name": "Verbindungstechnik Mairhofer GmbH",
+     "price_unit": 100,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7300072",
+     "status": null,
+     "supplier_id": "sup:70650",
+     "unit_price": 5.6
+    }
+   ],
+   "category": "C-parts",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70610-360012",
+    "price": 4.91,
+    "price_unit": 100,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Hex nut ISO 4032 M12 8, zinc",
+   "drivers": [
+    {
+     "change_12m_pct": 1.66,
+     "change_6m_pct": 0.87,
+     "ids_12m": [
+      "idx:PPI-C2594@2025-08",
+      "idx:PPI-C2594@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2594@2026-02",
+      "idx:PPI-C2594@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 116.3,
+     "series": "PPI-C2594",
+     "weight": 0.6
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.13
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 9.0,
+    "id": "fc:360012@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 654000,
+    "volume_per_year": 654000
+   },
+   "grade": "8",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-15",
+      "event_id": "EV-2023-70610-360012",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 2.3,
+      "date": "2023-11-16",
+      "event_id": "EV-2024-70610-360012",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.3,
+      "date": "2024-11-12",
+      "event_id": "EV-2025-70610-360012",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.7,
+      "date": "2025-11-12",
+      "event_id": "EV-2026-70610-360012",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 2.43,
+    "mean_give_pct": 2.43,
+    "mean_settled_pct": 0.0
+   },
+   "material_group": "fastener",
+   "planned_lead_time_days": 5,
+   "price_to_should_cost": null,
+   "price_unit": 100,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2020-03-01",
+    "quota_pct": 30,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  },
+  "part:360030": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Normteile Brucker KG",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 50,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70630",
+     "unit_price": null
+    },
+    {
+     "date": "2025-08-14",
+     "name": "Normteile Brucker KG",
+     "price_unit": 1000,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100063",
+     "status": null,
+     "supplier_id": "sup:70630",
+     "unit_price": 12.8
+    }
+   ],
+   "category": "C-parts",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70610-360030",
+    "price": 12.78,
+    "price_unit": 1000,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Washer ISO 7089 M12, zinc",
+   "drivers": [
+    {
+     "change_12m_pct": 1.66,
+     "change_6m_pct": 0.87,
+     "ids_12m": [
+      "idx:PPI-C2594@2025-08",
+      "idx:PPI-C2594@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2594@2026-02",
+      "idx:PPI-C2594@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 116.3,
+     "series": "PPI-C2594",
+     "weight": 0.64
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.08
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 8.7,
+    "id": "fc:360030@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 736000,
+    "volume_per_year": 736000
+   },
+   "grade": "200 HV",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-10",
+      "event_id": "EV-2023-70610-360030",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 3.2,
+      "date": "2023-11-28",
+      "event_id": "EV-2024-70610-360030",
+      "note": "",
+      "settled_pct": 1.5,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.3,
+      "date": "2024-11-23",
+      "event_id": "EV-2025-70610-360030",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.2,
+      "date": "2025-11-24",
+      "event_id": "EV-2026-70610-360030",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 2.23,
+    "mean_give_pct": 1.73,
+    "mean_settled_pct": 0.5
+   },
+   "material_group": "fastener",
+   "planned_lead_time_days": 5,
+   "price_to_should_cost": null,
+   "price_unit": 1000,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2012-03-01",
+    "quota_pct": 50,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "A",
+   "colour": "green",
+   "id": "sc:70610@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 88.6,
+   "otd_pct": 88.6,
+   "ppm": 68,
+   "quarter": "2026Q3",
+   "score": 94.0
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70610@2025Q4",
+    "sc:70610@2026Q1",
+    "sc:70610@2026Q2",
+    "sc:70610@2026Q3"
+   ],
+   "otd_pct": 88.32,
+   "ppm": 66.25
+  },
+  "qn_12m": 19,
+  "qn_ids_12m": [
+   "qn:20004693",
+   "qn:20004787",
+   "qn:20004790",
+   "qn:20004807",
+   "qn:20004816",
+   "qn:20004861",
+   "qn:20004866",
+   "qn:20004873",
+   "qn:20004880",
+   "qn:20004889",
+   "qn:20004893",
+   "qn:20004902",
+   "qn:20004910",
+   "qn:20004929",
+   "qn:20004937",
+   "qn:20004943",
+   "qn:20004959",
+   "qn:20004964",
+   "qn:20004972"
+  ],
+  "qn_supplier_caused_12m": 19,
+  "trend": "flat"
+ },
+ "profile_text": "Schraubenhandel Leitner & Sohn GmbH (DE; family; 280 staff; turnover EUR 139.0 M). Our spend FY2026 EUR 39,959 (0.03 % of its turnover). Standard terms: 30 days net, DAP, lead time 5 days. Cost of money about 9 % a year; cash pressure low; type family. Signals: approval ladder (1). Performance 2026Q3: green, OTD 88.6 %, 68 ppm. Parts: part:360010 Hex bolt ISO 4017 M12x40 8.8, zinc: price 12.46 per 100; part:360012 Hex nut ISO 4032 M12 8, zinc: price 4.91 per 100; part:360030 Washer ISO 7089 M12, zinc: price 12.78 per 1000.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260513-70610-M1"
+   ],
+   "excerpt": "Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks.",
+   "kind": "approval_ladder",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "DAP",
+  "lead_time_days": 5,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70610",
+ "warnings": []
+}

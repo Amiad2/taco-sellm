@@ -1,0 +1,683 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070110",
+  "incoterm": "FCA",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 30,
+  "price_basis": "fixed per year",
+  "valid_from": "2024-01-01",
+  "valid_to": "2026-12-31"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Gießerei Brandlhuber GmbH & Co. KG",
+   "date": "2025-12-17",
+   "effective_date": null,
+   "id": "doc:20251217-70110-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Holiday shutdown",
+   "text": "Our plant is closed from 23 December to 6 January. Please place call-offs for January by 10 December."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-07-15",
+   "effective_date": null,
+   "id": "doc:20260715-70110-M5",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Visit by the owner",
+   "text": "Visit by the owner of Gießerei Brandlhuber GmbH & Co. KG. He reminded us that in 2022 they kept supplying at the old price for a quarter and said he expects partnership in return."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-08-24",
+   "effective_date": null,
+   "id": "doc:20260824-70110-M1",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Price discussion",
+   "text": "Call with the owner of Gießerei Brandlhuber GmbH & Co. KG: he asked where we get our index figures from - he works from his own spreadsheet, last updated two years ago."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Gießerei Brandlhuber GmbH & Co. KG",
+   "date": "2026-09-02",
+   "effective_date": null,
+   "id": "doc:20260902-70110-M2",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Payment of invoices",
+   "text": "Could you pay our invoices within 10 days? In return we would grant a cash discount."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-09-09",
+   "effective_date": null,
+   "id": "doc:20260909-70110-M4",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Visit by the owner",
+   "text": "The owner of Gießerei Brandlhuber GmbH & Co. KG admitted he had not followed his material and energy prices closely since the 2022 peak; his office manager does the costing."
+  },
+  {
+   "asked_pct": 9.5,
+   "asked_price": 138.55,
+   "author": "Gießerei Brandlhuber GmbH & Co. KG",
+   "date": "2026-09-11",
+   "effective_date": "2026-11-01",
+   "id": "doc:20260911-70110-P01",
+   "kind": "letter",
+   "notice_days": 51,
+   "part_ids": [
+    "part:310010"
+   ],
+   "subject": "Price adjustment from 01 November 2026",
+   "text": "Dear Sir or Madam,\n\nwe have supplied Hollerau Pumpenwerke reliably for many years. Owing to sustained increases in energy, raw material and wage costs, we are forced to adjust our prices for Volute casing HN 50-200 (part:310010) by **9.5 %** with effect from **01 November 2026**: from EUR 126.53 to EUR 138.55 per  pc.\n\nWe regret this step and ask for your understanding.\n\nYours faithfully,\nGießerei Brandlhuber GmbH & Co. KG"
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-09-17",
+   "effective_date": null,
+   "id": "doc:20260917-70110-M3",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Visit by the owner",
+   "text": "Visit by the owner of Gießerei Brandlhuber GmbH & Co. KG. He reminded us that in 2022 they kept supplying at the old price for a quarter and said he expects partnership in return."
+  }
+ ],
+ "economics": {
+  "archetype": "family",
+  "archetype_basis": "owner type family",
+  "cash_pressure": "medium",
+  "cost_of_money": 0.09,
+  "cost_of_money_basis": "rule: owner type family",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 4.87,
+  "our_spend_eur": {
+   "FY2024": 1014074.06,
+   "FY2025": 1212229.85,
+   "FY2026": 1256302.57
+  },
+  "we_pay_late_days": 3.7
+ },
+ "identity": {
+  "abc_class": "A",
+  "blocked": false,
+  "category": "castings",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001",
+   "ISO 50001"
+  ],
+  "country": "DE",
+  "credit_index": 222,
+  "credit_index_12m_ago": 222,
+  "equity_ratio_pct": 24.7,
+  "founded": 1921,
+  "group_parent": null,
+  "legal_form": "GmbH & Co. KG",
+  "name": "Gießerei Brandlhuber GmbH & Co. KG",
+  "owner_type": "family",
+  "staff": 185,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "25-50 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 25800000,
+  "vda63_grade": "B"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Producer prices for iron castings rose +1.8 % in the twelve months to August.",
+   "date": "2026-09-14",
+   "headline": "Iron castings +1.8 % year on year",
+   "id": "news:20260914-31"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  }
+ ],
+ "news": [],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2025-01-22",
+   "incoterm": "FCA",
+   "lead_time_days": 49,
+   "part_id": "part:310010",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100001",
+   "remarks": "",
+   "unit_price": 142.5
+  },
+  {
+   "date": "2025-08-11",
+   "incoterm": "FCA",
+   "lead_time_days": 52,
+   "part_id": "part:310012",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100006",
+   "remarks": "",
+   "unit_price": 385.2
+  },
+  {
+   "date": "2026-09-03",
+   "incoterm": null,
+   "lead_time_days": 42,
+   "part_id": "part:310010",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7300001",
+   "remarks": "",
+   "unit_price": 126.53
+  },
+  {
+   "date": "2026-09-06",
+   "incoterm": null,
+   "lead_time_days": 42,
+   "part_id": "part:310012",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7300079",
+   "remarks": "",
+   "unit_price": 383.06
+  }
+ ],
+ "parts": {
+  "part:310010": {
+   "abc_class": "A",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Odlewnia Kalwisz Sp. z o.o.",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 0,
+     "quote_id": null,
+     "status": "qualified",
+     "supplier_id": "sup:70140",
+     "unit_price": null
+    },
+    {
+     "date": "2025-01-22",
+     "name": "Odlewnia Kalwisz Sp. z o.o.",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100002",
+     "status": null,
+     "supplier_id": "sup:70140",
+     "unit_price": 124.2
+    },
+    {
+     "date": "2026-09-02",
+     "name": "Odlewnia Kalwisz Sp. z o.o.",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7200001",
+     "status": null,
+     "supplier_id": "sup:70140",
+     "unit_price": 143.22
+    }
+   ],
+   "category": "castings",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70110-310010",
+    "price": 126.53,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Volute casing HN 50-200",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.32
+    },
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.26
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.06
+    }
+   ],
+   "floor_estimate": {
+    "basis": "plant-specific should-cost cost:310010",
+    "high": 139.27,
+    "low": 126.01,
+    "value": 132.64
+   },
+   "forecast": {
+    "change_pct": 10.1,
+    "id": "fc:310010@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 8150,
+    "volume_per_year": 8150
+   },
+   "grade": "EN-GJL-250",
+   "history": {
+    "below_full_cost": true,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-05",
+      "event_id": "EV-2023-70110-310010",
+      "note": "accepted below full cost to keep the volume",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -2.2,
+      "date": "2023-11-16",
+      "event_id": "EV-2024-70110-310010",
+      "note": "accepted below full cost to keep the volume",
+      "settled_pct": -5.6,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.9,
+      "date": "2024-11-17",
+      "event_id": "EV-2025-70110-310010",
+      "note": "accepted below full cost to keep the volume",
+      "settled_pct": -0.1,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.1,
+      "date": "2025-12-03",
+      "event_id": "EV-2026-70110-310010",
+      "note": "accepted below full cost to keep the volume",
+      "settled_pct": -1.4,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 0.6,
+    "mean_give_pct": 2.97,
+    "mean_settled_pct": -2.37
+   },
+   "material_group": "cast_iron",
+   "planned_lead_time_days": 42,
+   "price_to_should_cost": 0.9539,
+   "price_unit": 1,
+   "should_cost": {
+    "confidence_pct": 5,
+    "conversion_eur": 62.21,
+    "cost_base": "DE",
+    "id": "cost:310010",
+    "material_eur": 43.77,
+    "overhead_eur": 26.66,
+    "plant_specific": true,
+    "price_unit": 1,
+    "unit_cost": 132.64
+   },
+   "sourcing": {
+    "approved_since": "2010-07-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  },
+  "part:310012": {
+   "abc_class": "A",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Gießerei Wimbacher GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 60,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70130",
+     "unit_price": null
+    },
+    {
+     "date": "2025-08-11",
+     "name": "Gießerei Wimbacher GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100005",
+     "status": null,
+     "supplier_id": "sup:70130",
+     "unit_price": 390.2
+    },
+    {
+     "date": "2026-09-05",
+     "name": "Gießerei Wimbacher GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7300078",
+     "status": null,
+     "supplier_id": "sup:70130",
+     "unit_price": 359.17
+    }
+   ],
+   "category": "castings",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70110-310012",
+    "price": 383.06,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Volute casing HN 100-315",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.31
+    },
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.27
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.1
+    }
+   ],
+   "floor_estimate": {
+    "basis": "plant-specific should-cost cost:310012-70110",
+    "high": 364.63,
+    "low": 329.91,
+    "value": 347.27
+   },
+   "forecast": {
+    "change_pct": 12.5,
+    "id": "fc:310012@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 2010,
+    "volume_per_year": 2010
+   },
+   "grade": "EN-GJL-250",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-22",
+      "event_id": "EV-2023-70110-310012",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -3.3,
+      "date": "2023-11-25",
+      "event_id": "EV-2024-70110-310012",
+      "note": "",
+      "settled_pct": -5.6,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.6,
+      "date": "2024-12-01",
+      "event_id": "EV-2025-70110-310012",
+      "note": "",
+      "settled_pct": -0.1,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.5,
+      "date": "2025-11-26",
+      "event_id": "EV-2026-70110-310012",
+      "note": "",
+      "settled_pct": -1.4,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 0.27,
+    "mean_give_pct": 2.63,
+    "mean_settled_pct": -2.37
+   },
+   "material_group": "cast_iron",
+   "planned_lead_time_days": 45,
+   "price_to_should_cost": 1.1031,
+   "price_unit": 1,
+   "should_cost": {
+    "confidence_pct": 5,
+    "conversion_eur": 162.87,
+    "cost_base": "DE",
+    "id": "cost:310012-70110",
+    "material_eur": 114.6,
+    "overhead_eur": 69.8,
+    "plant_specific": true,
+    "price_unit": 1,
+    "unit_cost": 347.27
+   },
+   "sourcing": {
+    "approved_since": "2012-07-01",
+    "quota_pct": 40,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "B",
+   "colour": "amber",
+   "id": "sc:70110@2026Q3",
+   "open_8d_overdue": 1,
+   "otd_confirmed_pct": 88.9,
+   "otd_pct": 85.2,
+   "ppm": 712,
+   "quarter": "2026Q3",
+   "score": 84.0
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70110@2025Q4",
+    "sc:70110@2026Q1",
+    "sc:70110@2026Q2",
+    "sc:70110@2026Q3"
+   ],
+   "otd_pct": 83.72,
+   "ppm": 621.25
+  },
+  "qn_12m": 7,
+  "qn_ids_12m": [
+   "qn:20004728",
+   "qn:20004837",
+   "qn:20004853",
+   "qn:20004877",
+   "qn:20004934",
+   "qn:20004978",
+   "qn:20004995"
+  ],
+  "qn_supplier_caused_12m": 6,
+  "trend": "worse"
+ },
+ "profile_text": "Gießerei Brandlhuber GmbH & Co. KG (DE; family; 185 staff; turnover EUR 25.8 M). Our spend FY2026 EUR 1.3 M (4.87 % of its turnover). Standard terms: 30 days net, FCA, lead time 42 days. Cost of money about 9 % a year; cash pressure medium; type family. Signals: cash short (1), informal costing (2), margin floor (1), partnership (2), price claim (1), quality problem (2), wants volume (1). Performance 2026Q3: amber, OTD 85.2 %, 712 ppm, 1 overdue 8D. Parts: part:310010 Volute casing HN 50-200: price 126.53 per 1, 0.95x should-cost; part:310012 Volute casing HN 100-315: price 383.06 per 1, 1.10x should-cost.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260902-70110-M2"
+   ],
+   "excerpt": "Could you pay our invoices within 10 days?",
+   "kind": "cash_short",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "doc:20260824-70110-M1",
+    "doc:20260909-70110-M4"
+   ],
+   "excerpt": "KG admitted he had not followed his material and energy prices closely since the 2022 peak; his office manager does the costing.",
+   "kind": "informal_costing",
+   "strength": 2
+  },
+  {
+   "evidence": [
+    "cost:310010#below"
+   ],
+   "excerpt": "part:310010 is priced at 0.95 x its should-cost.",
+   "kind": "margin_floor",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "doc:20260715-70110-M5",
+    "doc:20260917-70110-M3"
+   ],
+   "excerpt": "He reminded us that in 2022 they kept supplying at the old price for a quarter and said he expects partnership in return.",
+   "kind": "partnership",
+   "strength": 2
+  },
+  {
+   "evidence": [
+    "doc:20260911-70110-P01"
+   ],
+   "excerpt": "Letter asks 9.5 % from 2026-11-01.",
+   "kind": "price_claim",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "sc:70110@2026Q3"
+   ],
+   "excerpt": "Scorecard 2026Q3 is amber.",
+   "kind": "quality_problem",
+   "strength": 2
+  },
+  {
+   "evidence": [
+    "EV-2026-70110-310010"
+   ],
+   "excerpt": "part:310010: 'accepted below full cost to keep the volume'",
+   "kind": "wants_volume",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "FCA",
+  "lead_time_days": 42,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70110",
+ "warnings": []
+}

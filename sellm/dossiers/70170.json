@@ -1,0 +1,359 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070170",
+  "incoterm": "FCA",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 45,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Slévárna Vrbenský s.r.o.",
+   "date": "2025-11-09",
+   "effective_date": null,
+   "id": "doc:20251109-70170-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Trade fair invitation",
+   "text": "We would be pleased to welcome you at our booth at the regional supplier fair in November."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Slévárna Vrbenský s.r.o.",
+   "date": "2026-02-10",
+   "effective_date": null,
+   "id": "doc:20260210-70170-M1",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Payment of invoices",
+   "text": "Could you pay our invoices within 10 days? In return we would grant a cash discount."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-05-12",
+   "effective_date": null,
+   "id": "doc:20260512-70170-M2",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Supplier day",
+   "text": "At our supplier day Slévárna Vrbenský s.r.o. said Hollerau is an important reference customer for them."
+  }
+ ],
+ "economics": {
+  "archetype": "family",
+  "archetype_basis": "owner type family",
+  "cash_pressure": "low",
+  "cost_of_money": 0.09,
+  "cost_of_money_basis": "rule: owner type family",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 2.4,
+  "our_spend_eur": {
+   "FY2024": 152200.92,
+   "FY2025": 186763.2,
+   "FY2026": 198529.54
+  },
+  "we_pay_late_days": 5.5
+ },
+ "identity": {
+  "abc_class": "B",
+  "blocked": false,
+  "category": "castings",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001",
+   "ISO 50001"
+  ],
+  "country": "CZ",
+  "credit_index": 239,
+  "credit_index_12m_ago": 239,
+  "equity_ratio_pct": 36.4,
+  "founded": 1997,
+  "group_parent": null,
+  "legal_form": "s.r.o.",
+  "name": "Slévárna Vrbenský s.r.o.",
+  "owner_type": "family",
+  "staff": 150,
+  "supplier_since": "2000-01-01",
+  "turnover_band": "5-10 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 8270000,
+  "vda63_grade": "B"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Producer prices for iron castings rose +1.8 % in the twelve months to August.",
+   "date": "2026-09-14",
+   "headline": "Iron castings +1.8 % year on year",
+   "id": "news:20260914-31"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  }
+ ],
+ "news": [
+  {
+   "body": "Slévárna Vrbenský s.r.o. has commissioned a new automatic moulding line that doubles its capacity for stainless castings.",
+   "date": "2026-04-20",
+   "headline": "Slévárna Vrbenský s.r.o. opens a new moulding line",
+   "id": "news:20260420-09",
+   "noise": false,
+   "source": "Wirtschaftsblatt Niederbayern",
+   "topic": "new_plant"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2025-07-10",
+   "incoterm": "FCA",
+   "lead_time_days": 54,
+   "part_id": "part:310050",
+   "payment_days": 45,
+   "price_unit": 1,
+   "quote_id": "quote:7100013",
+   "remarks": "",
+   "unit_price": 598.1
+  }
+ ],
+ "parts": {
+  "part:310050": {
+   "abc_class": "A",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Feinguss Allgäu-Reiter GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 75,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70180",
+     "unit_price": null
+    },
+    {
+     "date": "2025-07-10",
+     "name": "Feinguss Allgäu-Reiter GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100012",
+     "status": null,
+     "supplier_id": "sup:70180",
+     "unit_price": 676.6
+    }
+   ],
+   "category": "castings",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70170-310050",
+    "price": 559.61,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Volute casing HI 80-250",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.26
+    },
+    {
+     "change_12m_pct": 5.92,
+     "change_6m_pct": -0.26,
+     "ids_12m": [
+      "idx:AS-14404@2025-09",
+      "idx:AS-14404@2026-09"
+     ],
+     "ids_6m": [
+      "idx:AS-14404@2026-03",
+      "idx:AS-14404@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 3007.8019,
+     "series": "AS-14404",
+     "weight": 0.24
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.06
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 13.3,
+    "id": "fc:310050@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 1593,
+    "volume_per_year": 1593
+   },
+   "grade": "1.4408",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-24",
+      "event_id": "EV-2023-70170-310050",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -2.5,
+      "date": "2023-11-25",
+      "event_id": "EV-2024-70170-310050",
+      "note": "",
+      "settled_pct": -5.9,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.2,
+      "date": "2024-12-06",
+      "event_id": "EV-2025-70170-310050",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 0.6,
+      "date": "2025-11-17",
+      "event_id": "EV-2026-70170-310050",
+      "note": "",
+      "settled_pct": -1.7,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": -0.23,
+    "mean_give_pct": 2.3,
+    "mean_settled_pct": -2.53
+   },
+   "material_group": "cast_steel",
+   "planned_lead_time_days": 49,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2019-07-01",
+    "quota_pct": 25,
+    "status": "active",
+    "tooling_owner": "supplier"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "C",
+   "colour": "red",
+   "id": "sc:70170@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 95.8,
+   "otd_pct": 91.7,
+   "ppm": 5682,
+   "quarter": "2026Q3",
+   "score": 67.4
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70170@2025Q4",
+    "sc:70170@2026Q1",
+    "sc:70170@2026Q2",
+    "sc:70170@2026Q3"
+   ],
+   "otd_pct": 95.75,
+   "ppm": 3629.5
+  },
+  "qn_12m": 2,
+  "qn_ids_12m": [
+   "qn:20004778",
+   "qn:20005004"
+  ],
+  "qn_supplier_caused_12m": 2,
+  "trend": "worse"
+ },
+ "profile_text": "Slévárna Vrbenský s.r.o. (CZ; family; 150 staff; turnover EUR 8.3 M). Our spend FY2026 EUR 198,530 (2.4 % of its turnover). Standard terms: 45 days net, FCA, lead time 56 days. Cost of money about 9 % a year; cash pressure low; type family. Signals: cash short (1), quality problem (2). Performance 2026Q3: red, OTD 91.7 %, 5682 ppm. Parts: part:310050 Volute casing HI 80-250: price 559.61 per 1.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260210-70170-M1"
+   ],
+   "excerpt": "Could you pay our invoices within 10 days?",
+   "kind": "cash_short",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "sc:70170@2026Q3"
+   ],
+   "excerpt": "Scorecard 2026Q3 is red.",
+   "kind": "quality_problem",
+   "strength": 2
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "FCA",
+  "lead_time_days": 56,
+  "payment_days": 45,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70170",
+ "warnings": []
+}

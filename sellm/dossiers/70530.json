@@ -1,0 +1,546 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070530",
+  "incoterm": "DAP",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 30,
+  "price_basis": "fixed per year",
+  "valid_from": "2024-01-01",
+  "valid_to": "2026-12-31"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Selvbrunn Drive Systems GmbH",
+   "date": "2025-12-01",
+   "effective_date": null,
+   "id": "doc:20251201-70530-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Holiday shutdown",
+   "text": "Our plant is closed from 23 December to 6 January. Please place call-offs for January by 10 December."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-08-26",
+   "effective_date": null,
+   "id": "doc:20260826-70530-M1",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Annual review",
+   "text": "Annual review with Selvbrunn Drive Systems GmbH. Their sales director said there is no room on price this year: head office has frozen all price reductions until December 2027. He was open on payment terms and call-off flexibility."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-09-09",
+   "effective_date": null,
+   "id": "doc:20260909-70530-M2",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Annual review",
+   "text": "Annual review with Selvbrunn Drive Systems GmbH. Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Selvbrunn Drive Systems GmbH",
+   "date": "2026-09-17",
+   "effective_date": null,
+   "id": "doc:20260917-70530-P03",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [
+    "part:350020"
+   ],
+   "subject": "Renewal of framework agreement 4600070530",
+   "text": "Hello,\n\nour framework agreement ctr:4600070530 for Frequency converter 7.5 kW, IP55 (part:350020) expires on 31 December 2026. We would like to agree the terms for the coming period and will send our offer when we meet. Please let us know your expected volumes.\n\nBest regards,\nSelvbrunn Drive Systems GmbH"
+  }
+ ],
+ "economics": {
+  "archetype": "group",
+  "archetype_basis": "owner type group",
+  "cash_pressure": "low",
+  "cost_of_money": 0.065,
+  "cost_of_money_basis": "rule: owner type group",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 0.28,
+  "our_spend_eur": {
+   "FY2024": 1417966.2,
+   "FY2025": 1694081.41,
+   "FY2026": 1693939.96
+  },
+  "we_pay_late_days": 2.0
+ },
+ "identity": {
+  "abc_class": "A",
+  "blocked": false,
+  "category": "electrical",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001"
+  ],
+  "country": "DE",
+  "credit_index": 157,
+  "credit_index_12m_ago": 157,
+  "equity_ratio_pct": 31.7,
+  "founded": 1983,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Selvbrunn Drive Systems GmbH",
+  "owner_type": "group",
+  "staff": 2200,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "250-1000 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 602000000,
+  "vda63_grade": "A"
+ },
+ "market_news": [
+  {
+   "body": "The copper notation for cables averaged EUR 1,289/100 kg in September, +48 % on a year ago.",
+   "date": "2026-09-10",
+   "headline": "Copper notation at EUR 1,289 per 100 kg",
+   "id": "news:20260910-27"
+  },
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Producer prices for assembled electronic boards rose +41 % in the twelve months to August.",
+   "date": "2026-09-18",
+   "headline": "Electronic boards +41 % year on year",
+   "id": "news:20260918-33"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  }
+ ],
+ "news": [
+  {
+   "body": "Selvbrunn Drive Systems GmbH was praised by the chamber for its apprentice training.",
+   "date": "2026-06-12",
+   "headline": "Selvbrunn Drive Systems GmbH trains apprentices",
+   "id": "news:20260612-13",
+   "noise": true,
+   "source": "Zulieferer Report",
+   "topic": "noise"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2024-02-15",
+   "incoterm": "DAP",
+   "lead_time_days": 56,
+   "part_id": "part:350021",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100053",
+   "remarks": "",
+   "unit_price": 672.0
+  },
+  {
+   "date": "2025-02-25",
+   "incoterm": "DAP",
+   "lead_time_days": 47,
+   "part_id": "part:350020",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100050",
+   "remarks": "",
+   "unit_price": 415.53
+  },
+  {
+   "date": "2026-09-05",
+   "incoterm": "DAP",
+   "lead_time_days": 49,
+   "part_id": "part:350020",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7300003",
+   "remarks": "Prices as per current list; discounts not possible this year (head-office directive).",
+   "unit_price": 412.74
+  }
+ ],
+ "parts": {
+  "part:350020": {
+   "abc_class": "A",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Konvertek Antriebselektronik GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 0,
+     "quote_id": null,
+     "status": "qualified",
+     "supplier_id": "sup:70540",
+     "unit_price": null
+    },
+    {
+     "date": "2025-02-25",
+     "name": "Konvertek Antriebselektronik GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100051",
+     "status": null,
+     "supplier_id": "sup:70540",
+     "unit_price": 429.18
+    },
+    {
+     "date": "2026-09-04",
+     "name": "Konvertek Antriebselektronik GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7200003",
+     "status": null,
+     "supplier_id": "sup:70540",
+     "unit_price": 466.99
+    }
+   ],
+   "category": "electrical",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70530-350020",
+    "price": 412.74,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Frequency converter 7.5 kW, IP55",
+   "drivers": [
+    {
+     "change_12m_pct": 13.48,
+     "change_6m_pct": 5.31,
+     "ids_12m": [
+      "idx:PPI-C2611@2025-08",
+      "idx:PPI-C2611@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2611@2026-02",
+      "idx:PPI-C2611@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 111.1,
+     "series": "PPI-C2611",
+     "weight": 0.44
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.14
+    },
+    {
+     "change_12m_pct": 47.73,
+     "change_6m_pct": 15.98,
+     "ids_12m": [
+      "idx:CU-NOTATION@2025-09",
+      "idx:CU-NOTATION@2026-09"
+     ],
+     "ids_6m": [
+      "idx:CU-NOTATION@2026-03",
+      "idx:CU-NOTATION@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 1288.5918,
+     "series": "CU-NOTATION",
+     "weight": 0.07
+    }
+   ],
+   "floor_estimate": {
+    "basis": "plant-specific should-cost cost:350020",
+    "high": 423.37,
+    "low": 383.05,
+    "value": 403.21
+   },
+   "forecast": {
+    "change_pct": 10.3,
+    "id": "fc:350020@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 4580,
+    "volume_per_year": 4580
+   },
+   "grade": "IP55",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-02",
+      "event_id": "EV-2023-70530-350020",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 1.4,
+      "date": "2023-11-13",
+      "event_id": "EV-2024-70530-350020",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": -0.6,
+      "date": "2024-12-08",
+      "event_id": "EV-2025-70530-350020",
+      "note": "",
+      "settled_pct": -3.5,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 5.5,
+      "date": "2025-11-21",
+      "event_id": "EV-2026-70530-350020",
+      "note": "",
+      "settled_pct": 3.1,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 2.1,
+    "mean_give_pct": 2.23,
+    "mean_settled_pct": -0.13
+   },
+   "material_group": "drive",
+   "planned_lead_time_days": 49,
+   "price_to_should_cost": 1.0236,
+   "price_unit": 1,
+   "should_cost": {
+    "confidence_pct": 5,
+    "conversion_eur": 149.59,
+    "cost_base": "DE",
+    "id": "cost:350020",
+    "material_eur": 189.51,
+    "overhead_eur": 64.11,
+    "plant_specific": true,
+    "price_unit": 1,
+    "unit_cost": 403.21
+   },
+   "sourcing": {
+    "approved_since": "2010-07-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  },
+  "part:350021": {
+   "abc_class": "A",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Konvertek Antriebselektronik GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 100,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70540",
+     "unit_price": null
+    },
+    {
+     "date": "2024-02-15",
+     "name": "Konvertek Antriebselektronik GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100052",
+     "status": null,
+     "supplier_id": "sup:70540",
+     "unit_price": 702.43
+    },
+    {
+     "date": "2026-09-19",
+     "name": "Konvertek Antriebselektronik GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7300067",
+     "status": null,
+     "supplier_id": "sup:70540",
+     "unit_price": 684.92
+    }
+   ],
+   "category": "electrical",
+   "current_price": null,
+   "description": "Frequency converter 15 kW, IP55",
+   "drivers": [
+    {
+     "change_12m_pct": 13.48,
+     "change_6m_pct": 5.31,
+     "ids_12m": [
+      "idx:PPI-C2611@2025-08",
+      "idx:PPI-C2611@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2611@2026-02",
+      "idx:PPI-C2611@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 111.1,
+     "series": "PPI-C2611",
+     "weight": 0.43
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.15
+    },
+    {
+     "change_12m_pct": 47.73,
+     "change_6m_pct": 15.98,
+     "ids_12m": [
+      "idx:CU-NOTATION@2025-09",
+      "idx:CU-NOTATION@2026-09"
+     ],
+     "ids_6m": [
+      "idx:CU-NOTATION@2026-03",
+      "idx:CU-NOTATION@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 1288.5918,
+     "series": "CU-NOTATION",
+     "weight": 0.08
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 5.4,
+    "id": "fc:350021@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 1947,
+    "volume_per_year": 1947
+   },
+   "grade": "IP55",
+   "history": {
+    "below_full_cost": false,
+    "events": [],
+    "mean_asked_pct": null,
+    "mean_give_pct": null,
+    "mean_settled_pct": null
+   },
+   "material_group": "drive",
+   "planned_lead_time_days": 56,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2011-07-01",
+    "quota_pct": 0,
+    "status": "qualified",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "A",
+   "colour": "green",
+   "id": "sc:70530@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 84.6,
+   "otd_pct": 84.6,
+   "ppm": 0,
+   "quarter": "2026Q3",
+   "score": 92.3
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70530@2025Q4",
+    "sc:70530@2026Q1",
+    "sc:70530@2026Q2",
+    "sc:70530@2026Q3"
+   ],
+   "otd_pct": 88.3,
+   "ppm": 0.0
+  },
+  "qn_12m": 0,
+  "qn_ids_12m": [],
+  "qn_supplier_caused_12m": 0,
+  "trend": "flat"
+ },
+ "profile_text": "Selvbrunn Drive Systems GmbH (DE; group; 2200 staff; turnover EUR 602.0 M). Our spend FY2026 EUR 1.7 M (0.28 % of its turnover). Standard terms: 30 days net, DAP, lead time 49 days. Cost of money about 6.5 % a year; cash pressure low; type group. Signals: approval ladder (3), list price fixed (2). Performance 2026Q3: green, OTD 84.6 %, 0 ppm. Parts: part:350020 Frequency converter 7.5 kW, IP55: price 412.74 per 1, 1.02x should-cost; part:350021 Frequency converter 15 kW, IP55.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260826-70530-M1",
+    "doc:20260909-70530-M2",
+    "sup:70530#group"
+   ],
+   "excerpt": "Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks.",
+   "kind": "approval_ladder",
+   "strength": 3
+  },
+  {
+   "evidence": [
+    "doc:20260826-70530-M1",
+    "quote:7300003"
+   ],
+   "excerpt": "Prices as per current list; discounts not possible this year (head-office directive).",
+   "kind": "list_price_fixed",
+   "strength": 2
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "DAP",
+  "lead_time_days": 49,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70530",
+ "warnings": []
+}

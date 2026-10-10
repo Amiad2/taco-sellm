@@ -1,0 +1,559 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070640",
+  "incoterm": "DAP",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 30,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Kugellager-Vertrieb Inntal GmbH",
+   "date": "2025-12-12",
+   "effective_date": null,
+   "id": "doc:20251212-70640-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "ISO 9001 certificate",
+   "text": "Please find attached our renewed ISO 9001 certificate."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-02-01",
+   "effective_date": null,
+   "id": "doc:20260201-70640-M5",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Capacity",
+   "text": "Call with sales at Kugellager-Vertrieb Inntal GmbH: they could take additional parts at short notice; the second shift has been on hold since spring."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-02-28",
+   "effective_date": null,
+   "id": "doc:20260228-70640-M3",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Annual review",
+   "text": "Annual review with Kugellager-Vertrieb Inntal GmbH. Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-05-12",
+   "effective_date": null,
+   "id": "doc:20260512-70640-M2",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Annual review",
+   "text": "Annual review with Kugellager-Vertrieb Inntal GmbH. Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-07-15",
+   "effective_date": null,
+   "id": "doc:20260715-70640-M4",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Capacity",
+   "text": "Call with sales at Kugellager-Vertrieb Inntal GmbH: they could take additional parts at short notice; the second shift has been on hold since spring."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-08-19",
+   "effective_date": null,
+   "id": "doc:20260819-70640-M1",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Customer portfolio",
+   "text": "The sales director of Kugellager-Vertrieb Inntal GmbH said they are reviewing small accounts and will focus on customers with volume."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Kugellager-Vertrieb Inntal GmbH",
+   "date": "2026-09-25",
+   "effective_date": null,
+   "id": "doc:20260925-70640-P19",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [
+    "part:360020"
+   ],
+   "subject": "Renewal of framework agreement 4600070640",
+   "text": "Hello,\n\nour framework agreement ctr:4600070640 for Deep groove ball bearing 6306-2Z C3 (part:360020) expires on 30 June 2027. We would like to agree the terms for the coming period and will send our offer when we meet. Please let us know your expected volumes.\n\nBest regards,\nKugellager-Vertrieb Inntal GmbH"
+  }
+ ],
+ "economics": {
+  "archetype": "family",
+  "archetype_basis": "owner type family",
+  "cash_pressure": "low",
+  "cost_of_money": 0.09,
+  "cost_of_money_basis": "rule: owner type family",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 0.27,
+  "our_spend_eur": {
+   "FY2024": 89212.58,
+   "FY2025": 98866.6,
+   "FY2026": 98435.4
+  },
+  "we_pay_late_days": 3.1
+ },
+ "identity": {
+  "abc_class": "B",
+  "blocked": false,
+  "category": "C-parts",
+  "certifications": [
+   "ISO 9001"
+  ],
+  "country": "AT",
+  "credit_index": 180,
+  "credit_index_12m_ago": 180,
+  "equity_ratio_pct": 43.4,
+  "founded": 1981,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Kugellager-Vertrieb Inntal GmbH",
+  "owner_type": "family",
+  "staff": 80,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "25-50 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 37000000,
+  "vda63_grade": "A"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  },
+  {
+   "body": "Producer prices for basic iron and steel are +7.3 % above January.",
+   "date": "2026-09-22",
+   "headline": "Steel prices +7.3 % since January",
+   "id": "news:20260922-35"
+  }
+ ],
+ "news": [],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2024-01-16",
+   "incoterm": "DAP",
+   "lead_time_days": 10,
+   "part_id": "part:360021",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100060",
+   "remarks": "",
+   "unit_price": 7.15
+  },
+  {
+   "date": "2025-04-08",
+   "incoterm": "DAP",
+   "lead_time_days": 10,
+   "part_id": "part:360020",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100059",
+   "remarks": "",
+   "unit_price": 4.29
+  },
+  {
+   "date": "2026-09-05",
+   "incoterm": "DAP",
+   "lead_time_days": 10,
+   "part_id": "part:360020",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7200004",
+   "remarks": "",
+   "unit_price": 5.04
+  }
+ ],
+ "parts": {
+  "part:360020": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Wälzlager-Zentrum Süd GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 70,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70620",
+     "unit_price": null
+    },
+    {
+     "date": "2025-04-08",
+     "name": "Wälzlager-Zentrum Süd GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100058",
+     "status": null,
+     "supplier_id": "sup:70620",
+     "unit_price": 4.42
+    },
+    {
+     "date": "2026-09-06",
+     "name": "Wälzlager-Zentrum Süd GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7300004",
+     "status": null,
+     "supplier_id": "sup:70620",
+     "unit_price": 4.39
+    },
+    {
+     "date": "2026-09-20",
+     "name": "Wälzlager-Zentrum Süd GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7200019",
+     "status": null,
+     "supplier_id": "sup:70620",
+     "unit_price": 4.63
+    }
+   ],
+   "category": "C-parts",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70640-360020",
+    "price": 4.2,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Deep groove ball bearing 6306-2Z C3",
+   "drivers": [
+    {
+     "change_12m_pct": 0.84,
+     "change_6m_pct": 0.59,
+     "ids_12m": [
+      "idx:PPI-C2815@2025-08",
+      "idx:PPI-C2815@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2815@2026-02",
+      "idx:PPI-C2815@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 119.8,
+     "series": "PPI-C2815",
+     "weight": 0.63
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.09
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 4.2,
+    "id": "fc:360020@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 28600,
+    "volume_per_year": 28600
+   },
+   "grade": "6306-2Z",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-01",
+      "event_id": "EV-2023-70640-360020",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 1.3,
+      "date": "2023-11-25",
+      "event_id": "EV-2024-70640-360020",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 5.0,
+      "date": "2024-11-23",
+      "event_id": "EV-2025-70640-360020",
+      "note": "",
+      "settled_pct": 3.4,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.4,
+      "date": "2025-11-26",
+      "event_id": "EV-2026-70640-360020",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 3.23,
+    "mean_give_pct": 2.1,
+    "mean_settled_pct": 1.13
+   },
+   "material_group": "bearing",
+   "planned_lead_time_days": 7,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2019-09-01",
+    "quota_pct": 30,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  },
+  "part:360021": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Wälzlager-Zentrum Süd GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 40,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70620",
+     "unit_price": null
+    },
+    {
+     "date": "2024-01-16",
+     "name": "Wälzlager-Zentrum Süd GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100061",
+     "status": null,
+     "supplier_id": "sup:70620",
+     "unit_price": 7.42
+    }
+   ],
+   "category": "C-parts",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70640-360021",
+    "price": 7.21,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Deep groove ball bearing 6308-2Z C3",
+   "drivers": [
+    {
+     "change_12m_pct": 0.84,
+     "change_6m_pct": 0.59,
+     "ids_12m": [
+      "idx:PPI-C2815@2025-08",
+      "idx:PPI-C2815@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2815@2026-02",
+      "idx:PPI-C2815@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 119.8,
+     "series": "PPI-C2815",
+     "weight": 0.66
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.12
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 16.0,
+    "id": "fc:360021@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 17330,
+    "volume_per_year": 17330
+   },
+   "grade": "6308-2Z",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-22",
+      "event_id": "EV-2023-70640-360021",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 5.4,
+      "date": "2023-12-10",
+      "event_id": "EV-2024-70640-360021",
+      "note": "",
+      "settled_pct": 1.8,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.8,
+      "date": "2024-11-23",
+      "event_id": "EV-2025-70640-360021",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 6.4,
+      "date": "2025-11-24",
+      "event_id": "EV-2026-70640-360021",
+      "note": "",
+      "settled_pct": 4.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 4.53,
+    "mean_give_pct": 2.6,
+    "mean_settled_pct": 1.93
+   },
+   "material_group": "bearing",
+   "planned_lead_time_days": 7,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2020-09-01",
+    "quota_pct": 60,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "A",
+   "colour": "green",
+   "id": "sc:70640@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 88.5,
+   "otd_pct": 86.5,
+   "ppm": 0,
+   "quarter": "2026Q3",
+   "score": 93.3
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70640@2025Q4",
+    "sc:70640@2026Q1",
+    "sc:70640@2026Q2",
+    "sc:70640@2026Q3"
+   ],
+   "otd_pct": 84.12,
+   "ppm": 159.5
+  },
+  "qn_12m": 0,
+  "qn_ids_12m": [],
+  "qn_supplier_caused_12m": 0,
+  "trend": "flat"
+ },
+ "profile_text": "Kugellager-Vertrieb Inntal GmbH (AT; family; 80 staff; turnover EUR 37.0 M). Our spend FY2026 EUR 98,435 (0.27 % of its turnover). Standard terms: 30 days net, DAP, lead time 10 days. Cost of money about 9 % a year; cash pressure low; type family. Signals: approval ladder (2), wants volume (1). Performance 2026Q3: green, OTD 86.5 %, 0 ppm. Parts: part:360020 Deep groove ball bearing 6306-2Z C3: price 4.2 per 1; part:360021 Deep groove ball bearing 6308-2Z C3: price 7.21 per 1.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260228-70640-M3",
+    "doc:20260512-70640-M2"
+   ],
+   "excerpt": "Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks.",
+   "kind": "approval_ladder",
+   "strength": 2
+  },
+  {
+   "evidence": [
+    "doc:20260819-70640-M1"
+   ],
+   "excerpt": "The sales director of Kugellager-Vertrieb Inntal GmbH said they are reviewing small accounts and will focus on customers with volume.",
+   "kind": "wants_volume",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "DAP",
+  "lead_time_days": 10,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70640",
+ "warnings": []
+}

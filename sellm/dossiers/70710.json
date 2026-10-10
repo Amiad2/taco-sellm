@@ -1,0 +1,554 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070710",
+  "incoterm": "DAP",
+  "index_clauses": [
+   {
+    "deadband_pct": 0,
+    "id": "ctr:4600070710#3.2",
+    "material_share": 0.45,
+    "series": "AS-14404"
+   }
+  ],
+  "notice_days": 60,
+  "payment_days": 30,
+  "price_basis": "index clause",
+  "valid_from": "2024-01-01",
+  "valid_to": "2026-12-31"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Edelstahl-Service Donautal GmbH",
+   "date": "2025-12-25",
+   "effective_date": null,
+   "id": "doc:20251225-70710-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Holiday shutdown",
+   "text": "Our plant is closed from 23 December to 6 January. Please place call-offs for January by 10 December."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-04-21",
+   "effective_date": null,
+   "id": "doc:20260421-70710-M2",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Price discussion",
+   "text": "Call with the owner of Edelstahl-Service Donautal GmbH: he offered to walk us through their calculation (hourly rates and material) if that helps to settle prices."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Edelstahl-Service Donautal GmbH",
+   "date": "2026-07-06",
+   "effective_date": null,
+   "id": "doc:20260706-70710-M1",
+   "kind": "letter",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Material costs",
+   "text": "Dear Sir or Madam,\n\nfor your information: our nickel and alloys requirement is covered at fixed prices until March 2027. Market movements reach our costs only after that.\n\nYours faithfully,\nEdelstahl-Service Donautal GmbH"
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Edelstahl-Service Donautal GmbH",
+   "date": "2026-09-12",
+   "effective_date": null,
+   "id": "doc:20260912-70710-P08",
+   "kind": "letter",
+   "notice_days": null,
+   "part_ids": [
+    "part:370010"
+   ],
+   "subject": "Price basis and surcharge clause for the coming period",
+   "text": "Dear Sir or Madam,\n\nfor Round bar 1.4404 dia 30 mm, peeled (part:370010) we propose to agree the price basis for the coming period, including a price adjustment clause based on AS-14404. Please let us know your view.\n\nYours faithfully,\nEdelstahl-Service Donautal GmbH"
+  }
+ ],
+ "economics": {
+  "archetype": "group",
+  "archetype_basis": "owner type group",
+  "cash_pressure": "low",
+  "cost_of_money": 0.065,
+  "cost_of_money_basis": "rule: owner type group",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 0.3,
+  "our_spend_eur": {
+   "FY2024": 507987.0,
+   "FY2025": 493091.0,
+   "FY2026": 493832.0
+  },
+  "we_pay_late_days": 2.1
+ },
+ "identity": {
+  "abc_class": "A",
+  "blocked": false,
+  "category": "raw material",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001"
+  ],
+  "country": "DE",
+  "credit_index": 177,
+  "credit_index_12m_ago": 177,
+  "equity_ratio_pct": 33.9,
+  "founded": 1970,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Edelstahl-Service Donautal GmbH",
+  "owner_type": "group",
+  "staff": 350,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "100-250 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 165000000,
+  "vda63_grade": "A"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "The alloy surcharge for 1.4404 stands at EUR 3,008/t, +6 % on a year ago.",
+   "date": "2026-09-16",
+   "headline": "Alloy surcharge 1.4404 at EUR 3,008 per tonne",
+   "id": "news:20260916-32"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  },
+  {
+   "body": "Producer prices for basic iron and steel are +7.3 % above January.",
+   "date": "2026-09-22",
+   "headline": "Steel prices +7.3 % since January",
+   "id": "news:20260922-35"
+  }
+ ],
+ "news": [
+  {
+   "body": "Edelstahl-Service Donautal GmbH presents its products at a regional supplier fair.",
+   "date": "2026-08-22",
+   "headline": "Edelstahl-Service Donautal GmbH at the trade fair",
+   "id": "news:20260822-24",
+   "noise": true,
+   "source": "Metall-Kurier",
+   "topic": "noise"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2024-07-11",
+   "incoterm": "DAP",
+   "lead_time_days": 11,
+   "part_id": "part:370021",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100069",
+   "remarks": "",
+   "unit_price": 4.29
+  },
+  {
+   "date": "2025-05-18",
+   "incoterm": "DAP",
+   "lead_time_days": 12,
+   "part_id": "part:370010",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100064",
+   "remarks": "",
+   "unit_price": 5.34
+  },
+  {
+   "date": "2026-09-10",
+   "incoterm": "DAP",
+   "lead_time_days": 10,
+   "part_id": "part:370010",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7300008",
+   "remarks": "Material covered until March 2027; price valid accordingly.",
+   "unit_price": 5.45
+  },
+  {
+   "date": "2026-09-19",
+   "incoterm": "DAP",
+   "lead_time_days": 10,
+   "part_id": "part:370010",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7200018",
+   "remarks": "",
+   "unit_price": 6.31
+  }
+ ],
+ "parts": {
+  "part:370010": {
+   "abc_class": "A",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Blankstahl Werdenfels GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 20,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70740",
+     "unit_price": null
+    },
+    {
+     "date": "2025-05-18",
+     "name": "Blankstahl Werdenfels GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100065",
+     "status": null,
+     "supplier_id": "sup:70740",
+     "unit_price": 5.41
+    },
+    {
+     "date": "2026-09-09",
+     "name": "Blankstahl Werdenfels GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7200008",
+     "status": null,
+     "supplier_id": "sup:70740",
+     "unit_price": 6.06
+    }
+   ],
+   "category": "raw material",
+   "current_price": {
+    "basis": "index_adjustment",
+    "event_id": "EV-2026-70710-370010-Q3",
+    "price": 5.45,
+    "price_unit": 1,
+    "valid_from": "2026-07-01",
+    "valid_to": null
+   },
+   "description": "Round bar 1.4404 dia 30 mm, peeled",
+   "drivers": [
+    {
+     "change_12m_pct": 5.92,
+     "change_6m_pct": -0.26,
+     "ids_12m": [
+      "idx:AS-14404@2025-09",
+      "idx:AS-14404@2026-09"
+     ],
+     "ids_6m": [
+      "idx:AS-14404@2026-03",
+      "idx:AS-14404@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 3007.8019,
+     "series": "AS-14404",
+     "weight": 0.43
+    },
+    {
+     "change_12m_pct": 12.26,
+     "change_6m_pct": 9.69,
+     "ids_12m": [
+      "idx:PPI-C2431@2025-08",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2431@2026-02",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 129.1,
+     "series": "PPI-C2431",
+     "weight": 0.36
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.03
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 1.9,
+    "id": "fc:370010@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 118500,
+    "volume_per_year": 118500
+   },
+   "grade": "1.4404",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-27",
+      "event_id": "EV-2023-70710-370010",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -3.1,
+      "date": "2023-11-29",
+      "event_id": "EV-2024-70710-370010",
+      "note": "",
+      "settled_pct": -7.1,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.0,
+      "date": "2024-12-04",
+      "event_id": "EV-2025-70710-370010",
+      "note": "",
+      "settled_pct": -1.5,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.2,
+      "date": "2025-12-05",
+      "event_id": "EV-2026-70710-370010",
+      "note": "",
+      "settled_pct": 1.4,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 0.7,
+    "mean_give_pct": 3.1,
+    "mean_settled_pct": -2.4
+   },
+   "material_group": "bar_inox",
+   "planned_lead_time_days": 10,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2017-07-01",
+    "quota_pct": 80,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "kg"
+  },
+  "part:370021": {
+   "abc_class": "B",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Inox Center Ostalpen GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 100,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70730",
+     "unit_price": null
+    },
+    {
+     "date": "2024-07-11",
+     "name": "Inox Center Ostalpen GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100068",
+     "status": null,
+     "supplier_id": "sup:70730",
+     "unit_price": 4.29
+    },
+    {
+     "date": "2026-09-15",
+     "name": "Inox Center Ostalpen GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7300063",
+     "status": null,
+     "supplier_id": "sup:70730",
+     "unit_price": 4.05
+    }
+   ],
+   "category": "raw material",
+   "current_price": null,
+   "description": "Sheet 1.4301 2 mm, 2B, cut to size",
+   "drivers": [
+    {
+     "change_12m_pct": 8.64,
+     "change_6m_pct": -0.37,
+     "ids_12m": [
+      "idx:AS-14301@2025-09",
+      "idx:AS-14301@2026-09"
+     ],
+     "ids_6m": [
+      "idx:AS-14301@2026-03",
+      "idx:AS-14301@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 1690.452,
+     "series": "AS-14301",
+     "weight": 0.46
+    },
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.34
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.04
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 7.0,
+    "id": "fc:370021@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 72100,
+    "volume_per_year": 72100
+   },
+   "grade": "1.4301",
+   "history": {
+    "below_full_cost": false,
+    "events": [],
+    "mean_asked_pct": null,
+    "mean_give_pct": null,
+    "mean_settled_pct": null
+   },
+   "material_group": "sheet_inox_sc",
+   "planned_lead_time_days": 14,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2015-07-01",
+    "quota_pct": 0,
+    "status": "qualified",
+    "tooling_owner": "n/a"
+   },
+   "uom": "kg"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "A",
+   "colour": "green",
+   "id": "sc:70710@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 92.0,
+   "otd_pct": 88.0,
+   "ppm": 75,
+   "quarter": "2026Q3",
+   "score": 93.6
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70710@2025Q4",
+    "sc:70710@2026Q1",
+    "sc:70710@2026Q2",
+    "sc:70710@2026Q3"
+   ],
+   "otd_pct": 89.25,
+   "ppm": 71.5
+  },
+  "qn_12m": 7,
+  "qn_ids_12m": [
+   "qn:20004725",
+   "qn:20004878",
+   "qn:20004895",
+   "qn:20004922",
+   "qn:20004940",
+   "qn:20004951",
+   "qn:20005016"
+  ],
+  "qn_supplier_caused_12m": 7,
+  "trend": "flat"
+ },
+ "profile_text": "Edelstahl-Service Donautal GmbH (DE; group; 350 staff; turnover EUR 165.0 M). Our spend FY2026 EUR 493,832 (0.3 % of its turnover). Standard terms: 30 days net, DAP, lead time 10 days. Cost of money about 6.5 % a year; cash pressure low; type group. Signals: approval ladder (1), material hedged (1). Performance 2026Q3: green, OTD 88.0 %, 75 ppm. Parts: part:370010 Round bar 1.4404 dia 30 mm, peeled: price 5.45 per 1; part:370021 Sheet 1.4301 2 mm, 2B, cut to size.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "sup:70710#group"
+   ],
+   "excerpt": "Part of a group.",
+   "kind": "approval_ladder",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "quote:7300008"
+   ],
+   "excerpt": "Material covered until March 2027; price valid accordingly.",
+   "kind": "material_hedged",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "DAP",
+  "lead_time_days": 10,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70710",
+ "warnings": []
+}

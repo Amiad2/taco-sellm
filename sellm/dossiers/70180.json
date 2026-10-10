@@ -1,0 +1,502 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070180",
+  "incoterm": "FCA",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 30,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Feinguss Allgäu-Reiter GmbH",
+   "date": "2025-10-22",
+   "effective_date": null,
+   "id": "doc:20251022-70180-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Packaging",
+   "text": "From November we deliver in returnable boxes instead of cardboard."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-09-24",
+   "effective_date": null,
+   "id": "doc:20260924-70180-M1",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Visit by the owner",
+   "text": "Visit by the owner of Feinguss Allgäu-Reiter GmbH. He reminded us that in 2022 they kept supplying at the old price for a quarter and said he expects partnership in return."
+  }
+ ],
+ "economics": {
+  "archetype": "family",
+  "archetype_basis": "owner type family",
+  "cash_pressure": "low",
+  "cost_of_money": 0.09,
+  "cost_of_money_basis": "rule: owner type family",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 3.32,
+  "our_spend_eur": {
+   "FY2024": 583593.96,
+   "FY2025": 751199.3,
+   "FY2026": 798959.9
+  },
+  "we_pay_late_days": 4.1
+ },
+ "identity": {
+  "abc_class": "A",
+  "blocked": false,
+  "category": "castings",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001",
+   "ISO 50001"
+  ],
+  "country": "DE",
+  "credit_index": 244,
+  "credit_index_12m_ago": 244,
+  "equity_ratio_pct": 25.0,
+  "founded": 1962,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Feinguss Allgäu-Reiter GmbH",
+  "owner_type": "family",
+  "staff": 160,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "10-25 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 24100000,
+  "vda63_grade": "B"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Producer prices for iron castings rose +1.8 % in the twelve months to August.",
+   "date": "2026-09-14",
+   "headline": "Iron castings +1.8 % year on year",
+   "id": "news:20260914-31"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  }
+ ],
+ "news": [],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2024-04-12",
+   "incoterm": "FCA",
+   "lead_time_days": 48,
+   "part_id": "part:310051",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100014",
+   "remarks": "",
+   "unit_price": 130.3
+  },
+  {
+   "date": "2025-07-10",
+   "incoterm": "FCA",
+   "lead_time_days": 60,
+   "part_id": "part:310050",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100012",
+   "remarks": "",
+   "unit_price": 676.6
+  }
+ ],
+ "parts": {
+  "part:310050": {
+   "abc_class": "A",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Slévárna Vrbenský s.r.o.",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 25,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70170",
+     "unit_price": null
+    },
+    {
+     "date": "2025-07-10",
+     "name": "Slévárna Vrbenský s.r.o.",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100013",
+     "status": null,
+     "supplier_id": "sup:70170",
+     "unit_price": 598.1
+    }
+   ],
+   "category": "castings",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70180-310050",
+    "price": 654.52,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Volute casing HI 80-250",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.26
+    },
+    {
+     "change_12m_pct": 5.92,
+     "change_6m_pct": -0.26,
+     "ids_12m": [
+      "idx:AS-14404@2025-09",
+      "idx:AS-14404@2026-09"
+     ],
+     "ids_6m": [
+      "idx:AS-14404@2026-03",
+      "idx:AS-14404@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 3007.8019,
+     "series": "AS-14404",
+     "weight": 0.24
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.06
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 13.3,
+    "id": "fc:310050@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 1593,
+    "volume_per_year": 1593
+   },
+   "grade": "1.4408",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-12",
+      "event_id": "EV-2023-70180-310050",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -2.1,
+      "date": "2023-11-23",
+      "event_id": "EV-2024-70180-310050",
+      "note": "",
+      "settled_pct": -3.7,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.5,
+      "date": "2024-11-19",
+      "event_id": "EV-2025-70180-310050",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 0.0,
+      "date": "2025-11-18",
+      "event_id": "EV-2026-70180-310050",
+      "note": "",
+      "settled_pct": -2.1,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": -0.2,
+    "mean_give_pct": 1.73,
+    "mean_settled_pct": -1.93
+   },
+   "material_group": "cast_steel",
+   "planned_lead_time_days": 49,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2016-05-01",
+    "quota_pct": 75,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  },
+  "part:310051": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Meridune Precision Castings Co., Ltd.",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 40,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70160",
+     "unit_price": null
+    },
+    {
+     "date": "2024-04-12",
+     "name": "Meridune Precision Castings Co., Ltd.",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100015",
+     "status": null,
+     "supplier_id": "sup:70160",
+     "unit_price": 91.4
+    }
+   ],
+   "category": "castings",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70180-310051",
+    "price": 118.73,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Impeller HI 250",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.29
+    },
+    {
+     "change_12m_pct": 5.92,
+     "change_6m_pct": -0.26,
+     "ids_12m": [
+      "idx:AS-14404@2025-09",
+      "idx:AS-14404@2026-09"
+     ],
+     "ids_6m": [
+      "idx:AS-14404@2026-03",
+      "idx:AS-14404@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 3007.8019,
+     "series": "AS-14404",
+     "weight": 0.24
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.09
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 5.3,
+    "id": "fc:310051@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 1483,
+    "volume_per_year": 1483
+   },
+   "grade": "1.4408",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-04",
+      "event_id": "EV-2023-70180-310051",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -5.1,
+      "date": "2023-11-29",
+      "event_id": "EV-2024-70180-310051",
+      "note": "",
+      "settled_pct": -6.4,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 4.0,
+      "date": "2024-11-15",
+      "event_id": "EV-2025-70180-310051",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 0.1,
+      "date": "2025-12-09",
+      "event_id": "EV-2026-70180-310051",
+      "note": "",
+      "settled_pct": -3.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": -0.33,
+    "mean_give_pct": 2.8,
+    "mean_settled_pct": -3.13
+   },
+   "material_group": "cast_steel",
+   "planned_lead_time_days": 49,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2017-05-01",
+    "quota_pct": 60,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "B",
+   "colour": "amber",
+   "id": "sc:70180@2026Q3",
+   "open_8d_overdue": 1,
+   "otd_confirmed_pct": 78.8,
+   "otd_pct": 73.1,
+   "ppm": 526,
+   "quarter": "2026Q3",
+   "score": 78.9
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70180@2025Q4",
+    "sc:70180@2026Q1",
+    "sc:70180@2026Q2",
+    "sc:70180@2026Q3"
+   ],
+   "otd_pct": 78.25,
+   "ppm": 678.25
+  },
+  "qn_12m": 1,
+  "qn_ids_12m": [
+   "qn:20004976"
+  ],
+  "qn_supplier_caused_12m": 1,
+  "trend": "worse"
+ },
+ "profile_text": "Feinguss Allgäu-Reiter GmbH (DE; family; 160 staff; turnover EUR 24.1 M). Our spend FY2026 EUR 798,960 (3.32 % of its turnover). Standard terms: 30 days net, FCA, lead time 49 days. Cost of money about 9 % a year; cash pressure low; type family. Signals: delivery problem (1), partnership (1), quality problem (2). Performance 2026Q3: amber, OTD 73.1 %, 526 ppm, 1 overdue 8D. Parts: part:310050 Volute casing HI 80-250: price 654.52 per 1; part:310051 Impeller HI 250: price 118.73 per 1.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "sc:70180@2026Q3"
+   ],
+   "excerpt": "On-time delivery 73.1 % in 2026Q3.",
+   "kind": "delivery_problem",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "doc:20260924-70180-M1"
+   ],
+   "excerpt": "He reminded us that in 2022 they kept supplying at the old price for a quarter and said he expects partnership in return.",
+   "kind": "partnership",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "sc:70180@2026Q3"
+   ],
+   "excerpt": "Scorecard 2026Q3 is amber.",
+   "kind": "quality_problem",
+   "strength": 2
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "FCA",
+  "lead_time_days": 49,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70180",
+ "warnings": []
+}

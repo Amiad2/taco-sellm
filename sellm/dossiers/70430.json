@@ -1,0 +1,557 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070430",
+  "incoterm": "DAP",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 30,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Elasto-Dicht Hermannsdorfer GmbH",
+   "date": "2025-10-12",
+   "effective_date": null,
+   "id": "doc:20251012-70430-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "New contact person",
+   "text": "From 1 October your contact in sales is our new colleague in inside sales; all other contacts stay the same."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-03-26",
+   "effective_date": null,
+   "id": "doc:20260326-70430-M2",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Price discussion",
+   "text": "Call with the owner of Elasto-Dicht Hermannsdorfer GmbH: he offered to walk us through their calculation (hourly rates and material) if that helps to settle prices."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-05-15",
+   "effective_date": null,
+   "id": "doc:20260515-70430-M1",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Customer portfolio",
+   "text": "The sales director of Elasto-Dicht Hermannsdorfer GmbH said they are reviewing small accounts and will focus on customers with volume."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-09-13",
+   "effective_date": null,
+   "id": "doc:20260913-70430-P15",
+   "kind": "memo",
+   "notice_days": null,
+   "part_ids": [
+    "part:340020",
+    "part:340030",
+    "part:340040"
+   ],
+   "subject": "One supplier for the kit",
+   "text": "Kit per unit (about 25000 kits a year):\n- 2 x O-ring set EPDM, drinking-water approved (part:340020)\n- 1 x Casing gasket, aramid fibre (part:340030)\n- 2 x Lip seal 35x52x7 (part:340040)\n\nToday these parts come from several suppliers. We want one supplier for the kit."
+  }
+ ],
+ "economics": {
+  "archetype": "job_shop",
+  "archetype_basis": "staff 45 < 80",
+  "cash_pressure": "low",
+  "cost_of_money": 0.25,
+  "cost_of_money_basis": "rule: job shop or short of cash",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 0.2,
+  "our_spend_eur": {
+   "FY2024": 43900.33,
+   "FY2025": 45915.42,
+   "FY2026": 46358.68
+  },
+  "we_pay_late_days": 2.8
+ },
+ "identity": {
+  "abc_class": "B",
+  "blocked": false,
+  "category": "seals",
+  "certifications": [
+   "ISO 9001"
+  ],
+  "country": "DE",
+  "credit_index": 167,
+  "credit_index_12m_ago": 167,
+  "equity_ratio_pct": 38.9,
+  "founded": 1987,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Elasto-Dicht Hermannsdorfer GmbH",
+  "owner_type": "family",
+  "staff": 45,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "10-25 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 22900000,
+  "vda63_grade": "A"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  }
+ ],
+ "news": [],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2025-01-12",
+   "incoterm": "DAP",
+   "lead_time_days": 7,
+   "part_id": "part:340040",
+   "payment_days": 30,
+   "price_unit": 100,
+   "quote_id": "quote:7100040",
+   "remarks": "",
+   "unit_price": 102.34
+  },
+  {
+   "date": "2025-05-23",
+   "incoterm": "DAP",
+   "lead_time_days": 8,
+   "part_id": "part:340030",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100039",
+   "remarks": "",
+   "unit_price": 1.97
+  }
+ ],
+ "parts": {
+  "part:340020": {
+   "abc_class": "C",
+   "alternatives": [],
+   "category": "seals",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70430-340020",
+    "price": 65.41,
+    "price_unit": 100,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "O-ring set EPDM, drinking-water approved",
+   "drivers": [
+    {
+     "change_12m_pct": 3.9,
+     "change_6m_pct": 3.2,
+     "ids_12m": [
+      "idx:PPI-C2219@2025-08",
+      "idx:PPI-C2219@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2219@2026-02",
+      "idx:PPI-C2219@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 122.4,
+     "series": "PPI-C2219",
+     "weight": 0.54
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.14
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 9.5,
+    "id": "fc:340020@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 48200,
+    "volume_per_year": 48200
+   },
+   "grade": "EPDM",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-29",
+      "event_id": "EV-2023-70430-340020",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 2.7,
+      "date": "2023-12-02",
+      "event_id": "EV-2024-70430-340020",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.1,
+      "date": "2024-11-26",
+      "event_id": "EV-2025-70430-340020",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 5.4,
+      "date": "2025-11-24",
+      "event_id": "EV-2026-70430-340020",
+      "note": "",
+      "settled_pct": 2.4,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 3.07,
+    "mean_give_pct": 2.27,
+    "mean_settled_pct": 0.8
+   },
+   "material_group": "seal_soft",
+   "planned_lead_time_days": 7,
+   "price_to_should_cost": null,
+   "price_unit": 100,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2011-03-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  },
+  "part:340030": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Dichtungswerk Ravensteiner GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 100,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70410",
+     "unit_price": null
+    },
+    {
+     "date": "2025-05-23",
+     "name": "Dichtungswerk Ravensteiner GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100038",
+     "status": null,
+     "supplier_id": "sup:70410",
+     "unit_price": 2.35
+    }
+   ],
+   "category": "seals",
+   "current_price": null,
+   "description": "Casing gasket, aramid fibre",
+   "drivers": [
+    {
+     "change_12m_pct": 3.9,
+     "change_6m_pct": 3.2,
+     "ids_12m": [
+      "idx:PPI-C2219@2025-08",
+      "idx:PPI-C2219@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2219@2026-02",
+      "idx:PPI-C2219@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 122.4,
+     "series": "PPI-C2219",
+     "weight": 0.56
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.11
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 10.2,
+    "id": "fc:340030@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 30600,
+    "volume_per_year": 30600
+   },
+   "grade": "aramid",
+   "history": {
+    "below_full_cost": false,
+    "events": [],
+    "mean_asked_pct": null,
+    "mean_give_pct": null,
+    "mean_settled_pct": null
+   },
+   "material_group": "seal_soft",
+   "planned_lead_time_days": 14,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2021-03-01",
+    "quota_pct": 0,
+    "status": "qualified",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  },
+  "part:340040": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Kohlering-Technik Pirkheim GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 50,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70440",
+     "unit_price": null
+    },
+    {
+     "date": "2025-01-12",
+     "name": "Kohlering-Technik Pirkheim GmbH",
+     "price_unit": 100,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100041",
+     "status": null,
+     "supplier_id": "sup:70440",
+     "unit_price": 121.27
+    }
+   ],
+   "category": "seals",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70430-340040",
+    "price": 100.98,
+    "price_unit": 100,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Lip seal 35x52x7",
+   "drivers": [
+    {
+     "change_12m_pct": 3.9,
+     "change_6m_pct": 3.2,
+     "ids_12m": [
+      "idx:PPI-C2219@2025-08",
+      "idx:PPI-C2219@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2219@2026-02",
+      "idx:PPI-C2219@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 122.4,
+     "series": "PPI-C2219",
+     "weight": 0.54
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.12
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 5.1,
+    "id": "fc:340040@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 39100,
+    "volume_per_year": 39100
+   },
+   "grade": "NBR",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-20",
+      "event_id": "EV-2023-70430-340040",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 1.1,
+      "date": "2023-11-22",
+      "event_id": "EV-2024-70430-340040",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.5,
+      "date": "2024-11-22",
+      "event_id": "EV-2025-70430-340040",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 4.0,
+      "date": "2025-12-01",
+      "event_id": "EV-2026-70430-340040",
+      "note": "",
+      "settled_pct": 2.6,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 2.53,
+    "mean_give_pct": 1.67,
+    "mean_settled_pct": 0.87
+   },
+   "material_group": "seal_soft",
+   "planned_lead_time_days": 7,
+   "price_to_should_cost": null,
+   "price_unit": 100,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2018-03-01",
+    "quota_pct": 50,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "A",
+   "colour": "green",
+   "id": "sc:70430@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 91.8,
+   "otd_pct": 91.8,
+   "ppm": 291,
+   "quarter": "2026Q3",
+   "score": 94.5
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70430@2025Q4",
+    "sc:70430@2026Q1",
+    "sc:70430@2026Q2",
+    "sc:70430@2026Q3"
+   ],
+   "otd_pct": 86.2,
+   "ppm": 325.25
+  },
+  "qn_12m": 13,
+  "qn_ids_12m": [
+   "qn:20004690",
+   "qn:20004694",
+   "qn:20004705",
+   "qn:20004721",
+   "qn:20004767",
+   "qn:20004844",
+   "qn:20004888",
+   "qn:20004894",
+   "qn:20004903",
+   "qn:20004942",
+   "qn:20004961",
+   "qn:20004975",
+   "qn:20005007"
+  ],
+  "qn_supplier_caused_12m": 12,
+  "trend": "better"
+ },
+ "profile_text": "Elasto-Dicht Hermannsdorfer GmbH (DE; family; 45 staff; turnover EUR 22.9 M). Our spend FY2026 EUR 46,359 (0.2 % of its turnover). Standard terms: 30 days net, DAP, lead time 7 days. Cost of money about 25 % a year; cash pressure low; type job shop. Signals: wants volume (1). Performance 2026Q3: green, OTD 91.8 %, 291 ppm. Parts: part:340020 O-ring set EPDM, drinking-water approved: price 65.41 per 100; part:340030 Casing gasket, aramid fibre; part:340040 Lip seal 35x52x7: price 100.98 per 100.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260515-70430-M1"
+   ],
+   "excerpt": "The sales director of Elasto-Dicht Hermannsdorfer GmbH said they are reviewing small accounts and will focus on customers with volume.",
+   "kind": "wants_volume",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "DAP",
+  "lead_time_days": 7,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70430",
+ "warnings": []
+}

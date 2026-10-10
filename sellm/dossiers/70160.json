@@ -1,0 +1,366 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070160",
+  "incoterm": "FCA",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 90,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Meridune Precision Castings Co., Ltd.",
+   "date": "2025-11-16",
+   "effective_date": null,
+   "id": "doc:20251116-70160-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Holiday shutdown",
+   "text": "Our plant is closed from 23 December to 6 January. Please place call-offs for January by 10 December."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Meridune Precision Castings Co., Ltd.",
+   "date": "2026-07-01",
+   "effective_date": null,
+   "id": "doc:20260701-70160-M1",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Payment of invoices",
+   "text": "Could you pay our invoices within 10 days? In return we would grant a cash discount."
+  }
+ ],
+ "economics": {
+  "archetype": "other",
+  "archetype_basis": "no rule applies",
+  "cash_pressure": "medium",
+  "cost_of_money": 0.1,
+  "cost_of_money_basis": "rule: owner type private",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 0.12,
+  "our_spend_eur": {
+   "FY2024": 27095.52,
+   "FY2025": 46641.7,
+   "FY2026": 45236.18
+  },
+  "we_pay_late_days": 1.9
+ },
+ "identity": {
+  "abc_class": "B",
+  "blocked": false,
+  "category": "castings",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001",
+   "ISO 50001"
+  ],
+  "country": "CN",
+  "credit_index": 254,
+  "credit_index_12m_ago": 254,
+  "equity_ratio_pct": 25.3,
+  "founded": 2003,
+  "group_parent": null,
+  "legal_form": "Co., Ltd.",
+  "name": "Meridune Precision Castings Co., Ltd.",
+  "owner_type": "private",
+  "staff": 900,
+  "supplier_since": "2006-01-01",
+  "turnover_band": "25-50 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 39300000,
+  "vda63_grade": "B"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Producer prices for iron castings rose +1.8 % in the twelve months to August.",
+   "date": "2026-09-14",
+   "headline": "Iron castings +1.8 % year on year",
+   "id": "news:20260914-31"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  }
+ ],
+ "news": [
+  {
+   "body": "Meridune Precision Castings Co., Ltd. has appointed a new managing director for sales.",
+   "date": "2026-09-25",
+   "headline": "New managing director at Meridune Precision Castings Co., Ltd.",
+   "id": "news:20260925-37",
+   "noise": true,
+   "source": "Zulieferer Report",
+   "topic": "noise"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2024-04-12",
+   "incoterm": "FCA",
+   "lead_time_days": 112,
+   "part_id": "part:310051",
+   "payment_days": 90,
+   "price_unit": 1,
+   "quote_id": "quote:7100015",
+   "remarks": "",
+   "unit_price": 91.4
+  }
+ ],
+ "parts": {
+  "part:310051": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Feinguss Allgäu-Reiter GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 60,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70180",
+     "unit_price": null
+    },
+    {
+     "date": "2024-04-12",
+     "name": "Feinguss Allgäu-Reiter GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100014",
+     "status": null,
+     "supplier_id": "sup:70180",
+     "unit_price": 130.3
+    }
+   ],
+   "category": "castings",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70160-310051",
+    "price": 79.44,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Impeller HI 250",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.29
+    },
+    {
+     "change_12m_pct": 5.92,
+     "change_6m_pct": -0.26,
+     "ids_12m": [
+      "idx:AS-14404@2025-09",
+      "idx:AS-14404@2026-09"
+     ],
+     "ids_6m": [
+      "idx:AS-14404@2026-03",
+      "idx:AS-14404@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 3007.8019,
+     "series": "AS-14404",
+     "weight": 0.24
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.09
+    }
+   ],
+   "floor_estimate": {
+    "basis": "plant-specific should-cost cost:310051",
+    "high": 89.22,
+    "low": 80.72,
+    "value": 84.97
+   },
+   "forecast": {
+    "change_pct": 5.3,
+    "id": "fc:310051@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 1483,
+    "volume_per_year": 1483
+   },
+   "grade": "1.4408",
+   "history": {
+    "below_full_cost": true,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-25",
+      "event_id": "EV-2023-70160-310051",
+      "note": "accepted below full cost to keep the volume",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -2.6,
+      "date": "2023-12-02",
+      "event_id": "EV-2024-70160-310051",
+      "note": "accepted below full cost to keep the volume",
+      "settled_pct": -5.1,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.0,
+      "date": "2024-11-13",
+      "event_id": "EV-2025-70160-310051",
+      "note": "accepted below full cost to keep the volume",
+      "settled_pct": -0.3,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": -1.1,
+      "date": "2025-12-09",
+      "event_id": "EV-2026-70160-310051",
+      "note": "accepted below full cost to keep the volume",
+      "settled_pct": -2.3,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": -0.9,
+    "mean_give_pct": 1.67,
+    "mean_settled_pct": -2.57
+   },
+   "material_group": "cast_steel",
+   "planned_lead_time_days": 49,
+   "price_to_should_cost": 0.9349,
+   "price_unit": 1,
+   "should_cost": {
+    "confidence_pct": 5,
+    "conversion_eur": 40.44,
+    "cost_base": "CN",
+    "id": "cost:310051",
+    "material_eur": 27.19,
+    "overhead_eur": 17.33,
+    "plant_specific": true,
+    "price_unit": 1,
+    "unit_cost": 84.97
+   },
+   "sourcing": {
+    "approved_since": "2010-09-01",
+    "quota_pct": 40,
+    "status": "active",
+    "tooling_owner": "supplier"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "A",
+   "colour": "green",
+   "id": "sc:70160@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 84.0,
+   "otd_pct": 84.0,
+   "ppm": 0,
+   "quarter": "2026Q3",
+   "score": 92.0
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70160@2025Q4",
+    "sc:70160@2026Q1",
+    "sc:70160@2026Q2",
+    "sc:70160@2026Q3"
+   ],
+   "otd_pct": 76.53,
+   "ppm": 2254.75
+  },
+  "qn_12m": 0,
+  "qn_ids_12m": [],
+  "qn_supplier_caused_12m": 0,
+  "trend": "better"
+ },
+ "profile_text": "Meridune Precision Castings Co., Ltd. (CN; private; 900 staff; turnover EUR 39.3 M). Our spend FY2026 EUR 45,236 (0.12 % of its turnover). Standard terms: 90 days net, FCA, lead time 105 days. Cost of money about 10 % a year; cash pressure medium; type other. Signals: cash short (1), margin floor (1), wants volume (1). Performance 2026Q3: green, OTD 84.0 %, 0 ppm. Parts: part:310051 Impeller HI 250: price 79.44 per 1, 0.93x should-cost.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260701-70160-M1"
+   ],
+   "excerpt": "Could you pay our invoices within 10 days?",
+   "kind": "cash_short",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "cost:310051#below"
+   ],
+   "excerpt": "part:310051 is priced at 0.93 x its should-cost.",
+   "kind": "margin_floor",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "EV-2026-70160-310051"
+   ],
+   "excerpt": "part:310051: 'accepted below full cost to keep the volume'",
+   "kind": "wants_volume",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "FCA",
+  "lead_time_days": 105,
+  "payment_days": 90,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70160",
+ "warnings": []
+}

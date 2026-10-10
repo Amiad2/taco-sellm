@@ -1,0 +1,389 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070730",
+  "incoterm": "DAP",
+  "index_clauses": [
+   {
+    "deadband_pct": 0,
+    "id": "ctr:4600070730#3.2",
+    "material_share": 0.45,
+    "series": "AS-14301"
+   }
+  ],
+  "notice_days": 60,
+  "payment_days": 30,
+  "price_basis": "index clause",
+  "valid_from": "2024-01-01",
+  "valid_to": "2026-12-31"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Inox Center Ostalpen GmbH",
+   "date": "2025-12-16",
+   "effective_date": null,
+   "id": "doc:20251216-70730-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Holiday shutdown",
+   "text": "Our plant is closed from 23 December to 6 January. Please place call-offs for January by 10 December."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-03-08",
+   "effective_date": null,
+   "id": "doc:20260308-70730-M2",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Annual review",
+   "text": "Annual review with Inox Center Ostalpen GmbH. Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-07-27",
+   "effective_date": null,
+   "id": "doc:20260727-70730-M1",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Material purchasing",
+   "text": "Call with Inox Center Ostalpen GmbH: they bought their nickel and alloys forward until January 2027 and said the market price is 'not our reality' before then."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-08-06",
+   "effective_date": null,
+   "id": "doc:20260806-70730-M3",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Price discussion",
+   "text": "Call with the owner of Inox Center Ostalpen GmbH: he offered to walk us through their calculation (hourly rates and material) if that helps to settle prices."
+  }
+ ],
+ "economics": {
+  "archetype": "trader",
+  "archetype_basis": "raw material or supply from stock",
+  "cash_pressure": "low",
+  "cost_of_money": 0.1,
+  "cost_of_money_basis": "rule: owner type private",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 0.35,
+  "our_spend_eur": {
+   "FY2024": 288137.79,
+   "FY2025": 278282.0,
+   "FY2026": 267004.25
+  },
+  "we_pay_late_days": 2.9
+ },
+ "identity": {
+  "abc_class": "B",
+  "blocked": false,
+  "category": "raw material",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001"
+  ],
+  "country": "AT",
+  "credit_index": 167,
+  "credit_index_12m_ago": 167,
+  "equity_ratio_pct": 34.2,
+  "founded": 1995,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Inox Center Ostalpen GmbH",
+  "owner_type": "private",
+  "staff": 150,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "50-100 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 76300000,
+  "vda63_grade": "A"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "The alloy surcharge for 1.4404 stands at EUR 3,008/t, +6 % on a year ago.",
+   "date": "2026-09-16",
+   "headline": "Alloy surcharge 1.4404 at EUR 3,008 per tonne",
+   "id": "news:20260916-32"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  },
+  {
+   "body": "Producer prices for basic iron and steel are +7.3 % above January.",
+   "date": "2026-09-22",
+   "headline": "Steel prices +7.3 % since January",
+   "id": "news:20260922-35"
+  }
+ ],
+ "news": [],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2024-07-11",
+   "incoterm": "DAP",
+   "lead_time_days": 17,
+   "part_id": "part:370021",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100068",
+   "remarks": "",
+   "unit_price": 4.29
+  },
+  {
+   "date": "2026-09-15",
+   "incoterm": "DAP",
+   "lead_time_days": 14,
+   "part_id": "part:370021",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7300063",
+   "remarks": "Material covered until January 2027; price valid accordingly.",
+   "unit_price": 4.05
+  }
+ ],
+ "parts": {
+  "part:370021": {
+   "abc_class": "B",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Edelstahl-Service Donautal GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 0,
+     "quote_id": null,
+     "status": "qualified",
+     "supplier_id": "sup:70710",
+     "unit_price": null
+    },
+    {
+     "date": "2024-07-11",
+     "name": "Edelstahl-Service Donautal GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100069",
+     "status": null,
+     "supplier_id": "sup:70710",
+     "unit_price": 4.29
+    }
+   ],
+   "category": "raw material",
+   "current_price": {
+    "basis": "index_adjustment",
+    "event_id": "EV-2026-70730-370021-Q3",
+    "price": 4.05,
+    "price_unit": 1,
+    "valid_from": "2026-07-01",
+    "valid_to": null
+   },
+   "description": "Sheet 1.4301 2 mm, 2B, cut to size",
+   "drivers": [
+    {
+     "change_12m_pct": 8.64,
+     "change_6m_pct": -0.37,
+     "ids_12m": [
+      "idx:AS-14301@2025-09",
+      "idx:AS-14301@2026-09"
+     ],
+     "ids_6m": [
+      "idx:AS-14301@2026-03",
+      "idx:AS-14301@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 1690.452,
+     "series": "AS-14301",
+     "weight": 0.46
+    },
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.34
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.04
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 7.0,
+    "id": "fc:370021@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 72100,
+    "volume_per_year": 72100
+   },
+   "grade": "1.4301",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-04",
+      "event_id": "EV-2023-70730-370021",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -6.4,
+      "date": "2023-11-19",
+      "event_id": "EV-2024-70730-370021",
+      "note": "",
+      "settled_pct": -8.9,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.2,
+      "date": "2024-12-07",
+      "event_id": "EV-2025-70730-370021",
+      "note": "",
+      "settled_pct": -1.2,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": -0.8,
+      "date": "2025-11-20",
+      "event_id": "EV-2026-70730-370021",
+      "note": "",
+      "settled_pct": -2.8,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": -2.0,
+    "mean_give_pct": 2.3,
+    "mean_settled_pct": -4.3
+   },
+   "material_group": "sheet_inox_sc",
+   "planned_lead_time_days": 14,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2022-03-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "kg"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "A",
+   "colour": "green",
+   "id": "sc:70730@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 96.0,
+   "otd_pct": 96.0,
+   "ppm": 89,
+   "quarter": "2026Q3",
+   "score": 97.6
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70730@2025Q4",
+    "sc:70730@2026Q1",
+    "sc:70730@2026Q2",
+    "sc:70730@2026Q3"
+   ],
+   "otd_pct": 96.88,
+   "ppm": 72.25
+  },
+  "qn_12m": 6,
+  "qn_ids_12m": [
+   "qn:20004788",
+   "qn:20004836",
+   "qn:20004863",
+   "qn:20004909",
+   "qn:20004948",
+   "qn:20004981"
+  ],
+  "qn_supplier_caused_12m": 6,
+  "trend": "flat"
+ },
+ "profile_text": "Inox Center Ostalpen GmbH (AT; private; 150 staff; turnover EUR 76.3 M). Our spend FY2026 EUR 267,004 (0.35 % of its turnover). Standard terms: 30 days net, DAP, lead time 14 days. Cost of money about 10 % a year; cash pressure low; type trader. Signals: approval ladder (1), material hedged (1). Performance 2026Q3: green, OTD 96.0 %, 89 ppm. Parts: part:370021 Sheet 1.4301 2 mm, 2B, cut to size: price 4.05 per 1.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260308-70730-M2"
+   ],
+   "excerpt": "Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks.",
+   "kind": "approval_ladder",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "quote:7300063"
+   ],
+   "excerpt": "Material covered until January 2027; price valid accordingly.",
+   "kind": "material_hedged",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "DAP",
+  "lead_time_days": 14,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70730",
+ "warnings": []
+}

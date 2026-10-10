@@ -1,0 +1,490 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070720",
+  "incoterm": "DAP",
+  "index_clauses": [],
+  "notice_days": 60,
+  "payment_days": 30,
+  "price_basis": "fixed per year",
+  "valid_from": "2024-01-01",
+  "valid_to": "2026-12-31"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Stahlhandel Rupprecht-Kessel GmbH",
+   "date": "2025-12-27",
+   "effective_date": null,
+   "id": "doc:20251227-70720-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Trade fair invitation",
+   "text": "We would be pleased to welcome you at our booth at the regional supplier fair in November."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-04-09",
+   "effective_date": null,
+   "id": "doc:20260409-70720-M4",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Supplier day",
+   "text": "At our supplier day Stahlhandel Rupprecht-Kessel GmbH said Hollerau is an important reference customer for them."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-04-15",
+   "effective_date": null,
+   "id": "doc:20260415-70720-M2",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Price discussion",
+   "text": "Call with the owner of Stahlhandel Rupprecht-Kessel GmbH: he offered to walk us through their calculation (hourly rates and material) if that helps to settle prices."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-07-12",
+   "effective_date": null,
+   "id": "doc:20260712-70720-M3",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Price discussion",
+   "text": "Call with the owner of Stahlhandel Rupprecht-Kessel GmbH: he offered to walk us through their calculation (hourly rates and material) if that helps to settle prices."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Stahlhandel Rupprecht-Kessel GmbH",
+   "date": "2026-09-16",
+   "effective_date": null,
+   "id": "doc:20260916-70720-P16",
+   "kind": "letter",
+   "notice_days": null,
+   "part_ids": [
+    "part:370020"
+   ],
+   "subject": "Price basis and surcharge clause for the coming period",
+   "text": "Dear Sir or Madam,\n\nfor Sheet S235JR 3 mm, hot rolled, cut to size (part:370020) we propose to agree the price basis for the coming period, including a price adjustment clause based on PPI-C241. Please let us know your view.\n\nYours faithfully,\nStahlhandel Rupprecht-Kessel GmbH"
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-09-24",
+   "effective_date": null,
+   "id": "doc:20260924-70720-M1",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Supplier day",
+   "text": "At our supplier day Stahlhandel Rupprecht-Kessel GmbH said Hollerau is an important reference customer for them."
+  }
+ ],
+ "economics": {
+  "archetype": "family",
+  "archetype_basis": "owner type family",
+  "cash_pressure": "low",
+  "cost_of_money": 0.09,
+  "cost_of_money_basis": "rule: owner type family",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 0.22,
+  "our_spend_eur": {
+   "FY2024": 486291.55,
+   "FY2025": 481846.92,
+   "FY2026": 440941.1
+  },
+  "we_pay_late_days": 2.2
+ },
+ "identity": {
+  "abc_class": "A",
+  "blocked": false,
+  "category": "raw material",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001"
+  ],
+  "country": "DE",
+  "credit_index": 177,
+  "credit_index_12m_ago": 177,
+  "equity_ratio_pct": 39.0,
+  "founded": 1908,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Stahlhandel Rupprecht-Kessel GmbH",
+  "owner_type": "family",
+  "staff": 500,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "100-250 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 196000000,
+  "vda63_grade": "A"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "The alloy surcharge for 1.4404 stands at EUR 3,008/t, +6 % on a year ago.",
+   "date": "2026-09-16",
+   "headline": "Alloy surcharge 1.4404 at EUR 3,008 per tonne",
+   "id": "news:20260916-32"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  },
+  {
+   "body": "Producer prices for basic iron and steel are +7.3 % above January.",
+   "date": "2026-09-22",
+   "headline": "Steel prices +7.3 % since January",
+   "id": "news:20260922-35"
+  }
+ ],
+ "news": [],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2025-05-20",
+   "incoterm": "DAP",
+   "lead_time_days": 11,
+   "part_id": "part:370012",
+   "payment_days": 30,
+   "price_unit": 100,
+   "quote_id": "quote:7100067",
+   "remarks": "",
+   "unit_price": 129.78
+  }
+ ],
+ "parts": {
+  "part:370012": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Blankstahl Werdenfels GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 60,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70740",
+     "unit_price": null
+    },
+    {
+     "date": "2025-05-20",
+     "name": "Blankstahl Werdenfels GmbH",
+     "price_unit": 100,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100066",
+     "status": null,
+     "supplier_id": "sup:70740",
+     "unit_price": 131.74
+    }
+   ],
+   "category": "raw material",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70720-370012",
+    "price": 126.05,
+    "price_unit": 100,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Round bar C45 dia 50 mm, cold drawn",
+   "drivers": [
+    {
+     "change_12m_pct": 12.26,
+     "change_6m_pct": 9.69,
+     "ids_12m": [
+      "idx:PPI-C2431@2025-08",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2431@2026-02",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 129.1,
+     "series": "PPI-C2431",
+     "weight": 0.82
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.06
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 9.2,
+    "id": "fc:370012@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 98700,
+    "volume_per_year": 98700
+   },
+   "grade": "C45",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-09",
+      "event_id": "EV-2023-70720-370012",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -5.9,
+      "date": "2023-12-08",
+      "event_id": "EV-2024-70720-370012",
+      "note": "",
+      "settled_pct": -9.1,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.5,
+      "date": "2024-11-17",
+      "event_id": "EV-2025-70720-370012",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 0.0,
+      "date": "2025-11-28",
+      "event_id": "EV-2026-70720-370012",
+      "note": "",
+      "settled_pct": -2.3,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": -1.47,
+    "mean_give_pct": 2.33,
+    "mean_settled_pct": -3.8
+   },
+   "material_group": "bar_steel",
+   "planned_lead_time_days": 14,
+   "price_to_should_cost": null,
+   "price_unit": 100,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2016-05-01",
+    "quota_pct": 40,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "kg"
+  },
+  "part:370020": {
+   "abc_class": "B",
+   "alternatives": [
+    {
+     "date": "2026-09-17",
+     "name": "Blankstahl Werdenfels GmbH",
+     "price_unit": 100,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7200016",
+     "status": null,
+     "supplier_id": "sup:70740",
+     "unit_price": 96.37
+    }
+   ],
+   "category": "raw material",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70720-370020",
+    "price": 84.34,
+    "price_unit": 100,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Sheet S235JR 3 mm, hot rolled, cut to size",
+   "drivers": [
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.84
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.07
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 18.8,
+    "id": "fc:370020@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 551000,
+    "volume_per_year": 551000
+   },
+   "grade": "S235JR",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-14",
+      "event_id": "EV-2023-70720-370020",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -9.4,
+      "date": "2023-12-02",
+      "event_id": "EV-2024-70720-370020",
+      "note": "",
+      "settled_pct": -11.7,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": -3.1,
+      "date": "2024-11-16",
+      "event_id": "EV-2025-70720-370020",
+      "note": "",
+      "settled_pct": -6.5,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": -0.8,
+      "date": "2025-12-06",
+      "event_id": "EV-2026-70720-370020",
+      "note": "",
+      "settled_pct": -2.3,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": -4.43,
+    "mean_give_pct": 2.4,
+    "mean_settled_pct": -6.83
+   },
+   "material_group": "sheet_steel",
+   "planned_lead_time_days": 10,
+   "price_to_should_cost": null,
+   "price_unit": 100,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2011-05-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "kg"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "A",
+   "colour": "green",
+   "id": "sc:70720@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 94.1,
+   "otd_pct": 92.2,
+   "ppm": 44,
+   "quarter": "2026Q3",
+   "score": 95.9
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70720@2025Q4",
+    "sc:70720@2026Q1",
+    "sc:70720@2026Q2",
+    "sc:70720@2026Q3"
+   ],
+   "otd_pct": 90.75,
+   "ppm": 44.25
+  },
+  "qn_12m": 9,
+  "qn_ids_12m": [
+   "qn:20004716",
+   "qn:20004719",
+   "qn:20004760",
+   "qn:20004776",
+   "qn:20004808",
+   "qn:20004849",
+   "qn:20004935",
+   "qn:20004986",
+   "qn:20005023"
+  ],
+  "qn_supplier_caused_12m": 9,
+  "trend": "flat"
+ },
+ "profile_text": "Stahlhandel Rupprecht-Kessel GmbH (DE; family; 500 staff; turnover EUR 196.0 M). Our spend FY2026 EUR 440,941 (0.22 % of its turnover). Standard terms: 30 days net, DAP, lead time 10 days. Cost of money about 9 % a year; cash pressure low; type family. Signals: none. Performance 2026Q3: green, OTD 92.2 %, 44 ppm. Parts: part:370012 Round bar C45 dia 50 mm, cold drawn: price 126.05 per 100; part:370020 Sheet S235JR 3 mm, hot rolled, cut to size: price 84.34 per 100.",
+ "schema_version": 1,
+ "signals": [],
+ "standard_terms": {
+  "incoterm": "DAP",
+  "lead_time_days": 10,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70720",
+ "warnings": []
+}

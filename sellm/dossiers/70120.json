@@ -1,0 +1,544 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070120",
+  "incoterm": "FCA",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 45,
+  "price_basis": "fixed per year",
+  "valid_from": "2024-01-01",
+  "valid_to": "2026-12-31"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Eisengießerei Velkenreith GmbH",
+   "date": "2025-11-27",
+   "effective_date": null,
+   "id": "doc:20251127-70120-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "New contact person",
+   "text": "From 1 October your contact in sales is our new colleague in inside sales; all other contacts stay the same."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-07-19",
+   "effective_date": null,
+   "id": "doc:20260719-70120-M1",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Visit by the owner",
+   "text": "Visit by the owner of Eisengießerei Velkenreith GmbH. He reminded us that in 2022 they kept supplying at the old price for a quarter and said he expects partnership in return."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-09-26",
+   "effective_date": null,
+   "id": "doc:20260926-70120-P06",
+   "kind": "rfq",
+   "notice_days": null,
+   "part_ids": [
+    "part:310070"
+   ],
+   "subject": "Request for quotation: Volute casing HX 80-200",
+   "text": "Request for quotation for Volute casing HX 80-200 (part:310070), series HX (start of production March 2027), drawing rev. B.\n\n- Annual volume: 4200 pc\n- Material: EN-GJS-500-7, net weight 44 kg\n- Delivery DAP Hollerau; please state price, payment terms, lead time and any tooling.\n\nInvited: Eisengießerei Velkenreith GmbH, Tarsevi Döküm Sanayi A.Ş."
+  }
+ ],
+ "economics": {
+  "archetype": "family",
+  "archetype_basis": "owner type family",
+  "cash_pressure": "low",
+  "cost_of_money": 0.09,
+  "cost_of_money_basis": "rule: owner type family",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 1.43,
+  "our_spend_eur": {
+   "FY2024": 375510.3,
+   "FY2025": 433061.73,
+   "FY2026": 488308.4
+  },
+  "we_pay_late_days": 5.9
+ },
+ "identity": {
+  "abc_class": "A",
+  "blocked": false,
+  "category": "castings",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001",
+   "ISO 50001"
+  ],
+  "country": "DE",
+  "credit_index": 239,
+  "credit_index_12m_ago": 239,
+  "equity_ratio_pct": 38.5,
+  "founded": 1936,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Eisengießerei Velkenreith GmbH",
+  "owner_type": "family",
+  "staff": 240,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "25-50 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 34200000,
+  "vda63_grade": "A"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Producer prices for iron castings rose +1.8 % in the twelve months to August.",
+   "date": "2026-09-14",
+   "headline": "Iron castings +1.8 % year on year",
+   "id": "news:20260914-31"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  }
+ ],
+ "news": [],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2025-09-23",
+   "incoterm": "FCA",
+   "lead_time_days": 55,
+   "part_id": "part:310030",
+   "payment_days": 45,
+   "price_unit": 1,
+   "quote_id": "quote:7100009",
+   "remarks": "",
+   "unit_price": 37.9
+  }
+ ],
+ "parts": {
+  "part:310030": {
+   "abc_class": "B",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Odlewnia Kalwisz Sp. z o.o.",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 30,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70140",
+     "unit_price": null
+    },
+    {
+     "date": "2025-09-23",
+     "name": "Odlewnia Kalwisz Sp. z o.o.",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100010",
+     "status": null,
+     "supplier_id": "sup:70140",
+     "unit_price": 32.9
+    },
+    {
+     "date": null,
+     "name": "Gießerei Pfaffenreuth GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 0,
+     "quote_id": null,
+     "status": "qualified",
+     "supplier_id": "sup:70190",
+     "unit_price": null
+    },
+    {
+     "date": "2025-09-23",
+     "name": "Gießerei Pfaffenreuth GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100011",
+     "status": null,
+     "supplier_id": "sup:70190",
+     "unit_price": 36.8
+    }
+   ],
+   "category": "castings",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70120-310030",
+    "price": 34.26,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Impeller HN 200",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.33
+    },
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.23
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.09
+    }
+   ],
+   "floor_estimate": {
+    "basis": "plant-specific should-cost cost:310030",
+    "high": 37.78,
+    "low": 34.18,
+    "value": 35.98
+   },
+   "forecast": {
+    "change_pct": 14.2,
+    "id": "fc:310030@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 8530,
+    "volume_per_year": 8530
+   },
+   "grade": "EN-GJS-400-15",
+   "history": {
+    "below_full_cost": true,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-27",
+      "event_id": "EV-2023-70120-310030",
+      "note": "accepted below full cost to keep the volume",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -4.1,
+      "date": "2023-12-05",
+      "event_id": "EV-2024-70120-310030",
+      "note": "accepted below full cost to keep the volume",
+      "settled_pct": -5.6,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.1,
+      "date": "2024-11-14",
+      "event_id": "EV-2025-70120-310030",
+      "note": "accepted below full cost to keep the volume",
+      "settled_pct": -0.1,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.6,
+      "date": "2025-12-03",
+      "event_id": "EV-2026-70120-310030",
+      "note": "accepted below full cost to keep the volume",
+      "settled_pct": -1.4,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": -0.13,
+    "mean_give_pct": 2.23,
+    "mean_settled_pct": -2.37
+   },
+   "material_group": "cast_iron",
+   "planned_lead_time_days": 49,
+   "price_to_should_cost": 0.9522,
+   "price_unit": 1,
+   "should_cost": {
+    "confidence_pct": 5,
+    "conversion_eur": 16.87,
+    "cost_base": "DE",
+    "id": "cost:310030",
+    "material_eur": 11.87,
+    "overhead_eur": 7.23,
+    "plant_specific": true,
+    "price_unit": 1,
+    "unit_cost": 35.98
+   },
+   "sourcing": {
+    "approved_since": "2014-05-01",
+    "quota_pct": 70,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  },
+  "part:310031": {
+   "abc_class": "B",
+   "alternatives": [],
+   "category": "castings",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70120-310031",
+    "price": 54.42,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Impeller HN 250",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.3
+    },
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.23
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.11
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": -5.6,
+    "id": "fc:310031@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 4870,
+    "volume_per_year": 4870
+   },
+   "grade": "EN-GJS-400-15",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-01",
+      "event_id": "EV-2023-70120-310031",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -2.1,
+      "date": "2023-11-26",
+      "event_id": "EV-2024-70120-310031",
+      "note": "",
+      "settled_pct": -3.9,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.0,
+      "date": "2024-11-25",
+      "event_id": "EV-2025-70120-310031",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.2,
+      "date": "2025-11-26",
+      "event_id": "EV-2026-70120-310031",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 1.03,
+    "mean_give_pct": 2.33,
+    "mean_settled_pct": -1.3
+   },
+   "material_group": "cast_iron",
+   "planned_lead_time_days": 49,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2015-05-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "B",
+   "colour": "amber",
+   "id": "sc:70120@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 78.2,
+   "otd_pct": 74.5,
+   "ppm": 734,
+   "quarter": "2026Q3",
+   "score": 83.6
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70120@2025Q4",
+    "sc:70120@2026Q1",
+    "sc:70120@2026Q2",
+    "sc:70120@2026Q3"
+   ],
+   "otd_pct": 81.08,
+   "ppm": 784.0
+  },
+  "qn_12m": 9,
+  "qn_ids_12m": [
+   "qn:20004677",
+   "qn:20004722",
+   "qn:20004750",
+   "qn:20004822",
+   "qn:20004825",
+   "qn:20004860",
+   "qn:20004907",
+   "qn:20004982",
+   "qn:20005013"
+  ],
+  "qn_supplier_caused_12m": 8,
+  "trend": "worse"
+ },
+ "profile_text": "Eisengießerei Velkenreith GmbH (DE; family; 240 staff; turnover EUR 34.2 M). Our spend FY2026 EUR 488,308 (1.43 % of its turnover). Standard terms: 45 days net, FCA, lead time 49 days. Cost of money about 9 % a year; cash pressure low; type family. Signals: delivery problem (1), margin floor (1), partnership (1), quality problem (1), wants volume (1). Performance 2026Q3: amber, OTD 74.5 %, 734 ppm. Parts: part:310030 Impeller HN 200: price 34.26 per 1, 0.95x should-cost; part:310031 Impeller HN 250: price 54.42 per 1.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "sc:70120@2026Q3"
+   ],
+   "excerpt": "On-time delivery 74.5 % in 2026Q3.",
+   "kind": "delivery_problem",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "cost:310030#below"
+   ],
+   "excerpt": "part:310030 is priced at 0.95 x its should-cost.",
+   "kind": "margin_floor",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "doc:20260719-70120-M1"
+   ],
+   "excerpt": "He reminded us that in 2022 they kept supplying at the old price for a quarter and said he expects partnership in return.",
+   "kind": "partnership",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "sc:70120@2026Q3"
+   ],
+   "excerpt": "Scorecard 2026Q3 is amber.",
+   "kind": "quality_problem",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "EV-2026-70120-310030"
+   ],
+   "excerpt": "part:310030: 'accepted below full cost to keep the volume'",
+   "kind": "wants_volume",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "FCA",
+  "lead_time_days": 49,
+  "payment_days": 45,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70120",
+ "warnings": []
+}

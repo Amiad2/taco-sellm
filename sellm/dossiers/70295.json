@@ -1,0 +1,785 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070295",
+  "incoterm": "EXW",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 30,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Drehzentrum Ilzauer GmbH",
+   "date": "2025-10-28",
+   "effective_date": null,
+   "id": "doc:20251028-70295-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Packaging",
+   "text": "From November we deliver in returnable boxes instead of cardboard."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-04-15",
+   "effective_date": null,
+   "id": "doc:20260415-70295-M6",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Supplier day",
+   "text": "At our supplier day Drehzentrum Ilzauer GmbH said Hollerau is an important reference customer for them."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-04-19",
+   "effective_date": null,
+   "id": "doc:20260419-70295-M5",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Capacity",
+   "text": "Call with sales at Drehzentrum Ilzauer GmbH: they could take additional parts at short notice; the second shift has been on hold since spring."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Drehzentrum Ilzauer GmbH",
+   "date": "2026-05-05",
+   "effective_date": null,
+   "id": "doc:20260505-70295-M2",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Payment of invoices",
+   "text": "Could you pay our invoices within 10 days? In return we would grant a cash discount."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Drehzentrum Ilzauer GmbH",
+   "date": "2026-05-15",
+   "effective_date": null,
+   "id": "doc:20260515-70295-P",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Overdue invoices",
+   "text": "Several of our invoices are overdue again. We ask you to keep to the agreed payment terms; otherwise we will have to review our conditions."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-07-17",
+   "effective_date": null,
+   "id": "doc:20260717-70295-M1",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Visit by the owner",
+   "text": "The owner of Drehzentrum Ilzauer GmbH admitted he had not followed his material and energy prices closely since the 2022 peak; his office manager does the costing."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-08-28",
+   "effective_date": null,
+   "id": "doc:20260828-70295-M3",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Supplier day",
+   "text": "At our supplier day Drehzentrum Ilzauer GmbH said Hollerau is an important reference customer for them."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-09-09",
+   "effective_date": null,
+   "id": "doc:20260909-70295-M4",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Visit by the owner",
+   "text": "The owner of Drehzentrum Ilzauer GmbH admitted he had not followed his material and energy prices closely since the 2022 peak; his office manager does the costing."
+  }
+ ],
+ "economics": {
+  "archetype": "job_shop",
+  "archetype_basis": "staff 20 < 80",
+  "cash_pressure": "low",
+  "cost_of_money": 0.25,
+  "cost_of_money_basis": "rule: job shop or short of cash",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 16.25,
+  "our_spend_eur": {
+   "FY2024": 479819.16,
+   "FY2025": 555105.0,
+   "FY2026": 568802.66
+  },
+  "we_pay_late_days": 10.4
+ },
+ "identity": {
+  "abc_class": "A",
+  "blocked": false,
+  "category": "machined parts",
+  "certifications": [
+   "ISO 9001"
+  ],
+  "country": "DE",
+  "credit_index": 249,
+  "credit_index_12m_ago": 249,
+  "equity_ratio_pct": 40.8,
+  "founded": 2001,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Drehzentrum Ilzauer GmbH",
+  "owner_type": "founder",
+  "staff": 20,
+  "supplier_since": "2004-01-01",
+  "turnover_band": "2-5 M EUR",
+  "turnover_estimated": true,
+  "turnover_eur": null,
+  "vda63_grade": "B"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "The alloy surcharge for 1.4404 stands at EUR 3,008/t, +6 % on a year ago.",
+   "date": "2026-09-16",
+   "headline": "Alloy surcharge 1.4404 at EUR 3,008 per tonne",
+   "id": "news:20260916-32"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  },
+  {
+   "body": "Producer prices for basic iron and steel are +7.3 % above January.",
+   "date": "2026-09-22",
+   "headline": "Steel prices +7.3 % since January",
+   "id": "news:20260922-35"
+  }
+ ],
+ "news": [
+  {
+   "body": "Drehzentrum Ilzauer GmbH is advertising free machine capacity and has paused hiring, the company said at a regional supplier day.",
+   "date": "2026-05-14",
+   "headline": "Drehzentrum Ilzauer GmbH looks for new customers",
+   "id": "news:20260514-12",
+   "noise": false,
+   "source": "Zulieferer Report",
+   "topic": "free_capacity"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2025-02-07",
+   "incoterm": null,
+   "lead_time_days": 33,
+   "part_id": "part:320020",
+   "payment_days": null,
+   "price_unit": 1,
+   "quote_id": "quote:7100022",
+   "remarks": "",
+   "unit_price": 12.4
+  },
+  {
+   "date": "2025-03-16",
+   "incoterm": null,
+   "lead_time_days": 31,
+   "part_id": "part:320090",
+   "payment_days": null,
+   "price_unit": 1,
+   "quote_id": "quote:7100030",
+   "remarks": "",
+   "unit_price": 5.0
+  },
+  {
+   "date": "2026-09-07",
+   "incoterm": null,
+   "lead_time_days": 28,
+   "part_id": "part:320090",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7300080",
+   "remarks": "",
+   "unit_price": 4.6
+  },
+  {
+   "date": "2026-09-14",
+   "incoterm": null,
+   "lead_time_days": 28,
+   "part_id": "part:320020",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7300062",
+   "remarks": "",
+   "unit_price": 30.03
+  }
+ ],
+ "parts": {
+  "part:320020": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Präzisionsteile Lindlbauer KG",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 40,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70230",
+     "unit_price": null
+    },
+    {
+     "date": "2025-02-07",
+     "name": "Präzisionsteile Lindlbauer KG",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100023",
+     "status": null,
+     "supplier_id": "sup:70230",
+     "unit_price": 12.9
+    }
+   ],
+   "category": "machined parts",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70295-320020",
+    "price": 11.66,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Shaft sleeve",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.34
+    },
+    {
+     "change_12m_pct": 12.26,
+     "change_6m_pct": 9.69,
+     "ids_12m": [
+      "idx:PPI-C2431@2025-08",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2431@2026-02",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 129.1,
+     "series": "PPI-C2431",
+     "weight": 0.19
+    },
+    {
+     "change_12m_pct": 5.92,
+     "change_6m_pct": -0.26,
+     "ids_12m": [
+      "idx:AS-14404@2025-09",
+      "idx:AS-14404@2026-09"
+     ],
+     "ids_6m": [
+      "idx:AS-14404@2026-03",
+      "idx:AS-14404@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 3007.8019,
+     "series": "AS-14404",
+     "weight": 0.14
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.04
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 14.4,
+    "id": "fc:320020@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 21910,
+    "volume_per_year": 21910
+   },
+   "grade": "1.4404",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-13",
+      "event_id": "EV-2023-70295-320020",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -1.2,
+      "date": "2023-12-08",
+      "event_id": "EV-2024-70295-320020",
+      "note": "",
+      "settled_pct": -3.6,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.4,
+      "date": "2024-12-08",
+      "event_id": "EV-2025-70295-320020",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.0,
+      "date": "2025-11-12",
+      "event_id": "EV-2026-70295-320020",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 1.4,
+    "mean_give_pct": 2.6,
+    "mean_settled_pct": -1.2
+   },
+   "material_group": "mach_inox",
+   "planned_lead_time_days": 28,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2013-12-01",
+    "quota_pct": 60,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  },
+  "part:320040": {
+   "abc_class": "B",
+   "alternatives": [],
+   "category": "machined parts",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70295-320040",
+    "price": 13.59,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Wear ring set",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.32
+    },
+    {
+     "change_12m_pct": 47.73,
+     "change_6m_pct": 15.98,
+     "ids_12m": [
+      "idx:CU-NOTATION@2025-09",
+      "idx:CU-NOTATION@2026-09"
+     ],
+     "ids_6m": [
+      "idx:CU-NOTATION@2026-03",
+      "idx:CU-NOTATION@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 1288.5918,
+     "series": "CU-NOTATION",
+     "weight": 0.3
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 13.1,
+    "id": "fc:320040@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 31600,
+    "volume_per_year": 31600
+   },
+   "grade": "CuSn10",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-23",
+      "event_id": "EV-2023-70295-320040",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 1.9,
+      "date": "2023-12-01",
+      "event_id": "EV-2024-70295-320040",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 6.6,
+      "date": "2024-11-24",
+      "event_id": "EV-2025-70295-320040",
+      "note": "",
+      "settled_pct": 5.2,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 5.2,
+      "date": "2025-11-15",
+      "event_id": "EV-2026-70295-320040",
+      "note": "",
+      "settled_pct": 3.1,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 4.57,
+    "mean_give_pct": 1.8,
+    "mean_settled_pct": 2.77
+   },
+   "material_group": "mach_bronze",
+   "planned_lead_time_days": 28,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2020-12-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  },
+  "part:320090": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Drehteile Fuchsreiter GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 50,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70250",
+     "unit_price": null
+    },
+    {
+     "date": "2025-03-16",
+     "name": "Drehteile Fuchsreiter GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100031",
+     "status": null,
+     "supplier_id": "sup:70250",
+     "unit_price": 5.1
+    }
+   ],
+   "category": "machined parts",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70295-320090",
+    "price": 4.6,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Spacer sleeve",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.35
+    },
+    {
+     "change_12m_pct": 12.26,
+     "change_6m_pct": 9.69,
+     "ids_12m": [
+      "idx:PPI-C2431@2025-08",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2431@2026-02",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 129.1,
+     "series": "PPI-C2431",
+     "weight": 0.19
+    },
+    {
+     "change_12m_pct": 5.92,
+     "change_6m_pct": -0.26,
+     "ids_12m": [
+      "idx:AS-14404@2025-09",
+      "idx:AS-14404@2026-09"
+     ],
+     "ids_6m": [
+      "idx:AS-14404@2026-03",
+      "idx:AS-14404@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 3007.8019,
+     "series": "AS-14404",
+     "weight": 0.15
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.05
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 7.7,
+    "id": "fc:320090@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 27000,
+    "volume_per_year": 27000
+   },
+   "grade": "1.4301",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-28",
+      "event_id": "EV-2023-70295-320090",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -0.1,
+      "date": "2023-12-09",
+      "event_id": "EV-2024-70295-320090",
+      "note": "",
+      "settled_pct": -3.1,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.7,
+      "date": "2024-11-17",
+      "event_id": "EV-2025-70295-320090",
+      "note": "",
+      "settled_pct": -1.7,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.3,
+      "date": "2025-11-18",
+      "event_id": "EV-2026-70295-320090",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 1.63,
+    "mean_give_pct": 3.23,
+    "mean_settled_pct": -1.6
+   },
+   "material_group": "mach_inox",
+   "planned_lead_time_days": 21,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2018-12-01",
+    "quota_pct": 50,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "B",
+   "colour": "amber",
+   "id": "sc:70295@2026Q3",
+   "open_8d_overdue": 2,
+   "otd_confirmed_pct": 85.7,
+   "otd_pct": 84.4,
+   "ppm": 1000,
+   "quarter": "2026Q3",
+   "score": 77.2
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70295@2025Q4",
+    "sc:70295@2026Q1",
+    "sc:70295@2026Q2",
+    "sc:70295@2026Q3"
+   ],
+   "otd_pct": 82.28,
+   "ppm": 1130.0
+  },
+  "qn_12m": 20,
+  "qn_ids_12m": [
+   "qn:20004706",
+   "qn:20004707",
+   "qn:20004739",
+   "qn:20004748",
+   "qn:20004758",
+   "qn:20004774",
+   "qn:20004794",
+   "qn:20004805",
+   "qn:20004811",
+   "qn:20004820",
+   "qn:20004842",
+   "qn:20004886",
+   "qn:20004915",
+   "qn:20004944",
+   "qn:20004947",
+   "qn:20004977",
+   "qn:20004985",
+   "qn:20004993",
+   "qn:20004994",
+   "qn:20005014"
+  ],
+  "qn_supplier_caused_12m": 20,
+  "trend": "flat"
+ },
+ "profile_text": "Drehzentrum Ilzauer GmbH (DE; founder; 20 staff; turnover 2-5 M EUR). Our spend FY2026 EUR 568,803 (16.25 % of its turnover). Standard terms: 30 days net, EXW, lead time 28 days. Cost of money about 25 % a year; cash pressure low; type job shop. Signals: cash short (1), informal costing (2), quality problem (2), wants volume (1). Performance 2026Q3: amber, OTD 84.4 %, 1000 ppm, 2 overdue 8D. Parts: part:320020 Shaft sleeve: price 11.66 per 1; part:320040 Wear ring set: price 13.59 per 1; part:320090 Spacer sleeve: price 4.6 per 1.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260505-70295-M2"
+   ],
+   "excerpt": "Could you pay our invoices within 10 days?",
+   "kind": "cash_short",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "doc:20260717-70295-M1",
+    "doc:20260909-70295-M4"
+   ],
+   "excerpt": "The owner of Drehzentrum Ilzauer GmbH admitted he had not followed his material and energy prices closely since the 2022 peak; his office manager does the co...",
+   "kind": "informal_costing",
+   "strength": 2
+  },
+  {
+   "evidence": [
+    "sc:70295@2026Q3"
+   ],
+   "excerpt": "Scorecard 2026Q3 is amber.",
+   "kind": "quality_problem",
+   "strength": 2
+  },
+  {
+   "evidence": [
+    "news:20260514-12"
+   ],
+   "excerpt": "Drehzentrum Ilzauer GmbH looks for new customers.",
+   "kind": "wants_volume",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "EXW",
+  "lead_time_days": 28,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70295",
+ "warnings": []
+}

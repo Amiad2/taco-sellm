@@ -1,0 +1,945 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070190",
+  "incoterm": "FCA",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 30,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Gießerei Pfaffenreuth GmbH",
+   "date": "2025-10-14",
+   "effective_date": null,
+   "id": "doc:20251014-70190-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "New contact person",
+   "text": "From 1 October your contact in sales is our new colleague in inside sales; all other contacts stay the same."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-06-23",
+   "effective_date": null,
+   "id": "doc:20260623-70190-M1",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Material purchasing",
+   "text": "Call with Gießerei Pfaffenreuth GmbH: they bought their electricity forward until December 2028 and said the market price is 'not our reality' before then."
+  }
+ ],
+ "economics": {
+  "archetype": "family",
+  "archetype_basis": "owner type family",
+  "cash_pressure": "low",
+  "cost_of_money": 0.09,
+  "cost_of_money_basis": "rule: owner type family",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 7.08,
+  "our_spend_eur": {
+   "FY2024": 1060689.05,
+   "FY2025": 1111179.2,
+   "FY2026": 1048065.72
+  },
+  "we_pay_late_days": 3.0
+ },
+ "identity": {
+  "abc_class": "A",
+  "blocked": false,
+  "category": "castings",
+  "certifications": [
+   "ISO 9001",
+   "ISO 50001"
+  ],
+  "country": "DE",
+  "credit_index": 227,
+  "credit_index_12m_ago": 227,
+  "equity_ratio_pct": 33.9,
+  "founded": 1949,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Gießerei Pfaffenreuth GmbH",
+  "owner_type": "family",
+  "staff": 95,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "10-25 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 14800000,
+  "vda63_grade": "B"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Producer prices for iron castings rose +1.8 % in the twelve months to August.",
+   "date": "2026-09-14",
+   "headline": "Iron castings +1.8 % year on year",
+   "id": "news:20260914-31"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  }
+ ],
+ "news": [
+  {
+   "body": "Gießerei Pfaffenreuth GmbH has fixed its electricity supply for 2026-2028 under a long-term contract, the company said.",
+   "date": "2026-04-26",
+   "headline": "Gießerei Pfaffenreuth GmbH secures power prices",
+   "id": "news:20260426-10",
+   "noise": false,
+   "source": "Zulieferer Report",
+   "topic": "energy_contract"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2024-08-18",
+   "incoterm": "FCA",
+   "lead_time_days": 47,
+   "part_id": "part:310011",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100004",
+   "remarks": "",
+   "unit_price": 204.2
+  },
+  {
+   "date": "2025-04-10",
+   "incoterm": "FCA",
+   "lead_time_days": 50,
+   "part_id": "part:310060",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100017",
+   "remarks": "",
+   "unit_price": 45.7
+  },
+  {
+   "date": "2025-09-20",
+   "incoterm": "FCA",
+   "lead_time_days": 44,
+   "part_id": "part:310020",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100008",
+   "remarks": "",
+   "unit_price": 57.4
+  },
+  {
+   "date": "2025-09-23",
+   "incoterm": "FCA",
+   "lead_time_days": 52,
+   "part_id": "part:310030",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100011",
+   "remarks": "",
+   "unit_price": 36.8
+  },
+  {
+   "date": "2026-09-12",
+   "incoterm": "FCA",
+   "lead_time_days": 42,
+   "part_id": "part:310020",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7200011",
+   "remarks": "",
+   "unit_price": 53.56
+  },
+  {
+   "date": "2026-09-16",
+   "incoterm": "FCA",
+   "lead_time_days": 42,
+   "part_id": "part:310040",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7300064",
+   "remarks": "Material covered until December 2028; price valid accordingly.",
+   "unit_price": 33.94
+  }
+ ],
+ "parts": {
+  "part:310011": {
+   "abc_class": "A",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Gießerei Wimbacher GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 100,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70130",
+     "unit_price": null
+    },
+    {
+     "date": "2024-08-18",
+     "name": "Gießerei Wimbacher GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100003",
+     "status": null,
+     "supplier_id": "sup:70130",
+     "unit_price": 203.8
+    },
+    {
+     "date": "2026-09-03",
+     "name": "Gießerei Wimbacher GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7300051",
+     "status": null,
+     "supplier_id": "sup:70130",
+     "unit_price": 180.52
+    }
+   ],
+   "category": "castings",
+   "current_price": null,
+   "description": "Volute casing HN 65-250",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.31
+    },
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.25
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.1
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 3.2,
+    "id": "fc:310011@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 5220,
+    "volume_per_year": 5220
+   },
+   "grade": "EN-GJL-250",
+   "history": {
+    "below_full_cost": false,
+    "events": [],
+    "mean_asked_pct": null,
+    "mean_give_pct": null,
+    "mean_settled_pct": null
+   },
+   "material_group": "cast_iron",
+   "planned_lead_time_days": 45,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2013-03-01",
+    "quota_pct": 0,
+    "status": "qualified",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  },
+  "part:310020": {
+   "abc_class": "A",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Odlewnia Kalwisz Sp. z o.o.",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 100,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70140",
+     "unit_price": null
+    },
+    {
+     "date": "2025-09-20",
+     "name": "Odlewnia Kalwisz Sp. z o.o.",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100007",
+     "status": null,
+     "supplier_id": "sup:70140",
+     "unit_price": 49.2
+    },
+    {
+     "date": "2026-09-13",
+     "name": "Odlewnia Kalwisz Sp. z o.o.",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7300011",
+     "status": null,
+     "supplier_id": "sup:70140",
+     "unit_price": 45.15
+    }
+   ],
+   "category": "castings",
+   "current_price": null,
+   "description": "Bearing bracket HN",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.31
+    },
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.26
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.06
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 20.0,
+    "id": "fc:310020@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 15930,
+    "volume_per_year": 15930
+   },
+   "grade": "EN-GJL-250",
+   "history": {
+    "below_full_cost": false,
+    "events": [],
+    "mean_asked_pct": null,
+    "mean_give_pct": null,
+    "mean_settled_pct": null
+   },
+   "material_group": "cast_iron",
+   "planned_lead_time_days": 56,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2022-03-01",
+    "quota_pct": 0,
+    "status": "qualified",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  },
+  "part:310030": {
+   "abc_class": "B",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Eisengießerei Velkenreith GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 70,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70120",
+     "unit_price": null
+    },
+    {
+     "date": "2025-09-23",
+     "name": "Eisengießerei Velkenreith GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100009",
+     "status": null,
+     "supplier_id": "sup:70120",
+     "unit_price": 37.9
+    },
+    {
+     "date": null,
+     "name": "Odlewnia Kalwisz Sp. z o.o.",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 30,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70140",
+     "unit_price": null
+    },
+    {
+     "date": "2025-09-23",
+     "name": "Odlewnia Kalwisz Sp. z o.o.",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100010",
+     "status": null,
+     "supplier_id": "sup:70140",
+     "unit_price": 32.9
+    }
+   ],
+   "category": "castings",
+   "current_price": null,
+   "description": "Impeller HN 200",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.33
+    },
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.23
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.09
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 14.2,
+    "id": "fc:310030@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 8530,
+    "volume_per_year": 8530
+   },
+   "grade": "EN-GJS-400-15",
+   "history": {
+    "below_full_cost": false,
+    "events": [],
+    "mean_asked_pct": null,
+    "mean_give_pct": null,
+    "mean_settled_pct": null
+   },
+   "material_group": "cast_iron",
+   "planned_lead_time_days": 49,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2019-03-01",
+    "quota_pct": 0,
+    "status": "qualified",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  },
+  "part:310040": {
+   "abc_class": "A",
+   "alternatives": [],
+   "category": "castings",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70190-310040",
+    "price": 33.94,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Casing cover HB",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.31
+    },
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.23
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.1
+    }
+   ],
+   "floor_estimate": {
+    "basis": "plant-specific should-cost cost:310040",
+    "high": 35.63,
+    "low": 32.23,
+    "value": 33.93
+   },
+   "forecast": {
+    "change_pct": 7.1,
+    "id": "fc:310040@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 19430,
+    "volume_per_year": 19430
+   },
+   "grade": "EN-GJL-250",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-03",
+      "event_id": "EV-2023-70190-310040",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -3.1,
+      "date": "2023-11-22",
+      "event_id": "EV-2024-70190-310040",
+      "note": "",
+      "settled_pct": -4.7,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 4.0,
+      "date": "2024-11-26",
+      "event_id": "EV-2025-70190-310040",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.3,
+      "date": "2025-12-04",
+      "event_id": "EV-2026-70190-310040",
+      "note": "",
+      "settled_pct": -2.5,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 0.73,
+    "mean_give_pct": 3.13,
+    "mean_settled_pct": -2.4
+   },
+   "material_group": "cast_iron",
+   "planned_lead_time_days": 42,
+   "price_to_should_cost": 1.0003,
+   "price_unit": 1,
+   "should_cost": {
+    "confidence_pct": 5,
+    "conversion_eur": 15.91,
+    "cost_base": "DE",
+    "id": "cost:310040",
+    "material_eur": 11.2,
+    "overhead_eur": 6.82,
+    "plant_specific": true,
+    "price_unit": 1,
+    "unit_cost": 33.93
+   },
+   "sourcing": {
+    "approved_since": "2016-03-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  },
+  "part:310060": {
+   "abc_class": "A",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Tarsevi Döküm Sanayi A.Ş.",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 60,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70150",
+     "unit_price": null
+    },
+    {
+     "date": "2025-04-10",
+     "name": "Tarsevi Döküm Sanayi A.Ş.",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100016",
+     "status": null,
+     "supplier_id": "sup:70150",
+     "unit_price": 34.0
+    },
+    {
+     "date": "2026-09-20",
+     "name": "Tarsevi Döküm Sanayi A.Ş.",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7300068",
+     "status": null,
+     "supplier_id": "sup:70150",
+     "unit_price": 32.24
+    }
+   ],
+   "category": "castings",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70190-310060",
+    "price": 43.39,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Pump housing HB 40",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.31
+    },
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.22
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.06
+    }
+   ],
+   "floor_estimate": {
+    "basis": "generic DE should-cost cost:310060 x 1.0 (DE)",
+    "high": 45.79,
+    "low": 33.85,
+    "value": 39.82
+   },
+   "forecast": {
+    "change_pct": 2.5,
+    "id": "fc:310060@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 26400,
+    "volume_per_year": 26400
+   },
+   "grade": "EN-GJL-250",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-20",
+      "event_id": "EV-2023-70190-310060",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -2.3,
+      "date": "2023-11-18",
+      "event_id": "EV-2024-70190-310060",
+      "note": "",
+      "settled_pct": -4.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.6,
+      "date": "2024-11-24",
+      "event_id": "EV-2025-70190-310060",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.5,
+      "date": "2025-11-20",
+      "event_id": "EV-2026-70190-310060",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 0.27,
+    "mean_give_pct": 1.6,
+    "mean_settled_pct": -1.33
+   },
+   "material_group": "cast_iron",
+   "planned_lead_time_days": 70,
+   "price_to_should_cost": 1.0897,
+   "price_unit": 1,
+   "should_cost": {
+    "confidence_pct": 12,
+    "conversion_eur": 18.68,
+    "cost_base": "DE",
+    "id": "cost:310060",
+    "material_eur": 13.14,
+    "overhead_eur": 8.0,
+    "plant_specific": false,
+    "price_unit": 1,
+    "unit_cost": 39.82
+   },
+   "sourcing": {
+    "approved_since": "2010-03-01",
+    "quota_pct": 40,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "B",
+   "colour": "amber",
+   "id": "sc:70190@2026Q3",
+   "open_8d_overdue": 1,
+   "otd_confirmed_pct": 85.1,
+   "otd_pct": 85.1,
+   "ppm": 715,
+   "quarter": "2026Q3",
+   "score": 84.0
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70190@2025Q4",
+    "sc:70190@2026Q1",
+    "sc:70190@2026Q2",
+    "sc:70190@2026Q3"
+   ],
+   "otd_pct": 83.45,
+   "ppm": 756.75
+  },
+  "qn_12m": 13,
+  "qn_ids_12m": [
+   "qn:20004689",
+   "qn:20004700",
+   "qn:20004757",
+   "qn:20004768",
+   "qn:20004802",
+   "qn:20004832",
+   "qn:20004858",
+   "qn:20004924",
+   "qn:20004925",
+   "qn:20004938",
+   "qn:20004988",
+   "qn:20005005",
+   "qn:20005015"
+  ],
+  "qn_supplier_caused_12m": 13,
+  "trend": "worse"
+ },
+ "profile_text": "Gießerei Pfaffenreuth GmbH (DE; family; 95 staff; turnover EUR 14.8 M). Our spend FY2026 EUR 1.0 M (7.08 % of its turnover). Standard terms: 30 days net, FCA, lead time 42 days. Cost of money about 9 % a year; cash pressure low; type family. Signals: material hedged (1), quality problem (2). Performance 2026Q3: amber, OTD 85.1 %, 715 ppm, 1 overdue 8D. Parts: part:310011 Volute casing HN 65-250; part:310020 Bearing bracket HN; part:310030 Impeller HN 200; part:310040 Casing cover HB: price 33.94 per 1, 1.00x should-cost; part:310060 Pump housing HB 40: price 43.39 per 1, 1.09x should-cost.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "quote:7300064"
+   ],
+   "excerpt": "Material covered until December 2028; price valid accordingly.",
+   "kind": "material_hedged",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "sc:70190@2026Q3"
+   ],
+   "excerpt": "Scorecard 2026Q3 is amber.",
+   "kind": "quality_problem",
+   "strength": 2
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "FCA",
+  "lead_time_days": 42,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70190",
+ "warnings": []
+}

@@ -1,0 +1,757 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070140",
+  "incoterm": "FCA",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 60,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Odlewnia Kalwisz Sp. z o.o.",
+   "date": "2025-10-26",
+   "effective_date": null,
+   "id": "doc:20251026-70140-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Holiday shutdown",
+   "text": "Our plant is closed from 23 December to 6 January. Please place call-offs for January by 10 December."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Odlewnia Kalwisz Sp. z o.o.",
+   "date": "2026-07-10",
+   "effective_date": null,
+   "id": "doc:20260710-70140-M2",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Payment of invoices",
+   "text": "Could you pay our invoices within 10 days? In return we would grant a cash discount."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-07-15",
+   "effective_date": null,
+   "id": "doc:20260715-70140-M1",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Liquidity",
+   "text": "Call with the managing director of Odlewnia Kalwisz Sp. z o.o.: he asked twice whether we could pay earlier and said the bank is watching every month. 'I cannot sign anything that lowers our margin now.'"
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Supplier Quality",
+   "date": "2026-09-21",
+   "effective_date": null,
+   "id": "doc:20260921-70140-P11",
+   "kind": "letter",
+   "notice_days": null,
+   "part_ids": [
+    "part:310020"
+   ],
+   "subject": "Escalation: delivery and quality performance",
+   "text": "To Odlewnia Kalwisz Sp. z o.o.\n\nyour rolling 12-month scorecard (sc:70140@2026Q3) is **red**: on-time delivery 63.5 %, 2376 ppm, 0 overdue 8D reports. We expect a binding improvement plan for Bearing bracket HN (part:310020) and will discuss quality commitments and cost recovery.\n\nHollerau Pumpenwerke, Supplier Quality"
+  }
+ ],
+ "economics": {
+  "archetype": "job_shop",
+  "archetype_basis": "cash pressure high",
+  "cash_pressure": "high",
+  "cost_of_money": 0.25,
+  "cost_of_money_basis": "rule: job shop or short of cash",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 6.99,
+  "our_spend_eur": {
+   "FY2024": 544678.04,
+   "FY2025": 648182.46,
+   "FY2026": 682716.14
+  },
+  "we_pay_late_days": 8.8
+ },
+ "identity": {
+  "abc_class": "A",
+  "blocked": false,
+  "category": "castings",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001",
+   "ISO 50001"
+  ],
+  "country": "PL",
+  "credit_index": 225,
+  "credit_index_12m_ago": 225,
+  "equity_ratio_pct": 39.1,
+  "founded": 1994,
+  "group_parent": null,
+  "legal_form": "Sp. z o.o.",
+  "name": "Odlewnia Kalwisz Sp. z o.o.",
+  "owner_type": "private",
+  "staff": 210,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "5-10 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 9770000,
+  "vda63_grade": "C"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Producer prices for iron castings rose +1.8 % in the twelve months to August.",
+   "date": "2026-09-14",
+   "headline": "Iron castings +1.8 % year on year",
+   "id": "news:20260914-31"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  }
+ ],
+ "news": [
+  {
+   "body": "Odlewnia Kalwisz Sp. z o.o. has started a restructuring programme with its banks after two loss-making years; management says customers will not be affected.",
+   "date": "2026-09-11",
+   "headline": "Odlewnia Kalwisz Sp. z o.o. restructures",
+   "id": "news:20260911-28",
+   "noise": false,
+   "source": "Zulieferer Report",
+   "topic": "restructuring"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2025-01-22",
+   "incoterm": "FCA",
+   "lead_time_days": 64,
+   "part_id": "part:310010",
+   "payment_days": 60,
+   "price_unit": 1,
+   "quote_id": "quote:7100002",
+   "remarks": "",
+   "unit_price": 124.2
+  },
+  {
+   "date": "2025-09-20",
+   "incoterm": "FCA",
+   "lead_time_days": 64,
+   "part_id": "part:310020",
+   "payment_days": 60,
+   "price_unit": 1,
+   "quote_id": "quote:7100007",
+   "remarks": "",
+   "unit_price": 49.2
+  },
+  {
+   "date": "2025-09-23",
+   "incoterm": "FCA",
+   "lead_time_days": 58,
+   "part_id": "part:310030",
+   "payment_days": 60,
+   "price_unit": 1,
+   "quote_id": "quote:7100010",
+   "remarks": "",
+   "unit_price": 32.9
+  },
+  {
+   "date": "2026-09-02",
+   "incoterm": "FCA",
+   "lead_time_days": 56,
+   "part_id": "part:310010",
+   "payment_days": 60,
+   "price_unit": 1,
+   "quote_id": "quote:7200001",
+   "remarks": "",
+   "unit_price": 143.22
+  },
+  {
+   "date": "2026-09-13",
+   "incoterm": "FCA",
+   "lead_time_days": 56,
+   "part_id": "part:310020",
+   "payment_days": 10,
+   "price_unit": 1,
+   "quote_id": "quote:7300011",
+   "remarks": "Payment within 10 days requested.",
+   "unit_price": 45.15
+  }
+ ],
+ "parts": {
+  "part:310010": {
+   "abc_class": "A",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Gießerei Brandlhuber GmbH & Co. KG",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 100,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70110",
+     "unit_price": null
+    },
+    {
+     "date": "2025-01-22",
+     "name": "Gießerei Brandlhuber GmbH & Co. KG",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100001",
+     "status": null,
+     "supplier_id": "sup:70110",
+     "unit_price": 142.5
+    },
+    {
+     "date": "2026-09-03",
+     "name": "Gießerei Brandlhuber GmbH & Co. KG",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7300001",
+     "status": null,
+     "supplier_id": "sup:70110",
+     "unit_price": 126.53
+    }
+   ],
+   "category": "castings",
+   "current_price": null,
+   "description": "Volute casing HN 50-200",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.32
+    },
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.26
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.06
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 10.1,
+    "id": "fc:310010@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 8150,
+    "volume_per_year": 8150
+   },
+   "grade": "EN-GJL-250",
+   "history": {
+    "below_full_cost": false,
+    "events": [],
+    "mean_asked_pct": null,
+    "mean_give_pct": null,
+    "mean_settled_pct": null
+   },
+   "material_group": "cast_iron",
+   "planned_lead_time_days": 42,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2014-01-01",
+    "quota_pct": 0,
+    "status": "qualified",
+    "tooling_owner": "supplier"
+   },
+   "uom": "pc"
+  },
+  "part:310020": {
+   "abc_class": "A",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Gießerei Pfaffenreuth GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 0,
+     "quote_id": null,
+     "status": "qualified",
+     "supplier_id": "sup:70190",
+     "unit_price": null
+    },
+    {
+     "date": "2025-09-20",
+     "name": "Gießerei Pfaffenreuth GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100008",
+     "status": null,
+     "supplier_id": "sup:70190",
+     "unit_price": 57.4
+    },
+    {
+     "date": "2026-09-12",
+     "name": "Gießerei Pfaffenreuth GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7200011",
+     "status": null,
+     "supplier_id": "sup:70190",
+     "unit_price": 53.56
+    }
+   ],
+   "category": "castings",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70140-310020",
+    "price": 45.15,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Bearing bracket HN",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.31
+    },
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.26
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.06
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 20.0,
+    "id": "fc:310020@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 15930,
+    "volume_per_year": 15930
+   },
+   "grade": "EN-GJL-250",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-06",
+      "event_id": "EV-2023-70140-310020",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -3.3,
+      "date": "2023-11-18",
+      "event_id": "EV-2024-70140-310020",
+      "note": "",
+      "settled_pct": -5.5,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.3,
+      "date": "2024-11-21",
+      "event_id": "EV-2025-70140-310020",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": -1.0,
+      "date": "2025-12-08",
+      "event_id": "EV-2026-70140-310020",
+      "note": "",
+      "settled_pct": -2.5,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": -1.0,
+    "mean_give_pct": 1.67,
+    "mean_settled_pct": -2.67
+   },
+   "material_group": "cast_iron",
+   "planned_lead_time_days": 56,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2011-01-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "supplier"
+   },
+   "uom": "pc"
+  },
+  "part:310030": {
+   "abc_class": "B",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Eisengießerei Velkenreith GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 70,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70120",
+     "unit_price": null
+    },
+    {
+     "date": "2025-09-23",
+     "name": "Eisengießerei Velkenreith GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100009",
+     "status": null,
+     "supplier_id": "sup:70120",
+     "unit_price": 37.9
+    },
+    {
+     "date": null,
+     "name": "Gießerei Pfaffenreuth GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 0,
+     "quote_id": null,
+     "status": "qualified",
+     "supplier_id": "sup:70190",
+     "unit_price": null
+    },
+    {
+     "date": "2025-09-23",
+     "name": "Gießerei Pfaffenreuth GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100011",
+     "status": null,
+     "supplier_id": "sup:70190",
+     "unit_price": 36.8
+    }
+   ],
+   "category": "castings",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70140-310030",
+    "price": 30.14,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Impeller HN 200",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.33
+    },
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.23
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.09
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 14.2,
+    "id": "fc:310030@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 8530,
+    "volume_per_year": 8530
+   },
+   "grade": "EN-GJS-400-15",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-05",
+      "event_id": "EV-2023-70140-310030",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -4.7,
+      "date": "2023-11-28",
+      "event_id": "EV-2024-70140-310030",
+      "note": "",
+      "settled_pct": -6.2,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.8,
+      "date": "2024-11-19",
+      "event_id": "EV-2025-70140-310030",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.8,
+      "date": "2025-12-08",
+      "event_id": "EV-2026-70140-310030",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 0.63,
+    "mean_give_pct": 2.7,
+    "mean_settled_pct": -2.07
+   },
+   "material_group": "cast_iron",
+   "planned_lead_time_days": 49,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2021-01-01",
+    "quota_pct": 30,
+    "status": "active",
+    "tooling_owner": "supplier"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "C",
+   "colour": "red",
+   "id": "sc:70140@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 73.1,
+   "otd_pct": 63.5,
+   "ppm": 2376,
+   "quarter": "2026Q3",
+   "score": 69.9
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70140@2025Q4",
+    "sc:70140@2026Q1",
+    "sc:70140@2026Q2",
+    "sc:70140@2026Q3"
+   ],
+   "otd_pct": 73.7,
+   "ppm": 2637.0
+  },
+  "qn_12m": 13,
+  "qn_ids_12m": [
+   "qn:20004695",
+   "qn:20004736",
+   "qn:20004747",
+   "qn:20004756",
+   "qn:20004777",
+   "qn:20004791",
+   "qn:20004831",
+   "qn:20004883",
+   "qn:20004952",
+   "qn:20004963",
+   "qn:20004992",
+   "qn:20005020",
+   "qn:20005025"
+  ],
+  "qn_supplier_caused_12m": 12,
+  "trend": "better"
+ },
+ "profile_text": "Odlewnia Kalwisz Sp. z o.o. (PL; private; 210 staff; turnover EUR 9.8 M). Our spend FY2026 EUR 682,716 (6.99 % of its turnover). Standard terms: 60 days net, FCA, lead time 56 days. Cost of money about 25 % a year; cash pressure high; type job shop. Signals: cash short (3), delivery problem (2), margin floor (1), ownership change (1), quality problem (3). Performance 2026Q3: red, OTD 63.5 %, 2376 ppm. Parts: part:310010 Volute casing HN 50-200; part:310020 Bearing bracket HN: price 45.15 per 1; part:310030 Impeller HN 200: price 30.14 per 1.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260710-70140-M2",
+    "doc:20260715-70140-M1",
+    "news:20260911-28",
+    "quote:7300011"
+   ],
+   "excerpt": "Payment within 10 days requested.",
+   "kind": "cash_short",
+   "strength": 3
+  },
+  {
+   "evidence": [
+    "sc:70140@2026Q3"
+   ],
+   "excerpt": "On-time delivery 63.5 % in 2026Q3.",
+   "kind": "delivery_problem",
+   "strength": 2
+  },
+  {
+   "evidence": [
+    "doc:20260715-70140-M1"
+   ],
+   "excerpt": "'I cannot sign anything that lowers our margin now.'",
+   "kind": "margin_floor",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "news:20260911-28"
+   ],
+   "excerpt": "restructures.",
+   "kind": "ownership_change",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "doc:20260921-70140-P11",
+    "sc:70140@2026Q3"
+   ],
+   "excerpt": "your rolling 12-month scorecard (sc:70140@2026Q3) is **red**: on-time delivery 63.5 %, 2376 ppm, 0 overdue 8D reports.",
+   "kind": "quality_problem",
+   "strength": 3
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "FCA",
+  "lead_time_days": 56,
+  "payment_days": 60,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70140",
+ "warnings": []
+}

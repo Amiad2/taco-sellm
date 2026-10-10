@@ -1,0 +1,354 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070550",
+  "incoterm": "DAP",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 45,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Platinenwerk Lausitz GmbH",
+   "date": "2025-12-17",
+   "effective_date": null,
+   "id": "doc:20251217-70550-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "ISO 9001 certificate",
+   "text": "Please find attached our renewed ISO 9001 certificate."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-04-17",
+   "effective_date": null,
+   "id": "doc:20260417-70550-M1",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Annual review",
+   "text": "Annual review with Platinenwerk Lausitz GmbH. Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks."
+  },
+  {
+   "asked_pct": 8.0,
+   "asked_price": 37.1,
+   "author": "Platinenwerk Lausitz GmbH",
+   "date": "2026-09-19",
+   "effective_date": "2027-01-01",
+   "id": "doc:20260919-70550-P17",
+   "kind": "letter",
+   "notice_days": 104,
+   "part_ids": [
+    "part:350030"
+   ],
+   "subject": "Price adjustment from 01 January 2027",
+   "text": "Dear Sir or Madam,\n\nwe have supplied Hollerau Pumpenwerke reliably for many years. Owing to the strong rise in copper and electronic component prices, we are forced to adjust our prices for Control board HB smart pump (PCBA) (part:350030) by **8.0 %** with effect from **01 January 2027**: from EUR 34.35 to EUR 37.10 per  pc.\n\nWe regret this step and ask for your understanding.\n\nYours faithfully,\nPlatinenwerk Lausitz GmbH"
+  }
+ ],
+ "economics": {
+  "archetype": "other",
+  "archetype_basis": "no rule applies",
+  "cash_pressure": "low",
+  "cost_of_money": 0.1,
+  "cost_of_money_basis": "rule: owner type private",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 0.72,
+  "our_spend_eur": {
+   "FY2024": 602032.8,
+   "FY2025": 674638.9,
+   "FY2026": 635796.2
+  },
+  "we_pay_late_days": 4.4
+ },
+ "identity": {
+  "abc_class": "A",
+  "blocked": false,
+  "category": "electrical",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001"
+  ],
+  "country": "DE",
+  "credit_index": 150,
+  "credit_index_12m_ago": 150,
+  "equity_ratio_pct": 39.5,
+  "founded": 1991,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Platinenwerk Lausitz GmbH",
+  "owner_type": "private",
+  "staff": 320,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "50-100 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 88000000,
+  "vda63_grade": "A"
+ },
+ "market_news": [
+  {
+   "body": "The copper notation for cables averaged EUR 1,289/100 kg in September, +48 % on a year ago.",
+   "date": "2026-09-10",
+   "headline": "Copper notation at EUR 1,289 per 100 kg",
+   "id": "news:20260910-27"
+  },
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Producer prices for assembled electronic boards rose +41 % in the twelve months to August.",
+   "date": "2026-09-18",
+   "headline": "Electronic boards +41 % year on year",
+   "id": "news:20260918-33"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  }
+ ],
+ "news": [
+  {
+   "body": "Platinenwerk Lausitz GmbH was praised by the chamber for its apprentice training.",
+   "date": "2026-09-24",
+   "headline": "Platinenwerk Lausitz GmbH trains apprentices",
+   "id": "news:20260924-36",
+   "noise": true,
+   "source": "Zulieferer Report",
+   "topic": "noise"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [],
+ "parts": {
+  "part:350030": {
+   "abc_class": "A",
+   "alternatives": [],
+   "category": "electrical",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70550-350030",
+    "price": 34.35,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Control board HB smart pump (PCBA)",
+   "drivers": [
+    {
+     "change_12m_pct": 13.48,
+     "change_6m_pct": 5.31,
+     "ids_12m": [
+      "idx:PPI-C2611@2025-08",
+      "idx:PPI-C2611@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2611@2026-02",
+      "idx:PPI-C2611@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 111.1,
+     "series": "PPI-C2611",
+     "weight": 0.55
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.2
+    }
+   ],
+   "floor_estimate": {
+    "basis": "plant-specific should-cost cost:350030",
+    "high": 39.1,
+    "low": 35.38,
+    "value": 37.24
+   },
+   "forecast": {
+    "change_pct": 7.4,
+    "id": "fc:350030@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 19920,
+    "volume_per_year": 19920
+   },
+   "grade": "PCBA",
+   "history": {
+    "below_full_cost": true,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-09",
+      "event_id": "EV-2023-70550-350030",
+      "note": "accepted below full cost to keep the volume",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 1.2,
+      "date": "2023-12-08",
+      "event_id": "EV-2024-70550-350030",
+      "note": "accepted below full cost to keep the volume",
+      "settled_pct": -1.8,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": -0.5,
+      "date": "2024-11-13",
+      "event_id": "EV-2025-70550-350030",
+      "note": "accepted below full cost to keep the volume",
+      "settled_pct": -2.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 2.1,
+      "date": "2025-11-21",
+      "event_id": "EV-2026-70550-350030",
+      "note": "accepted below full cost to keep the volume",
+      "settled_pct": 0.4,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 0.93,
+    "mean_give_pct": 2.07,
+    "mean_settled_pct": -1.13
+   },
+   "material_group": "pcba",
+   "planned_lead_time_days": 56,
+   "price_to_should_cost": 0.9224,
+   "price_unit": 1,
+   "should_cost": {
+    "confidence_pct": 5,
+    "conversion_eur": 11.73,
+    "cost_base": "DE",
+    "id": "cost:350030",
+    "material_eur": 20.48,
+    "overhead_eur": 5.03,
+    "plant_specific": true,
+    "price_unit": 1,
+    "unit_cost": 37.24
+   },
+   "sourcing": {
+    "approved_since": "2014-03-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "A",
+   "colour": "green",
+   "id": "sc:70550@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 85.7,
+   "otd_pct": 85.7,
+   "ppm": 701,
+   "quarter": "2026Q3",
+   "score": 89.4
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70550@2025Q4",
+    "sc:70550@2026Q1",
+    "sc:70550@2026Q2",
+    "sc:70550@2026Q3"
+   ],
+   "otd_pct": 87.47,
+   "ppm": 469.75
+  },
+  "qn_12m": 10,
+  "qn_ids_12m": [
+   "qn:20004718",
+   "qn:20004730",
+   "qn:20004806",
+   "qn:20004809",
+   "qn:20004850",
+   "qn:20004958",
+   "qn:20004966",
+   "qn:20004998",
+   "qn:20005028",
+   "qn:20005031"
+  ],
+  "qn_supplier_caused_12m": 8,
+  "trend": "worse"
+ },
+ "profile_text": "Platinenwerk Lausitz GmbH (DE; private; 320 staff; turnover EUR 88.0 M). Our spend FY2026 EUR 635,796 (0.72 % of its turnover). Standard terms: 45 days net, DAP, lead time 56 days. Cost of money about 10 % a year; cash pressure low; type other. Signals: approval ladder (1), margin floor (1), price claim (1), wants volume (1). Performance 2026Q3: green, OTD 85.7 %, 701 ppm. Parts: part:350030 Control board HB smart pump (PCBA): price 34.35 per 1, 0.92x should-cost.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260417-70550-M1"
+   ],
+   "excerpt": "Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks.",
+   "kind": "approval_ladder",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "cost:350030#below"
+   ],
+   "excerpt": "part:350030 is priced at 0.92 x its should-cost.",
+   "kind": "margin_floor",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "doc:20260919-70550-P17"
+   ],
+   "excerpt": "Letter asks 8.0 % from 2027-01-01.",
+   "kind": "price_claim",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "EV-2026-70550-350030"
+   ],
+   "excerpt": "part:350030: 'accepted below full cost to keep the volume'",
+   "kind": "wants_volume",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "DAP",
+  "lead_time_days": 56,
+  "payment_days": 45,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70550",
+ "warnings": []
+}

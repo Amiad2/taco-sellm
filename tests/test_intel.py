@@ -1,5 +1,6 @@
 """sellm.intel: the dossier contract (docs/PLAN.md section 10), the builder and the case overlay."""
 
+import json
 import time
 from pathlib import Path
 
@@ -8,9 +9,12 @@ from intel_fixture import make_package
 
 from arena_kit.data import DataPackage
 from sellm.intel import SCHEMA_VERSION, dossier, signals
+from sellm.intel.__main__ import main as cli
 from sellm.intel.assemble import build_supplier
+from sellm.intel.build import DOSSIERS, build_all, build_one, write_all
 from sellm.intel.extract import Source, body
 from sellm.intel.schema import CORE_FIELDS, SIGNAL_KINDS, TOP_KEYS, validate
+from sellm.intel.serialize import dumps
 
 REAL = Path(__file__).resolve().parents[1] / "data" / "package"
 
@@ -341,3 +345,50 @@ def test_noise_and_market_news_never_make_a_signal(real_pkg):
     assert "ownership_change" not in by_id["sup:70230"] and "ownership_change" not in by_id["sup:70160"]
     assert sum("quality_problem" in s for s in by_id.values()) == 17
     assert sum("delivery_problem" in s for s in by_id.values()) == 9
+
+
+def test_profile_text_is_short_and_complete(fixture_pkg, real_pkg):
+    for pkg in (fixture_pkg, real_pkg):
+        for d in build_all(pkg).values():
+            text = d["profile_text"]
+            assert 0 < len(text.split()) <= 120 and "None" not in text, text
+    w = build_one(Source(real_pkg), "sup:70130")["profile_text"]
+    assert w.startswith("Gießerei Wimbacher GmbH (DE; family; 120 staff") and "Cost of money about 25 % a year" in w
+    assert "Cost of money about 6.5 %" in build_one(Source(real_pkg), "sup:70510")["profile_text"]
+
+
+def test_serialization_is_canonical():
+    assert dumps({"b": (1, 2.0000001), "a": 0.1 + 0.2}) == dumps({"a": 0.3, "b": [1, 2.0]})
+    assert dumps({"a": "Gießerei"}).endswith("\n") and "Gießerei" in dumps({"a": "Gießerei"})
+    with pytest.raises(ValueError):
+        dumps({"x": float("nan")})
+
+
+def test_build_writes_the_same_bytes_twice(tmp_path, fixture_pkg):
+    one, two = tmp_path / "one", tmp_path / "two"
+    files = write_all(build_all(fixture_pkg), one)
+    write_all(build_all(fixture_pkg), two)
+    assert files == ["1.json", "2.json", "3.json", "index.json"]
+    assert all((one / f).read_bytes() == (two / f).read_bytes() for f in files)
+    idx = json.loads((one / "index.json").read_text(encoding="utf-8"))
+    assert idx["suppliers"]["sup:1"]["file"] == "1.json" and idx["built_from"]["package"] == "9.9.9"
+    (one / "99.json").write_text("{}")
+    write_all(build_all(fixture_pkg), one)
+    assert not (one / "99.json").exists()
+
+
+def test_the_cli_builds_checks_and_shows(tmp_path, fixture_pkg, capsys):
+    data, out = str(fixture_pkg.root), str(tmp_path / "dossiers")
+    assert cli(["--data", data, "--out", out, "build"]) == 0
+    assert cli(["--data", data, "--out", out, "check"]) == 0
+    (tmp_path / "dossiers" / "1.json").write_text("{}")
+    assert cli(["--data", data, "--out", out, "check"]) == 1
+    assert cli(["--data", data, "--out", out, "show", "2"]) == 0 and "Shop Two" in capsys.readouterr().out
+    assert cli(["--data", data, "--out", out, "signals-report", "--to", str(tmp_path / "r.md")]) == 0
+    assert "## sup:1 Foundry One GmbH" in (tmp_path / "r.md").read_text(encoding="utf-8")
+
+
+def test_the_committed_dossiers_are_current(real_pkg):
+    if not (DOSSIERS / "index.json").is_file():
+        pytest.skip("no dossiers built yet")
+    assert cli(["--data", str(REAL), "--out", str(DOSSIERS), "check"]) == 0

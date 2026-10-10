@@ -1,0 +1,302 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070320",
+  "incoterm": "DAP",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 30,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Stahlbau Ganghofer-Lenz GmbH",
+   "date": "2025-12-14",
+   "effective_date": null,
+   "id": "doc:20251214-70320-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Holiday shutdown",
+   "text": "Our plant is closed from 23 December to 6 January. Please place call-offs for January by 10 December."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Stahlbau Ganghofer-Lenz GmbH",
+   "date": "2026-06-07",
+   "effective_date": null,
+   "id": "doc:20260607-70320-M1",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Payment of invoices",
+   "text": "Could you pay our invoices within 10 days? In return we would grant a cash discount."
+  }
+ ],
+ "economics": {
+  "archetype": "family",
+  "archetype_basis": "owner type family",
+  "cash_pressure": "medium",
+  "cost_of_money": 0.09,
+  "cost_of_money_basis": "rule: owner type family",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 3.4,
+  "our_spend_eur": {
+   "FY2024": 364153.84,
+   "FY2025": 379969.04,
+   "FY2026": 384464.78
+  },
+  "we_pay_late_days": 4.4
+ },
+ "identity": {
+  "abc_class": "A",
+  "blocked": false,
+  "category": "sheet metal",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001"
+  ],
+  "country": "DE",
+  "credit_index": 251,
+  "credit_index_12m_ago": 251,
+  "equity_ratio_pct": 25.6,
+  "founded": 1968,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Stahlbau Ganghofer-Lenz GmbH",
+  "owner_type": "family",
+  "staff": 110,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "10-25 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 11300000,
+  "vda63_grade": "A"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  },
+  {
+   "body": "Producer prices for basic iron and steel are +7.3 % above January.",
+   "date": "2026-09-22",
+   "headline": "Steel prices +7.3 % since January",
+   "id": "news:20260922-35"
+  }
+ ],
+ "news": [
+  {
+   "body": "Stahlbau Ganghofer-Lenz GmbH has passed the ISO 14001 environmental audit.",
+   "date": "2026-07-15",
+   "headline": "Stahlbau Ganghofer-Lenz GmbH certified to ISO 14001",
+   "id": "news:20260715-19",
+   "noise": true,
+   "source": "Metall-Kurier",
+   "topic": "noise"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [],
+ "parts": {
+  "part:330011": {
+   "abc_class": "B",
+   "alternatives": [],
+   "category": "sheet metal",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70320-330011",
+    "price": 181.29,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Base frame HN 100, welded, painted",
+   "drivers": [
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.31
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.27
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.03
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 2.7,
+    "id": "fc:330011@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 2160,
+    "volume_per_year": 2160
+   },
+   "grade": "S235JR",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-09",
+      "event_id": "EV-2023-70320-330011",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -3.9,
+      "date": "2023-11-23",
+      "event_id": "EV-2024-70320-330011",
+      "note": "",
+      "settled_pct": -6.6,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.1,
+      "date": "2024-11-14",
+      "event_id": "EV-2025-70320-330011",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": -0.7,
+      "date": "2025-11-22",
+      "event_id": "EV-2026-70320-330011",
+      "note": "",
+      "settled_pct": -1.9,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": -0.5,
+    "mean_give_pct": 2.33,
+    "mean_settled_pct": -2.83
+   },
+   "material_group": "sheet",
+   "planned_lead_time_days": 28,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2019-01-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "A",
+   "colour": "green",
+   "id": "sc:70320@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 88.0,
+   "otd_pct": 88.0,
+   "ppm": 949,
+   "quarter": "2026Q3",
+   "score": 89.3
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70320@2025Q4",
+    "sc:70320@2026Q1",
+    "sc:70320@2026Q2",
+    "sc:70320@2026Q3"
+   ],
+   "otd_pct": 84.9,
+   "ppm": 853.25
+  },
+  "qn_12m": 2,
+  "qn_ids_12m": [
+   "qn:20004769",
+   "qn:20004829"
+  ],
+  "qn_supplier_caused_12m": 2,
+  "trend": "worse"
+ },
+ "profile_text": "Stahlbau Ganghofer-Lenz GmbH (DE; family; 110 staff; turnover EUR 11.3 M). Our spend FY2026 EUR 384,465 (3.4 % of its turnover). Standard terms: 30 days net, DAP, lead time 28 days. Cost of money about 9 % a year; cash pressure medium; type family. Signals: cash short (1). Performance 2026Q3: green, OTD 88.0 %, 949 ppm. Parts: part:330011 Base frame HN 100, welded, painted: price 181.29 per 1.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260607-70320-M1"
+   ],
+   "excerpt": "Could you pay our invoices within 10 days?",
+   "kind": "cash_short",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "DAP",
+  "lead_time_days": 28,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70320",
+ "warnings": []
+}

@@ -1,0 +1,323 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070330",
+  "incoterm": "FCA",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 60,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Lasertechnik Varnoszeg Kft.",
+   "date": "2025-10-16",
+   "effective_date": null,
+   "id": "doc:20251016-70330-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Holiday shutdown",
+   "text": "Our plant is closed from 23 December to 6 January. Please place call-offs for January by 10 December."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-02-06",
+   "effective_date": null,
+   "id": "doc:20260206-70330-M1",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Capacity",
+   "text": "Call with sales at Lasertechnik Varnoszeg Kft.: they could take additional parts at short notice; the second shift has been on hold since spring."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Lasertechnik Varnoszeg Kft.",
+   "date": "2026-03-16",
+   "effective_date": null,
+   "id": "doc:20260316-70330-M2",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Payment of invoices",
+   "text": "Could you pay our invoices within 10 days? In return we would grant a cash discount."
+  }
+ ],
+ "economics": {
+  "archetype": "other",
+  "archetype_basis": "no rule applies",
+  "cash_pressure": "low",
+  "cost_of_money": 0.1,
+  "cost_of_money_basis": "rule: owner type private",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 8.23,
+  "our_spend_eur": {
+   "FY2024": 264651.52,
+   "FY2025": 308281.36,
+   "FY2026": 320260.47
+  },
+  "we_pay_late_days": 4.1
+ },
+ "identity": {
+  "abc_class": "B",
+  "blocked": false,
+  "category": "sheet metal",
+  "certifications": [
+   "ISO 9001"
+  ],
+  "country": "HU",
+  "credit_index": 248,
+  "credit_index_12m_ago": 248,
+  "equity_ratio_pct": 35.3,
+  "founded": 2006,
+  "group_parent": null,
+  "legal_form": "Kft.",
+  "name": "Lasertechnik Varnoszeg Kft.",
+  "owner_type": "private",
+  "staff": 90,
+  "supplier_since": "2009-01-01",
+  "turnover_band": "2-5 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 3890000,
+  "vda63_grade": "B"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  },
+  {
+   "body": "Producer prices for basic iron and steel are +7.3 % above January.",
+   "date": "2026-09-22",
+   "headline": "Steel prices +7.3 % since January",
+   "id": "news:20260922-35"
+  }
+ ],
+ "news": [],
+ "opening_offer": null,
+ "own_quotes": [],
+ "parts": {
+  "part:330040": {
+   "abc_class": "B",
+   "alternatives": [],
+   "category": "sheet metal",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70330-330040",
+    "price": 119.11,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Control cabinet housing HI",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.29
+    },
+    {
+     "change_12m_pct": 8.64,
+     "change_6m_pct": -0.37,
+     "ids_12m": [
+      "idx:AS-14301@2025-09",
+      "idx:AS-14301@2026-09"
+     ],
+     "ids_6m": [
+      "idx:AS-14301@2026-03",
+      "idx:AS-14301@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 1690.452,
+     "series": "AS-14301",
+     "weight": 0.23
+    },
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.14
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 9.5,
+    "id": "fc:330040@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 2910,
+    "volume_per_year": 2910
+   },
+   "grade": "1.4301",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-12",
+      "event_id": "EV-2023-70330-330040",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -3.8,
+      "date": "2023-11-16",
+      "event_id": "EV-2024-70330-330040",
+      "note": "",
+      "settled_pct": -7.5,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.2,
+      "date": "2024-12-05",
+      "event_id": "EV-2025-70330-330040",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.5,
+      "date": "2025-11-18",
+      "event_id": "EV-2026-70330-330040",
+      "note": "",
+      "settled_pct": -2.5,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 0.3,
+    "mean_give_pct": 3.63,
+    "mean_settled_pct": -3.33
+   },
+   "material_group": "sheet_inox",
+   "planned_lead_time_days": 35,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2019-11-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "B",
+   "colour": "amber",
+   "id": "sc:70330@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 91.7,
+   "otd_pct": 70.8,
+   "ppm": 1879,
+   "quarter": "2026Q3",
+   "score": 76.0
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70330@2025Q4",
+    "sc:70330@2026Q1",
+    "sc:70330@2026Q2",
+    "sc:70330@2026Q3"
+   ],
+   "otd_pct": 77.28,
+   "ppm": 1463.5
+  },
+  "qn_12m": 5,
+  "qn_ids_12m": [
+   "qn:20004702",
+   "qn:20004780",
+   "qn:20004862",
+   "qn:20004930",
+   "qn:20004955"
+  ],
+  "qn_supplier_caused_12m": 5,
+  "trend": "worse"
+ },
+ "profile_text": "Lasertechnik Varnoszeg Kft. (HU; private; 90 staff; turnover EUR 3.9 M). Our spend FY2026 EUR 320,260 (8.23 % of its turnover). Standard terms: 60 days net, FCA, lead time 35 days. Cost of money about 10 % a year; cash pressure low; type other. Signals: cash short (1), delivery problem (1), quality problem (2). Performance 2026Q3: amber, OTD 70.8 %, 1879 ppm. Parts: part:330040 Control cabinet housing HI: price 119.11 per 1.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260316-70330-M2"
+   ],
+   "excerpt": "Could you pay our invoices within 10 days?",
+   "kind": "cash_short",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "sc:70330@2026Q3"
+   ],
+   "excerpt": "On-time delivery 70.8 % in 2026Q3.",
+   "kind": "delivery_problem",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "sc:70330@2026Q3"
+   ],
+   "excerpt": "Scorecard 2026Q3 is amber.",
+   "kind": "quality_problem",
+   "strength": 2
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "FCA",
+  "lead_time_days": 35,
+  "payment_days": 60,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70330",
+ "warnings": []
+}

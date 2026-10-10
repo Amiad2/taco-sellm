@@ -1,0 +1,494 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070360",
+  "incoterm": "DAP",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 30,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Kantteile Strasser GmbH",
+   "date": "2025-12-12",
+   "effective_date": null,
+   "id": "doc:20251212-70360-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "ISO 9001 certificate",
+   "text": "Please find attached our renewed ISO 9001 certificate."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-05-27",
+   "effective_date": null,
+   "id": "doc:20260527-70360-M2",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Capacity",
+   "text": "Call with sales at Kantteile Strasser GmbH: they could take additional parts at short notice; the second shift has been on hold since spring."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-06-06",
+   "effective_date": null,
+   "id": "doc:20260606-70360-M1",
+   "kind": "call_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Price discussion",
+   "text": "Call with the owner of Kantteile Strasser GmbH: he asked where we get our index figures from - he works from his own spreadsheet, last updated two years ago."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-08-12",
+   "effective_date": null,
+   "id": "doc:20260812-70360-M3",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Supplier day",
+   "text": "At our supplier day Kantteile Strasser GmbH said Hollerau is an important reference customer for them."
+  }
+ ],
+ "economics": {
+  "archetype": "job_shop",
+  "archetype_basis": "staff 25 < 80",
+  "cash_pressure": "low",
+  "cost_of_money": 0.25,
+  "cost_of_money_basis": "rule: job shop or short of cash",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 4.23,
+  "our_spend_eur": {
+   "FY2024": 157405.8,
+   "FY2025": 146595.0,
+   "FY2026": 148083.12
+  },
+  "we_pay_late_days": 4.9
+ },
+ "identity": {
+  "abc_class": "B",
+  "blocked": false,
+  "category": "sheet metal",
+  "certifications": [
+   "ISO 9001"
+  ],
+  "country": "AT",
+  "credit_index": 223,
+  "credit_index_12m_ago": 223,
+  "equity_ratio_pct": 31.1,
+  "founded": 1999,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Kantteile Strasser GmbH",
+  "owner_type": "founder",
+  "staff": 25,
+  "supplier_since": "2002-01-01",
+  "turnover_band": "2-5 M EUR",
+  "turnover_estimated": true,
+  "turnover_eur": null,
+  "vda63_grade": "B"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  },
+  {
+   "body": "Producer prices for basic iron and steel are +7.3 % above January.",
+   "date": "2026-09-22",
+   "headline": "Steel prices +7.3 % since January",
+   "id": "news:20260922-35"
+  }
+ ],
+ "news": [],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2025-04-08",
+   "incoterm": null,
+   "lead_time_days": 30,
+   "part_id": "part:330020",
+   "payment_days": null,
+   "price_unit": 1,
+   "quote_id": "quote:7100033",
+   "remarks": "",
+   "unit_price": 21.0
+  },
+  {
+   "date": "2025-07-06",
+   "incoterm": null,
+   "lead_time_days": 34,
+   "part_id": "part:330030",
+   "payment_days": null,
+   "price_unit": 1,
+   "quote_id": "quote:7100034",
+   "remarks": "",
+   "unit_price": 16.9
+  }
+ ],
+ "parts": {
+  "part:330020": {
+   "abc_class": "B",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Metallbau Steinfelder KG",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 100,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70340",
+     "unit_price": null
+    },
+    {
+     "date": "2025-04-08",
+     "name": "Metallbau Steinfelder KG",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100032",
+     "status": null,
+     "supplier_id": "sup:70340",
+     "unit_price": 20.0
+    },
+    {
+     "date": "2026-09-26",
+     "name": "Metallbau Steinfelder KG",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7300074",
+     "status": null,
+     "supplier_id": "sup:70340",
+     "unit_price": 18.16
+    }
+   ],
+   "category": "sheet metal",
+   "current_price": null,
+   "description": "Coupling guard, galvanised",
+   "drivers": [
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.35
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.31
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.01
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 13.1,
+    "id": "fc:330020@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 15040,
+    "volume_per_year": 15040
+   },
+   "grade": "DX51D",
+   "history": {
+    "below_full_cost": false,
+    "events": [],
+    "mean_asked_pct": null,
+    "mean_give_pct": null,
+    "mean_settled_pct": null
+   },
+   "material_group": "sheet",
+   "planned_lead_time_days": 21,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2016-05-01",
+    "quota_pct": 0,
+    "status": "qualified",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  },
+  "part:330030": {
+   "abc_class": "B",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Metallbau Steinfelder KG",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 50,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70340",
+     "unit_price": null
+    },
+    {
+     "date": "2025-07-06",
+     "name": "Metallbau Steinfelder KG",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100035",
+     "status": null,
+     "supplier_id": "sup:70340",
+     "unit_price": 16.7
+    }
+   ],
+   "category": "sheet metal",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70360-330030",
+    "price": 16.11,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Motor bracket HB",
+   "drivers": [
+    {
+     "change_12m_pct": 6.54,
+     "change_6m_pct": 6.22,
+     "ids_12m": [
+      "idx:PPI-C241@2025-08",
+      "idx:PPI-C241@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C241@2026-02",
+      "idx:PPI-C241@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 105.9,
+     "series": "PPI-C241",
+     "weight": 0.35
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.25
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.04
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 2.3,
+    "id": "fc:330030@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 18790,
+    "volume_per_year": 18790
+   },
+   "grade": "S235JR",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-23",
+      "event_id": "EV-2023-70360-330030",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -3.1,
+      "date": "2023-11-20",
+      "event_id": "EV-2024-70360-330030",
+      "note": "",
+      "settled_pct": -6.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.7,
+      "date": "2024-11-26",
+      "event_id": "EV-2025-70360-330030",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.6,
+      "date": "2025-11-24",
+      "event_id": "EV-2026-70360-330030",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 1.4,
+    "mean_give_pct": 3.4,
+    "mean_settled_pct": -2.0
+   },
+   "material_group": "sheet",
+   "planned_lead_time_days": 21,
+   "price_to_should_cost": null,
+   "price_unit": 1,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2013-05-01",
+    "quota_pct": 50,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "B",
+   "colour": "amber",
+   "id": "sc:70360@2026Q3",
+   "open_8d_overdue": 1,
+   "otd_confirmed_pct": 84.0,
+   "otd_pct": 76.0,
+   "ppm": 762,
+   "quarter": "2026Q3",
+   "score": 79.2
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70360@2025Q4",
+    "sc:70360@2026Q1",
+    "sc:70360@2026Q2",
+    "sc:70360@2026Q3"
+   ],
+   "otd_pct": 77.22,
+   "ppm": 753.25
+  },
+  "qn_12m": 6,
+  "qn_ids_12m": [
+   "qn:20004691",
+   "qn:20004745",
+   "qn:20004848",
+   "qn:20004897",
+   "qn:20004979",
+   "qn:20004996"
+  ],
+  "qn_supplier_caused_12m": 6,
+  "trend": "flat"
+ },
+ "profile_text": "Kantteile Strasser GmbH (AT; founder; 25 staff; turnover 2-5 M EUR). Our spend FY2026 EUR 148,083 (4.23 % of its turnover). Standard terms: 30 days net, DAP, lead time 28 days. Cost of money about 25 % a year; cash pressure low; type job shop. Signals: informal costing (1), quality problem (2). Performance 2026Q3: amber, OTD 76.0 %, 762 ppm, 1 overdue 8D. Parts: part:330020 Coupling guard, galvanised; part:330030 Motor bracket HB: price 16.11 per 1.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260606-70360-M1"
+   ],
+   "excerpt": "Call with the owner of Kantteile Strasser GmbH: he asked where we get our index figures from - he works from his own spreadsheet, last updated two years ago.",
+   "kind": "informal_costing",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "sc:70360@2026Q3"
+   ],
+   "excerpt": "Scorecard 2026Q3 is amber.",
+   "kind": "quality_problem",
+   "strength": 2
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "DAP",
+  "lead_time_days": 28,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70360",
+ "warnings": []
+}

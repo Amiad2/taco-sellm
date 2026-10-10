@@ -1,0 +1,503 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070440",
+  "incoterm": "DAP",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 30,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Kohlering-Technik Pirkheim GmbH",
+   "date": "2025-10-12",
+   "effective_date": null,
+   "id": "doc:20251012-70440-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "New contact person",
+   "text": "From 1 October your contact in sales is our new colleague in inside sales; all other contacts stay the same."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-05-24",
+   "effective_date": null,
+   "id": "doc:20260524-70440-M2",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Annual review",
+   "text": "Annual review with Kohlering-Technik Pirkheim GmbH. Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-09-10",
+   "effective_date": null,
+   "id": "doc:20260910-70440-M1",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Commercial terms",
+   "text": "Kohlering-Technik Pirkheim GmbH stated that standard items are not discounted; only multi-year volume agreements change prices."
+  }
+ ],
+ "economics": {
+  "archetype": "family",
+  "archetype_basis": "owner type family",
+  "cash_pressure": "medium",
+  "cost_of_money": 0.09,
+  "cost_of_money_basis": "rule: owner type family",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 0.82,
+  "our_spend_eur": {
+   "FY2024": 220409.19,
+   "FY2025": 264102.37,
+   "FY2026": 287769.44
+  },
+  "we_pay_late_days": 2.9
+ },
+ "identity": {
+  "abc_class": "B",
+  "blocked": false,
+  "category": "seals",
+  "certifications": [
+   "ISO 9001",
+   "ISO 14001"
+  ],
+  "country": "DE",
+  "credit_index": 147,
+  "credit_index_12m_ago": 147,
+  "equity_ratio_pct": 24.5,
+  "founded": 1972,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "Kohlering-Technik Pirkheim GmbH",
+  "owner_type": "family",
+  "staff": 140,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "25-50 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 35200000,
+  "vda63_grade": "A"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  }
+ ],
+ "news": [
+  {
+   "body": "Kohlering-Technik Pirkheim GmbH has informed customers that deliveries of standard mechanical seals will be allocated in line with last year's call-offs.",
+   "date": "2026-08-27",
+   "headline": "Kohlering-Technik Pirkheim GmbH allocates volumes",
+   "id": "news:20260827-25",
+   "noise": false,
+   "source": "Gießerei-Rundschau Süd",
+   "topic": "allocation"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2024-04-21",
+   "incoterm": "DAP",
+   "lead_time_days": 44,
+   "part_id": "part:340011",
+   "payment_days": 30,
+   "price_unit": 1,
+   "quote_id": "quote:7100036",
+   "remarks": "",
+   "unit_price": 40.23
+  },
+  {
+   "date": "2025-01-12",
+   "incoterm": "DAP",
+   "lead_time_days": 36,
+   "part_id": "part:340040",
+   "payment_days": 30,
+   "price_unit": 100,
+   "quote_id": "quote:7100041",
+   "remarks": "",
+   "unit_price": 121.27
+  }
+ ],
+ "parts": {
+  "part:340011": {
+   "abc_class": "B",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Dichtungswerk Ravensteiner GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 40,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70410",
+     "unit_price": null
+    },
+    {
+     "date": "2024-04-21",
+     "name": "Dichtungswerk Ravensteiner GmbH",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100037",
+     "status": null,
+     "supplier_id": "sup:70410",
+     "unit_price": 41.55
+    }
+   ],
+   "category": "seals",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70440-340011",
+    "price": 37.55,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Mechanical seal 32 mm, SiC/carbon, EPDM",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.33
+    },
+    {
+     "change_12m_pct": 3.9,
+     "change_6m_pct": 3.2,
+     "ids_12m": [
+      "idx:PPI-C2219@2025-08",
+      "idx:PPI-C2219@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2219@2026-02",
+      "idx:PPI-C2219@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 122.4,
+     "series": "PPI-C2219",
+     "weight": 0.17
+    }
+   ],
+   "floor_estimate": {
+    "basis": "plant-specific should-cost cost:340011",
+    "high": 36.48,
+    "low": 33.0,
+    "value": 34.74
+   },
+   "forecast": {
+    "change_pct": 11.4,
+    "id": "fc:340011@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 12720,
+    "volume_per_year": 12720
+   },
+   "grade": "EN 12756",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-27",
+      "event_id": "EV-2023-70440-340011",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 2.9,
+      "date": "2023-12-07",
+      "event_id": "EV-2024-70440-340011",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.1,
+      "date": "2024-11-25",
+      "event_id": "EV-2025-70440-340011",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 4.8,
+      "date": "2025-11-17",
+      "event_id": "EV-2026-70440-340011",
+      "note": "",
+      "settled_pct": 2.1,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 2.93,
+    "mean_give_pct": 2.23,
+    "mean_settled_pct": 0.7
+   },
+   "material_group": "seal",
+   "planned_lead_time_days": 35,
+   "price_to_should_cost": 1.0809,
+   "price_unit": 1,
+   "should_cost": {
+    "confidence_pct": 5,
+    "conversion_eur": 20.92,
+    "cost_base": "DE",
+    "id": "cost:340011",
+    "material_eur": 4.86,
+    "overhead_eur": 8.96,
+    "plant_specific": true,
+    "price_unit": 1,
+    "unit_cost": 34.74
+   },
+   "sourcing": {
+    "approved_since": "2012-01-01",
+    "quota_pct": 60,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  },
+  "part:340040": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Elasto-Dicht Hermannsdorfer GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 50,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70430",
+     "unit_price": null
+    },
+    {
+     "date": "2025-01-12",
+     "name": "Elasto-Dicht Hermannsdorfer GmbH",
+     "price_unit": 100,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100040",
+     "status": null,
+     "supplier_id": "sup:70430",
+     "unit_price": 102.34
+    }
+   ],
+   "category": "seals",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70440-340040",
+    "price": 111.69,
+    "price_unit": 100,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Lip seal 35x52x7",
+   "drivers": [
+    {
+     "change_12m_pct": 3.9,
+     "change_6m_pct": 3.2,
+     "ids_12m": [
+      "idx:PPI-C2219@2025-08",
+      "idx:PPI-C2219@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2219@2026-02",
+      "idx:PPI-C2219@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 122.4,
+     "series": "PPI-C2219",
+     "weight": 0.54
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.12
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 5.1,
+    "id": "fc:340040@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 39100,
+    "volume_per_year": 39100
+   },
+   "grade": "NBR",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-01",
+      "event_id": "EV-2023-70440-340040",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 3.9,
+      "date": "2023-11-14",
+      "event_id": "EV-2024-70440-340040",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 4.7,
+      "date": "2024-11-25",
+      "event_id": "EV-2025-70440-340040",
+      "note": "",
+      "settled_pct": 1.8,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.7,
+      "date": "2025-11-12",
+      "event_id": "EV-2026-70440-340040",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 3.43,
+    "mean_give_pct": 2.83,
+    "mean_settled_pct": 0.6
+   },
+   "material_group": "seal_soft",
+   "planned_lead_time_days": 7,
+   "price_to_should_cost": null,
+   "price_unit": 100,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2015-01-01",
+    "quota_pct": 50,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "A",
+   "colour": "green",
+   "id": "sc:70440@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 79.2,
+   "otd_pct": 75.5,
+   "ppm": 387,
+   "quarter": "2026Q3",
+   "score": 85.8
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70440@2025Q4",
+    "sc:70440@2026Q1",
+    "sc:70440@2026Q2",
+    "sc:70440@2026Q3"
+   ],
+   "otd_pct": 78.08,
+   "ppm": 361.75
+  },
+  "qn_12m": 11,
+  "qn_ids_12m": [
+   "qn:20004692",
+   "qn:20004710",
+   "qn:20004727",
+   "qn:20004751",
+   "qn:20004914",
+   "qn:20004921",
+   "qn:20004939",
+   "qn:20004989",
+   "qn:20005003",
+   "qn:20005017",
+   "qn:20005029"
+  ],
+  "qn_supplier_caused_12m": 10,
+  "trend": "flat"
+ },
+ "profile_text": "Kohlering-Technik Pirkheim GmbH (DE; family; 140 staff; turnover EUR 35.2 M). Our spend FY2026 EUR 287,769 (0.82 % of its turnover). Standard terms: 30 days net, DAP, lead time 35 days. Cost of money about 9 % a year; cash pressure medium; type family. Signals: approval ladder (1), capacity tight (1). Performance 2026Q3: green, OTD 75.5 %, 387 ppm. Parts: part:340011 Mechanical seal 32 mm, SiC/carbon, EPDM: price 37.55 per 1, 1.08x should-cost; part:340040 Lip seal 35x52x7: price 111.69 per 100.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260524-70440-M2"
+   ],
+   "excerpt": "Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks.",
+   "kind": "approval_ladder",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "news:20260827-25"
+   ],
+   "excerpt": "Kohlering-Technik Pirkheim GmbH allocates volumes",
+   "kind": "capacity_tight",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "DAP",
+  "lead_time_days": 35,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70440",
+ "warnings": []
+}

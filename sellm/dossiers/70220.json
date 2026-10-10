@@ -1,0 +1,426 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070220",
+  "incoterm": "EXW",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 30,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "CNC-Technik Obermaier & Huber GmbH",
+   "date": "2025-12-07",
+   "effective_date": null,
+   "id": "doc:20251207-70220-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "New contact person",
+   "text": "From 1 October your contact in sales is our new colleague in inside sales; all other contacts stay the same."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-02-24",
+   "effective_date": null,
+   "id": "doc:20260224-70220-M2",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Supplier day",
+   "text": "At our supplier day CNC-Technik Obermaier & Huber GmbH said Hollerau is an important reference customer for them."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "CNC-Technik Obermaier & Huber GmbH",
+   "date": "2026-05-11",
+   "effective_date": null,
+   "id": "doc:20260511-70220-M1",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Payment of invoices",
+   "text": "Could you pay our invoices within 10 days? In return we would grant a cash discount."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "CNC-Technik Obermaier & Huber GmbH",
+   "date": "2026-09-15",
+   "effective_date": null,
+   "id": "doc:20260915-70220-P09",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [
+    "part:320030"
+   ],
+   "subject": "Capacity situation and delivery dates",
+   "text": "Hello,\n\ndue to very high capacity utilisation we cannot confirm your full forecast for Flange DN 65 PN 16, machined (part:320030) for the coming months. Lead times are currently longer than agreed. We will prioritise customers with firm, long-term commitments.\n\nBest regards,\nCNC-Technik Obermaier & Huber GmbH"
+  }
+ ],
+ "economics": {
+  "archetype": "job_shop",
+  "archetype_basis": "staff 35 < 80",
+  "cash_pressure": "low",
+  "cost_of_money": 0.25,
+  "cost_of_money_basis": "rule: job shop or short of cash",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 4.38,
+  "our_spend_eur": {
+   "FY2024": 137182.29,
+   "FY2025": 151389.0,
+   "FY2026": 153471.6
+  },
+  "we_pay_late_days": 8.1
+ },
+ "identity": {
+  "abc_class": "B",
+  "blocked": false,
+  "category": "machined parts",
+  "certifications": [
+   "ISO 9001"
+  ],
+  "country": "DE",
+  "credit_index": 245,
+  "credit_index_12m_ago": 245,
+  "equity_ratio_pct": 31.1,
+  "founded": 2004,
+  "group_parent": null,
+  "legal_form": "GmbH",
+  "name": "CNC-Technik Obermaier & Huber GmbH",
+  "owner_type": "founder",
+  "staff": 35,
+  "supplier_since": "2007-01-01",
+  "turnover_band": "2-5 M EUR",
+  "turnover_estimated": true,
+  "turnover_eur": null,
+  "vda63_grade": "B"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "The alloy surcharge for 1.4404 stands at EUR 3,008/t, +6 % on a year ago.",
+   "date": "2026-09-16",
+   "headline": "Alloy surcharge 1.4404 at EUR 3,008 per tonne",
+   "id": "news:20260916-32"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  },
+  {
+   "body": "Producer prices for basic iron and steel are +7.3 % above January.",
+   "date": "2026-09-22",
+   "headline": "Steel prices +7.3 % since January",
+   "id": "news:20260922-35"
+  }
+ ],
+ "news": [
+  {
+   "body": "CNC-Technik Obermaier & Huber GmbH reports an order backlog of more than six months and has stopped accepting new projects for now.",
+   "date": "2026-03-20",
+   "headline": "CNC-Technik Obermaier & Huber GmbH fully booked into next year",
+   "id": "news:20260320-04",
+   "noise": false,
+   "source": "Zulieferer Report",
+   "topic": "full_order_book"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2025-04-16",
+   "incoterm": null,
+   "lead_time_days": 42,
+   "part_id": "part:320030",
+   "payment_days": null,
+   "price_unit": 1,
+   "quote_id": "quote:7100024",
+   "remarks": "",
+   "unit_price": 17.3
+  }
+ ],
+ "parts": {
+  "part:320030": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Strojírna Hrvelec s.r.o.",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 0,
+     "quote_id": null,
+     "status": "qualified",
+     "supplier_id": "sup:70240",
+     "unit_price": null
+    },
+    {
+     "date": "2025-04-16",
+     "name": "Strojírna Hrvelec s.r.o.",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100025",
+     "status": null,
+     "supplier_id": "sup:70240",
+     "unit_price": 13.9
+    },
+    {
+     "date": "2026-09-10",
+     "name": "Strojírna Hrvelec s.r.o.",
+     "price_unit": 1,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7200009",
+     "status": null,
+     "supplier_id": "sup:70240",
+     "unit_price": 16.33
+    }
+   ],
+   "category": "machined parts",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70220-320030",
+    "price": 16.02,
+    "price_unit": 1,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Flange DN 65 PN 16, machined",
+   "drivers": [
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.33
+    },
+    {
+     "change_12m_pct": 12.26,
+     "change_6m_pct": 9.69,
+     "ids_12m": [
+      "idx:PPI-C2431@2025-08",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2431@2026-02",
+      "idx:PPI-C2431@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 129.1,
+     "series": "PPI-C2431",
+     "weight": 0.32
+    },
+    {
+     "change_12m_pct": -3.72,
+     "change_6m_pct": 6.63,
+     "ids_12m": [
+      "idx:PPI-D351@2025-08",
+      "idx:PPI-D351@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-D351@2026-02",
+      "idx:PPI-D351@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 131.9,
+     "series": "PPI-D351",
+     "weight": 0.02
+    }
+   ],
+   "floor_estimate": {
+    "basis": "plant-specific should-cost cost:320030",
+    "high": 16.17,
+    "low": 14.63,
+    "value": 15.4
+   },
+   "forecast": {
+    "change_pct": 13.2,
+    "id": "fc:320030@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 10780,
+    "volume_per_year": 10780
+   },
+   "grade": "S235JR",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-11-23",
+      "event_id": "EV-2023-70220-320030",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -0.4,
+      "date": "2023-11-20",
+      "event_id": "EV-2024-70220-320030",
+      "note": "",
+      "settled_pct": -4.1,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.1,
+      "date": "2024-11-19",
+      "event_id": "EV-2025-70220-320030",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.5,
+      "date": "2025-12-04",
+      "event_id": "EV-2026-70220-320030",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 2.07,
+    "mean_give_pct": 3.43,
+    "mean_settled_pct": -1.37
+   },
+   "material_group": "mach_steel",
+   "planned_lead_time_days": 35,
+   "price_to_should_cost": 1.0403,
+   "price_unit": 1,
+   "should_cost": {
+    "confidence_pct": 5,
+    "conversion_eur": 7.22,
+    "cost_base": "DE",
+    "id": "cost:320030",
+    "material_eur": 5.08,
+    "overhead_eur": 3.09,
+    "plant_specific": true,
+    "price_unit": 1,
+    "unit_cost": 15.4
+   },
+   "sourcing": {
+    "approved_since": "2013-09-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "Hollerau"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "B",
+   "colour": "amber",
+   "id": "sc:70220@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 76.0,
+   "otd_pct": 56.0,
+   "ppm": 731,
+   "quarter": "2026Q3",
+   "score": 74.3
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70220@2025Q4",
+    "sc:70220@2026Q1",
+    "sc:70220@2026Q2",
+    "sc:70220@2026Q3"
+   ],
+   "otd_pct": 58.8,
+   "ppm": 826.0
+  },
+  "qn_12m": 7,
+  "qn_ids_12m": [
+   "qn:20004683",
+   "qn:20004742",
+   "qn:20004784",
+   "qn:20004810",
+   "qn:20004882",
+   "qn:20004991",
+   "qn:20005010"
+  ],
+  "qn_supplier_caused_12m": 7,
+  "trend": "worse"
+ },
+ "profile_text": "CNC-Technik Obermaier & Huber GmbH (DE; founder; 35 staff; turnover 2-5 M EUR). Our spend FY2026 EUR 153,472 (4.38 % of its turnover). Standard terms: 30 days net, EXW, lead time 35 days. Cost of money about 25 % a year; cash pressure low; type job shop. Signals: capacity tight (1), cash short (1), delivery problem (2), quality problem (1). Performance 2026Q3: amber, OTD 56.0 %, 731 ppm. Parts: part:320030 Flange DN 65 PN 16, machined: price 16.02 per 1, 1.04x should-cost.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "news:20260320-04"
+   ],
+   "excerpt": "CNC-Technik Obermaier & Huber GmbH fully booked into next year.",
+   "kind": "capacity_tight",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "doc:20260511-70220-M1"
+   ],
+   "excerpt": "Could you pay our invoices within 10 days?",
+   "kind": "cash_short",
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "news:20260320-04",
+    "sc:70220@2026Q3"
+   ],
+   "excerpt": "CNC-Technik Obermaier & Huber GmbH reports an order backlog of more than six months and has stopped accepting new projects for now.",
+   "kind": "delivery_problem",
+   "strength": 2
+  },
+  {
+   "evidence": [
+    "sc:70220@2026Q3"
+   ],
+   "excerpt": "Scorecard 2026Q3 is amber.",
+   "kind": "quality_problem",
+   "strength": 1
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "EXW",
+  "lead_time_days": 35,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70220",
+ "warnings": []
+}

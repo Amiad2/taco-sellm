@@ -1,0 +1,523 @@
+{
+ "built_from": {
+  "case_id": null,
+  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "package": "1.0.0",
+  "sunday_release": false
+ },
+ "case_facts": {},
+ "citable": [],
+ "contact": null,
+ "contract": {
+  "id": "ctr:4600070630",
+  "incoterm": "DAP",
+  "index_clauses": [],
+  "notice_days": 90,
+  "payment_days": 30,
+  "price_basis": "fixed per year",
+  "valid_from": "2025-07-01",
+  "valid_to": "2027-06-30"
+ },
+ "coverage": "full",
+ "documents": [
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Normteile Brucker KG",
+   "date": "2025-12-22",
+   "effective_date": null,
+   "id": "doc:20251222-70630-N",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Packaging",
+   "text": "From November we deliver in returnable boxes instead of cardboard."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-03-27",
+   "effective_date": null,
+   "id": "doc:20260327-70630-M2",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Commercial terms",
+   "text": "Normteile Brucker KG stated that standard items are not discounted; only multi-year volume agreements change prices."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Normteile Brucker KG",
+   "date": "2026-07-06",
+   "effective_date": null,
+   "id": "doc:20260706-70630-M3",
+   "kind": "email",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Price list 2027",
+   "text": "Our price list applies to all customers without exception until December 2027. We are happy to discuss logistics and payment conditions."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-07-24",
+   "effective_date": null,
+   "id": "doc:20260724-70630-M1",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Annual review",
+   "text": "Annual review with Normteile Brucker KG. Their sales director said there is no room on price this year: head office has frozen all price reductions until December 2027. He was open on payment terms and call-off flexibility."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Hollerau Pumpenwerke, Purchasing",
+   "date": "2026-09-23",
+   "effective_date": null,
+   "id": "doc:20260923-70630-M4",
+   "kind": "meeting_note",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Annual review",
+   "text": "Annual review with Normteile Brucker KG. Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks."
+  }
+ ],
+ "economics": {
+  "archetype": "job_shop",
+  "archetype_basis": "staff 60 < 80",
+  "cash_pressure": "low",
+  "cost_of_money": 0.25,
+  "cost_of_money_basis": "rule: job shop or short of cash",
+  "discount_taken_share_pct": null,
+  "our_share_of_turnover_pct": 0.28,
+  "our_spend_eur": {
+   "FY2024": 84963.09,
+   "FY2025": 85923.1,
+   "FY2026": 81301.6
+  },
+  "we_pay_late_days": 4.4
+ },
+ "identity": {
+  "abc_class": "B",
+  "blocked": false,
+  "category": "C-parts",
+  "certifications": [
+   "ISO 9001"
+  ],
+  "country": "DE",
+  "credit_index": 185,
+  "credit_index_12m_ago": 185,
+  "equity_ratio_pct": 36.2,
+  "founded": 1966,
+  "group_parent": null,
+  "legal_form": "KG",
+  "name": "Normteile Brucker KG",
+  "owner_type": "family",
+  "staff": 60,
+  "supplier_since": "1996-01-01",
+  "turnover_band": "25-50 M EUR",
+  "turnover_estimated": false,
+  "turnover_eur": 29100000,
+  "vda63_grade": "A"
+ },
+ "market_news": [
+  {
+   "body": "Producer prices for electric power stand -43 % against August 2022.",
+   "date": "2026-09-12",
+   "headline": "Industrial power prices -43 % on 2022",
+   "id": "news:20260912-30"
+  },
+  {
+   "body": "Labour costs in German manufacturing rose +2.7 % year on year in the second quarter.",
+   "date": "2026-09-20",
+   "headline": "Labour costs in manufacturing +2.7 %",
+   "id": "news:20260920-34"
+  },
+  {
+   "body": "Producer prices for basic iron and steel are +7.3 % above January.",
+   "date": "2026-09-22",
+   "headline": "Steel prices +7.3 % since January",
+   "id": "news:20260922-35"
+  }
+ ],
+ "news": [
+  {
+   "body": "Normteile Brucker KG was praised by the chamber for its apprentice training.",
+   "date": "2026-07-06",
+   "headline": "Normteile Brucker KG trains apprentices",
+   "id": "news:20260706-17",
+   "noise": true,
+   "source": "Wirtschaftsblatt Niederbayern",
+   "topic": "noise"
+  }
+ ],
+ "opening_offer": null,
+ "own_quotes": [
+  {
+   "date": "2025-08-14",
+   "incoterm": "DAP",
+   "lead_time_days": 8,
+   "part_id": "part:360030",
+   "payment_days": 30,
+   "price_unit": 1000,
+   "quote_id": "quote:7100063",
+   "remarks": "",
+   "unit_price": 12.8
+  },
+  {
+   "date": "2026-09-04",
+   "incoterm": "DAP",
+   "lead_time_days": 7,
+   "part_id": "part:360013",
+   "payment_days": 30,
+   "price_unit": 100,
+   "quote_id": "quote:7300052",
+   "remarks": "Prices as per current list; discounts not possible this year (head-office directive).",
+   "unit_price": 29.23
+  }
+ ],
+ "parts": {
+  "part:360013": {
+   "abc_class": "C",
+   "alternatives": [],
+   "category": "C-parts",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70630-360013",
+    "price": 29.23,
+    "price_unit": 100,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Stud bolt M10 A2-70",
+   "drivers": [
+    {
+     "change_12m_pct": 1.66,
+     "change_6m_pct": 0.87,
+     "ids_12m": [
+      "idx:PPI-C2594@2025-08",
+      "idx:PPI-C2594@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2594@2026-02",
+      "idx:PPI-C2594@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 116.3,
+     "series": "PPI-C2594",
+     "weight": 0.32
+    },
+    {
+     "change_12m_pct": 8.64,
+     "change_6m_pct": -0.37,
+     "ids_12m": [
+      "idx:AS-14301@2025-09",
+      "idx:AS-14301@2026-09"
+     ],
+     "ids_6m": [
+      "idx:AS-14301@2026-03",
+      "idx:AS-14301@2026-09"
+     ],
+     "last_month": "2026-09",
+     "last_value": 1690.452,
+     "series": "AS-14301",
+     "weight": 0.28
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.1
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 11.5,
+    "id": "fc:360013@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 291000,
+    "volume_per_year": 291000
+   },
+   "grade": "A2-70",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-10",
+      "event_id": "EV-2023-70630-360013",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": -5.1,
+      "date": "2023-11-20",
+      "event_id": "EV-2024-70630-360013",
+      "note": "",
+      "settled_pct": -6.3,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": -1.1,
+      "date": "2024-12-08",
+      "event_id": "EV-2025-70630-360013",
+      "note": "",
+      "settled_pct": -2.8,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": -0.7,
+      "date": "2025-11-22",
+      "event_id": "EV-2026-70630-360013",
+      "note": "",
+      "settled_pct": -3.8,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": -2.3,
+    "mean_give_pct": 2.0,
+    "mean_settled_pct": -4.3
+   },
+   "material_group": "fastener_inox",
+   "planned_lead_time_days": 7,
+   "price_to_should_cost": null,
+   "price_unit": 100,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2015-11-01",
+    "quota_pct": 100,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  },
+  "part:360030": {
+   "abc_class": "C",
+   "alternatives": [
+    {
+     "date": null,
+     "name": "Schraubenhandel Leitner & Sohn GmbH",
+     "price_unit": null,
+     "private": true,
+     "quota_pct": 50,
+     "quote_id": null,
+     "status": "active",
+     "supplier_id": "sup:70610",
+     "unit_price": null
+    },
+    {
+     "date": "2025-08-14",
+     "name": "Schraubenhandel Leitner & Sohn GmbH",
+     "price_unit": 1000,
+     "private": true,
+     "quota_pct": null,
+     "quote_id": "quote:7100062",
+     "status": null,
+     "supplier_id": "sup:70610",
+     "unit_price": 13.06
+    }
+   ],
+   "category": "C-parts",
+   "current_price": {
+    "basis": "renewal",
+    "event_id": "EV-2026-70630-360030",
+    "price": 12.64,
+    "price_unit": 1000,
+    "valid_from": "2026-01-01",
+    "valid_to": null
+   },
+   "description": "Washer ISO 7089 M12, zinc",
+   "drivers": [
+    {
+     "change_12m_pct": 1.66,
+     "change_6m_pct": 0.87,
+     "ids_12m": [
+      "idx:PPI-C2594@2025-08",
+      "idx:PPI-C2594@2026-08"
+     ],
+     "ids_6m": [
+      "idx:PPI-C2594@2026-02",
+      "idx:PPI-C2594@2026-08"
+     ],
+     "last_month": "2026-08",
+     "last_value": 116.3,
+     "series": "PPI-C2594",
+     "weight": 0.64
+    },
+    {
+     "change_12m_pct": 2.66,
+     "change_6m_pct": 1.7,
+     "ids_12m": [
+      "idx:LCI-C@2025-06",
+      "idx:LCI-C@2026-06"
+     ],
+     "ids_6m": [
+      "idx:LCI-C@2025-12",
+      "idx:LCI-C@2026-06"
+     ],
+     "last_month": "2026-06",
+     "last_value": 119.6,
+     "series": "LCI-C",
+     "weight": 0.08
+    }
+   ],
+   "floor_estimate": null,
+   "forecast": {
+    "change_pct": 8.7,
+    "id": "fc:360030@2026-09",
+    "snapshot_month": "2026-09",
+    "volume_next_12m": 736000,
+    "volume_per_year": 736000
+   },
+   "grade": "200 HV",
+   "history": {
+    "below_full_cost": false,
+    "events": [
+     {
+      "asked_pct": null,
+      "date": "2022-12-11",
+      "event_id": "EV-2023-70630-360030",
+      "note": "",
+      "settled_pct": null,
+      "type": "initial price"
+     },
+     {
+      "asked_pct": 1.7,
+      "date": "2023-11-12",
+      "event_id": "EV-2024-70630-360030",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 3.5,
+      "date": "2024-11-12",
+      "event_id": "EV-2025-70630-360030",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     },
+     {
+      "asked_pct": 1.2,
+      "date": "2025-12-08",
+      "event_id": "EV-2026-70630-360030",
+      "note": "",
+      "settled_pct": 0.0,
+      "type": "annual renewal"
+     }
+    ],
+    "mean_asked_pct": 2.13,
+    "mean_give_pct": 2.13,
+    "mean_settled_pct": 0.0
+   },
+   "material_group": "fastener",
+   "planned_lead_time_days": 5,
+   "price_to_should_cost": null,
+   "price_unit": 1000,
+   "should_cost": null,
+   "sourcing": {
+    "approved_since": "2019-11-01",
+    "quota_pct": 50,
+    "status": "active",
+    "tooling_owner": "n/a"
+   },
+   "uom": "pc"
+  }
+ },
+ "performance": {
+  "latest": {
+   "class": "A",
+   "colour": "green",
+   "id": "sc:70630@2026Q3",
+   "open_8d_overdue": 0,
+   "otd_confirmed_pct": 90.0,
+   "otd_pct": 88.0,
+   "ppm": 257,
+   "quarter": "2026Q3",
+   "score": 92.7
+  },
+  "mean_4q": {
+   "ids": [
+    "sc:70630@2025Q4",
+    "sc:70630@2026Q1",
+    "sc:70630@2026Q2",
+    "sc:70630@2026Q3"
+   ],
+   "otd_pct": 88.8,
+   "ppm": 259.0
+  },
+  "qn_12m": 19,
+  "qn_ids_12m": [
+   "qn:20004680",
+   "qn:20004704",
+   "qn:20004741",
+   "qn:20004797",
+   "qn:20004799",
+   "qn:20004800",
+   "qn:20004814",
+   "qn:20004817",
+   "qn:20004830",
+   "qn:20004839",
+   "qn:20004865",
+   "qn:20004868",
+   "qn:20004879",
+   "qn:20004884",
+   "qn:20004905",
+   "qn:20004926",
+   "qn:20004933",
+   "qn:20004941",
+   "qn:20005021"
+  ],
+  "qn_supplier_caused_12m": 19,
+  "trend": "flat"
+ },
+ "profile_text": "Normteile Brucker KG (DE; family; 60 staff; turnover EUR 29.1 M). Our spend FY2026 EUR 81,302 (0.28 % of its turnover). Standard terms: 30 days net, DAP, lead time 7 days. Cost of money about 25 % a year; cash pressure low; type job shop. Signals: approval ladder (2), list price fixed (3). Performance 2026Q3: green, OTD 88.0 %, 257 ppm. Parts: part:360013 Stud bolt M10 A2-70: price 29.23 per 100; part:360030 Washer ISO 7089 M12, zinc: price 12.64 per 1000.",
+ "schema_version": 1,
+ "signals": [
+  {
+   "evidence": [
+    "doc:20260724-70630-M1",
+    "doc:20260923-70630-M4"
+   ],
+   "excerpt": "Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks.",
+   "kind": "approval_ladder",
+   "strength": 2
+  },
+  {
+   "evidence": [
+    "doc:20260706-70630-M3",
+    "doc:20260724-70630-M1",
+    "quote:7300052"
+   ],
+   "excerpt": "Prices as per current list; discounts not possible this year (head-office directive).",
+   "kind": "list_price_fixed",
+   "strength": 3
+  }
+ ],
+ "standard_terms": {
+  "incoterm": "DAP",
+  "lead_time_days": 7,
+  "payment_days": 30,
+  "skonto_days": null,
+  "skonto_pct": null,
+  "source": "vendor_master"
+ },
+ "stated_drivers": [],
+ "supplier_id": "sup:70630",
+ "warnings": []
+}
