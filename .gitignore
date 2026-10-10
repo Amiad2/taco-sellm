@@ -16,3 +16,5 @@ runs/lab/nohup-*.log
 runs/lab/ui-jobs.json
 runs/lab/llm-cache/
 runs/lab/ui.pid
+# the runner's per-machine logs (sessions themselves go to runs/ with scripts/pull-runs)
+runs/logs/

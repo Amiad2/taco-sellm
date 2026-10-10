@@ -49,6 +49,7 @@ from arena_kit.play import ENDED, closing_move, fetch_documents, latest, live_th
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNNING = re.compile(r"one session per case in the final: (\S+)")
+ENDS = {"accept": "accepted", "walk_away": "walked_away"}
 HOLD_BODY = "Dear Sir or Madam,\n\nthank you for your offer. We are reviewing it internally and will revert shortly."
 log = logging.getLogger("sellm.runner")
 
@@ -66,6 +67,11 @@ class Limits:
     max_case: float = 540.0  # without a cap (practice, sandbox): close after this
     idle: float = 2.0  # a loop with nothing to send waits this long (an LLM agent is asked again after it)
     poll: float = 5.0  # the final's case list is read this often
+
+
+def ended(result, reason):
+    """The result with its end reason: the arena puts it on the session, the accept reply may leave it out."""
+    return {**result, "end_reason": result.get("end_reason") or reason}
 
 
 class Table:
@@ -90,6 +96,7 @@ class CaseRunner:
         self.client, self.case_id, self.agent = client, case_id, agent
         self.deadline, self.lim, self.case_file = deadline, limits or Limits(), case
         self.lock, self.done = threading.Lock(), threading.Event()
+        self.closing = threading.Lock()  # one accept or walk-away at a time: two threads may both decide to close
         self.flying, self.notes, self.outcome = set(), [], {}
         self.stats = {"moves": 0, "slow": 0, "fallbacks": 0, "holds": 0, "refused": 0, "rereads": 0, "final_holds": 0}
         self.slowest, self.t_start = 0.0, time.monotonic()
@@ -101,7 +108,7 @@ class CaseRunner:
     # -- the session ---------------------------------------------------------------------------
     def note(self, text, level=logging.INFO):
         self.notes.append(text)
-        log.log(level, "%s %s", self.case_id, text)
+        log.log(level, "%s %s %s", self.case_id, getattr(self, "sid", "-"), text)
 
     def open(self):
         try:
@@ -125,7 +132,7 @@ class CaseRunner:
         state = self.client.session(sid)
         self.case = self.case_file or state.get("case") or {"case_id": self.case_id, "title": ""}
         if state.get("status") == "ended":
-            self.outcome["result"] = state.get("result") or {"deal": False, "end_reason": state.get("end_reason")}
+            self.outcome["result"] = ended(state.get("result") or {"deal": False}, state.get("end_reason"))
             self.note(f"session {sid} had already ended: {state.get('end_reason')}")
             return False
         self.threads = {}
@@ -224,6 +231,10 @@ class CaseRunner:
     # -- closing -------------------------------------------------------------------------------
     def close(self, decision):
         """An accept or a walk-away, the thread re-read first. True when the case has ended."""
+        with self.closing:
+            return self.done.is_set() or self._close(decision)
+
+    def _close(self, decision):
         target, action = decision["supplier_id"], decision["message"]["action"]
         if action["type"] == "accept":
             with self.lock:
@@ -245,7 +256,7 @@ class CaseRunner:
                     return True
                 return False
             raise
-        self.outcome["result"] = reply.get("result", reply)
+        self.outcome["result"] = ended(reply.get("result", reply), ENDS.get(action["type"]))
         self.note(f"{target}: {action['type']} -> {self.outcome['result'].get('end_reason') or 'ended'}")
         self.done.set()
         return True
@@ -253,7 +264,7 @@ class CaseRunner:
     def ended_on_server(self):
         state = self.client.session(self.sid)
         if state.get("status") == "ended":
-            self.outcome["result"] = state.get("result") or {"deal": False, "end_reason": state.get("end_reason")}
+            self.outcome["result"] = ended(state.get("result") or {"deal": False}, state.get("end_reason"))
             self.done.set()
             return True
         return False
@@ -590,8 +601,8 @@ def main(argv=None):
     def on_row(row):
         with write_lock, open(rows_path, "a", encoding="utf-8") as fh:
             fh.write(json.dumps(row, default=str) + "\n")
-        log.warning("%s: %s score %s (%s s, timeouts/refused %s/%s, holds %s, fallbacks %s)", row["case_id"],
-                    row["end_reason"], row["score"], row["seconds"], row["stats"].get("rereads"),
+        log.warning("%s: %s score %.3f (%s s, re-reads/refused %s/%s, holds %s, fallbacks %s)", row["case_id"],
+                    row["end_reason"], row["score"] or 0.0, row["seconds"], row["stats"].get("rereads"),
                     row["stats"].get("refused"), row["stats"].get("holds"), row["stats"].get("fallbacks"))  # fmt: skip
 
     if a.set == "final":
