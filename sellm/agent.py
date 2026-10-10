@@ -1,10 +1,17 @@
 """Our buyer agent, played by `arena play|run --agent sellm`. Replace `make_agent` to change it."""
 
-from sellm.lab.strategies import Calculator
+import os
 
-# Best variant of the first lab search (runs/lab/20261010-1632-search-first/report.md, #1), except
-# tone: warm and neutral tie in the lab, and the FAQ's P01 recording shows tone moves real suppliers.
-KNOBS = dict(
+from sellm.negotiator import Negotiator
+
+# Overrides of the negotiator's defaults (sellm/negotiator.py DEFAULTS). Empty: the defaults are the
+# values measured on the real sandbox (docs/LOG.md Sat 18:22).
+KNOBS = dict()
+
+# The best Calculator variant of the first lab search (runs/lab/20261010-1632-search-first/report.md,
+# #1), tone warm. Kept as the control arm of experiments/ab_sandbox.py: on the real sandbox case D01
+# it scored 0.789, a scripted moderate path 0.95 (docs/LOG.md Sat 18:22).
+CALC_KNOBS = dict(
     structure="joint",
     guess_rate=0.2,
     floor_guess=0.85,
@@ -22,6 +29,7 @@ KNOBS = dict(
 )
 
 
-def make_agent(package=None):
-    """A fresh agent for one case: it keeps per-case state."""
-    return Calculator(package, **KNOBS)
+def make_agent(package=None, writer=None, **knobs):
+    """A fresh agent for one case. `writer`: template (default) or llm; `SELLM_WRITER` sets it for a
+    run. `knobs` override the negotiator's defaults (the lab passes them)."""
+    return Negotiator(package, writer=writer or os.environ.get("SELLM_WRITER") or None, **{**KNOBS, **knobs})

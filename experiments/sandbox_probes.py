@@ -74,7 +74,12 @@ class Session:
         """Every term sheet in the supplier's latest e-mail: (id, terms, C, keeps the must-haves)."""
         std = standard_terms(self.threads[supplier])
         return [
-            (s["term_sheet_id"], s["terms"], total_cost(self.case, s["terms"], std), must_haves_ok(self.case, s["terms"], std))
+            (
+                s["term_sheet_id"],
+                s["terms"],
+                total_cost(self.case, s["terms"], std),
+                must_haves_ok(self.case, s["terms"], std),
+            )
             for s in latest(self.threads[supplier]).get("term_sheets") or []
         ]
 
@@ -113,12 +118,16 @@ class Session:
 
     def accept(self, supplier, sheet_id, note):
         try:
-            out = self.client.send_message(self.sid, supplier, {"action": {"type": "accept", "term_sheet_id": sheet_id}})
+            out = self.client.send_message(
+                self.sid, supplier, {"action": {"type": "accept", "term_sheet_id": sheet_id}}
+            )
         except ArenaError as e:
             self.steps.append({"note": note, "to": supplier, "accept": sheet_id, "error": str(e)})
             return None
         result = out.get("result", out)
-        self.steps.append({"note": note, "to": supplier, "accept": sheet_id, "deal": result.get("deal"), "score": result.get("score")})
+        self.steps.append(
+            {"note": note, "to": supplier, "accept": sheet_id, "deal": result.get("deal"), "score": result.get("score")}
+        )
         return result
 
     def close(self, supplier):
@@ -163,7 +172,9 @@ def h1(client, mode):
     for attempt in range(2):
         if len(s.sheets(sup)) > 1 or latest(s.threads[sup]).get("status") in ENDED:
             break
-        body = "Dear Mr Moser,\n\nthank you. Could you also state the price for the 30-day variant next to the 60-day one?"
+        body = (
+            "Dear Mr Moser,\n\nthank you. Could you also state the price for the 30-day variant next to the 60-day one?"
+        )
         step = {**base, "unit_price": 50.2 + 0.1 * attempt}
         s.send(sup, body, [{**step, "payment_days": 60}, {**step, "payment_days": 30}], "ask again for two variants")
     offered = s.sheets(sup)
@@ -182,7 +193,12 @@ def h1(client, mode):
         return s.summary("h1c", s.close(sup), alternative_id=alt_id, verdict=verdict)
     if mode == "b":
         body = "Dear Mr Moser,\n\nthank you for both variants. Could you improve the 30-day variant to EUR 50.60?"
-        s.send(sup, body, [{**base, "unit_price": 50.6, "payment_days": 30}], "one more round, then accept the old alternative")
+        s.send(
+            sup,
+            body,
+            [{**base, "unit_price": 50.6, "payment_days": 30}],
+            "one more round, then accept the old alternative",
+        )
     result = s.accept(sup, alt_id, "accept the alternative by its ID")
     verdict = "accepted" if result else f"refused: {s.steps[-1].get('error')}"
     return s.summary(f"h1{mode}", result or s.close(sup), alternative_id=alt_id, verdict=verdict)
@@ -211,7 +227,13 @@ def h2(client, variant, start=50.0, step=0.15, name=None):
     if reached in ENDED:
         return s.summary(name, s.result(), reached=reached, verdict="ended before the test")
     _, theirs, c_before, _ = s.sheets(sup)[0]
-    facts = {"reached": reached, "our_messages": len(s.steps), "their_price": theirs["unit_price"], "our_last_ask": ask, "c_before": c_before}
+    facts = {
+        "reached": reached,
+        "our_messages": len(s.steps),
+        "their_price": theirs["unit_price"],
+        "our_last_ask": ask,
+        "c_before": c_before,
+    }
     if variant == "none":
         return s.summary(name, s.close(sup), **facts)
     dates = s.case["term_options"]["effective_date"]
@@ -258,14 +280,21 @@ class ThreadAgent(LLMAgent):
         self.target = target
 
     def render(self, case, threads):
-        return super().render(case, threads) + f"\n\nIn this reply write to supplier {self.target} only (supplier_id {self.target})."
+        return (
+            super().render(case, threads)
+            + f"\n\nIn this reply write to supplier {self.target} only (supplier_id {self.target})."
+        )
 
     def guard(self, case, threads, d):
         return super().guard(case, threads, {**d, "supplier_id": self.target})
 
     def decide(self, case, threads):
         out = super().decide(case, threads)
-        return out if out["supplier_id"] == self.target else self.fallback.decide(case, {self.target: threads[self.target]})
+        return (
+            out
+            if out["supplier_id"] == self.target
+            else self.fallback.decide(case, {self.target: threads[self.target]})
+        )
 
 
 def h3_seq(client, complete, package):
@@ -330,7 +359,9 @@ def h3_par(client, complete, package):
                             outcome["result"] = result
                             done.set()
                         return
-                    s.steps.append({"note": f"ready ({status}) but not the cheapest (C {mine:,.0f}): leave this thread", "to": sup})
+                    s.steps.append(
+                        {"note": f"ready ({status}) but not the cheapest (C {mine:,.0f}): leave this thread", "to": sup}
+                    )
                     return
             try:
                 s.post(sup, message, "negotiate")
@@ -395,7 +426,9 @@ def h11(client):
                             outcome["result"] = result
                             done.set()
                         return
-                    s.steps.append({"note": f"ready ({status}) but not the cheapest (C {mine:,.0f}): leave this thread", "to": sup})
+                    s.steps.append(
+                        {"note": f"ready ({status}) but not the cheapest (C {mine:,.0f}): leave this thread", "to": sup}
+                    )
                     return
             mine = s.sheets(sup)[0][1]
             rivals = [s.sheets(o)[0] for o in live_threads(s.threads) if o != sup and s.sheets(o)]
@@ -414,7 +447,8 @@ def h11(client):
             else:
                 message["body"] = (
                     "Dear Sir or Madam,\n\nthank you for your offer. You are currently ahead of the other supplier we are "
-                    f"talking to, and we expect them to improve. If you can do EUR {target:.2f} on the terms below, the order is yours." + SIGN
+                    f"talking to, and we expect them to improve. If you can do EUR {target:.2f} on the terms below, the order is yours."
+                    + SIGN
                 )
             try:
                 s.post(sup, message, "cite the rival" if message.get("refs") else "ask the leader for more")
@@ -443,7 +477,26 @@ def h11(client):
 
 
 def main():
-    probes = ["h1a", "h1b", "h1c", "h2-trade", "h2-push", "h2-shift", "h2-hold", "h3-seq", "h3-par", "h8-low", "h8-slow", "h10-a", "h10-b", "h11", "h13-a", "h13-b", "h14-a", "h14-b"]
+    probes = [
+        "h1a",
+        "h1b",
+        "h1c",
+        "h2-trade",
+        "h2-push",
+        "h2-shift",
+        "h2-hold",
+        "h3-seq",
+        "h3-par",
+        "h8-low",
+        "h8-slow",
+        "h10-a",
+        "h10-b",
+        "h11",
+        "h13-a",
+        "h13-b",
+        "h14-a",
+        "h14-b",
+    ]
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("probes", nargs="+", choices=probes)
     ap.add_argument("--repeat", type=int, default=1, help="how often to run each probe (suppliers vary)")

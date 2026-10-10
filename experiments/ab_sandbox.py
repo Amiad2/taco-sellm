@@ -8,7 +8,7 @@ practice case costs quota: this script refuses one unless `--practice` is given.
     uv run python experiments/ab_sandbox.py --case D01 --arms calc nego-template nego-llm --repeat 4
     uv run python experiments/ab_sandbox.py --case D02 --arms calc --repeat 3
 
-Arms: calc (the plain Calculator with sellm/agent.py KNOBS), nego-template / nego-llm (the
+Arms: calc (the plain Calculator with sellm/agent.py CALC_KNOBS), nego-template / nego-llm (the
 negotiator with text from code / from the LLM), sellm (whatever `make_agent` returns for the arena).
 
 Every case is played with one loop per thread (each thread answers as soon as its own reply is in),
@@ -47,19 +47,24 @@ def build(arm, package):
     if arm == "sellm":
         from sellm.agent import make_agent
 
-        return make_agent(package, writer="llm") if "writer" in inspect.signature(make_agent).parameters else make_agent(package)
-    from sellm.agent import KNOBS
+        return (
+            make_agent(package, writer="llm")
+            if "writer" in inspect.signature(make_agent).parameters
+            else make_agent(package)
+        )
+    from sellm.agent import CALC_KNOBS, KNOBS
 
     if arm == "calc":
         from sellm.lab.strategies import Calculator
 
-        return Calculator(package, **KNOBS)
+        return Calculator(package, **CALC_KNOBS)
     from sellm.negotiator import Negotiator
 
     extra = {}
-    name, _, option = arm.partition("+")  # e.g. nego-llm+bounded
-    if option:
-        extra[option] = True
+    name, _, options = arm.partition("+")  # e.g. nego-template+open_below=0.08+rounds_to_floor=4
+    for option in filter(None, options.split("+")):
+        key, _, value = option.partition("=")
+        extra[key] = json.loads(value) if value else True
     return Negotiator(package, writer={"nego-template": "template", "nego-llm": "llm"}[name], **{**KNOBS, **extra})
 
 
@@ -92,7 +97,9 @@ def play_case(client, case_id, agent, max_s=MAX_CASE_S):
         t = client.thread(sid, sup)
         seen = sum(1 for m in threads[sup] if m.get("_timeout"))
         for k, late in enumerate((t.get("timeouts") or [])[seen:], start=seen):
-            sheets = [{"term_sheet_id": late["offer_id"], "terms": late.get("terms") or {}}] if late.get("offer_id") else []
+            sheets = (
+                [{"term_sheet_id": late["offer_id"], "terms": late.get("terms") or {}}] if late.get("offer_id") else []
+            )
             threads[sup].append(
                 {"from": f"timeout@{sup}", "_timeout": True, "message_id": f"timeout:{sup}:{k}", "status": late.get("status") or "open",
                  "term_sheets": sheets, "body": late.get("text") or "", "missing_fields": late.get("missing_fields") or [], "attachments": []}
@@ -100,7 +107,17 @@ def play_case(client, case_id, agent, max_s=MAX_CASE_S):
             notes.append(f"{sup}: timeout, now {late.get('status')} {late.get('offer_id')}")
             heard[sup] = time.monotonic()
         if t.get("closed") and latest(threads[sup]).get("status") not in ENDED:
-            threads[sup].append({"from": f"closed@{sup}", "_timeout": True, "message_id": f"closed:{sup}", "status": "walked_away", "term_sheets": [], "body": "", "attachments": []})
+            threads[sup].append(
+                {
+                    "from": f"closed@{sup}",
+                    "_timeout": True,
+                    "message_id": f"closed:{sup}",
+                    "status": "walked_away",
+                    "term_sheets": [],
+                    "body": "",
+                    "attachments": [],
+                }
+            )
             notes.append(f"{sup}: thread closed ({t.get('closed')})")
         return t
 
@@ -167,7 +184,10 @@ def play_case(client, case_id, agent, max_s=MAX_CASE_S):
                     if e.status in (409, 422):
                         state = client.session(sid)
                         if state.get("status") == "ended":
-                            outcome["result"] = state.get("result") or {"deal": False, "end_reason": state.get("end_reason")}
+                            outcome["result"] = state.get("result") or {
+                                "deal": False,
+                                "end_reason": state.get("end_reason"),
+                            }
                             done.set()
                             return
                         refresh(sup)
@@ -247,28 +267,51 @@ def play_case(client, case_id, agent, max_s=MAX_CASE_S):
 
 def commit():
     try:
-        out = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=False)
-        dirty = subprocess.run(["git", "status", "--porcelain", "--", "sellm", "arena_kit"], cwd=ROOT, capture_output=True, text=True, check=False)
+        out = subprocess.run(
+            ["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=False
+        )
+        dirty = subprocess.run(
+            ["git", "status", "--porcelain", "--", "sellm", "arena_kit"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
         return out.stdout.strip() + ("+local" if dirty.stdout.strip() else "")
     except OSError:
         return "?"
 
 
 def table_of(rows):
-    lines = ["| Arm | Case | n | Mean score | SE | Scores | Final price | Our messages | final_offer after | Timeouts | 422/409 | LLM fallbacks | s |", "|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
+    lines = [
+        "| Arm | Case | n | Mean score | SE | Scores | Final price | Our messages | final_offer after | Timeouts | 422/409 | LLM fallbacks | s |",
+        "|---|---|---|---|---|---|---|---|---|---|---|---|---|",
+    ]
     by = {}
     for r in rows:
         by.setdefault((r["arm"], r["case_id"]), []).append(r)
     for (arm, case_id), rs in sorted(by.items()):
         ok = [r for r in rs if "error" not in r]
         if not ok:
-            lines.append(f"| {arm} | {case_id.split(':')[1]} | 0 | - | - | errors: {[r['error'][:60] for r in rs]} | | | | | | | |")
+            lines.append(
+                f"| {arm} | {case_id.split(':')[1]} | 0 | - | - | errors: {[r['error'][:60] for r in rs]} | | | | | | | |"
+            )
             continue
         sc = [r["score"] for r in ok]
         se = statistics.stdev(sc) / math.sqrt(len(sc)) if len(sc) > 1 else float("nan")
         prices = [(r.get("terms") or {}).get("unit_price") for r in ok]
         msgs = [max(t["our_messages"] for t in r["threads"].values()) for r in ok]
-        finals = [min((t["final_offer_after_our_message"] for t in r["threads"].values() if t["final_offer_after_our_message"] is not None), default=None) for r in ok]
+        finals = [
+            min(
+                (
+                    t["final_offer_after_our_message"]
+                    for t in r["threads"].values()
+                    if t["final_offer_after_our_message"] is not None
+                ),
+                default=None,
+            )
+            for r in ok
+        ]
         touts = sum(t["timeouts"] for r in ok for t in r["threads"].values())
         refused = sum(1 for r in ok for n in r["notes"] if "refused" in n)
         falls = sum((r.get("agent_stats") or {}).get("fallbacks", 0) for r in ok)
@@ -284,7 +327,9 @@ def main():
     ap.add_argument("--case", required=True, help="D01, D02, or with --practice a practice case such as P07")
     ap.add_argument("--arms", nargs="+", default=["calc"])
     ap.add_argument("--repeat", type=int, default=3)
-    ap.add_argument("--workers", type=int, default=5, help="sessions at once (the key allows 10 open sessions for the whole team)")
+    ap.add_argument(
+        "--workers", type=int, default=5, help="sessions at once (the key allows 10 open sessions for the whole team)"
+    )
     ap.add_argument("--practice", action="store_true", help="allow a practice case: each session costs quota")
     ap.add_argument("--out", help="write the rows to this JSON file")
     args = ap.parse_args()
@@ -319,7 +364,10 @@ def main():
     print(table_of(rows))
     for r in rows:
         if r.get("crash") or r.get("error") or r.get("notes"):
-            print(f"\n{r['arm']} {r.get('session_id', '')}: {r.get('error') or r.get('crash') or ''} " + " | ".join((r.get("notes") or [])[:8]))
+            print(
+                f"\n{r['arm']} {r.get('session_id', '')}: {r.get('error') or r.get('crash') or ''} "
+                + " | ".join((r.get("notes") or [])[:8])
+            )
 
 
 if __name__ == "__main__":
