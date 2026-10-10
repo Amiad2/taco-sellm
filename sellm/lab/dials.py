@@ -14,9 +14,19 @@ tone        plain | warm | firm   one sentence around the proposal
 
 import re
 
-from sellm.negotiator import ID_RE, Negotiator
+from sellm.negotiator import ID_RE, Negotiator, Thread
 
-DIALS = dict(pay_days=None, idx="auto", n_args=1, arg_first=0, arg_order="default", tone="plain", menu=1)
+DIALS = dict(
+    pay_days=None,
+    idx="auto",
+    n_args=1,
+    arg_first=0,
+    arg_order="default",
+    tone="plain",
+    menu=1,
+    precedent=0,
+    committee=0,
+)
 ORDERS = {
     "default": None,
     "history": ("po", "fc", "sc_otd", "doc", "idx", "cost"),
@@ -121,9 +131,52 @@ class DialNegotiator(Negotiator):
     # -- tone --------------------------------------------------------------------------------------
     def message(self, case, threads, draft):
         decision = super().message(case, threads, draft)
-        line = TONES.get(self.d["tone"])
         body = (decision.get("message") or {}).get("body")
-        if line and body and draft.get("kind") == "ask":
-            head, _, rest = body.partition("\n\n")
-            decision["message"]["body"] = f"{head}\n\n{line} {rest}"
+        if not body or draft.get("kind") != "ask":
+            return decision
+        lines = [TONES.get(self.d["tone"])]
+        if draft.get("n", 0) == 0:  # the first ask only: an anchor, not a repeated demand
+            try:
+                v = Thread(case, draft["sid"], threads[draft["sid"]])
+                if self.d["precedent"]:
+                    lines.append(self.precedent_line(case, v))
+                if self.d["committee"]:
+                    lines.append(self.committee_line(case, v))
+            except Exception:
+                pass
+        lines = [x for x in lines if x]
+        if lines:
+            head, sep, rest = body.partition("\n\n")
+            para, tail = rest.split("\n\n", 1) if "\n\n" in rest else (rest, "")
+            cut = max(para.rfind(" On that basis"), para.rfind(" We can improve"))
+            extra = " ".join(lines)
+            para = f"{para[:cut]} {extra}{para[cut:]}" if cut > 0 else f"{extra} {para}"
+            decision["message"]["body"] = head + sep + para + ("\n\n" + tail if tail else "")
         return decision
+
+    def precedent_line(self, case, v):
+        """Our own past renewals with this supplier: what it asked and what was agreed (negotiation_history,
+        no data ID: nothing for the arena to check, a fact for the supplier to read)."""
+        found = self.intel(case, v)
+        events = []
+        for part in case.get("parts") or []:
+            events += (((found.get("parts") or {}).get(part) or {}).get("history") or {}).get("events") or []
+        rows = [
+            e
+            for e in sorted(events, key=lambda e: e["date"])
+            if e.get("asked_pct") is not None and e.get("settled_pct") is not None
+        ]
+        rows = [e for e in rows if e["asked_pct"] > 0][-2:]
+        if not rows:
+            return ""
+        past = " and ".join(
+            f"+{e['settled_pct']:g} % in {e['date'][:4]} (you had asked +{e['asked_pct']:g} %)" for e in rows
+        )
+        return f"In our last annual renewals we agreed {past}."
+
+    def committee_line(self, case, v):
+        """Its approval ladder, from our own meeting notes: a rise above 2 % goes to its pricing committee."""
+        found = self.intel(case, v)
+        if not any(x.get("kind") == "approval_ladder" for x in found.get("signals") or []):
+            return ""
+        return "We understand that changes above 2 % need your pricing committee, so please take our proposal there."

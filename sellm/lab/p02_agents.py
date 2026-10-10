@@ -9,6 +9,10 @@ VARIANTS = {
     "a3": dict(AGGRO, n_args=3, arg_order="history"),
     "a4": dict(AGGRO, n_args=2, tone="empathy"),
     "a5": dict(n_args=2, arg_order="history"),
+    # round 2 (Sat 23:05): new levers, one at a time, everything else the negotiator's default
+    "b1": dict(precedent=1),  # our past renewals: asked +3.5 / +4.7 %, agreed +1.4 / +1.2 %
+    "b2": dict(idx="db5"),  # an index clause with a 5 % deadband instead of a fixed price
+    "b3": dict(committee=1),  # its pricing committee (2 % rule), taken from our meeting notes
 }
 
 
