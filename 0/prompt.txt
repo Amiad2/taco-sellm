@@ -1,0 +1,17 @@
+<task-notification>
+<task-id>bz6slmw63</task-id>
+<summary>Monitor event: "clone ablation results"</summary>
+<event>**TIE: not distinguishable**: +0.1 ± 0.3 points (paired)
+== {"shape": 1.0}</event>
+If this event is something the user would act on now, send a PushNotification. Routine or benign output doesn't need one.
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>bz6slmw63</task-id>
+<summary>Monitor event: "clone ablation results"</summary>
+<event>**REJECT: clearly worse**: -0.3 ± 0.1 points (paired)
+== {"sheets": 1}</event>
+If this event is something the user would act on now, send a PushNotification. Routine or benign output doesn't need one.
+</task-notification>
