@@ -191,3 +191,11 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Added .idea/ (local PyCharm project metadata) to .gitignore so it stops showing as uncommitted noise.
 - New machine (omar): uv was not installed; installed via the official standalone installer into ~/.local/bin, then uv sync --all-extras and uv run arena data.
 - No code or behaviour change; arena_kit untouched.
+
+## 2026-10-10 16:45 CEST · Amiad @ fedora
+**[run] Lab search, 10 min: best Calculator variant 54.5 vs kit naive 38.7 (lab only, no arena)**
+- Sat 16:32-16:44, 'python -m sellm.lab search --minutes 10 --invented 150 --start 64 --seeds 2', commit 8309fc4. 27,800 negotiations on 12 twins + 150 invented scenarios, 8 cores. No arena calls, no LLM, no quota.
+- Best: mean 54.5 (twins 60.4, invented 54.0, P04/P10/P18 58.4, worst tenth 9.1); 0 crashes, 0 broken must-haves. Kit naive in the same run 38.7 (twins 22.3). Report: runs/lab/20261010-1632-search-first/report.md.
+- The top 12 agree on: structure=joint (cheapest terms for us at the same value to the supplier, guessing its cost of money at 20 %), 8 planned steps, open from 85 % of its opening (not from should-cost: that opening is too close and makes the steps small), accept a final offer, one new checked figure per round (claims=bank), 2-3 sheets per e-mail. Tone and asking for a breakdown make no difference in the lab (it reads keywords only).
+- Per twin, best variant: D01 0.90, P03 0.89, P04 0.81, P07 0.81, P11 0.81, P01 0.71, P10 0.63, P05 0.48, D02 0.36, P08 0.35, P18 0.31, P02 0.18. Weak where the kit LLM agent was weak too (P02, P18, P08).
+- Caveat: P04/P10/P18 were in the search set, so they are not a true hold-out yet; and the winner exploits the lab's mirror model. Next: confirm in sandbox D01/D02 (needs the arena key on Amiad's machine), true hold-out in the search, twins as families of plausible variants.
