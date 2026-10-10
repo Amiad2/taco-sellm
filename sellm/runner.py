@@ -61,7 +61,8 @@ class Limits:
     silence: float = 50.0  # re-read a thread we have not heard from for this long (it may have timed out)
     move_warn: float = 15.0  # a decision this slow is logged
     move_hard: float = 40.0  # then the fallback or a holding e-mail (the arena allows 60 per message)
-    final_wait: float = 45.0  # a thread at final_offer left this long gets a holding e-mail
+    hold_after: float = 42.0  # a live thread left unanswered this long gets a holding e-mail (it has 60)
+    max_holds: int = 2  # ... at most this often per thread
     close_before_cap: float = 90.0  # close this long before the cap at the latest
     round_margin: float = 15.0  # ... or the slowest round so far plus this
     max_case: float = 540.0  # without a cap (practice, sandbox): close after this
@@ -98,9 +99,9 @@ class CaseRunner:
         self.lock, self.done = threading.Lock(), threading.Event()
         self.closing = threading.Lock()  # one accept or walk-away at a time: two threads may both decide to close
         self.flying, self.notes, self.outcome = set(), [], {}
-        self.stats = {"moves": 0, "slow": 0, "fallbacks": 0, "holds": 0, "refused": 0, "rereads": 0, "final_holds": 0}
+        self.stats = {"moves": 0, "slow": 0, "fallbacks": 0, "holds": 0, "refused": 0, "rereads": 0, "clock_holds": 0}
         self.slowest, self.t_start = 0.0, time.monotonic()
-        self.final_holds, self.heard, self.threads = {}, {}, {}
+        self.clock_holds, self.heard, self.replied, self.threads = {}, {}, {}, {}  # replied: its last reply
         self.pending, self.failures, self.broken = {}, {}, False  # per thread: a running decision, failures in a row
         self.takes_focus = "focus" in inspect.signature(agent.decide).parameters
         self.pool = ThreadPoolExecutor(max_workers=8, thread_name_prefix=f"decide-{case_id}")
@@ -159,7 +160,7 @@ class CaseRunner:
                            "body": late.get("text") or "", "missing_fields": late.get("missing_fields") or [],
                            "attachments": []})  # fmt: skip
             self.note(f"{sup}: timeout, now {late.get('status')} {late.get('offer_id')}", logging.WARNING)
-            self.heard[sup] = time.monotonic()
+            self.heard[sup] = self.replied[sup] = time.monotonic()  # the follow-up restarts its clock
         if t.get("closed") and latest(events).get("status") not in ENDED:
             events.append({"from": f"closed@{sup}", "_timeout": True, "message_id": f"closed:{sup}",
                            "status": "walked_away", "term_sheets": [], "body": "", "attachments": []})  # fmt: skip
@@ -289,7 +290,7 @@ class CaseRunner:
             raise
         with self.lock:
             self.flying.discard(sup)
-            self.heard[sup] = time.monotonic()
+            self.heard[sup] = self.replied[sup] = time.monotonic()
             self.slowest = max(self.slowest, time.monotonic() - t0)
             if "result" in reply:
                 self.outcome["result"] = reply["result"]
@@ -331,7 +332,7 @@ class CaseRunner:
             elif sup is not None and target != sup:
                 decision = None  # a move for another thread: its own loop sends it
             if decision is None:
-                if sup is not None and self.guard_final(sup):
+                if any([self.guard_clock(s) for s in ([sup] if sup is not None else list(self.threads))]):
                     continue
                 time.sleep(self.lim.idle)
                 continue
@@ -346,22 +347,26 @@ class CaseRunner:
             if not self.send(target, message):
                 return
 
-    def guard_final(self, sup):
-        """A thread at its final offer must not wait long unanswered: one holding e-mail. True if sent."""
+    def guard_clock(self, sup):
+        """A live thread must not run out of its 60 s while the agent works on another thread (sandbox
+        D02: a waiting supplier hardened to its final offer, or withdrew). A holding e-mail keeps its
+        offer and restarts its clock, at most max_holds times per thread. True if one was sent."""
         events = self.threads[sup]
-        if latest(events).get("status") != "final_offer" or self.final_holds.get(sup):
+        waited = time.monotonic() - self.replied.get(sup, time.monotonic())
+        if latest(events).get("status") in ENDED or self.clock_holds.get(sup, 0) >= self.lim.max_holds:
             return False
-        if time.monotonic() - self.heard[sup] < self.lim.final_wait or moves_left(self.case, events) <= 1:
+        if waited < self.lim.hold_after or moves_left(self.case, events) <= 1:
             return False
         with self.lock:
             if sup in self.flying:
                 return False
             self.flying.add(sup)
-        self.final_holds[sup] = True
-        self.stats["final_holds"] += 1
-        self.note(f"{sup}: waiting at its final offer, holding e-mail", logging.WARNING)
-        self.send(sup, _hold(self.case, sup)["message"])
-        return True
+        self.clock_holds[sup] = self.clock_holds.get(sup, 0) + 1
+        self.stats["clock_holds"] += 1
+        status = latest(events).get("status")
+        self.note(f"{sup}: {status}, unanswered for {waited:.0f} s while the agent works elsewhere: holding e-mail",
+                  logging.WARNING)  # fmt: skip
+        return self.send(sup, _hold(self.case, sup)["message"]) or True
 
     def finish(self):
         """Time is up or every loop ended: re-read everything and close on what stands."""
@@ -395,6 +400,7 @@ class CaseRunner:
         try:
             if self.open():
                 self.heard = {s: self.heard.get(s, time.monotonic()) for s in self.threads}
+                self.replied = {s: self.replied.get(s, time.monotonic()) for s in self.threads}
                 loops = list(self.threads) if self.takes_focus else [None]
                 with ThreadPoolExecutor(max_workers=len(loops), thread_name_prefix=f"thread-{self.case_id}") as pool:
                     for f in [pool.submit(self.loop, s) for s in loops]:

@@ -523,3 +523,14 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 **[change] Runner: one close at a time per case, end_reason filled, session ID in every log line**
 - Smoke test on arena-sim (local, no quota; S01-S03 twice each, --agent sellm): 6 of 6 closed, no crash, mean 65.8. It showed that in an RFQ both thread loops decided 'accept the cheapest' at once: one accept went through, the other got a 409 (harmless, but two closes could also pick different suppliers). Now a case allows one accept or walk-away at a time; the second loop sees the case ended. Rerun: 0 refused moves.
 - end_reason was None in the rows because the arena puts it on the session, not in the accept reply's result; now taken from the session or the action. runs/logs/ is git-ignored (per-machine logs; sessions go to runs/ with pull-runs).
+
+## 2026-10-10 20:54 CEST · Amiad @ fedora
+**[run] Runner v1 on the sandbox: D01 0.935 x3, D02 0.535, 0.514, 0.535 - 6 of 6 closed, no crash, no refused move**
+- uv run python -m sellm.runner --set sandbox --agent sellm --cases D01 D02 --repeat 3 --parallel 3 (negotiator v1.1, template e-mails, no LLM; commit 76cb8ce). Free: quota 429 of 450 before and after.
+- Against experiments/ab_sandbox.py (same negotiator, Jonathan's case player): D01 0.920 -> 0.935 (n=4 vs 3), D02 0.530 -> 0.528. Sessions in runs/sandbox/, label 'runner v1, sellm (negotiator v1.1)'; e.g. https://arena.tacto.ai/replay/2ddae512980855ac
+- The 0.514 run had the one timeout of the batch: the negotiator moved DEMO-C1 for 71 s (15.4 -> 15.1) while DEMO-J1 stood open at 14.70 with nothing sent to it; J1 timed out and came back as final_offer 14.60 (the timeout counts as our last offer). Fixed in the runner, see the next entry.
+
+## 2026-10-10 20:54 CEST · Amiad @ fedora
+**[change] Runner: any live thread left unanswered for 42 s gets a holding e-mail (at most 2 per thread), not only one at final_offer**
+- The negotiator decides per thread (focus) but may answer with a move for another bidder; the runner then sends nothing on that thread. Before, only a thread at final_offer was guarded; now every live thread is (sellm/runner.py guard_clock, Limits.hold_after 42 s, max_holds 2, never in the last round). The clock is measured from the supplier's last reply or timeout follow-up, not from the runner's own re-reads.
+- Test: tests/test_runner.py, an agent that only ever moves the first bidder of P05 while its replies are slow: the other two bidders are held, each at most twice, no crash. Group A (Jonathan): if the negotiator wants a bidder to wait on purpose, it should send its own holding e-mail before 42 s, or the runner does.

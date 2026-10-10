@@ -15,7 +15,7 @@ from sellm.lab.table import LocalTable
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "package"
-FAST = runner.Limits(silence=0.5, move_warn=1.0, move_hard=2.0, final_wait=0.3, close_before_cap=0.4,
+FAST = runner.Limits(silence=0.5, move_warn=1.0, move_hard=2.0, hold_after=0.6, close_before_cap=0.4,
                      round_margin=0.05, max_case=20.0, idle=0.01, poll=0.05)  # fmt: skip
 
 
@@ -191,6 +191,35 @@ def test_an_agent_that_keeps_failing_is_closed_on_what_stands():
     assert row["crash"] is None and row["stats"]["holds"] == 1
     assert row["end_reason"] in ("accepted", "walked_away")
     assert any("second time in a row" in n for n in row["notes"])
+
+
+def test_a_thread_the_agent_leaves_waiting_gets_a_holding_email_before_its_clock_runs_out():
+    """Sandbox D02: the agent worked one bidder for 71 s, the other timed out and hardened to its
+    final offer. Here the agent only ever moves the first bidder; the others must be held, at most
+    max_holds times each."""
+    pkg = _package()
+
+    class Fixated:
+        def __init__(self):
+            self.inner = _agent(pkg)
+
+        def decide(self, case, threads, focus=None):
+            first = sorted(threads)[0]
+            return self.inner.decide(case, threads, focus=first)
+
+    class SlowFirst(FakeArena):
+        def send_message(self, sid, sup, message):
+            if sup == sorted(self.sessions[sid].threads)[0]:
+                time.sleep(0.4)  # its replies take time, as on the arena: the others wait
+            return super().send_message(sid, sup, message)
+
+    arena = SlowFirst([_scenario("P05")], pkg.facts)
+    row = runner.play_case(arena, "case:P05", Fixated(), limits=FAST)
+    assert row["crash"] is None and row["stats"]["clock_holds"] >= 1
+    first = sorted(arena.sessions[row["session_id"]].threads)[0]
+    held = [c[2] for c in arena.calls if c[0] == "send" and c[3] == "e-mail" and c[2] != first]
+    assert held and all(held.count(s) <= FAST.max_holds for s in set(held))
+    assert any("while the agent works elsewhere" in n for n in row["notes"])
 
 
 def test_closes_on_what_stands_before_the_cap():
