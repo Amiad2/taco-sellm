@@ -1,0 +1,17 @@
+<task-notification>
+<task-id>b6fj1u9tt</task-id>
+<tool-use-id>toolu_01Uxd8EgyA6MUqqxc8nTiKgJ</tool-use-id>
+<output-file>/tmp/claude-1000/-home-amiad-Desktop-taco-sellm/bc80161e-03a4-4665-86fa-dc14803965bc/tasks/b6fj1u9tt.output</output-file>
+<status>completed</status>
+<summary>Background command "Play all 10 hosted practice cases through the runner (10 quota)" completed (exit code 0)</summary>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>buqu3965f</task-id>
+<tool-use-id>toolu_01UCkY5278EqVhtprRjYYFgM</tool-use-id>
+<output-file>/tmp/claude-1000/-home-amiad-Desktop-taco-sellm/bc80161e-03a4-4665-86fa-dc14803965bc/tasks/buqu3965f.output</output-file>
+<status>completed</status>
+<summary>Background command "Replay D02 three times with the lock fix (free sandbox)" completed (exit code 0)</summary>
+</task-notification>
