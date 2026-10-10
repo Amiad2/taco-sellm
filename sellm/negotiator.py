@@ -130,6 +130,14 @@ class Thread:
         self.std = {**std0, **standard_terms(events)}  # later PDFs leave out what the offer now states
 
     @property
+    def fresh(self):
+        """Its last e-mail answers a holding e-mail of ours: the offer ID we see is the current one."""
+        if len(self.events) < 2:
+            return False
+        ours = self.events[-2]
+        return ours.get("from") == "buyer" and not ours.get("term_sheets") and not ours.get("action")
+
+    @property
     def standing(self):
         """(term_sheet_id, terms) of its standing offer: only the first sheet can be accepted."""
         return (self.sheets[0].get("term_sheet_id"), self.sheets[0]["terms"]) if self.sheets else (None, {})
@@ -227,7 +235,16 @@ class Negotiator:
                     return self.close(case, views, live, cost)
         if movable:  # with `focus` on a waiting thread this is a move for another one: its own loop sends it
             return self.ask(case, movable[0], views, live, rival[movable[0].sid])
-        return self.close(case, views, live, cost)
+        draft = self.close(case, views, live, cost)
+        if focus is None and len(views) > 1 and draft["kind"] == "accept":
+            # A runner that serves one thread at a time (the kit's `play()`) lets the others time out,
+            # and a timeout replaces the offer ID: accepting the old one is refused (422) and stops the
+            # kit's runner. A holding e-mail first brings this thread's state up to date - it is
+            # answered at once, or refused as late with the new offer - and then the accept is valid.
+            v = views[draft["sid"]]
+            if not v.fresh and v.left > 1:
+                return {"kind": "hold", "sid": v.sid, "sheets": [], "n": len(v.asks)}
+        return draft
 
     def offer_cost(self, case, v):
         """C of its standing offer, the relationship term priced with our estimate; inf if it cannot be taken."""
@@ -549,6 +566,11 @@ class Negotiator:
         v0 = self.value(case, v, {**s0, "unit_price": 0.0})
         v1 = self.value(case, v, {**s0, "unit_price": 1.0})
         estimate = self.should_cost(case, v.sid)
+        if estimate and relationship and v.opening and own:
+            # In every real case its opening carried no relationship cost (D01, P01, P02, P03, P10):
+            # an estimate that puts the opening below the sustainable margin is too high (P02: by 1.6 %).
+            worth = self.value(case, v, v.filled(v.opening["term_sheets"][0]["terms"]))
+            estimate = (estimate[0], min(estimate[1], worth * (1 - b["sustainable_margin_pct"] / 100)))
         if estimate and v1 > v0:
             source, full = estimate[0], estimate[1]
             target = (full - v0) / (v1 - v0)  # the price that pays it exactly its full cost
