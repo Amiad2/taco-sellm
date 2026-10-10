@@ -813,3 +813,7 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 ## 2026-10-11 00:26 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
 **[change] experiments/price_path.py: lab sweep of the price path of --agent sellm (first ask, target push, horizon, relationship push, should-cost oracle)**
 - Wraps sellm.agent.make_agent with test switches (oracle = the lab persona's calibrated floor as should-cost, target_scale, rel = knobs only for stabilise/secure_supply) plus the negotiator's open_below and horizon and the endgame's push_final; nothing in sellm/ changes. Engine suppliers, fixed twins + invented scenarios: uv run python -m experiments.price_path --invented 200 --seeds 3. Full sweep running (29 variants, 18,444 negotiations); results and the report follow in experiments/PRICE-PATH.md.
+
+## 2026-10-11 00:27 CEST · Amiad @ fedora
+**[run] P02 one-euro branch at EUR 370.00: Nordmark withdrew**
+- One practice session with gpt-6-sol. Ladder EUR 1.00, 46.89, 92.78; Nordmark said final_offer at EUR 373.95 (90-day terms). Our post-final offer of EUR 370.00 led to withdrawal in round 4, no deal, score 0.000. Replay https://arena.tacto.ai/replay/25746cb95112af8a; saved under runs/practice/P02/. Quota after run: 271/450 left.

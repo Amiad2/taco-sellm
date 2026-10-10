@@ -32,6 +32,7 @@
  "240249c66058fc81": "EVAL ppmfix: bank2 with ppm written without thousands comma @19b339f (claude eval session)",
  "246df5aea9f545b6": "P02 repaired c1 control @18f739b",
  "247b287638de67b5": "probe h3-par v1 (rounds in lockstep, held a ready thread; script crashed, closed by hand)",
+ "25746cb95112af8a": "Codex P02 one-euro branch 370.00 @71e506d",
  "25a2be1eda9b5f25": "PERSIST T2 fast payment for a supplier short of cash (14 days), with past_target {\"fast_pay\": true, \"past_target\": true}",
  "27abfcc63ed8b192": "EVAL ppmfix: bank2 with ppm written without thousands comma @19b339f (claude eval session)",
  "27b2aa77f9b8fb6b": "PERSIST T3 first ask as two offers of equal cost that differ in payment days {\"pay_probe\": true}",
