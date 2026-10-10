@@ -110,8 +110,47 @@ a hypothesis written down first is a wasted session.
   write a number or an ID that code did not give it.
 - **One machine, one key.** Decide the final machine today (open question in `docs/STATUS.md`).
 
-## 8. Not doing
+## 8. Data access, timing and overfitting (decided Sat 15:40)
 
+**No vector database, no embeddings.** The data is small and keyed by ID: all 208 letters, e-mails
+and notes together are 46 KB; everything written about one supplier is at most about 500 tokens;
+reading it by `supplier_id` takes 0.1 ms. Similarity search would add a dependency, latency and
+wrong hits and solve a problem we do not have. Instead:
+
+- **Dossier cache**: one command builds a file per supplier (and per part) from SQL plus the full
+  text of its documents, with an LLM summary written offline. Runtime is a dictionary lookup by the
+  case's `suppliers` and `parts`. Sunday 08:00: `uv run arena data`, run the command again, commit.
+- **Optimal values are computed, never retrieved.** The best term sheet depends on the case's
+  rates, options and must-haves, which are new in every hidden case. The calculator derives it from
+  the case file in milliseconds. Storing "what worked on P01" and looking it up is overfitting.
+- **A supplier with no dossier must still work**: hidden cases carry `facts` that exist only in
+  the case file. The agent builds a minimal dossier from those at the start of the case.
+
+**Where the time goes.** The 60-second clock starts when the session opens and runs per thread.
+Case files are readable before that (`GET /v1/cases?set=final` once the wave has started), so all
+preparation happens **before** `POST /v1/sessions`: dossier lookup, plan, argument bank, and one
+planning call to the LLM if we want one. Inside the session a move is the calculator (milliseconds)
+plus one LLM call for the wording. Budget: 15 s per move as the target, 40 s as the hard deadline
+after which the calculator's move is sent without the LLM. Nothing in a move may search or summarise.
+
+**Guards against overfitting** (the hidden set includes combinations practice never hosts):
+
+- No practice case ID, supplier ID or supplier name anywhere in code or prompts. Review for it.
+- The calculator must handle **every** negotiable field. `incoterm` is negotiable in no practice
+  case, `tooling_eur` in one, `effective_date` in two; the final may use any of them.
+- Dry-run the whole pipeline (prepare, plan, first message) on all 19 practice case files, not only
+  the 10 hosted ones. `P06` (rfq + stabilise) and `P13` (price_increase + leverage) are
+  combinations that are never hosted, which is what the final will look like.
+- Property tests on generated case files: random negotiable sets, options, must-haves and goals.
+  Every proposed sheet has exactly the negotiable fields, values from `term_options`, keeps the
+  must-haves and has a finite C.
+- Hold out 3 of the 10 hosted cases (P04, P10, P18): never look at them while tuning, play them
+  only in full runs. If the held-out mean falls behind the others, we are overfitting.
+- Judge a change by the mean over cases, never by one case.
+
+## 9. Not doing
+
+- No vector database or embedding search (section 8).
 - No supplier simulator of our own: too much work for what it would prove before Sunday.
 - No tuning on a single practice case until it scores 1.0: the final cases are different ones.
 - No changes to `arena_kit/` beyond registering our agent, so upstream fixes stay easy to take.

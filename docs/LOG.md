@@ -83,3 +83,10 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - The 19 practice cases use 22 detailed suppliers. The other 24 have about 4 documents each: likely the hidden cases' suppliers, so dossiers should cover all 46.
 - negotiation_history has notes per supplier and part, e.g. Brandlhuber on part:310010: 'accepted below full cost to keep the volume'.
 - GET /v1/sessions/{sid}/backoffice only shows who asked whom ('My call: counter.'). The supplier's reasons are in the session trace.
+
+## 2026-10-10 15:22 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[decision] No vector RAG: dossier cache by ID, optimal values computed, prep before the session opens**
+- Measured: all 208 documents are 46 KB, one supplier's documents at most ~500 tokens, lookup by supplier_id 0.1 ms. Embedding search would only add latency and wrong hits.
+- Dossiers are built by one command and looked up by ID; rebuilt after the Sunday 08:00 release. Best term sheets are computed from the case file, never looked up from practice results.
+- Timing: case files are readable before POST /v1/sessions, so all preparation happens before the 60 s clock starts. Per move: 15 s target, 40 s hard deadline, then the calculator's move without the LLM.
+- Overfitting guards in docs/PLAN.md section 8: no practice IDs in code or prompts, every negotiable field supported (incoterm is never negotiable in practice), dry-runs on all 19 case files incl. P06 and P13, property tests, hold-out P04/P10/P18.
