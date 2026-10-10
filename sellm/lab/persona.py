@@ -50,6 +50,8 @@ class Persona:
     cap_decay: float = 0.75  # that limit shrinks by this factor with every further counter
     walk_on_push: float = 0.5  # chance it walks when we push price after its final offer
     claim_weight: dict = field(default_factory=dict)  # kind -> share of (ask - floor) a verified claim takes off
+    claim_kinds: list = field(default_factory=list)  # kinds of data that moved it ('took it into account')
+    claim_w: float = 0.0  # share of (ask - floor) a verified claim of those kinds takes off
     ultimatum: float = 0.5  # multiplies `mirror` for the rest of the case after an ultimatum
     leak: float = 0.6  # multiplies `mirror` once we leak urgency, a budget or no alternative
     discloses: bool = False  # sends a cost breakdown when asked

@@ -171,3 +171,18 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - 233 real supplier replies (13 practice + 33 sandbox sessions) replayed into the twins: mean error 0.95 % of the opening value per reply, status right in 210 of 233. Good on D01, P01, P04, P07, P08 (<= 0.6 %); weak on P05 (8 %) and P10 (3.3 %), one session each.
 - Best global fit: first counter 35 % of (opening - floor), then mirror 0.5 of our step, but at most 0.4 % of the opening per round, final_offer at our 6th message. Most twins sit at the grid's lowest limit: the per-round limit, not the mirror, is what binds when our steps are large.
 - So the first counter and the number of rounds decide most of the outcome; a bigger step only helps up to that limit. To be tested in the tournament, then on one practice case.
+
+## 2026-10-10 16:32 CEST · Amiad @ fedora
+**[change] Lab v2: invented suppliers, a rule-based strategy with knobs, and a tournament runner**
+- sellm/lab/invent.py: scenarios with suppliers drawn from the data package (name, country, standard terms, credit index -> cost of money, scorecard ppm) on mutated cases: any goal, 2-4 negotiable fields of 10 (incoterm and tooling included), must-haves, alternatives, RFQs with 2-3 suppliers; random economics and dynamics in the ranges the backtest found.
+- sellm/lab/strategies.py: Calculator, a numbers-only buyer with 14 knobs (structure keep/buyer/joint, floor estimate, opening, steps and their shape, sheets per mail, after final_offer accept/hold/push, claims none/cost/bank, tone, ...). Uses only the case file, the thread and the data package, so it can play the arena too. Never accepts a deal worse than the cheapest opening (that scores 0).
+- sellm/lab/tournament.py + CLI: 'python -m sellm.lab compare naive calc', 'python -m sellm.lab search --minutes 60' (successive halving over random knob sets, then mutations of the best). Reports in runs/lab/<time>-<mode>/report.md (mean, twins, invented, held-out P04/P10/P18, worst 10 %, crashes, broken must-haves, deals worse than the opening); raw rows .jsonl.gz are git-ignored.
+- Claim checker fixed after comparing with the arena: a letter and a contract are one argument across the whole e-mail; a letter cited again is 'duplicate'. Backtest now opens all RFQ threads first (rival offers are citable). Mean error 0.79 %, status 218/237.
+- Smoke run (runs/lab/20261010-1630-compare-smoke): Calculator default 48.7 vs kit naive 36.4 over 12 twins + 60 invented; naive broke a must-have 10 times.
+
+## 2026-10-10 16:32 CEST · Amiad @ fedora
+**[finding] Lab validation: the kit agents score in the lab about what they scored in the arena**
+- Same agent in lab and arena (runs/lab/VALIDATION.md). Naive: P01 0.590 vs 0.583, D01 0.235 vs 0.200. Kit LLM (gpt-6.1-sol, one run each): practice mean 59.8 in the lab vs 61.5 in the arena; within 0.03 on D01, P01, P03, P07, P08; off by 0.12-0.31 on P04, P05, P10, P11.
+- Data that moved a real supplier ('it holds and we took it into account'): notice period P01, volume change P03, quality record P11, rival quote D02. No effect: notice period P02, volume change P04 and P10, delivery record P18. Verified is not convincing, as the brief says.
+- Use: rank strategy variants by the mean over many scenarios; do not read one case's lab score as a prediction; confirm winners in the sandbox, then on practice.
+- LLM spend for this check: about 60 calls on Amiad's key.

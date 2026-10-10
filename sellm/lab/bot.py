@@ -175,7 +175,7 @@ class SupplierThread:
         for r in results:
             topic = CLAIM_TOPIC.get(r["kind"], "data")
             if r["result"] == "verified":
-                w = p.claim_weight.get(r["kind"], 0.0)
+                w = p.claim_weight.get(r["kind"], p.claim_w if r["kind"] in p.claim_kinds else 0.0)
                 if w > 0:
                     bonus += w * max(0.0, self.ask - p.full_cost)
                     lines.append(f"We checked the {topic} data you cited; it holds and we took it into account.")

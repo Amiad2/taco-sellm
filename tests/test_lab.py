@@ -134,3 +134,27 @@ def test_claims_follow_the_published_rules():
     assert [r["result"] for r in unknown] == ["contradicted"]
     cost = checker.check("sup:70110", "Our estimate cost:310010 puts your full cost at EUR 132.64.", used=set())
     assert [r["result"] for r in cost] == ["verified"]
+
+
+def test_invented_scenarios_are_valid_and_playable():
+    from arena_kit.data import DataPackage
+    from sellm.lab.invent import generate
+    from sellm.lab.strategies import Calculator
+
+    facts()  # skips without the data package
+    pkg = DataPackage(DATA.parent)
+    for s in generate(8, SCENARIOS, pkg, seed=7):
+        assert s.c_open > s.c_best
+        for p in s.personas.values():
+            assert set(p.opening) <= set(s.case["negotiable"])
+        for agent in (NaiveAgent(), Calculator(pkg)):
+            result = play(LocalTable(s, pkg.facts, seed=0), s.case["case_id"], agent)
+            assert 0.0 <= result["score"] <= 1.0
+
+
+def test_calculator_never_breaks_a_must_have():
+    from sellm.lab.strategies import Calculator
+
+    for s in SCENARIOS:
+        result = play(LocalTable(s, {}, seed=0), s.case["case_id"], Calculator(None))
+        assert not result["deal"] or result["must_haves_ok"]

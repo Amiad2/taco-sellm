@@ -66,17 +66,26 @@ class ClaimChecker:
                 self.last_month[s] = max(self.last_month.get(s, ""), v["month"])
 
     def claims(self, body, refs=()):
-        """[(ids, sentence)] in the order written; refs not named in the body come last, alone."""
-        out, named = [], set()
+        """[(ids, text)] in the order written; refs not named in the body come last, alone. A
+        letter and a contract form one argument across the whole e-mail (the notice it gives)."""
+        out, named, letter = [], set(), None
         for sentence in SENTENCE.split(body or ""):
             ids = [i for i in dict.fromkeys(ID_RE.findall(sentence)) if not i.startswith(CONTEXT_ONLY)]
             named |= set(ids)
             groups = {}
             for i in ids:
                 kind = i.split(":", 1)[0]
-                key = kind if kind in ("idx", "po") else "docctr" if kind in ("doc", "ctr") else i
-                groups.setdefault(key, []).append(i)
+                if kind in ("doc", "ctr"):
+                    if letter is None:
+                        letter = ([], [])
+                        out.append(letter)
+                    if i not in letter[0]:
+                        letter[0].append(i)
+                    letter[1].append(sentence)
+                    continue
+                groups.setdefault(kind if kind in ("idx", "po") else i, []).append(i)
             out += [(g, sentence) for g in groups.values()]
+        out = [(ids, " ".join(text) if isinstance(text, list) else text) for ids, text in out]
         out += [([r], "") for r in dict.fromkeys(refs or []) if r not in named and not r.startswith(CONTEXT_ONLY)]
         return out
 
@@ -91,8 +100,6 @@ class ClaimChecker:
             kind = ids[0].split(":", 1)[0]
             if kind == "ctr" and len(ids) == 1:
                 continue  # a contract alone is context
-            if kind == "doc" and not any(i.startswith("ctr:") for i in ids):
-                continue  # a letter alone is context
             keys = [(supplier_id, i) if i.startswith(("quote:", "offer:")) else i for i in ids]
             known = all(i in self.facts or i in offers for i in ids)
             if not known:

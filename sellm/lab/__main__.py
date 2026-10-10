@@ -25,11 +25,40 @@ def package():
 
 
 def agent_for(name, pkg):
-    from arena_kit.agents import LLMAgent, NaiveAgent, llm_from_env
+    from .strategies import registry
 
-    if name == "naive":
-        return NaiveAgent()
-    return LLMAgent(llm_from_env(), pkg)
+    return registry(pkg)[name]()
+
+
+def tournament(a):
+    import gzip
+    import time
+    from pathlib import Path
+
+    from . import tournament as t
+
+    stamp = time.strftime("%Y%m%d-%H%M")
+    out = Path("runs/lab") / f"{stamp}-{a.cmd}{'-' + a.label if a.label else ''}"
+    t0 = time.time()
+    if a.cmd == "compare":
+        rows = t.compare(a.strategies, a.invented, a.seeds, a.workers, a.invent_seed)
+        title = f"Lab compare {stamp}: {' vs '.join(a.strategies)}"
+        min_scen = 0
+    else:
+        rows = t.search(a.minutes, a.invented, a.start, a.seeds, a.workers, a.invent_seed, a.seed)
+        title = f"Lab search {stamp}: {a.minutes:g} min, {a.start} random variants to start"
+        min_scen = len({r["scenario"] for r in rows})
+    out.mkdir(parents=True, exist_ok=True)
+    text = t.report(rows, title, min_scenarios=min_scen)
+    text += f"\nRun: `uv run python -m sellm.lab {' '.join(__import__('sys').argv[1:])}`, {time.time() - t0:.0f} s.\n"
+    (out / "report.md").write_text(text, encoding="utf-8")
+    with gzip.open(out / "rows.jsonl.gz", "wt", encoding="utf-8") as f:
+        for r in rows:
+            f.write(json.dumps({k: v for k, v in r.items() if k != "trace"}, default=str) + "\n")
+    best = sorted(t.summarise(rows, min_scen).values(), key=lambda x: -x["mean"])[:10]
+    (out / "best.json").write_text(json.dumps(best, indent=1, default=str) + "\n", encoding="utf-8")
+    print(text)
+    print(f"wrote {out}/")
 
 
 def show(result, table):
@@ -51,10 +80,24 @@ def main(argv=None):
     sub.add_parser("twins")
     b = sub.add_parser("backtest")
     b.add_argument("--fit", action="store_true")
+    b.add_argument("--write", action="store_true", help="write runs/lab/BACKTEST.md")
     p = sub.add_parser("play")
     p.add_argument("case")
-    p.add_argument("--agent", default="naive", choices=["naive", "llm"])
+    p.add_argument("--agent", default="naive", choices=["naive", "llm", "calc"])
     p.add_argument("--seed", type=int, default=0)
+    for mode in ("compare", "search"):
+        t = sub.add_parser(mode)
+        if mode == "compare":
+            t.add_argument("strategies", nargs="+")
+        else:
+            t.add_argument("--minutes", type=float, default=10)
+            t.add_argument("--start", type=int, default=64, help="random variants in the first round")
+            t.add_argument("--seed", type=int, default=0)
+        t.add_argument("--invented", type=int, default=150, help="invented scenarios next to the twins")
+        t.add_argument("--invent-seed", type=int, default=1)
+        t.add_argument("--seeds", type=int, default=2, help="runs per strategy and scenario")
+        t.add_argument("--workers", type=int, default=None)
+        t.add_argument("--label", default="")
     a = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO if a.verbose else logging.WARNING, format="%(message)s")
 
@@ -80,7 +123,13 @@ def main(argv=None):
                         setattr(p, k, v)
             twins.save(scenarios)
             print(f"wrote {twins.CACHE}")
-        print(backtest.report(backtest.evaluate(scenarios, pkg.facts)))
+        rows = backtest.evaluate(scenarios, pkg.facts)
+        print(backtest.report(rows))
+        if a.write:
+            backtest.write_report(scenarios, rows, "runs/lab/BACKTEST.md")
+            print("wrote runs/lab/BACKTEST.md")
+    elif a.cmd in ("compare", "search"):
+        tournament(a)
     elif a.cmd == "play":
         pkg = package()
         name = a.case.split(":")[-1]

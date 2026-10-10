@@ -8,6 +8,7 @@ the defaults measured on sandbox D01 (`Persona`). Build once with `python -m sel
 """
 
 import json
+import re
 from pathlib import Path
 
 from arena_kit.cost import closing_terms
@@ -120,6 +121,34 @@ EVIDENCE = {
 }
 
 
+TOPIC_KINDS = {
+    "notice period": ["doc", "ctr"],
+    "volume change": ["fc"],
+    "quality record": ["sc", "qn"],
+    "delivery record": ["sc"],
+    "rival quote": ["quote", "offer"],
+    "index": ["idx"],
+    "cost estimate": ["cost"],
+    "order history": ["po"],
+}
+EFFECT = re.compile(r"We checked the ([\w\s-]+?) data you cited; it holds and we took it into account")
+
+
+def effect_kinds(case_id):
+    """{supplier_id: [kinds of cited data that moved it]} from every real session of the case."""
+    out = {}
+    for f in sorted(ROOT.glob(f"runs/*/{case_id.split(':', 1)[1]}/*.json")):
+        d = json.loads(f.read_text(encoding="utf-8"))
+        for sid, thread in d.get("threads", {}).items():
+            for m in thread.get("messages", []):
+                if m.get("from") == "buyer":
+                    continue
+                for topic in EFFECT.findall(m.get("body") or ""):
+                    for kind in TOPIC_KINDS.get(topic.strip(), []):
+                        out.setdefault(sid, set()).add(kind)
+    return {k: sorted(v) for k, v in out.items()}
+
+
 def _sessions():
     """The richest session per case: the kit LLM agent's if there is one."""
     best = {}
@@ -147,7 +176,7 @@ def build(package=None):
     out = []
     for case_id, d in _sessions().items():
         case, result = d["case"], d["state"]["result"]
-        personas = {}
+        personas, moved = {}, effect_kinds(case_id)
         for sid, opening in d["analysis"]["openings"].items():
             first = d["threads"][sid]["messages"][0]
             pdf = {k: v for k, v in opening["standard_terms"].items() if v != "none"}
@@ -166,6 +195,7 @@ def build(package=None):
                 sender_name=first.get("from_name", ""),
                 opening_body=first.get("body"),
                 notes=EVIDENCE.get(sid, {}).get("notes", ""),
+                claim_kinds=moved.get(sid, []),
                 **ev,
             )
         reached = calibrate(case, personas, result["c_best"])

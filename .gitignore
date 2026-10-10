@@ -8,3 +8,4 @@ __pycache__/
 # downloaded with `uv run arena data`
 data/
 .claude/settings.local.json
+runs/lab/*/rows.jsonl.gz
