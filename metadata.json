@@ -1,0 +1,31 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4K69KCAH8TVF6HVNQ2HNS80",
+  "strategy": "manual-commit",
+  "branch": "main",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "scripts/lab",
+    "sellm/lab/README.md",
+    "sellm/lab/__main__.py",
+    "sellm/lab/invent.py",
+    "sellm/lab/store.py",
+    "sellm/lab/tournament.py"
+  ],
+  "sessions": [
+    {
+      "metadata": "/0/metadata.json",
+      "transcript": "/0/full.jsonl",
+      "compact_transcript": "/0/transcript.jsonl",
+      "content_hash": "/0/content_hash.txt",
+      "prompt": ""
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 78,
+    "cache_creation_tokens": 111724,
+    "cache_read_tokens": 20564958,
+    "output_tokens": 87983,
+    "api_call_count": 39
+  }
+}
