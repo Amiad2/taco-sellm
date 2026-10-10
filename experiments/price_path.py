@@ -84,6 +84,10 @@ def _floor(case_id, sid):
         for s in tournament._W.get("scenarios", {}).values():
             for supplier, persona in s.personas.items():
                 index[(s.case.get("case_id"), supplier)] = getattr(persona, "full_cost", None)
+        if not index:  # outside the lab (an arena test): the twins' calibrated floors
+            for tw in json.loads((Path(__file__).resolve().parents[1] / "sellm/lab/twins.json").read_text()):
+                for supplier, persona in (tw.get("personas") or {}).items():
+                    index[(f"case:{tw['name']}", supplier)] = persona.get("full_cost")
         tournament._W["_floors"] = index
     return index.get((case_id, sid))
 
