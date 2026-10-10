@@ -1,0 +1,49 @@
+[
+ {
+  "mean": 0.5568,
+  "knobs": {
+   "horizon": 3,
+   "keep_below": 0.0,
+   "pace": 0.3
+  }
+ },
+ {
+  "mean": 0.5513,
+  "knobs": {
+   "horizon": 3,
+   "keep_below": 0.0
+  }
+ },
+ {
+  "mean": 0.5401,
+  "knobs": {
+   "horizon": 3,
+   "pace": 0.3
+  }
+ },
+ {
+  "mean": 0.5344,
+  "knobs": {
+   "horizon": 3
+  }
+ },
+ {
+  "mean": 0.5235,
+  "knobs": {
+   "keep_below": 0.0,
+   "pace": 0.3
+  }
+ },
+ {
+  "mean": 0.5158,
+  "knobs": {
+   "keep_below": 0.0
+  }
+ },
+ {
+  "mean": 0.5094,
+  "knobs": {
+   "pace": 0.3
+  }
+ }
+]
