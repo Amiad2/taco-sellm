@@ -1,0 +1,770 @@
+[
+ {
+  "case": "case:P01",
+  "supplier": "sup:70110",
+  "version": "v1 opening only",
+  "question": "short_of_cash",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P01",
+  "supplier": "sup:70110",
+  "version": "v1 opening only",
+  "question": "fixed_list_price",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P01",
+  "supplier": "sup:70110",
+  "version": "v1 opening only",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P01",
+  "supplier": "sup:70110",
+  "version": "v1 opening only",
+  "question": "approval_ladder",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P01",
+  "supplier": "sup:70110",
+  "version": "v2 with its next two e-mails",
+  "question": "short_of_cash",
+  "dossier": true,
+  "p_yes": 0.0513
+ },
+ {
+  "case": "case:P01",
+  "supplier": "sup:70110",
+  "version": "v2 with its next two e-mails",
+  "question": "fixed_list_price",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P01",
+  "supplier": "sup:70110",
+  "version": "v2 with its next two e-mails",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P01",
+  "supplier": "sup:70110",
+  "version": "v2 with its next two e-mails",
+  "question": "approval_ladder",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P02",
+  "supplier": "sup:70510",
+  "version": "v1 opening only",
+  "question": "short_of_cash",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P02",
+  "supplier": "sup:70510",
+  "version": "v1 opening only",
+  "question": "fixed_list_price",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P02",
+  "supplier": "sup:70510",
+  "version": "v1 opening only",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P02",
+  "supplier": "sup:70510",
+  "version": "v1 opening only",
+  "question": "approval_ladder",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P02",
+  "supplier": "sup:70510",
+  "version": "v2 with its next two e-mails",
+  "question": "short_of_cash",
+  "dossier": false,
+  "p_yes": 0.9339
+ },
+ {
+  "case": "case:P02",
+  "supplier": "sup:70510",
+  "version": "v2 with its next two e-mails",
+  "question": "fixed_list_price",
+  "dossier": true,
+  "p_yes": 0.048
+ },
+ {
+  "case": "case:P02",
+  "supplier": "sup:70510",
+  "version": "v2 with its next two e-mails",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 1.0
+ },
+ {
+  "case": "case:P02",
+  "supplier": "sup:70510",
+  "version": "v2 with its next two e-mails",
+  "question": "approval_ladder",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P03",
+  "supplier": "sup:70530",
+  "version": "v1 opening only",
+  "question": "short_of_cash",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P03",
+  "supplier": "sup:70530",
+  "version": "v1 opening only",
+  "question": "fixed_list_price",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P03",
+  "supplier": "sup:70530",
+  "version": "v1 opening only",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P03",
+  "supplier": "sup:70530",
+  "version": "v1 opening only",
+  "question": "approval_ladder",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P03",
+  "supplier": "sup:70530",
+  "version": "v2 with its next two e-mails",
+  "question": "short_of_cash",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P03",
+  "supplier": "sup:70530",
+  "version": "v2 with its next two e-mails",
+  "question": "fixed_list_price",
+  "dossier": true,
+  "p_yes": 0.1445
+ },
+ {
+  "case": "case:P03",
+  "supplier": "sup:70530",
+  "version": "v2 with its next two e-mails",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 1.0
+ },
+ {
+  "case": "case:P03",
+  "supplier": "sup:70530",
+  "version": "v2 with its next two e-mails",
+  "question": "approval_ladder",
+  "dossier": true,
+  "p_yes": 1.0
+ },
+ {
+  "case": "case:P04",
+  "supplier": "sup:70620",
+  "version": "v1 opening only",
+  "question": "short_of_cash",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P04",
+  "supplier": "sup:70620",
+  "version": "v1 opening only",
+  "question": "fixed_list_price",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P04",
+  "supplier": "sup:70620",
+  "version": "v1 opening only",
+  "question": "wants_volume",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P04",
+  "supplier": "sup:70620",
+  "version": "v1 opening only",
+  "question": "approval_ladder",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P04",
+  "supplier": "sup:70620",
+  "version": "v2 with its next two e-mails",
+  "question": "short_of_cash",
+  "dossier": false,
+  "p_yes": 0.8539
+ },
+ {
+  "case": "case:P04",
+  "supplier": "sup:70620",
+  "version": "v2 with its next two e-mails",
+  "question": "fixed_list_price",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P04",
+  "supplier": "sup:70620",
+  "version": "v2 with its next two e-mails",
+  "question": "wants_volume",
+  "dossier": true,
+  "p_yes": 1.0
+ },
+ {
+  "case": "case:P04",
+  "supplier": "sup:70620",
+  "version": "v2 with its next two e-mails",
+  "question": "approval_ladder",
+  "dossier": false,
+  "p_yes": 0.1202
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70210",
+  "version": "v1 opening only",
+  "question": "short_of_cash",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70210",
+  "version": "v1 opening only",
+  "question": "fixed_list_price",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70210",
+  "version": "v1 opening only",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70210",
+  "version": "v1 opening only",
+  "question": "approval_ladder",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70210",
+  "version": "v2 with its next two e-mails",
+  "question": "short_of_cash",
+  "dossier": true,
+  "p_yes": 0.0487
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70210",
+  "version": "v2 with its next two e-mails",
+  "question": "fixed_list_price",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70210",
+  "version": "v2 with its next two e-mails",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70210",
+  "version": "v2 with its next two e-mails",
+  "question": "approval_ladder",
+  "dossier": false,
+  "p_yes": 0.2015
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70240",
+  "version": "v1 opening only",
+  "question": "short_of_cash",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70240",
+  "version": "v1 opening only",
+  "question": "fixed_list_price",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70240",
+  "version": "v1 opening only",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 0.0417
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70240",
+  "version": "v1 opening only",
+  "question": "approval_ladder",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70240",
+  "version": "v2 with its next two e-mails",
+  "question": "short_of_cash",
+  "dossier": false,
+  "p_yes": 1.0
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70240",
+  "version": "v2 with its next two e-mails",
+  "question": "fixed_list_price",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70240",
+  "version": "v2 with its next two e-mails",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70240",
+  "version": "v2 with its next two e-mails",
+  "question": "approval_ladder",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70250",
+  "version": "v1 opening only",
+  "question": "short_of_cash",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70250",
+  "version": "v1 opening only",
+  "question": "fixed_list_price",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70250",
+  "version": "v1 opening only",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70250",
+  "version": "v1 opening only",
+  "question": "approval_ladder",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70250",
+  "version": "v2 with its next two e-mails",
+  "question": "short_of_cash",
+  "dossier": true,
+  "p_yes": 0.9572
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70250",
+  "version": "v2 with its next two e-mails",
+  "question": "fixed_list_price",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70250",
+  "version": "v2 with its next two e-mails",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 0.2385
+ },
+ {
+  "case": "case:P05",
+  "supplier": "sup:70250",
+  "version": "v2 with its next two e-mails",
+  "question": "approval_ladder",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P07",
+  "supplier": "sup:70610",
+  "version": "v1 opening only",
+  "question": "short_of_cash",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P07",
+  "supplier": "sup:70610",
+  "version": "v1 opening only",
+  "question": "fixed_list_price",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P07",
+  "supplier": "sup:70610",
+  "version": "v1 opening only",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P07",
+  "supplier": "sup:70610",
+  "version": "v1 opening only",
+  "question": "approval_ladder",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P07",
+  "supplier": "sup:70610",
+  "version": "v2 with its next two e-mails",
+  "question": "short_of_cash",
+  "dossier": false,
+  "p_yes": 0.6389
+ },
+ {
+  "case": "case:P07",
+  "supplier": "sup:70610",
+  "version": "v2 with its next two e-mails",
+  "question": "fixed_list_price",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P07",
+  "supplier": "sup:70610",
+  "version": "v2 with its next two e-mails",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 1.0
+ },
+ {
+  "case": "case:P07",
+  "supplier": "sup:70610",
+  "version": "v2 with its next two e-mails",
+  "question": "approval_ladder",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P08",
+  "supplier": "sup:70710",
+  "version": "v1 opening only",
+  "question": "short_of_cash",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P08",
+  "supplier": "sup:70710",
+  "version": "v1 opening only",
+  "question": "fixed_list_price",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P08",
+  "supplier": "sup:70710",
+  "version": "v1 opening only",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P08",
+  "supplier": "sup:70710",
+  "version": "v1 opening only",
+  "question": "approval_ladder",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P08",
+  "supplier": "sup:70710",
+  "version": "v2 with its next two e-mails",
+  "question": "short_of_cash",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P08",
+  "supplier": "sup:70710",
+  "version": "v2 with its next two e-mails",
+  "question": "fixed_list_price",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P08",
+  "supplier": "sup:70710",
+  "version": "v2 with its next two e-mails",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 1.0
+ },
+ {
+  "case": "case:P08",
+  "supplier": "sup:70710",
+  "version": "v2 with its next two e-mails",
+  "question": "approval_ladder",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P10",
+  "supplier": "sup:70410",
+  "version": "v1 opening only",
+  "question": "short_of_cash",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P10",
+  "supplier": "sup:70410",
+  "version": "v1 opening only",
+  "question": "fixed_list_price",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P10",
+  "supplier": "sup:70410",
+  "version": "v1 opening only",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P10",
+  "supplier": "sup:70410",
+  "version": "v1 opening only",
+  "question": "approval_ladder",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P10",
+  "supplier": "sup:70410",
+  "version": "v2 with its next two e-mails",
+  "question": "short_of_cash",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P10",
+  "supplier": "sup:70410",
+  "version": "v2 with its next two e-mails",
+  "question": "fixed_list_price",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P10",
+  "supplier": "sup:70410",
+  "version": "v2 with its next two e-mails",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 0.0286
+ },
+ {
+  "case": "case:P10",
+  "supplier": "sup:70410",
+  "version": "v2 with its next two e-mails",
+  "question": "approval_ladder",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P11",
+  "supplier": "sup:70140",
+  "version": "v1 opening only",
+  "question": "short_of_cash",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P11",
+  "supplier": "sup:70140",
+  "version": "v1 opening only",
+  "question": "fixed_list_price",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P11",
+  "supplier": "sup:70140",
+  "version": "v1 opening only",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 0.0241
+ },
+ {
+  "case": "case:P11",
+  "supplier": "sup:70140",
+  "version": "v1 opening only",
+  "question": "approval_ladder",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P11",
+  "supplier": "sup:70140",
+  "version": "v2 with its next two e-mails",
+  "question": "short_of_cash",
+  "dossier": true,
+  "p_yes": 1.0
+ },
+ {
+  "case": "case:P11",
+  "supplier": "sup:70140",
+  "version": "v2 with its next two e-mails",
+  "question": "fixed_list_price",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P11",
+  "supplier": "sup:70140",
+  "version": "v2 with its next two e-mails",
+  "question": "wants_volume",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P11",
+  "supplier": "sup:70140",
+  "version": "v2 with its next two e-mails",
+  "question": "approval_ladder",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P18",
+  "supplier": "sup:70740",
+  "version": "v1 opening only",
+  "question": "short_of_cash",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P18",
+  "supplier": "sup:70740",
+  "version": "v1 opening only",
+  "question": "fixed_list_price",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P18",
+  "supplier": "sup:70740",
+  "version": "v1 opening only",
+  "question": "wants_volume",
+  "dossier": true,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P18",
+  "supplier": "sup:70740",
+  "version": "v1 opening only",
+  "question": "approval_ladder",
+  "dossier": true,
+  "p_yes": 0.6423
+ },
+ {
+  "case": "case:P18",
+  "supplier": "sup:70740",
+  "version": "v2 with its next two e-mails",
+  "question": "short_of_cash",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P18",
+  "supplier": "sup:70740",
+  "version": "v2 with its next two e-mails",
+  "question": "fixed_list_price",
+  "dossier": false,
+  "p_yes": 0.0
+ },
+ {
+  "case": "case:P18",
+  "supplier": "sup:70740",
+  "version": "v2 with its next two e-mails",
+  "question": "wants_volume",
+  "dossier": true,
+  "p_yes": 1.0
+ },
+ {
+  "case": "case:P18",
+  "supplier": "sup:70740",
+  "version": "v2 with its next two e-mails",
+  "question": "approval_ladder",
+  "dossier": true,
+  "p_yes": 0.0
+ }
+]
