@@ -13,6 +13,7 @@ line to experiments/LEDGER.md; run scripts/pull-runs afterwards (on main).
 """
 
 import argparse
+import fcntl
 import glob
 import importlib.util
 import json
@@ -129,6 +130,9 @@ def arena(name, cases):
         row = ab.play_case(client, case_id, make(package, **knobs))
         version = f"{branch}@{commit}" + ("+dirty" if dirty else "")
         row.update(label=name, knobs=knobs, version=version)
+        lock = open(ROOT / ".git" / "structure-args.lock", "w")  # runs of this script in parallel write the same files
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        rows = json.loads(OUT.read_text(encoding="utf-8")) if OUT.is_file() else []
         rows.append(row)
         OUT.parent.mkdir(parents=True, exist_ok=True)
         OUT.write_text(json.dumps(rows, indent=1, default=str), encoding="utf-8")
@@ -146,6 +150,8 @@ def arena(name, cases):
         for sid, t in (row.get("threads") or {}).items():
             ours = [p[0] if p else None for p in t["our_prices"]]
             threads.append(f"{sid.split(':')[-1]} theirs {t['their_prices']} ours {ours} {t['status']}")
+        fcntl.flock(lock, fcntl.LOCK_UN)
+        lock.close()
         head = f"{case} {name} score {score if score is None else round(score, 3)} {row.get('end_reason')}"
         print(f"{head} | {'; '.join(threads)} | {row['session_id']} {row.get('notes') or ''}", flush=True)
 
