@@ -42,6 +42,34 @@ Evidence and tables: `experiments/RESULTS.md`. Measured on the sandbox's demo su
 - **An early `agreed` means the ask was too high** (seen in D02): both RFQ suppliers have far more
   room than any run found (C_best 156,739, best closed about 186,000).
 
+## From the lab (Sat 16:00-17:00, `sellm/lab/`, `runs/lab/`)
+
+How the twins were built and how well they match: `runs/lab/BACKTEST.md`, `runs/lab/VALIDATION.md`.
+
+- **A supplier's floor is its full cost in cash terms, and C_best pins it down** (computed, two
+  routes). The floor that makes the cheapest acceptable package cost exactly C_best is 129.91 for
+  P01; the relationship charge the arena billed on our P01 deal implies 129.95. Where a
+  plant-specific should-cost exists, floors are within 3-5 % of it. So **should-cost is a good
+  estimate of the floor**, and the floor is in value terms: faster payment, a longer lead time or an
+  index clause lower the price the supplier can accept.
+- **Suppliers price levers at their own cost** (seen in their alternative sheets): payment days at
+  about 6.5 % a year for groups (P02, P08), about 9 % for a family foundry (D01), about 35 % for a
+  Czech job shop (P05: 16 days faster = 0.50 on 32); lead time about 0.15 EUR per unit per day
+  shorter (P10); 1,200 ppm tighter about 1.40 EUR per unit (P11). A trade is good for us when its
+  value to us is above that.
+- **The kit LLM agent closed 1-31 % above the floor** (computed): P04 1 %, P01 2 %, P02 2 %, P11
+  4 %, P07 8 %, P08 10 %, P18 20 %, P10 31 %. The room is largest where we scored worst.
+- **Concessions per round are small and bounded** (backtested on 237 real replies): first counter
+  about a third of (opening - floor), later ones a share of our step but at most about 0.3-0.6 % of
+  the opening per round, final offer around our 6th message. So the first counter and the number of
+  rounds used decide most of the outcome; steps beyond what the supplier mirrors are wasted.
+- **Which data moved a supplier** (seen: "it holds and we took it into account" vs "it holds, but
+  it does not change our calculation"): notice period (P01), volume change (P03), quality record
+  (P11), rival quote (D02) moved it; notice period (P02), volume change (P04, P10), delivery
+  record (P18) did not.
+- **A letter and a contract are one argument across the whole e-mail** (seen, P01): the arena
+  verified doc + ctr in different sentences; the same letter cited again was `duplicate`.
+
 ## From the baseline of all 10 hosted cases (Sat 15:27, kit LLM agent, mean 61.5)
 
 Full analysis with evidence per case: `runs/BASELINE.md`. The rules that follow from it:
