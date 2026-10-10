@@ -1,11 +1,34 @@
 """sellm.intel: the dossier contract (docs/PLAN.md section 10), the builder and the case overlay."""
 
 import time
+from pathlib import Path
 
 import pytest
+from intel_fixture import make_package
 
+from arena_kit.data import DataPackage
 from sellm.intel import SCHEMA_VERSION, dossier
+from sellm.intel.extract import Source, body
 from sellm.intel.schema import CORE_FIELDS, SIGNAL_KINDS, TOP_KEYS, validate
+
+REAL = Path(__file__).resolve().parents[1] / "data" / "package"
+
+
+@pytest.fixture
+def fixture_pkg(tmp_path):
+    return DataPackage(make_package(tmp_path / "pkg"))
+
+
+@pytest.fixture
+def release_pkg(tmp_path):
+    return DataPackage(make_package(tmp_path / "pkg", release=True))
+
+
+@pytest.fixture(scope="module")
+def real_pkg():
+    if not (REAL / "world.sqlite").is_file():
+        pytest.skip("data package not downloaded (uv run arena data)")
+    return DataPackage(REAL)
 
 
 def test_the_stub_carries_every_field_of_the_contract():
@@ -82,3 +105,31 @@ def _broken(change):
 def test_the_validator_reports_every_breach(change, needle):
     errors = _broken(change)
     assert errors and any(needle in e for e in errors), errors
+
+
+def test_extract_reads_the_package(fixture_pkg):
+    src = Source(fixture_pkg)
+    assert src.detailed_ids() == ["sup:1", "sup:2", "sup:3"]
+    two = src.supplier("sup:2")
+    assert two["owner_type"] == "founder" and two["skonto_pct"] == 2 and two["turnover_eur"] is None
+    docs = src.documents("sup:1")
+    assert [d["id"] for d in docs] == ["doc:1", "doc:2", "doc:3"]
+    assert docs[0]["text"].startswith("Call with the managing director") and "# " not in docs[0]["text"]
+    assert [n["id"] for n in src.market_news()] == ["news:3"]
+    assert src.release_rows == {} and src.version() == "9.9.9"
+    assert body("# T\n\nemail - 2026-01-01 - X\n\nHello.") == "Hello."
+
+
+def test_extract_picks_up_the_sunday_release(release_pkg):
+    src = Source(release_pkg)
+    docs = src.documents("sup:3")
+    assert [d["id"] for d in docs] == ["doc:R1"] and docs[0]["text"] == "We are on allocation for the rest of the year."
+    assert [n["id"] for n in src.news("sup:3")] == ["news:R1"]
+    assert [n["id"] for n in src.market_news()] == ["news:3"]
+
+
+def test_extract_reads_every_row_of_the_real_package(real_pkg):
+    src = Source(real_pkg)
+    assert len(src.detailed_ids()) == 46
+    assert len(src.q("SELECT id FROM po_lines")) == 5400
+    assert len(src.documents("sup:70130")) == 7 and len(src.market_news()) == 7

@@ -359,3 +359,8 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 **[change] Intel S2: schema validator**
 - sellm/intel/schema.py validate(d) -> list of readable errors: required and unknown keys at every level, enums, cost_of_money in (0, 1], signal kinds/strength/evidence sorted and unique, floor band order, alternatives buyer-private, standard_terms source, finite numbers everywhere.
 - tests/test_intel.py: the stub is valid; 14 deliberate breaches are each reported.
+
+## 2026-10-10 18:23 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
+**[change] Intel S3: extraction layer over the data package**
+- sellm/intel/extract.py Source: read-only SQL with limit 1,000,000 (DataPackage.query stops at 200 rows by default), index series from facts.json, and the Sunday release's documents and news, which DataPackage puts into its ID index only (release-sunday/data/*.csv), not into SQLite - a SQL-only builder would miss Sunday's letters.
+- tests/intel_fixture.py: a small package with the real columns and every trap (two plant estimates for one part, skonto, noise news, market news, price per 100, a Sunday release). Tests: fixture, simulated release, and on the real package 46 suppliers, all 5,400 PO lines, 7 documents for sup:70130, 7 market news.
