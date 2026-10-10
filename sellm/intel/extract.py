@@ -3,6 +3,7 @@
 import hashlib
 import json
 import re
+from functools import cached_property
 
 LIMIT = 1_000_000  # DataPackage.query returns 200 rows unless told otherwise
 HEADER = re.compile(r"^\S[^\n]* - \d{4}-\d{2}-\d{2} - ")
@@ -49,9 +50,11 @@ class Source:
         rows = self.q(sql, params)
         return rows[0] if rows else None
 
+    @cached_property
     def facts_sha256(self):
         return hashlib.sha256(json.dumps(self.facts, sort_keys=True).encode()).hexdigest()
 
+    @cached_property
     def version(self):
         path = self.pkg.root / "datapackage.json"
         try:

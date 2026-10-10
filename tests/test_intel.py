@@ -8,6 +8,7 @@ from intel_fixture import make_package
 
 from arena_kit.data import DataPackage
 from sellm.intel import SCHEMA_VERSION, dossier
+from sellm.intel.assemble import build_supplier
 from sellm.intel.extract import Source, body
 from sellm.intel.schema import CORE_FIELDS, SIGNAL_KINDS, TOP_KEYS, validate
 
@@ -116,7 +117,7 @@ def test_extract_reads_the_package(fixture_pkg):
     assert [d["id"] for d in docs] == ["doc:1", "doc:2", "doc:3"]
     assert docs[0]["text"].startswith("Call with the managing director") and "# " not in docs[0]["text"]
     assert [n["id"] for n in src.market_news()] == ["news:3"]
-    assert src.release_rows == {} and src.version() == "9.9.9"
+    assert src.release_rows == {} and src.version == "9.9.9"
     assert body("# T\n\nemail - 2026-01-01 - X\n\nHello.") == "Hello."
 
 
@@ -133,3 +134,126 @@ def test_extract_reads_every_row_of_the_real_package(real_pkg):
     assert len(src.detailed_ids()) == 46
     assert len(src.q("SELECT id FROM po_lines")) == 5400
     assert len(src.documents("sup:70130")) == 7 and len(src.market_news()) == 7
+
+
+def test_parts_follow_the_rules(fixture_pkg):
+    src = Source(fixture_pkg)
+    a = build_supplier(src, "sup:1")["parts"]["part:A"]
+    assert a["current_price"]["price"] == 102.0 and a["sourcing"]["quota_pct"] == 100
+    assert a["should_cost"]["id"] == "cost:A" and a["should_cost"]["plant_specific"] is True
+    assert a["floor_estimate"] == {
+        "value": 101.0,
+        "low": 95.95,
+        "high": 106.05,
+        "basis": "plant-specific should-cost cost:A",
+    }
+    assert a["price_to_should_cost"] == 1.0099
+    h = a["history"]
+    assert (h["mean_asked_pct"], h["mean_settled_pct"], h["mean_give_pct"], h["below_full_cost"]) == (
+        2.5,
+        -0.25,
+        2.75,
+        True,
+    )
+    s1, s2 = a["drivers"]
+    assert (s1["series"], s1["change_12m_pct"], s1["change_6m_pct"]) == ("S1", 6.0, 1.92)
+    assert s1["ids_12m"] == ["idx:S1@2025-08", "idx:S1@2026-08"]
+    assert (s2["series"], s2["change_12m_pct"], s2["change_6m_pct"]) == ("S2", -5.0, -3.06)
+    assert a["forecast"] == {
+        "id": "fc:A@2026-06",
+        "snapshot_month": "2026-06",
+        "volume_next_12m": 1000,
+        "change_pct": 5.0,
+        "volume_per_year": 1000,
+    }
+    assert [(x["supplier_id"], x["quote_id"], x["unit_price"], x["private"]) for x in a["alternatives"]] == [
+        ("sup:2", "quote:3", 99.0, True)
+    ]
+
+
+def test_a_plant_estimate_is_never_another_suppliers(fixture_pkg):
+    src = Source(fixture_pkg)
+    b1 = build_supplier(src, "sup:1")["parts"]["part:B"]
+    assert b1["should_cost"]["id"] == "cost:B-1" and b1["price_to_should_cost"] == 1.0204
+    assert build_supplier(src, "sup:2")["parts"]["part:B"]["should_cost"]["id"] == "cost:B"
+    c = build_supplier(src, "sup:3")["parts"]["part:C"]
+    assert c["should_cost"]["plant_specific"] is False
+    assert c["floor_estimate"] == {
+        "value": 80.0,
+        "low": 68.0,
+        "high": 92.0,
+        "basis": "generic DE should-cost cost:C x 1.0 (DE)",
+    }
+
+
+def test_the_supplier_sections(fixture_pkg):
+    src = Source(fixture_pkg)
+    one, two = build_supplier(src, "sup:1"), build_supplier(src, "sup:2")
+    assert validate(one) == [] and validate(two) == []
+    assert one["coverage"] == "full" and one["built_from"]["package"] == "9.9.9"
+    assert one["economics"]["our_spend_eur"] == {"FY2025": 1000000.0, "FY2026": 1289395.92}
+    assert one["economics"]["our_share_of_turnover_pct"] == 6.68 and one["economics"]["we_pay_late_days"] == 3.0
+    assert two["identity"]["turnover_estimated"] is True and two["economics"]["our_share_of_turnover_pct"] == 10.0
+    assert two["economics"]["discount_taken_share_pct"] == 50.0
+    perf = one["performance"]
+    assert perf["latest"]["id"] == "sc:1@2026Q3" and perf["mean_4q"]["otd_pct"] == 87.83 and perf["trend"] == "better"
+    assert (perf["qn_12m"], perf["qn_ids_12m"]) == (1, ["qn:1"])
+    assert one["contract"]["index_clauses"] == [
+        {"id": "ctr:1#3.2", "series": "S1", "material_share": 0.5, "deadband_pct": 0}
+    ]
+    assert [d["id"] for d in one["documents"]] == ["doc:1", "doc:2", "doc:3"] and one["documents"][2]["part_ids"] == [
+        "part:A"
+    ]
+    assert two["news"][0]["noise"] is True and [n["id"] for n in one["market_news"]] == ["news:3"]
+    assert two["market_news"] == [] and one["own_quotes"][0]["remarks"] == "Payment within 10 days requested."
+
+
+def test_golden_values_on_the_real_package(real_pkg):
+    src = Source(real_pkg)
+    w, b = build_supplier(src, "sup:70130"), build_supplier(src, "sup:70110")
+    assert set(w["parts"]) == {"part:310011", "part:310012"}
+    assert w["parts"]["part:310011"]["should_cost"]["id"] == "cost:310011"
+    assert (w["parts"]["part:310012"]["should_cost"]["id"], w["parts"]["part:310012"]["should_cost"]["unit_cost"]) == (
+        "cost:310012",
+        370.21,
+    )
+    assert b["parts"]["part:310012"]["should_cost"]["id"] == "cost:310012-70110"
+    assert b["parts"]["part:310012"]["should_cost"]["unit_cost"] == 347.27
+    assert b["parts"]["part:310010"]["should_cost"]["unit_cost"] == 132.64
+    assert build_supplier(src, "sup:70520")["parts"]["part:350010"]["should_cost"]["id"] == "cost:350010-70520"
+    assert build_supplier(src, "sup:70510")["parts"]["part:350010"]["should_cost"]["id"] == "cost:350010"
+    assert [w["parts"][p]["current_price"]["price"] for p in ("part:310011", "part:310012")] == [180.52, 359.17]
+    assert [w["parts"][p]["price_to_should_cost"] for p in ("part:310011", "part:310012")] == [1.0018, 0.9702]
+    assert b["parts"]["part:310012"]["price_to_should_cost"] == 1.1031
+    assert (
+        w["economics"]["our_spend_eur"]["FY2026"] == 1289395.92 and w["economics"]["our_share_of_turnover_pct"] == 6.68
+    )
+    assert b["economics"]["our_share_of_turnover_pct"] == 4.87
+    t = build_supplier(src, "sup:70210")
+    assert t["economics"]["our_share_of_turnover_pct"] == 9.05 and t["identity"]["turnover_estimated"] is True
+    late = [build_supplier(src, s)["economics"]["we_pay_late_days"] for s in ("sup:70130", "sup:70110", "sup:70580")]
+    assert late == [2.8, 3.7, 19.4]
+    perf = w["performance"]
+    assert (perf["latest"]["id"], perf["latest"]["otd_pct"], perf["latest"]["ppm"], perf["latest"]["colour"]) == (
+        "sc:70130@2026Q3",
+        82.4,
+        651,
+        "green",
+    )
+    assert (perf["mean_4q"]["otd_pct"], perf["mean_4q"]["ppm"], perf["trend"]) == (87.83, 1147.5, "better")
+    drivers = {x["series"]: x for x in b["parts"]["part:310010"]["drivers"]}
+    assert (drivers["LCI-C"]["weight"], drivers["LCI-C"]["change_12m_pct"]) == (0.32, 2.66)
+    assert drivers["LCI-C"]["ids_12m"] == ["idx:LCI-C@2025-06", "idx:LCI-C@2026-06"]
+    assert drivers["PPI-C241"]["change_12m_pct"] == 6.54
+    assert (drivers["PPI-D351"]["change_12m_pct"], drivers["PPI-D351"]["change_6m_pct"]) == (-3.72, 6.63)
+    assert len(w["documents"]) == len(b["documents"]) == 7
+
+
+def test_the_real_package_in_numbers(real_pkg):
+    src = Source(real_pkg)
+    ds = [build_supplier(src, s) for s in src.detailed_ids()]
+    assert len(ds) == 46 and all(validate(d) == [] for d in ds)
+    assert sum(len(d["parts"]) for d in ds) == 90 and sum(len(d["documents"]) for d in ds) == 208
+    assert sum(len(d["news"]) for d in ds) == 32
+    market = {"news:20260910-27", "news:20260912-30", "news:20260914-31", "news:20260916-32"}
+    assert not any(n["id"] in market for d in ds for n in d["news"])
