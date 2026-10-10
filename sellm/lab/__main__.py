@@ -63,6 +63,8 @@ def opts_of(a):
         "think_s": None if a.think < 0 else a.think,
         "vary": not a.fixed_twins,
         "reader": a.reader,
+        "supplier": a.supplier,
+        "no_cache": a.no_cache,
     }
 
 
@@ -87,11 +89,12 @@ def cmd_play(a):
     pkg = package()
     s = find_scenario(a.case.split(":")[-1], pkg)
     o = opts_of(a)
-    from .tournament import reader_for
+    from .tournament import brain_for, reader_for
 
     table = LocalTable(
         s, pkg.facts, seed=a.seed, clock=o["clock"], wave_cap_s=o["wave_cap_s"], think_s=o["think_s"],
-        vary=o["vary"] and s.kind == "twin", reader=reader_for(o),
+        vary=o["vary"] and s.kind == "twin", reader=reader_for(o), supplier=o["supplier"], brain=brain_for(o),
+        package=pkg,
     )  # fmt: skip
     r = play_lab(table, make_agent(a.agent, parse_knobs(a.knobs), pkg), mode=o["mode"])
     c = s.case
@@ -115,7 +118,7 @@ def cmd_play(a):
             for att in m.get("attachments") or []:
                 print(f"    attached: {att['name']}")
     keep = ("end_reason", "deal", "supplier_id", "terms", "c_open", "c_deal", "c_best", "c_alt", "score",
-            "rounds", "seconds", "timeouts", "rejected")  # fmt: skip
+            "rounds", "seconds", "timeouts", "rejected", "llm_calls", "llm_fail")  # fmt: skip
     print("\n" + json.dumps({k: r.get(k) for k in keep}, indent=1, default=str))
     if r.get("cost_breakdown"):
         print("cost breakdown:", {k: round(v) for k, v in r["cost_breakdown"].items() if v})
@@ -133,7 +136,8 @@ def cmd_tournament(a):
     o = opts_of(a)
     print(f"run folder: {out}  (progress: {out / 'progress.log'})", flush=True)
     train, test = t.build_pools(a.invented, a.invent_seed, a.test, pkg)
-    run = t.Run(out, o, train, test, a.workers)
+    workers = a.workers or (24 if a.supplier == "llm" else None)  # LLM suppliers wait on the network
+    run = t.Run(out, o, train, test, workers)
     t0 = time.time()
     try:
         if a.cmd == "compare":
@@ -159,7 +163,8 @@ def cmd_stress(a):
     out = run_dir("stress", a.label or a.agent.replace(":", "-").replace(".", "-"))
     print(f"run folder: {out}", flush=True)
     knobs = parse_knobs(a.knobs)
-    rows = stress.run(out, a.agent, knobs, pkg, a.n, a.per_edge, a.seeds, workers=a.workers, opts=opts_of(a))
+    workers = a.workers or (24 if a.supplier == "llm" else None)  # LLM suppliers wait on the network
+    rows = stress.run(out, a.agent, knobs, pkg, a.n, a.per_edge, a.seeds, workers=workers, opts=opts_of(a))
     text, verdict = stress.report(rows, a.agent, knobs)
     (out / "report.md").write_text(text, encoding="utf-8")
     print(text)
@@ -201,9 +206,15 @@ def cmd_validate(a):
             real.setdefault((kind, d["case_id"].split(":")[1]), []).append(d["state"]["result"]["score"])
     from .backtest import probe_check
 
-    print("Whole negotiations: the sandbox step probes (experiments/RESULTS.md) on the D01 twin family")
-    print("| Probe | Arena | Lab (40 family members) |\n|---|---|---|")
-    for label, arena, mean, sd in probe_check(pkg.facts):
+    brain = None
+    if a.supplier == "llm":
+        from .llm_supplier import Brain
+
+        brain = Brain()
+    seeds = 40 if brain is None else 6
+    print(f"Whole negotiations: the sandbox step probes (experiments/RESULTS.md), D01 family, {a.supplier} suppliers")
+    print(f"| Probe | Arena | Lab ({seeds} family members) |\n|---|---|---|")
+    for label, arena, mean, sd in probe_check(pkg.facts, seeds, brain=brain, package=pkg):
         print(f"| {label} | {min(arena):.2f}-{max(arena):.2f} | {mean:.3f} ± {sd:.3f} |")
     print()
     kinds = ["naive"] + (["llm"] if a.llm else [])
@@ -215,8 +226,11 @@ def cmd_validate(a):
             if not arena:
                 continue
             lab = [
-                play_lab(LocalTable(s, pkg.facts, seed=i), make_agent(kind, {}, pkg))["score"]
-                for i in range(1 if kind == "llm" else 5)
+                play_lab(
+                    LocalTable(s, pkg.facts, seed=i, supplier=a.supplier, brain=brain, package=pkg),
+                    make_agent(kind, {}, pkg),
+                )["score"]
+                for i in range(1 if kind == "llm" or brain is not None else 5)
             ]
             pairs.append((statistics.mean(arena), statistics.mean(lab)))
             print(f"| {kind} | {s.name} | {pairs[-1][0]:.3f} | {pairs[-1][1]:.3f} |")
@@ -256,6 +270,11 @@ def main(argv=None):
             "--reader", default="keywords", choices=["keywords", "llm"],
             help="how suppliers read our e-mails: keyword rules, or an LLM (LAB_READER_MODEL or LLM_MODEL; costs)",
         )  # fmt: skip
+        p.add_argument(
+            "--supplier", default="engine", choices=["engine", "llm"],
+            help="engine: the calibrated rules (fast, free); llm: an LLM plays each supplier inside them (costs calls)",
+        )  # fmt: skip
+        p.add_argument("--no-cache", action="store_true", help="llm suppliers: no answers from runs/lab/llm-cache")
         p.add_argument("--invent-seed", type=int, default=1)
         p.add_argument("--workers", type=int, default=None)
         p.add_argument("--label", default="")
@@ -265,6 +284,9 @@ def main(argv=None):
     b = sub.add_parser("backtest")
     b.add_argument("--fit", action="store_true")
     b.add_argument("--write", action="store_true", help="write runs/lab/BACKTEST.md")
+    b.add_argument(
+        "--supplier", default="engine", choices=["engine", "llm"], help="llm: the LLM suppliers (about 240 calls)"
+    )
     p = sub.add_parser("play")
     p.add_argument("case")
     p.add_argument("--agent", default="calc")
@@ -295,6 +317,7 @@ def main(argv=None):
     st.add_argument("--lines", type=int, default=15)
     v = sub.add_parser("validate")
     v.add_argument("--llm", action="store_true", help="also the kit LLM agent: about 60 LLM calls")
+    v.add_argument("--supplier", default="engine", choices=["engine", "llm"], help="llm: LLM suppliers (~200 calls)")
     u = sub.add_parser("ui")
     u.add_argument("--port", type=int, default=8765)
     u.add_argument("--no-browser", action="store_true")
@@ -327,7 +350,14 @@ def main(argv=None):
                     p.ranges = {**ranges[x.name], "noise": [0.05, 0.1, 0.2]}
             twins.save(scenarios)
             print(f"wrote {twins.CACHE}")
-        rows = backtest.evaluate(scenarios, pkg.facts)
+        if a.supplier == "llm":
+            from .llm_supplier import Brain
+
+            brain = Brain()
+            rows = backtest.evaluate(scenarios, pkg.facts, brain=brain, package=pkg)
+            print(f"LLM suppliers: {brain.calls} calls, {brain.cached} from the cache")
+        else:
+            rows = backtest.evaluate(scenarios, pkg.facts)
         print(backtest.report(rows))
         if a.write:
             backtest.write_report(scenarios, rows, "runs/lab/BACKTEST.md")

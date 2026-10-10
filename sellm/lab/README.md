@@ -54,6 +54,7 @@ Use a result: `--knobs runs/lab/<run>/best.json` (rank 1) or `...best.json#3` (r
 | `--wave-cap S` | 480 | seconds per case, as a Live Final wave; the runner closes 90 s before it with the kit's `closing_move` |
 | `--think S` | 2.0 | our seconds per move; `-1` = the real time the agent took (use for LLM agents) |
 | `--fixed-twins` | off | the fitted twins only; by default each run draws a member of each twin's family |
+| `--supplier engine\|llm` | engine | who plays the suppliers: the calibrated rules, or an LLM inside them (costs tokens) |
 | `--invented N`, `--test N` | 160, 80 | generated scenarios for training and for the unseen test |
 | `--seeds N` | 2 | runs per strategy and scenario |
 
@@ -66,6 +67,26 @@ Use a result: `--knobs runs/lab/<run>/best.json` (rank 1) or `...best.json#3` (r
   left more than 60 s.
 - The tables below the ranking break the winner down by case type, goal, supplier archetype and edge
   case: that is where to look for the next improvement.
+
+## Two kinds of supplier: engine and LLM
+
+`--supplier engine` (default): the calibrated rules below. Fast and free: use it for searches.
+
+`--supplier llm`: an LLM plays each supplier, the way the brief describes the arena's: the hard
+limits come from the calibrated engine (its floor, its usual move this round, approval, patience),
+and inside them the LLM - knowing the company from the data package (register facts, archetype,
+cost of money, the letters, call and meeting notes, news and past renewals about it) and the whole
+thread - reads our e-mail and decides: counter, agree, final offer, hold or walk away, the price
+between half and 125 % of the usual move (more room when we brought verified data), a variant it
+prefers, which documents to attach, and it writes the e-mail. Code computes every number and
+renders the term sheets and documents; the LLM cannot go below the floor, cannot stand still when
+we moved (real suppliers always answered a move), cannot walk away without being provoked.
+`llm_supplier.py`; about 7 LLM calls per negotiation (`LLM_MODEL`, or `LAB_SUPPLIER_MODEL`);
+answers are cached in `runs/lab/llm-cache/` (same prompt, same answer). A failed call falls back to
+the engine and is counted as `llm_fail` in every result and report - never silently.
+
+Use it to check the finalists of a search, to test an agent that writes with an LLM (its wording
+matters to an LLM supplier, not to the engine), and to read realistic transcripts (`play ... --supplier llm`).
 
 ## How the suppliers are modelled
 

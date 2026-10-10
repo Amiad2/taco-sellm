@@ -71,18 +71,23 @@ class LocalTable:
         wave_cap_s=None,
         vary=False,
         reader=None,
+        supplier="engine",
+        brain=None,
+        package=None,
     ):
         """`clock`: simulate time (see the module doc). `think_s`: our decision time per move in
         simulated seconds (None: the real time the agent took, plus 0.5 s for the network).
-        `vary`: play a random member of each twin's family instead of the fitted twin."""
+        `vary`: play a random member of each twin's family instead of the fitted twin.
+        `supplier`: "engine" (the calibrated rules, fast, free) or "llm" (an LLM plays each supplier
+        inside the engine's limits, `llm_supplier.py`; needs `brain`, and `package` for its history)."""
         self.scenario, self.case = scenario, copy.deepcopy(scenario.case)
         self.facts, self.rng, self.reader = facts or {}, random.Random(seed), reader
         self.clock, self.reply_s, self.think_s, self.wave_cap_s = clock, reply_s, think_s, wave_cap_s
-        self.vary = vary
+        self.vary, self.supplier, self.brain, self.package = vary, supplier, brain, package
         self.session_id, self.done, self.threads, self.outcome = f"lab-{seed}", None, {}, None
         self.now, self.parallel, self._back, self._late = 0.0, False, None, []
         self.personas = {}
-        self.stats = {"timeouts": 0, "late": 0, "rejected": 0}
+        self.stats = {"timeouts": 0, "late": 0, "rejected": 0, "llm_calls": 0, "llm_fail": 0}
 
     # -- the RemoteTable interface -------------------------------------------------------------
     def open(self, case_id=None):
@@ -91,7 +96,13 @@ class LocalTable:
             rng = random.Random(self.rng.random())
             p = persona.vary(rng) if self.vary else persona
             self.personas[sid] = p
-            t = self.threads[sid] = SupplierThread(p, self.case, rng, self.session)
+            if self.supplier == "llm" and self.brain is not None:
+                from .llm_supplier import LLMSupplierThread
+
+                t = LLMSupplierThread(p, self.case, rng, self.session, self.brain, self.package)
+            else:
+                t = SupplierThread(p, self.case, rng, self.session)
+            self.threads[sid] = t
             t.last_at = 0.0
             t.opening()
             t.messages[-1]["_at"] = 0.0
@@ -261,6 +272,8 @@ class LocalTable:
             "rounds": sum(t.round for t in self.threads.values()),
             "seconds": round(self.now, 1),
             **self.stats,
+            "llm_calls": sum(getattr(t, "llm_calls", 0) for t in self.threads.values()),
+            "llm_fail": sum(getattr(t, "llm_fail", 0) for t in self.threads.values()),
         }
         if owner:
             t, p = self.threads[owner], self.personas[owner]

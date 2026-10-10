@@ -68,6 +68,16 @@ def _init(path, opts):
     pkg = DataPackage(os.environ.get("ARENA_DATA", "data/package"))
     pkg.lookup("")
     _W.update(pkg=pkg, scenarios={s.name: s for s in store.load(path)}, opts=opts, reader=reader_for(opts))
+    _W["brain"] = brain_for(opts)
+
+
+def brain_for(opts):
+    """The LLM that plays the suppliers when opts['supplier'] == 'llm', else None."""
+    if opts.get("supplier") != "llm":
+        return None
+    from .llm_supplier import Brain
+
+    return Brain(cache=not opts.get("no_cache"))
 
 
 def make_agent(name, knobs, package):
@@ -119,6 +129,9 @@ def _play(job):
             think_s=o["think_s"],
             vary=o["vary"] and s.kind == "twin",
             reader=_W.get("reader"),
+            supplier=o.get("supplier", "engine"),
+            brain=_W.get("brain"),
+            package=_W["pkg"],
         )
         r = play_lab(table, agent, mode=o["mode"])
         row.update(
@@ -133,6 +146,8 @@ def _play(job):
             seconds=r.get("seconds"),
             alt_score=_alt_score(s),
             c_deal=r.get("c_deal"),
+            llm_calls=r.get("llm_calls", 0),
+            llm_fail=r.get("llm_fail", 0),
         )
     except Exception as e:  # a crash is a result too: it would cost the case in the final
         row.update(score=0.0, deal=False, crash=f"{type(e).__name__}: {e}"[:200], trace=traceback.format_exc()[-800:])
@@ -327,6 +342,8 @@ def summarise(rows, min_scenarios=0):
             "wave_cap": sum(r.get("end") == "wave_cap" for r in rs),
             "timeouts": sum(r.get("timeouts", 0) for r in rs),
             "seconds": _mean([r["seconds"] for r in rs if r.get("seconds") is not None]),
+            "llm_calls": sum(r.get("llm_calls", 0) for r in rs),
+            "llm_fail": sum(r.get("llm_fail", 0) for r in rs),
             "per_twin": {s: round(m, 3) for s, m in sorted(means.items()) if first[s]["kind"] == "twin"},
             "by": {
                 dim: {

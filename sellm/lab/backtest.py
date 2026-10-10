@@ -41,8 +41,8 @@ def real_sessions(name):
     return out
 
 
-def replay(scenario, session, facts, params=None):
-    """Rows, one per real supplier reply to a buyer e-mail."""
+def replay(scenario, session, facts, params=None, brain=None, package=None):
+    """Rows, one per real supplier reply to a buyer e-mail. With `brain` the LLM supplier replies."""
     case, rows = scenario.case, []
     shared, bots = Session(scenario, facts), {}
     for sid in session["threads"]:  # every opening first: rivals' offers are citable from the start
@@ -50,7 +50,12 @@ def replay(scenario, session, facts, params=None):
         for k, v in (params or {}).items():
             setattr(persona, k, v)
         persona.alternatives, persona.noise = False, 0.0  # compare the ask itself, deterministically
-        bots[sid] = SupplierThread(persona, case, random.Random(0), shared)
+        if brain is not None:
+            from .llm_supplier import LLMSupplierThread
+
+            bots[sid] = LLMSupplierThread(persona, case, random.Random(0), shared, brain, package)
+        else:
+            bots[sid] = SupplierThread(persona, case, random.Random(0), shared)
         bots[sid].opening()
     for sid, thread in session["threads"].items():
         bot, persona = bots[sid], bots[sid].p
@@ -97,12 +102,16 @@ def loss(rows):
     return (statistics.mean(errs) if errs else 0.0) + STATUS_WEIGHT * statistics.mean(status)
 
 
-def evaluate(scenarios, facts, params_for=lambda s: None):
-    rows = []
-    for s in scenarios:
-        for session in real_sessions(s.name):
-            rows += replay(s, session, facts, params_for(s))
-    return rows
+def evaluate(scenarios, facts, params_for=lambda s: None, brain=None, package=None, threads=16):
+    """Every real session replayed; with `brain` (LLM suppliers) the sessions run in parallel threads."""
+    jobs = [(s, session) for s in scenarios for session in real_sessions(s.name)]
+    if brain is None:
+        return [row for s, session in jobs for row in replay(s, session, facts, params_for(s))]
+    from concurrent.futures import ThreadPoolExecutor
+
+    with ThreadPoolExecutor(threads) as pool:
+        parts = pool.map(lambda j: replay(j[0], j[1], facts, params_for(j[0]), brain, package), jobs)
+        return [row for part in parts for row in part]
 
 
 def fit(scenarios, facts, log=print, passes=3):
@@ -287,18 +296,26 @@ def probe_loss(scenario, facts, params, seeds=6):
     return statistics.mean(gaps)
 
 
-def probe_check(facts, seeds=40):
+def probe_check(facts, seeds=40, brain=None, package=None, threads=16):
     """The sandbox probes replayed closed-loop on the D01 twin family: does the lab rank them as the
-    arena did? Returns rows (label, arena range, lab mean, lab spread)."""
+    arena did? Returns rows (label, arena range, lab mean, lab spread). With `brain` the LLM suppliers
+    play (fewer seeds are enough to see the order; each negotiation is about 6 LLM calls)."""
+    from concurrent.futures import ThreadPoolExecutor
+
     from .table import LocalTable, play_lab
 
     s = next(x for x in twins.load() if x.name == "D01")
     fixed = {"payment_days": 30, "contract_months": 24, "effective_date": "2027-02-01"}
+    supplier = "llm" if brain is not None else "engine"
+
+    def one(job):
+        start, step, k = job
+        table = LocalTable(s, facts, seed=k, vary=True, supplier=supplier, brain=brain, package=package)
+        return play_lab(table, Stepper(start, step, fixed))["score"]
+
     rows = []
-    for label, start, step, arena in PROBES:
-        scores = [
-            play_lab(LocalTable(s, facts, seed=k, vary=True), Stepper(start, step, fixed))["score"]
-            for k in range(seeds)
-        ]
-        rows.append((label, arena, statistics.mean(scores), statistics.pstdev(scores)))
+    with ThreadPoolExecutor(threads if brain is not None else 1) as pool:
+        for label, start, step, arena in PROBES:
+            scores = list(pool.map(one, [(start, step, k) for k in range(seeds)]))
+            rows.append((label, arena, statistics.mean(scores), statistics.pstdev(scores)))
     return rows

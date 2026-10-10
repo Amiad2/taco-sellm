@@ -83,7 +83,7 @@ def argv_for(cmd, o):
     args += ["--seeds", str(int(o.get("seeds") or 2)), "--mode", o.get("mode") or "parallel"]
     args += ["--wave-cap", str(float(o.get("wave_cap") if o.get("wave_cap") not in (None, "") else 480))]
     args += ["--think", str(float(o.get("think") if o.get("think") not in (None, "") else 2.0))]
-    args += ["--reader", o.get("reader") or "keywords"]
+    args += ["--reader", o.get("reader") or "keywords", "--supplier", o.get("supplier") or "engine"]
     if o.get("no_clock"):
         args.append("--no-clock")
     if o.get("fixed_twins"):
@@ -217,6 +217,7 @@ def play(o):
     if o.get("knobs"):
         args += ["--knobs", o["knobs"]]
     args += ["--mode", o.get("mode") or "parallel", "--seed", str(int(o.get("seed") or 0))]
+    args += ["--supplier", o.get("supplier") or "engine"]
     if o.get("no_clock"):
         args.append("--no-clock")
     r = subprocess.run(args, cwd=ROOT, capture_output=True, text=True, timeout=600)
@@ -355,7 +356,8 @@ pre{white-space:pre-wrap;word-break:break-word;background:var(--bg);border:1px s
    <label>Runner<select id="mode"><option value="parallel">one loop per thread</option><option value="sequential">kit play() (one at a time)</option></select></label>
    <label>Wave cap (s, 0 = none)<input id="wave_cap" type="number" value="480"></label>
    <label>Our seconds per move<input id="think" type="number" value="2" step="0.5"></label>
-   <label>Suppliers read e-mails by<select id="reader"><option value="keywords">keywords (free)</option><option value="llm">LLM (costs calls)</option></select></label>
+   <label>Suppliers played by<select id="supplier"><option value="engine">engine: calibrated rules (fast, free)</option><option value="llm">LLM inside the engine's limits (realistic, costs tokens)</option></select></label>
+   <label>Engine reads e-mails by<select id="reader"><option value="keywords">keywords (free)</option><option value="llm">LLM (costs calls)</option></select></label>
    <label>Scenario seed<input id="invent_seed" type="number" value="1"></label>
    <label><span><input type="checkbox" id="no_clock"> no clock</span><span><input type="checkbox" id="fixed_twins"> fitted twins only</span></label>
   </div></div>
@@ -374,7 +376,8 @@ pre{white-space:pre-wrap;word-break:break-word;background:var(--bg);border:1px s
  <label>Scenario<input id="p_scen" value="P01" list="scenlist"><datalist id="scenlist"></datalist></label>
  <label>Agent<input id="p_agent" value="sellm.agent:make_agent" list="agentlist"><datalist id="agentlist"></datalist></label>
  <label>Runner<select id="p_mode"><option value="parallel">one loop per thread</option><option value="sequential">kit play()</option></select></label>
- <label>Seed<input id="p_seed" type="number" value="0"></label></div>
+ <label>Seed<input id="p_seed" type="number" value="0"></label>
+ <label>Supplier played by<select id="p_supplier"><option value="llm">LLM (realistic, ~7 calls)</option><option value="engine">engine (free)</option></select></label></div>
  <label style="margin-top:8px">Knobs (JSON, optional)<textarea id="p_knobs"></textarea></label>
  <div class="row" style="margin-top:8px"><button class="go" onclick="playOne()">Play</button><span class="mute">Twins: P01 ... D02. Generated: X&lt;seed&gt;-&lt;n&gt;, e.g. X01-007.</span></div></div>
  <pre id="transcript" class="hidden"></pre></section>
@@ -399,7 +402,7 @@ function toggleKnobs(){$('knobtable').classList.toggle('show');jsonToTable();}
 function tableToJson(){const o={};$('knobtable').querySelectorAll('select').forEach(s=>{if(s.value!=='')o[s.dataset.k]=JSON.parse(s.value)});$('knobs').value=Object.keys(o).length?JSON.stringify(o):'';}
 function jsonToTable(){let o={};try{o=JSON.parse($('knobs').value||'{}')}catch(e){}$('knobtable').querySelectorAll('select').forEach(s=>{s.value=s.dataset.k in o?JSON.stringify(o[s.dataset.k]):''});}
 async function loadKnobs(){const run=$('fromrun').value;if(!run)return;const b=await j(`/api/run/${run}/best`);const e=b[Math.min(+$('rank').value,b.length)-1];$('knobs').value=JSON.stringify(e.knobs||{});jsonToTable();}
-function opts(){const o={};['minutes','agents','agent','label','invented','test','n','per_edge','seeds','mode','wave_cap','think','reader','invent_seed','knobs'].forEach(k=>o[k]=$(k).value);
+function opts(){const o={};['minutes','agents','agent','label','invented','test','n','per_edge','seeds','mode','wave_cap','think','reader','supplier','invent_seed','knobs'].forEach(k=>o[k]=$(k).value);
  o.start=$('start_n').value;o.no_clock=$('no_clock').checked;o.fixed_twins=$('fixed_twins').checked;return o;}
 async function startRun(){$('startmsg').textContent='starting ...';try{const job=await j('/api/start',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({cmd:$('cmd').value,options:opts()})});
  $('startmsg').textContent=`started: ${job.args.join(' ')}`;SEL={job:job.id};document.querySelector('.tab[data-t=runs]').click();}catch(e){$('startmsg').textContent='error: '+e.message}}
@@ -428,7 +431,7 @@ async function extend(name){const m=name.match(/-(search|compare|stress)/);const
 async function stressBest(name){$('cmd').value='stress';showFields();$('agent').value='calc';$('fromrun').value=name;$('rank').value=1;await loadKnobs();await startRun();}
 async function snippet(name){const t=await j(`/api/run/${encodeURIComponent(name)}/snippet?rank=1`);const s=$('snip');s.textContent=t;s.classList.remove('hidden');}
 async function playOne(){const T=$('transcript');T.classList.remove('hidden');T.textContent='playing ...';
- T.textContent=await j('/api/play',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({scenario:$('p_scen').value,agent:$('p_agent').value,knobs:$('p_knobs').value,mode:$('p_mode').value,seed:$('p_seed').value})});}
+ T.textContent=await j('/api/play',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({scenario:$('p_scen').value,agent:$('p_agent').value,knobs:$('p_knobs').value,mode:$('p_mode').value,seed:$('p_seed').value,supplier:$('p_supplier').value})});}
 init();
 </script></body></html>
 """

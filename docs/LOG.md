@@ -317,3 +317,15 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 ## 2026-10-10 18:11 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
 **[change] CONTEXT section 14: --agent now also offers sellm**
 - The line said the choices naive|llm are hard-coded in cli.py; since 17:16 AGENTS in cli.py lists naive, llm and sellm (sellm.agent.make_agent).
+
+## 2026-10-10 18:14 CEST · Amiad @ fedora
+**[change] Lab: LLM suppliers - an LLM plays each supplier inside the calibrated engine's limits (--supplier llm)**
+- sellm/lab/llm_supplier.py, as the brief describes the arena: hard limits from the engine (floor, its usual move this round, approval, patience), and inside them an LLM that knows the company from the data package (register facts, archetype, cost of money, its letters, call and meeting notes, news, past renewals) and the whole thread reads our e-mail and decides counter / agree / final offer / hold / walk away, the price, a variant, documents, and writes the e-mail. Code computes every number and renders sheets and documents.
+- Bounds: price between half and 125 % of the calibrated move (+ room for verified data); it cannot stand still when we moved, agree far below its usual ask, say final earlier than one round before its patience, or walk away unprovoked. A failed call uses the engine's reply and counts llm_fail in results and reports. Answers cached in runs/lab/llm-cache/ (git-ignored).
+- Everywhere: play/compare/search/stress/validate/backtest take --supplier llm; the UI has a supplier choice in Start and Play; LLM runs use 24 worker processes. Tests with a fake LLM: limits kept, no unprovoked walk-away, failures counted (78 tests green).
+
+## 2026-10-10 18:14 CEST · Amiad @ fedora
+**[finding] LLM suppliers match the arena about as well as the engine, once their moves are bounded**
+- Closed loop (runs/lab/VALIDATION.md): kit naive agent P01 0.554 (arena 0.583, engine 0.590), D01 0.235 (0.200, 0.239); D01 step probes 0.652/0.707/0.716/0.774/0.814 - the arena's order, levels 0.03-0.07 below (6 members each, SE about 0.03). Replay of the 237 real replies: 0.87 % mean error, status 190/237 (engine 0.77 %, 217/237, but fitted on them).
+- Without bounds the LLM played its own idea of the supplier and was far too hard: it held still on the naive agent's first lowball (naive P01 0.096 vs 0.583), while the real Brandlhuber answered with a first counter. The numbers must come from the calibrated dynamics; the LLM varies them, reads and writes.
+- In character without being told: the LLM Brandlhuber wrote 'The 14-day payment term is essential for this offer', as the real one did in our practice session. LLM spend for building and validating: about 1,300 calls on Amiad's key.

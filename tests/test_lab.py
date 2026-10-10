@@ -297,3 +297,50 @@ def test_ui_serves_runs_exports_and_refuses_bad_input():
     assert c.get("/api/run/..%2F..%2Fdocs/report").status_code == 404
     args = argv_for("search", {"minutes": 5, "label": "a b;rm"})
     assert args[:3] == ["search", "--minutes", "5.0"] and args[-1] == "abrm"
+
+
+class _FakeBrain:
+    """Stands in for the LLM: always the same decision, no API calls."""
+
+    def __init__(self, reply):
+        self.reply, self.calls = reply, 0
+
+    def ask(self, system, user):
+        self.calls += 1
+        return dict(self.reply)
+
+
+def test_llm_supplier_cannot_break_the_engines_limits():
+    from sellm.lab.table import play_lab
+
+    s = _scenario("P01")
+    brain = _FakeBrain({"decision": "counter", "price": 1.0, "email": "Our offer: EUR {PRICE}.", "reasons": ["x"]})
+    table = LocalTable(s, {}, seed=0, supplier="llm", brain=brain)
+    result = play_lab(table, NaiveAgent())
+    p = table.personas["sup:70110"]
+    for t in table.threads.values():
+        for m in t.messages:
+            for ts in m["term_sheets"]:
+                assert p.value(s.case, ts["terms"]) >= p.full_cost - 1e-6  # never below its floor
+            assert "{PRICE}" not in m["body"] and "€€" not in m["body"]
+    assert brain.calls > 0 and result["llm_fail"] == 0
+
+
+def test_llm_supplier_does_not_walk_without_a_reason():
+    s = _scenario("P01")
+    table = LocalTable(s, {}, seed=0, supplier="llm", brain=_FakeBrain({"decision": "walk_away", "email": "Bye."}))
+    case, _ = table.open()
+    sheet = {"unit_price": 130.0, "effective_date": "2027-01-01", "payment_days": 30}
+    reply = table.send(case["suppliers"][0], {"body": "Thank you for your offer.", "term_sheets": [{"terms": sheet}]})
+    assert reply["status"] != "walked_away"
+
+
+def test_llm_supplier_failure_falls_back_to_the_engine_and_is_counted():
+    from sellm.lab.table import play_lab
+
+    class Broken:
+        def ask(self, system, user):
+            raise RuntimeError("the LLM is down")
+
+    result = play_lab(LocalTable(_scenario("P01"), {}, seed=0, supplier="llm", brain=Broken()), NaiveAgent())
+    assert result["llm_fail"] > 0 and 0.0 <= result["score"] <= 1.0

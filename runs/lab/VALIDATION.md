@@ -51,6 +51,26 @@ Before the probes were in the fit the lab underrated big steps (0.831 for the la
 per-round limit was too tight. This is the check that matters most - the lab is used to rank
 strategies - but it is one demo supplier.
 
+## LLM suppliers (`--supplier llm`, added Sat 19:00)
+
+An LLM plays each supplier inside the calibrated engine's limits (`sellm/lab/llm_supplier.py`).
+Same checks, OpenAI `gpt-6.1-sol`, about 650 calls in all:
+
+| Check | Arena | Engine | LLM suppliers |
+|---|---|---|---|
+| Kit naive agent, P01 (closed loop) | 0.583 | 0.590 | 0.554 |
+| Kit naive agent, D01 (closed loop) | 0.200 | 0.239 | 0.235 |
+| Step probes, D01, five strategies | 0.68 / 0.75-0.80 / 0.75-0.82 / 0.79-0.86 / 0.88-0.90 | 0.678 / 0.747 / 0.762 / 0.842 / 0.881 | 0.652 / 0.707 / 0.716 / 0.774 / 0.814 (6 members each, ±0.03 SE) |
+| Replay of 237 real replies: mean error, status right | - | 0.77 %, 217/237 (fitted on them) | 0.87 %, 190/237 (not fitted) |
+
+The LLM suppliers rank the five probes in the arena's order and match the naive agent's scores,
+with levels about 0.03-0.07 below the sandbox on the probes. The engine is closer on numbers - it was
+fitted to exactly these sessions - while the LLM adds what the engine cannot: it reads the e-mail,
+answers questions, reacts to tone and arguments in its own words, and writes in character (the LLM
+Brandlhuber wrote "The 14-day payment term is essential for this offer" unprompted, as the real one
+did). A first version without limits on its moves was far too hard (naive P01 0.096): the dynamics
+must stay calibrated, the LLM varies them.
+
 ## How far to trust the lab
 
 - **Good** (within about 0.03 in score): D01, P01, P03, P07, P08. The mean over the practice cases
