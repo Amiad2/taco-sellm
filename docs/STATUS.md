@@ -19,6 +19,7 @@ Last updated: 2026-10-10 16:50 CEST by Amiad (Claude Code).
 | Who | What | Files | Since |
 |---|---|---|---|
 | Amiad (Claude Code) | **Lab**: a local supplier simulator (twins of the 11 suppliers we have played, calibrated to each case's `C_best`, plus invented suppliers) and a tournament runner to test buyer strategies without quota. Backtested against our real sessions before anyone trusts it. No arena calls | `sellm/lab/`, `tests/test_lab.py`, `runs/lab/` | Sat 16:00 |
+| Omar (Claude Code) | Register our agent: `--agent sellm` -> `sellm/agent.py` (for now the lab's best Calculator), `sellm` in the wheel, README run section. No arena calls | `arena_kit/cli.py`, `sellm/agent.py`, `pyproject.toml`, `README.md`, `tests/test_sellm_agent.py` | Sat 17:15 |
 
 ## Next up
 
