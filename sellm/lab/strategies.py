@@ -23,7 +23,7 @@ the same object can play the arena. `decide(case, threads)` is the kit's agent i
 
 import math
 
-from arena_kit.cost import complete_offer, must_haves_ok, supplier_value, total_cost
+from arena_kit.cost import RELATIONSHIP_GOALS, complete_offer, must_haves_ok, supplier_value, total_cost
 from arena_kit.docs import standard_terms
 from arena_kit.play import latest, live_threads, moves_left, standing
 
@@ -62,6 +62,7 @@ class Calculator:
         self.k = {**DEFAULTS, **knobs}
         self.package = package
         self.plans, self.cited, self.held, self.pushed, self.sent_back = {}, set(), set(), set(), set()
+        self.estimates = {}
         self.name = "calc " + " ".join(f"{k}={v}" for k, v in knobs.items())
 
     # -- the numbers ---------------------------------------------------------------------------
@@ -72,6 +73,35 @@ class Calculator:
         out = closing_terms(case, std, std)
         out.pop("unit_price", None)
         return out
+
+    def _estimate(self, case, sid, events):
+        """Our estimate of the supplier for the relationship term (stabilise and secure_supply only):
+        its full cost from the should-cost, else `floor_guess` of what its opening is worth to it."""
+        if case["buyer"].get("category_goal") not in RELATIONSHIP_GOALS:
+            return None
+        if sid not in self.estimates:
+            first = next((m for m in events if m.get("from") != "buyer" and m.get("term_sheets")), None)
+            if first is None:
+                return None
+            terms = first["term_sheets"][0]["terms"]
+            std = self._std(case, events, terms)
+            sc = self._should_cost(case) if self.k["use_should_cost"] else None
+            sc = sc or (self._should_cost_any(case))
+            full = sc[1] if sc else self.k["floor_guess"] * self._sup_value(case, std, terms)
+            self.estimates[sid] = {"standard": std, "interest_rate": self.k["guess_rate"], "full_cost": full}
+        return self.estimates[sid]
+
+    def _should_cost_any(self, case):
+        """The should-cost estimate, whether or not the strategy uses it for its opening."""
+        if not self.package:
+            return None
+        for part in case["parts"]:
+            fact = self.package.lookup(f"cost:{part.split(':', 1)[1]}") or case.get("facts", {}).get(
+                f"cost:{part.split(':', 1)[1]}"
+            )
+            if fact and fact.get("unit_cost"):
+                return f"cost:{part.split(':', 1)[1]}", fact["unit_cost"], fact.get("confidence_pct") or 10
+        return None
 
     def _sup_value(self, case, std, terms):
         return supplier_value(case, terms, {"standard": std, "interest_rate": self.k["guess_rate"]})
@@ -87,7 +117,7 @@ class Calculator:
         for part in case["parts"]:
             fact = self.package.lookup(f"cost:{part.split(':', 1)[1]}")
             if fact and fact.get("unit_cost"):
-                return f"cost:{part.split(':', 1)[1]}", fact["unit_cost"]
+                return f"cost:{part.split(':', 1)[1]}", fact["unit_cost"], fact.get("confidence_pct") or 10
         return None
 
     def plan(self, case, sid, events, force=None):
@@ -146,22 +176,31 @@ class Calculator:
             if not sheet_id:
                 return math.inf
             std = standard_terms(threads[sid])
-            return total_cost(case, terms, std) if must_haves_ok(case, terms, std) else math.inf
+            if not must_haves_ok(case, terms, std):
+                return math.inf
+            return total_cost(case, terms, std, self._estimate(case, sid, threads[sid]))
 
         costs = {sid: c_of(sid) for sid in live}
         best = min(live, key=lambda s: costs[s]) if live else None
         # a deal worse than the cheapest opening scores 0, like no deal: never take one
+        # as the arena does: the cheapest opening that keeps the must-haves, else the cheapest opening
         openings = []
         for events in threads.values():
             first = next((m for m in events if m.get("from") != "buyer" and m.get("term_sheets")), None)
             if first:
                 terms, std = first["term_sheets"][0]["terms"], standard_terms(events)
-                if must_haves_ok(case, terms, std):
-                    openings.append(total_cost(case, terms, std))
-        c_open = min(openings) if openings else math.inf
+                openings.append((not must_haves_ok(case, terms, std), total_cost(case, terms, std)))
+        keeps = [c for broken, c in openings if not broken]
+        c_open = min(keeps) if keeps else min((c for _, c in openings), default=math.inf)
+
+        def certain(sid):  # its C without the relationship term: a floor under the true C
+            sheet_id, terms = standing(threads[sid])
+            return total_cost(case, terms, standard_terms(threads[sid])) if sheet_id else math.inf
 
         def accept(sid):
-            if sid is None or costs[sid] >= c_alt or costs[sid] >= c_open:
+            # walk if the alternative is better, or if the deal is surely worse than the opening (it
+            # scores 0 like no deal); otherwise take it, even when the relationship term may tip it
+            if sid is None or costs[sid] >= c_alt or certain(sid) >= c_open:
                 return {"supplier_id": (live or list(threads))[0], "message": {"action": {"type": "walk_away"}}}
             return {
                 "supplier_id": sid,

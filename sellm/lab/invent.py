@@ -427,6 +427,12 @@ def invent(rng, package, pool, cases, name, edges=None):
     if n > 1:
         case["type"] = "rfq"
     floor = price * rng.uniform(0.78, 0.97)
+    for part in case["parts"][:1]:  # where a should-cost exists the floor is near it (5-15 % error)
+        rows = package.query("select unit_cost from should_cost where part_id = ?", (part,))
+        if rows:
+            scale = 100 if "per_100" in tags else 1
+            floor = rows[0]["unit_cost"] * scale * rng.uniform(0.88, 1.12)
+            price = max(price, floor * 1.02)
     personas = {}
     for i, sup in enumerate(rng.sample(list(pool.values()), n)):
         arch = archetype_for(rng, sup)

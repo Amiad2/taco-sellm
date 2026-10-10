@@ -13,7 +13,8 @@ what would cost points in the final:
   wave_cap     the case ran out of time: no deal
   timeouts     threads left more than 60 s
 
-The verdict is FAIL if any crash, 422, broken or worse occurred.
+The verdict is FAIL if any crash, 422 or broken must-have occurred; the other counts are warnings
+(a deal worse than the opening scores 0, like walking away without an alternative).
 """
 
 import statistics
@@ -22,7 +23,7 @@ from . import invent, twins
 from .tournament import Run, summarise
 
 CHECKS = ("crashes", "rejected", "broken", "worse", "below_alt", "wave_cap", "timeouts")
-HARD = ("crashes", "rejected", "broken", "worse")
+HARD = ("crashes", "rejected", "broken")  # 'worse' scores 0 like no deal: a warning, not a failure
 
 
 def pools(package, n=120, per_edge=6, seed=7):
@@ -87,7 +88,7 @@ def report(rows, agent, knobs):
         secs = [r["wall_s"] for r in rs]
         lines.append(f"Our time per negotiation: median {statistics.median(secs):.2f} s, max {max(secs):.2f} s.")
         lines.append("")
-    lines.insert(1, f"**{verdict}** (FAIL = any crash, refused move, broken must-have or deal worse than the opening)")
+    lines.insert(1, f"**{verdict}** (FAIL = any crash, refused move or broken must-have; the rest are warnings)")
     return "\n".join(lines) + "\n", verdict
 
 

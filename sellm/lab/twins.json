@@ -119,11 +119,11 @@
     "premiums": {},
     "hard_limits": {},
     "first_step": 0.35,
-    "mirror": 0.5,
+    "mirror": 0.7,
     "patience": 6,
     "tiny_step": 0.002,
-    "cap": 0.004,
-    "cap_decay": 1.0,
+    "cap": 0.006,
+    "cap_decay": 0.8,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [],
@@ -145,19 +145,16 @@
      ],
      "mirror": [
       0.5,
-      0.7
+      0.7,
+      0.85
      ],
      "cap": [
-      0.002,
-      0.003,
       0.004,
       0.006,
       0.008,
-      0.012,
-      0.02
+      0.012
      ],
      "cap_decay": [
-      0.6,
       0.8,
       1.0
      ],
@@ -321,11 +318,11 @@
      "lead_time_days": 0.1
     },
     "hard_limits": {},
-    "first_step": 0.35,
-    "mirror": 0.7,
+    "first_step": 0.2,
+    "mirror": 0.85,
     "patience": 6,
     "tiny_step": 0.002,
-    "cap": 0.002,
+    "cap": 0.012,
     "cap_decay": 0.6,
     "walk_on_push": 0.5,
     "claim_weight": {},
@@ -333,7 +330,7 @@
      "offer",
      "quote"
     ],
-    "claim_w": 0.2,
+    "claim_w": 0.35,
     "ultimatum": 0.5,
     "leak": 0.6,
     "discloses": false,
@@ -347,8 +344,7 @@
     "archetype": "twin",
     "ranges": {
      "first_step": [
-      0.2,
-      0.35
+      0.2
      ],
      "mirror": [
       0.3,
@@ -357,11 +353,12 @@
       0.85
      ],
      "cap": [
-      0.002,
       0.003,
       0.004,
       0.006,
-      0.008
+      0.008,
+      0.012,
+      0.02
      ],
      "cap_decay": [
       0.6,
@@ -376,7 +373,6 @@
       7
      ],
      "claim_w": [
-      0.0,
       0.1,
       0.2,
       0.35,
@@ -432,11 +428,11 @@
      "lead_time_days": 0.1
     },
     "hard_limits": {},
-    "first_step": 0.35,
-    "mirror": 0.7,
+    "first_step": 0.2,
+    "mirror": 0.85,
     "patience": 6,
     "tiny_step": 0.002,
-    "cap": 0.002,
+    "cap": 0.012,
     "cap_decay": 0.6,
     "walk_on_push": 0.5,
     "claim_weight": {},
@@ -444,7 +440,7 @@
      "offer",
      "quote"
     ],
-    "claim_w": 0.2,
+    "claim_w": 0.35,
     "ultimatum": 0.5,
     "leak": 0.6,
     "discloses": false,
@@ -458,8 +454,7 @@
     "archetype": "twin",
     "ranges": {
      "first_step": [
-      0.2,
-      0.35
+      0.2
      ],
      "mirror": [
       0.3,
@@ -468,11 +463,12 @@
       0.85
      ],
      "cap": [
-      0.002,
       0.003,
       0.004,
       0.006,
-      0.008
+      0.008,
+      0.012,
+      0.02
      ],
      "cap_decay": [
       0.6,
@@ -487,7 +483,6 @@
       7
      ],
      "claim_w": [
-      0.0,
       0.1,
       0.2,
       0.35,
@@ -644,7 +639,7 @@
     "patience": 7,
     "tiny_step": 0.002,
     "cap": 0.002,
-    "cap_decay": 1.0,
+    "cap_decay": 0.8,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [
@@ -669,7 +664,9 @@
      ],
      "mirror": [
       0.3,
-      0.5
+      0.5,
+      0.7,
+      0.85
      ],
      "cap": [
       0.002
@@ -1249,12 +1246,12 @@
     "ppm_real": null,
     "premiums": {},
     "hard_limits": {},
-    "first_step": 0.8,
-    "mirror": 0.5,
+    "first_step": 0.5,
+    "mirror": 0.7,
     "patience": 6,
     "tiny_step": 0.002,
-    "cap": 0.003,
-    "cap_decay": 1.0,
+    "cap": 0.008,
+    "cap_decay": 0.8,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [],
@@ -1272,7 +1269,7 @@
     "archetype": "twin",
     "ranges": {
      "first_step": [
-      0.8
+      0.5
      ],
      "mirror": [
       0.3,
@@ -1281,8 +1278,8 @@
       0.85
      ],
      "cap": [
-      0.002,
-      0.003
+      0.006,
+      0.008
      ],
      "cap_decay": [
       0.6,
@@ -1449,7 +1446,7 @@
     },
     "hard_limits": {},
     "first_step": 0.03,
-    "mirror": 0.5,
+    "mirror": 0.7,
     "patience": 4,
     "tiny_step": 0.002,
     "cap": 0.002,
@@ -1561,7 +1558,7 @@
      ]
     },
     "first_step": 0.03,
-    "mirror": 0.5,
+    "mirror": 0.7,
     "patience": 4,
     "tiny_step": 0.002,
     "cap": 0.002,
@@ -1667,7 +1664,7 @@
     },
     "hard_limits": {},
     "first_step": 0.03,
-    "mirror": 0.5,
+    "mirror": 0.7,
     "patience": 4,
     "tiny_step": 0.002,
     "cap": 0.002,
@@ -1874,11 +1871,11 @@
     "premiums": {},
     "hard_limits": {},
     "first_step": 0.35,
-    "mirror": 0.5,
+    "mirror": 0.7,
     "patience": 4,
     "tiny_step": 0.002,
     "cap": 0.012,
-    "cap_decay": 1.0,
+    "cap_decay": 0.8,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [],
@@ -1900,12 +1897,11 @@
      ],
      "mirror": [
       0.5,
-      0.7
+      0.7,
+      0.85
      ],
      "cap": [
-      0.008,
-      0.012,
-      0.02
+      0.012
      ],
      "cap_decay": [
       0.6,
@@ -2289,11 +2285,11 @@
     },
     "hard_limits": {},
     "first_step": 0.03,
-    "mirror": 0.5,
+    "mirror": 0.7,
     "patience": 6,
     "tiny_step": 0.002,
     "cap": 0.006,
-    "cap_decay": 1.0,
+    "cap_decay": 0.8,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [],
@@ -2322,9 +2318,7 @@
      "cap": [
       0.004,
       0.006,
-      0.008,
-      0.012,
-      0.02
+      0.008
      ],
      "cap_decay": [
       0.6,
@@ -2716,11 +2710,11 @@
     },
     "hard_limits": {},
     "first_step": 0.2,
-    "mirror": 0.5,
+    "mirror": 0.7,
     "patience": 3,
     "tiny_step": 0.002,
-    "cap": 0.006,
-    "cap_decay": 1.0,
+    "cap": 0.008,
+    "cap_decay": 0.8,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [],
@@ -2741,15 +2735,11 @@
       0.2
      ],
      "mirror": [
-      0.3,
       0.5,
       0.7,
       0.85
      ],
      "cap": [
-      0.002,
-      0.003,
-      0.004,
       0.006,
       0.008,
       0.012,

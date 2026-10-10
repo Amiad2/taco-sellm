@@ -46,12 +46,28 @@ def build_pools(n_invented, invent_seed, n_test, package):
     return train, test
 
 
+def reader_for(opts):
+    """None (keyword rules) or an LLM reader of our e-mails, cached per text."""
+    if opts.get("reader") != "llm":
+        return None
+    from arena_kit.agents.llm import llm_from_env
+
+    from .reader import llm_reader
+
+    model = os.environ.get("LAB_READER_MODEL")
+    if model:
+        os.environ["LLM_MODEL"] = model
+    return llm_reader(llm_from_env())
+
+
 def _init(path, opts):
+    from arena_kit.cli import load_env
     from arena_kit.data import DataPackage
 
+    load_env()
     pkg = DataPackage(os.environ.get("ARENA_DATA", "data/package"))
     pkg.lookup("")
-    _W.update(pkg=pkg, scenarios={s.name: s for s in store.load(path)}, opts=opts)
+    _W.update(pkg=pkg, scenarios={s.name: s for s in store.load(path)}, opts=opts, reader=reader_for(opts))
 
 
 def make_agent(name, knobs, package):
@@ -100,6 +116,7 @@ def _play(job):
             wave_cap_s=o["wave_cap_s"],
             think_s=o["think_s"],
             vary=o["vary"] and s.kind == "twin",
+            reader=_W.get("reader"),
         )
         r = play_lab(table, agent, mode=o["mode"])
         row.update(
@@ -236,6 +253,23 @@ def _mean(xs):
     return statistics.mean(xs) if xs else math.nan
 
 
+def _se(xs):
+    """Standard error of the mean."""
+    return statistics.stdev(xs) / math.sqrt(len(xs)) if len(xs) > 1 else math.nan
+
+
+def paired(rows, a, b, pool="test"):
+    """Mean score difference a - b over the scenarios both played in `pool`, with its standard error:
+    the same scenarios on both sides, so the scenarios' own spread cancels out."""
+    per = {}
+    for r in rows:
+        if r["pool"] == pool:
+            per.setdefault((_key(r["strategy"], r["knobs"]), r["scenario"]), []).append(r["score"])
+    common = {s for k, s in per if k == a} & {s for k, s in per if k == b}
+    diffs = [_mean(per[(a, s)]) - _mean(per[(b, s)]) for s in common]
+    return _mean(diffs), _se(diffs), len(diffs)
+
+
 def _vals(row, dim):
     v = row.get(dim)
     return v if isinstance(v, list) else [v] if v is not None else []
@@ -268,6 +302,8 @@ def summarise(rows, min_scenarios=0):
             "mean": _mean(list(means.values())),
             "train": part(lambda r: r["pool"] == "train"),
             "test": part(lambda r: r["pool"] == "test"),
+            "test_se": _se([m for s, m in means.items() if first[s]["pool"] == "test"]),
+            "key": key,
             "twins": part(lambda r: r["kind"] == "twin"),
             "data": part(lambda r: r["kind"] == "data"),
             "invented": part(lambda r: r["kind"] == "invented"),
@@ -314,14 +350,15 @@ def report(rows, title, sort="test", top=12, min_scenarios=0):
         "moves (422) would cost cases in the final; broken must-haves and deals worse than the opening score 0; "
         "'below alt' = ended under what walking away would have scored.",
         "",
-        "| # | Strategy | Knobs | Test | Train | Twins | Case files | Invented | Worst 10 % | Crash | 422 "
+        "| # | Strategy | Knobs | Test ± SE | Train | Twins | Case files | Invented | Worst 10 % | Crash | 422 "
         "| Broken | Worse | Below alt | Wave cap | Timeouts | No deal |",
         "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|",
     ]
     for i, s in enumerate(ranked[:top], 1):
         knobs = ", ".join(f"{k}={v}" for k, v in sorted((s["knobs"] or {}).items())) or "default"
         lines.append(
-            f"| {i} | {s['strategy']} | {knobs} | **{f(s['test'])}** | {f(s['train'])} | {f(s['twins'])} | "
+            f"| {i} | {s['strategy']} | {knobs} | **{f(s['test'])}** ± {f(s['test_se'])} | {f(s['train'])} | "
+            f"{f(s['twins'])} | "
             f"{f(s['data'])} | {f(s['invented'])} | {f(s['worst10'])} | {s['crashes']} | {s['rejected']} | "
             f"{s['broken']} | {s['worse']} | {s['below_alt']} | {s['wave_cap']} | {s['timeouts']} | {s['no_deal']} |"
         )
@@ -333,7 +370,20 @@ def report(rows, title, sort="test", top=12, min_scenarios=0):
     def label(s):
         return "#1" if s is win else s["strategy"] + (" default" if s["strategy"] == "calc" else "")
 
-    lines += ["", "## Where the winner (#1) is weak, next to the baselines", ""]
+    lines += ["", "## Is #1 really better? Paired on the same test scenarios", ""]
+    for other in [s for s in ranked[1:4]] + [s for s in show[1:] if s not in ranked[1:4]]:
+        d, se, n = paired(rows, win["key"], other["key"])
+        if n:
+            verdict = "clearly better" if d > 2 * se else "clearly worse" if d < -2 * se else "not distinguishable"
+            name = label(other) if other in show else f"#{ranked.index(other) + 1}"
+            lines.append(f"- #1 vs {name}: {100 * d:+.1f} ± {100 * se:.1f} points on {n} scenarios ({verdict})")
+    lines += [
+        "",
+        "Differences within two standard errors are noise: more seeds or scenarios, or treat them as a tie.",
+        "",
+        "## Where the winner (#1) is weak, next to the baselines",
+        "",
+    ]
     dims = (("type", "case type"), ("goal", "goal"), ("archetypes", "supplier archetype"), ("tags", "edge case"))
     for dim, name in dims:
         keys = sorted({k for s in show for k in s["by"][dim]})

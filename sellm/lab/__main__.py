@@ -61,6 +61,7 @@ def opts_of(a):
         "wave_cap_s": None if a.no_clock or a.wave_cap <= 0 else a.wave_cap,
         "think_s": None if a.think < 0 else a.think,
         "vary": not a.fixed_twins,
+        "reader": a.reader,
     }
 
 
@@ -85,9 +86,11 @@ def cmd_play(a):
     pkg = package()
     s = find_scenario(a.case.split(":")[-1], pkg)
     o = opts_of(a)
+    from .tournament import reader_for
+
     table = LocalTable(
         s, pkg.facts, seed=a.seed, clock=o["clock"], wave_cap_s=o["wave_cap_s"], think_s=o["think_s"],
-        vary=o["vary"] and s.kind == "twin",
+        vary=o["vary"] and s.kind == "twin", reader=reader_for(o),
     )  # fmt: skip
     r = play_lab(table, make_agent(a.agent, parse_knobs(a.knobs), pkg), mode=o["mode"])
     c = s.case
@@ -195,6 +198,13 @@ def cmd_validate(a):
         kind = "naive" if lab.startswith("kit naive") else "llm" if lab.startswith("kit llm") else None
         if kind and (d.get("state") or {}).get("result"):
             real.setdefault((kind, d["case_id"].split(":")[1]), []).append(d["state"]["result"]["score"])
+    from .backtest import probe_check
+
+    print("Whole negotiations: the sandbox step probes (experiments/RESULTS.md) on the D01 twin family")
+    print("| Probe | Arena | Lab (40 family members) |\n|---|---|---|")
+    for label, arena, mean, sd in probe_check(pkg.facts):
+        print(f"| {label} | {min(arena):.2f}-{max(arena):.2f} | {mean:.3f} ± {sd:.3f} |")
+    print()
     kinds = ["naive"] + (["llm"] if a.llm else [])
     print("| Agent | Case | Arena | Lab |\n|---|---|---|---|")
     for kind in kinds:
@@ -241,6 +251,10 @@ def main(argv=None):
         p.add_argument("--wave-cap", type=float, default=480, help="seconds per case as in the final (0: none)")
         p.add_argument("--think", type=float, default=2.0, help="our seconds per move (-1: the real time taken)")
         p.add_argument("--fixed-twins", action="store_true", help="the fitted twins only, not their families")
+        p.add_argument(
+            "--reader", default="keywords", choices=["keywords", "llm"],
+            help="how suppliers read our e-mails: keyword rules, or an LLM (LAB_READER_MODEL or LLM_MODEL; costs)",
+        )  # fmt: skip
         p.add_argument("--invent-seed", type=int, default=1)
         p.add_argument("--workers", type=int, default=None)
         p.add_argument("--label", default="")

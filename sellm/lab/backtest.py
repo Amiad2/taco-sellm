@@ -14,6 +14,7 @@ import random
 import statistics
 from pathlib import Path
 
+from . import twins
 from .bot import SupplierThread
 from .table import Session
 from .twins import ROOT
@@ -28,6 +29,7 @@ GRID = {
 }
 STATUS_WEIGHT = 1.0  # a wrong status counts like 1 % of the opening value off
 PLAUSIBLE = 1.15  # a family member explains the replies within 15 % of the best fit's loss
+PROBE_WEIGHT = 10.0  # D01: 0.05 off in the closed-loop probe scores weighs like 0.5 % off per reply
 
 
 def real_sessions(name):
@@ -113,7 +115,10 @@ def fit(scenarios, facts, log=print, passes=3):
         for s in subset:
             for session in sessions[s.name]:
                 rows += replay(s, session, facts, params)
-        return loss(rows)
+        value = loss(rows)
+        if any(s.name == "D01" for s in subset):  # whole negotiations too: the sandbox step probes
+            value += PROBE_WEIGHT * probe_loss(next(s for s in subset if s.name == "D01"), facts, params)
+        return value
 
     def descend(start, subset):
         params, value = dict(start), total(start, subset)
@@ -223,3 +228,77 @@ one session are fitted on 2-6 replies: plausible values, not measurements.
 {dyn}
 """
     Path(path).write_text(text, encoding="utf-8")
+
+
+class Stepper:
+    """Jonathan's sandbox probe h2/h8/h10 (experiments/sandbox_probes.py) as an agent: fixed terms,
+    open at `start`, raise by `step` per e-mail while staying 0.30 below the supplier, accept as soon
+    as it stops saying `open` (at most 8 e-mails)."""
+
+    def __init__(self, start, step, fixed, margin=0.3, max_messages=8):
+        self.ask, self.step, self.fixed, self.margin, self.max = start, step, fixed, margin, max_messages
+        self.sent = 0
+
+    def decide(self, case, threads):
+        from arena_kit.play import latest, standing
+
+        sid = case["suppliers"][0]
+        events = threads[sid]
+        status = latest(events).get("status")
+        sheet_id, terms = standing(events)
+        if self.sent and (status != "open" or self.sent >= self.max):
+            return {"supplier_id": sid, "message": {"action": {"type": "accept", "term_sheet_id": sheet_id}}}
+        if self.sent:
+            self.ask = round(max(self.ask, min(self.ask + self.step, terms["unit_price"] - self.margin)), 2)
+        self.sent += 1
+        sheet = {**self.fixed, "unit_price": self.ask}
+        return {
+            "supplier_id": sid,
+            "message": {"body": "We can improve our proposal.", "term_sheets": [{"terms": sheet}]},
+        }
+
+
+# experiments/RESULTS.md section 3: D01, 30 days, 24 months, start February
+PROBES = [
+    ("open 50.00, steps 0.05", 50.0, 0.05, [0.676, 0.676, 0.676]),
+    ("open 50.00, steps 0.15", 50.0, 0.15, [0.75, 0.80]),
+    ("open 49.00, steps 0.15", 49.0, 0.15, [0.75, 0.82]),
+    ("open 48.60, steps 0.30", 48.6, 0.30, [0.79, 0.86]),
+    ("open 48.00, steps 0.40", 48.0, 0.40, [0.88, 0.90]),
+]
+
+
+def probe_loss(scenario, facts, params, seeds=6):
+    """Mean absolute gap between lab and arena scores of the sandbox step probes, with `params`."""
+    from .table import LocalTable, Scenario, play_lab
+
+    personas = {}
+    for sid, p in scenario.personas.items():
+        q = copy.copy(p)
+        for k, v in params.items():
+            setattr(q, k, v)
+        personas[sid] = q
+    s = Scenario(scenario.case, personas, scenario.c_open, scenario.c_best, name=scenario.name)
+    fixed = {"payment_days": 30, "contract_months": 24, "effective_date": "2027-02-01"}
+    gaps = []
+    for _, start, step, arena in PROBES:
+        lab = [play_lab(LocalTable(s, facts, seed=k), Stepper(start, step, fixed))["score"] for k in range(seeds)]
+        gaps.append(abs(statistics.mean(lab) - statistics.mean(arena)))
+    return statistics.mean(gaps)
+
+
+def probe_check(facts, seeds=40):
+    """The sandbox probes replayed closed-loop on the D01 twin family: does the lab rank them as the
+    arena did? Returns rows (label, arena range, lab mean, lab spread)."""
+    from .table import LocalTable, play_lab
+
+    s = next(x for x in twins.load() if x.name == "D01")
+    fixed = {"payment_days": 30, "contract_months": 24, "effective_date": "2027-02-01"}
+    rows = []
+    for label, start, step, arena in PROBES:
+        scores = [
+            play_lab(LocalTable(s, facts, seed=k, vary=True), Stepper(start, step, fixed))["score"]
+            for k in range(seeds)
+        ]
+        rows.append((label, arena, statistics.mean(scores), statistics.pstdev(scores)))
+    return rows

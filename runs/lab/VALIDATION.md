@@ -32,6 +32,25 @@ and compare the scores. Twins as in `sellm/lab/twins.json` after `backtest --fit
 Mean absolute difference per practice case: 0.11. One LLM run per side, and the LLM agent itself
 varies from run to run, so part of that is noise.
 
+## Whole negotiations: the sandbox step probes (added Sat 18:00)
+
+Jonathan's scripted D01 probes (`experiments/RESULTS.md` section 3: fixed terms, open at X, raise by
+a fixed step, accept when the supplier stops saying `open`) replayed closed-loop on the D01 twin
+family, 40 members each (`python -m sellm.lab validate`). Since then they are part of the fit.
+
+| Probe | Arena (sandbox) | Lab |
+|---|---|---|
+| open 50.00, steps 0.05 | 0.68 | 0.678 ± 0.045 |
+| open 50.00, steps 0.15 | 0.75-0.80 | 0.747 ± 0.038 |
+| open 49.00, steps 0.15 | 0.75-0.82 | 0.762 ± 0.051 |
+| open 48.60, steps 0.30 | 0.79-0.86 | 0.842 ± 0.051 |
+| open 48.00, steps 0.40 | 0.88-0.90 | 0.881 ± 0.053 |
+
+The lab ranks the five strategies as the arena did, and every level lies in the arena's range.
+Before the probes were in the fit the lab underrated big steps (0.831 for the last row): its
+per-round limit was too tight. This is the check that matters most - the lab is used to rank
+strategies - but it is one demo supplier.
+
 ## How far to trust the lab
 
 - **Good** (within about 0.03 in score): D01, P01, P03, P07, P08. The mean over the practice cases

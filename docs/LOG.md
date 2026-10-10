@@ -237,3 +237,16 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Same knobs as sellm/agent.py (from runs/lab/20261010-1632-search-first) against the Calculator default, on the 12 twin families + 80 freshly generated scenarios, clock on, one loop per thread, 2 seeds: 58.6 vs 52.3. Adaptive steps (58.2) and learning from the supplier's pick (58.2) added nothing; both 57.3.
 - Preliminary weak spots of the Calculator (small smoke runs, 1-2 seeds, read as pointers): raw_material and rfq cases, cases with 5-7 negotiable fields, near-monopolists and groups with an approval ladder, short round limits (4-6), prices per 100 pieces. A real search will say more.
 - No search was run after these changes (Amiad's instruction: build the environment first, no runs yet); no arena calls, quota still 189.
+
+## 2026-10-10 17:28 CEST · Amiad @ fedora
+**[finding] The lab ranks strategies as the arena did: Jonathan's five D01 step probes, replayed closed-loop**
+- experiments/RESULTS.md section 3 (open at X, fixed step, accept when the supplier stops saying open) replayed on the D01 twin family, 40 members each: 0.678 / 0.747 / 0.762 / 0.842 / 0.881 against the sandbox's 0.68 / 0.75-0.80 / 0.75-0.82 / 0.79-0.86 / 0.88-0.90. Same order, every level inside the arena's range.
+- Before the probes were part of the fit the lab gave the biggest steps only 0.831: its per-round limit was too tight, which would have biased searches toward small steps. Fit now: backtest loss + 10 x the probes' mean score gap. Mean error per real reply 0.77 %, status right in 217/237.
+- One demo supplier: it shows the lab can rank, not that every twin does. 'python -m sellm.lab validate' prints this table and the naive agent's lab vs arena scores (free).
+
+## 2026-10-10 17:28 CEST · Amiad @ fedora
+**[change] Lab: standard errors and paired tests in reports, an LLM reader option, Calculator prices the relationship term**
+- Reports show Test +- SE and pair #1 with the runners-up and baselines on the same test scenarios ('+8.8 +- 4.0 points, clearly better' / 'not distinguishable'): a difference under two SE is noise.
+- --reader llm: the lab's suppliers read our e-mails with an LLM (LAB_READER_MODEL or LLM_MODEL, cached per text) instead of keywords; costs calls, off by default.
+- Found with the lab and fixed in the Calculator (so in sellm/agent.py): it ignored the relationship term in stabilise/secure_supply cases and could close a deal that the term made worse than the opening (score 0): 2-4 of 324 negotiations. It now prices the term with its own floor estimate (should-cost, else floor_guess of the opening's value) for choosing and for the alternative check, and refuses only deals that are surely worse than the opening (C without the term). C_open follows the arena: the cheapest opening that keeps the must-haves, else the cheapest opening (P11 confirms it: 817,578 is its must-have-breaking opening). Result on 162 scenarios x 2: 0 worse-than-opening deals.
+- Invented suppliers' floors now sit within 12 % of the part's should-cost where one exists, as the data package says real estimates do. Stress verdict: FAIL on crashes, 422s and broken must-haves; a deal worse than the opening is a warning (it scores 0 like walking away without an alternative).
