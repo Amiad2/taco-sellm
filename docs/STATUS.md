@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-10 16:10 CEST by Jonathan (Claude Code).
+Last updated: 2026-10-10 16:50 CEST by Amiad (Claude Code).
 
 ## Now
 
@@ -11,13 +11,13 @@ Last updated: 2026-10-10 16:10 CEST by Jonathan (Claude Code).
 - No agent of our own exists yet; the kit's LLM agent is the baseline to beat: **61.5** over the 10 hosted cases (`runs/BASELINE.md`).
 - Every session the team plays is saved in full under `runs/` by `scripts/pull-runs`. Quota left: 189.
 - Sandbox probes (33 free sessions) show how suppliers react: only the first sheet can be accepted, a final offer is final, the supplier mirrors the size of our concessions, RFQ threads need their own loops. Rules for the agent: `experiments/RESULTS.md` section 5.
+- **Lab** (`sellm/lab/`, Sat 16:50): twins of the 15 suppliers of our 12 played cases, each calibrated to its case's `C_best`; the kit's `play()` and any agent run against them locally, free and in milliseconds (`uv run python -m sellm.lab play P01`). Backtest against all 233 real supplier replies: mean error 0.95 % of the opening value, status right in 210/233; weak on P05 and P10 (`runs/lab/BACKTEST.md`). Tournament runner is next.
 - Team memory is in place: `AGENTS.md`, `docs/CONTEXT.md`, this file, `docs/LEARNINGS.md`, `docs/LOG.md`.
 
 ## In progress (claim before you start, remove when done)
 
 | Who | What | Files | Since |
 |---|---|---|---|
-| - | - | - | - |
 | Amiad (Claude Code) | **Lab**: a local supplier simulator (twins of the 11 suppliers we have played, calibrated to each case's `C_best`, plus invented suppliers) and a tournament runner to test buyer strategies without quota. Backtested against our real sessions before anyone trusts it. No arena calls | `sellm/lab/`, `tests/test_lab.py`, `runs/lab/` | Sat 16:00 |
 
 ## Next up

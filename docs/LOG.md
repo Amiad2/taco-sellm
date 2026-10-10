@@ -151,3 +151,23 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Built in: 'arena play', 'arena run', scripts/pull-runs and experiments/sandbox_probes.py call scripts/pull-first. It fetches; if origin is ahead it pulls (rebase, autostash) and restarts the command on the new code; on a conflict the run does not start.
 - New runners or scripts that open arena sessions must call arena_kit.cli.pull_first() first. Exceptions: arena-sim on localhost never pulls; 'arena run --set final' only reports (the final runs the frozen commit); ARENA_NO_PULL=1 switches it off.
 - Tested with two clones: teammate pushes -> pulled and restarted on the new code; nothing new -> starts directly; conflicting local commit -> run refused. Rule text: AGENTS.md section 2.
+
+## 2026-10-10 16:22 CEST · Amiad @ fedora
+**[change] Lab v1: local twins of the suppliers we played, and a backtest against our real sessions**
+- sellm/lab/: LocalTable (the kit's RemoteTable interface: kit play() and any agent run unchanged, no HTTP, no clock, no quota), SupplierThread (the supplier's decision), Persona (value, floor, dynamics), ClaimChecker (cited data by the published rules), twins.json (15 suppliers of the 12 cases in runs/, incl. D02).
+- Commands: 'uv run python -m sellm.lab play P01 [--agent llm]', 'twins', 'calibrate' (rebuild twins.json after new sessions are pulled), 'backtest [--fit]'. tests/test_lab.py: 28 tests, 1.3 s.
+- Supplier model: accepts a package when its cash value to the supplier (kit supplier_value at its cost of money, plus lever premiums read from its alternative sheets) reaches its floor; first counter a fixed share of (opening - floor), then gives back a share of each of our steps up to a per-round limit that shrinks, final_offer after its patience, may walk when pushed after final_offer (Jonathan's probes, experiments/RESULTS.md).
+- Report for the team: runs/lab/BACKTEST.md. Not yet: strategy tournament, invented suppliers.
+
+## 2026-10-10 16:22 CEST · Amiad @ fedora
+**[finding] A supplier's floor is its full cost in value terms; C_best pins it down**
+- Calibrating the floor so the cheapest acceptable package costs exactly C_best gives P01 full cost 129.91 (at 8 % cost of money); the arena's relationship charge of 813 on our P01 deal at 133.70 implies 129.95. Two independent routes, 4 cents apart.
+- Floors vs should-cost where a plant-specific estimate exists: P02 363.96 vs 374.95, P03 397.46 vs 403.21, P10 25.64 vs 24.31 - within the estimate's own error of about 5 %.
+- How far above the floor the kit LLM agent closed (value terms): P01 2 %, P02 2 %, P04 1 %, P11 4 %, P07 8 %, P08 10 %, P18 20 %, P10 31 %. That is the room our strategy has to win; it is largest in P10, P18, P08.
+- Lever prices from suppliers' alternative sheets: payment days at 6.4-6.6 % a year (P02, P08), 9.3 % (D01), about 35 % for the Czech job shop in P05 (16 days = 0.50); lead time 0.15 EUR per unit per day (P10); 1,200 ppm tighter about 1.4 EUR per unit (P11).
+
+## 2026-10-10 16:22 CEST · Amiad @ fedora
+**[finding] Backtest: real suppliers give back little per round, whatever our step**
+- 233 real supplier replies (13 practice + 33 sandbox sessions) replayed into the twins: mean error 0.95 % of the opening value per reply, status right in 210 of 233. Good on D01, P01, P04, P07, P08 (<= 0.6 %); weak on P05 (8 %) and P10 (3.3 %), one session each.
+- Best global fit: first counter 35 % of (opening - floor), then mirror 0.5 of our step, but at most 0.4 % of the opening per round, final_offer at our 6th message. Most twins sit at the grid's lowest limit: the per-round limit, not the mirror, is what binds when our steps are large.
+- So the first counter and the number of rounds decide most of the outcome; a bigger step only helps up to that limit. To be tested in the tournament, then on one practice case.
