@@ -8,10 +8,15 @@ from pathlib import Path
 
 import pytest
 
-from sellm.agent import make_agent
-from sellm.endgame import DEFAULTS
+from sellm.endgame import DEFAULTS, Persistent
 from sellm.endgame import make_agent as make_persistent
 from sellm.negotiator import Negotiator, Thread
+
+
+def make_agent(package):
+    """The negotiator alone, without the layer: the reference these tests compare with."""
+    return Negotiator(package)
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "package"
@@ -134,3 +139,35 @@ def test_creep_never_steps_further_than_its_share_of_the_gap(package):
                 assert sheet["unit_price"] <= plain["term_sheets"][0]["terms"]["unit_price"] + 0.006
             checked += 1
     assert checked >= 10
+
+
+def test_the_agent_plays_the_two_rules_that_were_measured(package):
+    """`--agent sellm`: past the relationship target, and fast payment for a supplier short of cash."""
+    from sellm.agent import KNOBS
+    from sellm.agent import make_agent as the_agent
+
+    assert KNOBS == {"past_target": True, "fast_pay": True}
+    agent = the_agent(package)
+    assert isinstance(agent, Persistent) and agent.e["past_target"] and agent.e["fast_pay"]
+    assert not any(agent.e[k] for k in ("push_final", "pay_probe", "signal_facts", "soft_give", "creep", "zone"))
+    if package is None:
+        return
+    rec = record("P01", "v1.4 (argument bank")
+    case = rec["case"]
+    sid = case["suppliers"][0]
+    first = agent.decide(case, {sid: rec["threads"][sid]["messages"][:1]})["message"]["term_sheets"][0]["terms"]
+    assert first["payment_days"] == 14, "the dossier holds this supplier's request for payment within ten days"
+
+
+def test_no_ask_after_a_final_offer_by_default(package):
+    """Measured Sat 23:15: one polite ask 1 % below a final offer and two of three suppliers withdrew."""
+    from sellm.agent import make_agent as the_agent
+
+    for case_id in ("P04", "P08", "P07"):
+        rec = record(case_id, "v1.4 (argument bank")
+        case = rec["case"]
+        sid = case["suppliers"][0]
+        messages = rec["threads"][sid]["messages"]
+        final = next(i for i, m in enumerate(messages) if m.get("status") == "final_offer")
+        decision = the_agent(package).decide(case, {sid: messages[: final + 1]})
+        assert (decision["message"].get("action") or {}).get("type") == "accept"

@@ -231,13 +231,16 @@ def test_no_walk_away_while_a_valid_offer_stands(package):
 
 
 def test_strategic_case_stops_when_the_offer_reaches_our_target(package):
-    """In stabilise and secure_supply cases a lower price costs more in the relationship term."""
+    """In stabilise and secure_supply cases a lower price costs more in the relationship term: the
+    negotiator by itself stops at its target. (`--agent sellm` adds the persistence layer, which
+    keeps asking past it while the supplier moves: tests/test_endgame.py.)"""
     case, sid, messages = first_single("stabilise")
-    agent = make_agent(package)
+    agent = Negotiator(package)
     view = Thread(case, sid, [messages[0]])
     target = agent.aim(case, view, agent.opening_structure(case, view))["target"]
     their = reply(messages[0], "open", round(target * 0.995, 2), **agent.opening_structure(case, view))
-    decision = make_agent(package).decide(case, ask_then(case, sid, messages, package, their))
+    ours = Negotiator(package).decide(case, {sid: [messages[0]]})["message"]
+    decision = Negotiator(package).decide(case, {sid: [messages[0], {**ours, "from": "buyer"}, their]})
     assert (decision["message"].get("action") or {}).get("type") == "accept"
 
 
@@ -368,4 +371,3 @@ def test_the_dossier_reads_every_opening_not_one_email(package):
     assert found.get("contact"), "the overlay read its opening e-mail"
     alone = Negotiator(package)  # asked before any move: its own opening at least
     assert alone.intel(case, Thread(case, "sup:70240", threads["sup:70240"])).get("contact")
-

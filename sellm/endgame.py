@@ -271,7 +271,6 @@ class Persistent(Negotiator):
 
 
 def make_agent(package=None, writer=None, **knobs):
-    """The negotiator with the persistence knobs given (none: identical to `sellm.agent.make_agent`)."""
-    from .agent import KNOBS
-
-    return Persistent(package, writer=writer, **{**KNOBS, **knobs})
+    """The layer with exactly the knobs given, for tests and experiments (none: the negotiator's
+    moves). What `--agent sellm` plays is set in `sellm.agent.KNOBS`."""
+    return Persistent(package, writer=writer, **knobs)

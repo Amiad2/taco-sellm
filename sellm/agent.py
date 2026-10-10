@@ -2,11 +2,16 @@
 
 import os
 
-from sellm.negotiator import Negotiator
+from sellm.endgame import Persistent
 
-# Overrides of the negotiator's defaults (sellm/negotiator.py DEFAULTS). Empty: the defaults are the
-# values measured on the real sandbox (docs/LOG.md Sat 18:22).
-KNOBS = dict()
+# What `--agent sellm` plays on top of the defaults of the negotiator (sellm/negotiator.py DEFAULTS)
+# and of its persistence layer (sellm/endgame.py DEFAULTS). Both rules were measured on practice
+# (experiments/PERSISTENCE.md): together they change P01 (0.915 -> 0.969) and D01's accept, and no
+# other move in the recorded sessions.
+KNOBS = dict(
+    past_target=True,  # with a relationship term: keep asking past our target while the supplier still moves
+    fast_pay=True,  # a supplier the dossier calls short of cash is asked for the fastest payment
+)
 
 # The best Calculator variant of the first lab search (runs/lab/20261010-1632-search-first/report.md,
 # #1), tone warm. Kept as the control arm of experiments/ab_sandbox.py: on the real sandbox case D01
@@ -30,6 +35,14 @@ CALC_KNOBS = dict(
 
 
 def make_agent(package=None, writer=None, **knobs):
-    """A fresh agent for one case. `writer`: template (default) or llm; `SELLM_WRITER` sets it for a
-    run. `knobs` override the negotiator's defaults (the lab passes them)."""
-    return Negotiator(package, writer=writer or os.environ.get("SELLM_WRITER") or None, **{**KNOBS, **knobs})
+    """A fresh agent for one case. `knobs` override the defaults (the lab passes them).
+
+    `SELLM_LLM=shadow|apply` adds the LLM (sellm/advisor.py): it writes the e-mail around the moves
+    code has fixed and gives a verdict with a confidence on the supplier's standing offer - logged
+    only (`shadow`) or acted on within guards (`apply`). Without it no LLM is called."""
+    mode = os.environ.get("SELLM_LLM", "").strip().lower()
+    if mode in ("shadow", "apply"):
+        from sellm.advisor import Advised
+
+        return Advised(package, writer=writer, verdict=mode, **{**KNOBS, **knobs})
+    return Persistent(package, writer=writer or os.environ.get("SELLM_WRITER") or None, **{**KNOBS, **knobs})
