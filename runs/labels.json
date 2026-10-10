@@ -206,6 +206,7 @@
  "b7f37a230bf6f9b0": "TEST past-target (one-off, not in the agent): keep asking past the relationship target while the supplier moves",
  "b9bd6f9b3b878b6c": "probe h13-a",
  "b9eb9670c83ff68c": "probe h2-trade",
+ "ba9d28cfec9a89c7": "Codex P02 one-euro branch 368.14 @b2f54e2",
  "bb64095ce8935924": "kit llm, gpt-6.1-sol",
  "bb715f900ecf9364": "sellm negotiator v1.3 (data lock) @d792ee3, kit runner, no LLM",
  "bbb071f7e97ef408": "ab nego-template @8e0f876+local",

@@ -114,7 +114,8 @@ Evidence and tables: `experiments/RESULTS.md`. Measured on the sandbox's demo su
   led Nordmark to EUR 373.85 at 90-day payment and `final_offer`; our next ask, EUR 138.68, ended the
   session with no deal (score 0.000). The requested ten rounds were impossible once the supplier
   withdrew. Do not push after `final_offer`; the one-euro anchor also did not bring the supplier near
-  the buyer's EUR 368.14 target.
+  the buyer's EUR 368.14 target. Three follow-up branches at EUR 370.00, 369.03, and 368.14 after
+  `final_offer` (EUR 373.95, 373.90, 373.85 respectively) all ended in withdrawal and score 0.000.
 - **The supplier mirrors our steps, not our level** (confirmed on D01, 20 sessions). Its first
   counter did not depend on our opening. It then gave back 0.6-0.85 of each step we made and said
   `final_offer` at our 6th message. Opening 1.00 lower with the same steps changed nothing; steps
