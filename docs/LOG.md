@@ -354,3 +354,8 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - sellm/intel/schema.py: schema v1 names, enums (coverage, cash_pressure, archetype, 13 signal kinds incl. informal_costing), empty_dossier(); sellm/intel/__init__.py: dossier(supplier_id, part_ids, case, opening, package) returns the full section 10 schema with 'no data' defaults and never raises.
 - Defaults are the rules' outcome for a supplier without data: cost_of_money 0.10, cash_pressure low, archetype other; parts get an empty section each.
 - tests/test_intel.py: every field of the contract, odd inputs never raise, < 5 ms per call. Next: validator, extraction, builder (S2-S9).
+
+## 2026-10-10 18:21 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
+**[change] Intel S2: schema validator**
+- sellm/intel/schema.py validate(d) -> list of readable errors: required and unknown keys at every level, enums, cost_of_money in (0, 1], signal kinds/strength/evidence sorted and unique, floor band order, alternatives buyer-private, standard_terms source, finite numbers everywhere.
+- tests/test_intel.py: the stub is valid; 14 deliberate breaches are each reported.
