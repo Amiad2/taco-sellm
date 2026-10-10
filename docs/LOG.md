@@ -186,3 +186,8 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Data that moved a real supplier ('it holds and we took it into account'): notice period P01, volume change P03, quality record P11, rival quote D02. No effect: notice period P02, volume change P04 and P10, delivery record P18. Verified is not convincing, as the brief says.
 - Use: rank strategy variants by the mean over many scenarios; do not read one case's lab score as a prediction; confirm winners in the sandbox, then on practice.
 - LLM spend for this check: about 60 calls on Amiad's key.
+## 2026-10-10 16:38 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
+**[change] Ignore .idea/, set up uv on a new machine**
+- Added .idea/ (local PyCharm project metadata) to .gitignore so it stops showing as uncommitted noise.
+- New machine (omar): uv was not installed; installed via the official standalone installer into ~/.local/bin, then uv sync --all-extras and uv run arena data.
+- No code or behaviour change; arena_kit untouched.

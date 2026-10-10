@@ -9,3 +9,4 @@ __pycache__/
 data/
 .claude/settings.local.json
 runs/lab/*/rows.jsonl.gz
+.idea/
