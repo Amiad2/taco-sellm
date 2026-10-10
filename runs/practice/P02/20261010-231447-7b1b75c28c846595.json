@@ -3,7 +3,7 @@
  "case_id": "case:P02",
  "set": "practice",
  "created_at": "2026-10-10T23:14:47+02:00",
- "label": null,
+ "label": "P02 c3 volume_commitment retry",
  "replay": "https://arena.tacto.ai/replay/7b1b75c28c846595",
  "case": {
   "case_id": "case:P02",

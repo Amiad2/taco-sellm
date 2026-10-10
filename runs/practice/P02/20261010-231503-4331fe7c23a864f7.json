@@ -3,7 +3,7 @@
  "case_id": "case:P02",
  "set": "practice",
  "created_at": "2026-10-10T23:15:03+02:00",
- "label": null,
+ "label": "P02 c4 quid_pro_quo retry",
  "replay": "https://arena.tacto.ai/replay/4331fe7c23a864f7",
  "case": {
   "case_id": "case:P02",

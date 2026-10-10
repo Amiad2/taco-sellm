@@ -3,7 +3,7 @@
  "case_id": "case:P02",
  "set": "practice",
  "created_at": "2026-10-10T23:32:51+02:00",
- "label": null,
+ "label": "P02 repaired c2 current-price anchor @18f739b",
  "replay": "https://arena.tacto.ai/replay/3fcf699839c8473a",
  "case": {
   "case_id": "case:P02",

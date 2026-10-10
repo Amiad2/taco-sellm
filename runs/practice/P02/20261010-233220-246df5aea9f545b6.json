@@ -3,7 +3,7 @@
  "case_id": "case:P02",
  "set": "practice",
  "created_at": "2026-10-10T23:32:20+02:00",
- "label": null,
+ "label": "P02 repaired c1 control @18f739b",
  "replay": "https://arena.tacto.ai/replay/246df5aea9f545b6",
  "case": {
   "case_id": "case:P02",
