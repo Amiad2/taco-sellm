@@ -23,7 +23,7 @@ from zoneinfo import ZoneInfo
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from arena_kit.cli import load_env  # noqa: E402
+from arena_kit.cli import load_env, pull_first  # noqa: E402
 from arena_kit.client import ArenaClient, ArenaError  # noqa: E402
 from arena_kit.cost import RELATIONSHIP_GOALS, must_haves_ok, total_cost  # noqa: E402
 from arena_kit.docs import quote_terms, read_document  # noqa: E402
@@ -367,6 +367,7 @@ def main():
     args = ap.parse_args()
     os.chdir(ROOT)
     load_env()
+    pull_first()  # runs/ is shared: write on top of the team's latest state
     client = ArenaClient()
     labels = json.loads(LABELS.read_text(encoding="utf-8")) if LABELS.is_file() else {}
     records, new = [], 0

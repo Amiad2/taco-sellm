@@ -42,6 +42,7 @@
  "eae14282a9da2d78": "probe h1b",
  "ed5f9251a6dce645": "kit llm, gpt-6.1-sol",
  "edd91daa7e17280b": "kit llm, gpt-6.1-sol",
+ "f137ed9ee57ca253": "kit naive (test of pull-first)",
  "f8ee381f24b016da": "probe h8-low",
  "ffaaeec39a8214fd": "probe h1c",
  "fff76670fe248a29": "kit llm, gpt-6.1-sol"

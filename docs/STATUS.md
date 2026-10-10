@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-10 16:00 CEST by Jonathan (Claude Code).
+Last updated: 2026-10-10 16:10 CEST by Jonathan (Claude Code).
 
 ## Now
 
@@ -38,6 +38,7 @@ Weakest: P02 0.105, P18 0.377, P08 0.433, P10 0.570. Analysis and hypotheses: `r
 ## Decisions
 
 - Work on `main`, small commits, `scripts/sync` after each one (`AGENTS.md`).
+- **Pull before every run.** `arena play`, `arena run`, `scripts/pull-runs` and the probe scripts call `scripts/pull-first` themselves and restart on the new code; new runners must call `arena_kit.cli.pull_first()` (`AGENTS.md` section 2).
 - Docs and logs are written in English: the jury and tum.ai read the repo.
 
 ## Open questions (need a human)

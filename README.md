@@ -31,6 +31,7 @@ working protocol (sync, claim, log, commit, push). The team's memory lives in `d
 
 ```bash
 scripts/sync                                   # pull --rebase + push
+scripts/pull-first                             # get the team's latest code; arena play/run call it themselves
 scripts/log "[finding] title" "detail" ...     # add a log entry, then commit it with the change
 scripts/session-start                          # print the team's live state
 ```

@@ -40,7 +40,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from arena_kit.agents import LLMAgent, llm_from_env  # noqa: E402
-from arena_kit.cli import load_env  # noqa: E402
+from arena_kit.cli import load_env, pull_first  # noqa: E402
 from arena_kit.client import ArenaClient, ArenaError  # noqa: E402
 from arena_kit.cost import complete_offer, must_haves_ok, total_cost  # noqa: E402
 from arena_kit.data import DataPackage  # noqa: E402
@@ -448,6 +448,7 @@ def main():
     ap.add_argument("--out", help="write the summaries to this JSON file")
     args = ap.parse_args()
     load_env()
+    pull_first()  # never play on outdated code
     client = ArenaClient()
     complete = package = None
     if any(p.startswith("h3") for p in args.probes):

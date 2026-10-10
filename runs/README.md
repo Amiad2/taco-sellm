@@ -22,7 +22,7 @@ runs are in `runs/logs/`.
 | P10 (practice) | capacity / secure_supply | 1,932,492 | 1,328,927 | - | 0.570 | kit llm, gpt-6.1-sol | 1 |
 | P11 (practice) | quality / quality_first | 817,578 | 722,500 | 894,383 | 0.710 | kit llm, gpt-6.1-sol | 1 |
 | P18 (practice) | raw_material / leverage | 295,173 | 222,651 | 301,088 | 0.377 | kit llm, gpt-6.1-sol | 1 |
-| D01 (sandbox) | price_increase / stabilise | 448,811 | 408,624 | - | 0.897 | probe h10-b | 28 |
+| D01 (sandbox) | price_increase / stabilise | 448,811 | 408,624 | - | 0.897 | probe h10-b | 29 |
 | D02 (sandbox) | rfq / leverage | 214,296 | 156,739 | 238,800 | 0.492 | probe h3-seq | 7 |
 
 Mean of our best per practice case played: 61.5 (10 cases).
@@ -75,6 +75,7 @@ price would beat C_best, so the supplier would not give all of them at this pric
 | D01 | 10-10 15:55 | probe h10-a | 0.805 | accepted | 7 | unit_price=50.7, payment_days=30, contract_months=24, effective_date=2027-02-01 | 7,844 | 4,052 | 3,791 | [md](sandbox/D01/20261010-155522-a0175b58a858434d.md) · [json](sandbox/D01/20261010-155522-a0175b58a858434d.json) · [replay](https://arena.tacto.ai/replay/a0175b58a858434d) |
 | D01 | 10-10 15:55 | probe h10-b | 0.878 | accepted | 7 | unit_price=50.3, payment_days=30, contract_months=24, effective_date=2027-02-01 | 4,896 | 3,774 | 1,122 | [md](sandbox/D01/20261010-155522-d0873f54ec6fc033.md) · [json](sandbox/D01/20261010-155522-d0873f54ec6fc033.json) · [replay](https://arena.tacto.ai/replay/d0873f54ec6fc033) |
 | D01 | 10-10 15:55 | probe h10-b | 0.897 | accepted | 7 | unit_price=50.2, payment_days=30, contract_months=24, effective_date=2027-02-01 | 4,159 | 3,705 | 455 | [md](sandbox/D01/20261010-155522-c710026954a70317.md) · [json](sandbox/D01/20261010-155522-c710026954a70317.json) · [replay](https://arena.tacto.ai/replay/c710026954a70317) |
+| D01 | 10-10 16:06 | kit naive (test of pull-first) | 0.200 | accepted | 5 | unit_price=50.9, payment_days=30, contract_months=12, effective_date=2026-12-01 | 32,133 | 27,007 | 5,126 | [md](sandbox/D01/20261010-160655-f137ed9ee57ca253.md) · [json](sandbox/D01/20261010-160655-f137ed9ee57ca253.json) · [replay](https://arena.tacto.ai/replay/f137ed9ee57ca253) |
 | D02 | 10-10 15:42 | probe h3-seq | 0.492 | accepted | 9 | unit_price=15.3, payment_days=14, lead_time_days=35, incoterm=DAP | 29,266 | 1,877 | 27,389 | [md](sandbox/D02/20261010-154243-9888e414ec64b388.md) · [json](sandbox/D02/20261010-154243-9888e414ec64b388.json) · [replay](https://arena.tacto.ai/replay/9888e414ec64b388) |
 | D02 | 10-10 15:42 | probe h3-par v1 (rounds in lockstep, held a ready thread; script crashed, closed by hand) | 0.239 | accepted | 10 | unit_price=16.1, payment_days=30, lead_time_days=35, incoterm=FCA | 43,797 | 6,088 | 37,709 | [md](sandbox/D02/20261010-154243-247b287638de67b5.md) · [json](sandbox/D02/20261010-154243-247b287638de67b5.json) · [replay](https://arena.tacto.ai/replay/247b287638de67b5) |
 | D02 | 10-10 15:50 | probe h3-par | 0.345 | accepted | 9 | unit_price=15.4, payment_days=14, lead_time_days=35, incoterm=EXW | 37,678 | 9,089 | 28,589 | [md](sandbox/D02/20261010-155018-a24a4447a9db8d6f.md) · [json](sandbox/D02/20261010-155018-a24a4447a9db8d6f.json) · [replay](https://arena.tacto.ai/replay/a24a4447a9db8d6f) |

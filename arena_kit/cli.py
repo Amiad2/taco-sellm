@@ -8,6 +8,8 @@ import json
 import logging
 import os
 import statistics
+import subprocess
+import sys
 import zipfile
 from pathlib import Path
 
@@ -24,6 +26,23 @@ def load_env(path=".env"):
             value = value.strip().strip("\"'")
             if sep and value and not key.strip().startswith("#"):
                 os.environ.setdefault(key.strip(), value)
+
+
+PULL_FIRST = Path(__file__).resolve().parent.parent / "scripts" / "pull-first"
+
+
+def pull_first(final=False, restart=True):
+    """Before a run on the hosted arena: get the team's latest commits (scripts/pull-first), so no
+    run measures an outdated agent. If commits came in, this command starts again on the new code.
+    The Live Final only reports: it runs the commit that is checked out. Not for arena-sim."""
+    url = os.environ.get("ARENA_URL", "")
+    if not PULL_FIRST.is_file() or "127.0.0.1" in url or "localhost" in url:
+        return
+    code = subprocess.run(["bash", str(PULL_FIRST), *(["--check-only"] if final else [])], check=False).returncode
+    if code == 3 and restart:  # this process still holds the old modules
+        os.execve(sys.executable, [sys.executable, *sys.argv], {**os.environ, "ARENA_NO_PULL": "1"})
+    if code == 1:
+        raise SystemExit("not started: get in sync with the team first (message above)")
 
 
 def agent_factory(name, data):
@@ -91,6 +110,8 @@ def main(argv=None):
         from .mcp_server import main as serve
 
         return serve(args.data)
+    if args.cmd in ("play", "run"):
+        pull_first(final=args.cmd == "run" and args.set == "final", restart=argv is None)
     client = ArenaClient()
     if args.cmd == "register":
         out = client.register(args.team_name, args.event_code)

@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# Before any run against the arena: get the team's latest commits, so every run tests the team's
+# current code and nobody measures an outdated agent. Called automatically by `arena play`,
+# `arena run`, scripts/pull-runs and the experiment scripts; run it by hand before anything else
+# that plays sessions.
+#   exit 0  in sync (or origin unreachable: warning only), go ahead
+#   exit 3  new commits were pulled: restart the command so it runs the new code
+#   exit 1  do not run: the pull stopped on a conflict
+# --check-only   report, never pull (the Live Final runs the frozen commit)
+# ARENA_NO_PULL=1 skips the check.
+cd "$(dirname "$0")/.." || exit 0
+git rev-parse --git-dir >/dev/null 2>&1 || exit 0
+head=$(git rev-parse --short HEAD)
+if [ "${ARENA_NO_PULL:-}" = "1" ]; then
+  echo "pull-first: skipped (ARENA_NO_PULL=1), running $head" >&2
+  exit 0
+fi
+branch=$(git rev-parse --abbrev-ref HEAD)
+
+git fetch --quiet origin 2>/dev/null &
+fetch=$!
+(sleep 15 && kill "$fetch" 2>/dev/null) &
+watchdog=$!
+wait "$fetch" 2>/dev/null && fetched=yes || fetched=no
+kill "$watchdog" 2>/dev/null
+wait "$watchdog" 2>/dev/null
+if [ "$fetched" = no ] || ! git rev-parse --verify --quiet "origin/$branch" >/dev/null; then
+  echo "pull-first: WARNING could not reach origin. Running local $head; teammates may have pushed newer code." >&2
+  exit 0
+fi
+
+behind=$(git rev-list --count "HEAD..origin/$branch")
+ahead=$(git rev-list --count "origin/$branch..HEAD")
+dirty=$(git status --porcelain | wc -l | tr -d ' ')
+state="$ahead unpushed commit(s), $dirty uncommitted file(s)"
+if [ "$behind" = "0" ]; then
+  echo "pull-first: in sync with origin/$branch at $head ($state)" >&2
+  exit 0
+fi
+if [ "${1:-}" = "--check-only" ]; then
+  echo "pull-first: WARNING origin/$branch has $behind newer commit(s). This run uses local $head ($state). Pull by hand if that is not the commit you mean to run." >&2
+  exit 0
+fi
+if ! git pull --rebase --autostash --quiet origin "$branch"; then
+  echo "pull-first: STOP. origin/$branch has $behind newer commit(s) and the pull hit a conflict." >&2
+  echo "pull-first: fix the files, 'git add' them, 'git rebase --continue', then start the run again." >&2
+  exit 1
+fi
+echo "pull-first: pulled $behind new commit(s) from the team, now at $(git rev-parse --short HEAD) ($state). Restarting on the new code." >&2
+exit 3

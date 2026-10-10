@@ -144,3 +144,10 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Kit play() on D02: 2 timeouts per session. One loop per thread: 0. Replies take 30-59 s, so rounds in lockstep still break the other thread's clock.
 - A supplier at final_offer left for over a minute withdrew when we came back to accept. A timeout is counted when the session is next touched; the follow-up carries a new offer ID.
 - Citing the rival's offer by ID is 'verified'. An early 'agreed' means the ask was too high: C_best in D02 is 156,739, best closed about 186,000.
+
+## 2026-10-10 16:08 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[decision] Pull before every run; built into the run commands**
+- Rule from Jonathan: whenever teammates have pushed, their commits must be pulled before a new run starts, so no run measures an outdated agent.
+- Built in: 'arena play', 'arena run', scripts/pull-runs and experiments/sandbox_probes.py call scripts/pull-first. It fetches; if origin is ahead it pulls (rebase, autostash) and restarts the command on the new code; on a conflict the run does not start.
+- New runners or scripts that open arena sessions must call arena_kit.cli.pull_first() first. Exceptions: arena-sim on localhost never pulls; 'arena run --set final' only reports (the final runs the frozen commit); ARENA_NO_PULL=1 switches it off.
+- Tested with two clones: teammate pushes -> pulled and restarted on the new code; nothing new -> starts directly; conflicting local commit -> run refused. Rule text: AGENTS.md section 2.

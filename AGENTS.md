@@ -10,7 +10,8 @@ Final: Sunday 11 Oct 2026, 12:00 CEST.** Everything about the challenge is in `d
 
 ## 1. Start of every session, before anything else
 
-1. `scripts/sync` - get the team's latest state (pull --rebase, push).
+1. `scripts/sync` - get the team's latest state (pull --rebase, push). Do it again whenever you
+   come back to the work after a pause.
 2. Read `docs/STATUS.md` - where we are, who is working on what, what is next - and `docs/PLAN.md`
    for the workstream your task belongs to.
 3. Read the newest entries of `docs/LOG.md` - `scripts/session-start` prints both.
@@ -38,6 +39,29 @@ file and `docs/CONTEXT.md`. In any other tool, do the steps by hand.
 you stop or hand back to your human.** Unpushed work is the main way two agents end up building the
 same thing or breaking each other. The one exception: do not push a state that breaks the tests or
 the runner on `main`; finish the step or stash it, and say so.
+
+### Pull before every run
+
+**Before every run against the arena - one case, a full run, a probe, the final rehearsal - the
+checkout must contain everything the team has pushed.** Otherwise the run measures an outdated
+agent, the score is credited to the wrong code, and quota is spent on something a teammate already
+fixed. This holds every time, not only at the start of a session: teammates push while you work.
+
+It is built in, so it cannot be forgotten:
+
+- `uv run arena play ...` and `uv run arena run ...` call `scripts/pull-first` before they open a
+  session. If teammates pushed, it pulls (rebase, autostash) and **starts the command again on the
+  new code**. If the pull hits a conflict, the run does not start: resolve it, then start again.
+- `scripts/pull-runs` and `experiments/sandbox_probes.py` do the same.
+- **Any new script or runner that opens arena sessions must call
+  `arena_kit.cli.pull_first()` first**, or `scripts/pull-first` from a shell.
+- Read its one-line report: it names the commit the run uses and how many of your own commits and
+  files are not pushed. A run on unpushed code cannot be reproduced by anyone else, so push first
+  when the result matters.
+- Exceptions, both deliberate: `arena-sim` on localhost never pulls. `arena run --set final` only
+  reports and never pulls, because the final must run the frozen commit; pull by hand before
+  starting it. `ARENA_NO_PULL=1` switches the check off.
+- If origin cannot be reached it warns and runs the local code. Then say so in the `[run]` entry.
 
 ## 3. The log (`docs/LOG.md`)
 
@@ -121,7 +145,7 @@ Each file has one job. Do not mix them:
 | `arena_kit/` | the official starter kit (client, runner, cost function, example agents, simulator). Upstream: github.com/tacto-ai/negotiation-arena-kit |
 | `tests/` | the kit's contract tests against `arena-sim` |
 | `data/package/` | the data package. Not in git: `uv run arena data` |
-| `scripts/` | `sync`, `log`, `pull-runs`, `session-start`, `stop-check` |
+| `scripts/` | `sync`, `log`, `pull-first`, `pull-runs`, `session-start`, `stop-check` |
 | `runs/` | all sessions played, with transcripts, supplier reasons, cost breakdowns and offline analysis |
 | `experiments/` | probe scripts and their results: `RESULTS.md` says how the suppliers react and which rules follow |
 | `KIT-README.md` | the kit's own README with worked examples |

@@ -47,5 +47,5 @@ if [ -f docs/LOG.md ]; then
   tail -n +"${start:-1}" docs/LOG.md | tail -n 90
 fi
 echo
-echo "=== Rules (AGENTS.md): claim your task in docs/STATUS.md; after every working step: scripts/log, commit, scripts/sync; the practice quota is shared and does not refill before the final. ==="
+echo "=== Rules (AGENTS.md): claim your task in docs/STATUS.md; after every working step: scripts/log, commit, scripts/sync; before every run the team's latest code must be pulled (arena play/run do it themselves via scripts/pull-first); the practice quota is shared and does not refill before the final. ==="
 exit 0

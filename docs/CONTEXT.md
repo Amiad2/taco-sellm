@@ -489,6 +489,8 @@ Known limits of the kit agents (read from the code):
   60-second clocks keep running meanwhile: confirmed, 2 timeouts per session in sandbox `D02` and
   in P05. One loop per thread removes them (`experiments/RESULTS.md`).
 - The `--agent` choices `naive|llm` are hard-coded in `cli.py`.
+- Our one change to the kit so far: `cli.py` calls `scripts/pull-first` before `play` and `run`
+  (`pull_first()`), so every run uses the team's latest code.
 - The LLM call has a 45 s timeout; any failure silently plays the naive move.
 
 ## 15. Tacto's own tips
