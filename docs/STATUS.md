@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-10 19:00 CEST by Omar (Claude Code).
+Last updated: 2026-10-10 19:05 CEST by Omar (Claude Code).
 
 ## Now
 
@@ -51,11 +51,12 @@ Weakest: P02 0.105, P18 0.377, P08 0.433, P10 0.570. Analysis and hypotheses: `r
 - **Pull before every run.** `arena play`, `arena run`, `scripts/pull-runs` and the probe scripts call `scripts/pull-first` themselves and restart on the new code; new runners must call `arena_kit.cli.pull_first()` (`AGENTS.md` section 2).
 - Docs and logs are written in English: the jury and tum.ai read the repo.
 - Our code lives in `sellm/` (lab in `sellm/lab/`, the agent's entry point `sellm/agent.py`); `arena_kit/` stays the kit except for `pull_first` and the `--agent sellm` registration.
+- **LLM: OpenAI `gpt-6-sol`** for development and the final (`LLM_PROVIDER=openai`, `LLM_MODEL=gpt-6-sol` in every `.env`; decided Sat 19:05, Omar). Earlier runs (D01 0.786, baseline 61.5) are logged as `gpt-6.1-sol`: whoever ran them, check which model your `.env` had and log it.
 
 ## Open questions (need a human)
 
 - Which machine runs the Live Final, and is it a cloud VM or a laptop?
-- Which LLM and whose key for the final; is there budget for an hour of parallel play?
+- Whose LLM key for the final, and is there budget for an hour of parallel play? (Model decided: `gpt-6-sol`.)
 - Who takes group A and C (`docs/PLAN.md` section 3)? B: Omar.
 - Which agent plays the final? Proposed: `sellm` replaces `llm` only if its mean is higher in lab, sandbox and one full practice run including the hold-out cases P04, P10, P18.
 - How do the final score and the jury score combine for places 1-3? Ask at the Tacto desk.

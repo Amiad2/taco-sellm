@@ -323,8 +323,9 @@ from the public data (Tacto suggests it). It would only be as good as our model 
 ### LLM provider
 
 The kit's `llm_from_env()` supports `LLM_PROVIDER=anthropic` and `LLM_PROVIDER=openai`. The team
-uses OpenAI: `LLM_PROVIDER=openai`, `LLM_MODEL`, `LLM_API_KEY` (and `LLM_BASE_URL` only for a
-non-OpenAI endpoint). `LLM_EFFORT` and `ANTHROPIC_API_KEY` apply to Anthropic only.
+uses OpenAI: `LLM_PROVIDER=openai`, `LLM_MODEL=gpt-6-sol` (decided Sat 19:05), `LLM_API_KEY` (and
+`LLM_BASE_URL` only for a non-OpenAI endpoint). `LLM_EFFORT` and `ANTHROPIC_API_KEY` apply to
+Anthropic only.
 
 **Trap: a failing LLM call is silent.** `LLMAgent.decide` catches every exception and plays the
 naive move instead (it logs a warning, visible only with `-v`). A wrong model name, a bad key or a

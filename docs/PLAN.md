@@ -142,7 +142,7 @@ on each other's progress. The runner plays any `make_agent`. Integration at Sat 
 
 **Still to agree as a team** (proposed defaults in brackets): which agent plays the final (`sellm`
 replaces `llm` only if its mean is higher in lab, sandbox and one full practice run including the
-hold-out cases P04, P10, P18); LLM model, whose key, budget; the final machine and who is on duty
+hold-out cases P04, P10, P18); whose LLM key and what budget (the model is decided: `gpt-6-sol`); the final machine and who is on duty
 (nobody else uses the key during the final); quota per group; default policies (accept a
 `final_offer`, warm tone and no ultimatum, never close worse than the cheapest opening, walk away
 only to a better alternative).

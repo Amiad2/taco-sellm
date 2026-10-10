@@ -9,7 +9,7 @@ the brief and API docs are in [brief/](brief/).
 Needs Python 3.12 and [uv](https://docs.astral.sh/uv/).
 
 ```bash
-cp .env.example .env     # set ARENA_API_KEY and the LLM: LLM_PROVIDER=openai, LLM_MODEL, LLM_API_KEY
+cp .env.example .env     # set ARENA_API_KEY and the LLM: LLM_PROVIDER=openai, LLM_MODEL=gpt-6-sol, LLM_API_KEY
 uv sync --all-extras
 uv run arena data        # unpacks data/package (gitignored)
 uv run arena me          # team + practice quota

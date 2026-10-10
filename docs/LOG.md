@@ -302,3 +302,9 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - P10: one of its three sheets is 2.98 per unit for 12 months (opening 32.20): the 'same cost to us' alternative solves for a price that offsets the uncovered second year. A real supplier reads that as a mistake or an insult.
 - The e-mail is one template line ('We propose EUR x per unit on the terms attached'), salutation 'Dear Sir or Madam' although the contact is named in the opening e-mail.
 - Why it matters: the lab's suppliers cannot be offended and read keywords only; the arena's read the whole e-mail and react to tone, trust and manipulation (brief section 2). These knobs won in the lab because nothing there punishes them. Before any practice session: play it in the sandbox (free) and bound the asks.
+
+## 2026-10-10 17:50 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
+**[decision] LLM for development and the final: OpenAI gpt-6-sol**
+- Every .env: LLM_PROVIDER=openai, LLM_MODEL=gpt-6-sol, LLM_API_KEY. Written into docs/STATUS.md (Decisions), docs/CONTEXT.md section 9, docs/PLAN.md section 3 and the README run section.
+- Open: earlier runs are logged as gpt-6.1-sol (D01 0.786, baseline 61.5, lab validation), while this machine's .env already had gpt-6-sol. Whoever ran them: check which model your .env had and log it, so the baseline is compared on the same model.
+- Still open: whose key and what budget for an hour of 10 parallel cases in the final.
