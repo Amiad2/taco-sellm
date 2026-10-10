@@ -59,9 +59,11 @@ The verdict:
 
 ## Reading
 
-- An early accept can only give up concessions: in about 270 sessions no supplier withdrew before
-  its own final offer. So "take it now" has nothing to win before a final offer, and after one code
-  accepts anyway.
+- An early accept gives up concessions and protects against almost nothing: in the 264 saved
+  sessions a supplier withdrew in 10 threads - 6 after timeouts, 3 after we asked again past its
+  final offer, and one RFQ bidder (P05, sup:70210) while still open, after three asks about 10 %
+  below its price. No supplier of a single-supplier case withdrew before its own final offer. So
+  "take it now" has next to nothing to win before a final offer, and after one code accepts anyway.
 - The model's reason in P01 was our own cost function: "a further price cut could raise our
   total cost" - the relationship estimate that is 2 % too high there (experiments/PERSISTENCE.md, P1).
   A verdict built on our numbers repeats their error with confidence 0.95.
