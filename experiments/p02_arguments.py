@@ -31,6 +31,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from arena_kit.cost import complete_offer  # noqa: E402
 from sellm.agent import KNOBS  # noqa: E402
 from sellm.endgame import Persistent  # noqa: E402
 
@@ -52,6 +53,7 @@ VOLUME = [
     "You asked which volume we can commit to: the 6,110 units a year of this contract are a binding volume, not a forecast.",
     "We can add a fixed monthly call-off schedule and a rolling twelve-month forecast, so that you can plan your capacity.",
 ]
+CLAUSE = "With the index clause the price follows copper beyond the deadband, so the copper risk no longer has to be priced in up front."
 COMMITTEE = "We know from our annual reviews that a price change of this size goes to your pricing committee; please put our proposal before it - we are glad to wait for its next meeting."
 VARIANTS = {
     # the letter passes copper on: an index clause on copper takes that risk off the supplier
@@ -111,7 +113,14 @@ VARIANTS = {
         ],
     ),
     "control": dict(),
+    # the clause again, at the price where our total cost is lowest (relationship term with its full cost
+    # 367.56 as the arena charged it in two deals): asked at once, or after its own lower offer
+    "clause5-direct": dict(
+        structure=clause(5), hold=True, first_price=361.35, floor=361.35, script={0: {"after": [CLAUSE]}}
+    ),
+    "clause5-raise": dict(structure=clause(5), hold=True, floor=361.35, script={0: {"after": [CLAUSE]}}),
 }
+FAIR = "We do not want a price that leaves you below a sustainable margin: a healthy supplier matters more to us than the last euro."
 
 
 class Probe(Persistent):
@@ -137,10 +146,40 @@ class Probe(Persistent):
     def structure(self, case, v, s0):
         return s0 if self.p.get("hold") else super().structure(case, v, s0)
 
+    def below(self, case, v):
+        """Its standing offer is on our structure and under the price we do not want to go below."""
+        floor = self.p.get("floor")
+        terms = v.filled(v.standing[1]) if v.standing[0] else {}
+        if not floor or terms.get("unit_price") is None or v.status != "open" or v.left <= 1:
+            return False
+        s = self.opening_structure(case, v)
+        asked = sum(1 for a in v.asks if a.get("unit_price") == floor)
+        return (
+            {f: x for f, x in terms.items() if f != "unit_price"} == s
+            and terms["unit_price"] < floor - 0.005
+            and asked < 2
+        )
+
+    def ready(self, case, v, rival=math.inf):
+        return False if self.below(case, v) else super().ready(case, v, rival)
+
+    def plan(self, case, v, rival=math.inf):
+        plan = super().plan(case, v, rival)
+        first = self.p.get("first_price")
+        if first and not v.asks:
+            return {**plan, "sheet": complete_offer(case, {**plan["structure"], "unit_price": first})}
+        if self.below(case, v):
+            sheet = complete_offer(case, {**plan["structure"], "unit_price": self.p["floor"]})
+            return {**plan, "sheet": sheet, "capped": False, "enough": False}
+        return plan
+
     def ask(self, case, v, views, live, rival=math.inf):
+        raise_it = self.below(case, v)
         draft = super().ask(case, v, views, live, rival)
         if draft.get("kind") != "ask":
             return draft
+        if raise_it:
+            return {**draft, "arguments": [FAIR]}
         step = (self.p.get("script") or {}).get(draft.get("n", len(v.asks))) or {}
         arguments = [] if step.get("replace") else list(draft.get("arguments") or [])
         arguments = [*step.get("before", []), *arguments, *step.get("after", [])]
