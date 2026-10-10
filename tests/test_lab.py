@@ -344,3 +344,26 @@ def test_llm_supplier_failure_falls_back_to_the_engine_and_is_counted():
 
     result = play_lab(LocalTable(_scenario("P01"), {}, seed=0, supplier="llm", brain=Broken()), NaiveAgent())
     assert result["llm_fail"] > 0 and 0.0 <= result["score"] <= 1.0
+
+
+def test_a_lowball_opening_gets_a_smaller_first_counter_and_an_earlier_final_offer():
+    import copy
+
+    s = _scenario("D01")
+    persona = copy.copy(s.personas["sup:DEMO-F1"])
+    persona.noise = 0.0
+    terms = {"payment_days": 30, "contract_months": 24, "effective_date": "2027-02-01"}
+
+    def play(start, step):
+        bot = SupplierThread(persona, s.case, random.Random(0))
+        bot.opening()
+        first, n, price = None, 0, start
+        while bot.status == "open" and n < 10:
+            bot.respond({"body": "", "term_sheets": [{"terms": {**terms, "unit_price": price}}]})
+            first = bot.a0 - bot.ask if first is None else first
+            n, price = n + 1, price + step
+        return first, n
+
+    low_first, low_n = play(40.5, 2.0)  # 16 % below its floor, as the lab-best Calculator did on D01
+    mod_first, mod_n = play(47.0, 0.6)  # a few percent below, as the scripts that scored 0.95
+    assert low_first < mod_first and low_n < mod_n

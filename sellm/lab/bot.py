@@ -301,13 +301,19 @@ class SupplierThread:
         # concession
         gap = max(0.0, self.ask - p.full_cost)
         self.counters += 1
+        # an offer far below its floor offends: a smaller first counter, and patience runs out faster
+        # (sandbox D01: opening 16 % below the floor got 0.70 instead of 1.40 and a final offer after our
+        # 3rd message instead of the 6th; 2-4 % below showed neither)
+        lowball = p.full_cost > 0 and (p.full_cost - ours) / p.full_cost > p.lowball
         if step is None:
-            concession = p.first_step * gap
-            self.pressure += 1
+            concession = p.first_step * gap * (p.lowball_first if lowball else 1.0)
+            self.pressure += 1 + (p.lowball_pressure if lowball else 0)
         elif step > tol:
-            limit = p.cap * self.a0 * p.cap_decay ** max(0, self.counters - 2)
-            concession = min(self.mirror * step, limit)
-            self.pressure += 2 if step < p.tiny_step * self.a0 else 1
+            # it gives back a share of our step that shrinks as the step grows, and less every round:
+            # on D01 steps of 0.15 / 0.6 / 2.6 got about 0.13 / 0.4 / 0.9 back
+            saturation = max(1e-9, p.cap * self.a0)
+            concession = self.mirror * step / (1 + step / saturation) * p.cap_decay ** max(0, self.counters - 2)
+            self.pressure += (2 if step < p.tiny_step * self.a0 else 1) + (p.lowball_pressure if lowball else 0)
         else:
             concession = 0.0
             self.pressure += 1

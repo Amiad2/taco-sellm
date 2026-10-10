@@ -16,6 +16,8 @@ thousands of negotiations cost nothing - and has knobs for what we want to compa
   learn          when the supplier counters on one of our variant sheets, ask on that structure
   rel_estimate   the supplier's full cost for the relationship term: should_cost | offer (rel_margin x
                  its lowest offer so far, which bounds its cost) | max (the higher of the two)
+  alt_check      normal | cautious: against the alternative only, price the relationship term as if
+                 the supplier's cost were close to its lowest offer (it never sells below its cost)
   hold_others    with one loop per thread: keep a finished thread alive with a holding e-mail while
                  the others still negotiate (a supplier left waiting at its final offer may withdraw)
 
@@ -50,6 +52,7 @@ DEFAULTS = dict(
     learn=False,
     rel_estimate="should_cost",
     rel_margin=0.97,
+    alt_check="normal",
     hold_others=True,
     mirror_guess=0.6,
 )
@@ -216,10 +219,28 @@ class Calculator:
             sheet_id, terms = standing(threads[sid])
             return total_cost(case, terms, standard_terms(threads[sid])) if sheet_id else math.inf
 
+        def against_alt(sid):  # C as compared with the alternative: cautious about the relationship term
+            if self.k["alt_check"] != "cautious" or not math.isfinite(c_alt):
+                return costs[sid]
+            sheet_id, terms = standing(threads[sid])
+            if not sheet_id:
+                return math.inf
+            est = self._estimate(case, sid, threads[sid])
+            if est is None:
+                return costs[sid]
+            std = standard_terms(threads[sid])
+            values = [
+                self._sup_value(case, est["standard"], m["term_sheets"][0]["terms"])
+                for m in threads[sid]
+                if m.get("from") != "buyer" and m.get("term_sheets") and m["term_sheets"][0]["terms"].get("unit_price")
+            ]
+            full = max([est["full_cost"]] + [self.k["rel_margin"] * v for v in values])
+            return total_cost(case, terms, std, {**est, "full_cost": full})
+
         def accept(sid):
             # walk if the alternative is better, or if the deal is surely worse than the opening (it
             # scores 0 like no deal); otherwise take it, even when the relationship term may tip it
-            if sid is None or costs[sid] >= c_alt or certain(sid) >= c_open:
+            if sid is None or against_alt(sid) >= c_alt or certain(sid) >= c_open:
                 return {"supplier_id": (live or list(threads))[0], "message": {"action": {"type": "walk_away"}}}
             return {
                 "supplier_id": sid,
@@ -414,6 +435,7 @@ SPACE = {
     "accept_gap": [0.0, 0.002, 0.005, 0.01],
     "rel_estimate": ["should_cost", "offer", "max"],
     "rel_margin": [0.93, 0.97, 1.0],
+    "alt_check": ["normal", "cautious"],
     "adaptive": [False, True],
 }
 

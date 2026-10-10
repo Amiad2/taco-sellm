@@ -280,8 +280,9 @@ def cmd_validate(a):
     seeds = 40 if brain is None else 6
     print(f"Whole negotiations: the sandbox step probes (experiments/RESULTS.md), D01 family, {a.supplier} suppliers")
     print(f"| Probe | Arena | Lab ({seeds} family members) |\n|---|---|---|")
-    for label, arena, mean, sd in probe_check(pkg.facts, seeds, brain=brain, package=pkg):
-        print(f"| {label} | {min(arena):.2f}-{max(arena):.2f} | {mean:.3f} ± {sd:.3f} |")
+    for label, arena, mean, sd, fitted in probe_check(pkg.facts, seeds, brain=brain, package=pkg):
+        mark = "" if fitted else " **(prediction)**"
+        print(f"| {label}{mark} | {min(arena):.2f}-{max(arena):.2f} | {mean:.3f} ± {sd:.3f} |")
     print()
     kinds = ["naive"] + (["llm"] if a.llm else [])
     print("| Agent | Case | Arena | Lab |\n|---|---|---|---|")

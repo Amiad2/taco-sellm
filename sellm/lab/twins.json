@@ -119,11 +119,14 @@
     "premiums": {},
     "hard_limits": {},
     "first_step": 0.35,
-    "mirror": 0.7,
-    "patience": 6,
+    "mirror": 1.0,
+    "patience": 5,
     "tiny_step": 0.002,
-    "cap": 0.006,
-    "cap_decay": 0.8,
+    "cap": 0.015,
+    "cap_decay": 1.0,
+    "lowball": 0.06,
+    "lowball_first": 0.6,
+    "lowball_pressure": 1,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [],
@@ -144,23 +147,25 @@
       0.35
      ],
      "mirror": [
-      0.5,
-      0.7,
-      0.85
-     ],
-     "cap": [
-      0.004,
-      0.006,
-      0.008,
-      0.012
-     ],
-     "cap_decay": [
-      0.8,
+      0.85,
       1.0
      ],
+     "cap": [
+      0.01,
+      0.015,
+      0.02
+     ],
+     "cap_decay": [
+      0.85,
+      1.0
+     ],
+     "lowball_first": [
+      0.4,
+      0.6
+     ],
      "patience": [
-      6,
-      7
+      5,
+      6
      ],
      "claim_w": [
       0.0,
@@ -319,11 +324,14 @@
     },
     "hard_limits": {},
     "first_step": 0.2,
-    "mirror": 0.85,
-    "patience": 6,
+    "mirror": 1.0,
+    "patience": 5,
     "tiny_step": 0.002,
-    "cap": 0.012,
+    "cap": 0.028,
     "cap_decay": 0.6,
+    "lowball": 0.06,
+    "lowball_first": 0.6,
+    "lowball_pressure": 1,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [
@@ -350,19 +358,28 @@
       0.3,
       0.5,
       0.7,
-      0.85
+      0.85,
+      1.0
      ],
      "cap": [
-      0.003,
-      0.004,
-      0.006,
-      0.008,
-      0.012,
-      0.02
+      0.005,
+      0.01,
+      0.015,
+      0.02,
+      0.028,
+      0.04,
+      0.06
      ],
      "cap_decay": [
       0.6,
-      0.8,
+      0.75,
+      0.85,
+      1.0
+     ],
+     "lowball_first": [
+      0.25,
+      0.4,
+      0.6,
       1.0
      ],
      "patience": [
@@ -429,11 +446,14 @@
     },
     "hard_limits": {},
     "first_step": 0.2,
-    "mirror": 0.85,
-    "patience": 6,
+    "mirror": 1.0,
+    "patience": 5,
     "tiny_step": 0.002,
-    "cap": 0.012,
+    "cap": 0.028,
     "cap_decay": 0.6,
+    "lowball": 0.06,
+    "lowball_first": 0.6,
+    "lowball_pressure": 1,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [
@@ -460,19 +480,28 @@
       0.3,
       0.5,
       0.7,
-      0.85
+      0.85,
+      1.0
      ],
      "cap": [
-      0.003,
-      0.004,
-      0.006,
-      0.008,
-      0.012,
-      0.02
+      0.005,
+      0.01,
+      0.015,
+      0.02,
+      0.028,
+      0.04,
+      0.06
      ],
      "cap_decay": [
       0.6,
-      0.8,
+      0.75,
+      0.85,
+      1.0
+     ],
+     "lowball_first": [
+      0.25,
+      0.4,
+      0.6,
       1.0
      ],
      "patience": [
@@ -634,12 +663,15 @@
     "ppm_real": null,
     "premiums": {},
     "hard_limits": {},
-    "first_step": 0.35,
-    "mirror": 0.3,
+    "first_step": 0.2,
+    "mirror": 0.7,
     "patience": 7,
     "tiny_step": 0.002,
-    "cap": 0.002,
-    "cap_decay": 0.8,
+    "cap": 0.015,
+    "cap_decay": 0.85,
+    "lowball": 0.06,
+    "lowball_first": 0.6,
+    "lowball_pressure": 1,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [
@@ -660,20 +692,25 @@
     "archetype": "twin",
     "ranges": {
      "first_step": [
-      0.35
+      0.2
      ],
      "mirror": [
-      0.3,
-      0.5,
-      0.7,
-      0.85
+      0.7
      ],
      "cap": [
-      0.002
+      0.015,
+      0.02
      ],
      "cap_decay": [
       0.6,
-      0.8,
+      0.75,
+      0.85,
+      1.0
+     ],
+     "lowball_first": [
+      0.25,
+      0.4,
+      0.6,
       1.0
      ],
      "patience": [
@@ -852,8 +889,11 @@
     "mirror": 0.3,
     "patience": 4,
     "tiny_step": 0.002,
-    "cap": 0.002,
+    "cap": 0.005,
     "cap_decay": 0.6,
+    "lowball": 0.06,
+    "lowball_first": 0.6,
+    "lowball_pressure": 1,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [],
@@ -874,17 +914,21 @@
       0.03
      ],
      "mirror": [
-      0.3,
-      0.5,
-      0.7,
-      0.85
+      0.3
      ],
      "cap": [
-      0.002
+      0.005
      ],
      "cap_decay": [
       0.6,
-      0.8,
+      0.75,
+      0.85,
+      1.0
+     ],
+     "lowball_first": [
+      0.25,
+      0.4,
+      0.6,
       1.0
      ],
      "patience": [
@@ -1052,12 +1096,15 @@
      "contract_months": 3.4
     },
     "hard_limits": {},
-    "first_step": 0.03,
-    "mirror": 0.5,
-    "patience": 6,
+    "first_step": 0.1,
+    "mirror": 0.3,
+    "patience": 5,
     "tiny_step": 0.002,
-    "cap": 0.003,
-    "cap_decay": 1.0,
+    "cap": 0.005,
+    "cap_decay": 0.6,
+    "lowball": 0.06,
+    "lowball_first": 0.6,
+    "lowball_pressure": 1,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [
@@ -1077,23 +1124,31 @@
     "archetype": "twin",
     "ranges": {
      "first_step": [
-      0.03
+      0.1
      ],
      "mirror": [
       0.3,
-      0.5,
-      0.7,
-      0.85
+      0.5
      ],
      "cap": [
-      0.003
+      0.005,
+      0.01
      ],
      "cap_decay": [
       0.6,
-      0.8,
+      0.75,
+      0.85,
+      1.0
+     ],
+     "lowball_first": [
+      0.25,
+      0.4,
+      0.6,
       1.0
      ],
      "patience": [
+      4,
+      5,
       6,
       7
      ],
@@ -1246,12 +1301,15 @@
     "ppm_real": null,
     "premiums": {},
     "hard_limits": {},
-    "first_step": 0.5,
-    "mirror": 0.7,
-    "patience": 6,
+    "first_step": 0.8,
+    "mirror": 1.0,
+    "patience": 5,
     "tiny_step": 0.002,
-    "cap": 0.008,
-    "cap_decay": 0.8,
+    "cap": 0.015,
+    "cap_decay": 1.0,
+    "lowball": 0.06,
+    "lowball_first": 0.6,
+    "lowball_pressure": 1,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [],
@@ -1269,26 +1327,29 @@
     "archetype": "twin",
     "ranges": {
      "first_step": [
-      0.5
+      0.8
      ],
      "mirror": [
-      0.3,
       0.5,
       0.7,
-      0.85
+      0.85,
+      1.0
      ],
      "cap": [
-      0.006,
-      0.008
+      0.005,
+      0.01,
+      0.015
      ],
      "cap_decay": [
       0.6,
-      0.8,
+      0.75,
+      0.85,
       1.0
      ],
+     "lowball_first": [
+      0.6
+     ],
      "patience": [
-      3,
-      4,
       5,
       6,
       7
@@ -1446,11 +1507,14 @@
     },
     "hard_limits": {},
     "first_step": 0.03,
-    "mirror": 0.7,
+    "mirror": 0.3,
     "patience": 4,
     "tiny_step": 0.002,
-    "cap": 0.002,
+    "cap": 0.005,
     "cap_decay": 0.6,
+    "lowball": 0.06,
+    "lowball_first": 1.0,
+    "lowball_pressure": 1,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [],
@@ -1476,19 +1540,28 @@
       0.3,
       0.5,
       0.7,
-      0.85
+      0.85,
+      1.0
      ],
      "cap": [
-      0.002,
-      0.003,
-      0.004,
-      0.006,
-      0.008,
-      0.012
+      0.005,
+      0.01,
+      0.015,
+      0.02,
+      0.028,
+      0.04,
+      0.06
      ],
      "cap_decay": [
       0.6,
-      0.8,
+      0.75,
+      0.85,
+      1.0
+     ],
+     "lowball_first": [
+      0.25,
+      0.4,
+      0.6,
       1.0
      ],
      "patience": [
@@ -1558,11 +1631,14 @@
      ]
     },
     "first_step": 0.03,
-    "mirror": 0.7,
+    "mirror": 0.3,
     "patience": 4,
     "tiny_step": 0.002,
-    "cap": 0.002,
+    "cap": 0.005,
     "cap_decay": 0.6,
+    "lowball": 0.06,
+    "lowball_first": 1.0,
+    "lowball_pressure": 1,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [],
@@ -1588,19 +1664,28 @@
       0.3,
       0.5,
       0.7,
-      0.85
+      0.85,
+      1.0
      ],
      "cap": [
-      0.002,
-      0.003,
-      0.004,
-      0.006,
-      0.008,
-      0.012
+      0.005,
+      0.01,
+      0.015,
+      0.02,
+      0.028,
+      0.04,
+      0.06
      ],
      "cap_decay": [
       0.6,
-      0.8,
+      0.75,
+      0.85,
+      1.0
+     ],
+     "lowball_first": [
+      0.25,
+      0.4,
+      0.6,
       1.0
      ],
      "patience": [
@@ -1664,11 +1749,14 @@
     },
     "hard_limits": {},
     "first_step": 0.03,
-    "mirror": 0.7,
+    "mirror": 0.3,
     "patience": 4,
     "tiny_step": 0.002,
-    "cap": 0.002,
+    "cap": 0.005,
     "cap_decay": 0.6,
+    "lowball": 0.06,
+    "lowball_first": 1.0,
+    "lowball_pressure": 1,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [],
@@ -1694,19 +1782,28 @@
       0.3,
       0.5,
       0.7,
-      0.85
+      0.85,
+      1.0
      ],
      "cap": [
-      0.002,
-      0.003,
-      0.004,
-      0.006,
-      0.008,
-      0.012
+      0.005,
+      0.01,
+      0.015,
+      0.02,
+      0.028,
+      0.04,
+      0.06
      ],
      "cap_decay": [
       0.6,
-      0.8,
+      0.75,
+      0.85,
+      1.0
+     ],
+     "lowball_first": [
+      0.25,
+      0.4,
+      0.6,
       1.0
      ],
      "patience": [
@@ -1871,11 +1968,14 @@
     "premiums": {},
     "hard_limits": {},
     "first_step": 0.35,
-    "mirror": 0.7,
+    "mirror": 1.0,
     "patience": 4,
     "tiny_step": 0.002,
-    "cap": 0.012,
-    "cap_decay": 0.8,
+    "cap": 0.02,
+    "cap_decay": 1.0,
+    "lowball": 0.06,
+    "lowball_first": 0.6,
+    "lowball_pressure": 1,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [],
@@ -1896,16 +1996,19 @@
       0.35
      ],
      "mirror": [
-      0.5,
-      0.7,
-      0.85
+      1.0
      ],
      "cap": [
-      0.012
+      0.02,
+      0.028
      ],
      "cap_decay": [
+      1.0
+     ],
+     "lowball_first": [
+      0.25,
+      0.4,
       0.6,
-      0.8,
       1.0
      ],
      "patience": [
@@ -2091,11 +2194,14 @@
     },
     "hard_limits": {},
     "first_step": 0.35,
-    "mirror": 0.85,
+    "mirror": 1.0,
     "patience": 5,
     "tiny_step": 0.002,
-    "cap": 0.006,
+    "cap": 0.02,
     "cap_decay": 1.0,
+    "lowball": 0.06,
+    "lowball_first": 0.6,
+    "lowball_pressure": 1,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [],
@@ -2116,14 +2222,18 @@
       0.35
      ],
      "mirror": [
-      0.7,
-      0.85
+      1.0
      ],
      "cap": [
-      0.006
+      0.02
      ],
      "cap_decay": [
-      0.8,
+      1.0
+     ],
+     "lowball_first": [
+      0.25,
+      0.4,
+      0.6,
       1.0
      ],
      "patience": [
@@ -2285,11 +2395,14 @@
     },
     "hard_limits": {},
     "first_step": 0.03,
-    "mirror": 0.7,
-    "patience": 6,
+    "mirror": 0.85,
+    "patience": 5,
     "tiny_step": 0.002,
-    "cap": 0.006,
-    "cap_decay": 0.8,
+    "cap": 0.015,
+    "cap_decay": 1.0,
+    "lowball": 0.06,
+    "lowball_first": 0.6,
+    "lowball_pressure": 1,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [],
@@ -2310,19 +2423,25 @@
       0.03
      ],
      "mirror": [
-      0.3,
-      0.5,
       0.7,
-      0.85
+      0.85,
+      1.0
      ],
      "cap": [
-      0.004,
-      0.006,
-      0.008
+      0.01,
+      0.015,
+      0.02
      ],
      "cap_decay": [
       0.6,
-      0.8,
+      0.75,
+      0.85,
+      1.0
+     ],
+     "lowball_first": [
+      0.25,
+      0.4,
+      0.6,
       1.0
      ],
      "patience": [
@@ -2491,11 +2610,14 @@
     },
     "hard_limits": {},
     "first_step": 0.35,
-    "mirror": 0.7,
-    "patience": 6,
+    "mirror": 1.0,
+    "patience": 5,
     "tiny_step": 0.002,
-    "cap": 0.02,
+    "cap": 0.04,
     "cap_decay": 1.0,
+    "lowball": 0.06,
+    "lowball_first": 0.6,
+    "lowball_pressure": 1,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [
@@ -2519,14 +2641,21 @@
       0.35
      ],
      "mirror": [
-      0.7,
-      0.85
+      0.85,
+      1.0
      ],
      "cap": [
-      0.02
+      0.028,
+      0.04,
+      0.06
      ],
      "cap_decay": [
-      0.8,
+      1.0
+     ],
+     "lowball_first": [
+      0.25,
+      0.4,
+      0.6,
       1.0
      ],
      "patience": [
@@ -2710,11 +2839,14 @@
     },
     "hard_limits": {},
     "first_step": 0.2,
-    "mirror": 0.7,
+    "mirror": 1.0,
     "patience": 3,
     "tiny_step": 0.002,
-    "cap": 0.008,
-    "cap_decay": 0.8,
+    "cap": 0.06,
+    "cap_decay": 1.0,
+    "lowball": 0.06,
+    "lowball_first": 0.6,
+    "lowball_pressure": 1,
     "walk_on_push": 0.5,
     "claim_weight": {},
     "claim_kinds": [],
@@ -2735,19 +2867,24 @@
       0.2
      ],
      "mirror": [
-      0.5,
-      0.7,
-      0.85
+      0.85,
+      1.0
      ],
      "cap": [
-      0.006,
-      0.008,
-      0.012,
-      0.02
+      0.028,
+      0.04,
+      0.06
      ],
      "cap_decay": [
       0.6,
-      0.8,
+      0.75,
+      0.85,
+      1.0
+     ],
+     "lowball_first": [
+      0.25,
+      0.4,
+      0.6,
       1.0
      ],
      "patience": [

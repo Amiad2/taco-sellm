@@ -21,9 +21,10 @@ from .twins import ROOT
 
 GRID = {
     "first_step": [0.03, 0.1, 0.2, 0.35, 0.5, 0.65, 0.8],
-    "mirror": [0.3, 0.5, 0.7, 0.85],
-    "cap": [0.002, 0.003, 0.004, 0.006, 0.008, 0.012, 0.02],
-    "cap_decay": [0.6, 0.8, 1.0],
+    "mirror": [0.3, 0.5, 0.7, 0.85, 1.0],
+    "cap": [0.005, 0.01, 0.015, 0.02, 0.028, 0.04, 0.06],
+    "cap_decay": [0.6, 0.75, 0.85, 1.0],
+    "lowball_first": [0.25, 0.4, 0.6, 1.0],
     "patience": [3, 4, 5, 6, 7],
     "claim_w": [0.0, 0.1, 0.2, 0.35, 0.5],
 }
@@ -268,17 +269,57 @@ class Stepper:
 
 
 # experiments/RESULTS.md section 3: D01, 30 days, 24 months, start February
+_FIXED = {"payment_days": 30, "contract_months": 24, "effective_date": "2027-02-01"}
+
+
+# Whole negotiations on sandbox D01 with known arena scores (experiments/RESULTS.md, docs/LOG.md Sat
+# 18:30): (label, a fresh agent, arena scores, used in the fit). The negotiator is left out of the fit
+# on purpose: it is the out-of-sample test of whether the lab predicts a strategy it was not tuned on.
+def _stepper(start, step):
+    return lambda package=None: Stepper(start, step, _FIXED)
+
+
+def _calc_lab_best(package=None):
+    from .strategies import Calculator
+
+    knobs = dict(structure="joint", guess_rate=0.2, floor_guess=0.85, use_should_cost=False, open_below=0.1,
+                 steps=8, shape=0.75, sheets=3, take_alternative=False, after_final="accept", claims="bank",
+                 tone="warm", ask_breakdown=False, accept_gap=0.01)  # fmt: skip
+    return Calculator(package, **knobs)
+
+
+def _negotiator(package=None):
+    from sellm.agent import make_agent
+
+    return make_agent(package)
+
+
 PROBES = [
-    ("open 50.00, steps 0.05", 50.0, 0.05, [0.676, 0.676, 0.676]),
-    ("open 50.00, steps 0.15", 50.0, 0.15, [0.75, 0.80]),
-    ("open 49.00, steps 0.15", 49.0, 0.15, [0.75, 0.82]),
-    ("open 48.60, steps 0.30", 48.6, 0.30, [0.79, 0.86]),
-    ("open 48.00, steps 0.40", 48.0, 0.40, [0.88, 0.90]),
+    ("open 50.00, steps 0.05", _stepper(50.0, 0.05), [0.676, 0.676, 0.676], True),
+    ("open 50.00, steps 0.15", _stepper(50.0, 0.15), [0.75, 0.80], True),
+    ("open 49.00, steps 0.15", _stepper(49.0, 0.15), [0.75, 0.82], True),
+    ("open 48.60, steps 0.30", _stepper(48.6, 0.30), [0.79, 0.86], True),
+    ("open 48.00, steps 0.40", _stepper(48.0, 0.40), [0.88, 0.90], True),
+    ("open 47.00, steps 0.60", _stepper(47.0, 0.60), [0.944, 0.957], True),
+    ("open 46.00, steps 0.80", _stepper(46.0, 0.80), [0.944, 0.914], True),
+    ("lab-best Calculator (opens 16 % below the floor)", _calc_lab_best, [0.789, 0.789, 0.789, 0.789], True),
+    ("negotiator v1 (not fitted: prediction)", _negotiator, [0.869, 0.909, 0.909, 0.889], False),
 ]
+_PACKAGE = []
+
+
+def _package():
+    if not _PACKAGE:
+        import os
+
+        from arena_kit.data import DataPackage
+
+        _PACKAGE.append(DataPackage(os.environ.get("ARENA_DATA", "data/package")))
+    return _PACKAGE[0]
 
 
 def probe_loss(scenario, facts, params, seeds=6):
-    """Mean absolute gap between lab and arena scores of the sandbox step probes, with `params`."""
+    """Mean absolute gap between lab and arena scores of the fitted D01 probes, with `params`."""
     from .table import LocalTable, Scenario, play_lab
 
     personas = {}
@@ -288,34 +329,35 @@ def probe_loss(scenario, facts, params, seeds=6):
             setattr(q, k, v)
         personas[sid] = q
     s = Scenario(scenario.case, personas, scenario.c_open, scenario.c_best, name=scenario.name)
-    fixed = {"payment_days": 30, "contract_months": 24, "effective_date": "2027-02-01"}
     gaps = []
-    for _, start, step, arena in PROBES:
-        lab = [play_lab(LocalTable(s, facts, seed=k), Stepper(start, step, fixed))["score"] for k in range(seeds)]
+    for _, make, arena, fitted in PROBES:
+        if not fitted:
+            continue
+        lab = [play_lab(LocalTable(s, facts, seed=k), make(_package()))["score"] for k in range(seeds)]
         gaps.append(abs(statistics.mean(lab) - statistics.mean(arena)))
     return statistics.mean(gaps)
 
 
 def probe_check(facts, seeds=40, brain=None, package=None, threads=16):
-    """The sandbox probes replayed closed-loop on the D01 twin family: does the lab rank them as the
-    arena did? Returns rows (label, arena range, lab mean, lab spread). With `brain` the LLM suppliers
-    play (fewer seeds are enough to see the order; each negotiation is about 6 LLM calls)."""
+    """The D01 probes replayed closed-loop on the D01 twin family: does the lab rank them as the arena
+    did? Rows (label, arena scores, lab mean, lab spread, fitted). With `brain` the LLM suppliers play
+    (fewer seeds are enough to see the order; each negotiation is about 6 LLM calls)."""
     from concurrent.futures import ThreadPoolExecutor
 
     from .table import LocalTable, play_lab
 
     s = next(x for x in twins.load() if x.name == "D01")
-    fixed = {"payment_days": 30, "contract_months": 24, "effective_date": "2027-02-01"}
     supplier = "llm" if brain is not None else "engine"
+    package = package or _package()
 
     def one(job):
-        start, step, k = job
+        make, k = job
         table = LocalTable(s, facts, seed=k, vary=True, supplier=supplier, brain=brain, package=package)
-        return play_lab(table, Stepper(start, step, fixed))["score"]
+        return play_lab(table, make(package))["score"]
 
     rows = []
     with ThreadPoolExecutor(threads if brain is not None else 1) as pool:
-        for label, start, step, arena in PROBES:
-            scores = list(pool.map(one, [(start, step, k) for k in range(seeds)]))
-            rows.append((label, arena, statistics.mean(scores), statistics.pstdev(scores)))
+        for label, make, arena, fitted in PROBES:
+            scores = list(pool.map(one, [(make, k) for k in range(seeds)]))
+            rows.append((label, arena, statistics.mean(scores), statistics.pstdev(scores), fitted))
     return rows

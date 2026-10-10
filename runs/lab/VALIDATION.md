@@ -51,6 +51,31 @@ Before the probes were in the fit the lab underrated big steps (0.831 for the la
 per-round limit was too tight. This is the check that matters most - the lab is used to rank
 strategies - but it is one demo supplier.
 
+## Recalibrated Sat 20:10: the lowball penalty, and a strategy it was not tuned on
+
+Jonathan's reality check (docs/LOG.md Sat 18:30): the lab-best Calculator, which opens 16 % below the
+supplier's floor, scored 0.789 on the real D01 while the lab had predicted about 0.90 - the twins did
+not punish a lowball. Now they do (a smaller first counter, patience used up faster; `lowball*` in
+`persona.py`), concessions saturate with the step instead of hitting a hard cap, and the fit uses the
+new sessions plus all D01 strategies with known arena scores. Jonathan's negotiator v1 was kept out
+of the fit as the out-of-sample test.
+
+| Strategy on D01 | Arena | Lab (40 family members) |
+|---|---|---|
+| open 50.00, steps 0.05 | 0.68 | 0.666 |
+| open 50.00, steps 0.15 | 0.75-0.80 | 0.728 |
+| open 49.00, steps 0.15 | 0.75-0.82 | 0.734 |
+| open 48.60, steps 0.30 | 0.79-0.86 | 0.798 |
+| open 48.00, steps 0.40 | 0.88-0.90 | 0.829 |
+| open 47.00, steps 0.60 | 0.944-0.957 | 0.873 |
+| open 46.00, steps 0.80 | 0.914-0.944 | 0.902 |
+| lab-best Calculator (lowball opening) | 0.789 | 0.717 |
+| **negotiator v1 (not fitted: a prediction)** | **0.869-0.909** | **0.891** |
+
+The prediction for a strategy the lab never saw lands inside the arena's range. The lowball is now
+ranked near the bottom, as in the arena. Still off: the best moderate scripts are underrated by
+0.04-0.07. Replay of all 307 real replies: mean error 0.72 % of the opening value, status 254/307.
+
 ## LLM suppliers (`--supplier llm`, added Sat 19:00)
 
 An LLM plays each supplier inside the calibrated engine's limits (`sellm/lab/llm_supplier.py`).

@@ -26,7 +26,18 @@ from dataclasses import asdict, dataclass, field, fields
 from arena_kit.cost import OPS, RELATIONSHIP_GOALS, closing_terms, must_haves_ok, supplier_value, total_cost
 
 # dynamics a twin family varies (see Persona.ranges and Persona.vary)
-VARIED = ("first_step", "mirror", "cap", "cap_decay", "patience", "claim_w", "walk_on_push", "noise")
+VARIED = (
+    "first_step",
+    "mirror",
+    "cap",
+    "cap_decay",
+    "patience",
+    "claim_w",
+    "walk_on_push",
+    "noise",
+    "lowball",
+    "lowball_first",
+)
 
 
 @dataclass
@@ -48,8 +59,11 @@ class Persona:
     mirror: float = 0.7  # share of each of our steps (in its value) it gives back
     patience: int = 6  # our messages until it says final_offer (a tiny step counts twice)
     tiny_step: float = 0.002  # a step below this share of its opening value counts as tiny
-    cap: float = 0.009  # most it gives back for our step in its 2nd counter, share of its opening value
-    cap_decay: float = 0.75  # that limit shrinks by this factor with every further counter
+    cap: float = 0.028  # saturation: it gives back mirror * step / (1 + step / (cap * opening value))
+    cap_decay: float = 0.85  # and that shrinks by this factor with every further counter
+    lowball: float = 0.06  # an offer worth more than this share below its floor offends it ...
+    lowball_first: float = 0.4  # ... its first counter is this share of the usual one ...
+    lowball_pressure: int = 1  # ... and each such e-mail costs this much more of its patience
     walk_on_push: float = 0.5  # chance it walks when we push price after its final offer
     claim_weight: dict = field(default_factory=dict)  # kind -> share of (ask - floor) a verified claim takes off
     claim_kinds: list = field(default_factory=list)  # kinds of data that moved it ('took it into account')
