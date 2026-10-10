@@ -142,6 +142,7 @@
  "b395491ef29942ff": "kit naive",
  "b3eb672fd683c567": "EVAL full: bank (ppm plain, one per topic) + signals @19b339f (claude eval session)",
  "b4105401f739c2ff": "sellm negotiator v1.2 + calculator @19b339f, kit runner, no LLM",
+ "b5e4bb8bb96a3946": "sellm negotiator v1.4 + dossier fix A @0223875 (fix B reverted; P05 unaffected by B), kit runner, no LLM",
  "b62447687636e5a1": "probe h1b",
  "b6759d5e9b760a5b": "kit llm, gpt-6.1-sol",
  "b7f37a230bf6f9b0": "TEST past-target (one-off, not in the agent): keep asking past the relationship target while the supplier moves",

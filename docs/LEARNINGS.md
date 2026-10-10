@@ -58,6 +58,11 @@ the arms are in `experiments/PRACTICE-ARMS.md` and `experiments/arms/`.
   another part's forecast is `duplicate`; a complaint `qn:` after the scorecard's quality `sc:` is
   `duplicate`. Verified together in one case: index, notice letter + contract, should-cost, price
   history, forecast, on-time delivery, quality record.
+- **A `duplicate` citation still works; a round without an argument gets a hold** (confirmed,
+  Sat 22:16): dropping the `qn:` that followed an `sc:` cost P11 0.778 -> 0.710 (the supplier held
+  45.50 from the first argument-free round on, "we are really at the limit", instead of accepting
+  45.09) and P02 0.531 -> 0.522. The supplier reads the sentence ("that quality complaint ... was
+  already baked into our last price drop") and keeps conceding. Keep sending an argument each round.
 - **The supplier's final price on a given structure does not depend on our first ask** (confirmed
   on P04 4.09 vs 4.54, P11 38.88 vs 42.41, P18 5.02 vs 4.89): suppliers follow their own concession
   schedule. What our ask changes is which alternative sheets they put next to their offer.
