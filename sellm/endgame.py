@@ -21,6 +21,10 @@ Knobs (all off by default, so `Persistent()` plays exactly like the negotiator):
 - `past_target`  keep asking past the relationship target while the supplier is open and its last
                  offer was lower than the one before, down to the target a cost estimate lower by
                  `estimate_error` (5 %) would give
+- `past_creep`   a fraction, used with `past_target` once its offer is at or below our target: no
+                 step closes more than this share of the gap (0: the smallest visible step, we
+                 hold our price). Whatever happens there, its standing offer is one the negotiator
+                 would have accepted already
 - `creep`        a fraction: no step closes more than this share of the gap to its price (None: the
                  negotiator's pace)
 - `zone`         a fraction: once the supplier repeats its offer (`stall_after` times) we ask this
@@ -36,7 +40,7 @@ from arena_kit.cost import complete_offer
 
 from .negotiator import EPS, Negotiator, _key
 
-DEFAULTS = dict(past_target=False, estimate_error=0.05, creep=None, zone=None, stall_after=1)
+DEFAULTS = dict(past_target=False, estimate_error=0.05, past_creep=None, creep=None, zone=None, stall_after=1)
 
 
 class Persistent(Negotiator):
@@ -56,6 +60,8 @@ class Persistent(Negotiator):
                 plan = self.crept(case, v, plan)
         if self.e["past_target"] and plan["enough"]:
             plan = self.past(case, v, plan)
+            if not plan["enough"] and self.e["past_creep"] is not None and v.asks:
+                plan = self.crept(case, v, plan, self.e["past_creep"])
         return plan
 
     # -- stop rule -------------------------------------------------------------------------------
@@ -112,7 +118,7 @@ class Persistent(Negotiator):
             return plan  # we are in the zone already: the negotiator's rule decides (step or take its offer)
         return {**plan, "sheet": complete_offer(case, {**s, "unit_price": price}), "capped": False}
 
-    def crept(self, case, v, plan):
+    def crept(self, case, v, plan, share=None):
         """The same ask, but no further up than `creep` of the way to the price it quotes for this
         structure. With nothing visible left to give, the plan says `capped` as the negotiator's does."""
         s = plan["structure"]
@@ -123,9 +129,8 @@ class Persistent(Negotiator):
         if quoted is None or quoted <= last["unit_price"]:
             return plan
         ceiling = quoted * (1 - self.k["keep_below"])
-        price = min(
-            last["unit_price"] + self.e["creep"] * (quoted - last["unit_price"]), ceiling, plan["sheet"]["unit_price"]
-        )
+        share = self.e["creep"] if share is None else share
+        price = min(last["unit_price"] + share * (quoted - last["unit_price"]), ceiling, plan["sheet"]["unit_price"])
         price = round(max(price, last["unit_price"]), 2)
         if price <= last["unit_price"] + EPS and ceiling >= last["unit_price"] + 0.01:
             price = round(last["unit_price"] + 0.01, 2)  # the smallest step it can see
