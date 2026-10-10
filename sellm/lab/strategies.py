@@ -160,6 +160,8 @@ class Calculator:
         return self._price_at(case, plan["std"], plan["structure"], self._sup_value(case, plan["std"], terms))
 
     def ask(self, plan, n):
+        # not capped by the round limit: tested in the lab, capping it cost 4.9 +- 0.5 points on short
+        # round limits (our price rises faster and meets the supplier higher; docs/LOG.md Sat 18:10)
         steps, shape = max(1, self.k["steps"]), self.k["shape"]
         frac = min(1.0, (n / steps) ** shape)
         return round(plan["p_open"] + (plan["p_limit"] - plan["p_open"]) * frac, 2)

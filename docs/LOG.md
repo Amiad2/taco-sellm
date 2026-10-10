@@ -250,3 +250,9 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - --reader llm: the lab's suppliers read our e-mails with an LLM (LAB_READER_MODEL or LLM_MODEL, cached per text) instead of keywords; costs calls, off by default.
 - Found with the lab and fixed in the Calculator (so in sellm/agent.py): it ignored the relationship term in stabilise/secure_supply cases and could close a deal that the term made worse than the opening (score 0): 2-4 of 324 negotiations. It now prices the term with its own floor estimate (should-cost, else floor_guess of the opening's value) for choosing and for the alternative check, and refuses only deals that are surely worse than the opening (C without the term). C_open follows the arena: the cheapest opening that keeps the must-haves, else the cheapest opening (P11 confirms it: 817,578 is its must-have-breaking opening). Result on 162 scenarios x 2: 0 worse-than-opening deals.
 - Invented suppliers' floors now sit within 12 % of the part's should-cost where one exists, as the data package says real estimates do. Stress verdict: FAIL on crashes, 422s and broken must-haves; a deal worse than the opening is a warning (it scores 0 like walking away without an alternative).
+
+## 2026-10-10 17:30 CEST · Amiad @ fedora
+**[finding] Lab: capping planned steps at the round limit costs points (tested, not adopted)**
+- Idea: with a round limit of 4-6, plan fewer, bigger steps. Paired test on the same 40 short-round scenarios x 2 seeds, sellm/agent.py knobs: 54.2 without the cap, 49.3 with it, -4.9 +- 0.5 points.
+- Why: our price rises faster and meets the supplier sooner, at a higher level. Staying low until the rounds run out and then taking its standing offer is better under the mirror-and-limit dynamics the backtest supports.
+- A plausible change the lab refuted in a minute; the code keeps a comment at Calculator.ask.

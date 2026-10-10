@@ -22,6 +22,11 @@ Last updated: 2026-10-10 17:45 CEST by Amiad (Claude Code).
 | Amiad (Claude Code) | **Lab** upkeep and strategy search: suppliers, scenarios, tournament, stress test, the `Calculator` strategy and its knobs. No arena calls | `sellm/lab/`, `scripts/lab`, `tests/test_lab.py`, `runs/lab/` | Sat 16:00 |
 ## Next up
 
+From the lab (Amiad): **the final runner needs one loop per thread** - the kit's `play()` times RFQ
+threads out in the lab as in the sandbox, and a stale offer ID after a timeout is a 422 that crashes
+it. Before any arena run of `--agent sellm`: `scripts/lab stress sellm.agent:make_agent` must PASS.
+Then confirm the lab's best knobs in the free sandbox (D01, D02) before spending practice quota.
+
 The plan is in `docs/PLAN.md`: three workstreams (A numbers and strategy, B data and arguments,
 C arena, measurement and final), a timeline and the quota budget. It is **proposed, not yet agreed**.
 
