@@ -109,6 +109,12 @@ Evidence and tables: `experiments/RESULTS.md`. Measured on the sandbox's demo su
 - **A final offer is final** (confirmed, 8 sessions). Pushing the price after `final_offer` gained
   nothing and lost the deal once in two tries. A holding message without a term sheet keeps the
   offer alive and restarts the clock.
+- **P02 also withdrew after a post-final-offer price push** (confirmed, 2026-10-11, replay
+  `1a882885bd67dea7`): with the LLM writing the e-mails, a buyer ladder of EUR 1.00, 46.89, 92.78
+  led Nordmark to EUR 373.85 at 90-day payment and `final_offer`; our next ask, EUR 138.68, ended the
+  session with no deal (score 0.000). The requested ten rounds were impossible once the supplier
+  withdrew. Do not push after `final_offer`; the one-euro anchor also did not bring the supplier near
+  the buyer's EUR 368.14 target.
 - **The supplier mirrors our steps, not our level** (confirmed on D01, 20 sessions). Its first
   counter did not depend on our opening. It then gave back 0.6-0.85 of each step we made and said
   `final_offer` at our 6th message. Opening 1.00 lower with the same steps changed nothing; steps

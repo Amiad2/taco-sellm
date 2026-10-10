@@ -789,3 +789,9 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Verdict A/B on the standing offer, confidence = the probability of the letter from the token probabilities: agrees with code in 48 of 53. Applied in five random cases (a sure A before the final offer accepts at once): acted twice, P01 0.864 (0.984) and P18 0.401 (0.446). Its reason in P01 is our own cost function with the relationship estimate that is 2 % too high.
 - P05 in the apply batch scored 0.250: three timeouts, two bidders withdrew - the kit's sequential runner with 6-8 s of model time per move while five sessions ran at once (0.820 in the full run, no verdict acted). For Amiad: an RFQ with the model in the loop needs the per-thread runner.
 - Kept off: SELLM_LLM is not set, --agent sellm calls no model and plays the template with the two rules of 23:50.
+
+## 2026-10-11 00:18 CEST · Amiad @ fedora
+**[run] P02 one-euro LLM ladder: Nordmark withdrew after our post-final-offer push**
+- One practice session, custom LLM-written e-mails (gpt-6-sol) with a coded price ladder from EUR 1.00 toward the P02 C_best target of EUR 368.14; opened on commit 7a49c38.
+- Round 1 EUR 1.00; round 2 EUR 46.89 (supplier EUR 374.63); round 3 EUR 92.78 (supplier EUR 374.15); supplier marked EUR 373.85 at 90-day payment/no index as final_offer; our EUR 138.68 push in round 4 led to withdrawal and score 0.000. Replay https://arena.tacto.ai/replay/1a882885bd67dea7.
+- Arena ended the session after 4 rounds, so it could not use all 10; one practice session spent, quota 283 -> 282 of 450. The requested post-final-offer test was attempted; supplier did not continue.

@@ -20,6 +20,7 @@
  "17cc1fd397091bdf": "sellm negotiator v1.1 @2dadddb, kit runner, no LLM",
  "17eb970d44b012e1": "probe h14-a",
  "1855160613d397c9": "ab nego-template+recent_cap=false @cd67dda+local",
+ "1a882885bd67dea7": "Codex P02 LLM one-euro ladder @7a49c38",
  "1d100e578081af73": "PERSIST T4b forecast first + a fixed call-off schedule offered in the first e-mail {\"signal_facts\": true, \"soft_give\": true}",
  "1d5d9c993360de9b": "sellm + two rules + LLM writer, verdict in shadow (gpt-6-sol) @86db7be, kit runner",
  "1fa57b7c86d67ede": "EVAL bank2: bank, one fact per topic, no ppm sentences @19b339f (claude eval session)",
