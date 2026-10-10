@@ -1,0 +1,12 @@
+[
+ {
+  "knobs": {
+   "structure": "buyer"
+  },
+  "delta": {
+   "structure": "buyer"
+  },
+  "diff": -0.011238113930719934,
+  "se": 0.007073399509218599
+ }
+]

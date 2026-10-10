@@ -1,0 +1,4 @@
+18:49:20 pools: train 169 (9 twins), test 83 (3 twins); options {'clock': True, 'mode': 'parallel', 'wave_cap_s': 480, 'think_s': 2.0, 'vary': True, 'reader': 'keywords', 'supplier': 'engine', 'no_cache': False}
+18:49:20 compare ['calc', 'sellm.lab.clone_agent:CloneAgent']: 1008 negotiations
+18:49:33 done in 13 s
+18:49:33 report: runs/lab/20261010-184910-compare-test-clone1/report.md

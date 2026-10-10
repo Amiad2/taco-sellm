@@ -1,0 +1,2 @@
+18:46:43 pools: train 204 (12 twins), test 0 (0 twins); options {'clock': True, 'mode': 'sequential', 'wave_cap_s': 480, 'think_s': 2.0, 'vary': True, 'reader': 'keywords', 'supplier': 'engine', 'no_cache': False}
+18:46:43 stress calc {'structure': 'joint', 'guess_rate': 0.2, 'floor_guess': 0.85, 'use_should_cost': False, 'open_below': 0.1, 'steps': 8, 'shape': 0.75, 'sheets': 3, 'take_alternative': False, 'after_final': 'accept', 'claims': 'bank', 'tone': 'warm', 'ask_breakdown': False, 'accept_gap': 0.01} (sequential): 408 negotiations

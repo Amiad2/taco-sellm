@@ -1,0 +1,4 @@
+20:05:13 pools: train 69 (9 twins), test 103 (3 twins); options {'clock': True, 'mode': 'parallel', 'wave_cap_s': 480, 'think_s': 2.0, 'vary': True, 'reader': 'keywords', 'supplier': 'engine', 'no_cache': False}
+20:05:13 compare ['naive', 'calc', 'sellm.agent:make_agent']: 1032 negotiations
+20:05:26 done in 13 s
+20:05:26 report: runs/lab/20261010-200506-compare-nego-vs-calc/report.md

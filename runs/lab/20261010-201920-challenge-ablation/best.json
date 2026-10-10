@@ -1,0 +1,12 @@
+[
+ {
+  "knobs": {
+   "use_should_cost": false
+  },
+  "delta": {
+   "use_should_cost": false
+  },
+  "diff": -0.008720811340568967,
+  "se": 0.002801996970939202
+ }
+]

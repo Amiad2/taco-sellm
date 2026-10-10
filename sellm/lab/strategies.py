@@ -16,6 +16,7 @@ thousands of negotiations cost nothing - and has knobs for what we want to compa
   learn          when the supplier counters on one of our variant sheets, ask on that structure
   rel_estimate   the supplier's full cost for the relationship term: should_cost | offer (rel_margin x
                  its lowest offer so far, which bounds its cost) | max (the higher of the two)
+  keep_below     never ask closer than this share to the supplier's standing offer (it makes the last move)
   alt_check      normal | cautious: against the alternative only, price the relationship term as if
                  the supplier's cost were close to its lowest offer (it never sells below its cost)
   hold_others    with one loop per thread: keep a finished thread alive with a holding e-mail while
@@ -53,6 +54,7 @@ DEFAULTS = dict(
     rel_estimate="should_cost",
     rel_margin=0.97,
     alt_check="normal",
+    keep_below=0.001,
     hold_others=True,
     mirror_guess=0.6,
 )
@@ -327,8 +329,9 @@ class Calculator:
             step = plan["last_step"] or 0.0
             if step > 0 and given < self.k["mirror_guess"] * step * 0.7:  # its limit binds: smaller steps
                 price = min(price, round(plan["last_price"] + max(given / self.k["mirror_guess"], step * 0.25), 2))
-        if math.isfinite(eq) and price >= eq:
-            price = round(min(price, eq) * 0.999, 2)
+        if math.isfinite(eq) and price >= eq * (1 - self.k["keep_below"]):
+            # stay below its standing offer: it should make the last move (sandbox D01, docs/LOG.md 18:30)
+            price = round(eq * (1 - max(self.k["keep_below"], 0.001)), 2)
         plan["last_step"] = price - plan["last_price"] if plan["last_price"] is not None else None
         plan["last_price"], plan["supplier_eq"] = price, eq
         plan["sent"] += 1
@@ -436,13 +439,14 @@ SPACE = {
     "rel_estimate": ["should_cost", "offer", "max"],
     "rel_margin": [0.93, 0.97, 1.0],
     "alt_check": ["normal", "cautious"],
+    "keep_below": [0.001, 0.004, 0.008, 0.015],
     "adaptive": [False, True],
 }
 
 
-def sample_knobs(rng):
-    """A random Calculator variant: every knob drawn from SPACE."""
-    return {k: rng.choice(v) for k, v in SPACE.items()}
+def sample_knobs(rng, space=None):
+    """A random variant: every knob drawn from `space` (default: the Calculator's SPACE)."""
+    return {k: rng.choice(v) for k, v in (space or SPACE).items()}
 
 
 def registry(package):

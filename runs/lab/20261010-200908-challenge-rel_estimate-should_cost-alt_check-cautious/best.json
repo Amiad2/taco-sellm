@@ -1,0 +1,14 @@
+[
+ {
+  "knobs": {
+   "rel_estimate": "should_cost",
+   "alt_check": "cautious"
+  },
+  "delta": {
+   "rel_estimate": "should_cost",
+   "alt_check": "cautious"
+  },
+  "diff": -0.010734470540224552,
+  "se": 0.004998319273558306
+ }
+]

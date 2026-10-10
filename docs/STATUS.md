@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-10 18:41 CEST by Omar (Claude Code).
+Last updated: 2026-10-10 20:30 CEST by Amiad (Claude Code).
 
 ## Now
 
@@ -20,11 +20,15 @@ Last updated: 2026-10-10 18:41 CEST by Omar (Claude Code).
 
 | Who | What | Files | Since |
 |---|---|---|---|
-| Amiad (Claude Code) | **Lab** upkeep and strategy search: suppliers, scenarios, tournament, stress test, the `Calculator` strategy and its knobs. No arena calls | `sellm/lab/`, `scripts/lab`, `tests/test_lab.py`, `runs/lab/` | Sat 16:00 |
+| Amiad (Claude Code) | **Lab** upkeep and the clone feedback loop: suppliers (engine and LLM), scenarios, tournament, stress test, the Calculator and `sellm/lab/clone_agent.py`. Never edits group A's files. No arena calls | `sellm/lab/`, `scripts/lab`, `tests/test_lab.py`, `runs/lab/` | Sat 16:00 |
 | Omar (Claude Code) | **Group B - Data**: built and verified (S0-S12). Open: the human check of the signals against blind labels (V11), the Sunday 08:00 rebuild. No arena calls | `sellm/intel/` (package), `sellm/dossiers/`, `tests/test_intel.py` | Sat 17:48 |
 | Jonathan (Claude Code) | **Group A - Negotiation** (`docs/PLAN.md` section 3): the negotiator behind `make_agent` - guards so no move is invalid, a writer (LLM prose around term sheets and arguments that code fixes; template fallback), reading the supplier's reply, use of the dossier. Plays the free sandbox itself to measure wording; practice only up to 10 sessions, each logged | `sellm/negotiator.py`, `sellm/writer.py`, `sellm/llm.py`, `sellm/reading.py`, `sellm/agent.py`, `tests/test_negotiator.py`, `experiments/ab_sandbox.py` | Sat 18:16 |
 
 ## Next up
+
+**Jonathan: read the [handoff] of Sat 20:30 in docs/LOG.md** - the lab's supplier model changed at 20:03 (lowball
+penalty), so earlier lab numbers are superseded; a comparison of the negotiator, the Calculator and Amiad's clone is
+waiting for you to run.
 
 From the lab (Amiad): **the final runner needs one loop per thread** - the kit's `play()` times RFQ
 threads out in the lab as in the sandbox, and a stale offer ID after a timeout is a 422 that crashes

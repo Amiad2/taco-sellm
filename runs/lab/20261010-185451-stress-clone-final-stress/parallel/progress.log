@@ -1,0 +1,2 @@
+18:55:47 pools: train 204 (12 twins), test 0 (0 twins); options {'clock': True, 'mode': 'parallel', 'wave_cap_s': 480, 'think_s': 2.0, 'vary': True, 'reader': 'keywords', 'supplier': 'engine', 'no_cache': False}
+18:55:47 stress sellm.lab.clone_agent:CloneAgent  (parallel): 408 negotiations

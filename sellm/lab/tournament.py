@@ -31,7 +31,8 @@ from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 
 from . import invent, store, twins
-from .strategies import registry, sample_knobs
+from .spaces import sample, space_for
+from .strategies import registry
 from .table import LocalTable, play_lab
 
 HOLDOUT = {"P04", "P10", "P18"}
@@ -211,7 +212,18 @@ def compare(run, names, seeds=2, knobs=None):
     return rows
 
 
-def search(run, minutes=10, start=64, seeds=2, seed=0, test_top=8, test_seeds=3, baselines=("naive",), around=None):
+def search(
+    run,
+    minutes=10,
+    start=64,
+    seeds=2,
+    seed=0,
+    test_top=8,
+    test_seeds=3,
+    baselines=("naive",),
+    around=None,
+    agent="calc",
+):
     """Successive halving over random Calculator knobs on the train pool, then the best `test_top`
     variants, the default and the baselines on the test pool. `around`: start from these knobs and
     their neighbours (one or two knobs changed) instead of random ones - a local search."""
@@ -223,10 +235,13 @@ def search(run, minutes=10, start=64, seeds=2, seed=0, test_top=8, test_seeds=3,
     if start > fits:
         run.log(f"{minutes:g} min fit about {fits} variants in a first round, not {start}: starting with {fits}")
         start = fits
+    space = space_for(agent)
     if around is not None:
-        variants = [("calc", dict(around)), ("calc", {})] + [("calc", mutate(rng, around)) for _ in range(start - 2)]
+        variants = [(agent, dict(around)), (agent, {})] + [
+            (agent, mutate(rng, around, space)) for _ in range(start - 2)
+        ]
     else:
-        variants = [("calc", {})] + [("calc", sample_knobs(rng)) for _ in range(start - 1)]
+        variants = [(agent, {})] + [(agent, sample(rng, space)) for _ in range(start - 1)]
     size, played = max(12, len(names) // 8), {}
     rows = run.play([(b, {}, n, k) for b in baselines for n in names for k in range(seeds)])
     rnd = 0
@@ -251,29 +266,29 @@ def search(run, minutes=10, start=64, seeds=2, seed=0, test_top=8, test_seeds=3,
         run.log(f"round {rnd}: {len(variants)} variants on {len(subset)} train scenarios, best {100 * best:.1f}")
         if size >= len(names):
             keep = ranked[: max(4, len(ranked) // 4)]
-            variants = keep + [("calc", mutate(rng, keep[i % len(keep)][1])) for i in range(len(keep) * 3)]
+            variants = keep + [(agent, mutate(rng, keep[i % len(keep)][1], space)) for i in range(len(keep) * 3)]
         else:
             variants = ranked[: max(4, len(ranked) // 2)]
             size = min(len(names), size * 2)
-    calc_rows = [r for r in rows if r["strategy"] == "calc"]
+    calc_rows = [r for r in rows if r["strategy"] == agent]
     stats = summarise(calc_rows, min_scenarios=len(names))
     top = sorted(stats.values(), key=lambda x: -x["mean"])[:test_top]
     if not top:  # nothing was played on every train scenario: take the widest-played ones
         top = sorted(summarise(calc_rows).values(), key=lambda x: (-x["scenarios"], -x["mean"]))[:test_top]
-    cands = [("calc", t["knobs"]) for t in top] + [(b, {}) for b in baselines]
-    if around is not None and not any(n == "calc" and k == around for n, k in cands):
-        cands.append(("calc", dict(around)))  # the champion is always scored on the test pool
-    if not any(n == "calc" and not k for n, k in cands):
-        cands.append(("calc", {}))
+    cands = [(agent, t["knobs"]) for t in top] + [(b, {}) for b in baselines]
+    if around is not None and not any(n == agent and k == around for n, k in cands):
+        cands.append((agent, dict(around)))  # the champion is always scored on the test pool
+    if not any(n == agent and not k for n, k in cands):
+        cands.append((agent, {}))
     run.log(f"test phase: {len(cands)} strategies on {len(run.test)} test scenarios, {test_seeds} seeds")
     rows += run.play([(n, k, s.name, 100 + j) for n, k in cands for s in run.test for j in range(test_seeds)])
     run.log("search done")
     return rows
 
 
-def mutate(rng, knobs):
+def mutate(rng, knobs, space=None):
     """A neighbour of a variant: one or two knobs re-drawn."""
-    fresh = sample_knobs(rng)
+    fresh = sample(rng, space or space_for("calc"))
     out = dict(knobs)
     for k in rng.sample(list(fresh), rng.randint(1, 2)):
         out[k] = fresh[k]
