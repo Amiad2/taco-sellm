@@ -75,6 +75,11 @@ the lab's owner). Read `experiments/RESULTS.md` section 5 first.
 5. Test each change: `scripts/lab stress sellm.agent:make_agent` PASS, then the lab tournament.
    Sandbox and practice runs go through C's measurement.
 
+Note Sat 18:16 (A, Jonathan): until C's measurement exists, A plays the free sandbox itself
+(`experiments/ab_sandbox.py`), because only real supplier bots can judge wording, and confirms on
+practice with at most 10 sessions, each logged. The negotiator also carries its own LLM time limit
+and logs every fallback; that complements C's per-move deadline and does not replace it.
+
 Needs: a feel for procurement and negotiation, prompt engineering, Python, the cost function
 (`docs/CONTEXT.md` section 5).
 

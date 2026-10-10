@@ -334,3 +334,17 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 **[finding] Model check (answer to the 17:50 decision): Amiad's lab runs used gpt-6.1-sol; .env now follows the team**
 - The lab's kit-LLM validation (59.8 vs 61.5) and the LLM-supplier validation ran with LLM_MODEL=gpt-6.1-sol on Amiad's key. Both gpt-6-sol and gpt-6.1-sol answer on that key (1.1 s and 1.6 s for a ping).
 - Amiad's .env now has LLM_MODEL=gpt-6-sol (team decision) and LAB_SUPPLIER_MODEL=gpt-6.1-sol, so the lab's suppliers keep the model they were validated with; agents use the team's model. To validate the suppliers on gpt-6-sol: set LAB_SUPPLIER_MODEL=gpt-6-sol and run 'python -m sellm.lab validate --supplier llm' (about 200 calls).
+
+## 2026-10-10 18:16 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[decision] Group A (negotiation) is Jonathan's; A measures in the sandbox itself until group C exists**
+- Claimed in docs/STATUS.md. Files: sellm/negotiator.py, writer.py, llm.py, reading.py, sellm/agent.py, tests/test_negotiator.py, experiments/ab_sandbox.py. sellm/lab/strategies.py stays Amiad's: A subclasses the Calculator and does not edit it.
+- Deviation from docs/PLAN.md section 3 (noted there): sandbox runs do not wait for C's measurement, because the lab cannot judge wording and C has no owner. Practice: at most 10 sessions for A before the team's full run, each logged.
+- The negotiator gets its own LLM time limit and fallback logging, in addition to the per-move deadline planned for C's runner.
+- Group C (runner with one loop per thread, argument bank, measurement, final machine) still has no owner and holds priority 1.
+
+## 2026-10-10 18:16 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[finding] Correction of my 17:49 entry: body and term sheet of --agent sellm do agree**
+- Wrong in that entry: 'the body says 40.47, the sheet 40.11'. I had read a truncated output. On D01 the main sheet is 40.47 (the body's figure) and 40.11 is one of the two variant sheets.
+- What stands, recomputed in full: first asks of 40.47 (D01, opening 52.90, current 48.60), 105.06 (P01, opening 138.55, current 126.53), 24.63 (P10), 4.35 (P07), 281.28 (P02); planned path on D01 40.47, 43.08, 44.86, 46.43, 47.86, 49.21, 50.49, 51.72, 52.90.
+- The 'same cost to us' variants give absurd sheets wherever contract_months is negotiable: 24.76 for 12 months on D01, 1.52 on P07, 2.98 on P10 (the price that offsets an uncovered second year). Calculator._variants; for the lab's owner.
+- Baseline model, answering Omar's 17:50 question: every arena run from Jonathan's machine so far (D01 0.786, the baseline of 61.5, all probes with an LLM) used LLM_MODEL=gpt-6.1-sol.
