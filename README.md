@@ -9,18 +9,31 @@ the brief and API docs are in [brief/](brief/).
 Needs Python 3.12 and [uv](https://docs.astral.sh/uv/).
 
 ```bash
-cp .env.example .env     # set ARENA_API_KEY and the LLM: LLM_PROVIDER=openai, LLM_MODEL=gpt-6-sol, LLM_API_KEY
+cp .env.example .env     # set ARENA_URL, ARENA_API_KEY, ARENA_DATA=data/package; for an LLM agent also
+                         # LLM_PROVIDER=openai, LLM_MODEL, LLM_API_KEY (values never in git)
 uv sync --all-extras
-uv run arena data        # unpacks data/package (gitignored)
+uv run arena data        # unpacks data/package (and data/release-sunday from Sun 08:00; gitignored)
 uv run arena me          # team + practice quota
-uv run arena play case:D01 --agent sellm -v               # sandbox: free, real supplier bots
-uv run arena play case:P01 --agent llm -v
-uv run arena run --set final --agent llm --parallel 10   # Live Final, start before 12:00
+scripts/preflight        # everything the final needs, plus one free sandbox case through the runner
 ```
 
-Agents: `naive` and `llm` are the kit's examples; `llm` is the baseline to beat (61.5 on the 10
-hosted cases). `sellm` is ours: `sellm/agent.py`, for now the lab's numbers-only Calculator. The
-final command switches to `--agent sellm` only once it beats `llm`.
+The Live Final runs through our runner, `sellm/runner.py` (start it before 12:00; it polls until wave 1
+opens, plays every case of a wave in parallel, closes each case before the wave's cap and stops after
+wave 5; run the same command again after a crash and it resumes the running sessions):
+
+```bash
+nohup uv run python -m sellm.runner --set final --agent sellm > runs/logs/final.out 2>&1 &
+```
+
+Measured runs use the same runner: `uv run python -m sellm.runner --set sandbox --cases D01 D02
+--repeat 3` (free) or `--set practice --cases P01 P05` (quota). Logs: `runs/logs/<time>-runner-<set>.log`
+(every move) and `.jsonl` (one row per case). `uv run arena play case:D01 --agent sellm -v` plays one case
+with the kit's runner.
+
+Agents (`--agent`): `sellm` is ours (`sellm/agent.py` -> `sellm/negotiator.py`: the price path and the
+term sheets from code, data arguments from `sellm/claims.py`, supplier dossiers from `sellm/intel/`);
+`naive` and `llm` are the kit's examples (`llm` scored 61.5 on the 10 hosted cases). Which one the
+final runs is decided in `docs/STATUS.md`.
 
 ## Working on this repo (humans and agents)
 

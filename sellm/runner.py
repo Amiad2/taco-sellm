@@ -39,7 +39,7 @@ import os
 import re
 import threading
 import time
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from concurrent.futures import TimeoutError as FutureTimeout
 from dataclasses import dataclass
 from pathlib import Path
@@ -66,6 +66,8 @@ class Limits:
     close_before_cap: float = 90.0  # close this long before the cap at the latest
     round_margin: float = 15.0  # ... or the slowest round so far plus this
     max_case: float = 540.0  # without a cap (practice, sandbox): close after this
+    flight_wait: float = 70.0  # an accept waits this long for a message still on its way to that supplier
+    docs: float = 20.0  # a reply's attachments are waited for this long, then it goes on without their text
     idle: float = 2.0  # a loop with nothing to send waits this long (an LLM agent is asked again after it)
     poll: float = 5.0  # the final's case list is read this often
 
@@ -99,12 +101,22 @@ class CaseRunner:
         self.lock, self.done = threading.Lock(), threading.Event()
         self.closing = threading.Lock()  # one accept or walk-away at a time: two threads may both decide to close
         self.flying, self.notes, self.outcome = set(), [], {}
-        self.stats = {"moves": 0, "slow": 0, "fallbacks": 0, "holds": 0, "refused": 0, "rereads": 0, "clock_holds": 0}
+        self.stats = {
+            "moves": 0,
+            "slow": 0,
+            "fallbacks": 0,
+            "holds": 0,
+            "refused": 0,
+            "rereads": 0,
+            "clock_holds": 0,
+            "slow_docs": 0,
+        }
         self.slowest, self.t_start = 0.0, time.monotonic()
         self.clock_holds, self.heard, self.replied, self.threads = {}, {}, {}, {}  # replied: its last reply
         self.pending, self.failures, self.broken = {}, {}, False  # per thread: a running decision, failures in a row
         self.takes_focus = "focus" in inspect.signature(agent.decide).parameters
         self.pool = ThreadPoolExecutor(max_workers=8, thread_name_prefix=f"decide-{case_id}")
+        self.docs_pool = ThreadPoolExecutor(max_workers=4, thread_name_prefix=f"docs-{case_id}")
 
     # -- the session ---------------------------------------------------------------------------
     def note(self, text, level=logging.INFO):
@@ -147,8 +159,13 @@ class CaseRunner:
 
     def refresh(self, sup):
         """Add what the arena did in this thread without us: timeout follow-ups carry a new offer ID."""
+        t = self.client.thread(self.sid, sup)  # outside the lock: the arena may hold it behind a reply
+        with self.lock:
+            self._merge(sup, t)
+        return t
+
+    def _merge(self, sup, t):
         self.stats["rereads"] += 1
-        t = self.client.thread(self.sid, sup)
         events = self.threads[sup]
         seen = sum(1 for m in events if m.get("_timeout"))
         for k, late in enumerate((t.get("timeouts") or [])[seen:], start=seen):
@@ -165,7 +182,6 @@ class CaseRunner:
             events.append({"from": f"closed@{sup}", "_timeout": True, "message_id": f"closed:{sup}",
                            "status": "walked_away", "term_sheets": [], "body": "", "attachments": []})  # fmt: skip
             self.note(f"{sup}: thread closed ({t.get('closed')})", logging.WARNING)
-        return t
 
     # -- time ----------------------------------------------------------------------------------
     def closing_due(self):
@@ -238,8 +254,10 @@ class CaseRunner:
     def _close(self, decision):
         target, action = decision["supplier_id"], decision["message"]["action"]
         if action["type"] == "accept":
-            with self.lock:
-                current = self.refresh(target).get("offer_id")
+            t0 = time.monotonic()  # a message to it still on its way gets a new offer ID with its reply
+            while target in self.flying and time.monotonic() - t0 < self.lim.flight_wait:
+                time.sleep(min(0.2, self.lim.idle))
+            current = self.refresh(target).get("offer_id")
             if current != action.get("term_sheet_id"):
                 old = action.get("term_sheet_id")
                 self.note(f"{target}: offer ID changed before the accept ({old} -> {current}), deciding again")
@@ -250,9 +268,8 @@ class CaseRunner:
             self.stats["refused"] += 1
             self.note(f"{target}: {action['type']} refused: {e}", logging.WARNING)
             if e.status in (409, 422):
-                with self.lock:
-                    for s in self.threads:
-                        self.refresh(s)
+                for s in list(self.threads):
+                    self.refresh(s)
                 if self.ended_on_server():
                     return True
                 return False
@@ -270,6 +287,24 @@ class CaseRunner:
             return True
         return False
 
+    def documents(self, message):
+        """The message with its attachments' text, waited for at most lim.docs. The arena answers an
+        attachment of a session only after a pending reply in it (P05: 37-61 s while another bidder
+        wrote); without the text the move goes on, the thread's clock matters more."""
+        if not any(a.get("attachment_id") and "text" not in a for a in message.get("attachments") or []):
+            return message
+        msg = copy.deepcopy(message)  # filled in the worker; a late fill never touches the threads
+        future = self.docs_pool.submit(fetch_documents, self.table, msg)
+        try:
+            return future.result(timeout=self.lim.docs)
+        except FutureTimeout:
+            self.stats["slow_docs"] += 1
+            self.note(f"{message.get('from')}: attachments not there after {self.lim.docs:.0f} s, going on without",
+                      logging.WARNING)  # fmt: skip
+        except Exception as e:
+            self.note(f"{message.get('from')}: attachments failed: {type(e).__name__}: {e}", logging.WARNING)
+        return message
+
     # -- the loops -----------------------------------------------------------------------------
     def send(self, sup, message):
         """One e-mail and its reply. Returns False if the loop should stop."""
@@ -284,19 +319,21 @@ class CaseRunner:
             if e.status in (409, 422):
                 if self.ended_on_server():
                     return False
-                with self.lock:
-                    self.refresh(sup)
+                self.refresh(sup)
                 return True
             raise
         with self.lock:
-            self.flying.discard(sup)
-            self.heard[sup] = self.replied[sup] = time.monotonic()
+            self.heard[sup] = self.replied[sup] = time.monotonic()  # its 60 s run from here
             self.slowest = max(self.slowest, time.monotonic() - t0)
             if "result" in reply:
+                self.flying.discard(sup)
                 self.outcome["result"] = reply["result"]
                 self.done.set()
                 return False
-            self.threads[sup] += [{**message, "from": "buyer"}, fetch_documents(self.table, reply)]
+        reply = self.documents(reply)  # outside the lock: the other threads keep playing meanwhile
+        with self.lock:
+            self.flying.discard(sup)
+            self.threads[sup] += [{**message, "from": "buyer"}, reply]
             status = latest(self.threads[sup]).get("status")
         prices = [s.get("terms", {}).get("unit_price") for s in reply.get("term_sheets") or []]
         self.note(f"{sup}: sent {len(message.get('term_sheets') or [])} sheet(s); reply {status} {prices}")
@@ -311,9 +348,8 @@ class CaseRunner:
                 if latest(self.threads[sup]).get("status") in ENDED:
                     return
                 if time.monotonic() - self.heard[sup] > self.lim.silence:
-                    with self.lock:
-                        self.refresh(sup)
-                        self.heard[sup] = time.monotonic()
+                    self.refresh(sup)
+                    self.heard[sup] = time.monotonic()
                     if latest(self.threads[sup]).get("status") in ENDED:
                         return
             elif not live_threads(self.threads):
@@ -372,9 +408,8 @@ class CaseRunner:
         """Time is up or every loop ended: re-read everything and close on what stands."""
         if "result" in self.outcome or self.ended_on_server():
             return
-        with self.lock:
-            for s in self.threads:
-                self.refresh(s)
+        for s in list(self.threads):
+            self.refresh(s)
         for attempt in range(3):
             if live_threads(self.threads):
                 decision = closing_move(self.case, self.threads)
@@ -389,9 +424,8 @@ class CaseRunner:
                 self.note(f"closing refused ({attempt + 1}/3): {e}", logging.WARNING)
                 if self.ended_on_server():
                     return
-                with self.lock:
-                    for s in self.threads:
-                        self.refresh(s)
+                for s in list(self.threads):
+                    self.refresh(s)
         self.outcome["result"] = self.client.session(self.sid).get("result") or {"deal": False}
 
     def run(self):
@@ -416,6 +450,7 @@ class CaseRunner:
             log.exception("%s failed", self.case_id)
         finally:
             self.pool.shutdown(wait=False, cancel_futures=True)
+            self.docs_pool.shutdown(wait=False, cancel_futures=True)
         return self.row(crash)
 
     def row(self, crash):
@@ -526,10 +561,11 @@ def run_cases(client, case_ids, new_agent, parallel=10, limits=None, repeat=1, o
     rows = []
     jobs = [cid for cid in case_ids for _ in range(repeat)]
     with ThreadPoolExecutor(max_workers=min(parallel, 10), thread_name_prefix="case") as pool:
-        for row in pool.map(lambda cid: play_case(client, cid, new_agent(), None, limits), jobs):
-            rows.append(row)
+        futures = [pool.submit(play_case, client, cid, new_agent(), None, limits) for cid in jobs]
+        for f in as_completed(futures):  # each row as soon as its case ends, not behind a slow one
+            rows.append(f.result())
             if on_row:
-                on_row(row)
+                on_row(rows[-1])
     return rows
 
 

@@ -1,0 +1,132 @@
+#!/usr/bin/env bash
+# Pre-flight for the Live Final on the machine that runs it (docs/CONTEXT.md section 12; macOS and Linux,
+# bash 3.2). Checks everything the final needs, plays one free sandbox case through the final runner and
+# prints the command that starts the final. Nothing here waits for input.
+# Usage: scripts/preflight            all checks (about 3 min)
+#        scripts/preflight --quick    skip the full test suite and the sandbox case (about 30 s)
+#        scripts/preflight --no-sync  do not pull (after the freeze: the final runs the checked-out commit)
+set -uo pipefail
+cd "$(dirname "$0")/.." || exit 1
+quick=no
+sync=yes
+for a in "$@"; do
+  case "$a" in
+    --quick) quick=yes ;;
+    --no-sync) sync=no ;;
+    *) echo "preflight: unknown option $a" >&2; exit 2 ;;
+  esac
+done
+fails=0
+warns=0
+tmp=$(mktemp)
+trap 'rm -f "$tmp"' EXIT
+ok() { printf '  ok    %s\n' "$1"; }
+warn() { printf '  WARN  %s\n' "$1"; warns=$((warns + 1)); }
+fail() { printf '  FAIL  %s\n' "$1"; fails=$((fails + 1)); }
+step() { printf '\n%s\n' "$1"; }
+now() { TZ=Europe/Berlin date '+%a %H:%M'; }
+
+echo "preflight: $(now) CEST on $(hostname) ($(uname -s))"
+
+step "1. Repo"
+if [ "$sync" = yes ]; then
+  if scripts/sync >/dev/null 2>&1; then ok "scripts/sync: in step with origin"; else fail "scripts/sync failed (network? conflict?)"; fi
+fi
+branch=$(git rev-parse --abbrev-ref HEAD)
+[ "$branch" = main ] && ok "branch main" || fail "branch is $branch, not main"
+if [ -z "$(git status --porcelain --untracked-files=no)" ]; then ok "no local changes to tracked files"; else warn "local changes to tracked files (git status): the final runs what is on disk"; fi
+ok "commit $(git rev-parse HEAD) (this hash goes into the submission)"
+
+step "2. Tools and environment"
+command -v uv >/dev/null 2>&1 && ok "uv $(uv --version 2>/dev/null | cut -d' ' -f2)" || fail "uv not found (https://docs.astral.sh/uv/)"
+if uv sync --all-extras --quiet >/dev/null 2>&1; then ok "uv sync --all-extras"; else fail "uv sync --all-extras failed"; fi
+if [ -f .env ]; then
+  ok ".env present"
+  for key in ARENA_URL ARENA_API_KEY; do
+    if grep -Eq "^[[:space:]]*$key=.+" .env || [ -n "${!key:-}" ]; then ok "$key set"; else fail "$key missing in .env"; fi
+  done
+  if grep -Eq '^[[:space:]]*LLM_PROVIDER=.+' .env; then
+    ok "LLM settings present (only needed for --agent llm or an LLM writer)"
+  fi
+else
+  fail ".env missing: cp .env.example .env and put in the team key (never commit it)"
+fi
+
+step "3. Data (the Sunday release is public from Sun 08:00)"
+if uv run arena data >"$tmp" 2>&1; then
+  ok "uv run arena data: $(tr '\n' ' ' <"$tmp")"
+else
+  fail "uv run arena data failed: $(tail -1 "$tmp")"
+fi
+[ -f data/package/facts.json ] && ok "data/package unpacked" || fail "data/package/facts.json missing"
+if [ -f data/release-sunday/facts.json ]; then
+  ok "Sunday release unpacked (DataPackage merges it)"
+elif [ "$(TZ=Europe/Berlin date +%u%H)" -ge 708 ] 2>/dev/null; then
+  fail "Sunday release missing after 08:00: run uv run arena data again"
+else
+  warn "Sunday release not public yet (from Sun 08:00): run this again after 08:00"
+fi
+
+step "4. Arena"
+me=$(uv run arena me 2>&1)
+if printf '%s' "$me" | grep -q '"status": "active"'; then
+  left=$(printf '%s' "$me" | sed -n 's/.*"left": \([0-9]*\).*/\1/p' | head -1)
+  ok "uv run arena me: team active, practice sessions left ${left:-?}"
+  [ -n "$left" ] && [ "$left" -lt 15 ] && warn "few practice sessions left ($left): keep 10 for the rehearsal"
+else
+  fail "uv run arena me: $(printf '%s' "$me" | tail -1)"
+fi
+
+step "5. Rules (docs/CONTEXT.md section 11)"
+hits=$(grep -nE '/v1/events|events/stream|/v1/screen|"/screen|leaderboard|/v1/results|"/results' \
+  sellm/*.py sellm/intel/*.py 2>/dev/null | grep -vE '^[^:]+:[0-9]+:[[:space:]]*#' | grep -v 'never the live feed' || true)
+if [ -z "$hits" ]; then ok "no live-feed endpoint in the agent's code path (sellm/, sellm/intel/)"; else fail "live-feed endpoint in the agent's code: $hits"; fi
+if git ls-files | grep -qE '(^|/)\.env$'; then fail ".env is tracked by git"; else ok ".env not in git"; fi
+
+step "6. Tests"
+if uv run ruff check . >/dev/null 2>&1; then ok "ruff check"; else fail "ruff check (uv run ruff check .)"; fi
+if [ "$quick" = yes ]; then
+  if uv run pytest -q tests/test_runner.py tests/test_claims.py >"$tmp" 2>&1; then
+    ok "runner and claims tests: $(tail -1 "$tmp")"
+  else
+    fail "runner and claims tests: $(tail -1 "$tmp")"
+  fi
+else
+  if uv run pytest -q >"$tmp" 2>&1; then ok "pytest: $(tail -1 "$tmp")"; else fail "pytest: $(tail -1 "$tmp")"; fi
+fi
+
+if [ "$quick" = no ]; then
+  step "7. One free sandbox case through the final runner (no quota)"
+  out=$(ARENA_NO_PULL=1 uv run python -m sellm.runner --set sandbox --agent sellm --cases D01 2>&1)
+  done_line=$(printf '%s\n' "$out" | grep 'done:' | tail -1)
+  if printf '%s' "$done_line" | grep -q 'crashes 0'; then
+    ok "sandbox D01: ${done_line#*done: }"
+  else
+    fail "sandbox D01 through the runner: $(printf '%s\n' "$out" | tail -3 | tr '\n' ' ')"
+  fi
+fi
+
+step "8. Machine"
+if [ "$(uname -s)" = Darwin ]; then
+  if pmset -g batt 2>/dev/null | grep -q "AC Power"; then ok "on AC power"; else warn "on battery: plug the laptop in"; fi
+  if pgrep -x caffeinate >/dev/null 2>&1; then ok "caffeinate is running"; else warn "no caffeinate: run 'caffeinate -dims &' so the Mac does not sleep"; fi
+else
+  ok "Linux: make sure the machine does not suspend (systemd-inhibit or the power settings)"
+fi
+if curl -s -m 10 -o /dev/null -w '%{http_code}' https://arena.tacto.ai/health 2>/dev/null | grep -q 200; then
+  ok "arena.tacto.ai reachable"
+else
+  fail "arena.tacto.ai/health not reachable (network?)"
+fi
+
+echo
+echo "preflight: $fails failed, $warns warnings ($(now) CEST)"
+cat <<'EOF'
+
+Start the final (Sun 11:30 at the latest, it polls until wave 1 opens and stops after wave 5):
+  caffeinate -dims &      # macOS: no sleep
+  nohup uv run python -m sellm.runner --set final --agent sellm > runs/logs/final.out 2>&1 &
+  tail -f runs/logs/final.out      # watch; the per-move log is runs/logs/<time>-runner-final.log
+After a crash: run the same command again; it resumes the running sessions.
+EOF
+[ "$fails" -eq 0 ]

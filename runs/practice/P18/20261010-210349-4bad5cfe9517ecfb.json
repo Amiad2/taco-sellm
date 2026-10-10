@@ -3,7 +3,7 @@
  "case_id": "case:P18",
  "set": "practice",
  "created_at": "2026-10-10T21:03:49+02:00",
- "label": "sellm negotiator v1.2 + calculator @19b339f, kit runner, no LLM",
+ "label": "runner v1.1, sellm (negotiator v1.1 @2dadddb)",
  "replay": "https://arena.tacto.ai/replay/4bad5cfe9517ecfb",
  "case": {
   "case_id": "case:P18",

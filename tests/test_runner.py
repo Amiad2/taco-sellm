@@ -2,6 +2,7 @@
 lose points in the final - an RFQ timeout that replaces the offer ID, a slow agent, the wave's cap, a
 crash and its resume, waves that start and close - are played in seconds, without quota."""
 
+import copy
 import threading
 import time
 from pathlib import Path
@@ -220,6 +221,45 @@ def test_a_thread_the_agent_leaves_waiting_gets_a_holding_email_before_its_clock
     held = [c[2] for c in arena.calls if c[0] == "send" and c[3] == "e-mail" and c[2] != first]
     assert held and all(held.count(s) <= FAST.max_holds for s in set(held))
     assert any("while the agent works elsewhere" in n for n in row["notes"])
+
+
+def test_an_attachment_held_behind_another_reply_does_not_stop_the_other_threads():
+    """Practice P05: the arena answered an attachment only once another bidder's pending reply was
+    written (37-61 s); the runner held the case lock meanwhile and a bidder timed out. Here every
+    attachment waits for all of the session's replies in flight, and one bidder is slow."""
+    pkg = _package()
+
+    class Held(FakeArena):
+        def __init__(self, *a, **k):
+            super().__init__(*a, **k)
+            self.in_flight, self.cv = 0, threading.Condition()
+
+        def send_message(self, sid, sup, message):
+            with self.cv:
+                self.in_flight += 1
+            try:
+                if sup == sorted(self.sessions[sid].threads)[0]:
+                    time.sleep(1.0)
+                reply = copy.deepcopy(super().send_message(sid, sup, message))
+                for att in reply.get("attachments") or []:
+                    att.pop("text", None)  # as on the arena: the text has to be fetched
+                return reply
+            finally:
+                with self.cv:
+                    self.in_flight -= 1
+                    self.cv.notify_all()
+
+        def attachment(self, sid, attachment_id):
+            with self.cv:
+                self.cv.wait_for(lambda: self.in_flight == 0, timeout=5.0)
+            return super().attachment(sid, attachment_id)
+
+    arena = Held([_scenario("P05")], pkg.facts)
+    limits = runner.Limits(**{**FAST.__dict__, "docs": 0.2})
+    row = runner.play_case(arena, "case:P05", _agent(pkg), limits=limits)
+    assert row["crash"] is None and row["end_reason"] in ("accepted", "walked_away")
+    assert row["stats"]["slow_docs"] >= 1
+    assert any("going on without" in n for n in row["notes"])
 
 
 def test_closes_on_what_stands_before_the_cap():
