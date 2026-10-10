@@ -20,16 +20,38 @@ Tacto's docs or FAQ, not yet seen by us). Raw history goes to `docs/LOG.md`.
   basis of our price; citing the should-cost estimate (`cost:310010`) was `verified` and brought
   the closing offer.
 
+## From the sandbox probes (Sat 15:42-15:57, 33 free sessions)
+
+Evidence and tables: `experiments/RESULTS.md`. Measured on the sandbox's demo suppliers only.
+
+- **Only the first term sheet of an e-mail can be accepted** (confirmed, 4 of 4: `422 not a
+  standing offer`). To take a supplier's second package, send its exact terms back as our sheet;
+  the supplier answers `agreed` and that sheet can be accepted (confirmed, 2 of 2).
+- **A final offer is final** (confirmed, 8 sessions). Pushing the price after `final_offer` gained
+  nothing and lost the deal once in two tries. A holding message without a term sheet keeps the
+  offer alive and restarts the clock.
+- **The supplier mirrors our steps, not our level** (confirmed on D01, 20 sessions). Its first
+  counter did not depend on our opening. It then gave back 0.6-0.85 of each step we made and said
+  `final_offer` at our 6th message. Opening 1.00 lower with the same steps changed nothing; steps
+  of 0.40 instead of 0.15 moved the score from about 0.77 to 0.89. Steps of 0.05 got 0.68 and an
+  early final offer. **Open low, concede in about five large steps, never shrink the steps early.**
+  Not yet confirmed on a practice supplier.
+- **RFQ: one loop per thread** (confirmed). It removes the timeouts. A supplier at `final_offer`
+  left waiting for over a minute withdrew. After a timeout the offer ID changes.
+- **A rival's offer cited by its ID is `verified`** (confirmed); the same ID twice is `duplicate`.
+- **An early `agreed` means the ask was too high** (seen in D02): both RFQ suppliers have far more
+  room than any run found (C_best 156,739, best closed about 186,000).
+
 ## From the baseline of all 10 hosted cases (Sat 15:27, kit LLM agent, mean 61.5)
 
 Full analysis with evidence per case: `runs/BASELINE.md`. The rules that follow from it:
 
 - **Price every sheet a supplier sends and compare by C** (seen, computed). Suppliers put two
   packages in one e-mail in 11 of 12 threads; the kit reads only the first. In P10 the ignored
-  alternative was worth 0.647 against the accepted 0.570.
-- **Do not stop when the supplier stops moving** (seen). The kit agent accepted after 2-5 of 10
-  messages, on the first `final_offer`, `agreed` or repeated price. What happens when we answer a
-  final offer with a different package is not tested yet.
+  alternative was worth 0.647 against the accepted 0.570. Taking it needs one more round (see above).
+- **Use the rounds before `final_offer`** (seen). The kit agent accepted after 2-5 of 10 messages.
+  The sandbox probes show nothing is gained after a final offer, so the work is in the steps
+  before it.
 - **Talk to all RFQ threads in parallel** (seen, P05): handled one by one, the waiting threads
   timed out and the cheapest bidder withdrew.
 - **Never cite the same ID twice in a case** (seen): 8 of 16 claims came back `duplicate`. Bring a

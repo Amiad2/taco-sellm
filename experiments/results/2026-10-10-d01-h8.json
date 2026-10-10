@@ -1,0 +1,992 @@
+[
+ {
+  "probe": "h8-low",
+  "session_id": "f8ee381f24b016da",
+  "case_id": "case:D01",
+  "deal": true,
+  "score": 0.7498064035147961,
+  "c_deal": 418678.44,
+  "timeouts": {
+   "sup:DEMO-F1": 0
+  },
+  "reached": "final_offer",
+  "our_messages": 6,
+  "their_price": 51.0,
+  "our_last_ask": 49.75,
+  "c_before": 418678.44,
+  "steps": [
+   {
+    "note": "opening ask",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 49.0,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.5,
+    "reply_seconds": 12.5,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-1",
+      "terms": {
+       "unit_price": 51.5,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 422363.12
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 49.15,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 14.1,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-2",
+      "terms": {
+       "unit_price": 51.4,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 421626.18
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 49.3,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 10.3,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-3",
+      "terms": {
+       "unit_price": 51.3,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 420889.25
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 49.45,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 18.6,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-4",
+      "terms": {
+       "unit_price": 51.2,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 420152.31
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 49.6,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 1.7,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-5",
+      "terms": {
+       "unit_price": 51.1,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 419415.38
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 49.75,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 8.5,
+    "status": "final_offer",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-6",
+      "terms": {
+       "unit_price": 51.0,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 418678.44
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "accept the standing sheet",
+    "to": "sup:DEMO-F1",
+    "accept": "offer:DEMO-F1-6",
+    "deal": true,
+    "score": 0.7498064035147961
+   }
+  ]
+ },
+ {
+  "probe": "h8-low",
+  "session_id": "44677d77c01877a5",
+  "case_id": "case:D01",
+  "deal": true,
+  "score": 0.8231575736039897,
+  "c_deal": 415730.7,
+  "timeouts": {
+   "sup:DEMO-F1": 0
+  },
+  "reached": "final_offer",
+  "our_messages": 6,
+  "their_price": 50.6,
+  "our_last_ask": 49.75,
+  "c_before": 415730.7,
+  "steps": [
+   {
+    "note": "opening ask",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 49.0,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.3,
+    "reply_seconds": 15.6,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-1",
+      "terms": {
+       "unit_price": 51.5,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 422363.12
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 49.15,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 13.1,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-2",
+      "terms": {
+       "unit_price": 51.3,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 420889.25
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 49.3,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 22.9,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-3",
+      "terms": {
+       "unit_price": 51.1,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 419415.38
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 49.45,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 9.4,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-4",
+      "terms": {
+       "unit_price": 50.9,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 417941.51
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 49.6,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 8.0,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-5",
+      "terms": {
+       "unit_price": 50.7,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 416467.64
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 49.75,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 9.4,
+    "status": "final_offer",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-6",
+      "terms": {
+       "unit_price": 50.6,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 415730.7
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "accept the standing sheet",
+    "to": "sup:DEMO-F1",
+    "accept": "offer:DEMO-F1-6",
+    "deal": true,
+    "score": 0.8231575736039897
+   }
+  ]
+ },
+ {
+  "probe": "h8-low",
+  "session_id": "835afa84f719c603",
+  "case_id": "case:D01",
+  "deal": true,
+  "score": 0.7498064035147961,
+  "c_deal": 418678.44,
+  "timeouts": {
+   "sup:DEMO-F1": 0
+  },
+  "reached": "final_offer",
+  "our_messages": 6,
+  "their_price": 51.0,
+  "our_last_ask": 49.75,
+  "c_before": 418678.44,
+  "steps": [
+   {
+    "note": "opening ask",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 49.0,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.3,
+    "reply_seconds": 15.6,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-1",
+      "terms": {
+       "unit_price": 51.5,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 422363.12
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 49.15,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 9.6,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-2",
+      "terms": {
+       "unit_price": 51.4,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 421626.18
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 49.3,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 10.3,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-3",
+      "terms": {
+       "unit_price": 51.3,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 420889.25
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 49.45,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 11.2,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-4",
+      "terms": {
+       "unit_price": 51.2,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 420152.31
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 49.6,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 10.0,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-5",
+      "terms": {
+       "unit_price": 51.1,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 419415.38
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 49.75,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 21.5,
+    "status": "final_offer",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-6",
+      "terms": {
+       "unit_price": 51.0,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 418678.44
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "accept the standing sheet",
+    "to": "sup:DEMO-F1",
+    "accept": "offer:DEMO-F1-6",
+    "deal": true,
+    "score": 0.7498064035147961
+   }
+  ]
+ },
+ {
+  "probe": "h8-slow",
+  "session_id": "21e7a3ebe111ce35",
+  "case_id": "case:D01",
+  "deal": true,
+  "score": 0.6764552334256027,
+  "c_deal": 421626.18,
+  "timeouts": {
+   "sup:DEMO-F1": 0
+  },
+  "reached": "final_offer",
+  "our_messages": 4,
+  "their_price": 51.4,
+  "our_last_ask": 50.15,
+  "c_before": 421626.18,
+  "steps": [
+   {
+    "note": "opening ask",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 50.0,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.1,
+    "reply_seconds": 0.1,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-1",
+      "terms": {
+       "unit_price": 51.5,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 422363.12
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 50.05,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 17.9,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-2",
+      "terms": {
+       "unit_price": 51.5,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 422363.12
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 50.1,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 14.0,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-3",
+      "terms": {
+       "unit_price": 51.4,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 421626.18
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 50.15,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 9.8,
+    "status": "final_offer",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-4",
+      "terms": {
+       "unit_price": 51.4,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 421626.18
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "accept the standing sheet",
+    "to": "sup:DEMO-F1",
+    "accept": "offer:DEMO-F1-4",
+    "deal": true,
+    "score": 0.6764552334256027
+   }
+  ]
+ },
+ {
+  "probe": "h8-slow",
+  "session_id": "81b5477e1c0ac9cd",
+  "case_id": "case:D01",
+  "deal": true,
+  "score": 0.6764552334256027,
+  "c_deal": 421626.18,
+  "timeouts": {
+   "sup:DEMO-F1": 0
+  },
+  "reached": "final_offer",
+  "our_messages": 4,
+  "their_price": 51.4,
+  "our_last_ask": 50.15,
+  "c_before": 421626.18,
+  "steps": [
+   {
+    "note": "opening ask",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 50.0,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.2,
+    "reply_seconds": 0.2,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-1",
+      "terms": {
+       "unit_price": 51.5,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 422363.12
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 50.05,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 8.8,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-2",
+      "terms": {
+       "unit_price": 51.5,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 422363.12
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 50.1,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 14.2,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-3",
+      "terms": {
+       "unit_price": 51.4,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 421626.18
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 50.15,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 19.9,
+    "status": "final_offer",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-4",
+      "terms": {
+       "unit_price": 51.4,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 421626.18
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "accept the standing sheet",
+    "to": "sup:DEMO-F1",
+    "accept": "offer:DEMO-F1-4",
+    "deal": true,
+    "score": 0.6764552334256027
+   }
+  ]
+ },
+ {
+  "probe": "h8-slow",
+  "session_id": "71243800ec11631f",
+  "case_id": "case:D01",
+  "deal": true,
+  "score": 0.6764552334256027,
+  "c_deal": 421626.18,
+  "timeouts": {
+   "sup:DEMO-F1": 0
+  },
+  "reached": "final_offer",
+  "our_messages": 4,
+  "their_price": 51.4,
+  "our_last_ask": 50.15,
+  "c_before": 421626.18,
+  "steps": [
+   {
+    "note": "opening ask",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 50.0,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.2,
+    "reply_seconds": 0.3,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-1",
+      "terms": {
+       "unit_price": 51.5,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 422363.12
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 50.05,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 12.7,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-2",
+      "terms": {
+       "unit_price": 51.5,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 422363.12
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 50.1,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 11.2,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-3",
+      "terms": {
+       "unit_price": 51.4,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 421626.18
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "small concession",
+    "to": "sup:DEMO-F1",
+    "sent": [
+     {
+      "unit_price": 50.15,
+      "payment_days": 30,
+      "contract_months": 24,
+      "effective_date": "2027-02-01"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 7.5,
+    "status": "final_offer",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-F1-4",
+      "terms": {
+       "unit_price": 51.4,
+       "payment_days": 30,
+       "contract_months": 24,
+       "effective_date": "2027-02-01"
+      },
+      "c": 421626.18
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "accept the standing sheet",
+    "to": "sup:DEMO-F1",
+    "accept": "offer:DEMO-F1-4",
+    "deal": true,
+    "score": 0.6764552334256027
+   }
+  ]
+ }
+]

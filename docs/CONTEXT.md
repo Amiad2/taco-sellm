@@ -232,6 +232,16 @@ The back office is thin (seen on P01 and D01): one line per step such as "My cal
 `GET /v1/sessions/{sid}`, not there. `GET /v1/sessions?set=practice|sandbox` lists every session
 of the team, whoever played it, so all runs can be pulled into the repo.
 
+Found by testing (Sat 15:42-15:57, `experiments/RESULTS.md`):
+
+- Only the **first** term sheet of a supplier's e-mail is its standing offer. Accepting an
+  alternative's ID gives `422 not a standing offer in this session` (nothing happens).
+- A timeout is counted when the session is next touched, once per silence. The supplier then
+  sends a follow-up with a **new offer ID**; the old one can no longer be accepted. The session
+  state shows `seconds_left` per thread.
+- A message without a term sheet restarts the clock and leaves the standing offer in place, also
+  at `final_offer`.
+
 Structured path for agents that skip prose: `POST /v1/sessions/{sid}/moves`, `.../accept`,
 `.../walk_away`. Same supplier, same rules.
 
@@ -476,7 +486,8 @@ Known limits of the kit agents (read from the code):
 - Neither agent passes a supplier estimate to `total_cost`, so the **relationship term is missing
   from the C they optimise** in `stabilise` and `secure_supply` cases (P01, P02, P03, P10).
 - `play()` handles one thread at a time and waits for each reply. In RFQ cases the other threads'
-  60-second clocks keep running meanwhile. Verify the effect in sandbox `D02` before relying on it.
+  60-second clocks keep running meanwhile: confirmed, 2 timeouts per session in sandbox `D02` and
+  in P05. One loop per thread removes them (`experiments/RESULTS.md`).
 - The `--agent` choices `naive|llm` are hard-coded in `cli.py`.
 - The LLM call has a 45 s timeout; any failure silently plays the naive move.
 

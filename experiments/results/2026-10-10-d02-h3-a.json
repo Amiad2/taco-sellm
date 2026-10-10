@@ -1,0 +1,29 @@
+[
+ {
+  "probe": "h3-seq",
+  "session_id": "9888e414ec64b388",
+  "case_id": "case:D02",
+  "deal": true,
+  "score": 0.4915317313796603,
+  "supplier": "sup:DEMO-J1",
+  "timeouts": {
+   "sup:DEMO-J1": 1,
+   "sup:DEMO-C1": 1
+  },
+  "thread_status": {
+   "sup:DEMO-J1": [
+    "agreed",
+    null
+   ],
+   "sup:DEMO-C1": [
+    "open",
+    null
+   ]
+  },
+  "rounds": 9
+ },
+ {
+  "probe": "h3-par",
+  "error": "ArenaError: HTTP 422: not a standing offer in this session"
+ }
+]

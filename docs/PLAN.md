@@ -37,7 +37,9 @@ except for registering our agent in `cli.py`; add `sellm` to the wheel packages 
 
 ## 3. Workstreams (one per person, each with its own agent sessions)
 
-**A - Numbers and strategy** (calculator + negotiator). First deliverable: `plan()` reproduces the
+**A - Numbers and strategy** (calculator + negotiator). Read `experiments/RESULTS.md` first: it fixes
+the concession policy (open low, about five large steps, nothing after `final_offer`) and how to
+take a supplier's second package. First deliverable: `plan()` reproduces the
 P01 and D01 tables in `docs/LEARNINGS.md` and proposes the first two term sheets for every hosted
 case. Then the round policy: open with a question and two or three sheets that probe what the
 supplier values, trade one lever per round, never accept before the target unless the status is
@@ -49,7 +51,9 @@ in no practice case have about four documents each and are the likely pool for t
 `negotiation_history` carries notes such as "accepted below full cost to keep the volume"
 (Brandlhuber, the P01 part). Sunday 08:00: rebuild with the new release, it must be one command.
 
-**C - Arena, measurement, final** (runner + runs + submission). First deliverable: the baseline
+**C - Arena, measurement, final** (runner + runs + submission). The RFQ runner needs one loop per
+thread and must accept or hold a thread at `final_offer` inside its 60 seconds
+(`experiments/RESULTS.md` section 4; a prototype is `h3_par` in `experiments/sandbox_probes.py`). First deliverable: the baseline
 below and `scripts/pull-runs`. Then: RFQ threads in parallel, the 8-minute budget, the final
 machine, the rehearsal, the README run instructions, the approach text and the slides.
 

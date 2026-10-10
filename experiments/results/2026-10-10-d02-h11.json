@@ -1,0 +1,375 @@
+[
+ {
+  "probe": "h11",
+  "session_id": "d28e7c62991081a9",
+  "case_id": "case:D02",
+  "deal": true,
+  "score": 0.4608978682431153,
+  "c_deal": 187768.0,
+  "timeouts": {
+   "sup:DEMO-J1": 0,
+   "sup:DEMO-C1": 0
+  },
+  "supplier": "sup:DEMO-J1",
+  "thread_status": {
+   "sup:DEMO-J1": [
+    "agreed",
+    null
+   ],
+   "sup:DEMO-C1": [
+    "open",
+    null
+   ]
+  },
+  "rounds": 6,
+  "steps": [
+   {
+    "note": "cite the rival",
+    "to": "sup:DEMO-J1",
+    "sent": [
+     {
+      "unit_price": 15.6,
+      "payment_days": 30,
+      "lead_time_days": 35,
+      "incoterm": "DAP"
+     }
+    ],
+    "seconds_since_their_reply": 0.3,
+    "reply_seconds": 44.3,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-J1-1",
+      "terms": {
+       "unit_price": 15.9,
+       "payment_days": 30,
+       "lead_time_days": 35,
+       "incoterm": "DAP"
+      },
+      "c": 192600.0
+     }
+    ],
+    "claim_results": [
+     {
+      "index": 0,
+      "result": "verified"
+     }
+    ]
+   },
+   {
+    "note": "ask the leader for more",
+    "to": "sup:DEMO-C1",
+    "sent": [
+     {
+      "unit_price": 15.6,
+      "payment_days": 45,
+      "lead_time_days": 35,
+      "incoterm": "EXW"
+     }
+    ],
+    "seconds_since_their_reply": 0.3,
+    "reply_seconds": 44.3,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-C1-1",
+      "terms": {
+       "unit_price": 16.4,
+       "payment_days": 45,
+       "lead_time_days": 35,
+       "incoterm": "EXW"
+      },
+      "c": 205904.0
+     },
+     {
+      "id": "offer:DEMO-C1-1-a",
+      "terms": {
+       "unit_price": 15.5,
+       "payment_days": 45,
+       "lead_time_days": 45,
+       "incoterm": "EXW"
+      },
+      "c": 196568.0
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "cite the rival",
+    "to": "sup:DEMO-C1",
+    "sent": [
+     {
+      "unit_price": 15.5,
+      "payment_days": 45,
+      "lead_time_days": 35,
+      "incoterm": "EXW"
+     }
+    ],
+    "seconds_since_their_reply": 0.2,
+    "reply_seconds": 35.4,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-C1-2",
+      "terms": {
+       "unit_price": 16.3,
+       "payment_days": 45,
+       "lead_time_days": 35,
+       "incoterm": "EXW"
+      },
+      "c": 204700.0
+     }
+    ],
+    "claim_results": [
+     {
+      "index": 0,
+      "result": "verified"
+     }
+    ]
+   },
+   {
+    "note": "ask the leader for more",
+    "to": "sup:DEMO-J1",
+    "sent": [
+     {
+      "unit_price": 15.5,
+      "payment_days": 30,
+      "lead_time_days": 35,
+      "incoterm": "DAP"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 35.6,
+    "status": "agreed",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-J1-2",
+      "terms": {
+       "unit_price": 15.5,
+       "payment_days": 30,
+       "lead_time_days": 35,
+       "incoterm": "DAP"
+      },
+      "c": 187768.0
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "cite the rival",
+    "to": "sup:DEMO-C1",
+    "sent": [
+     {
+      "unit_price": 15.5,
+      "payment_days": 45,
+      "lead_time_days": 35,
+      "incoterm": "EXW"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 16.8,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-C1-3",
+      "terms": {
+       "unit_price": 16.1,
+       "payment_days": 45,
+       "lead_time_days": 35,
+       "incoterm": "EXW"
+      },
+      "c": 202292.0
+     }
+    ],
+    "claim_results": [
+     {
+      "index": 0,
+      "result": "duplicate"
+     }
+    ]
+   },
+   {
+    "note": "ready (agreed) and cheapest: accept at once",
+    "to": "sup:DEMO-J1",
+    "accept": "offer:DEMO-J1-2",
+    "deal": true,
+    "score": 0.4608978682431153
+   },
+   {
+    "note": "cite the rival",
+    "to": "sup:DEMO-C1",
+    "error": "HTTP 409: the session has ended: accepted"
+   }
+  ]
+ },
+ {
+  "probe": "h11",
+  "session_id": "55fdbfea88ae9d8c",
+  "case_id": "case:D02",
+  "deal": true,
+  "score": 0.4608978682431153,
+  "c_deal": 187768.0,
+  "timeouts": {
+   "sup:DEMO-J1": 0,
+   "sup:DEMO-C1": 0
+  },
+  "supplier": "sup:DEMO-J1",
+  "thread_status": {
+   "sup:DEMO-J1": [
+    "agreed",
+    null
+   ],
+   "sup:DEMO-C1": [
+    "open",
+    null
+   ]
+  },
+  "rounds": 5,
+  "steps": [
+   {
+    "note": "cite the rival",
+    "to": "sup:DEMO-J1",
+    "sent": [
+     {
+      "unit_price": 15.6,
+      "payment_days": 30,
+      "lead_time_days": 35,
+      "incoterm": "DAP"
+     }
+    ],
+    "seconds_since_their_reply": 0.5,
+    "reply_seconds": 18.9,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-J1-1",
+      "terms": {
+       "unit_price": 15.9,
+       "payment_days": 30,
+       "lead_time_days": 35,
+       "incoterm": "DAP"
+      },
+      "c": 192600.0
+     }
+    ],
+    "claim_results": [
+     {
+      "index": 0,
+      "result": "verified"
+     }
+    ]
+   },
+   {
+    "note": "ask the leader for more",
+    "to": "sup:DEMO-C1",
+    "sent": [
+     {
+      "unit_price": 15.6,
+      "payment_days": 45,
+      "lead_time_days": 35,
+      "incoterm": "EXW"
+     }
+    ],
+    "seconds_since_their_reply": 0.5,
+    "reply_seconds": 73.7,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-C1-1",
+      "terms": {
+       "unit_price": 16.4,
+       "payment_days": 45,
+       "lead_time_days": 35,
+       "incoterm": "EXW"
+      },
+      "c": 205904.0
+     },
+     {
+      "id": "offer:DEMO-C1-1-a",
+      "terms": {
+       "unit_price": 15.5,
+       "payment_days": 45,
+       "lead_time_days": 45,
+       "incoterm": "EXW"
+      },
+      "c": 196568.0
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "ask the leader for more",
+    "to": "sup:DEMO-J1",
+    "sent": [
+     {
+      "unit_price": 15.5,
+      "payment_days": 30,
+      "lead_time_days": 35,
+      "incoterm": "DAP"
+     }
+    ],
+    "seconds_since_their_reply": 0.0,
+    "reply_seconds": 54.8,
+    "status": "agreed",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-J1-2",
+      "terms": {
+       "unit_price": 15.5,
+       "payment_days": 30,
+       "lead_time_days": 35,
+       "incoterm": "DAP"
+      },
+      "c": 187768.0
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "cite the rival",
+    "to": "sup:DEMO-C1",
+    "sent": [
+     {
+      "unit_price": 15.5,
+      "payment_days": 45,
+      "lead_time_days": 35,
+      "incoterm": "EXW"
+     }
+    ],
+    "seconds_since_their_reply": 0.1,
+    "reply_seconds": 11.4,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-C1-2",
+      "terms": {
+       "unit_price": 16.3,
+       "payment_days": 45,
+       "lead_time_days": 35,
+       "incoterm": "EXW"
+      },
+      "c": 204700.0
+     }
+    ],
+    "claim_results": [
+     {
+      "index": 0,
+      "result": "verified"
+     }
+    ]
+   },
+   {
+    "note": "ready (agreed) and cheapest: accept at once",
+    "to": "sup:DEMO-J1",
+    "accept": "offer:DEMO-J1-2",
+    "deal": true,
+    "score": 0.4608978682431153
+   },
+   {
+    "note": "cite the rival",
+    "to": "sup:DEMO-C1",
+    "error": "HTTP 409: the session has ended: accepted"
+   }
+  ]
+ }
+]

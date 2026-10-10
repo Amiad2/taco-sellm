@@ -15,7 +15,7 @@ Final: Sunday 11 Oct 2026, 12:00 CEST.** Everything about the challenge is in `d
    for the workstream your task belongs to.
 3. Read the newest entries of `docs/LOG.md` - `scripts/session-start` prints both.
 4. Read `docs/CONTEXT.md` if it is not already in your context, and `docs/LEARNINGS.md` and
-   `runs/BASELINE.md` before you touch negotiation behaviour. Before you play a case, read its
+   `runs/BASELINE.md` and `experiments/RESULTS.md` before you touch negotiation behaviour. Before you play a case, read its
    earlier sessions in `runs/` instead of replaying it.
 5. If the task you were given overlaps something under "In progress" in `docs/STATUS.md`, say so to
    your human before you start.
@@ -123,6 +123,7 @@ Each file has one job. Do not mix them:
 | `data/package/` | the data package. Not in git: `uv run arena data` |
 | `scripts/` | `sync`, `log`, `pull-runs`, `session-start`, `stop-check` |
 | `runs/` | all sessions played, with transcripts, supplier reasons, cost breakdowns and offline analysis |
+| `experiments/` | probe scripts and their results: `RESULTS.md` says how the suppliers react and which rules follow |
 | `KIT-README.md` | the kit's own README with worked examples |
 
 New machine: `uv sync --all-extras`, `cp .env.example .env`, put in the team's `ARENA_API_KEY`

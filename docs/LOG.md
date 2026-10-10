@@ -121,3 +121,26 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Guard: lab results are hypotheses. The lab is backtested against our 13 real sessions first; winners are confirmed in sandbox D01/D02, then on single practice cases. arena_kit/ stays untouched; the lab makes no arena calls.
 - Owner: Amiad (Claude Code), claimed in docs/STATUS.md.
 - Setup trap on this machine, worth checking on yours: arena_kit load_env takes the FIRST value of a duplicated key in .env. With the Anthropic block of .env.example left in, LLM_PROVIDER=anthropic wins and, with an empty ANTHROPIC_API_KEY, every LLM call fails silently into the naive move. Comment out the block you do not use.
+
+## 2026-10-10 15:59 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] Sandbox probes H1-H3 plus follow-ups H8, H10, H11: 33 free sessions**
+- Sat 15:42-15:57 on D01 and D02 with experiments/sandbox_probes.py. Practice quota unchanged at 189. All sessions under runs/sandbox/, labelled 'probe <name>'.
+- Results and the rules that follow: experiments/RESULTS.md. Short form in docs/LEARNINGS.md.
+
+## 2026-10-10 15:59 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[finding] Only the first term sheet can be accepted; a final offer is final**
+- Accepting an alternative's ID: 422 'not a standing offer in this session' (4 of 4). Sending its terms back as our sheet: supplier answers 'agreed', then accept (2 of 2).
+- After final_offer: a lower-price push lost the deal once in two; trade, later start and a holding message left the offer unchanged. Nothing was gained in 8 sessions.
+- A holding message without a term sheet keeps a final offer alive and restarts the 60 s clock.
+
+## 2026-10-10 15:59 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[finding] The supplier mirrors the size of our concessions, not our opening level**
+- D01, 20 scripted sessions, same terms: first counter always 51.50 whatever we opened with. Then it gave back 0.6-0.85 of each of our steps and said final_offer at our 6th message.
+- Steps 0.05 -> final 51.40 (score 0.68); 0.15 -> 50.86 (0.77); 0.30 -> 50.63 (0.82); 0.40 -> 50.23 (0.89). Opening at 49.00 instead of 50.00 with the same steps: no change.
+- Policy: open low, about five large steps, never shrink the steps early. Measured on one demo supplier; confirm on a practice supplier (H14: P07, 1 session).
+
+## 2026-10-10 15:59 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[finding] RFQ: one loop per thread, and never leave a thread at final_offer waiting**
+- Kit play() on D02: 2 timeouts per session. One loop per thread: 0. Replies take 30-59 s, so rounds in lockstep still break the other thread's clock.
+- A supplier at final_offer left for over a minute withdrew when we came back to accept. A timeout is counted when the session is next touched; the follow-up carries a new offer ID.
+- Citing the rival's offer by ID is 'verified'. An early 'agreed' means the ask was too high: C_best in D02 is 156,739, best closed about 186,000.

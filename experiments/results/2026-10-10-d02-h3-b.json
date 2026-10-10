@@ -1,0 +1,648 @@
+[
+ {
+  "probe": "h3-par",
+  "session_id": "a24a4447a9db8d6f",
+  "case_id": "case:D02",
+  "deal": true,
+  "score": 0.34537682674736536,
+  "c_deal": 194417.07,
+  "timeouts": {
+   "sup:DEMO-J1": 0,
+   "sup:DEMO-C1": 0
+  },
+  "supplier": "sup:DEMO-J1",
+  "thread_status": {
+   "sup:DEMO-J1": [
+    "agreed",
+    null
+   ],
+   "sup:DEMO-C1": [
+    "open",
+    null
+   ]
+  },
+  "rounds": 9,
+  "steps": [
+   {
+    "note": "negotiate",
+    "to": "sup:DEMO-C1",
+    "sent": [
+     {
+      "unit_price": 14.5,
+      "payment_days": 45,
+      "lead_time_days": 35,
+      "incoterm": "DAP"
+     },
+     {
+      "unit_price": 14.3,
+      "payment_days": 30,
+      "lead_time_days": 35,
+      "incoterm": "FCA"
+     }
+    ],
+    "seconds_since_their_reply": 5.9,
+    "reply_seconds": 43.6,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-C1-1",
+      "terms": {
+       "unit_price": 16.2,
+       "payment_days": 30,
+       "lead_time_days": 35,
+       "incoterm": "FCA"
+      },
+      "c": 201744.0
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "negotiate",
+    "to": "sup:DEMO-J1",
+    "sent": [
+     {
+      "unit_price": 15.2,
+      "payment_days": 60,
+      "lead_time_days": 35,
+      "incoterm": "EXW"
+     }
+    ],
+    "seconds_since_their_reply": 12.1,
+    "reply_seconds": 37.4,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-J1-1",
+      "terms": {
+       "unit_price": 15.8,
+       "payment_days": 30,
+       "lead_time_days": 35,
+       "incoterm": "EXW"
+      },
+      "c": 198592.0
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "negotiate",
+    "to": "sup:DEMO-C1",
+    "sent": [
+     {
+      "unit_price": 14.6,
+      "payment_days": 30,
+      "lead_time_days": 35,
+      "incoterm": "FCA"
+     },
+     {
+      "unit_price": 14.8,
+      "payment_days": 45,
+      "lead_time_days": 35,
+      "incoterm": "DAP"
+     }
+    ],
+    "seconds_since_their_reply": 8.3,
+    "reply_seconds": 40.4,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-C1-2",
+      "terms": {
+       "unit_price": 16.1,
+       "payment_days": 30,
+       "lead_time_days": 35,
+       "incoterm": "FCA"
+      },
+      "c": 200536.0
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "negotiate",
+    "to": "sup:DEMO-J1",
+    "sent": [
+     {
+      "unit_price": 15.3,
+      "payment_days": 45,
+      "lead_time_days": 35,
+      "incoterm": "EXW"
+     },
+     {
+      "unit_price": 15.7,
+      "payment_days": 45,
+      "lead_time_days": 35,
+      "incoterm": "DAP"
+     }
+    ],
+    "seconds_since_their_reply": 10.1,
+    "reply_seconds": 38.7,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-J1-2",
+      "terms": {
+       "unit_price": 15.6,
+       "payment_days": 30,
+       "lead_time_days": 35,
+       "incoterm": "EXW"
+      },
+      "c": 196176.0
+     }
+    ],
+    "claim_results": [
+     {
+      "index": 0,
+      "result": "irrelevant"
+     }
+    ]
+   },
+   {
+    "note": "negotiate",
+    "to": "sup:DEMO-C1",
+    "sent": [
+     {
+      "unit_price": 14.8,
+      "payment_days": 30,
+      "lead_time_days": 35,
+      "incoterm": "FCA"
+     },
+     {
+      "unit_price": 14.7,
+      "payment_days": 14,
+      "lead_time_days": 35,
+      "incoterm": "FCA"
+     }
+    ],
+    "seconds_since_their_reply": 9.9,
+    "reply_seconds": 30.8,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-C1-3",
+      "terms": {
+       "unit_price": 16.1,
+       "payment_days": 30,
+       "lead_time_days": 35,
+       "incoterm": "FCA"
+      },
+      "c": 200536.0
+     },
+     {
+      "id": "offer:DEMO-C1-3-a",
+      "terms": {
+       "unit_price": 16.0,
+       "payment_days": 14,
+       "lead_time_days": 35,
+       "incoterm": "FCA"
+      },
+      "c": 200010.67
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "negotiate",
+    "to": "sup:DEMO-J1",
+    "sent": [
+     {
+      "unit_price": 15.4,
+      "payment_days": 30,
+      "lead_time_days": 35,
+      "incoterm": "EXW"
+     },
+     {
+      "unit_price": 15.8,
+      "payment_days": 30,
+      "lead_time_days": 35,
+      "incoterm": "DAP"
+     }
+    ],
+    "seconds_since_their_reply": 8.0,
+    "reply_seconds": 32.7,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-J1-3",
+      "terms": {
+       "unit_price": 15.5,
+       "payment_days": 30,
+       "lead_time_days": 35,
+       "incoterm": "EXW"
+      },
+      "c": 194968.0
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "negotiate",
+    "to": "sup:DEMO-C1",
+    "sent": [
+     {
+      "unit_price": 15.0,
+      "payment_days": 30,
+      "lead_time_days": 35,
+      "incoterm": "FCA"
+     },
+     {
+      "unit_price": 15.4,
+      "payment_days": 45,
+      "lead_time_days": 35,
+      "incoterm": "DAP"
+     }
+    ],
+    "seconds_since_their_reply": 10.7,
+    "reply_seconds": 48.0,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-C1-4",
+      "terms": {
+       "unit_price": 16.1,
+       "payment_days": 30,
+       "lead_time_days": 35,
+       "incoterm": "FCA"
+      },
+      "c": 200536.0
+     },
+     {
+      "id": "offer:DEMO-C1-4-a",
+      "terms": {
+       "unit_price": 16.6,
+       "payment_days": 45,
+       "lead_time_days": 35,
+       "incoterm": "DAP"
+      },
+      "c": 201112.0
+     }
+    ],
+    "claim_results": [
+     {
+      "index": 0,
+      "result": "irrelevant"
+     }
+    ]
+   },
+   {
+    "note": "negotiate",
+    "to": "sup:DEMO-J1",
+    "sent": [
+     {
+      "unit_price": 15.25,
+      "payment_days": 14,
+      "lead_time_days": 35,
+      "incoterm": "EXW"
+     },
+     {
+      "unit_price": 15.65,
+      "payment_days": 14,
+      "lead_time_days": 35,
+      "incoterm": "DAP"
+     }
+    ],
+    "seconds_since_their_reply": 8.7,
+    "reply_seconds": 50.0,
+    "status": "final_offer",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-J1-4",
+      "terms": {
+       "unit_price": 15.4,
+       "payment_days": 14,
+       "lead_time_days": 35,
+       "incoterm": "EXW"
+      },
+      "c": 194417.07
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "ready (final_offer) and cheapest: accept at once",
+    "to": "sup:DEMO-J1",
+    "accept": "offer:DEMO-J1-4",
+    "deal": true,
+    "score": 0.34537682674736536
+   },
+   {
+    "note": "negotiate",
+    "to": "sup:DEMO-C1",
+    "error": "HTTP 409: the session has ended: accepted"
+   }
+  ]
+ },
+ {
+  "probe": "h3-par",
+  "session_id": "204c068ae168940b",
+  "case_id": "case:D02",
+  "deal": true,
+  "score": 0.34537682674736536,
+  "c_deal": 194417.07,
+  "timeouts": {
+   "sup:DEMO-J1": 0,
+   "sup:DEMO-C1": 0
+  },
+  "supplier": "sup:DEMO-J1",
+  "thread_status": {
+   "sup:DEMO-J1": [
+    "agreed",
+    null
+   ],
+   "sup:DEMO-C1": [
+    "open",
+    null
+   ]
+  },
+  "rounds": 7,
+  "steps": [
+   {
+    "note": "negotiate",
+    "to": "sup:DEMO-C1",
+    "sent": [
+     {
+      "unit_price": 14.5,
+      "payment_days": 60,
+      "lead_time_days": 35,
+      "incoterm": "DAP"
+     },
+     {
+      "unit_price": 14.3,
+      "payment_days": 30,
+      "lead_time_days": 35,
+      "incoterm": "FCA"
+     }
+    ],
+    "seconds_since_their_reply": 6.5,
+    "reply_seconds": 58.7,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-C1-1",
+      "terms": {
+       "unit_price": 16.1,
+       "payment_days": 30,
+       "lead_time_days": 35,
+       "incoterm": "FCA"
+      },
+      "c": 200536.0
+     },
+     {
+      "id": "offer:DEMO-C1-1-a",
+      "terms": {
+       "unit_price": 15.9,
+       "payment_days": 30,
+       "lead_time_days": 35,
+       "incoterm": "EXW"
+      },
+      "c": 200520.0
+     }
+    ],
+    "claim_results": [
+     {
+      "index": 0,
+      "result": "irrelevant"
+     }
+    ]
+   },
+   {
+    "note": "negotiate",
+    "to": "sup:DEMO-J1",
+    "sent": [
+     {
+      "unit_price": 15.3,
+      "payment_days": 60,
+      "lead_time_days": 35,
+      "incoterm": "EXW"
+     },
+     {
+      "unit_price": 15.7,
+      "payment_days": 45,
+      "lead_time_days": 35,
+      "incoterm": "DAP"
+     }
+    ],
+    "seconds_since_their_reply": 6.5,
+    "reply_seconds": 58.7,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-J1-1",
+      "terms": {
+       "unit_price": 15.6,
+       "payment_days": 30,
+       "lead_time_days": 35,
+       "incoterm": "EXW"
+      },
+      "c": 196176.0
+     }
+    ],
+    "claim_results": [
+     {
+      "index": 0,
+      "result": "irrelevant"
+     }
+    ]
+   },
+   {
+    "note": "negotiate",
+    "to": "sup:DEMO-C1",
+    "sent": [
+     {
+      "unit_price": 14.5,
+      "payment_days": 30,
+      "lead_time_days": 35,
+      "incoterm": "FCA"
+     },
+     {
+      "unit_price": 14.35,
+      "payment_days": 14,
+      "lead_time_days": 35,
+      "incoterm": "FCA"
+     }
+    ],
+    "seconds_since_their_reply": 8.4,
+    "reply_seconds": 48.2,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-C1-2",
+      "terms": {
+       "unit_price": 16.0,
+       "payment_days": 30,
+       "lead_time_days": 35,
+       "incoterm": "FCA"
+      },
+      "c": 199328.0
+     },
+     {
+      "id": "offer:DEMO-C1-2-a",
+      "terms": {
+       "unit_price": 15.9,
+       "payment_days": 14,
+       "lead_time_days": 35,
+       "incoterm": "FCA"
+      },
+      "c": 198798.4
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "negotiate",
+    "to": "sup:DEMO-J1",
+    "sent": [
+     {
+      "unit_price": 15.4,
+      "payment_days": 45,
+      "lead_time_days": 35,
+      "incoterm": "EXW"
+     },
+     {
+      "unit_price": 15.2,
+      "payment_days": 14,
+      "lead_time_days": 35,
+      "incoterm": "EXW"
+     }
+    ],
+    "seconds_since_their_reply": 10.7,
+    "reply_seconds": 45.9,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-J1-2",
+      "terms": {
+       "unit_price": 15.6,
+       "payment_days": 14,
+       "lead_time_days": 35,
+       "incoterm": "EXW"
+      },
+      "c": 196841.6
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "negotiate",
+    "to": "sup:DEMO-C1",
+    "sent": [
+     {
+      "unit_price": 14.65,
+      "payment_days": 30,
+      "lead_time_days": 35,
+      "incoterm": "FCA"
+     },
+     {
+      "unit_price": 14.5,
+      "payment_days": 14,
+      "lead_time_days": 35,
+      "incoterm": "FCA"
+     },
+     {
+      "unit_price": 15.05,
+      "payment_days": 30,
+      "lead_time_days": 35,
+      "incoterm": "DAP"
+     }
+    ],
+    "seconds_since_their_reply": 8.0,
+    "reply_seconds": 41.3,
+    "status": "open",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-C1-3",
+      "terms": {
+       "unit_price": 16.3,
+       "payment_days": 30,
+       "lead_time_days": 35,
+       "incoterm": "DAP"
+      },
+      "c": 198152.0
+     },
+     {
+      "id": "offer:DEMO-C1-3-a",
+      "terms": {
+       "unit_price": 15.8,
+       "payment_days": 14,
+       "lead_time_days": 35,
+       "incoterm": "FCA"
+      },
+      "c": 197586.13
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "negotiate",
+    "to": "sup:DEMO-J1",
+    "sent": [
+     {
+      "unit_price": 15.3,
+      "payment_days": 14,
+      "lead_time_days": 35,
+      "incoterm": "EXW"
+     },
+     {
+      "unit_price": 15.5,
+      "payment_days": 45,
+      "lead_time_days": 35,
+      "incoterm": "EXW"
+     }
+    ],
+    "seconds_since_their_reply": 9.4,
+    "reply_seconds": 39.8,
+    "status": "final_offer",
+    "their_sheets": [
+     {
+      "id": "offer:DEMO-J1-3",
+      "terms": {
+       "unit_price": 15.4,
+       "payment_days": 14,
+       "lead_time_days": 35,
+       "incoterm": "EXW"
+      },
+      "c": 194417.07
+     }
+    ],
+    "claim_results": []
+   },
+   {
+    "note": "ready (final_offer) and cheapest: accept at once",
+    "to": "sup:DEMO-J1",
+    "accept": "offer:DEMO-J1-3",
+    "deal": true,
+    "score": 0.34537682674736536
+   },
+   {
+    "note": "negotiate",
+    "to": "sup:DEMO-C1",
+    "error": "HTTP 409: the session has ended: accepted"
+   }
+  ]
+ },
+ {
+  "probe": "h3-seq",
+  "session_id": "3ae0accc9a071d6e",
+  "case_id": "case:D02",
+  "deal": true,
+  "score": 0.44074401091644105,
+  "c_deal": 188928.0,
+  "supplier": "sup:DEMO-J1",
+  "timeouts": {
+   "sup:DEMO-J1": 1,
+   "sup:DEMO-C1": 1
+  },
+  "thread_status": {
+   "sup:DEMO-J1": [
+    "agreed",
+    null
+   ],
+   "sup:DEMO-C1": [
+    "final_offer",
+    null
+   ]
+  },
+  "rounds": 9
+ }
+]

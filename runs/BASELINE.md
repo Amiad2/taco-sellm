@@ -142,3 +142,8 @@ final wave (6.5 usable minutes).
 | H7 | P08/P18: there is a fact in the data that justifies a base price well below today's | data first, then 1 each | 0, then 2 |
 
 Record each result in `docs/LEARNINGS.md` and log it as a `[run]`.
+
+**Update Sat 15:57:** H1, H2 and H3 are tested in the sandbox, with two follow-ups. H1 is refuted
+(only the first sheet can be accepted; send the alternative's terms back instead), a final offer
+is final, per-thread loops remove the RFQ timeouts, and the supplier mirrors the size of our
+concessions. Details: `experiments/RESULTS.md`.

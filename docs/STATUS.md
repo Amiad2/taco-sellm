@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-10 16:00 CEST by Amiad (Claude Code).
+Last updated: 2026-10-10 16:00 CEST by Jonathan (Claude Code).
 
 ## Now
 
@@ -10,13 +10,14 @@ Last updated: 2026-10-10 16:00 CEST by Amiad (Claude Code).
 - **OpenAI works with the kit's LLM agent** (`LLM_PROVIDER=openai`, model `gpt-6.1-sol`, Sat 15:00): D01 scored 0.786 against 0.200 for the naive agent, no `LLM failed` in the log. Each machine needs the values in its own `.env`; `llm_from_env` was not changed.
 - No agent of our own exists yet; the kit's LLM agent is the baseline to beat: **61.5** over the 10 hosted cases (`runs/BASELINE.md`).
 - Every session the team plays is saved in full under `runs/` by `scripts/pull-runs`. Quota left: 189.
+- Sandbox probes (33 free sessions) show how suppliers react: only the first sheet can be accepted, a final offer is final, the supplier mirrors the size of our concessions, RFQ threads need their own loops. Rules for the agent: `experiments/RESULTS.md` section 5.
 - Team memory is in place: `AGENTS.md`, `docs/CONTEXT.md`, this file, `docs/LEARNINGS.md`, `docs/LOG.md`.
 
 ## In progress (claim before you start, remove when done)
 
 | Who | What | Files | Since |
 |---|---|---|---|
-| Jonathan (Claude Code) | Sandbox probes for H1-H3 of `runs/BASELINE.md` (accept an alternative sheet, moves after `final_offer`, RFQ threads in parallel). Sandbox only, no quota | `experiments/sandbox_probes.py`, `runs/sandbox/` | Sat 16:05 |
+| - | - | - | - |
 | Amiad (Claude Code) | **Lab**: a local supplier simulator (twins of the 11 suppliers we have played, calibrated to each case's `C_best`, plus invented suppliers) and a tournament runner to test buyer strategies without quota. Backtested against our real sessions before anyone trusts it. No arena calls | `sellm/lab/`, `tests/test_lab.py`, `runs/lab/` | Sat 16:00 |
 
 ## Next up
@@ -25,7 +26,7 @@ The plan is in `docs/PLAN.md`: three workstreams (A numbers and strategy, B data
 C arena, measurement and final), a timeline and the quota budget. It is **proposed, not yet agreed**.
 
 1. Team: read `docs/PLAN.md`, agree or change it, and each claim a workstream in the table above.
-2. Baseline of all 10 hosted cases is done. Next: the hypotheses H1-H7 in `runs/BASELINE.md`, the free ones (sandbox) first. Sandbox `D02` has not been played yet.
+2. Baseline and the sandbox probes H1-H3 are done (`runs/BASELINE.md`, `experiments/RESULTS.md`). Next probes: H12-H15 in `experiments/RESULTS.md` section 6 (H12, H13, H15 are free), then H4-H7 on practice cases, one session each.
 3. Then follow the timeline in `docs/PLAN.md` section 4.
 
 ## Scoreboard
