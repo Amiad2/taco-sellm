@@ -745,3 +745,12 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 ## 2026-10-10 23:31 CEST · Amiad @ fedora
 **[change] Repair P02 probe agents and terms**
 - Fixed the invalid Thread import: it belongs to sellm.negotiator, not arena_kit.play. The five 23:09-23:15 P02 probe sessions had raised ImportError, sent hold messages, and accepted the opening quote for score 0. Replaced the Wimbacher/36-month assumptions with five P02-specific probes: persistence control, current-price anchor, 30-day payment, trade question, and a firm 20% price target plus trade question. Verified all five imports and produce decisions from the saved P02 opening; no Arena quota used for that check.
+
+## 2026-10-10 23:37 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] Four tests of what a supplier gives for what it wants (10 practice sessions): a push after the final offer loses the deal; fast payment for a cash-short supplier gains**
+- Jonathan's ideas after reading the suppliers' e-mails; record in experiments/PERSISTENCE.md section 6, knobs in sellm/endgame.py (all off), sessions labelled 'PERSIST T1..T4'. Quota left 300 of 450.
+- T1, one polite ask 1 % below the supplier's final_offer: P04 and P08 answered 'We are withdrawing from this negotiation' - no deal, score 0.000 (references 0.860 and 0.549); P07 took 5.36 against its 5.41 (0.779 against 0.747). Stopped after three; with the sandbox probes of Sat 15:42 that is 3 lost deals in 5 pushes. Rule confirmed on practice: never ask after final_offer.
+- T2, the fastest payment in the first ask where the dossier shows a cash problem, with past_target: P01 closed at 132.96 with 14 days, 0.969 (0.953 with past_target alone, 0.915 for v1.4). Every offer of the supplier was 1.2-2.4 lower than with 30 days.
+- T3, the first ask as two offers of equal cost that differ in payment days: P18 0.419 (0.467), P05 0.762 (within its spread). No gain.
+- T4, facts by signal for suppliers that want volume (forecast first, then also a call-off schedule in the text): P04 unchanged at 0.860, P18 0.430 and 0.467 (0.467). No gain. A binding volume above the need can never pay by the cost function (P03: +20 % volume = 786,803 EUR, a price cut of 16.7 % to break even).
+- Proposal, nothing switched on: past_target + fast_pay. Replayed over 157 recorded decision states they change only P01 and D01's accept.

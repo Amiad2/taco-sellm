@@ -80,3 +80,38 @@ To switch it on for `--agent sellm`: `sellm/agent.py:make_agent` returns
   there, and only when the supplier is still moving at our target.
 - P2 suggests that the last ask before a supplier's offer decides the price it takes. Mapping that
   per supplier would need its schedule, which hidden suppliers do not show in advance.
+
+## 6. Four more tests: what a supplier gives for what it wants (Sat 23:10-23:40, 10 practice sessions)
+
+Jonathan's three ideas after reading the suppliers' e-mails: push until a supplier refuses, trade
+fast payment for price where the dossier shows a cash problem, trade volume for price where it
+wants volume. One session per variant and case; reference = negotiator v1.4 (`past_target` where noted).
+
+| Test | Variant | Result |
+|---|---|---|
+| T1 | after its `final_offer`, one polite ask 1 % below it (`push_final=0.01`) | **P04: the supplier withdrew, no deal, 0.000 (0.860). P08: withdrew, 0.000 (0.549).** P07: took 5.36 against its 5.41, 0.779 (0.747). Stopped after three. |
+| T2 | fastest payment in the first ask for a supplier the dossier calls short of cash (`fast_pay`), with `past_target` | P01: 14 days, 132.96 -> **0.969** (0.953 with `past_target` alone, 0.915 without either) |
+| T3 | first ask as two offers of equal cost to us, 30 and 90 days (`pay_probe`) | P18 0.419 (0.467); P05 0.762 (0.66-0.82 over six sessions) |
+| T4a | a supplier that wants volume hears the forecast first (`signal_facts`) | P04 0.860 (same); P18 0.430 (0.467) |
+| T4b | T4a + a fixed call-off schedule offered in the first e-mail (`soft_give`) | P04 0.860 (same); P18 0.467 (same) |
+
+- **P6 (seen, 2 of 3; with the sandbox 3 of 5). A final offer is final.** "We are withdrawing from
+  this negotiation" came after a single ask 0.9-1.0 % below the final offer, with a polite text
+  and a verified fact. One lost case costs 0.5-0.9, a won push 0.03: never ask after `final_offer`.
+  That also answers where the limit is: at the supplier's own last word, not at its cost.
+- **P7 (seen, computed). Fast payment is worth about one percent, where the supplier needs cash.**
+  P01 (the dossier holds its letter asking for payment within ten days): every offer was 1.2-2.4
+  lower with 14 days than with 30 (139.30 against 141.70, 135.20 against 136.50, 133.90 against
+  135.10) and it took 132.96 against 133.96. 16 days cost us 0.36 % of the price; net +0.016.
+- **P8 (seen). Two equal-cost offers do not find a better payment term.** P18 answered the 30-day
+  offer and ended at 5.50 with 30 days, worse for us than the same 5.50 with 90 days.
+- **P9 (seen, computed). Volume is no lever in the term sheet.** A binding volume above the need
+  is paid for in full by the cost function (P03: +20 % volume costs 786,803 EUR; it would take a
+  price cut of 16.7 %); only two of ten cases let us set it at all. The forecast and a call-off
+  schedule in the text did not move the two suppliers the dossier marks as wanting volume. What
+  such suppliers did pay for was contract length, which the first ask already carries.
+
+**To adopt from section 6: `fast_pay` together with `past_target`.** Replayed over the 157 decision
+states of the latest full runs the pair decides differently only in P01 (first ask with 14 days) and
+at D01's accept; everything else is identical. Not adopted: `push_final`, `pay_probe`,
+`signal_facts`, `soft_give`.

@@ -1107,5 +1107,573 @@
   "knobs": {
    "push_final": 0.01
   }
+ },
+ {
+  "session_id": "25a2be1eda9b5f25",
+  "case_id": "case:P01",
+  "deal": true,
+  "score": 0.968567143155075,
+  "c_deal": 1098606.32,
+  "supplier": "sup:70110",
+  "terms": {
+   "payment_days": 14,
+   "lead_time_days": 42,
+   "volume_per_year": 8150,
+   "contract_months": 12,
+   "effective_date": "2027-04-01",
+   "index_clause": null,
+   "incoterm": "FCA",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 900,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 132.96
+  },
+  "end_reason": "accepted",
+  "seconds": 134,
+  "threads": {
+   "sup:70110": {
+    "our_messages": 5,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": null,
+    "their_prices": [
+     138.55,
+     139.3,
+     136.5,
+     135.2,
+     133.9,
+     132.96
+    ],
+    "our_prices": [
+     [
+      127.89
+     ],
+     [
+      130.24
+     ],
+     [
+      131.48
+     ],
+     [
+      132.84
+     ],
+     [
+      132.96
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified",
+     "verified",
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 6,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "label": "T2 fast payment for a supplier short of cash (14 days), with past_target",
+  "knobs": {
+   "fast_pay": true,
+   "past_target": true
+  }
+ },
+ {
+  "session_id": "9aba2588ca77b9a8",
+  "case_id": "case:P18",
+  "deal": true,
+  "score": 0.41903073220856135,
+  "c_deal": 264784.3,
+  "supplier": "sup:70740",
+  "terms": {
+   "payment_days": 30,
+   "lead_time_days": 14,
+   "volume_per_year": 23700,
+   "contract_months": 36,
+   "effective_date": "2027-01-01",
+   "index_clause": {
+    "series": "AS-14404",
+    "material_share": 0.45,
+    "deadband_pct": 5.0,
+    "base_month": "2026-08"
+   },
+   "incoterm": "DAP",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 70,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 5.5
+  },
+  "end_reason": "accepted",
+  "seconds": 118,
+  "threads": {
+   "sup:70740": {
+    "our_messages": 4,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 4,
+    "their_prices": [
+     6.1,
+     5.6,
+     5.5,
+     5.5,
+     5.5
+    ],
+    "our_prices": [
+     [
+      4.89,
+      4.83
+     ],
+     [
+      5.04
+     ],
+     [
+      5.18
+     ],
+     [
+      5.41
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 5,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "label": "T3 first ask as two offers of equal cost that differ in payment days",
+  "knobs": {
+   "pay_probe": true
+  }
+ },
+ {
+  "session_id": "27b2aa77f9b8fb6b",
+  "case_id": "case:P05",
+  "deal": true,
+  "score": 0.761911813074375,
+  "c_deal": 242976.16,
+  "supplier": "sup:70210",
+  "terms": {
+   "payment_days": 14,
+   "lead_time_days": 28,
+   "volume_per_year": 4200,
+   "contract_months": 24,
+   "effective_date": "2027-01-01",
+   "index_clause": null,
+   "incoterm": "DAP",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 1200,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 28.5
+  },
+  "end_reason": "accepted",
+  "seconds": 250,
+  "threads": {
+   "sup:70210": {
+    "our_messages": 4,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 3,
+    "their_prices": [
+     36.0,
+     32.5,
+     30.5,
+     28.5,
+     28.5
+    ],
+    "our_prices": [
+     [
+      25.65,
+      25.74
+     ],
+     [
+      26.67
+     ],
+     [
+      27.27
+     ],
+     []
+    ],
+    "claims": [
+     "duplicate",
+     "verified",
+     "verified"
+    ]
+   },
+   "sup:70240": {
+    "our_messages": 5,
+    "timeouts": 0,
+    "status": "final_offer",
+    "closed": null,
+    "final_offer_after_our_message": 5,
+    "their_prices": [
+     31.5,
+     34.5,
+     34.0,
+     33.5,
+     33.5,
+     33.5
+    ],
+    "our_prices": [
+     [
+      26.9,
+      26.63
+     ],
+     [
+      27.69
+     ],
+     [
+      28.61
+     ],
+     [],
+     []
+    ],
+    "claims": [
+     "verified",
+     "verified",
+     "verified"
+    ]
+   },
+   "sup:70250": {
+    "our_messages": 4,
+    "timeouts": 1,
+    "status": "final_offer",
+    "closed": null,
+    "final_offer_after_our_message": 4,
+    "their_prices": [
+     38.5,
+     31.0,
+     30.5,
+     29.5,
+     29.0
+    ],
+    "our_prices": [
+     [
+      25.77,
+      25.86
+     ],
+     [
+      26.89
+     ],
+     [
+      28.07
+     ],
+     [
+      28.27
+     ]
+    ],
+    "claims": [
+     "verified",
+     "duplicate",
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 14,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "label": "T3 first ask as two offers of equal cost that differ in payment days",
+  "knobs": {
+   "pay_probe": true
+  }
+ },
+ {
+  "session_id": "86b40b1e580e8e11",
+  "case_id": "case:P04",
+  "deal": true,
+  "score": 0.8604451426623068,
+  "c_deal": 196852.67,
+  "supplier": "sup:70620",
+  "terms": {
+   "payment_days": 90,
+   "lead_time_days": 7,
+   "volume_per_year": 20000,
+   "contract_months": 36,
+   "effective_date": "2027-01-01",
+   "index_clause": null,
+   "incoterm": "DAP",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 150,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 4.94
+  },
+  "end_reason": "accepted",
+  "seconds": 49,
+  "threads": {
+   "sup:70620": {
+    "our_messages": 3,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 3,
+    "their_prices": [
+     4.96,
+     4.94,
+     4.94,
+     4.94
+    ],
+    "our_prices": [
+     [
+      4.54
+     ],
+     [
+      4.62
+     ],
+     [
+      4.74
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 4,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "label": "T4a a supplier that wants volume hears the forecast first",
+  "knobs": {
+   "signal_facts": true
+  }
+ },
+ {
+  "session_id": "f090da7948c826f6",
+  "case_id": "case:P18",
+  "deal": true,
+  "score": 0.4295318273251301,
+  "c_deal": 264022.74,
+  "supplier": "sup:70740",
+  "terms": {
+   "payment_days": 60,
+   "lead_time_days": 14,
+   "volume_per_year": 23700,
+   "contract_months": 36,
+   "effective_date": "2027-01-01",
+   "index_clause": {
+    "series": "AS-14404",
+    "material_share": 0.45,
+    "deadband_pct": 0.0,
+    "base_month": "2026-08"
+   },
+   "incoterm": "DAP",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 70,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 5.4
+  },
+  "end_reason": "accepted",
+  "seconds": 83,
+  "threads": {
+   "sup:70740": {
+    "our_messages": 4,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 4,
+    "their_prices": [
+     6.1,
+     5.7,
+     5.5,
+     5.4,
+     5.4
+    ],
+    "our_prices": [
+     [
+      4.89
+     ],
+     [
+      5.04
+     ],
+     [
+      5.18
+     ],
+     [
+      5.29
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 5,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "label": "T4a a supplier that wants volume hears the forecast first",
+  "knobs": {
+   "signal_facts": true
+  }
+ },
+ {
+  "session_id": "50deb00ff3822c53",
+  "case_id": "case:P04",
+  "deal": true,
+  "score": 0.8604451426623068,
+  "c_deal": 196852.67,
+  "supplier": "sup:70620",
+  "terms": {
+   "payment_days": 90,
+   "lead_time_days": 7,
+   "volume_per_year": 20000,
+   "contract_months": 36,
+   "effective_date": "2027-01-01",
+   "index_clause": null,
+   "incoterm": "DAP",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 150,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 4.94
+  },
+  "end_reason": "accepted",
+  "seconds": 51,
+  "threads": {
+   "sup:70620": {
+    "our_messages": 3,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 3,
+    "their_prices": [
+     4.96,
+     4.94,
+     4.94,
+     4.94
+    ],
+    "our_prices": [
+     [
+      4.54
+     ],
+     [
+      4.62
+     ],
+     [
+      4.74
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 4,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "label": "T4b forecast first + a fixed call-off schedule offered in the first e-mail",
+  "knobs": {
+   "signal_facts": true,
+   "soft_give": true
+  }
+ },
+ {
+  "session_id": "1d100e578081af73",
+  "case_id": "case:P18",
+  "deal": true,
+  "score": 0.4669610418692489,
+  "c_deal": 261308.3,
+  "supplier": "sup:70740",
+  "terms": {
+   "payment_days": 90,
+   "lead_time_days": 14,
+   "volume_per_year": 23700,
+   "contract_months": 36,
+   "effective_date": "2027-01-01",
+   "index_clause": {
+    "series": "AS-14404",
+    "material_share": 0.45,
+    "deadband_pct": 5.0,
+    "base_month": "2026-08"
+   },
+   "incoterm": "DAP",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 70,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 5.5
+  },
+  "end_reason": "accepted",
+  "seconds": 81,
+  "threads": {
+   "sup:70740": {
+    "our_messages": 4,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": null,
+    "their_prices": [
+     6.1,
+     5.6,
+     5.6,
+     5.6,
+     5.5
+    ],
+    "our_prices": [
+     [
+      4.89
+     ],
+     [
+      5.06
+     ],
+     [
+      5.23
+     ],
+     [
+      5.5
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 5,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "label": "T4b forecast first + a fixed call-off schedule offered in the first e-mail",
+  "knobs": {
+   "signal_facts": true,
+   "soft_give": true
+  }
  }
 ]
