@@ -76,10 +76,12 @@ def make_agent(name, knobs, package):
     if ":" in name:
         module, cls = name.split(":", 1)
         klass = getattr(importlib.import_module(module), cls)
+        if knobs:  # an agent that takes no knobs fails loudly rather than ignoring them
+            return klass(package, **knobs)
         try:
-            return klass(package, **(knobs or {}))
+            return klass(package)
         except TypeError:
-            return klass(**(knobs or {}))
+            return klass()
     return registry(package)[name](**(knobs or {}))
 
 

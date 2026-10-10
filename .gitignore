@@ -13,3 +13,4 @@ runs/lab/*/rows.jsonl.gz
 runs/lab/**/scenarios.json.gz
 runs/lab/**/rows.jsonl.gz
 runs/lab/nohup-*.log
+runs/lab/ui-jobs.json

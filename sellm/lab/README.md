@@ -10,6 +10,19 @@ the opening, timeouts in RFQs, running out of time). **What it is not:** a predi
 score. A lab winner is a hypothesis until the sandbox (`case:D01`, `case:D02`, free) or one practice
 case confirms it.
 
+## The UI
+
+`scripts/lab ui` opens a local page (http://127.0.0.1:8765, nobody else can reach it):
+
+- **Start**: search, compare or stress with every option as a form field; knobs as JSON or a table,
+  or loaded from any earlier run's `best.json` (rank N). Runs go to the background and keep going
+  when the UI is closed.
+- **Runs**: every run with live progress and the rendered report; stop a running one; **extend**
+  (refills the form with more minutes, seeds and scenarios); **use #1 knobs** for a compare;
+  **stress-test #1**; **#1 as sellm/agent.py KNOBS** (a block to paste into `sellm/agent.py`); export
+  `report.md`, `best.json`, `rows.csv` (one row per negotiation, for a spreadsheet) or the whole run as a zip.
+- **Play one**: any twin or generated scenario with any agent and knobs, the full transcript.
+
 ## Quick start
 
 ```bash

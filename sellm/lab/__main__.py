@@ -12,6 +12,7 @@ Building the lab:
     backtest [--fit] [--write]   replay our real sessions into the twins; --fit tunes them, --write reports
     validate [--llm]             the same agent in lab and arena: naive (free); --llm the kit LLM (costs)
     twins | scenarios            list the twins / a sample of generated scenarios
+    ui [--port 8765]             a local web UI to start, watch, tune, extend and export runs
 
 Agents (A): naive, calc (the rule-based Calculator), llm (the kit's LLM agent: costs LLM calls), or
 any 'module:Class' with decide(case, threads). Knobs (K): a JSON object, or a run's best.json
@@ -136,7 +137,7 @@ def cmd_tournament(a):
     t0 = time.time()
     try:
         if a.cmd == "compare":
-            knobs = {n: parse_knobs(a.knobs) for n in a.agents} if a.knobs else {}
+            knobs = {"calc": parse_knobs(a.knobs)} if a.knobs else {}  # knobs are the Calculator's
             rows = t.compare(run, a.agents, a.seeds, knobs)
             title = f"Lab compare {out.name}: {' vs '.join(a.agents)}"
         else:
@@ -274,7 +275,7 @@ def main(argv=None):
         t = sub.add_parser(name)
         if name == "compare":
             t.add_argument("agents", nargs="+")
-            t.add_argument("--knobs", default="", help="knobs for every agent that takes them")
+            t.add_argument("--knobs", default="", help="knobs for the 'calc' agent")
         else:
             t.add_argument("--minutes", type=float, default=10)
             t.add_argument("--start", type=int, default=64, help="random variants in the first round")
@@ -294,6 +295,9 @@ def main(argv=None):
     st.add_argument("--lines", type=int, default=15)
     v = sub.add_parser("validate")
     v.add_argument("--llm", action="store_true", help="also the kit LLM agent: about 60 LLM calls")
+    u = sub.add_parser("ui")
+    u.add_argument("--port", type=int, default=8765)
+    u.add_argument("--no-browser", action="store_true")
     sc = sub.add_parser("scenarios")
     sc.add_argument("--n", type=int, default=30)
     sc.add_argument("--invent-seed", type=int, default=1)
@@ -340,6 +344,10 @@ def main(argv=None):
         cmd_validate(a)
     elif a.cmd == "scenarios":
         cmd_scenarios(a)
+    elif a.cmd == "ui":
+        from .ui import serve
+
+        serve(a.port, browser=not a.no_browser)
 
 
 if __name__ == "__main__":

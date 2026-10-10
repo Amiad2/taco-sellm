@@ -256,3 +256,9 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Idea: with a round limit of 4-6, plan fewer, bigger steps. Paired test on the same 40 short-round scenarios x 2 seeds, sellm/agent.py knobs: 54.2 without the cap, 49.3 with it, -4.9 +- 0.5 points.
 - Why: our price rises faster and meets the supplier sooner, at a higher level. Staying low until the rounds run out and then taking its standing offer is better under the mirror-and-limit dynamics the backtest supports.
 - A plausible change the lab refuted in a minute; the code keeps a comment at Calculator.ask.
+
+## 2026-10-10 17:36 CEST · Amiad @ fedora
+**[change] Lab UI: start, watch, tune, extend and export runs in the browser (scripts/lab ui)**
+- sellm/lab/ui.py: a local page on 127.0.0.1:8765 (FastAPI from the kit's sim extra, one HTML page, no build step). Start search/compare/stress with every option; knobs as JSON, as a table of all 14 Calculator knobs, or loaded from any run's best.json.
+- Runs tab: live progress, rendered report, stop, 'extend' (more minutes, seeds, scenarios), 'use #1 knobs', 'stress-test #1', '#1 as sellm/agent.py KNOBS' (a block to paste), exports report.md / best.json / rows.csv / run.zip. Play tab: one negotiation with its transcript.
+- Runs are their own processes (start_new_session) and survive the UI; commands are built as argument lists from an allowlist, paths are confined to runs/lab. compare --knobs now applies to calc only. Test: test_ui_serves_runs_exports_and_refuses_bad_input.

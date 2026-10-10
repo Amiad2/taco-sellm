@@ -282,3 +282,18 @@ def test_stress_verdict_fails_on_a_broken_must_have():
     assert verdict == "FAIL"
     _, verdict = stress.report([{**row, "broken": False}], "x", {})
     assert verdict == "PASS"
+
+
+def test_ui_serves_runs_exports_and_refuses_bad_input():
+    pytest.importorskip("fastapi")
+    from fastapi.testclient import TestClient
+
+    from sellm.lab.ui import argv_for, create_app
+
+    c = TestClient(create_app())
+    assert c.get("/").status_code == 200
+    assert "calc" in c.get("/api/meta").json()["agents"]
+    assert c.post("/api/start", json={"cmd": "rm -rf", "options": {}}).status_code == 400
+    assert c.get("/api/run/..%2F..%2Fdocs/report").status_code == 404
+    args = argv_for("search", {"minutes": 5, "label": "a b;rm"})
+    assert args[:3] == ["search", "--minutes", "5.0"] and args[-1] == "abrm"
