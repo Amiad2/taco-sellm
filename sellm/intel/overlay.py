@@ -327,7 +327,7 @@ def overlay(sid, part_ids, case=None, opening=None, src=None):
     hook = citable_hook()
     if hook and src is not None:
         try:
-            d["citable"] = hook(src.pkg, sid, sorted(d["parts"]))
+            d["citable"] = hook(src.pkg, sid, sorted(d["parts"]), case=case or None)
         except Exception as e:
             warnings.append(f"citable_for failed: {type(e).__name__}: {e}")
     d["profile_text"] = render.profile(d)

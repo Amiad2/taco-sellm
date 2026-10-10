@@ -1,6 +1,7 @@
 """Supplier dossiers for the negotiator (docs/PLAN.md section 10): `dossier()` never raises."""
 
 import os
+import threading
 from pathlib import Path
 
 from .schema import SCHEMA_VERSION, empty_dossier
@@ -8,6 +9,9 @@ from .schema import SCHEMA_VERSION, empty_dossier
 __all__ = ["SCHEMA_VERSION", "dossier"]
 
 _SOURCES = {}
+# One SQLite connection and one cache serve every case played at once: without this lock 13 threads
+# each built the package's ID index at the same time (6.6-8.3 s instead of 0.1 s, measured Sat 22:00).
+_LOCK = threading.RLock()
 
 
 def _part_list(part_ids):
@@ -54,8 +58,9 @@ def dossier(supplier_id, part_ids=(), case=None, opening=None, package=None):
     try:
         from .overlay import overlay
 
-        src = _source(package)
-        d = overlay(sid, parts, case, opening, src)
+        with _LOCK:
+            src = _source(package)
+            d = overlay(sid, parts, case, opening, src)
         if src is None:
             d["warnings"].append("no data package: stored dossiers and the case only")
         return d

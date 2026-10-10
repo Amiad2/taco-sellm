@@ -542,12 +542,12 @@ def test_citable_for_is_called_once_group_c_ships_it(monkeypatch, fixture_pkg):
         "private": False,
     }
     module = types.ModuleType("sellm.claims")
-    module.citable_for = lambda pkg, sid, parts: [entry] if sid == "sup:1" else []
+    module.citable_for = lambda pkg, sid, parts, case=None: [entry] if sid == "sup:1" else []
     monkeypatch.setitem(sys.modules, "sellm.claims", module)
     assert build_one(Source(fixture_pkg), "sup:1")["citable"] == [entry]
     assert dossier("sup:1", ["part:A"], package=fixture_pkg)["citable"] == [entry]
 
-    def broken(pkg, sid, parts):
+    def broken(pkg, sid, parts, case=None):
         raise RuntimeError("boom")
 
     module.citable_for = broken
@@ -581,3 +581,29 @@ def test_golden_floors_match_the_lab_within_ten_percent(real_pkg, case_id, lab_f
     d = dossier(case["suppliers"][0], case["parts"], case=case, package=real_pkg)
     value = d["parts"][case["parts"][0]]["floor_estimate"]["value"]
     assert abs(lab_floor - value) / value <= 0.10, (value, lab_floor)
+
+
+def test_concurrent_first_calls_build_the_package_once(real_pkg):
+    import threading
+
+    import sellm.intel as intel
+
+    case = json.loads((CASES / "P01.json").read_text(encoding="utf-8"))
+    intel._SOURCES.clear()
+    out = []
+    threads = [
+        threading.Thread(target=lambda: out.append(dossier("sup:70110", case["parts"], case=case))) for _ in range(13)
+    ]
+    t0 = time.perf_counter()
+    [t.start() for t in threads]
+    [t.join() for t in threads]
+    assert time.perf_counter() - t0 < 2.0  # 6.6-8.3 s without the lock
+    assert len(out) == 13 and all(d["coverage"] == "full" and d["citable"] and validate(d) == [] for d in out)
+
+
+def test_a_case_fact_is_citable_in_its_case(real_pkg):
+    case = json.loads((CASES / "P01.json").read_text(encoding="utf-8"))
+    case["facts"] = {"cost:310010-H": {"part": "part:310010", "supplier": "sup:70110", "unit_cost": 128.5}}
+    d = dossier("sup:70110", case["parts"], case=case, package=real_pkg)
+    assert any("cost:310010-H" in c["ids"] and "128.50" in c["statement"] for c in d["citable"])
+    assert d["parts"]["part:310010"]["should_cost"]["id"] == "cost:310010-H"
