@@ -50,7 +50,8 @@ def main():
         OUT.parent.mkdir(parents=True, exist_ok=True)
         OUT.write_text(json.dumps(rows, indent=1, default=str), encoding="utf-8")
         labels = json.loads(LABELS.read_text(encoding="utf-8")) if LABELS.is_file() else {}
-        labels[row["session_id"]] = f"PRICE-PATH {args.variant} {json.dumps(knobs, sort_keys=True)} (Omar, sellm.agent + test switches)"
+        note = "(Omar, sellm.agent + test switches)"
+        labels[row["session_id"]] = f"PRICE-PATH {args.variant} {json.dumps(knobs, sort_keys=True)} {note}"
         LABELS.write_text(json.dumps(labels, indent=1, sort_keys=True) + "\n", encoding="utf-8")
         threads = []
         for sid, t in (row.get("threads") or {}).items():
