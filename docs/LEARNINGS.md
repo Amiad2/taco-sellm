@@ -19,6 +19,23 @@ Tacto's docs or FAQ, not yet seen by us). Raw history goes to `docs/LOG.md`.
 - **Answer "which figures?" with data** (reported, FAQ P01 recording). The supplier asked for the
   basis of our price; citing the should-cost estimate (`cost:310010`) was `verified` and brought
   the closing offer.
+- **Trust the numbers, not the supplier's prose** (reported, `brief/api.md`,
+  `data/package/KNOWN_ISSUES.md`). Term sheets and the generated documents (quote PDF, cost
+  breakdown, 8D report, delivery schedule, order confirmation) are "rendered from the supplier's
+  structured state, never written by a language model, byte-stable" - their figures are exact and
+  bind. The e-mail body's reasoning is in-character colour, not fact-checked: "cheaper engineering
+  variants a supplier mentions are information, not binding terms," and identical messages need
+  not get identical replies. P01's letter blames energy costs while the cited index shows
+  electricity (PPI-D351) fell 3.7 % over the period (see below) - read a stated reason as a signal
+  of what the supplier cares about, not as a checked fact.
+  Our own `facts.json` is the one checked ground truth for what *we* cite, and it has documented,
+  deliberate quirks, not errors: `should_cost` carries a stated error (5 % where a plant-specific
+  estimate exists, 5-15 % otherwise, with `confidence_pct` in `facts.json`); `sup:71999` and
+  `sup:70210` are the same company under an old/new record; some PO lines carry a stale price
+  (`price_note: stale_condition`); OTD differs 10-30 points depending on which of three delivery
+  dates (requested, confirmed, goods-receipt) you read; ppm is jumpy on small lots, so read the
+  rolling scorecard. Pick the right reference before citing, and build the argument bank only from
+  IDs checked against `facts.json`, never from a supplier's stated reasons.
 
 ## From the sandbox probes (Sat 15:42-15:57, 33 free sessions)
 

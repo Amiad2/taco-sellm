@@ -199,3 +199,11 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - The top 12 agree on: structure=joint (cheapest terms for us at the same value to the supplier, guessing its cost of money at 20 %), 8 planned steps, open from 85 % of its opening (not from should-cost: that opening is too close and makes the steps small), accept a final offer, one new checked figure per round (claims=bank), 2-3 sheets per e-mail. Tone and asking for a breakdown make no difference in the lab (it reads keywords only).
 - Per twin, best variant: D01 0.90, P03 0.89, P04 0.81, P07 0.81, P11 0.81, P01 0.71, P10 0.63, P05 0.48, D02 0.36, P08 0.35, P18 0.31, P02 0.18. Weak where the kit LLM agent was weak too (P02, P18, P08).
 - Caveat: P04/P10/P18 were in the search set, so they are not a true hold-out yet; and the winner exploits the lab's mirror model. Next: confirm in sandbox D01/D02 (needs the arena key on Amiad's machine), true hold-out in the search, twins as families of plausible variants.
+
+## 2026-10-10 16:50 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
+**[finding] Supplier prose is not fact-checked; only term sheets, documents and our own facts.json are**
+- brief/api.md: quote PDFs, cost breakdowns, 8D reports, delivery schedules and order confirmations are rendered from the supplier's structured state, never written by an LLM, byte-stable - their figures bind.
+- The e-mail body's reasoning (why it raised the price, what it mentions in passing) is in-character colour: 'cheaper engineering variants a supplier mentions are information, not binding terms,' and identical messages need not get identical replies.
+- Our own facts.json is the one checked ground truth for what we cite, with documented quirks from data/package/KNOWN_ISSUES.md (should_cost error 5-15%, sup:71999=sup:70210, stale PO prices, OTD depends on which of 3 dates, ppm jumpy on small lots) - these are deliberate realism, not bugs to fix.
+- Consequence for the argument bank (workstream B): build claims only from facts.json-checked IDs, never repeat a supplier's stated reason as if it were verified.
+- Added to docs/LEARNINGS.md under General.
