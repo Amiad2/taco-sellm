@@ -1,14 +1,15 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-10 16:50 CEST by Amiad (Claude Code).
+Last updated: 2026-10-10 17:30 CEST by Omar (Claude Code).
 
 ## Now
 
 - Repo is set up on the official starter kit; tests pass (31 passed, 1 skipped).
 - Team key works: team **sellm**, active. `uv run arena me` is the source of truth for quota and best scores.
 - **OpenAI works with the kit's LLM agent** (`LLM_PROVIDER=openai`, model `gpt-6.1-sol`, Sat 15:00): D01 scored 0.786 against 0.200 for the naive agent, no `LLM failed` in the log. Each machine needs the values in its own `.env`; `llm_from_env` was not changed.
-- No agent of our own exists yet; the kit's LLM agent is the baseline to beat: **61.5** over the 10 hosted cases (`runs/BASELINE.md`).
+- The kit's LLM agent is the baseline to beat: **61.5** over the 10 hosted cases (`runs/BASELINE.md`).
+- **Our agent is registered** (Sat 17:30): `uv run arena play|run ... --agent sellm` plays `sellm/agent.py`, the single entry point for whoever builds the negotiator. For now it is the lab's numbers-only Calculator with the best knobs of the first lab search: on the 10 practice twins it scores 59.8 in the lab, the same as the kit LLM agent there (59.8). **Not shown to beat `--agent llm`**, never played on the arena. `sellm` is in the wheel, so a non-editable install (VM, container) runs it too.
 - Every session the team plays is saved in full under `runs/` by `scripts/pull-runs`. Quota left: 189.
 - Sandbox probes (33 free sessions) show how suppliers react: only the first sheet can be accepted, a final offer is final, the supplier mirrors the size of our concessions, RFQ threads need their own loops. Rules for the agent: `experiments/RESULTS.md` section 5.
 - **Lab** (`sellm/lab/`, Sat 16:50): twins of the 15 suppliers of our 12 played cases, each calibrated to its case's `C_best`; the kit's `play()` and any agent run against them locally, free and in milliseconds (`uv run python -m sellm.lab play P01`). Backtest against all 233 real supplier replies: mean error 0.95 % of the opening value, status right in 210/233; weak on P05 and P10 (`runs/lab/BACKTEST.md`). Tournament runner is next.
@@ -19,8 +20,6 @@ Last updated: 2026-10-10 16:50 CEST by Amiad (Claude Code).
 | Who | What | Files | Since |
 |---|---|---|---|
 | Amiad (Claude Code) | **Lab**: a local supplier simulator (twins of the 11 suppliers we have played, calibrated to each case's `C_best`, plus invented suppliers) and a tournament runner to test buyer strategies without quota. Backtested against our real sessions before anyone trusts it. No arena calls | `sellm/lab/`, `tests/test_lab.py`, `runs/lab/` | Sat 16:00 |
-| Omar (Claude Code) | Register our agent: `--agent sellm` -> `sellm/agent.py` (for now the lab's best Calculator), `sellm` in the wheel, README run section. No arena calls | `arena_kit/cli.py`, `sellm/agent.py`, `pyproject.toml`, `README.md`, `tests/test_sellm_agent.py` | Sat 17:15 |
-
 ## Next up
 
 The plan is in `docs/PLAN.md`: three workstreams (A numbers and strategy, B data and arguments,
@@ -41,12 +40,12 @@ Weakest: P02 0.105, P18 0.377, P08 0.433, P10 0.570. Analysis and hypotheses: `r
 - Work on `main`, small commits, `scripts/sync` after each one (`AGENTS.md`).
 - **Pull before every run.** `arena play`, `arena run`, `scripts/pull-runs` and the probe scripts call `scripts/pull-first` themselves and restart on the new code; new runners must call `arena_kit.cli.pull_first()` (`AGENTS.md` section 2).
 - Docs and logs are written in English: the jury and tum.ai read the repo.
+- Our code lives in `sellm/` (lab in `sellm/lab/`, the agent's entry point `sellm/agent.py`); `arena_kit/` stays the kit except for `pull_first` and the `--agent sellm` registration.
 
 ## Open questions (need a human)
 
 - Which machine runs the Live Final, and is it a cloud VM or a laptop?
 - Which LLM and whose key for the final; is there budget for an hour of parallel play?
-- Where does our own agent code live? `docs/PLAN.md` proposes a separate package `sellm/` next to the kit. Confirm or change.
 - Who takes workstream A, B and C?
 - How do the final score and the jury score combine for places 1-3? Ask at the Tacto desk.
 - When does Tacto go offline on Saturday night?
