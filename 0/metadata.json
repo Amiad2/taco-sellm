@@ -1,0 +1,64 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4KABQFJB6V0QGAY4S8P8AK4",
+  "session_id": "bc80161e-03a4-4665-86fa-dc14803965bc",
+  "strategy": "manual-commit",
+  "created_at": "2026-10-10T16:29:27.639729788Z",
+  "branch": "main",
+  "checkpoints_count": 4,
+  "save_step_count": 1,
+  "files_touched": [
+    "sellm/lab/__main__.py",
+    "sellm/lab/tournament.py"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-5-5",
+  "turn_id": "0fa869ae5d3b",
+  "checkpoint_transcript_start": 2085,
+  "transcript_lines_at_start": 2085,
+  "compact_transcript_start": 284,
+  "token_usage": {
+    "input_tokens": 36,
+    "cache_creation_tokens": 27783,
+    "cache_read_tokens": 13610665,
+    "output_tokens": 20001,
+    "api_call_count": 18
+  },
+  "session_metrics": {
+    "turn_count": 20
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-10-10T16:29:27.287902027Z",
+    "agent_lines": 0,
+    "agent_removed": 0,
+    "human_added": 47,
+    "human_modified": 6,
+    "human_removed": 0,
+    "total_committed": 47,
+    "total_lines_changed": 54,
+    "agent_percentage": 0,
+    "metric_version": 2
+  },
+  "prompt_attributions": [
+    {
+      "checkpoint_number": 1,
+      "user_lines_added": 250,
+      "user_lines_removed": 6,
+      "agent_lines_added": 0,
+      "agent_lines_removed": 0,
+      "user_added_per_file": {
+        ".agents/hooks.json": 28,
+        ".codex/hooks.json": 88,
+        "runs/lab/20261010-182433-stress-champion/parallel/progress.log": 2,
+        "runs/lab/20261010-182433-stress-champion/report.md": 43,
+        "runs/lab/20261010-182433-stress-champion/sequential/progress.log": 2,
+        "sellm/lab/__main__.py": 78,
+        "sellm/lab/tournament.py": 9
+      },
+      "user_removed_per_file": {
+        "sellm/lab/__main__.py": 3,
+        "sellm/lab/tournament.py": 3
+      }
+    }
+  ]
+}
