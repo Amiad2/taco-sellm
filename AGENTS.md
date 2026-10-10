@@ -145,8 +145,9 @@ Each file has one job. Do not mix them:
 | `arena_kit/` | the official starter kit (client, runner, cost function, example agents, simulator). Upstream: github.com/tacto-ai/negotiation-arena-kit |
 | `tests/` | the kit's contract tests against `arena-sim` |
 | `data/package/` | the data package. Not in git: `uv run arena data` |
-| `scripts/` | `sync`, `log`, `pull-first`, `pull-runs`, `session-start`, `stop-check` |
+| `scripts/` | `sync`, `log`, `pull-first`, `pull-runs`, `session-start`, `stop-check`, `lab` (the lab from a shell, background runs) |
 | `runs/` | all sessions played, with transcripts, supplier reasons, cost breakdowns and offline analysis |
+| `sellm/` | our code: `agent.py` (what `--agent sellm` plays), `lab/` (local supplier simulator, tournament, stress test; guide `sellm/lab/README.md`) |
 | `experiments/` | probe scripts and their results: `RESULTS.md` says how the suppliers react and which rules follow |
 | `KIT-README.md` | the kit's own README with worked examples |
 

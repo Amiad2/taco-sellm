@@ -111,6 +111,7 @@ class LocalTable:
             self._check(supplier_id, ts.get("terms", {}))
         if t.round >= self.case.get("round_limit", 10):
             raise ArenaError(409, "round limit reached: accept the standing offer or walk away")
+        t.history.append({**copy.deepcopy(message), "from": "buyer", "_at": self.now})
         reply = t.respond(message)
         self._delivered(t, reply)
         self._returned()
@@ -140,6 +141,7 @@ class LocalTable:
         )
         if owner is None:
             self._reject("not a standing offer in this session")
+        self.threads[owner].history.append({**copy.deepcopy(message), "from": "buyer", "_at": self.now})
         self._end(owner, "accepted")
         return self._result()
 

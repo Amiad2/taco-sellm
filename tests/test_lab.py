@@ -143,7 +143,7 @@ def test_invented_scenarios_are_valid_and_playable():
 
     facts()  # skips without the data package
     pkg = DataPackage(DATA.parent)
-    for s in generate(8, SCENARIOS, pkg, seed=7):
+    for s in generate(8, pkg, seed=7):
         assert s.c_open > s.c_best
         for p in s.personas.values():
             assert set(p.opening) <= set(s.case["negotiable"])
@@ -210,3 +210,75 @@ def test_a_sheet_may_use_the_suppliers_standard_value():
     assert std not in case["term_options"]["lead_time_days"]
     sheet = {"unit_price": 15.0, "payment_days": 30, "lead_time_days": std, "incoterm": "DAP"}
     table.send(sid, {"body": "x", "term_sheets": [{"terms": sheet}]})
+
+
+def _pkg():
+    from arena_kit.data import DataPackage
+
+    facts()  # skips without the data package
+    return DataPackage(DATA.parent)
+
+
+def test_scenarios_survive_a_round_trip(tmp_path):
+    from sellm.lab import store
+
+    path = tmp_path / "s.json.gz"
+    store.save(SCENARIOS, path)
+    back = store.load(path)
+    assert [s.name for s in back] == [s.name for s in SCENARIOS]
+    assert back[0].personas.keys() == SCENARIOS[0].personas.keys()
+
+
+@pytest.mark.parametrize("mode", ["sequential", "parallel"])
+def test_every_edge_case_is_playable_by_both_agents(mode):
+    from sellm.lab.invent import EDGES, edge_suite
+    from sellm.lab.strategies import Calculator
+    from sellm.lab.table import play_lab
+
+    pkg = _pkg()
+    suite = edge_suite(pkg, per_edge=1, seed=300)
+    assert {t for s in suite for t in s.tags} >= set(EDGES) - {"current_contract"}
+    for s in suite:
+        assert s.c_open > s.c_best
+        for agent in (NaiveAgent(), Calculator(pkg)):
+            table = LocalTable(s, pkg.facts, seed=1, clock=True, think_s=2.0, wave_cap_s=480)
+            r = play_lab(table, agent, mode=mode)
+            assert 0.0 <= r["score"] <= 1.0
+
+
+def test_calculator_walks_away_when_the_alternative_is_best():
+    from sellm.lab.invent import generate
+    from sellm.lab.strategies import Calculator
+    from sellm.lab.table import play_lab
+
+    pkg = _pkg()
+    for s in generate(3, pkg, seed=11, data_share=0.0, edges=["walk_away_best"]):
+        r = play_lab(LocalTable(s, pkg.facts, seed=0), Calculator(pkg))
+        assert r["score"] == pytest.approx(1.0) and not r["deal"]
+
+
+def test_tournament_compare_runs_in_worker_processes(tmp_path):
+    from sellm.lab import tournament
+
+    _pkg()
+    opts = {"clock": True, "mode": "parallel", "wave_cap_s": 480, "think_s": 2.0, "vary": True}
+    run = tournament.Run(tmp_path / "run", opts, SCENARIOS[:4], SCENARIOS[4:6], workers=2, log=lambda _: None)
+    try:
+        rows = tournament.compare(run, ["naive", "calc"], seeds=1)
+    finally:
+        run.close()
+    assert len(rows) == 2 * 6 and not [r for r in rows if "crash" in r]
+    text = tournament.report(rows, "test")
+    assert "| 1 | calc" in text or "| 1 | naive" in text
+
+
+def test_stress_verdict_fails_on_a_broken_must_have():
+    from sellm.lab import stress
+
+    row = {"strategy": "x", "knobs": {}, "scenario": "S", "kind": "invented", "seed": 0, "type": "rfq",
+           "goal": "routine", "tags": [], "archetypes": ["family"], "pool": "train", "score": 0.0,
+           "deal": True, "broken": True, "worse": False, "wall_s": 0.1, "mode": "parallel"}  # fmt: skip
+    _, verdict = stress.report([row], "x", {})
+    assert verdict == "FAIL"
+    _, verdict = stress.report([{**row, "broken": False}], "x", {})
+    assert verdict == "PASS"

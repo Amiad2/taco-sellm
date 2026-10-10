@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-10 17:30 CEST by Omar (Claude Code).
+Last updated: 2026-10-10 17:45 CEST by Amiad (Claude Code).
 
 ## Now
 
@@ -12,14 +12,14 @@ Last updated: 2026-10-10 17:30 CEST by Omar (Claude Code).
 - **Our agent is registered** (Sat 17:30): `uv run arena play|run ... --agent sellm` plays `sellm/agent.py`, the single entry point for whoever builds the negotiator. For now it is the lab's numbers-only Calculator with the best knobs of the first lab search: on the 10 practice twins it scores 59.8 in the lab, the same as the kit LLM agent there (59.8). **Not shown to beat `--agent llm`**, never played on the arena. `sellm` is in the wheel, so a non-editable install (VM, container) runs it too.
 - Every session the team plays is saved in full under `runs/` by `scripts/pull-runs`. Quota left: 189.
 - Sandbox probes (33 free sessions) show how suppliers react: only the first sheet can be accepted, a final offer is final, the supplier mirrors the size of our concessions, RFQ threads need their own loops. Rules for the agent: `experiments/RESULTS.md` section 5.
-- **Lab** (`sellm/lab/`, Sat 16:50): twins of the 15 suppliers of our 12 played cases, each calibrated to its case's `C_best`; the kit's `play()` and any agent run against them locally, free and in milliseconds (`uv run python -m sellm.lab play P01`). Backtest against all 233 real supplier replies: mean error 0.95 % of the opening value, status right in 210/233; weak on P05 and P10 (`runs/lab/BACKTEST.md`). Tournament runner is next.
+- **Lab** (`sellm/lab/`, Sat 17:45; guide `sellm/lab/README.md`): test any agent locally, free, no quota. `scripts/lab play P01`, `scripts/lab compare naive calc`, `scripts/lab search 60` (background), `scripts/lab stress calc`, `scripts/lab status`. Scenarios: twins of our 15 played suppliers (families of plausible variants), the 9 unplayed practice case files with their real suppliers, and invented ones (all 7 types, all fields, 8 supplier archetypes, 12 edge cases). Simulated clock: 20-60 s replies, 60-s timeouts with re-issued offer IDs, 8-min wave cap; `--mode parallel` (one loop per thread) or `sequential` (the kit's `play()`). Backtest: 0.79 % mean error on 237 real replies; kit LLM agent 59.8 in the lab vs 61.5 in the arena (`runs/lab/BACKTEST.md`, `VALIDATION.md`). **Found: the kit's sequential `play()` times RFQ threads out and can crash on a stale offer ID; the final runner needs one loop per thread.**
 - Team memory is in place: `AGENTS.md`, `docs/CONTEXT.md`, this file, `docs/LEARNINGS.md`, `docs/LOG.md`.
 
 ## In progress (claim before you start, remove when done)
 
 | Who | What | Files | Since |
 |---|---|---|---|
-| Amiad (Claude Code) | **Lab**: a local supplier simulator (twins of the 11 suppliers we have played, calibrated to each case's `C_best`, plus invented suppliers) and a tournament runner to test buyer strategies without quota. Backtested against our real sessions before anyone trusts it. No arena calls | `sellm/lab/`, `tests/test_lab.py`, `runs/lab/` | Sat 16:00 |
+| Amiad (Claude Code) | **Lab** upkeep and strategy search: suppliers, scenarios, tournament, stress test, the `Calculator` strategy and its knobs. No arena calls | `sellm/lab/`, `scripts/lab`, `tests/test_lab.py`, `runs/lab/` | Sat 16:00 |
 ## Next up
 
 The plan is in `docs/PLAN.md`: three workstreams (A numbers and strategy, B data and arguments,

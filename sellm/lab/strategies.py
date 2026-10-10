@@ -11,6 +11,11 @@ thousands of negotiations cost nothing - and has knobs for what we want to compa
   after_final    accept | hold (one holding message, then accept) | push (one more lower ask)
   claims         none | cost (the should-cost estimate once) | bank (one new checked figure per round)
   tone           warm | neutral | hard (ultimatum wording)
+  adaptive       shrink our step when the supplier gives back much less than it (its per-round limit
+                 binds), so our price stays low for more rounds
+  learn          when the supplier counters on one of our variant sheets, ask on that structure
+  hold_others    with one loop per thread: keep a finished thread alive with a holding e-mail while
+                 the others still negotiate (a supplier left waiting at its final offer may withdraw)
 
 It never uses the lab's hidden numbers: only the case file, the thread and the data package, so
 the same object can play the arena. `decide(case, threads)` is the kit's agent interface.
@@ -39,6 +44,10 @@ DEFAULTS = dict(
     tone="warm",
     ask_breakdown=False,
     accept_gap=0.002,
+    adaptive=False,
+    learn=False,
+    hold_others=True,
+    mirror_guess=0.6,
 )
 
 TONE = {
@@ -81,14 +90,16 @@ class Calculator:
                 return f"cost:{part.split(':', 1)[1]}", fact["unit_cost"]
         return None
 
-    def plan(self, case, sid, events):
+    def plan(self, case, sid, events, force=None):
         """Once per thread: the structure we ask for, our floor estimate and the price path."""
         _, terms = standing(events)
         std = self._std(case, events, terms)
         value_now = self._sup_value(case, std, terms)
         candidates = [s for s in structures(case) if must_haves_ok(case, {**s, "unit_price": 1.0}, std)]
         current = {k: v for k, v in complete_offer(case, terms).items() if k != "unit_price"}
-        if self.k["structure"] == "keep" or not candidates:
+        if force is not None:
+            structure = force
+        elif self.k["structure"] == "keep" or not candidates:
             structure = current
         elif self.k["structure"] == "buyer":
             structure = min(candidates, key=lambda s: total_cost(case, {**s, "unit_price": terms["unit_price"]}, std))
@@ -107,8 +118,16 @@ class Calculator:
         p_floor = self._price_at(case, std, structure, floor_value)
         p_limit = self._price_at(case, std, structure, value_now)
         p_open = min(p_floor * (1 - self.k["open_below"]), p_limit * 0.97)
-        self.plans[sid] = dict(std=std, structure=structure, p_open=p_open, p_limit=p_limit, sent=0, sc=sc)
+        old = self.plans.get(sid, {})
+        self.plans[sid] = dict(
+            std=std, structure=structure, p_open=p_open, p_limit=p_limit, sent=old.get("sent", 0), sc=sc,
+            last_price=None, last_step=None, supplier_eq=None, learned=old.get("learned", False),
+        )  # fmt: skip
         return self.plans[sid]
+
+    def _supplier_eq(self, case, plan, terms):
+        """The supplier's standing offer as a price on our structure, at equal value to it."""
+        return self._price_at(case, plan["std"], plan["structure"], self._sup_value(case, plan["std"], terms))
 
     def ask(self, plan, n):
         steps, shape = max(1, self.k["steps"]), self.k["shape"]
@@ -116,7 +135,8 @@ class Calculator:
         return round(plan["p_open"] + (plan["p_limit"] - plan["p_open"]) * frac, 2)
 
     # -- the decision --------------------------------------------------------------------------
-    def decide(self, case, threads):
+    def decide(self, case, threads, focus=None):
+        """The kit's interface; `focus` (one loop per thread) asks for a move in that thread."""
         live = live_threads(threads)
         alt = case["buyer"].get("alternative") or {}
         c_alt = total_cost(case, alt["terms"]) if alt.get("terms", {}).get("unit_price") else math.inf
@@ -156,8 +176,17 @@ class Calculator:
         ]
         if not movable:
             return accept(best)
+        if focus is not None and focus in live:
+            if focus in movable:
+                return self._move(case, focus, threads, costs, best)
+            if self.k["hold_others"] and moves_left(case, threads[focus]) > 1 and focus == best:
+                return self._hold(case, focus)  # the best offer stays alive while the others go on
         sid = min(movable, key=lambda s: (sum(m.get("from") == "buyer" for m in threads[s]), costs[s]))
         return self._move(case, sid, threads, costs, best)
+
+    def _hold(self, case, sid):
+        body = "Dear Sir or Madam,\n\nThank you, we are reviewing your offer internally and will revert shortly."
+        return {"supplier_id": sid, "message": {"subject": f"Re: {case['title']}", "body": body, "term_sheets": []}}
 
     def _done(self, case, sid, events, cost):
         """Nothing more to get from this thread: take or leave its standing offer."""
@@ -184,14 +213,7 @@ class Calculator:
         lines = [TONE[self.k["tone"]]]
         if status == "final_offer" and self.k["after_final"] == "hold":
             self.held.add(sid)
-            return {
-                "supplier_id": sid,
-                "message": {
-                    "subject": f"Re: {case['title']}",
-                    "body": "Thank you, we are reviewing your offer internally and will revert shortly.",
-                    "term_sheets": [],
-                },
-            }
+            return self._hold(case, sid)
         if status == "final_offer":
             self.pushed.add(sid)
         # a cheaper second sheet from the supplier: send its terms back, it agrees, we accept
@@ -211,13 +233,25 @@ class Calculator:
                         ["We can accept your alternative package as offered."],
                         [complete_offer(case, alt_terms)],
                     )
+        # learn: the supplier countered on one of our variants - it values that structure
+        _, terms = standing(events)
+        if self.k["learn"] and not plan["learned"] and plan["sent"] > 0 and terms:
+            theirs = {k: v for k, v in complete_offer(case, terms).items() if k != "unit_price"}
+            if theirs != plan["structure"] and must_haves_ok(case, {**theirs, "unit_price": 1.0}, plan["std"]):
+                plan = self.plan(case, sid, events, force=theirs)
+                plan["learned"] = True
         # our price path; in an RFQ the best rival offer is our argument
         price = self.ask(plan, plan["sent"])
-        _, terms = standing(events)
-        if terms.get("unit_price") and price >= self._price_at(
-            case, plan["std"], plan["structure"], self._sup_value(case, plan["std"], terms)
-        ):
-            price = round(price * 0.999, 2)
+        eq = self._supplier_eq(case, plan, terms) if terms.get("unit_price") else math.inf
+        if self.k["adaptive"] and plan["last_price"] is not None and plan["supplier_eq"] is not None:
+            given = plan["supplier_eq"] - eq  # what it gave back for our last step, on our structure
+            step = plan["last_step"] or 0.0
+            if step > 0 and given < self.k["mirror_guess"] * step * 0.7:  # its limit binds: smaller steps
+                price = min(price, round(plan["last_price"] + max(given / self.k["mirror_guess"], step * 0.25), 2))
+        if math.isfinite(eq) and price >= eq:
+            price = round(min(price, eq) * 0.999, 2)
+        plan["last_step"] = price - plan["last_price"] if plan["last_price"] is not None else None
+        plan["last_price"], plan["supplier_eq"] = price, eq
         plan["sent"] += 1
         main = complete_offer(case, {**plan["structure"], "unit_price": price})
         out = [main]

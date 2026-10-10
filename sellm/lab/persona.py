@@ -167,28 +167,36 @@ def buyer_cost(case, persona, terms):
     return total_cost(case, terms, persona.pdf_standard, persona.relationship_view())
 
 
-def best_package(case, persona):
-    """(C, terms): the cheapest package for the buyer that this supplier would accept."""
-    best = (math.inf, None)
+def best_package(case, persona, exact=True):
+    """(C, terms): the cheapest package for the buyer that this supplier would accept. With
+    `exact=False` only the six most promising structures get the fine price search (fast enough to
+    generate scenarios with seven negotiable fields)."""
     relationship = case["buyer"].get("category_goal") in RELATIONSHIP_GOALS
+    rough = []
     for s in structures(case):
         if not persona.allows(s) or not must_haves_ok(case, {**s, "unit_price": 1.0}, persona.pdf_standard):
             continue
         p_min = persona.price_for(case, s, persona.full_cost, tick=False)
         if not math.isfinite(p_min) or p_min <= 0:
             continue
+        rough.append((buyer_cost(case, persona, {**s, "unit_price": round(p_min, 4)}), p_min, s))
+    if not rough:
+        return (math.inf, None)
+    if not relationship:
+        c, p, s = min(rough, key=lambda x: x[0])
+        return (c, {**s, "unit_price": round(p, 2)})
+    rough.sort(key=lambda x: x[0])
+    best = (math.inf, None)
+    for _, p_min, s in rough if exact else rough[:6]:
 
         def c(p, s=s):
             return buyer_cost(case, persona, {**s, "unit_price": round(p, 4)})
 
-        if relationship:  # buyer cost rises with price, the relationship term falls: convex
-            lo, hi = p_min, p_min * 1.3
-            for _ in range(60):
-                m1, m2 = lo + (hi - lo) / 3, hi - (hi - lo) / 3
-                lo, hi = (lo, m2) if c(m1) <= c(m2) else (m1, hi)
-            p = max(p_min, (lo + hi) / 2)
-        else:
-            p = p_min
+        lo, hi = p_min, p_min * 1.3  # buyer cost rises with price, the relationship term falls: convex
+        for _ in range(60 if exact else 30):
+            m1, m2 = lo + (hi - lo) / 3, hi - (hi - lo) / 3
+            lo, hi = (lo, m2) if c(m1) <= c(m2) else (m1, hi)
+        p = max(p_min, (lo + hi) / 2)
         if (cost := c(p)) < best[0]:
             best = (cost, {**s, "unit_price": round(p, 2)})
     return best

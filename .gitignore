@@ -10,3 +10,6 @@ data/
 .claude/settings.local.json
 runs/lab/*/rows.jsonl.gz
 .idea/
+runs/lab/**/scenarios.json.gz
+runs/lab/**/rows.jsonl.gz
+runs/lab/nohup-*.log

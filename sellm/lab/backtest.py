@@ -27,11 +27,12 @@ GRID = {
     "claim_w": [0.0, 0.1, 0.2, 0.35, 0.5],
 }
 STATUS_WEIGHT = 1.0  # a wrong status counts like 1 % of the opening value off
+PLAUSIBLE = 1.15  # a family member explains the replies within 15 % of the best fit's loss
 
 
 def real_sessions(name):
     out = []
-    for f in sorted(ROOT.glob(f"runs/*/{name}/*.json")):
+    for f in sorted(f for d in ("practice", "sandbox") for f in ROOT.glob(f"runs/{d}/{name}/*.json")):
         d = json.loads(f.read_text(encoding="utf-8"))
         if (d.get("state") or {}).get("result"):
             out.append(d)
@@ -127,17 +128,26 @@ def fit(scenarios, facts, log=print, passes=3):
                 break
         return params, value
 
+    def plausible(params, value, subset):
+        """Per parameter, the grid values that explain the replies almost as well (the family)."""
+        out = {}
+        for k, grid in GRID.items():
+            ok = [v for v in grid if total({**params, k: v}, subset) <= value * PLAUSIBLE + 0.05]
+            out[k] = ok or [params[k]]
+        return out
+
     start = {k: grid[len(grid) // 2] for k, grid in GRID.items()}
     best, value = descend(start, scenarios)
     log(f"global {best} loss {value:.3f}")
-    per = {}
+    per, ranges = {}, {}
     for s in scenarios:
         if not sessions[s.name]:
-            per[s.name] = dict(best)
+            per[s.name], ranges[s.name] = dict(best), {k: list(v) for k, v in GRID.items()}
             continue
         per[s.name], v = descend(best, [s])
-        log(f"{s.name}: {per[s.name]} loss {v:.3f} ({len(sessions[s.name])} sessions)")
-    return best, per
+        ranges[s.name] = plausible(per[s.name], v, [s])
+        log(f"{s.name}: {per[s.name]} loss {v:.3f} ({len(sessions[s.name])} sessions) family {ranges[s.name]}")
+    return best, per, ranges
 
 
 def report(rows):

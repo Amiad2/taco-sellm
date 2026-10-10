@@ -83,6 +83,7 @@
   "c_best": 408623.99,
   "notes": "C_best 408,624, model 408,624",
   "drivers": [],
+  "tags": [],
   "personas": {
    "sup:DEMO-F1": {
     "supplier_id": "sup:DEMO-F1",
@@ -131,6 +132,52 @@
     "leak": 0.6,
     "discloses": false,
     "alternatives": true,
+    "noise": 0.1,
+    "approval_at": null,
+    "no_bid": false,
+    "tone_walk": 0.0,
+    "withdraw_on_wait": 0.5,
+    "asks_data": true,
+    "archetype": "twin",
+    "ranges": {
+     "first_step": [
+      0.35
+     ],
+     "mirror": [
+      0.5,
+      0.7
+     ],
+     "cap": [
+      0.002,
+      0.003,
+      0.004,
+      0.006,
+      0.008,
+      0.012,
+      0.02
+     ],
+     "cap_decay": [
+      0.6,
+      0.8,
+      1.0
+     ],
+     "patience": [
+      6,
+      7
+     ],
+     "claim_w": [
+      0.0,
+      0.1,
+      0.2,
+      0.35,
+      0.5
+     ],
+     "noise": [
+      0.05,
+      0.1,
+      0.2
+     ]
+    },
     "style": "family",
     "sender": "sales@DEMO-F1",
     "sender_name": "Owner, Demo Gießerei GmbH",
@@ -239,6 +286,7 @@
   "c_best": 156738.78,
   "notes": "C_best 156,739, model 156,739",
   "drivers": [],
+  "tags": [],
   "personas": {
    "sup:DEMO-J1": {
     "supplier_id": "sup:DEMO-J1",
@@ -290,6 +338,56 @@
     "leak": 0.6,
     "discloses": false,
     "alternatives": true,
+    "noise": 0.1,
+    "approval_at": null,
+    "no_bid": false,
+    "tone_walk": 0.0,
+    "withdraw_on_wait": 0.5,
+    "asks_data": true,
+    "archetype": "twin",
+    "ranges": {
+     "first_step": [
+      0.2,
+      0.35
+     ],
+     "mirror": [
+      0.3,
+      0.5,
+      0.7,
+      0.85
+     ],
+     "cap": [
+      0.002,
+      0.003,
+      0.004,
+      0.006,
+      0.008
+     ],
+     "cap_decay": [
+      0.6,
+      0.8,
+      1.0
+     ],
+     "patience": [
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "claim_w": [
+      0.0,
+      0.1,
+      0.2,
+      0.35,
+      0.5
+     ],
+     "noise": [
+      0.05,
+      0.1,
+      0.2
+     ]
+    },
     "style": "casual",
     "sender": "sales@DEMO-J1",
     "sender_name": "Owner, Demo Drehteile GmbH",
@@ -351,6 +449,56 @@
     "leak": 0.6,
     "discloses": false,
     "alternatives": true,
+    "noise": 0.1,
+    "approval_at": null,
+    "no_bid": false,
+    "tone_walk": 0.0,
+    "withdraw_on_wait": 0.5,
+    "asks_data": true,
+    "archetype": "twin",
+    "ranges": {
+     "first_step": [
+      0.2,
+      0.35
+     ],
+     "mirror": [
+      0.3,
+      0.5,
+      0.7,
+      0.85
+     ],
+     "cap": [
+      0.002,
+      0.003,
+      0.004,
+      0.006,
+      0.008
+     ],
+     "cap_decay": [
+      0.6,
+      0.8,
+      1.0
+     ],
+     "patience": [
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "claim_w": [
+      0.0,
+      0.1,
+      0.2,
+      0.35,
+      0.5
+     ],
+     "noise": [
+      0.05,
+      0.1,
+      0.2
+     ]
+    },
     "style": "corporate",
     "sender": "sales@DEMO-C1",
     "sender_name": "Export Manager, Demo Machining Sp. z o.o.",
@@ -460,6 +608,7 @@
    "PPI-D351",
    "LCI-C"
   ],
+  "tags": [],
   "personas": {
    "sup:70110": {
     "supplier_id": "sup:70110",
@@ -507,6 +656,41 @@
     "leak": 0.6,
     "discloses": false,
     "alternatives": true,
+    "noise": 0.1,
+    "approval_at": null,
+    "no_bid": false,
+    "tone_walk": 0.0,
+    "withdraw_on_wait": 0.5,
+    "asks_data": true,
+    "archetype": "twin",
+    "ranges": {
+     "first_step": [
+      0.35
+     ],
+     "mirror": [
+      0.3,
+      0.5
+     ],
+     "cap": [
+      0.002
+     ],
+     "cap_decay": [
+      0.6,
+      0.8,
+      1.0
+     ],
+     "patience": [
+      7
+     ],
+     "claim_w": [
+      0.2
+     ],
+     "noise": [
+      0.05,
+      0.1,
+      0.2
+     ]
+    },
     "style": "family",
     "sender": "sales@70110",
     "sender_name": "Owner, Gießerei Brandlhuber GmbH & Co. KG",
@@ -636,6 +820,7 @@
    "PPI-C241",
    "LCI-C"
   ],
+  "tags": [],
   "personas": {
    "sup:70510": {
     "supplier_id": "sup:70510",
@@ -680,6 +865,47 @@
     "leak": 0.6,
     "discloses": false,
     "alternatives": true,
+    "noise": 0.1,
+    "approval_at": null,
+    "no_bid": false,
+    "tone_walk": 0.0,
+    "withdraw_on_wait": 0.5,
+    "asks_data": true,
+    "archetype": "twin",
+    "ranges": {
+     "first_step": [
+      0.03
+     ],
+     "mirror": [
+      0.3,
+      0.5,
+      0.7,
+      0.85
+     ],
+     "cap": [
+      0.002
+     ],
+     "cap_decay": [
+      0.6,
+      0.8,
+      1.0
+     ],
+     "patience": [
+      4
+     ],
+     "claim_w": [
+      0.0,
+      0.1,
+      0.2,
+      0.35,
+      0.5
+     ],
+     "noise": [
+      0.05,
+      0.1,
+      0.2
+     ]
+    },
     "style": "corporate",
     "sender": "sales@70510",
     "sender_name": "Key Account Manager, Antriebstechnik Nordmark AG",
@@ -795,6 +1021,7 @@
    "CU-NOTATION",
    "LCI-C"
   ],
+  "tags": [],
   "personas": {
    "sup:70530": {
     "supplier_id": "sup:70530",
@@ -844,6 +1071,44 @@
     "leak": 0.6,
     "discloses": false,
     "alternatives": true,
+    "noise": 0.1,
+    "approval_at": null,
+    "no_bid": false,
+    "tone_walk": 0.0,
+    "withdraw_on_wait": 0.5,
+    "asks_data": true,
+    "archetype": "twin",
+    "ranges": {
+     "first_step": [
+      0.03
+     ],
+     "mirror": [
+      0.3,
+      0.5,
+      0.7,
+      0.85
+     ],
+     "cap": [
+      0.003
+     ],
+     "cap_decay": [
+      0.6,
+      0.8,
+      1.0
+     ],
+     "patience": [
+      6,
+      7
+     ],
+     "claim_w": [
+      0.0
+     ],
+     "noise": [
+      0.05,
+      0.1,
+      0.2
+     ]
+    },
     "style": "corporate",
     "sender": "sales@70530",
     "sender_name": "Key Account Manager, Selvbrunn Drive Systems GmbH",
@@ -953,6 +1218,7 @@
    "PPI-C2815",
    "LCI-C"
   ],
+  "tags": [],
   "personas": {
    "sup:70620": {
     "supplier_id": "sup:70620",
@@ -997,6 +1263,52 @@
     "leak": 0.6,
     "discloses": false,
     "alternatives": true,
+    "noise": 0.1,
+    "approval_at": null,
+    "no_bid": false,
+    "tone_walk": 0.0,
+    "withdraw_on_wait": 0.5,
+    "asks_data": true,
+    "archetype": "twin",
+    "ranges": {
+     "first_step": [
+      0.8
+     ],
+     "mirror": [
+      0.3,
+      0.5,
+      0.7,
+      0.85
+     ],
+     "cap": [
+      0.002,
+      0.003
+     ],
+     "cap_decay": [
+      0.6,
+      0.8,
+      1.0
+     ],
+     "patience": [
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "claim_w": [
+      0.0,
+      0.1,
+      0.2,
+      0.35,
+      0.5
+     ],
+     "noise": [
+      0.05,
+      0.1,
+      0.2
+     ]
+    },
     "style": "family",
     "sender": "sales@70620",
     "sender_name": "Inside Sales, Wälzlager-Zentrum Süd GmbH",
@@ -1105,6 +1417,7 @@
    "PPI-D351",
    "LCI-C"
   ],
+  "tags": [],
   "personas": {
    "sup:70210": {
     "supplier_id": "sup:70210",
@@ -1149,6 +1462,58 @@
     "leak": 0.6,
     "discloses": false,
     "alternatives": true,
+    "noise": 0.1,
+    "approval_at": null,
+    "no_bid": false,
+    "tone_walk": 0.0,
+    "withdraw_on_wait": 0.5,
+    "asks_data": true,
+    "archetype": "twin",
+    "ranges": {
+     "first_step": [
+      0.03,
+      0.1,
+      0.2
+     ],
+     "mirror": [
+      0.3,
+      0.5,
+      0.7,
+      0.85
+     ],
+     "cap": [
+      0.002,
+      0.003,
+      0.004,
+      0.006,
+      0.008,
+      0.012
+     ],
+     "cap_decay": [
+      0.6,
+      0.8,
+      1.0
+     ],
+     "patience": [
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "claim_w": [
+      0.0,
+      0.1,
+      0.2,
+      0.35,
+      0.5
+     ],
+     "noise": [
+      0.05,
+      0.1,
+      0.2
+     ]
+    },
     "style": "casual",
     "sender": "sales@70210",
     "sender_name": "Owner, Zerspanung Dralveck GmbH",
@@ -1209,6 +1574,58 @@
     "leak": 0.6,
     "discloses": false,
     "alternatives": true,
+    "noise": 0.1,
+    "approval_at": null,
+    "no_bid": false,
+    "tone_walk": 0.0,
+    "withdraw_on_wait": 0.5,
+    "asks_data": true,
+    "archetype": "twin",
+    "ranges": {
+     "first_step": [
+      0.03,
+      0.1,
+      0.2
+     ],
+     "mirror": [
+      0.3,
+      0.5,
+      0.7,
+      0.85
+     ],
+     "cap": [
+      0.002,
+      0.003,
+      0.004,
+      0.006,
+      0.008,
+      0.012
+     ],
+     "cap_decay": [
+      0.6,
+      0.8,
+      1.0
+     ],
+     "patience": [
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "claim_w": [
+      0.0,
+      0.1,
+      0.2,
+      0.35,
+      0.5
+     ],
+     "noise": [
+      0.05,
+      0.1,
+      0.2
+     ]
+    },
     "style": "casual",
     "sender": "sales@70240",
     "sender_name": "Export Manager, Strojírna Hrvelec s.r.o.",
@@ -1263,6 +1680,58 @@
     "leak": 0.6,
     "discloses": false,
     "alternatives": true,
+    "noise": 0.1,
+    "approval_at": null,
+    "no_bid": false,
+    "tone_walk": 0.0,
+    "withdraw_on_wait": 0.5,
+    "asks_data": true,
+    "archetype": "twin",
+    "ranges": {
+     "first_step": [
+      0.03,
+      0.1,
+      0.2
+     ],
+     "mirror": [
+      0.3,
+      0.5,
+      0.7,
+      0.85
+     ],
+     "cap": [
+      0.002,
+      0.003,
+      0.004,
+      0.006,
+      0.008,
+      0.012
+     ],
+     "cap_decay": [
+      0.6,
+      0.8,
+      1.0
+     ],
+     "patience": [
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "claim_w": [
+      0.0,
+      0.1,
+      0.2,
+      0.35,
+      0.5
+     ],
+     "noise": [
+      0.05,
+      0.1,
+      0.2
+     ]
+    },
     "style": "casual",
     "sender": "sales@70250",
     "sender_name": "Owner, Drehteile Fuchsreiter GmbH",
@@ -1373,6 +1842,7 @@
    "PPI-C2594",
    "LCI-C"
   ],
+  "tags": [],
   "personas": {
    "sup:70610": {
     "supplier_id": "sup:70610",
@@ -1417,6 +1887,47 @@
     "leak": 0.6,
     "discloses": false,
     "alternatives": true,
+    "noise": 0.1,
+    "approval_at": null,
+    "no_bid": false,
+    "tone_walk": 0.0,
+    "withdraw_on_wait": 0.5,
+    "asks_data": true,
+    "archetype": "twin",
+    "ranges": {
+     "first_step": [
+      0.35
+     ],
+     "mirror": [
+      0.5,
+      0.7
+     ],
+     "cap": [
+      0.008,
+      0.012,
+      0.02
+     ],
+     "cap_decay": [
+      0.6,
+      0.8,
+      1.0
+     ],
+     "patience": [
+      4
+     ],
+     "claim_w": [
+      0.0,
+      0.1,
+      0.2,
+      0.35,
+      0.5
+     ],
+     "noise": [
+      0.05,
+      0.1,
+      0.2
+     ]
+    },
     "style": "family",
     "sender": "sales@70610",
     "sender_name": "Inside Sales, Schraubenhandel Leitner & Sohn GmbH",
@@ -1549,6 +2060,7 @@
    "PPI-C2431",
    "LCI-C"
   ],
+  "tags": [],
   "personas": {
    "sup:70710": {
     "supplier_id": "sup:70710",
@@ -1596,6 +2108,44 @@
     "leak": 0.6,
     "discloses": false,
     "alternatives": true,
+    "noise": 0.1,
+    "approval_at": null,
+    "no_bid": false,
+    "tone_walk": 0.0,
+    "withdraw_on_wait": 0.5,
+    "asks_data": true,
+    "archetype": "twin",
+    "ranges": {
+     "first_step": [
+      0.35
+     ],
+     "mirror": [
+      0.7,
+      0.85
+     ],
+     "cap": [
+      0.006
+     ],
+     "cap_decay": [
+      0.8,
+      1.0
+     ],
+     "patience": [
+      5
+     ],
+     "claim_w": [
+      0.0,
+      0.1,
+      0.2,
+      0.35,
+      0.5
+     ],
+     "noise": [
+      0.05,
+      0.1,
+      0.2
+     ]
+    },
     "style": "corporate",
     "sender": "sales@70710",
     "sender_name": "Inside Sales, Edelstahl-Service Donautal GmbH",
@@ -1704,6 +2254,7 @@
    "PPI-C2219",
    "LCI-C"
   ],
+  "tags": [],
   "personas": {
    "sup:70410": {
     "supplier_id": "sup:70410",
@@ -1751,6 +2302,55 @@
     "leak": 0.6,
     "discloses": false,
     "alternatives": true,
+    "noise": 0.1,
+    "approval_at": null,
+    "no_bid": false,
+    "tone_walk": 0.0,
+    "withdraw_on_wait": 0.5,
+    "asks_data": true,
+    "archetype": "twin",
+    "ranges": {
+     "first_step": [
+      0.03
+     ],
+     "mirror": [
+      0.3,
+      0.5,
+      0.7,
+      0.85
+     ],
+     "cap": [
+      0.004,
+      0.006,
+      0.008,
+      0.012,
+      0.02
+     ],
+     "cap_decay": [
+      0.6,
+      0.8,
+      1.0
+     ],
+     "patience": [
+      3,
+      4,
+      5,
+      6,
+      7
+     ],
+     "claim_w": [
+      0.0,
+      0.1,
+      0.2,
+      0.35,
+      0.5
+     ],
+     "noise": [
+      0.05,
+      0.1,
+      0.2
+     ]
+    },
     "style": "corporate",
     "sender": "sales@70410",
     "sender_name": "Segment Manager, Dichtungswerk Ravensteiner GmbH",
@@ -1868,6 +2468,7 @@
    "PPI-D351",
    "LCI-C"
   ],
+  "tags": [],
   "personas": {
    "sup:70140": {
     "supplier_id": "sup:70140",
@@ -1912,6 +2513,42 @@
     "leak": 0.6,
     "discloses": false,
     "alternatives": true,
+    "noise": 0.1,
+    "approval_at": null,
+    "no_bid": false,
+    "tone_walk": 0.0,
+    "withdraw_on_wait": 0.5,
+    "asks_data": true,
+    "archetype": "twin",
+    "ranges": {
+     "first_step": [
+      0.35
+     ],
+     "mirror": [
+      0.7,
+      0.85
+     ],
+     "cap": [
+      0.02
+     ],
+     "cap_decay": [
+      0.8,
+      1.0
+     ],
+     "patience": [
+      5,
+      6,
+      7
+     ],
+     "claim_w": [
+      0.1
+     ],
+     "noise": [
+      0.05,
+      0.1,
+      0.2
+     ]
+    },
     "style": "corporate",
     "sender": "sales@70140",
     "sender_name": "Export Manager, Odlewnia Kalwisz Sp. z o.o.",
@@ -2044,6 +2681,7 @@
    "PPI-C2431",
    "LCI-C"
   ],
+  "tags": [],
   "personas": {
    "sup:70740": {
     "supplier_id": "sup:70740",
@@ -2091,6 +2729,53 @@
     "leak": 0.6,
     "discloses": false,
     "alternatives": true,
+    "noise": 0.1,
+    "approval_at": null,
+    "no_bid": false,
+    "tone_walk": 0.0,
+    "withdraw_on_wait": 0.5,
+    "asks_data": true,
+    "archetype": "twin",
+    "ranges": {
+     "first_step": [
+      0.2
+     ],
+     "mirror": [
+      0.3,
+      0.5,
+      0.7,
+      0.85
+     ],
+     "cap": [
+      0.002,
+      0.003,
+      0.004,
+      0.006,
+      0.008,
+      0.012,
+      0.02
+     ],
+     "cap_decay": [
+      0.6,
+      0.8,
+      1.0
+     ],
+     "patience": [
+      3
+     ],
+     "claim_w": [
+      0.0,
+      0.1,
+      0.2,
+      0.35,
+      0.5
+     ],
+     "noise": [
+      0.05,
+      0.1,
+      0.2
+     ]
+    },
     "style": "family",
     "sender": "sales@70740",
     "sender_name": "Inside Sales, Blankstahl Werdenfels GmbH",

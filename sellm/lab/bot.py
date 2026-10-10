@@ -107,6 +107,7 @@ class SupplierThread:
         self.best_ours, self.leaked, self.warm, self.counters = None, False, False, 0
         self.timeouts, self.approved, self.pending = 0, False, 0.0
         self.standing, self.messages, self.reasons = None, [], []
+        self.history = []  # both sides in order: our e-mails (added by the table) and its replies
 
     # -- messages ------------------------------------------------------------------------------
     def _mail(self, status, sheets, lines, attach=(), subject=None):
@@ -152,6 +153,7 @@ class SupplierThread:
             "action": None,
         }
         self.messages.append(msg)
+        self.history.append(msg)
         self.reasons.append({"round": self.round, "status": status, "ask": round(self.ask, 4), "lines": lines})
         return msg
 

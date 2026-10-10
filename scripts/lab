@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# The lab from a shell, no Claude needed. Long runs go to the background and survive a closed terminal.
+#   scripts/lab search 60              a 60-minute strategy search (any number of minutes)
+#   scripts/lab compare naive calc     agents side by side (background)
+#   scripts/lab stress calc            stress-test an agent: crashes, 422s, broken must-haves, ... (background)
+#   scripts/lab status                 what is running, the newest progress lines, where the report is
+#   scripts/lab stop                   stop a running lab run
+#   scripts/lab play P01 [agent]       one negotiation, every e-mail printed (foreground)
+#   scripts/lab <command> ...          anything else goes to 'python -m sellm.lab' (see --help)
+# Extra options pass through, e.g. scripts/lab search 30 --mode sequential --label kitrunner
+# Reports: runs/lab/<time>-<command>[-label]/report.md. Guide: sellm/lab/README.md.
+set -uo pipefail
+cd "$(dirname "$0")/.." || exit 1
+cmd=${1:-help}
+[ $# -gt 0 ] && shift
+case "$cmd" in
+  search)
+    minutes=${1:-60}
+    [ $# -gt 0 ] && shift
+    set -- search --minutes "$minutes" "$@" ;;
+  stress)
+    agent=${1:-calc}
+    [ $# -gt 0 ] && shift
+    set -- stress --agent "$agent" "$@" ;;
+  compare)
+    set -- compare "$@" ;;
+  status)
+    exec uv run python -m sellm.lab status "$@" ;;
+  stop)
+    if pkill -f "sellm.lab (search|compare|stress)"; then echo "stopped"; else echo "nothing running"; fi
+    exit 0 ;;
+  play)
+    scenario=${1:-P01}
+    agent=${2:-calc}
+    [ $# -gt 0 ] && shift
+    [ $# -gt 0 ] && shift
+    exec uv run python -m sellm.lab play "$scenario" --agent "$agent" "$@" ;;
+  help | -h | --help)
+    sed -n '2,11p' "$0"
+    exit 0 ;;
+  *)
+    exec uv run python -m sellm.lab "$cmd" "$@" ;;
+esac
+mkdir -p runs/lab
+log="runs/lab/nohup-$(date +%Y%m%d-%H%M%S)-$1.log"
+nohup uv run python -m sellm.lab "$@" >"$log" 2>&1 &
+echo "started '$*' in the background (pid $!)"
+echo "  progress: scripts/lab status    full output: tail -f $log"
+echo "  the report appears in the run folder named at the top of $log"

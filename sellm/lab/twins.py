@@ -137,7 +137,9 @@ EFFECT = re.compile(r"We checked the ([\w\s-]+?) data you cited; it holds and we
 def effect_kinds(case_id):
     """{supplier_id: [kinds of cited data that moved it]} from every real session of the case."""
     out = {}
-    for f in sorted(ROOT.glob(f"runs/*/{case_id.split(':', 1)[1]}/*.json")):
+    for f in sorted(
+        f for d in ("practice", "sandbox") for f in ROOT.glob(f"runs/{d}/{case_id.split(':', 1)[1]}/*.json")
+    ):
         d = json.loads(f.read_text(encoding="utf-8"))
         for sid, thread in d.get("threads", {}).items():
             for m in thread.get("messages", []):
@@ -152,7 +154,7 @@ def effect_kinds(case_id):
 def _sessions():
     """The richest session per case: the kit LLM agent's if there is one."""
     best = {}
-    for f in sorted(ROOT.glob("runs/*/*/*.json")):
+    for f in sorted([*ROOT.glob("runs/practice/*/*.json"), *ROOT.glob("runs/sandbox/*/*.json")]):
         d = json.loads(f.read_text(encoding="utf-8"))
         if not (d.get("state") or {}).get("result", {}).get("c_best"):
             continue
@@ -215,34 +217,12 @@ def build(package=None):
 
 
 def save(scenarios, path=CACHE):
-    rows = [
-        {
-            "name": s.name,
-            "kind": s.kind,
-            "case": s.case,
-            "c_open": s.c_open,
-            "c_best": s.c_best,
-            "notes": s.notes,
-            "drivers": s.drivers,
-            "personas": {k: p.to_dict() for k, p in s.personas.items()},
-        }
-        for s in scenarios
-    ]
-    path.write_text(json.dumps(rows, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    from . import store
+
+    store.save(scenarios, path)
 
 
 def load(path=CACHE):
-    rows = json.loads(Path(path).read_text(encoding="utf-8"))
-    return [
-        Scenario(
-            case=r["case"],
-            personas={k: Persona.from_dict(p) for k, p in r["personas"].items()},
-            c_open=r["c_open"],
-            c_best=r["c_best"],
-            kind=r["kind"],
-            name=r["name"],
-            notes=r["notes"],
-            drivers=r["drivers"],
-        )
-        for r in rows
-    ]
+    from . import store
+
+    return store.load(path)
