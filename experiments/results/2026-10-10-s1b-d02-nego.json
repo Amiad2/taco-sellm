@@ -1,0 +1,304 @@
+[
+ {
+  "session_id": "23ea61eacb28ed0f",
+  "case_id": "case:D02",
+  "deal": true,
+  "score": 0.44074401091644105,
+  "c_deal": 188928.0,
+  "supplier": "sup:DEMO-J1",
+  "terms": {
+   "payment_days": 30,
+   "lead_time_days": 28,
+   "volume_per_year": 6000,
+   "contract_months": 24,
+   "effective_date": null,
+   "index_clause": null,
+   "incoterm": "EXW",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 1100,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 15.0
+  },
+  "end_reason": "accepted",
+  "seconds": 115,
+  "threads": {
+   "sup:DEMO-J1": {
+    "our_messages": 5,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 5,
+    "their_prices": [
+     17.1,
+     15.6,
+     15.5,
+     15.3,
+     15.2,
+     15.0
+    ],
+    "our_prices": [
+     [
+      12.93
+     ],
+     [
+      13.1
+     ],
+     [
+      13.26
+     ],
+     [
+      13.43
+     ],
+     [
+      13.59
+     ]
+    ],
+    "claims": []
+   },
+   "sup:DEMO-C1": {
+    "our_messages": 5,
+    "timeouts": 0,
+    "status": "final_offer",
+    "closed": null,
+    "final_offer_after_our_message": 4,
+    "their_prices": [
+     16.0,
+     16.4,
+     15.4,
+     15.3,
+     15.3,
+     15.3
+    ],
+    "our_prices": [
+     [
+      12.93
+     ],
+     [
+      13.1
+     ],
+     [
+      13.26
+     ],
+     [
+      13.43
+     ],
+     []
+    ],
+    "claims": [
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 11,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "arm": "nego-template",
+  "commit": "ebcdcd6+local"
+ },
+ {
+  "session_id": "0101f1903af80590",
+  "case_id": "case:D02",
+  "deal": true,
+  "score": 0.44074401091644105,
+  "c_deal": 188928.0,
+  "supplier": "sup:DEMO-J1",
+  "terms": {
+   "payment_days": 30,
+   "lead_time_days": 28,
+   "volume_per_year": 6000,
+   "contract_months": 24,
+   "effective_date": null,
+   "index_clause": null,
+   "incoterm": "EXW",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 1100,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 15.0
+  },
+  "end_reason": "accepted",
+  "seconds": 148,
+  "threads": {
+   "sup:DEMO-J1": {
+    "our_messages": 6,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 5,
+    "their_prices": [
+     17.1,
+     15.6,
+     15.5,
+     15.3,
+     15.2,
+     15.0,
+     15.0
+    ],
+    "our_prices": [
+     [
+      12.93
+     ],
+     [
+      13.1
+     ],
+     [
+      13.26
+     ],
+     [
+      13.43
+     ],
+     [
+      13.59
+     ],
+     []
+    ],
+    "claims": []
+   },
+   "sup:DEMO-C1": {
+    "our_messages": 4,
+    "timeouts": 0,
+    "status": "final_offer",
+    "closed": null,
+    "final_offer_after_our_message": 4,
+    "their_prices": [
+     16.0,
+     16.4,
+     15.4,
+     15.3,
+     15.3
+    ],
+    "our_prices": [
+     [
+      12.93
+     ],
+     [
+      13.1
+     ],
+     [
+      13.26
+     ],
+     [
+      13.43
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 11,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "arm": "nego-template",
+  "commit": "ebcdcd6+local"
+ },
+ {
+  "session_id": "454487b0eab4e406",
+  "case_id": "case:D02",
+  "deal": true,
+  "score": 0.4617318209600811,
+  "c_deal": 187720.0,
+  "supplier": "sup:DEMO-J1",
+  "terms": {
+   "payment_days": 30,
+   "lead_time_days": 28,
+   "volume_per_year": 6000,
+   "contract_months": 24,
+   "effective_date": null,
+   "index_clause": null,
+   "incoterm": "EXW",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 1100,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 14.9
+  },
+  "end_reason": "accepted",
+  "seconds": 157,
+  "threads": {
+   "sup:DEMO-J1": {
+    "our_messages": 5,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 5,
+    "their_prices": [
+     17.1,
+     15.6,
+     15.4,
+     15.2,
+     15.0,
+     14.9
+    ],
+    "our_prices": [
+     [
+      12.93
+     ],
+     [
+      13.1
+     ],
+     [
+      13.26
+     ],
+     [
+      13.43
+     ],
+     [
+      13.59
+     ]
+    ],
+    "claims": []
+   },
+   "sup:DEMO-C1": {
+    "our_messages": 4,
+    "timeouts": 0,
+    "status": "final_offer",
+    "closed": null,
+    "final_offer_after_our_message": 4,
+    "their_prices": [
+     16.0,
+     16.4,
+     15.4,
+     15.3,
+     15.3
+    ],
+    "our_prices": [
+     [
+      12.93
+     ],
+     [
+      13.1
+     ],
+     [
+      13.26
+     ],
+     [
+      13.43
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 10,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "arm": "nego-template",
+  "commit": "ebcdcd6+local"
+ }
+]

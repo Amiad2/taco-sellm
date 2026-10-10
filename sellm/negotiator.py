@@ -6,17 +6,24 @@ from our own e-mails in the thread, nothing is counted in the object. So a secon
 state returns the same move, a fresh agent picks a case up after a crash, and `agent.fallback` is
 the agent itself (its numbers need no LLM).
 
-The price path follows what real suppliers did in the sandbox (docs/LOG.md Sat 18:22 and
+The price path follows what real suppliers did in the sandbox (docs/LOG.md Sat 18:22 and 20:30,
 experiments/RESULTS.md section 3):
-- a supplier gives back a share of each step we make, for about six of our messages, then says
-  `final_offer`; nothing is gained after that;
+- a supplier gives back a share of each step we make (the foundry in D01 about half, the job shop
+  in D02 all of it, and it asks for "bigger steps" when ours are small against the gap), for four
+  to six of our messages, then says `final_offer`; nothing is gained after that;
 - an opening about 10 % or more below its floor costs half of those rounds; 5-7 % below does not;
-- so: open a few percent below our estimate of its floor, concede in equal visible steps that reach
-  the estimate after five of them, never close the remaining gap ourselves, accept its final offer.
+- so: open a few percent below our estimate of where it can end, then size every step from what
+  the thread shows - the gap to its price, the rounds left and the share of our steps it has given
+  back so far - so that the two prices meet at the last round. No step size is fixed in advance.
+  We never ask at or above its price, and we accept its final offer.
 
-Everything is measured in our total cost C, so the ask stays comparable when the non-price terms
-change: we ask for its own terms where they cost us nothing to accept, cover the whole need, and
-move to the structure of whichever of its sheets is cheapest for us.
+The terms around the price: our first ask takes every lever that costs the supplier no cash in the
+arena's own value model (contract length, volume, start date, lead time, quality commitment, index
+clause) where our total cost C says it pays, and leaves its cash terms (payment days, Incoterm,
+tooling, chargeback) as it quoted them. Real suppliers answer on the structure we send and put
+their price on it (300 of 310 replies in runs/), so its counter shows what a lever costs; from then
+on we ask on whichever structure it has quoted that is cheapest for us in C. The price path runs
+in price, on whatever structure we ask; C decides between structures and between offers.
 """
 
 import itertools
@@ -36,22 +43,25 @@ from .writer import compose
 log = logging.getLogger("sellm")
 
 DEFAULTS = dict(
-    open_below=0.06,  # we open this share below our target (steps of 1.2 %: 0.60 on D01 gave 0.95, 0.55 gave 0.89)
-    rounds_to_floor=5,  # equal steps; the ask reaches the floor estimate after this many
+    open_below=0.06,  # we open this share below our estimate of where it can end
+    horizon=5,  # our messages until the prices should meet: suppliers said `final_offer` after 2 to 6 of them
+    pace=0.5,  # the share of our steps a supplier gives back, until the thread has shown its own
     keep_below=0.006,  # never ask closer than this share to its standing offer: it should make the last move
     floor_share=None,  # our target as a share of its opening when no should-cost exists; None: TARGET_SHARE
     rate_guess=0.08,  # its cost of money when the dossier does not say (ours: no bias on payment days)
     claims="bank",  # none | bank (one new checked figure per e-mail)
-    max_holds=1,  # holding e-mails to keep the best RFQ thread alive while the others still move, then we take it
+    max_holds=2,  # holding e-mails per RFQ thread whose offer waits while the others still move; then we close
+    levers="ours",  # first ask: ours (every lever that is no cash to it, by our C) | theirs (its terms, need covered)
+    dossier=True,  # read its cost of money from sellm.intel when a dossier exists
     writer="template",
 )
 # Where deals could end, as a share of the supplier's opening price, when no should-cost of its own
 # plant exists. Two numbers on purpose (few cases, so no finer split): cases with a relationship term,
 # where the best deal stays above the supplier's cost (D01, P01, P02, P03: 0.92-0.98), and all others
-# (P05, P07, P08, P11, D02: 0.82-0.93). The held-out cases P04, P10, P18 were not used. A prior of
-# this kind is wrong by up to 10 % for a single supplier; the path below is built to lose little then
-# (sensitivity: docs/LOG.md Sat 19:40), and a should-cost or dossier estimate replaces it where one exists.
-TARGET_SHARE = {True: 0.945, False: 0.86}
+# (P05, P07, P08, P11, D02: 0.82-0.97). The held-out cases P04, P10, P18 were not used. A prior of
+# this kind is wrong by up to 10 % for a single supplier. It only sets our first ask: every later
+# step is sized from the thread itself, and a should-cost of its own plant replaces it where one exists.
+TARGET_SHARE = {True: 0.945, False: 0.88}
 # COUNTRY: for a later use of generic estimates
 COUNTRY = {
     "AT": 1.05,
@@ -67,6 +77,8 @@ TOO_LOW = re.compile(
 )
 ASKS_DATA = re.compile(r"which figures is that based on|send us the data|data supporting your assumptions", re.I)
 READY = ("final_offer", "agreed")
+# what a deal is worth to the supplier in cash (arena_kit.cost.supplier_value): we do not ask these for free
+CASH_FIELDS = ("payment_days", "incoterm", "tooling_eur", "chargeback_eur_per_complaint")
 EPS = 1e-6
 
 
@@ -89,6 +101,10 @@ def _distance(a, b):
         return min(1.0, abs((date.fromisoformat(a) - date.fromisoformat(b)).days) / 365)
     except (TypeError, ValueError):
         return 1.0
+
+
+def _key(structure):
+    return tuple(sorted((f, repr(x)) for f, x in structure.items()))
 
 
 class Thread:
@@ -194,21 +210,23 @@ class Negotiator:
             self._memo[key] = min((p for p in opened if p), default=None)
         cost = {v.sid: self.offer_cost(case, v) for v in live}
         leader = min(live, key=lambda v: cost[v.sid]).sid
-        agreed = [v for v in live if v.status == "agreed" and cost[v.sid] < math.inf]
-        if agreed:  # it offers exactly our terms: take the cheapest such offer
-            return self.close(case, views, live, cost, prefer=min(agreed, key=lambda v: cost[v.sid]).sid)
-        movable = sorted((v for v in live if not self.ready(case, v)), key=lambda v: (len(v.ours), cost[v.sid]))
+        # what a bidder has to beat: the cheapest standing offer of the others (plain C, as the arena scores it)
+        plain = {v.sid: v.c(v.filled(v.standing[1])) if cost[v.sid] < math.inf else math.inf for v in live}
+        rival = {v.sid: min((plain[w.sid] for w in live if w.sid != v.sid), default=math.inf) for v in live}
+        movable = sorted(
+            (v for v in live if not self.ready(case, v, rival[v.sid])), key=lambda v: (len(v.ours), cost[v.sid])
+        )
         if focus is not None and focus in views and views[focus] in live:
             v = views[focus]
             if v in movable:
-                return self.ask(case, v, views, live)
-            others = [m for m in movable if m.sid != focus]
-            if v.sid == leader and others:  # the best offer must not time out while the others go on
-                if v.holds < self.k["max_holds"] and v.left > 1:
+                return self.ask(case, v, views, live, rival[v.sid])
+            if movable:  # its offer waits while other threads still move: it must not time out meanwhile
+                if cost[v.sid] < math.inf and v.holds < self.k["max_holds"] and v.left > 1:
                     return {"kind": "hold", "sid": v.sid, "sheets": [], "n": len(v.asks)}
-                return self.close(case, views, live, cost, prefer=v.sid)
-        if movable:  # with `focus` on a finished thread this is a move for another one: its own loop sends it
-            return self.ask(case, movable[0], views, live)
+                if views[leader] not in movable:  # the others have had their extra rounds: take the best offer
+                    return self.close(case, views, live, cost)
+        if movable:  # with `focus` on a waiting thread this is a move for another one: its own loop sends it
+            return self.ask(case, movable[0], views, live, rival[movable[0].sid])
         return self.close(case, views, live, cost)
 
     def offer_cost(self, case, v):
@@ -218,40 +236,43 @@ class Negotiator:
             return math.inf
         return v.c(terms, self.estimate(case, v))
 
-    def ready(self, case, v):
-        """Nothing more to ask in this thread: take or leave its standing offer."""
+    def done(self, case, v, rival=math.inf):
+        """We have nothing more to ask here: it said its last word, or our next step would meet its
+        price or no longer beat the best other offer."""
         if v.status in READY:
-            return self.better_alternative(case, v) is None
+            return True
+        plan = self.plan(case, v, rival)
+        return plan["capped"] or plan["enough"]
+
+    def ready(self, case, v, rival=math.inf):
+        """Take or leave its standing offer: nothing more to ask, and none of its other sheets is better."""
         if v.left <= 0:
             return True
         if v.standing[1].get("unit_price") is None:
             return False  # it has not named a price yet
-        plan = self.plan(case, v)
-        return plan["capped"] or plan["enough"]
+        return self.done(case, v, rival) and self.better_alternative(case, v) is None
 
-    def close(self, case, views, live, cost, prefer=None):
-        """Accept the cheapest standing offer that keeps the must-haves, unless the alternative is the
-        better deal. A deal no better than the opening scores 0, as walking away without an
-        alternative does: then the deal is taken (a tie goes to more deals)."""
+    def close(self, case, views, live, cost):
+        """Accept the cheapest standing offer that keeps the must-haves - whether it is called final,
+        agreed or still open - unless the alternative is the better deal. A deal no better than the
+        opening scores 0, as walking away without an alternative does: then the deal is taken (a tie
+        goes to more deals)."""
         alt = case["buyer"].get("alternative") or {}
         c_alt = total_cost(case, alt["terms"]) if (alt.get("terms") or {}).get("unit_price") else math.inf
         takable = [v for v in live if cost[v.sid] < math.inf]
-        walk = {"kind": "walk_away", "sid": live[0].sid}
         if not takable:
-            return walk
-        best = next((v for v in takable if v.sid == prefer), None) or min(takable, key=lambda v: cost[v.sid])
+            return {"kind": "walk_away", "sid": live[0].sid}
+        best = min(takable, key=lambda v: cost[v.sid])
         if c_alt < cost[best.sid]:
-            cheaper = min(takable, key=lambda v: cost[v.sid])
-            if c_alt < cost[cheaper.sid]:
-                return walk
-            best = cheaper
+            return {"kind": "walk_away", "sid": live[0].sid}
         return {"kind": "accept", "sid": best.sid, "accept_id": best.standing[0]}
 
-    def ask(self, case, v, views, live):
-        alt = self.better_alternative(case, v)
-        if alt is not None:  # its own second package, sent back as ours: it answers `agreed`
-            return {"kind": "take_alternative", "sid": v.sid, "sheets": [alt], "n": len(v.asks)}
-        plan = self.plan(case, v)
+    def ask(self, case, v, views, live, rival=math.inf):
+        if v.standing[1].get("unit_price") is not None and self.done(case, v, rival):
+            alt = self.better_alternative(case, v)
+            if alt is not None:  # its own second package, sent back as ours: it answers `agreed`
+                return {"kind": "take_alternative", "sid": v.sid, "sheets": [alt], "n": len(v.asks)}
+        plan = self.plan(case, v, rival)
         body_before = [m.get("body") or "" for m in v.theirs[:-1]]
         prices = [self.offer_cost_plain(v, m) for m in v.theirs if m.get("term_sheets")]
         flags = {
@@ -259,6 +280,8 @@ class Negotiator:
             "asked_for_data": bool(ASKS_DATA.search(v.last.get("body") or "")),
             "repeat_data_request": any(ASKS_DATA.search(b) for b in body_before),
         }
+        if self.k.get("opening_line"):  # experiments on wording only (experiments/ab_sandbox.py)
+            flags["opening_line"] = self.k["opening_line"]
         if not v.asks and v.opening:
             theirs = v.filled(v.opening["term_sheets"][0]["terms"]).get("contract_months")
             ours = plan["sheet"].get("contract_months")
@@ -279,9 +302,9 @@ class Negotiator:
         return v.c(v.filled(message["term_sheets"][0]["terms"]))
 
     def better_alternative(self, case, v):
-        """At its final offer: one of its other sheets that is cheaper for us in total cost, keeps
-        the must-haves, and that we have not sent back yet."""
-        if v.status != "final_offer" or len(v.sheets) < 2 or v.left < 1:
+        """When we are done asking: one of its other sheets that is cheaper for us in total cost,
+        keeps the must-haves, and that we have not sent back yet. Only its first sheet can be accepted."""
+        if v.status == "agreed" or len(v.sheets) < 2 or v.left < 1:
             return None
         _, standing = v.standing
         base = v.c(v.filled(standing)) if standing.get("unit_price") is not None else math.inf
@@ -298,61 +321,151 @@ class Negotiator:
         return best[1]
 
     # -- the numbers -----------------------------------------------------------------------------
-    def plan(self, case, v):
+    def plan(self, case, v, rival=math.inf):
         """Our next ask in this thread: the structure, the sheet, whether we can still move without
-        meeting its price (`capped`), and whether its offer is already as good as we want it
+        meeting its price or losing to `rival`, the cost of the best other bidder's standing offer
+        (`capped`), and whether its offer is already as good as we want it
         (`enough`: strategic and bottleneck cases only, where a lower price costs us more in the
         relationship term than it saves)."""
         s0 = self.opening_structure(case, v)
         s = self.structure(case, v, s0)
         aim = self.aim(case, v, s0)
-        step = aim["target"] * self.k["open_below"] / max(1, self.k["rounds_to_floor"])
-        boost = min(6, 2 * sum(1 for m in v.theirs if TOO_LOW.search(m.get("body") or "")))
-        path_price = aim["target"] * (1 - self.k["open_below"]) + (len(v.asks) + boost) * step
-        target = v.c({**s0, "unit_price": path_price})  # the path, in our cost
+        last = complete_offer(case, v.asks[-1]) if v.asks else None
         _, standing = v.standing
         their = v.c(v.filled(standing)) if standing.get("unit_price") is not None else math.inf
-        last = v.c(v.asks[-1]) if v.asks else -math.inf
-        target = min(target, their * (1 - self.k["keep_below"]))
-        capped = bool(v.asks) and target <= last * (1 + EPS)
-        target = max(target, last)
-        c0, c1 = v.c({**s, "unit_price": 0.0}), v.c({**s, "unit_price": 1.0})
-        price = (target - c0) / (c1 - c0) if c1 > c0 else path_price
-        sheet = complete_offer(case, {**s, "unit_price": max(0.01, price)})
+        quoted = self.quoted(case, v).get(_key(s))
+        if quoted is not None:  # it has put a price on this structure: stay visibly below it
+            ceiling = quoted * (1 - self.k["keep_below"])
+        elif their < math.inf:  # else stay below its standing offer in our cost
+            c0, c1 = v.c({**s, "unit_price": 0.0}), v.c({**s, "unit_price": 1.0})
+            ceiling = (their * (1 - self.k["keep_below"]) - c0) / (c1 - c0) if c1 > c0 else math.inf
+        else:
+            ceiling = math.inf
+        if rival < math.inf:  # an ask that does not beat the best other offer is worth nothing to us
+            c0, c1 = v.c({**s, "unit_price": 0.0}), v.c({**s, "unit_price": 1.0})
+            if c1 > c0:
+                ceiling = min(ceiling, (rival * (1 - self.k["keep_below"]) - c0) / (c1 - c0))
+        if last is None:
+            price = aim["target"] * (1 - self.k["open_below"])
+        elif ceiling < math.inf:
+            # the two prices should meet at the last round: each round closes our step plus its answer
+            rounds = max(1, self.k["horizon"] - len(v.asks))
+            if TOO_LOW.search(v.last.get("body") or ""):  # it calls our ask not serious: move at once
+                rounds = 1
+            step = (ceiling - last["unit_price"]) / (rounds * (1 + self.pace(case, v)))
+            price = last["unit_price"] + max(step, 0.0)  # never below our own last price
+        else:
+            price = last["unit_price"]
+        price = round(max(0.01, min(price, ceiling)), 2)
+        same = last is not None and {f: x for f, x in last.items() if f != "unit_price"} == s
+        capped = same and price <= last["unit_price"] + EPS  # no visible step left below its price
+        sheet = complete_offer(case, {**s, "unit_price": price})
         enough = aim["stop_at_target"] and their <= v.c({**s0, "unit_price": aim["target"]}) * (1 + EPS)
         return {"sheet": sheet, "capped": capped, "enough": enough, "target": aim["target"], "structure": s}
 
+    def pace(self, case, v):
+        """The share of our steps it has given back so far in this thread, on an unchanged structure
+        (0.25 to 2); our guess until two of our asks and two of its answers allow a measurement."""
+        rounds = []  # (our ask, its answer) per round, as (structure, price)
+        asked = None
+        for m in v.events:
+            sheets = m.get("term_sheets") or []
+            if m.get("from") == "buyer":
+                asked = complete_offer(case, sheets[0]["terms"]) if sheets else asked
+            elif asked is not None and sheets:
+                answer = v.filled(sheets[0]["terms"])
+                if answer.get("unit_price") is not None:
+                    rounds.append((asked, answer))
+                asked = None
+        same = [
+            r
+            for r in rounds
+            if _key({f: x for f, x in r[0].items() if f != "unit_price"})
+            == _key({f: x for f, x in rounds[-1][0].items() if f != "unit_price"})
+            and _key({f: x for f, x in r[1].items() if f != "unit_price"})
+            == _key({f: x for f, x in rounds[-1][1].items() if f != "unit_price"})
+        ]
+        if len(same) < 2:
+            return self.k["pace"]
+        ours = same[-1][0]["unit_price"] - same[0][0]["unit_price"]
+        theirs = same[0][1]["unit_price"] - same[-1][1]["unit_price"]
+        if ours <= EPS:
+            return self.k["pace"]
+        return min(2.0, max(0.25, theirs / ours))
+
+    def quoted(self, case, v):
+        """The price it has put on each structure: its latest sheets, and its opening."""
+        out = {}
+        sheets = [sheet["terms"] for sheet in v.sheets]
+        if v.opening and len(v.theirs) > 1:
+            sheets.append(v.opening["term_sheets"][0]["terms"])
+        for raw in sheets:
+            terms = v.filled(raw)
+            if terms.get("unit_price") is not None:
+                out.setdefault(_key({f: x for f, x in terms.items() if f != "unit_price"}), terms["unit_price"])
+        return out
+
     def opening_structure(self, case, v):
-        """The terms of our first ask: its own terms, changed only where that covers the whole need
-        or keeps a must-have. (Not the longest contract: suppliers charge for a term longer than
-        they like, as the P07 supplier said of three years.)"""
+        """The terms of our first ask. `ours`: its cash terms as quoted, every other field at the
+        value that is cheapest for us at its opening price - C prices uncovered need at the fallback,
+        so it decides how long and how much to commit; where C does not care, its own terms.
+        `theirs`: its own terms, changed only to cover the need and keep the must-haves."""
         key = (case.get("case_id"), v.sid, "s0")
         if key in self._memo:
             return self._memo[key]
         theirs = v.opening["term_sheets"][0]["terms"] if v.opening else {}
         base = {f: x for f, x in v.filled(theirs).items() if f != "unit_price"}
-        need = case["buyer"]["need_per_year"]
+        b = case["buyer"]
+        need = b["need_per_year"]
+        price = theirs.get("unit_price") or b.get("current_unit_price") or b.get("fallback_unit_price") or 1.0
         candidates = []
         for s in structures(case):
             s = {f: x for f, x in complete_offer(case, {**base, **s, "unit_price": 1.0}).items() if f != "unit_price"}
-            if must_haves_ok(case, {**s, "unit_price": 1.0}, v.std):
+            if s not in candidates and must_haves_ok(case, {**s, "unit_price": 1.0}, v.std):
                 candidates.append(s)
         if not candidates:
             self._memo[key] = base
             return base
 
+        def away(s):
+            return round(sum(_distance(s.get(f), base.get(f)) for f in s), 6)
+
+        if self.k["levers"] == "ours":
+            keep = [s for s in candidates if all(s.get(f) == base.get(f) for f in CASH_FIELDS if f in s)]
+            best = min(keep or candidates, key=lambda s: (round(v.c({**s, "unit_price": price})), away(s)))
+            self._memo[key] = self.payment_trade(case, v, best, price)
+            return self._memo[key]
+
         def rank(s):  # cover the need, commit no more than the need, else stay as close to its terms as possible
             t = closing_terms(case, {**s, "unit_price": 1.0}, v.std)
-            away = sum(_distance(s.get(f), base.get(f)) for f in s)
             return (
                 -round(v.coverage({**s, "unit_price": 1.0}), 6),
                 max(0, t["volume_per_year"] - need),
-                round(away, 6),
+                away(s),
                 t["contract_months"],
             )
 
         self._memo[key] = min(candidates, key=rank)
         return self._memo[key]
+
+    def payment_trade(self, case, v, s, price):
+        """Payment days are cash to both sides, at different rates: where its cost of money (dossier)
+        is far from ours, the days that leave it the same worth cost us less - faster payment for a
+        supplier short of cash, slower for one that borrows cheaply. Only a clear gain (0.3 % of C):
+        a rate guessed from the owner type alone does not reach it."""
+        if "payment_days" not in s or self.k["rate_guess"] == self.supplier(case, v)["interest_rate"]:
+            return s
+        worth = self.value(case, v, {**s, "unit_price": price})
+        best = (v.c({**s, "unit_price": price}), s)
+        for days in case.get("term_options", {}).get("payment_days") or []:
+            t = {**s, "payment_days": days}
+            v0, v1 = self.value(case, v, {**t, "unit_price": 0.0}), self.value(case, v, {**t, "unit_price": 1.0})
+            if v1 <= v0 or not must_haves_ok(case, {**t, "unit_price": 1.0}, v.std):
+                continue
+            cost = v.c({**t, "unit_price": (worth - v0) / (v1 - v0)})
+            if cost < best[0] * (1 - 0.003):
+                best = (cost, t)
+        return best[1]
 
     def structure(self, case, v, s0):
         """After its first answer: the structure of whichever of its sheets is cheapest for us at the
@@ -394,6 +507,18 @@ class Negotiator:
         return self._memo[key]
 
     def rate(self, case, v):
+        """Its cost of money: from the dossier where one exists (measured from its cash discount, or
+        by owner type), else our guess."""
+        if self.k["dossier"]:
+            try:
+                from .intel import dossier
+
+                found = dossier(v.sid, case.get("parts") or [], case, v.opening)
+                rate = (found.get("economics") or {}).get("cost_of_money")
+                if isinstance(rate, int | float) and 0 < rate < 1:
+                    return float(rate)
+            except Exception:  # no dossier is no reason to lose a move
+                log.debug("%s %s: no dossier", case.get("case_id"), v.sid)
         return self.k["rate_guess"]
 
     def value(self, case, v, terms):
@@ -436,6 +561,9 @@ class Negotiator:
             source = "prior"
             share = self.k["floor_share"] or TARGET_SHARE[bool(relationship)]
             target = share * min(reference, market)
+            if v.opening and v1 > v0:  # the same worth to it on the structure we ask
+                its = v.filled(v.opening["term_sheets"][0]["terms"])
+                target = (self.value(case, v, {**its, "unit_price": target}) - v0) / (v1 - v0)
             full = self.value(case, v, {**s0, "unit_price": target})
             if relationship:  # the prior is where deals ended, which lies above its full cost
                 one_pct = b["need_per_year"] * target / 100

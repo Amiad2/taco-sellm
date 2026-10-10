@@ -114,3 +114,64 @@ cost goodwill with a real supplier, and how a group with an approval ladder or a
 | H14 | Does the mirror effect hold for a practice supplier? P07 lost only on price (gap 20,243) | P07 | 1 session |
 | H15 | RFQ with a low opening, large steps, rival citations and a held leader | D02, then P05 | free, then 1 |
 | H4-H7 | still open from `runs/BASELINE.md`: P01 April start, P10 the 54-day package with should-cost, P02 90 days, P08/P18 data | practice | 1 each |
+
+## 7. The negotiator in the sandbox (Sat 18:40-20:20, 29 free sessions, `experiments/ab_sandbox.py`)
+
+All with `sellm/negotiator.py` and template e-mails (no LLM), one loop per thread. Rows:
+`experiments/results/2026-10-10-s1*.json`; sessions in `runs/sandbox/` (labels `ab nego-template ...`).
+
+| Version | D01 (n) | D02 (n) | What changed |
+|---|---|---|---|
+| kit LLM agent (reference) | 0.786 (1) | 0.47 (1) | - |
+| `calc`, lab-best knobs | 0.789 (4) | - | opens 16 % below the floor |
+| v1: fixed steps of 1.2 %, its own terms | 0.894 (4) | 0.448 (3) | - |
+| v1 + first ask takes the non-cash levers | 0.900 (3) | - | later start date: no gain, see below |
+| the same + "twelve years of reliable supply" in the first e-mail | 0.916 (4) | - | +0.016, within noise (SE 0.012) |
+| **v1.1: step sized from the thread** | **0.920 (4)** | 0.490 (3) | steps follow gap, rounds left and its pace |
+| **v1.1 + close on the cheapest offer, RFQ asks capped at the rival** | - | **0.530 (4)** | one bug fixed, see 7.4 |
+
+### 7.1 The supplier prices in value, not in price
+
+D01, first counter to nearly the same ask (47.00-47.24) with three start dates: 51.30 from December, 51.50 from
+February, 51.80 from April. In `arena_kit.cost.supplier_value` (the kit's own model of what a deal
+is worth to the supplier) these are 51.30, 51.26 and 51.27: the same. **A later `effective_date` is
+not free**: the supplier raises the price so that it earns the same. The score at the end was the
+same too (0.894 with December, 0.900 with April). What `supplier_value` leaves out (contract
+length, volume) the foundry gave without a premium: 24 instead of 12 months at the same price.
+
+### 7.2 With several term sheets the supplier answers the one worth most to it
+
+Counted over the 73 sessions saved by Sat 19:30: when we sent two or three sheets, the reply was on
+the sheet with the highest `supplier_value` in 65 of 79 cases, and almost never on the one cheapest
+for us. A menu therefore does not find our best structure. Suppliers answer on the structure we
+send in 294 of 304 replies; they changed a field only to refuse it (payment days in 7 replies, the
+start date in 3).
+
+### 7.3 How much of our step comes back differs by supplier
+
+- Foundry (D01): about half of each step (0.2-0.5 for 0.55-0.60), six rounds, then `final_offer`
+  just above our last ask or at its limit (value 49.7-50.1, a margin of 3.3-4.0 % against the
+  sustainable 4 %).
+- Job shop (D02 `DEMO-J1`): about all of it, and it says so: "You need to make bigger steps so we
+  can get this done", "You are moving in tiny steps, we need a bigger jump". Fixed steps of 1.3 %
+  against a gap of 17 % ended at 14.90-15.00; steps sized to close the gap in the rounds left
+  ended at 14.50-14.70.
+- The job shop offered its trade by itself: "If you can pay in 14 days, I can come down" - an
+  alternative sheet with 14 days. Taking that structure gave 14.50 (0.535) against 14.70 (0.51).
+- Polish machining company (D02 `DEMO-C1`): citing the rival's standing offer worked at once
+  ("we are prepared to match the competing offer you mentioned": 16.40 -> 15.40, claim
+  `verified`), then 0.1 per round, `final_offer` after four to six messages at 15.10-15.30
+  ("any further step needs approval from our management"). A shorter lead time costs a premium
+  (16.40 for 35 days against 15.50 for 45).
+- `C_best` in D02 (156,739) needs a price near 12.50; neither supplier went below 14.50 in any
+  D02 session so far. The theoretical best is not reachable in six rounds; 0.53 is our best so far.
+
+### 7.4 Closing in an RFQ
+
+- A bidder that says `agreed` is not the one to take if another standing offer is cheaper: one
+  session closed at 15.10 with `DEMO-C1` (0.399) while `DEMO-J1` stood at 14.70. Fixed: the close
+  always takes the cheapest valid standing offer.
+- An ask to a bidder above what the best other offer costs us is worthless; asks are now capped
+  there, and the bidder is told the rival's price.
+- A waiting leader loses: one timeout turned an offer of 14.50 into a final offer of 14.60. The
+  negotiator sends at most two holding e-mails per waiting thread and then closes.

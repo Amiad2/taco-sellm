@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-10 20:30 CEST by Amiad (Claude Code).
+Last updated: 2026-10-10 20:35 CEST by Jonathan (Claude Code).
 
 ## Now
 
@@ -9,8 +9,8 @@ Last updated: 2026-10-10 20:30 CEST by Amiad (Claude Code).
 - Team key works: team **sellm**, active. `uv run arena me` is the source of truth for quota and best scores.
 - **OpenAI works with the kit's LLM agent** (`LLM_PROVIDER=openai`, model `gpt-6.1-sol`, Sat 15:00): D01 scored 0.786 against 0.200 for the naive agent, no `LLM failed` in the log. Each machine needs the values in its own `.env`; `llm_from_env` was not changed.
 - The kit's LLM agent is the baseline to beat: **61.5** over the 10 hosted cases (`runs/BASELINE.md`).
-- **Our agent is registered** (Sat 17:16): `uv run arena play|run ... --agent sellm` plays `sellm/agent.py`, the single entry point for whoever builds the negotiator. For now it is the lab's numbers-only Calculator with the best knobs of the first lab search: on the 10 practice twins it scores 59.8 in the lab, the same as the kit LLM agent there (59.8). **Not shown to beat `--agent llm`**, never played on the arena. `sellm` is in the wheel, so a non-editable install (VM, container) runs it too.
-- Every session the team plays is saved in full under `runs/` by `scripts/pull-runs`. Quota left: 189.
+- **`--agent sellm` plays the negotiator** (`sellm/negotiator.py`, group A, Sat 20:35; no LLM yet, e-mails from a template): every move is a pure function of case and threads, the first ask takes coverage and the non-cash levers, each step is sized from the thread (gap, rounds left, the share of our steps the supplier gives back), it accepts a final offer and walks away only when the alternative is better. **Real sandbox: D01 0.920 (n=4; kit LLM 0.786, lab-best Calculator 0.789), D02 0.530 (n=4; kit LLM 0.47).** Lab (Amiad's recalibrated suppliers, 204 stress scenarios x 2): 52.8 against 45.8 for the Calculator knobs; 0 crashes, 0 broken must-haves, 0 refused moves with one loop per thread. **Not yet played on a practice case.** The old Calculator knobs stay in `sellm/agent.py` as `CALC_KNOBS`. Evidence: `experiments/RESULTS.md` section 7.
+- Every session the team plays is saved in full under `runs/` by `scripts/pull-runs`. **Quota (checked Sat 20:25): limit 450, used 11, left 439, resets Sun 14:13** - the limit was raised from 200.
 - Sandbox probes (33 free sessions) show how suppliers react: only the first sheet can be accepted, a final offer is final, the supplier mirrors the size of our concessions, RFQ threads need their own loops. Rules for the agent: `experiments/RESULTS.md` section 5.
 - **Lab** (`sellm/lab/`, Sat 17:45; guide `sellm/lab/README.md`): test any agent locally, free, no quota. `scripts/lab play P01`, `scripts/lab compare naive calc`, `scripts/lab search 60` (background), `scripts/lab stress calc`, `scripts/lab status`. Scenarios: twins of our 15 played suppliers (families of plausible variants), the 9 unplayed practice case files with their real suppliers, and invented ones (all 7 types, all fields, 8 supplier archetypes, 12 edge cases). Simulated clock: 20-60 s replies, 60-s timeouts with re-issued offer IDs, 8-min wave cap; `--mode parallel` (one loop per thread) or `sequential` (the kit's `play()`). Backtest: 0.79 % mean error on 237 real replies; kit LLM agent 59.8 in the lab vs 61.5 in the arena (`runs/lab/BACKTEST.md`, `VALIDATION.md`). **Found: the kit's sequential `play()` times RFQ threads out and can crash on a stale offer ID; the final runner needs one loop per thread.**
 - **Dossiers (group B, Sat 18:40)**: `sellm.intel.dossier(supplier_id, parts, case=, opening=, package=)` serves the 46 built dossiers (`sellm/dossiers/`, committed) plus the case overlay; strangers get a dossier from the case alone. `uv run python -m sellm.intel show 70130` prints one; `uv run python -m sellm.intel verify` runs checks V1-V10 (all PASS). Schema and rules: `docs/PLAN.md` section 10.
@@ -22,13 +22,15 @@ Last updated: 2026-10-10 20:30 CEST by Amiad (Claude Code).
 |---|---|---|---|
 | Amiad (Claude Code) | **Lab** upkeep and the clone feedback loop: suppliers (engine and LLM), scenarios, tournament, stress test, the Calculator and `sellm/lab/clone_agent.py`. Never edits group A's files. No arena calls | `sellm/lab/`, `scripts/lab`, `tests/test_lab.py`, `runs/lab/` | Sat 16:00 |
 | Omar (Claude Code) | **Group B - Data**: built and verified (S0-S12). Open: the human check of the signals against blind labels (V11), the Sunday 08:00 rebuild. No arena calls | `sellm/intel/` (package), `sellm/dossiers/`, `tests/test_intel.py` | Sat 17:48 |
-| Jonathan (Claude Code) | **Group A - Negotiation** (`docs/PLAN.md` section 3): the negotiator behind `make_agent` - guards so no move is invalid, a writer (LLM prose around term sheets and arguments that code fixes; template fallback), reading the supplier's reply, use of the dossier. Plays the free sandbox itself to measure wording; practice only up to 10 sessions, each logged | `sellm/negotiator.py`, `sellm/writer.py`, `sellm/llm.py`, `sellm/reading.py`, `sellm/agent.py`, `tests/test_negotiator.py`, `experiments/ab_sandbox.py` | Sat 18:16 |
+| Jonathan (Claude Code) | **Group A - Negotiation**: negotiator v1.1 is in (`[change]` Sat 20:35). Next: confirm on practice P07, P01, P02 (up to 10 sessions, each logged), then LLM wording as an opt-in experiment, reading the supplier's standard sentences. Plays the free sandbox itself | `sellm/negotiator.py`, `sellm/writer.py`, `sellm/llm.py`, `sellm/agent.py`, `tests/test_negotiator.py`, `experiments/ab_sandbox.py` | Sat 18:16 |
 
 ## Next up
 
 **Jonathan: read the [handoff] of Sat 20:30 in docs/LOG.md** - the lab's supplier model changed at 20:03 (lowball
 penalty), so earlier lab numbers are superseded; a comparison of the negotiator, the Calculator and Amiad's clone is
 waiting for you to run.
+
+**Group C has no owner and the final needs its runner.** With the kit's sequential `play()` the negotiator has a refused accept in 6 of 408 lab negotiations (RFQ: a timeout replaced the offer ID; the kit would crash there). With one loop per thread: none. `experiments/ab_sandbox.py:play_case` is such a loop (re-reads the thread before an accept, survives 409/422, one timeout in 20 real RFQ threads) and can become `sellm/runner.py`; it still lacks the wave handling and the closing before the cap of `arena_kit.play.play_waves`.
 
 From the lab (Amiad): **the final runner needs one loop per thread** - the kit's `play()` times RFQ
 threads out in the lab as in the sandbox, and a stale offer ID after a timeout is a 422 that crashes

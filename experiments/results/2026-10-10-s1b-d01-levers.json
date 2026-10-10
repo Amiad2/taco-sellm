@@ -1,0 +1,233 @@
+[
+ {
+  "session_id": "4d7836eeda3ef932",
+  "case_id": "case:D01",
+  "deal": true,
+  "score": 0.9206684901564397,
+  "c_deal": 411812.06,
+  "supplier": "sup:DEMO-F1",
+  "terms": {
+   "payment_days": 30,
+   "lead_time_days": 35,
+   "volume_per_year": 4000,
+   "contract_months": 24,
+   "effective_date": "2027-04-01",
+   "index_clause": null,
+   "incoterm": "FCA",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 650,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 50.2
+  },
+  "end_reason": "accepted",
+  "seconds": 82,
+  "threads": {
+   "sup:DEMO-F1": {
+    "our_messages": 6,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 6,
+    "their_prices": [
+     52.9,
+     51.8,
+     51.4,
+     51.1,
+     50.8,
+     50.5,
+     50.2
+    ],
+    "our_prices": [
+     [
+      46.99
+     ],
+     [
+      47.59
+     ],
+     [
+      48.19
+     ],
+     [
+      48.79
+     ],
+     [
+      49.39
+     ],
+     [
+      49.99
+     ]
+    ],
+    "claims": []
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 7,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "arm": "nego-template",
+  "commit": "ebcdcd6+local"
+ },
+ {
+  "session_id": "56a5429b4ce2918c",
+  "case_id": "case:D01",
+  "deal": true,
+  "score": 0.888986848378617,
+  "c_deal": 413085.24,
+  "supplier": "sup:DEMO-F1",
+  "terms": {
+   "payment_days": 30,
+   "lead_time_days": 35,
+   "volume_per_year": 4000,
+   "contract_months": 24,
+   "effective_date": "2027-04-01",
+   "index_clause": null,
+   "incoterm": "FCA",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 650,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 50.4
+  },
+  "end_reason": "accepted",
+  "seconds": 83,
+  "threads": {
+   "sup:DEMO-F1": {
+    "our_messages": 6,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 6,
+    "their_prices": [
+     52.9,
+     51.8,
+     51.4,
+     51.1,
+     50.8,
+     50.6,
+     50.4
+    ],
+    "our_prices": [
+     [
+      46.99
+     ],
+     [
+      47.59
+     ],
+     [
+      48.19
+     ],
+     [
+      48.79
+     ],
+     [
+      49.39
+     ],
+     [
+      49.99
+     ]
+    ],
+    "claims": []
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 7,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "arm": "nego-template",
+  "commit": "ebcdcd6+local"
+ },
+ {
+  "session_id": "fc33ea1824a54fa0",
+  "case_id": "case:D01",
+  "deal": true,
+  "score": 0.888986848378617,
+  "c_deal": 413085.24,
+  "supplier": "sup:DEMO-F1",
+  "terms": {
+   "payment_days": 30,
+   "lead_time_days": 35,
+   "volume_per_year": 4000,
+   "contract_months": 24,
+   "effective_date": "2027-04-01",
+   "index_clause": null,
+   "incoterm": "FCA",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 650,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 50.4
+  },
+  "end_reason": "accepted",
+  "seconds": 87,
+  "threads": {
+   "sup:DEMO-F1": {
+    "our_messages": 6,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 6,
+    "their_prices": [
+     52.9,
+     51.8,
+     51.4,
+     51.1,
+     50.8,
+     50.6,
+     50.4
+    ],
+    "our_prices": [
+     [
+      46.99
+     ],
+     [
+      47.59
+     ],
+     [
+      48.19
+     ],
+     [
+      48.79
+     ],
+     [
+      49.39
+     ],
+     [
+      49.99
+     ]
+    ],
+    "claims": []
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 7,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "arm": "nego-template",
+  "commit": "ebcdcd6+local"
+ },
+ {
+  "case_id": "case:D01",
+  "error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+  "arm": "nego-template+levers=theirs",
+  "commit": "ebcdcd6+local"
+ },
+ {
+  "case_id": "case:D01",
+  "error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+  "arm": "nego-template+levers=theirs",
+  "commit": "ebcdcd6+local"
+ },
+ {
+  "case_id": "case:D01",
+  "error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+  "arm": "nego-template+levers=theirs",
+  "commit": "ebcdcd6+local"
+ }
+]

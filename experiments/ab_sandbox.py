@@ -64,7 +64,10 @@ def build(arm, package):
     name, _, options = arm.partition("+")  # e.g. nego-template+open_below=0.08+rounds_to_floor=4
     for option in filter(None, options.split("+")):
         key, _, value = option.partition("=")
-        extra[key] = json.loads(value) if value else True
+        try:
+            extra[key] = json.loads(value) if value else True
+        except ValueError:
+            extra[key] = value  # a plain word, e.g. levers=theirs
     return Negotiator(package, writer={"nego-template": "template", "nego-llm": "llm"}[name], **{**KNOBS, **extra})
 
 

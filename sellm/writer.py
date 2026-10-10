@@ -103,8 +103,8 @@ def template(case, draft, events):
     else:
         if n == 0:
             lines.append(
-                "thank you for your offer and for the reliable cooperation. We would like to settle this in a way that "
-                "works for both sides."
+                (flags.get("opening_line") or "thank you for your offer and for the reliable cooperation.")
+                + " We would like to settle this in a way that works for both sides."
             )
             if flags.get("commitment"):
                 lines.append(

@@ -101,36 +101,59 @@ def test_a_move_is_a_pure_function_of_the_thread(package):
             ].get("term_sheets")
 
 
-def test_our_ask_never_gets_better_for_us(package):
-    """Played against the supplier's real replies: each ask costs us at least as much as the last."""
+def test_our_ask_never_goes_back(package):
+    """Played against the supplier's real replies: our price never falls, and while the structure
+    stays the same each ask costs us at least as much as the last."""
     for record in sessions():
         case = record["case"]
         for sid, thread in record["threads"].items():
             theirs = [m for m in thread["messages"] if m.get("from") != "buyer"]
             threads = {s: [t["messages"][0]] for s, t in record["threads"].items()}
-            agent, view, costs = make_agent(package), None, []
+            agent, asks = make_agent(package), []
             for reply in theirs[1:] + [None]:
                 decision = agent.decide(case, threads, focus=sid)
                 message = decision["message"]
                 if decision["supplier_id"] != sid or message.get("action") or not message.get("term_sheets"):
                     break
                 view = Thread(case, sid, threads[sid])
-                costs.append(total_cost(case, message["term_sheets"][0]["terms"], view.std))
+                terms = message["term_sheets"][0]["terms"]
+                if view.sheets and terms in [view.filled(sheet["terms"]) for sheet in view.sheets]:
+                    break  # we take one of its own sheets: the asking is over
+                asks.append((terms, total_cost(case, terms, view.std)))
                 if reply is None:
                     break
                 threads[sid] = threads[sid] + [{**message, "from": "buyer"}, reply]
-            assert costs == sorted(costs), f"{case['case_id']} {sid}: {costs}"
+            for (a, cost_a), (b, cost_b) in zip(asks, asks[1:], strict=False):
+                assert b["unit_price"] >= a["unit_price"], (
+                    f"{case['case_id']} {sid}: {[x[0]['unit_price'] for x in asks]}"
+                )
+                if {f: x for f, x in a.items() if f != "unit_price"} == {
+                    f: x for f, x in b.items() if f != "unit_price"
+                }:
+                    assert cost_b >= cost_a
 
 
-def test_every_sheet_covers_the_whole_need(package):
+def test_first_ask_is_no_dearer_for_us_than_its_own_terms(package):
+    """At its own price our structure costs us no more than the one it quoted, and keeps its cash
+    terms; payment days change only where its cost of money is known."""
     for record in sessions():
         case = record["case"]
         threads = {s: [t["messages"][0]] for s, t in record["threads"].items()}
         for sid in threads:
-            decision = make_agent(package).decide(case, threads, focus=sid)
             view = Thread(case, sid, threads[sid])
-            for sheet in decision["message"].get("term_sheets") or []:
-                assert view.coverage(sheet["terms"]) > 0.999, f"{case['case_id']}: {sheet['terms']}"
+            its = view.filled(view.opening["term_sheets"][0]["terms"])
+            if its.get("unit_price") is None or not view.valid(its):
+                continue
+            agent = make_agent(package)
+            sheet = agent.decide(case, threads, focus=sid)["message"]["term_sheets"][0]["terms"]
+            if "incoterm" in sheet:
+                assert sheet["incoterm"] == its["incoterm"]
+            if sheet.get("payment_days") != its.get("payment_days"):  # only where its cost of money is known to differ
+                assert agent.supplier(case, view)["interest_rate"] != agent.k["rate_guess"]
+                sheet = {**sheet, "payment_days": its["payment_days"]}
+            assert view.c({**sheet, "unit_price": its["unit_price"]}) <= view.c(its) + 0.01, (
+                f"{case['case_id']}: {sheet}"
+            )
 
 
 def one_supplier(record):

@@ -37,6 +37,29 @@ Tacto's docs or FAQ, not yet seen by us). Raw history goes to `docs/LOG.md`.
   rolling scorecard. Pick the right reference before citing, and build the argument bank only from
   IDs checked against `facts.json`, never from a supplier's stated reasons.
 
+## From the negotiator's sandbox runs (Sat 18:40-20:20, 29 free sessions; `experiments/RESULTS.md` section 7)
+
+- **Suppliers price in value** (`arena_kit.cost.supplier_value`): a later start date or longer
+  payment is paid for in the price (D01: first counter 51.30 / 51.50 / 51.80 for December /
+  February / April, the same worth to the foundry). Contract length was free. So: ask for coverage,
+  trade cash terms only where the supplier's cost of money differs from ours.
+- **With two or three term sheets the supplier answers the one worth most to it** (65 of 79
+  replies), not the one cheapest for us. It answers on our structure in 294 of 304 replies.
+- **The step must fit the gap.** The foundry gives back half of our step, the job shop all of it
+  and asks for "bigger steps". Sizing each step from the gap, the rounds left and the share it has
+  given back so far beat fixed steps on both cases (D01 0.894 -> 0.920, D02 0.448 -> 0.530).
+- **Citing the rival's standing offer moved the second bidder at once** (16.40 -> 15.40, "we are
+  prepared to match the competing offer"), with the claim `verified`.
+- **Take the trade a supplier names**: "If you can pay in 14 days, I can come down" came as an
+  alternative sheet; sending that sheet back closed 0.2 lower.
+- **A bidder that says `agreed` is not automatically the best offer**; close on the cheapest
+  standing offer. A leader left waiting timed out and its offer got worse (14.50 -> 14.60).
+- **In all five real cases with a relationship term the opening itself carried none** (D01, P01,
+  P02, P03, P10), and the suppliers' final offers sat near their sustainable margin (D01: 3.3-4.0 %
+  against 4 %). Backed out of the results: full cost / opening price was 0.909 (D01), 0.938 (P01),
+  0.899 (P03); the should-cost of the supplier's own plant was 2 % above the true full cost in
+  both cases where we can check it (P01, P03).
+
 ## From the sandbox probes (Sat 15:42-15:57, 33 free sessions)
 
 Evidence and tables: `experiments/RESULTS.md`. Measured on the sandbox's demo suppliers only.
