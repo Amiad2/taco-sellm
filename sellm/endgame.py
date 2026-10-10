@@ -92,10 +92,21 @@ class Persistent(Negotiator):
                     self._memo[(case.get("case_id"), v.sid, "s0")] = s
         return s
 
+    def persona(self, case, v):
+        """Which personas this supplier has and what follows (sellm/personas.py): a description of the rules, not a rule."""
+        from .personas import describe
+
+        return describe(self.intel(case, v))
+
     def ask(self, case, v, views, live, rival=math.inf):
         draft = super().ask(case, v, views, live, rival)
         if draft.get("kind") != "ask" or v.asks:
             return draft
+        key = (case.get("case_id"), v.sid, "persona-logged")
+        if key not in self._memo:  # once per supplier, in the run's log: why the first ask looks as it does
+            self._memo[key] = True
+            for line in self.persona(case, v)["lines"]:
+                log.info("%s %s: %s", case.get("case_id"), v.sid, line)
         sheet = draft["sheets"][0]
         if self.e["pay_probe"] and len(draft["sheets"]) == 1 and "payment_days" in sheet:
             other = self.other_payment(case, v, sheet)

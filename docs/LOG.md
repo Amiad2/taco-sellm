@@ -795,3 +795,12 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - One practice session, custom LLM-written e-mails (gpt-6-sol) with a coded price ladder from EUR 1.00 toward the P02 C_best target of EUR 368.14; opened on commit 7a49c38.
 - Round 1 EUR 1.00; round 2 EUR 46.89 (supplier EUR 374.63); round 3 EUR 92.78 (supplier EUR 374.15); supplier marked EUR 373.85 at 90-day payment/no index as final_offer; our EUR 138.68 push in round 4 led to withdrawal and score 0.000. Replay https://arena.tacto.ai/replay/1a882885bd67dea7.
 - Arena ended the session after 4 rounds, so it could not use all 10; one practice session spent, quota 283 -> 282 of 450. The requested post-final-offer test was attempted; supplier did not continue.
+
+## 2026-10-11 00:22 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] Confirmation run of the current --agent sellm (past_target + fast_pay, no LLM, @7a49c38, kit runner): mean 72.9**
+- 10 deals, 0 timeouts, 0 refused moves. P01 0.969 (132.96 with 14 days; v1.4: 0.915); the other nine closed on exactly the terms of the v1.4 run (P02 0.531, P03 0.923, P04 0.860, P05 0.820, P07 0.747, P08 0.549, P10 0.647, P11 0.778, P18 0.467), as the replay over recorded states had predicted. Baseline 61.5. Quota left 272 of 450.
+
+## 2026-10-11 00:22 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[change] sellm/personas.py: the five supplier personas behind the agent's rules, named and printed (no change of behaviour)**
+- Jonathan asked how the dossier steers the strategy and proposed personas. The agent already picks by fixed rules from the dossier; this file names them and says for a supplier which apply, on which evidence, and what the agent does: short_of_cash (fastest payment), relaxed_about_cash (latest payment), fixed_list_price (opens near its price), hungry_for_volume (opens deeper), unknown (two offers of equal cost). Over the 46 dossiers: 16 relaxed, 11 short of cash, 10 relaxed + fixed list price, 8 short of cash + fixed list price, 1 relaxed + hungry for volume.
+- 'uv run python -m sellm.personas' lists all suppliers, '... P01 P05' the suppliers of played cases with the first ask. The agent logs the lines once per supplier at its first ask (run with -v). tests/test_personas.py checks for every played supplier that the payment days and the depth of the first ask are the ones the personas announce. The dossier's approval_ladder and capacity_tight signals are listed as tags: no rule reads them yet.
