@@ -13,7 +13,7 @@ runs are in `runs/logs/`.
 | Case | Type / goal | C_open | C_best | C_alt | Best score | By | Sessions |
 |---|---|---|---|---|---|---|---|
 | P01 (practice) | price_increase / stabilise | 1,153,780 | 1,096,816 | 1,176,178 | 0.984 | sellm + two rules + LLM writer, verdict in shadow (gpt-6-sol) @86db7be, kit runner | 17 |
-| P02 (practice) | price_increase / stabilise | 2,282,867 | 2,235,514 | 2,604,228 | 0.531 | EVAL ppmfix: bank2 with ppm written without thousands comma @19b339f (claude eval session) | 46 |
+| P02 (practice) | price_increase / stabilise | 2,282,867 | 2,235,514 | 2,604,228 | 0.735 | P02 ARG clause5-direct @0fab3fd | 48 |
 | P03 (practice) | renewal / stabilise | 4,246,314 | 3,909,043 | 4,332,546 | 0.933 | sellm + two rules + LLM writer, verdict in shadow (gpt-6-sol) @86db7be, kit runner | 10 |
 | P04 (practice) | renewal / routine | 198,846 | 196,529 | 203,169 | 0.860 | sellm negotiator v1.2 + calculator @19b339f, kit runner, no LLM | 17 |
 | P05 (practice) | rfq / leverage | 305,545 | 223,424 | - | 0.820 | sellm negotiator v1.3 (data lock) @d792ee3, kit runner, no LLM | 14 |
@@ -25,7 +25,7 @@ runs are in `runs/logs/`.
 | D01 (sandbox) | price_increase / stabilise | 448,811 | 408,624 | - | 0.959 | PERSIST E1 past target + creep 0.25 {"creep": 0.25, "past_target": true} | 70 |
 | D02 (sandbox) | rfq / leverage | 214,296 | 156,739 | 238,800 | 0.567 | runner v1.2 (no network under the case lock), sellm (negotiator v1.1) | 31 |
 
-Mean of our best per practice case played: 74.0 (10 cases).
+Mean of our best per practice case played: 76.0 (10 cases).
 
 ## Every session
 
@@ -99,6 +99,8 @@ price would beat C_best, so the supplier would not give all of them at this pric
 | P02 | 10-11 00:57 | P02 ARG sister @a00444a | 0.319 | accepted | 4 | unit_price=373.45, payment_days=90, index_clause=none | 32,248 | 0 | 32,248 | [md](practice/P02/20261011-005751-ae7076add3a5e1b2.md) · [json](practice/P02/20261011-005751-ae7076add3a5e1b2.json) · [replay](https://arena.tacto.ai/replay/ae7076add3a5e1b2) |
 | P02 | 10-11 00:57 | P02 ARG committee @a00444a | 0.480 | accepted | 5 | unit_price=372.12, payment_days=90, index_clause=none | 24,644 | 0 | 24,644 | [md](practice/P02/20261011-005751-0392d26a38f95fd3.md) · [json](practice/P02/20261011-005751-0392d26a38f95fd3.json) · [replay](https://arena.tacto.ai/replay/0392d26a38f95fd3) |
 | P02 | 10-11 00:57 | P02 ARG volume @a00444a | 0.525 | accepted | 5 | unit_price=371.72, payment_days=90, index_clause=none | 22,516 | 0 | 22,516 | [md](practice/P02/20261011-005751-f731bcdeb7497fb9.md) · [json](practice/P02/20261011-005751-f731bcdeb7497fb9.json) · [replay](https://arena.tacto.ai/replay/f731bcdeb7497fb9) |
+| P02 | 10-11 01:51 | P02 ARG clause5-raise @0fab3fd | 0.242 | accepted | 4 | unit_price=351.45, payment_days=90, index_clause=CU-NOTATION 20% db5.0 | 35,874 | 17,179 | 18,695 | [md](practice/P02/20261011-015155-e806059f44db1dd8.md) · [json](practice/P02/20261011-015155-e806059f44db1dd8.json) · [replay](https://arena.tacto.ai/replay/e806059f44db1dd8) |
+| P02 | 10-11 01:51 | P02 ARG clause5-direct @0fab3fd | 0.735 | accepted | 2 | unit_price=361.35, payment_days=90, index_clause=CU-NOTATION 20% db5.0 | 12,530 | 17,663 | -5,133 | [md](practice/P02/20261011-015155-d4a6145c2f473cb6.md) · [json](practice/P02/20261011-015155-d4a6145c2f473cb6.json) · [replay](https://arena.tacto.ai/replay/d4a6145c2f473cb6) |
 | P03 | 10-10 15:27 | kit llm, gpt-6.1-sol | 0.903 | accepted | 5 | unit_price=432.94, payment_days=90, contract_months=36, volume_per_year=4580 | 32,587 | 0 | 32,587 | [md](practice/P03/20261010-152741-4b469202363ab4c1.md) · [json](practice/P03/20261010-152741-4b469202363ab4c1.json) · [replay](https://arena.tacto.ai/replay/4b469202363ab4c1) |
 | P03 | 10-10 20:32 | sellm negotiator v1.1 @2dadddb, kit runner, no LLM | 0.855 | accepted | 7 | unit_price=429.0, payment_days=30, contract_months=24, volume_per_year=4580 | 48,914 | 52,395 | -3,482 | [md](practice/P03/20261010-203233-6ffde165101af3ac.md) · [json](practice/P03/20261010-203233-6ffde165101af3ac.json) · [replay](https://arena.tacto.ai/replay/6ffde165101af3ac) |
 | P03 | 10-10 21:03 | runner v1.1, sellm (negotiator v1.1 @2dadddb) | 0.855 | accepted | 7 | unit_price=429.0, payment_days=30, contract_months=24, volume_per_year=4580 | 48,914 | 52,395 | -3,482 | [md](practice/P03/20261010-210342-5a7f3da375c619a5.md) · [json](practice/P03/20261010-210342-5a7f3da375c619a5.json) · [replay](https://arena.tacto.ai/replay/5a7f3da375c619a5) |
