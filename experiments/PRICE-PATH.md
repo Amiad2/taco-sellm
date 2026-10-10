@@ -6,8 +6,9 @@ suppliers be pushed harder; what would knowing the supplier's should-cost gain. 
 for Omar and the team): https://claude.ai/code/artifact/cd7f860c-5e80-433d-b1fe-40bb34782ddf
 
 **Result: none of the price levers gains on average; today's open_below 0.06, horizon 4 and target
-sit at the optimum. The only measurable lever is a better cost estimate for unknown suppliers (at
-most +2 points), and an estimate that is too low costs -5.9. Never ask after a final offer.**
+sit at the optimum. In the lab a better cost estimate for unknown suppliers looked worth up to +2
+points, but the arena check (section "Arena check") gave -2.4: no lever is left in the price path.
+Never ask after a final offer.**
 
 ## Sources
 
@@ -31,16 +32,43 @@ most +2 points), and an estimate that is too low costs -5.9. Never ask after a f
 | Relationship push | stabilise/secure_supply suppliers end closer to the floor (1.060 vs 1.096) but give a smaller share of their room (0.32 vs 0.40); walk-aways 2 % in both | only in relationship cases: horizon 6 -0.03, open 0.10 -1.11, target x0.95 -1.09; per twin D01 +4.7..+5.2, P01 +5.6..+6.3, P02 -2.8..-3.4; invented relationship suppliers lose for every archetype |
 | Should-cost known (oracle) | today: own-plant should-cost +1.4..+2.1 % (P10 -5.2 %), priors -2.2..+10.8 % | exact floor, first ask 6 % below -1.74; 3 % below +1.71; at the floor +1.97; floor +5 % **+2.05**; floor -5 % **-5.89**; twins all -0.4..-2.9, invented +1.8..+2.3 |
 
+## Arena check (Sun 00:40-01:05, 8 practice sessions, 4 free D01 sessions)
+
+One session per case (practice suppliers answer identical messages identically); baseline = the
+22:25 full run, which today's agent replays move for move. `experiments/price_path_arena.py`, rows in
+`experiments/results/2026-10-11-price-path.json`, sessions labelled `PRICE-PATH ...`.
+
+| Variant | Case | Today | Arena | Difference | Lab predicted |
+|---|---|---|---|---|---|
+| horizon 6 | P07 | 0.747 | 0.702 | -0.045 | -0.035 |
+| horizon 6 | P11 | 0.778 | 0.710 | -0.068 | -0.059 |
+| horizon 6 | P18 | 0.467 | 0.401 | -0.066 | -0.050 |
+| horizon 6 | D01 | 0.947 | 0.921 | -0.026 | -0.013 |
+| oracle, first ask 3 % below the floor | P02 | 0.531 | 0.531 | 0 | +0.019 |
+| oracle, first ask 3 % below the floor | P07 | 0.747 | 0.766 | +0.019 | -0.009 |
+| oracle, first ask 3 % below the floor | P11 | 0.778 | 0.710 | -0.068 | -0.011 |
+| oracle, first ask 3 % below the floor | P18 | 0.467 | 0.406 | -0.061 | +0.039 |
+| oracle, first ask 3 % below the floor | D01 | 0.947 | 0.935 | -0.012 | -0.013 |
+| relationship target x0.95 | P02 | 0.531 | 0.531 | 0 | -0.028 |
+| relationship target x0.95 | D01 | 0.947 | 0.959 | +0.012 | +0.052 |
+
+- Horizon 6 loses in 4 of 4 (mean -5.1 points): the lab had direction and size right.
+- The oracle loses on average (-2.4): the lab overestimated it. P18 closed at 5.40 instead of 5.50,
+  but the supplier moved the package to 30 days and an index clause without deadband, which costs more
+  in total: a lower first ask pushed it back to its own terms.
+- Relationship push: P02 the same deal, D01 +0.012 (D01 varies 0.921-0.947 with one agent).
+- P11's 0.778 is one lucky path (experiments/PERSISTENCE.md P3); both -0.068 there may partly be that.
+
 ## What follows (for code changes)
 
 1. Keep `open_below` 0.06, `horizon` 4 and the target; write the measured curves next to the knobs.
 2. Never ask after `final_offer` (`push_final` stays off); a test that the agent accepts a final offer.
 3. Keep `past_target`; do not widen it into a general relationship push.
-4. The one lever: a cost estimate with less spread for suppliers without an own-plant should-cost
-   (dossier history asked vs agreed, generic should-cost x country, recent low, cost drivers), rounded
-   up when unsure, with the first ask 0-3 % below it when it is sure. Upper bound +2 points; never go
-   below today's prior while the new estimate is uncertain. Measure against the oracle in this lab
-   frame first, then one practice session each for P07, P11, P18.
+4. Not before the final: a cost estimate with less spread for suppliers without an own-plant
+   should-cost. The lab's +2 points did not survive the arena (oracle -2.4 over five cases).
+5. Look for points outside the price path: which checked fact moves which supplier (measure per
+   argument kind from runs/, then the strongest first), and the structure of the offer (P08 index
+   clause 32,000 of 79,000 EUR to C_best, P10 lead time 33,600 EUR).
 
 ## Limits
 

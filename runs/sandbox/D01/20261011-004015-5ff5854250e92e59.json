@@ -3,7 +3,7 @@
  "case_id": "case:D01",
  "set": "sandbox",
  "created_at": "2026-10-11T00:40:15+02:00",
- "label": null,
+ "label": "PRICE-PATH base {} (Omar, sellm.agent + test switches)",
  "replay": "https://arena.tacto.ai/replay/5ff5854250e92e59",
  "case": {
   "case_id": "case:D01",

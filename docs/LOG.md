@@ -847,3 +847,8 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 ## 2026-10-11 00:54 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
 **[run] Arena check, interim: oracle first ask 3 % below the calibrated floor - P02 0.531 (0.531, same deal 371.66), P07 0.766 (0.747)**
 - experiments/price_path_arena.py --variant oracle+open_0.03; sessions 3ffb8694 (P02, first ask 354.43 instead of 343.47, Nordmark ended at the same 371.66), 4f9de9e6 (P07, closed at 5.38 instead of 5.41). Lab had predicted P02 +1.9, P07 -0.9. P11, P18 and relationship x0.95 on P02 still running.
+
+## 2026-10-11 00:57 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
+**[run] Arena check of the price-path findings: horizon 6 loses 4 of 4 (-5.1 points), the cost oracle loses on average (-2.4), relationship push no change; the lab overestimated the oracle**
+- experiments/price_path_arena.py, agent = sellm.agent.make_agent @130210e + the variant's switches; baselines = the 22:25 full run (replays move for move). Horizon 6: P07 0.702 (0.747), P11 0.710 (0.778), P18 0.401 (0.467), D01 0.921 (0.947). Oracle (first ask 3 % below the twins' calibrated floor): P02 0.531 (0.531), P07 0.766 (0.747), P11 0.710 (0.778), P18 0.406 (0.467: 5.40 instead of 5.50 but 30 days and an index clause without deadband), D01 0.935. Relationship target x0.95: P02 0.531 (same deal), D01 0.959.
+- Consequence: no lever is left in the price path; keep open_below 0.06, horizon 4 and the target, never ask after final_offer. The lab's +2 points for better cost knowledge are withdrawn (experiments/PRICE-PATH.md, report updated). P11's 0.778 baseline is a lucky path. 8 practice sessions used, D01 free.

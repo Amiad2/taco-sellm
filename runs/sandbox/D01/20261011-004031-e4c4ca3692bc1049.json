@@ -3,7 +3,7 @@
  "case_id": "case:D01",
  "set": "sandbox",
  "created_at": "2026-10-11T00:40:31+02:00",
- "label": null,
+ "label": "PRICE-PATH horizon_6 {\"horizon\": 6} (Omar, sellm.agent + test switches)",
  "replay": "https://arena.tacto.ai/replay/e4c4ca3692bc1049",
  "case": {
   "case_id": "case:D01",

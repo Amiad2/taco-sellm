@@ -20,6 +20,7 @@
  "17cc1fd397091bdf": "sellm negotiator v1.1 @2dadddb, kit runner, no LLM",
  "17eb970d44b012e1": "probe h14-a",
  "1855160613d397c9": "ab nego-template+recent_cap=false @cd67dda+local",
+ "1a4df16cb5fbf06f": "PRICE-PATH rel_target_0.95 {\"rel\": {\"target_scale\": 0.95}} (Omar, sellm.agent + test switches)",
  "1a882885bd67dea7": "Codex P02 LLM one-euro ladder @7a49c38",
  "1c9f860f8cf83c38": "PRICE-PATH rel_target_0.95 {\"rel\": {\"target_scale\": 0.95}} (Omar, sellm.agent + test switches)",
  "1d100e578081af73": "PERSIST T4b forecast first + a fixed call-off schedule offered in the first e-mail {\"signal_facts\": true, \"soft_give\": true}",
