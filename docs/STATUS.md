@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-10 20:35 CEST by Jonathan (Claude Code).
+Last updated: 2026-10-10 20:50 CEST by Amiad (Claude Code).
 
 ## Now
 
@@ -20,7 +20,7 @@ Last updated: 2026-10-10 20:35 CEST by Jonathan (Claude Code).
 
 | Who | What | Files | Since |
 |---|---|---|---|
-| Amiad (Claude Code) | **Lab** upkeep and the clone feedback loop: suppliers (engine and LLM), scenarios, tournament, stress test, the Calculator and `sellm/lab/clone_agent.py`. Never edits group A's files. No arena calls | `sellm/lab/`, `scripts/lab`, `tests/test_lab.py`, `runs/lab/` | Sat 16:00 |
+| Amiad (Claude Code) | **Group C - Runner, arguments, measurement, final** (`docs/PLAN.md` section 3): `sellm/runner.py` first (one loop per thread, waves, closing before the cap, resume, per-move deadline, log file), then a full practice run through it (up to ~25 practice sessions tonight), `sellm/claims.py`, pre-flight and rehearsal on Jonathan's machine, submission. Also keeps the lab. The clone loop is paused | `sellm/runner.py`, `tests/test_runner.py`, `sellm/claims.py`, `tests/test_claims.py`, `scripts/preflight`, `sellm/lab/`, `scripts/lab`, `runs/lab/`, README run section | Sat 20:50 |
 | Omar (Claude Code) | **Group B - Data**: built and verified (S0-S12). Open: the human check of the signals against blind labels (V11), the Sunday 08:00 rebuild. No arena calls | `sellm/intel/` (package), `sellm/dossiers/`, `tests/test_intel.py` | Sat 17:48 |
 | Jonathan (Claude Code) | **Group A - Negotiation**: negotiator v1.1 is in (`[change]` Sat 20:35). Next: confirm on practice P07, P01, P02 (up to 10 sessions, each logged), then LLM wording as an opt-in experiment, reading the supplier's standard sentences. Plays the free sandbox itself | `sellm/negotiator.py`, `sellm/writer.py`, `sellm/llm.py`, `sellm/agent.py`, `tests/test_negotiator.py`, `experiments/ab_sandbox.py` | Sat 18:16 |
 
@@ -30,7 +30,7 @@ Last updated: 2026-10-10 20:35 CEST by Jonathan (Claude Code).
 penalty), so earlier lab numbers are superseded; a comparison of the negotiator, the Calculator and Amiad's clone is
 waiting for you to run.
 
-**Group C has no owner and the final needs its runner.** With the kit's sequential `play()` the negotiator has a refused accept in 6 of 408 lab negotiations (RFQ: a timeout replaced the offer ID; the kit would crash there). With one loop per thread: none. `experiments/ab_sandbox.py:play_case` is such a loop (re-reads the thread before an accept, survives 409/422, one timeout in 20 real RFQ threads) and can become `sellm/runner.py`; it still lacks the wave handling and the closing before the cap of `arena_kit.play.play_waves`.
+**Group C: Amiad (Sat 20:50); the final needs its runner (C's priority 1, in progress).** With the kit's sequential `play()` the negotiator has a refused accept in 6 of 408 lab negotiations (RFQ: a timeout replaced the offer ID; the kit would crash there). With one loop per thread: none. `experiments/ab_sandbox.py:play_case` is such a loop (re-reads the thread before an accept, survives 409/422, one timeout in 20 real RFQ threads) and can become `sellm/runner.py`; it still lacks the wave handling and the closing before the cap of `arena_kit.play.play_waves`.
 
 From the lab (Amiad): **the final runner needs one loop per thread** - the kit's `play()` times RFQ
 threads out in the lab as in the sandbox, and a stale offer ID after a timeout is a 422 that crashes
@@ -62,6 +62,7 @@ Weakest: P02 0.105, P18 0.377, P08 0.433, P10 0.570. Analysis and hypotheses: `r
 
 ## Decisions
 
+- **Groups: A Jonathan, B Omar, C Amiad** (Sat 20:50). **The Live Final runs on Jonathan's machine** (MacBook; decided by Amiad Sat 20:45): the runner and the pre-flight must work on macOS, Jonathan starts the final.
 - Work on `main`, small commits, `scripts/sync` after each one (`AGENTS.md`).
 - **Pull before every run.** `arena play`, `arena run`, `scripts/pull-runs` and the probe scripts call `scripts/pull-first` themselves and restart on the new code; new runners must call `arena_kit.cli.pull_first()` (`AGENTS.md` section 2).
 - Docs and logs are written in English: the jury and tum.ai read the repo.
@@ -70,9 +71,7 @@ Weakest: P02 0.105, P18 0.377, P08 0.433, P10 0.570. Analysis and hypotheses: `r
 
 ## Open questions (need a human)
 
-- Which machine runs the Live Final, and is it a cloud VM or a laptop?
 - Whose LLM key for the final, and is there budget for an hour of parallel play? (Model decided: `gpt-6-sol`.)
-- Who takes group C (`docs/PLAN.md` section 3: runner, argument bank, measurement, final)? A: Jonathan. B: Omar. C has no owner yet, and it holds priority 1.
 - Which agent plays the final? Proposed: `sellm` replaces `llm` only if its mean is higher in lab, sandbox and one full practice run including the hold-out cases P04, P10, P18.
 - How do the final score and the jury score combine for places 1-3? Ask at the Tacto desk.
 - When does Tacto go offline on Saturday night?

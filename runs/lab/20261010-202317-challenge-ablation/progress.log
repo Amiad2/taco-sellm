@@ -1,0 +1,1 @@
+20:23:25 pools: train 0 (0 twins), test 163 (3 twins); options {'clock': True, 'mode': 'parallel', 'wave_cap_s': 480, 'think_s': 2.0, 'vary': True, 'reader': 'keywords', 'supplier': 'engine', 'no_cache': False}

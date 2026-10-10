@@ -481,3 +481,19 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - 1) In a case with several threads and a runner that does not pass 'focus', the negotiator sends one holding e-mail to the thread it is about to accept. That brings the thread's state up to date (answered at once, or refused as late with the new offer ID), so the accept is no longer a 422 that stops the kit's runner. Lab, 204 stress scenarios x 2: sequential refused moves 6 -> 0, mean 52.5; one loop per thread unchanged (52.8, 0 refused). Cost: one message and one supplier reply before an RFQ close.
 - 2) A should-cost estimate that would put the supplier's own opening below the sustainable margin is capped there (P02: the estimate is 1.1 % above the opening price). All 5 real cases with a relationship term had none at the opening; an estimate that is too high would make the agent stop early or prefer the alternative.
 - 153 tests green, ruff clean. The note of 18:59 (no practice run with --agent sellm) is lifted.
+
+## 2026-10-10 20:35 CEST · Amiad @ fedora
+**[decision] Group C goes to Amiad; the Live Final runs on Jonathan's machine**
+- Groups: A Jonathan, B Omar, C Amiad (runner, arguments, measurement, final; docs/PLAN.md section 3). C's order: sellm/runner.py first (one loop per thread, waves, closing before the cap, resume after a crash, per-move deadline with fallback, log file), then measurement, sellm/claims.py, ops, submission.
+- Final machine: Jonathan's MacBook (Amiad, Sat 20:45). So the runner and scripts/preflight must run on macOS (no setsid, no GNU-only flags); Jonathan starts the final at 11:30 with the command C hands over; pre-flight 09:00 and rehearsal 10:00 on that machine.
+- Practice quota for C tonight: up to about 25 sessions (one full run of the 10 hosted cases through the new runner, plus re-runs), each logged with the quota left. Jonathan plans P07/P01/P02 himself: we agree before running, never two runs at once (10 open sessions per key).
+
+## 2026-10-10 20:35 CEST · Amiad @ fedora
+**[run] Clone ablation finished: drop adaptive, use floor_guess 0.88 (+1.2 and +1.5 points each)**
+- Each of the clone's deviations reset to the Calculator default, challenged against the clone on 163 unseen test scenarios x 2 seeds (engine, one loop per thread, wave cap 480 s; runs/lab/2026...-challenge-ablation): adaptive false +1.2 +- 0.3 ADOPT; floor_guess 0.88 +1.5 +- 0.7 ADOPT; use_should_cost false -0.9 +- 0.3 and shape 1.0 -0.3 +- 0.1 REJECT; steps 5, sheets 1, accept_gap 0.002, open_below 0.03 tie.
+- Not combined or confirmed with LLM suppliers yet.
+
+## 2026-10-10 20:35 CEST · Amiad @ fedora
+**[handoff] Clone loop paused (Amiad moves to group C)**
+- State: sellm/lab/clone_agent.py v3 trails the plain Calculator on the recalibrated lab (45.7 vs 48.2). Next for whoever picks it up: clone v4 = v3 + adaptive=false + floor_guess=0.88, check 'python -m sellm.lab challenge --agent sellm.lab.clone_agent:CloneAgent "{\"adaptive\": false, \"floor_guess\": 0.88}"', then the same with '--supplier llm --test 40 --seeds 1' (about 600 OpenAI calls).
+- Traps: keep_below never triggers for the clone (it accepts when the supplier reaches its ask); its 'joint' structure asks for EXW/14 days in D02 (near zero-sum levers) and ends worse than the opening there (D02 0.0).
