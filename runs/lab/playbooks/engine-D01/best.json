@@ -1,0 +1,158 @@
+[
+ {
+  "mean": 0.9504,
+  "n": 320,
+  "knobs": {
+   "dossier": false,
+   "floor_share": 0.9,
+   "horizon": 5,
+   "keep_below": 0.0,
+   "levers": "theirs",
+   "max_holds": 0,
+   "open_below": 0.04,
+   "pace": 0.5,
+   "rounds_to_floor": 4
+  }
+ },
+ {
+  "mean": 0.9504,
+  "n": 316,
+  "knobs": {
+   "claims": "bank",
+   "dossier": false,
+   "floor_share": 0.9,
+   "horizon": 5,
+   "keep_below": 0.0,
+   "levers": "theirs",
+   "max_holds": 0,
+   "open_below": 0.04,
+   "pace": 0.5,
+   "rate_guess": 0.06,
+   "rounds_to_floor": 4
+  }
+ },
+ {
+  "mean": 0.9504,
+  "n": 232,
+  "knobs": {
+   "dossier": false,
+   "floor_share": 0.9,
+   "horizon": 5,
+   "keep_below": 0.0,
+   "levers": "theirs",
+   "max_holds": 1,
+   "open_below": 0.04,
+   "pace": 0.5,
+   "rounds_to_floor": 4
+  }
+ },
+ {
+  "mean": 0.9504,
+  "n": 284,
+  "knobs": {
+   "dossier": false,
+   "floor_share": 0.9,
+   "horizon": 5,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 0,
+   "open_below": 0.04,
+   "pace": 0.5,
+   "rounds_to_floor": 4
+  }
+ },
+ {
+  "mean": 0.9504,
+  "n": 332,
+  "knobs": {
+   "dossier": false,
+   "floor_share": 0.9,
+   "horizon": 5,
+   "keep_below": 0.0,
+   "levers": "theirs",
+   "max_holds": 0,
+   "open_below": 0.04,
+   "pace": 0.5,
+   "rate_guess": 0.06,
+   "rounds_to_floor": 4
+  }
+ },
+ {
+  "mean": 0.9504,
+  "n": 272,
+  "knobs": {
+   "dossier": false,
+   "floor_share": 0.9,
+   "horizon": 5,
+   "keep_below": 0.0,
+   "levers": "theirs",
+   "max_holds": 1,
+   "open_below": 0.04,
+   "pace": 0.5,
+   "rate_guess": 0.08,
+   "rounds_to_floor": 4
+  }
+ },
+ {
+  "mean": 0.9504,
+  "n": 116,
+  "knobs": {
+   "dossier": false,
+   "floor_share": 0.9,
+   "horizon": 5,
+   "keep_below": 0.0,
+   "levers": "theirs",
+   "max_holds": 1,
+   "open_below": 0.04,
+   "pace": 0.5,
+   "rate_guess": 0.06,
+   "rounds_to_floor": 4
+  }
+ },
+ {
+  "mean": 0.9504,
+  "n": 68,
+  "knobs": {
+   "dossier": true,
+   "floor_share": 0.9,
+   "horizon": 5,
+   "keep_below": 0.0,
+   "levers": "theirs",
+   "max_holds": 0,
+   "open_below": 0.04,
+   "pace": 0.5,
+   "rounds_to_floor": 4
+  }
+ },
+ {
+  "mean": 0.9504,
+  "n": 60,
+  "knobs": {
+   "claims": "none",
+   "dossier": false,
+   "floor_share": 0.9,
+   "horizon": 5,
+   "keep_below": 0.0,
+   "levers": "theirs",
+   "max_holds": 0,
+   "open_below": 0.04,
+   "pace": 0.5,
+   "rounds_to_floor": 4
+  }
+ },
+ {
+  "mean": 0.9504,
+  "n": 40,
+  "knobs": {
+   "dossier": false,
+   "floor_share": 0.9,
+   "horizon": 5,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 2,
+   "open_below": 0.04,
+   "pace": 0.5,
+   "rounds_to_floor": 4
+  }
+ }
+]

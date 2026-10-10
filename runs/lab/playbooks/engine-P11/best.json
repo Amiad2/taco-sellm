@@ -1,0 +1,132 @@
+[
+ {
+  "mean": 0.8437,
+  "n": 60,
+  "knobs": {
+   "dossier": true,
+   "floor_share": 0.82,
+   "levers": "theirs",
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.8437,
+  "n": 68,
+  "knobs": {
+   "dossier": true,
+   "floor_share": 0.82,
+   "levers": "theirs",
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.12,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.8437,
+  "n": 40,
+  "knobs": {
+   "dossier": true,
+   "floor_share": 0.82,
+   "levers": "theirs",
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rounds_to_floor": 4
+  }
+ },
+ {
+  "mean": 0.8437,
+  "n": 84,
+  "knobs": {
+   "dossier": true,
+   "floor_share": 0.82,
+   "levers": "theirs",
+   "max_holds": 0,
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.8437,
+  "n": 80,
+  "knobs": {
+   "dossier": true,
+   "floor_share": 0.82,
+   "keep_below": 0.006,
+   "levers": "theirs",
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.8437,
+  "n": 104,
+  "knobs": {
+   "dossier": true,
+   "floor_share": 0.82,
+   "levers": "theirs",
+   "max_holds": 2,
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.8437,
+  "n": 8,
+  "knobs": {
+   "dossier": true,
+   "floor_share": 0.82,
+   "keep_below": 0.006,
+   "levers": "theirs",
+   "max_holds": 1,
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.8437,
+  "n": 8,
+  "knobs": {
+   "dossier": true,
+   "floor_share": 0.82,
+   "keep_below": 0.006,
+   "levers": "theirs",
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.8437,
+  "n": 12,
+  "knobs": {
+   "dossier": false,
+   "floor_share": 0.82,
+   "levers": "theirs",
+   "max_holds": 0,
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.8437,
+  "n": 12,
+  "knobs": {
+   "dossier": false,
+   "floor_share": 0.82,
+   "keep_below": 0.006,
+   "levers": "theirs",
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rounds_to_floor": 7
+  }
+ }
+]

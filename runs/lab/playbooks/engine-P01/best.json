@@ -1,0 +1,158 @@
+[
+ {
+  "mean": 0.6544,
+  "n": 136,
+  "knobs": {
+   "claims": "bank",
+   "floor_share": null,
+   "horizon": 6,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 1,
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06,
+   "rounds_to_floor": 3
+  }
+ },
+ {
+  "mean": 0.6544,
+  "n": 200,
+  "knobs": {
+   "claims": "bank",
+   "dossier": true,
+   "horizon": 6,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 2,
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06
+  }
+ },
+ {
+  "mean": 0.6544,
+  "n": 132,
+  "knobs": {
+   "claims": "bank",
+   "floor_share": null,
+   "horizon": 6,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 1,
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06,
+   "rounds_to_floor": 4
+  }
+ },
+ {
+  "mean": 0.6544,
+  "n": 148,
+  "knobs": {
+   "claims": "bank",
+   "dossier": true,
+   "horizon": 6,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 0,
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06
+  }
+ },
+ {
+  "mean": 0.6544,
+  "n": 156,
+  "knobs": {
+   "claims": "bank",
+   "dossier": true,
+   "horizon": 6,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 2,
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06,
+   "rounds_to_floor": 3
+  }
+ },
+ {
+  "mean": 0.6544,
+  "n": 160,
+  "knobs": {
+   "claims": "bank",
+   "dossier": true,
+   "horizon": 6,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 1,
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06
+  }
+ },
+ {
+  "mean": 0.6544,
+  "n": 16,
+  "knobs": {
+   "claims": "bank",
+   "dossier": true,
+   "floor_share": null,
+   "horizon": 6,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 2,
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06
+  }
+ },
+ {
+  "mean": 0.6544,
+  "n": 20,
+  "knobs": {
+   "claims": "bank",
+   "floor_share": null,
+   "horizon": 6,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 0,
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06,
+   "rounds_to_floor": 3
+  }
+ },
+ {
+  "mean": 0.6544,
+  "n": 20,
+  "knobs": {
+   "claims": "bank",
+   "dossier": false,
+   "horizon": 6,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 1,
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06
+  }
+ },
+ {
+  "mean": 0.6544,
+  "n": 16,
+  "knobs": {
+   "claims": "bank",
+   "dossier": true,
+   "horizon": 6,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 1,
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06,
+   "rounds_to_floor": 5
+  }
+ }
+]

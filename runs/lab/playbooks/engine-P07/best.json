@@ -1,0 +1,114 @@
+[
+ {
+  "mean": 0.8249,
+  "n": 104,
+  "knobs": {
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 2,
+   "open_below": 0.08
+  }
+ },
+ {
+  "mean": 0.8249,
+  "n": 100,
+  "knobs": {
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 2,
+   "open_below": 0.08,
+   "rate_guess": 0.12
+  }
+ },
+ {
+  "mean": 0.8249,
+  "n": 84,
+  "knobs": {
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 2,
+   "open_below": 0.08,
+   "rounds_to_floor": 4
+  }
+ },
+ {
+  "mean": 0.8249,
+  "n": 96,
+  "knobs": {
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 0,
+   "open_below": 0.08,
+   "pace": 0.3
+  }
+ },
+ {
+  "mean": 0.8249,
+  "n": 108,
+  "knobs": {
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 2,
+   "open_below": 0.08,
+   "pace": 0.3
+  }
+ },
+ {
+  "mean": 0.8249,
+  "n": 140,
+  "knobs": {
+   "dossier": false,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 0,
+   "open_below": 0.08,
+   "pace": 0.3
+  }
+ },
+ {
+  "mean": 0.8249,
+  "n": 4,
+  "knobs": {
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 1,
+   "open_below": 0.08,
+   "rounds_to_floor": 3
+  }
+ },
+ {
+  "mean": 0.8249,
+  "n": 24,
+  "knobs": {
+   "claims": "bank",
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 2,
+   "open_below": 0.08
+  }
+ },
+ {
+  "mean": 0.8249,
+  "n": 32,
+  "knobs": {
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 1,
+   "open_below": 0.08,
+   "rounds_to_floor": 4
+  }
+ },
+ {
+  "mean": 0.8249,
+  "n": 4,
+  "knobs": {
+   "claims": "bank",
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 2,
+   "open_below": 0.08,
+   "rate_guess": 0.2,
+   "rounds_to_floor": 4
+  }
+ }
+]

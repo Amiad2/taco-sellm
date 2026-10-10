@@ -1,0 +1,138 @@
+[
+ {
+  "mean": 0.271,
+  "n": 136,
+  "knobs": {
+   "floor_share": 0.9,
+   "horizon": 2,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 1,
+   "open_below": 0.04,
+   "rate_guess": 0.06,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.271,
+  "n": 148,
+  "knobs": {
+   "floor_share": 0.9,
+   "horizon": 2,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 1,
+   "open_below": 0.04,
+   "rate_guess": 0.12,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.271,
+  "n": 148,
+  "knobs": {
+   "floor_share": 0.945,
+   "horizon": 2,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 1,
+   "open_below": 0.04,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.271,
+  "n": 112,
+  "knobs": {
+   "floor_share": 0.82,
+   "horizon": 2,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 1,
+   "open_below": 0.04,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.271,
+  "n": 188,
+  "knobs": {
+   "dossier": true,
+   "floor_share": 0.9,
+   "horizon": 2,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 1,
+   "open_below": 0.04,
+   "rate_guess": 0.12,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.271,
+  "n": 112,
+  "knobs": {
+   "floor_share": 0.945,
+   "horizon": 2,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 0,
+   "open_below": 0.04,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.271,
+  "n": 52,
+  "knobs": {
+   "floor_share": 0.945,
+   "horizon": 2,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 1,
+   "open_below": 0.04,
+   "rate_guess": 0.12,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.271,
+  "n": 28,
+  "knobs": {
+   "floor_share": null,
+   "horizon": 2,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 1,
+   "open_below": 0.04,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.271,
+  "n": 28,
+  "knobs": {
+   "floor_share": 0.82,
+   "horizon": 2,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 2,
+   "open_below": 0.04,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.271,
+  "n": 4,
+  "knobs": {
+   "floor_share": null,
+   "horizon": 2,
+   "keep_below": 0.0,
+   "levers": "ours",
+   "max_holds": 1,
+   "open_below": 0.04,
+   "rate_guess": 0.08,
+   "rounds_to_floor": 7
+  }
+ }
+]

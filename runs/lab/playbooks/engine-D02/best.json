@@ -1,0 +1,137 @@
+[
+ {
+  "mean": 0.5748,
+  "n": 80,
+  "knobs": {
+   "horizon": 6,
+   "keep_below": 0.02,
+   "levers": "theirs",
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06
+  }
+ },
+ {
+  "mean": 0.5748,
+  "n": 88,
+  "knobs": {
+   "horizon": 6,
+   "keep_below": 0.02,
+   "levers": "theirs",
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.5748,
+  "n": 108,
+  "knobs": {
+   "dossier": true,
+   "horizon": 6,
+   "keep_below": 0.02,
+   "levers": "theirs",
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06
+  }
+ },
+ {
+  "mean": 0.5748,
+  "n": 136,
+  "knobs": {
+   "dossier": true,
+   "horizon": 6,
+   "keep_below": 0.02,
+   "levers": "theirs",
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.5748,
+  "n": 148,
+  "knobs": {
+   "claims": "bank",
+   "dossier": true,
+   "horizon": 6,
+   "keep_below": 0.02,
+   "levers": "theirs",
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06
+  }
+ },
+ {
+  "mean": 0.5748,
+  "n": 72,
+  "knobs": {
+   "dossier": true,
+   "horizon": 6,
+   "keep_below": 0.02,
+   "levers": "theirs",
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.12
+  }
+ },
+ {
+  "mean": 0.5748,
+  "n": 8,
+  "knobs": {
+   "dossier": true,
+   "floor_share": null,
+   "horizon": 6,
+   "keep_below": 0.02,
+   "levers": "theirs",
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06
+  }
+ },
+ {
+  "mean": 0.5748,
+  "n": 24,
+  "knobs": {
+   "dossier": true,
+   "horizon": 6,
+   "keep_below": 0.02,
+   "levers": "theirs",
+   "max_holds": 2,
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.5748,
+  "n": 4,
+  "knobs": {
+   "dossier": true,
+   "floor_share": null,
+   "horizon": 6,
+   "keep_below": 0.02,
+   "levers": "theirs",
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.08
+  }
+ },
+ {
+  "mean": 0.5748,
+  "n": 16,
+  "knobs": {
+   "horizon": 6,
+   "keep_below": 0.02,
+   "levers": "theirs",
+   "open_below": 0.1,
+   "pace": 0.3,
+   "rate_guess": 0.06,
+   "rounds_to_floor": 4
+  }
+ }
+]

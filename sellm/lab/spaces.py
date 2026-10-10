@@ -11,6 +11,9 @@ NEGOTIATOR = {
     "rate_guess": [0.06, 0.08, 0.12, 0.20],
     "claims": ["none", "bank"],
     "max_holds": [0, 1, 2],
+    "horizon": [2, 3, 4, 5, 6],
+    "pace": [0.3, 0.5, 0.7, 0.9, 1.0],
+    "levers": ["ours", "theirs"],
 }
 SPACES = {"calc": CALC, "negotiator": NEGOTIATOR}
 AGENTS = {"calc": "calc", "negotiator": "sellm.agent:make_agent"}

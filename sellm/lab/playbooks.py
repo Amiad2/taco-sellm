@@ -12,7 +12,6 @@ import time
 from pathlib import Path
 
 from arena_kit.cli import load_env
-from arena_kit.data import DataPackage
 
 from . import twins
 from .spaces import NEGOTIATOR as BASE_SPACE
@@ -57,10 +56,11 @@ def main(argv=None):
     ap.add_argument("--minutes", type=float, default=10)
     ap.add_argument("--knobs", default="{}")
     ap.add_argument("--out", default="")
+    ap.add_argument("--workers", type=int, default=0)
     a = ap.parse_args(argv)
     sc = scenarios(a.names)
     out = a.out or str(ROOT / "runs" / "lab" / f"{time.strftime('%Y%m%d-%H%M')}-playbook-{a.cmd}")
-    run = Run(out, opts(a.llm), sc, [], workers=8)
+    run = Run(out, opts(a.llm), sc, [], workers=a.workers or (24 if a.llm else 8))
     try:
         if a.cmd == "base":
             knobs = json.loads(a.knobs)
@@ -77,7 +77,7 @@ def main(argv=None):
             results = {}
             while time.time() < deadline and variants:
                 rows = run.play([(AGENT, v, s.name, k) for v in variants for s in sc for k in range(a.seeds)], deadline)
-                for (name, kj), v in score_table(rows).items():
+                for (_name, kj), v in score_table(rows).items():
                     results.setdefault(kj, []).extend(v)
                 ranked = sorted(results.items(), key=lambda kv: -statistics.mean(kv[1]))
                 print(f"best so far {statistics.mean(ranked[0][1]):.3f} {ranked[0][0]}", flush=True)

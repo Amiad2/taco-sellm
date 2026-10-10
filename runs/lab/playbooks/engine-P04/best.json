@@ -1,0 +1,86 @@
+[
+ {
+  "mean": 0.8964,
+  "n": 64,
+  "knobs": {
+   "dossier": true,
+   "levers": "theirs"
+  }
+ },
+ {
+  "mean": 0.8964,
+  "n": 64,
+  "knobs": {
+   "levers": "theirs",
+   "max_holds": 0
+  }
+ },
+ {
+  "mean": 0.8964,
+  "n": 24,
+  "knobs": {
+   "levers": "theirs"
+  }
+ },
+ {
+  "mean": 0.8964,
+  "n": 40,
+  "knobs": {
+   "levers": "theirs",
+   "rounds_to_floor": 8
+  }
+ },
+ {
+  "mean": 0.8964,
+  "n": 64,
+  "knobs": {
+   "levers": "theirs",
+   "pace": 0.9
+  }
+ },
+ {
+  "mean": 0.8964,
+  "n": 40,
+  "knobs": {
+   "levers": "theirs",
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.8964,
+  "n": 4,
+  "knobs": {
+   "floor_share": 0.945,
+   "levers": "theirs",
+   "pace": 1.0
+  }
+ },
+ {
+  "mean": 0.8964,
+  "n": 4,
+  "knobs": {
+   "dossier": true,
+   "levers": "theirs",
+   "open_below": 0.1,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.8964,
+  "n": 24,
+  "knobs": {
+   "levers": "theirs",
+   "max_holds": 1,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.8964,
+  "n": 16,
+  "knobs": {
+   "levers": "theirs",
+   "rate_guess": 0.06,
+   "rounds_to_floor": 7
+  }
+ }
+]

@@ -1,0 +1,144 @@
+[
+ {
+  "mean": 0.7019,
+  "n": 92,
+  "knobs": {
+   "claims": "bank",
+   "dossier": true,
+   "horizon": 5,
+   "keep_below": 0.003,
+   "levers": "theirs",
+   "open_below": 0.08,
+   "rounds_to_floor": 6
+  }
+ },
+ {
+  "mean": 0.7019,
+  "n": 112,
+  "knobs": {
+   "dossier": true,
+   "horizon": 5,
+   "keep_below": 0.003,
+   "levers": "theirs",
+   "open_below": 0.08,
+   "rate_guess": 0.06,
+   "rounds_to_floor": 6
+  }
+ },
+ {
+  "mean": 0.7019,
+  "n": 132,
+  "knobs": {
+   "dossier": true,
+   "floor_share": null,
+   "horizon": 5,
+   "keep_below": 0.003,
+   "levers": "theirs",
+   "open_below": 0.08,
+   "rate_guess": 0.06,
+   "rounds_to_floor": 6
+  }
+ },
+ {
+  "mean": 0.7019,
+  "n": 104,
+  "knobs": {
+   "claims": "bank",
+   "dossier": true,
+   "floor_share": 0.86,
+   "horizon": 5,
+   "keep_below": 0.003,
+   "levers": "theirs",
+   "open_below": 0.08,
+   "rounds_to_floor": 6
+  }
+ },
+ {
+  "mean": 0.7019,
+  "n": 144,
+  "knobs": {
+   "dossier": true,
+   "horizon": 5,
+   "keep_below": 0.003,
+   "levers": "theirs",
+   "open_below": 0.08,
+   "pace": 0.3,
+   "rate_guess": 0.06,
+   "rounds_to_floor": 7
+  }
+ },
+ {
+  "mean": 0.7019,
+  "n": 244,
+  "knobs": {
+   "claims": "bank",
+   "dossier": true,
+   "floor_share": 0.86,
+   "horizon": 5,
+   "keep_below": 0.003,
+   "levers": "theirs",
+   "max_holds": 2,
+   "open_below": 0.08,
+   "rounds_to_floor": 6
+  }
+ },
+ {
+  "mean": 0.7019,
+  "n": 24,
+  "knobs": {
+   "claims": "bank",
+   "dossier": true,
+   "floor_share": 0.945,
+   "horizon": 5,
+   "keep_below": 0.003,
+   "levers": "theirs",
+   "open_below": 0.08,
+   "rounds_to_floor": 6
+  }
+ },
+ {
+  "mean": 0.7019,
+  "n": 12,
+  "knobs": {
+   "claims": "bank",
+   "dossier": true,
+   "floor_share": 0.86,
+   "horizon": 5,
+   "keep_below": 0.003,
+   "levers": "theirs",
+   "open_below": 0.08,
+   "rounds_to_floor": 8
+  }
+ },
+ {
+  "mean": 0.7019,
+  "n": 4,
+  "knobs": {
+   "claims": "bank",
+   "dossier": true,
+   "floor_share": null,
+   "horizon": 5,
+   "keep_below": 0.003,
+   "levers": "theirs",
+   "open_below": 0.08,
+   "pace": 0.3,
+   "rate_guess": 0.06,
+   "rounds_to_floor": 6
+  }
+ },
+ {
+  "mean": 0.7019,
+  "n": 4,
+  "knobs": {
+   "claims": "bank",
+   "dossier": false,
+   "floor_share": 0.86,
+   "horizon": 5,
+   "keep_below": 0.003,
+   "levers": "theirs",
+   "open_below": 0.08,
+   "rate_guess": 0.08,
+   "rounds_to_floor": 6
+  }
+ }
+]
