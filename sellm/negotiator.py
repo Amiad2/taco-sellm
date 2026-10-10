@@ -356,9 +356,11 @@ class Negotiator:
         quoted = self.quoted(case, v).get(_key(s))
         if quoted is not None:  # it has put a price on this structure: stay visibly below it
             ceiling = quoted * (1 - self.k["keep_below"])
-        elif their < math.inf:  # else stay below its standing offer in our cost
+        elif their < math.inf:  # else stay below its standing offer, in our cost and in price
             c0, c1 = v.c({**s, "unit_price": 0.0}), v.c({**s, "unit_price": 1.0})
             ceiling = (their * (1 - self.k["keep_below"]) - c0) / (c1 - c0) if c1 > c0 else math.inf
+            if v.asks:
+                ceiling = min(ceiling, standing["unit_price"] * (1 - self.k["keep_below"]))
         else:
             ceiling = math.inf
         if rival < math.inf:  # an ask that does not beat the best other offer is worth nothing to us
@@ -526,7 +528,49 @@ class Negotiator:
             return previous
         stay = next((o for o in options if o[1] == previous), options[0])
         best = min(options, key=lambda o: o[0])
-        return best[1] if best[0] < stay[0] * (1 - 0.002) else stay[1]
+        chosen = best if best[0] < stay[0] * (1 - 0.002) else stay
+        return self.second_choice(case, v, chosen[1])
+
+    def refused(self, case, v):
+        """{field: [values]} we asked and it changed in its answer. An answer on one of our own
+        sheets refuses nothing."""
+        out, asked = {}, None
+        for m in v.events:
+            sheets = m.get("term_sheets") or []
+            if m.get("from") == "buyer":
+                if sheets:
+                    asked = [complete_offer(case, sheet["terms"]) for sheet in sheets]
+            elif asked and sheets:
+                answer = {f: x for f, x in v.filled(sheets[0]["terms"]).items() if f != "unit_price"}
+                if all({f: x for f, x in a.items() if f != "unit_price"} != answer for a in asked):
+                    for field, value in answer.items():
+                        ours = asked[0].get(field)
+                        if ours != value and ours not in out.setdefault(field, []):
+                            out[field].append(ours)
+                asked = None
+        return {f: values for f, values in out.items() if values}
+
+    def second_choice(self, case, v, structure):
+        """Where it changed a field of our ask, its replacement is its choice, not the only one it
+        takes: we ask once for the option of that field that costs us least (it turned a fixed price
+        into an index clause without a deadband; the clause with the widest deadband costs us a
+        third of that). If it changes the field again, we take its value."""
+        _, standing = v.standing
+        price = standing.get("unit_price")
+        if price is None:
+            return structure
+        best, best_c = structure, v.c({**structure, "unit_price": price})
+        for field, values in self.refused(case, v).items():
+            if len(values) > 1 or field not in structure:
+                continue  # asked twice, changed twice: its value stands
+            for option in case.get("term_options", {}).get(field) or []:
+                candidate = {**best, field: option}
+                if option in values or candidate == best or not v.valid({**candidate, "unit_price": price}):
+                    continue
+                cost = v.c({**candidate, "unit_price": price})
+                if cost < best_c * (1 - 0.002):
+                    best, best_c = candidate, cost
+        return best
 
     def full_standard(self, case, v):
         """Its standard terms with every field the cost and value functions read."""

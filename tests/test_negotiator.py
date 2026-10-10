@@ -281,3 +281,40 @@ def test_a_bug_in_our_code_becomes_a_safe_move(monkeypatch):
     decision = agent.decide(case, {sid: [messages[0]]})
     assert decision["supplier_id"] == sid and decision["message"]["term_sheets"] == [] and agent.stats["errors"] == 1
     assert os.environ["SELLM_STRICT"] == "0"
+
+
+def test_a_changed_field_is_asked_once_more_at_the_option_cheapest_for_us(package):
+    """It answers a fixed-price ask with an index clause without a deadband: we ask once for the
+    clause that costs us least; if it changes the field again, its value stands."""
+    for record in sessions():
+        case = record["case"]
+        clauses = [o for o in case.get("term_options", {}).get("index_clause") or [] if o]
+        if len(case["suppliers"]) != 1 or len(clauses) < 2 or "contract_months" not in case["negotiable"]:
+            continue
+        sid = case["suppliers"][0]
+        first = record["threads"][sid]["messages"][0]
+        threads = {sid: [first]}
+        ours = make_agent(package).decide(case, threads)["message"]
+        asked = ours["term_sheets"][0]["terms"]
+        if asked.get("index_clause") is not None:
+            continue
+        view = Thread(case, sid, threads[sid])
+        worst = max(clauses, key=lambda o: view.c({**asked, "index_clause": o}))
+        cheapest = min(clauses, key=lambda o: view.c({**asked, "index_clause": o}))
+        price = first["term_sheets"][0]["terms"]["unit_price"] * 0.95
+        its = {**first, "status": "open", "attachments": [], "body": "A fixed price is not feasible."}
+
+        def answer(n, p, its=its, asked=asked, worst=worst):
+            terms = {**asked, "index_clause": worst, "unit_price": p}
+            return {**its, "term_sheets": [{"term_sheet_id": f"offer:t-{n}", "terms": terms}]}
+
+        threads = {sid: [first, {**ours, "from": "buyer"}, answer(1, price)]}
+        second = make_agent(package).decide(case, threads)["message"]
+        sheet = second["term_sheets"][0]["terms"]
+        assert sheet["index_clause"] == cheapest, sheet
+        assert asked["unit_price"] <= sheet["unit_price"] < price
+        threads = {sid: [*threads[sid], {**second, "from": "buyer"}, answer(2, price * 0.99)]}
+        third = make_agent(package).decide(case, threads)["message"]["term_sheets"][0]["terms"]
+        assert third["index_clause"] == worst, "changed twice: we take its clause"
+        return
+    pytest.skip("no saved case with an index clause and a contract length")
