@@ -41,3 +41,14 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Deal with sup:DEMO-F1 at 50.90, 30 days, 12 months, effective 2026-12-01. c_open 448,811, c_deal 440,757, c_best 408,624.
 - Verified: 'uv run arena me' shows used 1 / left 199 before and after, so the sandbox does not touch the practice quota.
 - The naive agent left contract_months at 12 although the horizon is 2 years, so half the need is uncovered at the fallback price.
+
+## 2026-10-10 14:51 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[finding] How to test without spending practice quota**
+- Sandbox D01/D02 run against Tacto's real supplier bots and do not use the practice quota (verified: arena me unchanged after a D01 run).
+- arena-sim is plumbing only: its supplier concedes a fixed 2 % per sheet and only checks that cited IDs exist.
+- Offline total_cost scores any term sheet for free. Table of which option to use for what: docs/CONTEXT.md section 9, rule in AGENTS.md section 5.
+- Trap: the kit's LLMAgent silently plays the naive move when the LLM call fails (wrong model name, bad key, 45 s timeout). Run with -v and look for 'LLM failed'.
+
+## 2026-10-10 14:51 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[decision] Team LLM provider is OpenAI**
+- Jonathan is wiring LLM_PROVIDER=openai (LLM_MODEL, LLM_API_KEY in .env). Claim is in docs/STATUS.md. Do not edit arena_kit/agents/llm.py until it is released there.

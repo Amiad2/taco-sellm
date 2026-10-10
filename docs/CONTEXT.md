@@ -279,6 +279,37 @@ final case already played · `413` body over 64 KB · `422` invalid message, not
 agent.** Our first session ran Sat 14:13, so nothing frees up before Sun 14:13, after the final:
 **treat what `uv run arena me` shows as the total budget until the final.**
 
+### Testing without spending quota (verified Sat 14:49)
+
+Sandbox `D01` was played with `uv run arena me` before and after: `used 1 / left 199` both times.
+The sandbox does not touch the practice quota. Which free option to use for what:
+
+| You want to test | Use | Not this |
+|---|---|---|
+| Whether a term sheet is good, what a price/date/payment trade is worth | offline `total_cost` / `cost_breakdown` (needs the case file and the supplier's standard terms; `C_open` and `C_best` for the score) | any session |
+| Plumbing: message format, timeouts, resume after a crash, the runner, parallelism | `arena-sim` (local, no key, no clock, no quota) | the sandbox, it adds nothing here |
+| **Agent behaviour against real supplier bots**: arguments, tone, term-sheet strategy, LLM prompts | **sandbox `D01`, `D02`** (free, replay after each run, result shows `C_open`, `C_best` and the breakdown) | `arena-sim`: its supplier is a script that concedes a fixed 2 % per sheet and only checks that cited IDs exist, so a strategy that wins there says nothing |
+| Behaviour on the real case types (renewal, capacity, quality, raw material, bundling) | practice case, costs one session | the sandbox: it only has a price increase and an RFQ |
+
+Limits of the sandbox: two cases, demo suppliers (`DEMO-F1`, `DEMO-J1`, `DEMO-C1`), no board, and
+no `facts` of the real data package for them. A good sandbox score does not prove a good practice
+score. Use it to iterate cheaply, then confirm on one practice case.
+
+Unlimited local testing against realistic suppliers would need our own supplier simulator built
+from the public data (Tacto suggests it). It would only be as good as our model of the suppliers.
+
+### LLM provider
+
+The kit's `llm_from_env()` supports `LLM_PROVIDER=anthropic` and `LLM_PROVIDER=openai`. The team
+uses OpenAI: `LLM_PROVIDER=openai`, `LLM_MODEL`, `LLM_API_KEY` (and `LLM_BASE_URL` only for a
+non-OpenAI endpoint). `LLM_EFFORT` and `ANTHROPIC_API_KEY` apply to Anthropic only.
+
+**Trap: a failing LLM call is silent.** `LLMAgent.decide` catches every exception and plays the
+naive move instead (it logs a warning, visible only with `-v`). A wrong model name, a bad key or a
+timeout (45 s per call in the kit) therefore looks like a working LLM run that negotiates badly.
+When you test an LLM agent, run with `-v` and check there is no `LLM failed` line before you
+trust the score.
+
 Hosted practice cases (all `round_limit` 10):
 
 | Case | Type | Goal | Supplier | Negotiable | Alternative | H | Must-have |

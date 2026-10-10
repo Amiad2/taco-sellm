@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-10 14:50 CEST by Jonathan (Claude Code).
+Last updated: 2026-10-10 14:55 CEST by Jonathan (Claude Code).
 
 ## Now
 
@@ -14,7 +14,7 @@ Last updated: 2026-10-10 14:50 CEST by Jonathan (Claude Code).
 
 | Who | What | Files | Since |
 |---|---|---|---|
-| - | - | - | - |
+| Jonathan | Connect the OpenAI key / provider to the LLM agent and check it runs without the silent naive fallback | `.env`, `arena_kit/agents/llm.py` (`llm_from_env`) | Sat 14:55 |
 
 ## Next up (in this order unless a human says otherwise)
 

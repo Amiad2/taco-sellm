@@ -88,8 +88,12 @@ Each file has one job. Do not mix them:
   Before any practice run: `uv run arena me`. Play single cases, not the whole set, unless a full
   rehearsal is planned in `docs/STATUS.md`. Log every `[run]` with the quota left. Keep at least 40
   sessions for Sunday (pre-flight and one full rehearsal).
-- **Free first**: score term sheets offline with `arena_kit.total_cost`; test plumbing on
-  `arena-sim`; test behaviour in the sandbox (`case:D01`, `case:D02`, outside the quota).
+- **Free first** (details and a table in `docs/CONTEXT.md`, section 9): score term sheets offline
+  with `arena_kit.total_cost`; test plumbing on `arena-sim`; **test agent behaviour against real
+  supplier bots in the sandbox (`case:D01`, `case:D02`) - it does not use the practice quota**
+  (verified). `arena-sim`'s supplier is a script and says nothing about strategy.
+- **Silent LLM fallback**: if the LLM call fails, the kit agent plays the naive move without
+  error. Run LLM agents with `-v` and check for `LLM failed` before trusting a score.
 - **One API key, 10 open sessions, 10 calls per second, for all of us.** Two parallel runs from two
   machines can starve each other: check `docs/STATUS.md` before a parallel run.
 - **LLM spend** is each developer's own key. Do not loop expensive models over the full case set.
