@@ -78,7 +78,7 @@ else
 fi
 
 step "5. Rules (docs/CONTEXT.md section 11)"
-hits=$(grep -nE '/v1/events|events/stream|/v1/screen|"/screen|leaderboard|/v1/results|"/results' \
+hits=$(grep -nE '/events|events/stream|/screen|/leaderboard|\.leaderboard\(|/results|\.results\(' \
   sellm/*.py sellm/intel/*.py 2>/dev/null | grep -vE '^[^:]+:[0-9]+:[[:space:]]*#' | grep -v 'never the live feed' || true)
 if [ -z "$hits" ]; then ok "no live-feed endpoint in the agent's code path (sellm/, sellm/intel/)"; else fail "live-feed endpoint in the agent's code: $hits"; fi
 if git ls-files | grep -qE '(^|/)\.env$'; then fail ".env is tracked by git"; else ok ".env not in git"; fi

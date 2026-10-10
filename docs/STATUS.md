@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-10 20:50 CEST by Amiad (Claude Code).
+Last updated: 2026-10-10 21:20 CEST by Amiad (Claude Code).
 
 ## Now
 
@@ -10,6 +10,7 @@ Last updated: 2026-10-10 20:50 CEST by Amiad (Claude Code).
 - **OpenAI works with the kit's LLM agent** (`LLM_PROVIDER=openai`, model `gpt-6.1-sol`, Sat 15:00): D01 scored 0.786 against 0.200 for the naive agent, no `LLM failed` in the log. Each machine needs the values in its own `.env`; `llm_from_env` was not changed.
 - The kit's LLM agent is the baseline to beat: **61.5** over the 10 hosted cases (`runs/BASELINE.md`).
 - **`--agent sellm` plays the negotiator with the cost calculator** (`sellm/negotiator.py`, `sellm/calculator.py`, group A, Sat 21:15; no LLM, e-mails from a template). Every move is a pure function of case and threads. The first ask is the package the calculator prices cheapest at the expected end price (long term; payment days by the dossier's cash_pressure: late for 'low', the quoted days or faster for 'medium'/'high', two equal-cost offers for an unknown supplier); each step is sized from the thread; it accepts a final offer and walks away only when the alternative is better. **Practice, all 10 cases: 67.5 (baseline 61.5).** Sandbox with the earlier version: D01 0.920, D02 0.530. `uv run python -m sellm.calculator P08` prints a case's sheet. The old Calculator knobs stay in `sellm/agent.py` as `CALC_KNOBS`.
+- **The final runner is `sellm/runner.py`** (group C, Sat 21:15): one loop per thread, the waves, closing before the cap, resume after a crash, a deadline per move, holding e-mails for threads left waiting, logs in `runs/logs/`. Final: `nohup uv run python -m sellm.runner --set final --agent sellm > runs/logs/final.out 2>&1 &`; measured runs: `--set sandbox|practice --cases ...`. On the 10 hosted cases it plays exactly what the kit runner plays (identical replies), and it fixes the RFQ problems: no refused accept, attachments that the arena holds behind another reply no longer block the case. Check a machine with `scripts/preflight`.
 - Every session the team plays is saved in full under `runs/` by `scripts/pull-runs`. **Quota (checked Sat 21:12): limit 450, used 41, left 409; a session frees up 24 h after it was played** - the limit was raised from 200.
 - Sandbox probes (33 free sessions) show how suppliers react: only the first sheet can be accepted, a final offer is final, the supplier mirrors the size of our concessions, RFQ threads need their own loops. Rules for the agent: `experiments/RESULTS.md` section 5.
 - **Lab** (`sellm/lab/`, Sat 17:45; guide `sellm/lab/README.md`): test any agent locally, free, no quota. `scripts/lab play P01`, `scripts/lab compare naive calc`, `scripts/lab search 60` (background), `scripts/lab stress calc`, `scripts/lab status`. Scenarios: twins of our 15 played suppliers (families of plausible variants), the 9 unplayed practice case files with their real suppliers, and invented ones (all 7 types, all fields, 8 supplier archetypes, 12 edge cases). Simulated clock: 20-60 s replies, 60-s timeouts with re-issued offer IDs, 8-min wave cap; `--mode parallel` (one loop per thread) or `sequential` (the kit's `play()`). Backtest: 0.79 % mean error on 237 real replies; kit LLM agent 59.8 in the lab vs 61.5 in the arena (`runs/lab/BACKTEST.md`, `VALIDATION.md`). **Found: the kit's sequential `play()` times RFQ threads out and can crash on a stale offer ID; the final runner needs one loop per thread.**
@@ -20,7 +21,7 @@ Last updated: 2026-10-10 20:50 CEST by Amiad (Claude Code).
 
 | Who | What | Files | Since |
 |---|---|---|---|
-| Amiad (Claude Code) | **Group C - Runner, arguments, measurement, final** (`docs/PLAN.md` section 3): `sellm/runner.py` first (one loop per thread, waves, closing before the cap, resume, per-move deadline, log file), then a full practice run through it (up to ~25 practice sessions tonight), `sellm/claims.py`, pre-flight and rehearsal on Jonathan's machine, submission. Also keeps the lab. The clone loop is paused. **Sat 21:10: full practice run of the 10 hosted cases through `sellm.runner` (`--agent sellm`, at most 6 sessions open at once, about 10 min, 10 quota)** | `sellm/runner.py`, `tests/test_runner.py`, `sellm/claims.py`, `tests/test_claims.py`, `scripts/preflight`, `sellm/lab/`, `scripts/lab`, `runs/lab/`, README run section | Sat 20:50 |
+| Amiad (Claude Code) | **Group C - Runner, arguments, measurement, final** (`docs/PLAN.md` section 3). Done: `sellm/runner.py` v1.2 (fake-arena tests, sandbox, one full practice run), `sellm/claims.py` (argument bank, dossiers rebuilt), `scripts/preflight`, README run section. Next: negotiator v1.2 through the runner on the sandbox and P05, the Sunday checklist and rehearsal for Jonathan's machine, submission text. Also keeps the lab; the clone loop is paused | `sellm/runner.py`, `tests/test_runner.py`, `sellm/claims.py`, `tests/test_claims.py`, `scripts/preflight`, `sellm/lab/`, `scripts/lab`, `runs/lab/`, README run section | Sat 20:50 |
 | Omar (Claude Code) | **Group B - Data**: built and verified (S0-S12). Open: the human check of the signals against blind labels (V11), the Sunday 08:00 rebuild. No arena calls | `sellm/intel/` (package), `sellm/dossiers/`, `tests/test_intel.py` | Sat 17:48 |
 | Jonathan (Claude Code) | **Group A - Negotiation**: negotiator v1.1 is in (`[change]` Sat 20:35). Next: confirm on practice P07, P01, P02 (up to 10 sessions, each logged), then LLM wording as an opt-in experiment, reading the supplier's standard sentences. Plays the free sandbox itself | `sellm/negotiator.py`, `sellm/writer.py`, `sellm/llm.py`, `sellm/agent.py`, `tests/test_negotiator.py`, `experiments/ab_sandbox.py` | Sat 18:16 |
 
@@ -30,12 +31,7 @@ Last updated: 2026-10-10 20:50 CEST by Amiad (Claude Code).
 penalty), so earlier lab numbers are superseded; a comparison of the negotiator, the Calculator and Amiad's clone is
 waiting for you to run.
 
-**Group C: Amiad (Sat 20:50); the final needs its runner (C's priority 1, in progress).** With the kit's sequential `play()` the negotiator has a refused accept in 6 of 408 lab negotiations (RFQ: a timeout replaced the offer ID; the kit would crash there). With one loop per thread: none. `experiments/ab_sandbox.py:play_case` is such a loop (re-reads the thread before an accept, survives 409/422, one timeout in 20 real RFQ threads) and can become `sellm/runner.py`; it still lacks the wave handling and the closing before the cap of `arena_kit.play.play_waves`.
-
-From the lab (Amiad): **the final runner needs one loop per thread** - the kit's `play()` times RFQ
-threads out in the lab as in the sandbox, and a stale offer ID after a timeout is a 422 that crashes
-it. Before any arena run of `--agent sellm`: `scripts/lab stress sellm.agent:make_agent` must PASS.
-Then confirm the lab's best knobs in the free sandbox (D01, D02) before spending practice quota.
+**Group C (Amiad): the runner is in** - `sellm/runner.py`, see Now. Use it for every measured run of a case with several suppliers: the kit's `arena run` still serves one thread at a time (2 timeouts in P05 at 21:06).
 
 **Decided Sat 17:41** (`docs/PLAN.md`): three groups with their tasks, priorities and the skills
 they need (**section 3**: A negotiation, B data, C runner, arguments, measurement and final; C took
@@ -74,6 +70,6 @@ Weakest: P02 0.105, P18 0.377, P08 0.433, P10 0.570. Analysis and hypotheses: `r
 ## Open questions (need a human)
 
 - Whose LLM key for the final, and is there budget for an hour of parallel play? (Model decided: `gpt-6-sol`.)
-- Which agent plays the final? Proposed: `sellm` replaces `llm` only if its mean is higher in lab, sandbox and one full practice run including the hold-out cases P04, P10, P18.
+- Which agent plays the final? Proposed: `sellm` replaces `llm` only if its mean is higher in lab, sandbox and one full practice run including the hold-out cases P04, P10, P18. **Met by the negotiator v1.2 (Sat 21:10): 67.5 against 61.5, P04, P10, P18 above the baseline; needs the team's yes.**
 - How do the final score and the jury score combine for places 1-3? Ask at the Tacto desk.
 - When does Tacto go offline on Saturday night?
