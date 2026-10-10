@@ -58,9 +58,10 @@ strategies - but it is one demo supplier.
 - **Weak**: P04, P05, P10, P11 (differences 0.12-0.31), P02 and P18 in between. P05 and P10 have
   one real session each, and P05 is an RFQ with three job shops whose concessions the model gets
   wrong by about 7 % of the opening value.
-- **Not modelled**: the 60-second clock and timeouts (the lab has no clock), reply delays, the
-  prose itself (the lab's supplier reads keywords and checks data, it does not understand an
-  argument), and anything we have never seen a supplier do.
+- **Modelled since Sat 17:30**: the 60-second clock (replies 20-60 s, timeouts with re-issued offer
+  IDs, withdrawals at a waiting final offer), the 8-minute wave cap, one-thread-at-a-time against
+  one-loop-per-thread runners. **Not modelled**: what a supplier makes of an argument beyond keywords
+  (unless `--reader llm`), and anything we have never seen a supplier do.
 - Use the lab to **rank strategy variants by their mean over many scenarios** (twins plus invented
   ones). Do not read a single case's lab score as a prediction. Confirm a winner in the sandbox, then
   on one or two practice cases.
