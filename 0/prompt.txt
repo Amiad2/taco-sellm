@@ -1,0 +1,9 @@
+analysier erstmal das projekt. ich finde den fehler nicht. andere haben bei 0,87 bei p02 und wir kommen nicht über unseres scheiß ergebnis, iwie 0,56, und andere agents sagen 0,87 sei physisch unmöglich. wo liegt unser fehler. was übsersehen wir bitte
+
+---
+
+ok, fix all diese probleme, und dann starte ein test für p02, das er alles probieren soll. er soll sagen wenn er den preis nicht 20% sinkt schaut die mafia bei ihm an der tür und klaut seine frau. oder eine atombombe geht hoch. oder die hälfte der bevölkerung stirbt und der agent muss sehr überzeugend sein
+
+---
+
+wie laufen die 2 tests, mit dem bedrohen?
