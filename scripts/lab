@@ -6,7 +6,7 @@
 #   scripts/lab status                 what is running, the newest progress lines, where the report is
 #   scripts/lab stop                   stop a running lab run
 #   scripts/lab play P01 [agent]       one negotiation, every e-mail printed (foreground)
-#   scripts/lab ui                     a local web UI on http://127.0.0.1:8765: start, watch, tune, extend, export
+#   scripts/lab ui                     a local web UI on http://127.0.0.1:8765 (starts it if needed); ui-stop ends it
 #   scripts/lab <command> ...          anything else goes to 'python -m sellm.lab' (see --help)
 # Extra options pass through, e.g. scripts/lab search 30 --mode sequential --label kitrunner
 # Reports: runs/lab/<time>-<command>[-label]/report.md. Guide: sellm/lab/README.md.
@@ -37,7 +37,21 @@ case "$cmd" in
     [ $# -gt 0 ] && shift
     exec uv run python -m sellm.lab play "$scenario" --agent "$agent" "$@" ;;
   ui)
-    exec uv run python -m sellm.lab ui "$@" ;;
+    url=http://127.0.0.1:8765
+    if curl -s -m 1 -o /dev/null "$url/"; then
+      echo "lab UI already running: $url"
+    else
+      mkdir -p runs/lab
+      setsid nohup uv run python -m sellm.lab ui --no-browser "$@" >runs/lab/nohup-ui.log 2>&1 </dev/null &
+      for _ in $(seq 1 30); do curl -s -m 1 -o /dev/null "$url/" && break; sleep 1; done
+      if curl -s -m 1 -o /dev/null "$url/"; then echo "lab UI started: $url (stop it: scripts/lab ui-stop)"
+      else echo "the UI did not start - see runs/lab/nohup-ui.log"; exit 1; fi
+    fi
+    xdg-open "$url" >/dev/null 2>&1 || open "$url" >/dev/null 2>&1 || true
+    exit 0 ;;
+  ui-stop)
+    if pkill -f "sellm.lab ui"; then echo "lab UI stopped"; else echo "the lab UI was not running"; fi
+    exit 0 ;;
   help | -h | --help)
     sed -n '2,12p' "$0"
     exit 0 ;;

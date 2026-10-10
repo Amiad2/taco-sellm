@@ -311,7 +311,7 @@ def serve(port=8765, browser=True):
 PAGE = r"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>sellm lab</title>
-<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 <style>
 :root{--bg:#f6f7f9;--card:#fff;--ink:#1c1e21;--mute:#666;--line:#dde1e6;--acc:#2457d6;--ok:#1d8a4b;--warn:#b25b00}
 @media (prefers-color-scheme:dark){:root{--bg:#141518;--card:#1d1f23;--ink:#e8e8ea;--mute:#a0a3a8;--line:#33363c;--acc:#7aa2ff;--ok:#4cc38a;--warn:#f0a050}}

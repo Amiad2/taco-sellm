@@ -12,7 +12,9 @@ case confirms it.
 
 ## The UI
 
-`scripts/lab ui` opens a local page (http://127.0.0.1:8765, nobody else can reach it):
+`scripts/lab ui` starts a small local server in the background (if it is not running yet) and opens
+http://127.0.0.1:8765 - nobody else can reach it. The page only works while that server runs;
+`scripts/lab ui-stop` ends it (runs it started keep going).
 
 - **Start**: search, compare or stress with every option as a form field; knobs as JSON or a table,
   or loaded from any earlier run's `best.json` (rank N). Runs go to the background and keep going
