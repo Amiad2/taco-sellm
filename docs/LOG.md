@@ -839,3 +839,7 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 **[run] P02 one-euro ladder with fact-based rebuttal: EUR 370 offer rejected**
 - One practice session with gpt-6-sol. Buyer ladder EUR 1.00, 46.89, 92.78, 138.68; Nordmark's final_offer was EUR 373.80. Our round-5 offer at EUR 370.00 included detailed rebuttals on the input weights, historical purchase prices, payment premium and lack of a price bridge; the supplier withdrew. No deal, score 0.000. All five LLM calls succeeded. Replay https://arena.tacto.ai/replay/80108787b179d871; transcript and raw session saved in runs/practice/P02/. Quota after run: 268/450 left.
 - pull-runs also downloaded three unrelated D01 sandbox sessions; their labels were corrected to unlabelled, and only our P02 session retains this run label.
+
+## 2026-10-11 00:49 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
+**[run] Arena check, interim: horizon 6 loses on all three practice cases, as the lab predicted - P07 0.702 (0.747), P11 0.710 (0.778), P18 0.401 (0.467)**
+- experiments/price_path_arena.py --variant horizon_6, agent = sellm.agent.make_agent @130210e with horizon 6; baselines = the 22:25 full run (today's agent replays it move for move). Smaller steps got smaller counters: P07 closed at 5.48 (5.41), P11 at 45.50 (45.09), P18 at 5.60 instead of 5.50. Sessions 5c8da0c8, 207d1c4d, 46c8d103. Oracle (P02 P07 P11 P18) and relationship x0.95 (P02) running.
