@@ -348,3 +348,9 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - What stands, recomputed in full: first asks of 40.47 (D01, opening 52.90, current 48.60), 105.06 (P01, opening 138.55, current 126.53), 24.63 (P10), 4.35 (P07), 281.28 (P02); planned path on D01 40.47, 43.08, 44.86, 46.43, 47.86, 49.21, 50.49, 51.72, 52.90.
 - The 'same cost to us' variants give absurd sheets wherever contract_months is negotiable: 24.76 for 12 months on D01, 1.52 on P07, 2.98 on P10 (the price that offsets an uncovered second year). Calculator._variants; for the lab's owner.
 - Baseline model, answering Omar's 17:50 question: every arena run from Jonathan's machine so far (D01 0.786, the baseline of 61.5, all probes with an LLM) used LLM_MODEL=gpt-6.1-sol.
+
+## 2026-10-10 18:20 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
+**[change] Intel S1: stub dossier() for group A**
+- sellm/intel/schema.py: schema v1 names, enums (coverage, cash_pressure, archetype, 13 signal kinds incl. informal_costing), empty_dossier(); sellm/intel/__init__.py: dossier(supplier_id, part_ids, case, opening, package) returns the full section 10 schema with 'no data' defaults and never raises.
+- Defaults are the rules' outcome for a supplier without data: cost_of_money 0.10, cash_pressure low, archetype other; parts get an empty section each.
+- tests/test_intel.py: every field of the contract, odd inputs never raise, < 5 ms per call. Next: validator, extraction, builder (S2-S9).

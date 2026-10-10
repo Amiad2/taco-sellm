@@ -36,8 +36,12 @@ over the per-move deadline from A and the argument bank and research from B at 1
 and the **dossier and mini-dossier schema** (**section 10**: fields, frozen core fields, rules,
 signal vocabulary). Build against section 10; add fields freely, rename core fields only by decision.
 
-1. Each person claims one group in the table above. B's first deliverable is a stub `dossier()`
-   returning the schema, so A can code against it.
+1. Each person claims one group in the table above. Group C is still open.
+   **For group A:** the stub is in. Code against
+   `from sellm.intel import dossier; d = dossier(supplier_id, case["parts"], case=case, opening=threads, package=package)`.
+   It returns the full section 10 schema and never raises; today every value is the "no data" default
+   (`cost_of_money` 0.10, `floor_estimate` None). Real values arrive with the builder (46 dossiers) and the
+   case overlay, both later tonight.
 2. Baseline and the sandbox probes H1-H3 are done (`runs/BASELINE.md`, `experiments/RESULTS.md`). Next probes: H12-H15 in `experiments/RESULTS.md` section 6 (H12, H13, H15 are free), then H4-H7 on practice cases, one session each.
 3. Then follow the timeline in `docs/PLAN.md` section 4.
 
