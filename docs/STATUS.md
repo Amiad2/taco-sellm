@@ -39,9 +39,10 @@ signal vocabulary). Build against section 10; add fields freely, rename core fie
 1. Each person claims one group in the table above. Group C is still open.
    **For group A:** the stub is in. Code against
    `from sellm.intel import dossier; d = dossier(supplier_id, case["parts"], case=case, opening=threads, package=package)`.
-   It returns the full section 10 schema and never raises. The 46 built dossiers are in `sellm/dossiers/`
-   (`uv run python -m sellm.intel show 70130` prints one); `dossier()` serves them once the case overlay
-   lands (next step). Until then it still returns the "no data" default.
+   **It now serves real values** (Sat 18:37): the 46 built dossiers in `sellm/dossiers/` plus the case
+   overlay (contact name, stated cost drivers checked against the index, quote-PDF terms, RFQ rivals'
+   offers, case facts). For strangers it builds from the case alone. Never raises, ~1 ms per call.
+   Try `uv run python -m sellm.intel show 70130`. Fields: `docs/PLAN.md` section 10.
 2. Baseline and the sandbox probes H1-H3 are done (`runs/BASELINE.md`, `experiments/RESULTS.md`). Next probes: H12-H15 in `experiments/RESULTS.md` section 6 (H12, H13, H15 are free), then H4-H7 on practice cases, one session each.
 3. Then follow the timeline in `docs/PLAN.md` section 4.
 
