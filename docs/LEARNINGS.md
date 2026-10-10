@@ -131,6 +131,14 @@ How the twins were built and how well they match: `runs/lab/BACKTEST.md`, `runs/
   Czech job shop (P05: 16 days faster = 0.50 on 32); lead time about 0.15 EUR per unit per day
   shorter (P10); 1,200 ppm tighter about 1.40 EUR per unit (P11). A trade is good for us when its
   value to us is above that.
+  Measured over every saved session (Sat 22:15, replies with two sheets that differ only in payment
+  days, yearly rate = price step / mean price / day step x 360), against the dossier's
+  `cost_of_money`: P02 70510 0.066 and P08 70710 0.065 (group, dossier 0.065); P03 70530 0.041
+  (group, 0.065); P04 70620 0.073 and P07 70610 0.075 (family, 0.09); P18 70740 0.11-0.22 (family,
+  0.09; it also wrote "we have already reached our limit for these extended payment terms");
+  P05 70240 0.17-0.35 (job shop, 0.25); D01 DEMO-F1 0.093; D02 DEMO-J1 0.15, DEMO-C1 0.14. The
+  dossier's rates are right for groups and within a factor of two elsewhere. Our own rate is 0.08,
+  so asking 90 days of a supplier above it costs us more in price than the days earn.
 - **The kit LLM agent closed 1-31 % above the floor** (computed): P04 1 %, P01 2 %, P02 2 %, P11
   4 %, P07 8 %, P08 10 %, P18 20 %, P10 31 %. The room is largest where we scored worst.
 - **Concessions per round are small and bounded** (backtested on 237 real replies): first counter
