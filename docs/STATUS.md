@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-10 15:25 CEST by Jonathan (Claude Code).
+Last updated: 2026-10-10 15:45 CEST by Jonathan (Claude Code).
 
 ## Now
 
@@ -15,7 +15,7 @@ Last updated: 2026-10-10 15:25 CEST by Jonathan (Claude Code).
 
 | Who | What | Files | Since |
 |---|---|---|---|
-| - | - | - | - |
+| Jonathan (Claude Code) | Baseline: kit LLM agent (OpenAI `gpt-6.1-sol`) on all 10 hosted cases, 10 sessions; `scripts/pull-runs` and `runs/` with every session in full | `runs/`, `scripts/pull-runs` | Sat 15:45 |
 
 ## Next up
 
