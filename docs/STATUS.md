@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-10 18:30 CEST by Omar (Claude Code).
+Last updated: 2026-10-10 18:50 CEST by Omar (Claude Code).
 
 ## Now
 
@@ -28,7 +28,8 @@ it. Before any arena run of `--agent sellm`: `scripts/lab stress sellm.agent:mak
 Then confirm the lab's best knobs in the free sandbox (D01, D02) before spending practice quota.
 
 **Decided Sat 18:30** (`docs/PLAN.md`): three groups with their tasks, priorities and the skills
-they need (**section 3**: A negotiation, B data and arguments, C runner, measurement and final),
+they need (**section 3**: A negotiation, B data, C runner, arguments, measurement and final; C took
+over the per-move deadline from A and the argument bank and research from B at 18:50),
 and the **dossier and mini-dossier schema** (**section 10**: fields, frozen core fields, rules,
 signal vocabulary). Build against section 10; add fields freely, rename core fields only by decision.
 

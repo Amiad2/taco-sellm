@@ -1,9 +1,9 @@
 # PLAN - how three people get the best agent running by Sunday 12:00
 
 Status: proposed Sat 15:10 by Jonathan (with Claude Code). **Decided Sat 18:30 (Omar): the three
-groups and their tasks (section 3) and the dossier schema (section 10).** Owners are open: claim a
-group in `docs/STATUS.md`. Change this file when the team changes the plan, and log the change as a
-`[decision]`.
+groups and their tasks (section 3, rebalanced 18:50) and the dossier schema (section 10).** Owners
+are open: claim a group in `docs/STATUS.md`. Change this file when the team changes the plan, and
+log the change as a `[decision]`.
 
 ## 1. Where the points are
 
@@ -32,15 +32,16 @@ files. Our code lives in `sellm/` next to `arena_kit/`; the kit is untouched exc
 | Part | Does | Interface |
 |---|---|---|
 | **Calculator** `Calculator` in `sellm/lab/strategies.py` (exists, lab-tuned) | For a case and a standing offer: enumerate term sheets over `term_options`, price each with `total_cost`, say what each lever is worth to us, guard must-haves and coverage, set a target and a walk-away value, estimate the supplier's margin for the relationship term | `decide(case, threads)`; `plan(case, sid, events)` per thread |
-| **Intel** `sellm/intel.py`, `sellm/claims.py` | Built once for **all 46 detailed suppliers**, cached as files, plus a case overlay for any supplier at session open (section 10). Plus an argument bank per supplier and part with figures computed in code and checked against `facts.json` | `dossier(supplier_id, part_ids, case, opening) -> dict` (section 10); `arguments(case, supplier_id) -> [{sentence, ids}]` |
+| **Intel** `sellm/intel.py` (B) and **claims** `sellm/claims.py` (C) | Dossiers built once for **all 46 detailed suppliers**, cached as files, plus a case overlay for any supplier at session open (section 10). The citable facts and the argument bank per supplier and part, with figures computed in code and checked against `facts.json` | `dossier(supplier_id, part_ids, case, opening) -> dict`; `citable_for(package, supplier_id, part_ids) -> [..]`; `arguments(case, supplier_id, dossier) -> [{sentence, ids}]` |
 | **Negotiator** behind `make_agent` in `sellm/agent.py` (registered as `--agent sellm`; today it returns the Calculator) | The round plan and the e-mail. Code decides the term sheets and which arguments are allowed; the LLM chooses among them and writes. Falls back to the calculator's move, never to the naive agent | `make_agent(package) -> agent with decide(case, threads) -> {supplier_id, message}` |
 | **Runner and measurement** `sellm/runner.py`, `scripts/pull-runs` | All threads of an RFQ in parallel, a round budget from the time left in the wave, logs to a file, resumes after a crash. Saves every session of the team (transcript, trace, breakdown) to `runs/` so nobody replays a case to see what happened | `uv run arena run ... --agent sellm` |
 
 ## 3. Groups and their tasks (decided Sat 18:30)
 
 Three groups, one person each, each with its own agent sessions. Claim one in `docs/STATUS.md`.
-Each group owns its files; the groups meet only at three interfaces: `make_agent`
-(`sellm/agent.py`), `dossier()` and `arguments()` (section 10).
+Each group owns its files; the groups meet only at four interfaces: `make_agent` with its
+`fallback` (`sellm/agent.py`), `dossier()`, `citable_for()` and `arguments()` (section 10).
+Rebalanced Sat 18:50: three tasks moved to C (see "Why this split" below).
 
 **Priorities**, by effect on the final score:
 
@@ -52,7 +53,7 @@ Each group owns its files; the groups meet only at three interfaces: `make_agent
    the floor; the room is largest in P10, P18, P08.
 4. **Tone and wording** (A). FAQ P01 recording: ultimatum instead of appreciation, about EUR 13,700
    a year worse.
-5. **Checked arguments** (B). Moved the supplier in P01, P03, P11, D02, not in P02, P04, P10, P18; a
+5. **Checked arguments** (C). Moved the supplier in P01, P03, P11, D02, not in P02, P04, P10, P18; a
    wrong figure is `contradicted` and costs trust.
 6. **Depth of the dossier** (B). Indirect: it tells A which trade the supplier wants, e.g. payment
    days for a supplier short of cash.
@@ -64,55 +65,80 @@ the lab's owner). Read `experiments/RESULTS.md` section 5 first.
    arguments are allowed; the LLM chooses among them, writes the e-mail and reads the reply
    (questions such as "Which figures is that based on?", signals). It never writes a number or an
    ID that code did not give it.
-2. Time budget per move: 15 s target, 40 s hard; after that the calculator's move is sent without
-   the LLM, and every fallback is logged.
+2. `make_agent` returns the negotiator with an attribute `fallback`: an agent whose `decide` uses
+   no LLM (the Calculator). C's runner calls it when the negotiator is too slow or fails.
 3. Levers beyond price: cover the horizon, start date, payment days; price every sheet the supplier
    sends by C; take its second package by sending it back as our sheet.
 4. Use the dossier: `economics.cost_of_money` and `parts.<part>.floor_estimate` instead of the
    global `guess_rate` and `floor_guess`; signals choose the trade (section 10); the relationship
-   term in `stabilise` and `secure_supply`.
-5. Test in this order: `scripts/lab stress sellm.agent:make_agent` PASS, lab tournament, sandbox
-   D01/D02, then one practice case per written hypothesis.
+   term in `stabilise` and `secure_supply`; `arguments()` for what may be cited.
+5. Test each change: `scripts/lab stress sellm.agent:make_agent` PASS, then the lab tournament.
+   Sandbox and practice runs go through C's measurement.
 
 Needs: a feel for procurement and negotiation, prompt engineering, Python, the cost function
 (`docs/CONTEXT.md` section 5).
 
-**B - Data and arguments** (`sellm/intel.py`, `sellm/claims.py`, `sellm/dossiers/`).
+**B - Data** (`sellm/intel.py`, `sellm/dossiers/`).
 
 0. First, within the hour: a stub `dossier()` that returns the section 10 schema with empty
    values, so A can code against it.
 1. The dossier builder: one command, all 46 detailed suppliers, exactly the schema of section 10,
-   deterministic, no LLM, no network.
-2. The case overlay (mini-dossier) at session open from the case file and the opening e-mails;
-   never raises for a supplier we have no data on.
-3. The argument bank `arguments(case, supplier_id)`: sentences built from `citable`, each checked
-   with `sellm/lab/claims.py` before it is offered; at most 3 per e-mail, each ID once per case,
-   a letter and its contract as one argument, rival quotes marked private.
-4. Research: which data unlock P08, P18, P10 (`C_best` 6-19 % below the current price), and which
-   signals go with "it holds and we took it into account".
-5. Sunday 08:00: `uv run arena data`, rebuild, commit; read the new letters, news and memo.
+   deterministic, no LLM, no network. `citable` comes from C's `citable_for()`; leave it `[]` until
+   that lands.
+2. The signal rules (section 10 table) over documents, news, quote remarks and history notes,
+   each signal with its evidence IDs and an excerpt; and the derived fields (`cost_of_money`,
+   `cash_pressure`, `archetype`, `floor_estimate`).
+3. The case overlay (mini-dossier) at session open from the case file and the opening e-mails,
+   with the same signal rules; never raises for a supplier we have no data on.
+4. Sunday 08:00: `uv run arena data`, rebuild, commit; read the new letters, news and memo and add
+   signal rules if they bring new wording.
 
-Needs: SQL, careful reading of texts, procurement sense, precision (one wrong figure costs trust).
+Needs: SQL, careful reading of texts, procurement sense, precision.
 
-**C - Runner, measurement, final** (`sellm/runner.py`, `scripts/pull-runs`, README, slides).
+**C - Runner, arguments, measurement, final** (`sellm/runner.py`, `sellm/claims.py`,
+`scripts/pull-runs`, README, slides). Work in this order; priority 1 first.
 
 1. RFQ runner: one loop per thread; re-read the thread before every accept (after a timeout the
    offer ID changes, and the old ID is a 422 that crashes the kit's `play()` and loses the case);
    accept or hold a thread at `final_offer` inside its 60 s. Prototypes: `play_lab(mode='parallel')`
    in the lab, `h3_par` in `experiments/sandbox_probes.py`.
 2. Waves: all cases of a wave in parallel (at most 10 sessions), a round budget from
-   `seconds_left`, close 90 s before the cap, resume after a crash, log to a file, count fallbacks.
-3. Measurement: every agent version through lab, sandbox and one full practice run;
+   `seconds_left`, close 90 s before the cap, resume after a crash, log to a file.
+3. *(from A)* Deadline per move, around any agent: `decide` runs in a worker; target 15 s, hard
+   40 s. Too slow or an exception: `agent.fallback.decide`, or, without a fallback, a holding
+   message without a term sheet to the same thread (it restarts the clock and keeps the standing
+   offer, `docs/CONTEXT.md` section 8). Every fallback is logged with case, round and reason, so a
+   failing LLM is never silent.
+4. *(from B)* `sellm/claims.py`: `citable_for(package, supplier_id, part_ids)` fills the dossier's
+   `citable` (section 10: index windows the arena accepts, should-cost matched on part and
+   supplier, scorecard means, PO pairs, forecast changes, letter + contract notice, rival quotes
+   marked private), and `arguments(case, supplier_id, dossier)` turns them into sentences, each
+   checked with `sellm/lab/claims.py`: at most 3 per e-mail, each ID once per case, a letter and
+   its contract as one argument.
+5. *(from B)* Research, offline from `runs/` and `total_cost`: which data unlock P08, P18, P10
+   (`C_best` 6-19 % below the current price), and which arguments got "it holds and we took it
+   into account". Results go to `docs/LEARNINGS.md`.
+6. Measurement: every agent version through lab, sandbox and one full practice run;
    `scripts/pull-runs`; keep the quota (at least 40 for Sunday).
-4. Final machine (Tacto advises a cloud VM), LLM key and rate limits for an hour of 10 parallel
+7. Final machine (Tacto advises a cloud VM), LLM key and rate limits for an hour of 10 parallel
    cases; pre-flight 09:00, rehearsal 10:00.
-5. Submission: README, commit hash, approach text, slides (walk through one replay).
+8. Submission: README, commit hash, approach text. Slides: C builds the skeleton and picks the
+   replay to walk through; each group writes the slide about its own part.
 
-Needs: Python concurrency (threads, asyncio), robust error handling, ops (VM, logs), organisation;
-for the slides, presenting.
+Needs: Python concurrency (threads, asyncio), robust error handling, ops (VM, logs), care with
+figures (item 4), organisation; for the slides, presenting.
 
-**Order and dependencies.** A and B depend only on section 10, not on each other's progress. C is
-independent of both: the runner plays any `make_agent`. Integration at Sat 20:30 (section 4).
+**Why this split.** Moved to C are tasks with their own file and an interface already fixed in
+section 10: the deadline wraps any agent and touches only the runner; `citable_for()` and
+`arguments()` have a fixed input and output; the research is offline. They stay where they are when
+they share one piece of logic: the negotiator and the Calculator's use of the dossier are one
+decision (two people in the same function would collide), and the dossier builder, the case overlay
+and the signal rules are one schema with the same extraction rules (split, they would be written
+twice). C's code is front-loaded: the runner (items 1-3) by Sat 20:30, then items 4-5. **If the
+runner is late, items 4 and 5 go back to B.**
+
+**Order and dependencies.** A, B and C depend only on section 10 and the `fallback` attribute, not
+on each other's progress. The runner plays any `make_agent`. Integration at Sat 20:30 (section 4).
 
 **Still to agree as a team** (proposed defaults in brackets): which agent plays the final (`sellm`
 replaces `llm` only if its mean is higher in lab, sandbox and one full practice run including the
@@ -251,6 +277,9 @@ a `*` field needs a `schema_version` bump and a `[decision]` in the log.
 - `dossier(supplier_id, part_ids, case=None, opening=None) -> dict`: the stored dossier restricted
   to `part_ids`, with the case overlay merged in. Never raises; for an unknown supplier it returns
   the overlay alone (`coverage: "case_only"`).
+- `citable` is filled by `sellm.claims.citable_for(package, supplier_id, part_ids)` (group C); the
+  builder and the overlay call it. `arguments(case, supplier_id, dossier)` (group C) turns it into
+  sentences for the negotiator.
 - Units as in the data: prices per the part's `price_unit`; yearly rates as fractions (0.09);
   percentages as numbers (9.5).
 
@@ -279,7 +308,7 @@ a `*` field needs a `schema_version` bump and a `[decision]` in the log.
 | `parts.<part>.forecast` | latest `fc:` ID, volume next 12 months, change_pct | `forecasts` |
 | `parts.<part>.alternatives`* | other approved suppliers and rival quotes `{supplier_id, quote_id, unit_price, date}`. **Buyer-private**: never in an e-mail unless the strategy cites it on purpose | `sourcing`, `quotes` |
 | `performance` | latest scorecard (id, otd_pct, ppm, colour), mean of the last 4 quarters with their IDs, trend, supplier-caused complaints in 12 months, overdue 8D | `scorecards`, `quality_notifications` |
-| `citable`* | list of `{ids, kind, figure, unit, about, statement, helps_buyer, private}`: every fact the argument bank may use, with the figure the arena checks (`docs/CONTEXT.md` section 7) | `facts.json`; in a case its `facts` and `refs` |
+| `citable`* | list of `{ids, kind, figure, unit, about, statement, helps_buyer, private}`: every fact the argument bank may use, with the figure the arena checks (`docs/CONTEXT.md` section 7) | `citable_for()` over `facts.json`; in a case also its `facts` and `refs` |
 | `documents` | id, date, kind, subject, author, full text | `documents`, `correspondence/` |
 | `news` | id, date, topic, headline, `noise` flag | `news` |
 | `profile_text` | at most 120 words, written from the fields by a template (no LLM) | |
@@ -340,6 +369,7 @@ the builder.
   `offer:` IDs are citable in the session).
 - Merge: lists are united by ID; scalar values from the case win.
 
-**Checks** (B's tests): every detailed supplier gets a dossier; two builds are byte-identical;
-0 `contradicted` in `citable`; `dossier()` on an unknown supplier and on every case file in
-`sellm/lab/cases/` returns the schema without raising.
+**Checks**: every detailed supplier gets a dossier; two builds are byte-identical;
+`dossier()` on an unknown supplier and on every case file in `sellm/lab/cases/` returns the schema
+without raising (B's tests). 0 `contradicted` in `citable` and in every sentence `arguments()`
+offers (C's tests).

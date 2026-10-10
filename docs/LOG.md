@@ -275,3 +275,16 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - sellm/lab/strategies.py looks up cost:<part number>. For two parts the package has one estimate per plant: cost:310012 is Wimbacher's (sup:70130), Brandlhuber's is cost:310012-70110; cost:350010 is sup:70510's, sup:70520's is cost:350010-70520.
 - So a hidden case with Brandlhuber on part 310012 would get Wimbacher's cost as its floor, and citing it to Brandlhuber is not about this supplier. No practice or sandbox case uses these parts (checked all 21 case files).
 - Fix (lab owner's file, not touched): read parts.<part>.should_cost from dossier() once B delivers it - the schema matches on part and supplier (docs/PLAN.md section 10).
+
+## 2026-10-10 17:45 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
+**[decision] Rebalanced the groups: three tasks with a fixed interface moved to C**
+- Moved to C: the per-move deadline from A (15 s target, 40 s hard, around any agent in the runner; falls back to make_agent's new 'fallback' attribute, else a holding message without a term sheet; every fallback logged), citable_for() and arguments() from B (sellm/claims.py), and the research on P08/P18/P10 from B.
+- Kept together: A's negotiator and the Calculator's use of the dossier (one decision logic); B's builder, case overlay and signal rules (one schema, the same extraction rules). C's code is front-loaded: runner by Sat 20:30, then arguments and research; if the runner is late, the argument bank and the research go back to B.
+- Slides: C builds the skeleton and picks the replay; each group writes the slide about its own part. Details: docs/PLAN.md section 3; interfaces in sections 2 and 10.
+
+## 2026-10-10 17:45 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
+**[finding] What the data package says about suppliers (now in docs/CONTEXT.md section 13)**
+- Skonto terms on 4 detailed suppliers (sup:70210, 70350 2 %/10 d; 70280 3 %/10 d; 70230 2 %/14 d; all vs 30 d) give the cost of money directly: 2 % for 20 days is 36 %/year. Note: P05's Czech shop (sup:70240, ~35 % measured) has no skonto terms.
+- Signals sit in quote remarks ('head-office directive', 'Payment within 10 days requested', 'Material covered until March 2027') and news topics (allocation, credit_watch, short_time_work, free_capacity, succession, ...; 10 items are 'noise').
+- Should-cost: 22 plant-specific, 6 generic DE; two parts have one estimate per plant (cost:310012 vs cost:310012-70110, cost:350010 vs cost:350010-70520). 34 of 55 parts have more than one approved supplier. 17 suppliers amber/red in 2026Q3. We pay some suppliers up to ~19 days late. Index clauses in only 4 contracts. No practice case file carries 'facts'.
+- Also documented: running arena-sim by hand (its 'practice sessions left' is the sim's own counter, not our quota; CONTEXT section 9) and installing uv on a machine without it (pip install is refused on Ubuntu; AGENTS.md section 7).

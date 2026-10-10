@@ -153,6 +153,9 @@ Each file has one job. Do not mix them:
 
 New machine: `uv sync --all-extras`, `cp .env.example .env`, put in the team's `ARENA_API_KEY`
 (from a teammate, never through git) and your own LLM key, `uv run arena data`, `uv run arena me`.
+No `uv` yet: `curl -LsSf https://astral.sh/uv/install.sh | sh` (installs to `~/.local/bin`; on
+Ubuntu/Debian `pip install uv` is refused by the system Python, PEP 668). This matters for the
+final machine too.
 
 **Entire** (session checkpoints, installed Sat 14:55, CLI 0.11.4) is enabled in this repo for Claude
 Code: `.entire/settings.json` and its hooks in `.claude/settings.json` are committed, but its git

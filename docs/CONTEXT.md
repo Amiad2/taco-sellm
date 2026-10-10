@@ -306,6 +306,13 @@ The sandbox does not touch the practice quota. Which free option to use for what
 | **Agent behaviour against real supplier bots**: arguments, tone, term-sheet strategy, LLM prompts | **sandbox `D01`, `D02`** (free, replay after each run, result shows `C_open`, `C_best` and the breakdown) | `arena-sim`: its supplier is a script that concedes a fixed 2 % per sheet and only checks that cited IDs exist, so a strategy that wins there says nothing |
 | Behaviour on the real case types (renewal, capacity, quality, raw material, bundling) | practice case, costs one session | the sandbox: it only has a price increase and an RFQ |
 
+Running `arena-sim` by hand (checked Sat 17:25): `uv run arena-sim serve --no-clock --port 8765
+--data data/package`, then `ARENA_URL=http://127.0.0.1:8765 uv run arena register <name> sim` prints
+a simulator key; play with `ARENA_URL=http://127.0.0.1:8765 ARENA_API_KEY=<key> uv run arena play
+case:S01 --agent sellm`. On localhost `pull_first` is skipped. **The "practice sessions left today"
+it prints is the simulator's own counter, not our quota.** `tests/test_sellm_agent.py` does the same
+in-process.
+
 Limits of the sandbox: two cases, demo suppliers (`DEMO-F1`, `DEMO-J1`, `DEMO-C1`), no board, and
 no `facts` of the real data package for them. A good sandbox score does not prove a good practice
 score. Use it to iterate cheaply, then confirm on one practice case.
@@ -436,6 +443,44 @@ likely pool for the hidden cases. `negotiation_history` has, per supplier and pa
 events with asked and settled change and a note, e.g. "accepted below full cost to keep the
 volume". `supplier_intel` has owner type, group parent, staff, turnover, equity ratio and credit
 index now and 12 months ago; `suppliers` has standard payment days and cash discount terms.
+
+What the data says about suppliers (checked Sat 18:20; used by the dossier schema, `docs/PLAN.md`
+section 10):
+
+- **The 46 detailed suppliers**: owner type family 22, founder 9, group 9, private 6; DE 32, AT 5,
+  CZ 4, one each CH, CN, HU, PL, TR; credit index 147-343, equity ratio 19.6-44.8 %.
+- **Cash discount terms give a supplier's cost of money directly**: `sup:70210` and `sup:70350` 2 %
+  at 10 days, `sup:70280` 3 % at 10 days, `sup:70230` 2 % at 14 days, all against 30 days net. 2 % for
+  20 days earlier is 36 % a year. We took the discount on about half of their invoices.
+- **Quote remarks carry signals** (`quotes.remarks`): "Prices as per current list; discounts not
+  possible this year (head-office directive)", "Payment within 10 days requested", "Material
+  covered until March 2027; price valid accordingly", "List conditions; supply from stock only".
+- **News topics** (`news.topic`): `allocation`, `full_order_book`, `big_order`, `chip_shortage`,
+  `free_capacity`, `short_time_work`, `credit_downgrade`, `credit_watch`, `new_owner`,
+  `succession`, `restructuring`, `refocus`, `energy_contract`, `new_plant`, `approvals`,
+  `renamed`, `market`, and **10 items marked `noise`**.
+- **Should-cost** (28 rows): 22 model a named supplier's plant (cost base DE, AT, CH, CZ or CN),
+  6 are generic German estimates without a supplier (confidence 5-12 %). **Two parts have one
+  estimate per plant**: `cost:310012` is Wimbacher's (`sup:70130`) and `cost:310012-70110`
+  Brandlhuber's; `cost:350010` is `sup:70510`'s and `cost:350010-70520` that of `sup:70520`.
+  Match on part **and** supplier; looking up `cost:<part>` alone can return another plant's cost.
+- **Alternatives**: 34 of 55 sourced parts have more than one approved supplier; `sourcing` also
+  says who owns the tooling. `rfqs` holds 34 periodic benchmarks, 11 second-source benchmarks and 2
+  open RFQs for new parts, with 108 quotes in all.
+- **Performance**: in 2026Q3, 17 detailed suppliers are amber or red; 19 have had an overdue 8D.
+- **Our payment behaviour**: we pay some suppliers late on average, up to about 19 days
+  (`sup:70580`); paying on time is a cheap concession to them.
+- **Index clauses** exist in only 4 contracts (`CU-NOTATION` 0.55, `AS-14404` 0.45, `AS-14301`
+  0.45, `PPI-C2431` 0.8 with a 3 % deadband). Index series end between 2026-06 and 2026-09.
+- **Letters with a price demand** (`documents.asked_pct`, `asked_price`, `effective_date`,
+  `notice_days`): four, the triggers of P01, P02, P13 and P17.
+- `facts.json` holds 10,356 IDs: `po` 5,400, `idx` 2,258, `qn` 1,033, `fc` 495 (with `change_pct`
+  and `volume_per_year`), `sc` 414, `ctr` 326, `doc` 208, `quote` 108, `rfq` 47, `news` 39, `cost` 28.
+- No practice or sandbox case file carries `facts`; only hidden cases will.
+- **A final-pool supplier, for illustration**: `sup:70130` Wimbacher (in no practice case) asks
+  three times to be paid within 10 days, has idle shifts and "the bank is watching every month",
+  says "I cannot sign anything that lowers our margin" and is "focusing on customers with volume":
+  the trade it wants is payment days and volume, not price.
 
 Data quirks that are not errors (`data/package/KNOWN_ISSUES.md`): prices are per `price_unit` (1,
 100 or 1,000); `sup:71999` is the old record of `sup:70210`; some PO lines carry a stale price;
