@@ -141,6 +141,7 @@
  "b4105401f739c2ff": "sellm negotiator v1.2 + calculator @19b339f, kit runner, no LLM",
  "b62447687636e5a1": "probe h1b",
  "b6759d5e9b760a5b": "kit llm, gpt-6.1-sol",
+ "b7f37a230bf6f9b0": "TEST past-target (one-off, not in the agent): keep asking past the relationship target while the supplier moves",
  "b9bd6f9b3b878b6c": "probe h13-a",
  "b9eb9670c83ff68c": "probe h2-trade",
  "bb64095ce8935924": "kit llm, gpt-6.1-sol",
