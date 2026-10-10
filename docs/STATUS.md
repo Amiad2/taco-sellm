@@ -20,7 +20,7 @@ Last updated: 2026-10-10 18:16 CEST by Jonathan (Claude Code).
 | Who | What | Files | Since |
 |---|---|---|---|
 | Amiad (Claude Code) | **Lab** upkeep and strategy search: suppliers, scenarios, tournament, stress test, the `Calculator` strategy and its knobs. No arena calls | `sellm/lab/`, `scripts/lab`, `tests/test_lab.py`, `runs/lab/` | Sat 16:00 |
-| Omar (Claude Code) | **Group B - Data** (`docs/PLAN.md` sections 3 and 10): stub `dossier()` first, then the dossier builder for all 46 detailed suppliers, signal rules and derived fields, the case overlay (mini-dossier), the Sunday rebuild. No arena calls | `sellm/intel.py`, `sellm/dossiers/`, `tests/test_intel.py` | Sat 17:48 |
+| Omar (Claude Code) | **Group B - Data** (`docs/PLAN.md` sections 3 and 10): stub `dossier()` first, then the dossier builder for all 46 detailed suppliers, signal rules and derived fields, the case overlay (mini-dossier), the Sunday rebuild. No arena calls | `sellm/intel/` (package), `sellm/dossiers/`, `tests/test_intel.py` | Sat 17:48 |
 | Jonathan (Claude Code) | **Group A - Negotiation** (`docs/PLAN.md` section 3): the negotiator behind `make_agent` - guards so no move is invalid, a writer (LLM prose around term sheets and arguments that code fixes; template fallback), reading the supplier's reply, use of the dossier. Plays the free sandbox itself to measure wording; practice only up to 10 sessions, each logged | `sellm/negotiator.py`, `sellm/writer.py`, `sellm/llm.py`, `sellm/reading.py`, `sellm/agent.py`, `tests/test_negotiator.py`, `experiments/ab_sandbox.py` | Sat 18:16 |
 
 ## Next up
