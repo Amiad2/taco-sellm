@@ -195,6 +195,12 @@ VARIANTS = {
     "agent-near3": dict(knobs=dict(plan="llm", near=0.03)),
     # the rule as built in: hold the fixed-price ask against a supplier whose material is not hedged
     "agent-holdfixed": dict(knobs=dict(plan="llm", hold_fixed=True)),
+    # P10 says its last word after our second message: a second ask close to its sheet (31.70) instead of 30.30
+    "second-31.0": dict(knobs=dict(plan="llm"), prices={1: 31.0}),
+    "second-30.7": dict(knobs=dict(plan="llm"), prices={1: 30.7}),
+    "second-31.3": dict(knobs=dict(plan="llm"), prices={1: 31.3}),
+    # P11: a chargeback of EUR 500 per complaint asked and kept (it costs the supplier more than it is worth to us)
+    "chargeback-hold": dict(knobs=dict(plan="llm"), structure={"chargeback_eur_per_complaint": 500}, hold=True),
     # P10: the lead time we need (42 days), which it calls not feasible, kept in every ask
     "lead42-hold": dict(knobs=dict(plan="llm"), structure={"lead_time_days": 42}, hold=True),
     # P10: the lead time it calls feasible (its alternative sheet) asked from the first e-mail
@@ -377,6 +383,10 @@ class Probe(Persistent):
             return {**plan, "sheet": complete_offer(case, {**plan["structure"], "unit_price": first})}
         if self.below(case, v):
             sheet = complete_offer(case, {**plan["structure"], "unit_price": self.p["floor"]})
+            return {**plan, "sheet": sheet, "capped": False, "enough": False}
+        fixed = (self.p.get("prices") or {}).get(len(v.asks))
+        if fixed and v.status == "open":  # the price of our n-th ask (0 = first), on the agent's structure
+            sheet = complete_offer(case, {**plan["structure"], "unit_price": fixed})
             return {**plan, "sheet": sheet, "capped": False, "enough": False}
         return plan
 
