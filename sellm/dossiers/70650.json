@@ -1,9 +1,9 @@
 {
  "built_from": {
   "case_id": null,
-  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "facts_sha256": "411943e51cc915a92a129e3d3adfe3f6269f4a5bbb4bddabecbdc6fdcfc57af2",
   "package": "1.0.0",
-  "sunday_release": false
+  "sunday_release": true
  },
  "case_facts": {},
  "citable": [
@@ -227,6 +227,22 @@
    "helps_buyer": false,
    "helps_supplier": false,
    "ids": [
+    "news:20261006-S9"
+   ],
+   "kind": "news",
+   "private": false,
+   "sensitive": false,
+   "statement": "We have read that Strelvo group acquires Verbindungstechnik Mairhofer GmbH (news:20261006-S9).",
+   "strength": 0.5,
+   "topic": "acquisition",
+   "unit": ""
+  },
+  {
+   "about": "sup:70650",
+   "figure": null,
+   "helps_buyer": false,
+   "helps_supplier": false,
+   "ids": [
     "news:20260803-21"
    ],
    "kind": "news",
@@ -431,6 +447,19 @@
    "part_ids": [],
    "subject": "Range changes",
    "text": "We are reorganising our range around our key accounts. Standard items will be supplied from stock at list conditions; individual agreements will not be extended."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Verbindungstechnik Mairhofer GmbH",
+   "date": "2026-10-08",
+   "effective_date": null,
+   "id": "doc:20261008-70650-S10",
+   "kind": "letter",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Prices and conditions in the Strelvo group",
+   "text": "Dear Sir or Madam,\n\nas you may have read, our company now belongs to the Strelvo group. Our prices are set centrally from now on: the group price list 2027 applies to all customers without exception, and we can no longer grant individual price reductions. We remain open to discuss payment terms, call-off planning and contract length.\n\nYours faithfully,\nVerbindungstechnik Mairhofer GmbH"
   }
  ],
  "economics": {
@@ -500,6 +529,15 @@
    "noise": false,
    "source": "Wirtschaftsblatt Niederbayern",
    "topic": "refocus"
+  },
+  {
+   "body": "The Mairhofer family has sold Verbindungstechnik Mairhofer GmbH to Strelvo, a group of fastener distributors. The company keeps its name and its sales team; prices will be set centrally by the group, as for all its member companies.",
+   "date": "2026-10-06",
+   "headline": "Strelvo group acquires Verbindungstechnik Mairhofer GmbH",
+   "id": "news:20261006-S9",
+   "noise": false,
+   "source": "Zulieferer Report",
+   "topic": "acquisition"
   }
  ],
  "opening_offer": null,
@@ -982,7 +1020,7 @@
   "qn_supplier_caused_12m": 25,
   "trend": "better"
  },
- "profile_text": "Verbindungstechnik Mairhofer GmbH (DE; family; 40 staff; turnover EUR 19.5 M). Our spend FY2026 EUR 140,220 (0.72 % of its turnover). Standard terms: 30 days net, DAP, lead time 7 days. Cost of money about 25 % a year; cash pressure low; type job shop. Signals: approval ladder (1), list price fixed (3), ownership change (1), wants volume (2). Performance 2026Q3: green, OTD 84.1 %, 296 ppm. Parts: part:360010 Hex bolt ISO 4017 M12x40 8.8, zinc: price 14.52 per 100; part:360011 Hex bolt ISO 4017 M16x60 8.8, zinc: price 37.64 per 100; part:360012 Hex nut ISO 4032 M12 8, zinc: price 5.6 per 100.",
+ "profile_text": "Verbindungstechnik Mairhofer GmbH (DE; family; 40 staff; turnover EUR 19.5 M). Our spend FY2026 EUR 140,220 (0.72 % of its turnover). Standard terms: 30 days net, DAP, lead time 7 days. Cost of money about 25 % a year; cash pressure low; type job shop. Signals: approval ladder (1), list price fixed (3), ownership change (2), wants volume (2). Performance 2026Q3: green, OTD 84.1 %, 296 ppm. Parts: part:360010 Hex bolt ISO 4017 M12x40 8.8, zinc: price 14.52 per 100; part:360011 Hex bolt ISO 4017 M16x60 8.8, zinc: price 37.64 per 100; part:360012 Hex nut ISO 4032 M12 8, zinc: price 5.6 per 100.",
  "schema_version": 1,
  "signals": [
   {
@@ -996,20 +1034,22 @@
   {
    "evidence": [
     "doc:20260817-70650-M1",
+    "doc:20261008-70650-S10",
     "quote:7300072",
     "quote:7300085"
    ],
-   "excerpt": "List conditions; supply from stock only.",
+   "excerpt": "Our prices are set centrally from now on: the group price list 2027 applies to all customers without exception, and we can no longer grant individual price r...",
    "kind": "list_price_fixed",
    "strength": 3
   },
   {
    "evidence": [
-    "news:20260803-21"
+    "news:20260803-21",
+    "news:20261006-S9"
    ],
    "excerpt": "Verbindungstechnik Mairhofer GmbH sharpens its focus",
    "kind": "ownership_change",
-   "strength": 1
+   "strength": 2
   },
   {
    "evidence": [
