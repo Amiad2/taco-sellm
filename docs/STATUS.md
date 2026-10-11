@@ -34,6 +34,8 @@ Last updated: 2026-10-11 10:20 CEST by Jonathan (Claude Code).
 
 ## Next up
 
+**Entire for everyone (Amiad, Sun 09:45): session checkpoints are now pushed and visible to the whole team** (`push_sessions: true` in `.entire/settings.json`; Amiad's 56 checkpoints are on origin, checked for keys first: only placeholders and the simulator's dummy key). **Jonathan and Omar, once on your machine:** `curl -fsSL https://entire.io/install.sh | bash`, then `entire enable --agent claude-code --telemetry=false` (no `--skip-push-sessions`), then `entire login`. From then on every `git push` sends your sessions too. **Never paste a real key into a chat or a command line**: it would be pushed with the session.
+
 **Withdrawn (Amiad, Sun 09:00):** the 03:45 proposal to play sellm2 in the final - jonathans_branch measured 80.3 after it (sellm2: 76.4). sellm2 stays on `amiads_branch` as a fallback agent (`python -m sellm2 ...`, README in `sellm2/README.md`).
 
 **Jonathan: read the [handoff] of Sat 20:30 in docs/LOG.md** - the lab's supplier model changed at 20:03 (lowball

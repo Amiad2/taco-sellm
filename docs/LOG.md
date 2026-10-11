@@ -1193,3 +1193,8 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Asked by Jonathan Sun 10:37. main's code is that of the measured commit 362bf0f: ten practice cases through the final runner 81.1 three times (09:57, 10:11, 10:22), 228 tests pass, intel verify PASS, dossiers built with the Sunday release.
 - Run it with the planner: SELLM_PLAN=llm SELLM_MODEL=gpt-6-sol uv run python -m sellm.runner --set final --agent sellm --parallel 10 (through sellm.runner, not the kit's arena run).
 - Fallbacks: tag best-jonathans_branch-80.3-sunday3 (without hold_fixed), best-jonathans_branch-81.1-head (this code).
+
+## 2026-10-11 10:42 CEST · Amiad @ fedora
+**[decision] Entire session checkpoints are pushed to origin and visible to the team (push_sessions true)**
+- Amiad's request: everyone must be able to see the sessions. Before the push all 56 local checkpoints were searched for keys: the .env values appear nowhere; only placeholders (<secret>, $KEY, ...) and the local simulator's dummy key 'sim'. Pushed by Amiad (entire pre-push hook): 56 refs under refs/entire/checkpoints on origin.
+- Jonathan and Omar have no Entire checkpoints in their commits: install and enable Entire without --skip-push-sessions (commands in docs/STATUS.md Next up). AGENTS.md section 7 still says push_sessions false - superseded by this decision.
