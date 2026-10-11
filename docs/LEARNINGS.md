@@ -37,6 +37,37 @@ Tacto's docs or FAQ, not yet seen by us). Raw history goes to `docs/LOG.md`.
   rolling scorecard. Pick the right reference before citing, and build the argument bank only from
   IDs checked against `facts.json`, never from a supplier's stated reasons.
 
+## From omars_branch's experiments (Sun 01:50-03:30, 17 practice sessions; `experiments/LEDGER.md` on `omars_branch`)
+
+One change at a time against the recorded sessions of today's agent; a case was played only where an
+offline replay showed a different e-mail.
+
+- **A fact the supplier did not know moves it at once** (confirmed, P18): "The index AS-14404 changed
+  -5.5 % from 2026-06 to 2026-09" (it rose 5.9 % over the year, as the supplier's own quote says) -
+  "we have verified the recent decrease ... and have reduced our price": first counter 5.40 instead of
+  5.60, 0.467 -> 0.520. A window of up to 12 months that ends with the data is checked like the
+  yearly one.
+- **The same fact to a supplier whose material is hedged costs points** (confirmed, P08): "That is not
+  our reality: our AS-14404 is covered at fixed prices until March, so that fall does not reach our
+  cost" - no move that round and final_offer a round earlier, 0.549 -> 0.438. Its quote remark says so
+  ("Material covered until March 2027"; dossier signal `material_hedged`, 6 quotes of 5 suppliers).
+  Jonathan (02:54): the hedge covers that material only - P08 took a fall of PPI-C2431.
+- **A round without new information is neutral or costs a round** (confirmed): leaving out a fact the
+  supplier would dismiss (E3: P08 -0.034, P07 -0.013, P18 +0.047), a duplicate forecast or a question
+  about its cost build-up (E5: P08 -0.034, P07 -0.007) - two suppliers say final_offer sooner after
+  a round with no new fact; one hardens after a dismissed fact. Keep one fact per e-mail; filler is
+  not a fact.
+- **A bigger number is not always better** (confirmed, E4): citing electricity's fall from its peak
+  (-6.1 %) instead of over the year (-3.7 %) gained P01 (0.969 -> 0.997) and lost P11 twice
+  (0.778 -> 0.710: the same prices, but it held at our 45.09 instead of agreeing).
+- **A contract longer than the horizon is neither priced nor rewarded** (confirmed, P08 E1): 24 instead
+  of 36 months did not avoid the index clause ("for a 24-month duration we cannot offer a fixed
+  price"); first counter 0.12 lower, same end.
+- **RFQ: the order of our messages matters more than their speed** (confirmed, P05): one loop per thread
+  0.665 (the arena processes a session's messages one after another, so parallel ones are counted
+  late), one message in flight 0.735, one loop per case in the agent's order (fewest of our messages
+  first, as the kit's play()) 0.820 in 3-52 s. That is the default of `sellm/runner.py` on omars_branch.
+
 ## From the P02 argument tests (Sun 01:20-02:10, 8 practice sessions; `experiments/P02-ARGUMENTS.md` on `jonathans_branch`)
 
 Nordmark (P02) ended at EUR 371.66 with 90 days in more than ten sessions, whatever was asked or
