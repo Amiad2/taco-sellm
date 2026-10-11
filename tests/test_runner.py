@@ -260,6 +260,32 @@ def test_a_thread_the_agent_leaves_waiting_gets_a_holding_email_before_its_clock
     assert any("while the agent works elsewhere" in n for n in row["notes"])
 
 
+def test_turns_holds_a_bidder_left_waiting_while_it_writes_to_the_others():
+    """One loop per case: the agent keeps writing to one bidder while replies are slow; the others get a
+    holding e-mail before their 60 s run out (here 0.6 s), at most max_holds times each."""
+    pkg = _package()
+
+    class Fixated:
+        def __init__(self):
+            self.inner = _agent(pkg)
+
+        def decide(self, case, threads, focus=None):
+            first = sorted(threads)[0]
+            return self.inner.decide(case, threads, focus=first)
+
+    class Slow(FakeArena):
+        def send_message(self, sid, sup, message):
+            time.sleep(0.3)  # every reply takes a while, as under load
+            return super().send_message(sid, sup, message)
+
+    arena = Slow([_scenario("P05")], pkg.facts)
+    row = runner.play_case(arena, "case:P05", Fixated(), limits=dataclasses.replace(FAST, turns=True, serial=True))
+    assert row["crash"] is None and row["stats"]["clock_holds"] >= 1
+    first = sorted(arena.sessions[row["session_id"]].threads)[0]
+    held = [c[2] for c in arena.calls if c[0] == "send" and c[3] == "e-mail" and c[2] != first]
+    assert held and all(held.count(s) <= FAST.max_holds for s in set(held))
+
+
 def test_an_attachment_held_behind_another_reply_does_not_stop_the_other_threads():
     """Practice P05: the arena answered an attachment only once another bidder's pending reply was
     written (37-61 s); the runner held the case lock meanwhile and a bidder timed out. Here every
@@ -297,6 +323,37 @@ def test_an_attachment_held_behind_another_reply_does_not_stop_the_other_threads
     assert row["crash"] is None and row["end_reason"] in ("accepted", "walked_away")
     assert row["stats"]["slow_docs"] >= 1
     assert any("going on without" in n for n in row["notes"])
+
+
+def test_a_case_waits_for_a_free_session_slot_instead_of_losing_the_case():
+    """Sun 03:05: with a teammate's sessions open on the key, 'at most 10 open sessions per key' made two
+    cases of a full run score 0. The runner now waits for a slot and plays the case."""
+    pkg = _package()
+
+    class Full(FakeArena):
+        refused = 0
+
+        def open_session(self, case_id):
+            if self.refused < 3:
+                self.refused += 1
+                raise ArenaError(429, "at most 10 open sessions per key")
+            return super().open_session(case_id)
+
+    arena = Full([_scenario("P01")], pkg.facts)
+    row = runner.play_case(arena, "case:P01", _agent(pkg), limits=dataclasses.replace(FAST, open_retry=0.01))
+    assert arena.refused == 3 and row["crash"] is None and row["end_reason"] in ("accepted", "walked_away")
+
+
+def test_the_practice_quota_is_not_waited_for():
+    pkg = _package()
+
+    class Quota(FakeArena):
+        def open_session(self, case_id):
+            raise ArenaError(429, "practice limit: 450 sessions per 24 h")
+
+    row = runner.play_case(Quota([_scenario("P01")], pkg.facts), "case:P01", _agent(pkg),
+                           limits=dataclasses.replace(FAST, open_retry=0.01), retries=0)
+    assert row["crash"] and "practice limit" in row["crash"]
 
 
 def test_closes_on_what_stands_before_the_cap():
@@ -345,6 +402,18 @@ def test_waves_start_their_cases_and_the_runner_stops_after_the_last():
     assert all(r["crash"] is None for r in rows.values())
     assert {r["wave"] for r in rows.values()} == {1, 2}
     assert ("cases", "final") in arena.calls
+
+
+def test_waves_in_the_final_mode_one_loop_per_case_with_an_rfq():
+    """What `python -m sellm.runner --set final` runs since Sun 02:20: one loop per case, one message in
+    flight, waves with an RFQ among single-supplier cases."""
+    pkg = _package()
+    scen = [_scenario(n) for n in ("P01", "P05", "P18")]
+    arena = FakeArena(scen, pkg.facts, waves=[(0.2, 8.0, ["case:P01", "case:P05"]), (0.6, 8.0, ["case:P18"])])
+    lim = dataclasses.replace(FAST, turns=True, serial=True)
+    rows = runner.run_final(arena, lambda: _agent(pkg), waves=2, parallel=10, limits=lim)
+    assert set(rows) == {"case:P01", "case:P05", "case:P18"}
+    assert all(r["crash"] is None and r["end_reason"] in ("accepted", "walked_away") for r in rows.values())
 
 
 def test_the_runner_never_calls_the_live_feed():

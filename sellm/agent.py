@@ -6,8 +6,9 @@ from sellm.endgame import Persistent
 
 # What `--agent sellm` plays on top of the defaults of the negotiator (sellm/negotiator.py DEFAULTS)
 # and of its persistence layer (sellm/endgame.py DEFAULTS). Each rule was measured on practice
-# (experiments/PERSISTENCE.md, experiments/P02-ARGUMENTS.md): the first two change P01 (0.915 -> 0.969)
-# and D01's accept, the third P02, and no other move in the recorded sessions.
+# (experiments/PERSISTENCE.md, experiments/P02-ARGUMENTS.md, experiments/LEDGER.md): the first two change
+# P01 (0.915 -> 0.969) and D01's accept, the third P02 (jonathans_branch), the fourth P18 and P05
+# (omars_branch), and no other move in the recorded sessions.
 KNOBS = dict(
     past_target=True,  # with a relationship term: keep asking past our target while the supplier still moves
     fast_pay=True,  # a supplier the dossier calls short of cash is asked for the fastest payment

@@ -1,219 +1,156 @@
-# SESSION_HANDOFF - Omar's Claude Code session, Sun 11 Oct 2026 01:45 CEST
+# SESSION_HANDOFF - omars_branch, Sun 11 Oct 2026 ~02:55 CEST
 
-Written for the next agent on `omars_branch`. Verified against the repo, `docs/LOG.md`, `GET /v1/me`
-and a local test run at 01:41-01:45. Everything not marked otherwise is measured; hypotheses are
-labelled. The repo's own memory stays authoritative: `AGENTS.md` (rules, read first),
-`docs/CONTEXT.md` (the challenge), `docs/STATUS.md` (now), `docs/LEARNINGS.md`, `docs/LOG.md`.
+For the next agent on `omars_branch`. Written from the repo, `docs/LOG.md`, the arena traces and
+`experiments/LEDGER.md` (every arena session of this research, with its commit). Measured results
+are marked as such; anything else is labelled a hypothesis. The repo's memory stays authoritative:
+`AGENTS.md` (rules, read first), `docs/CONTEXT.md` (the challenge), `docs/STATUS.md` (now),
+`docs/LEARNINGS.md`, `docs/LOG.md`. The handoff before this one (01:45) is in git history (`2df3350`).
 
-## 1. Project objective
+## 1. Objective and constraints
 
-- **Task:** team sellm's buyer agent for the Tacto Negotiation Arena (EHL Grand Finale 2026). It
-  negotiates by e-mail over an HTTP API (`https://arena.tacto.ai/v1`) with Tacto's hosted LLM
-  supplier bots for the fictional pump maker Hollerau, and accepts a supplier's standing term sheet
-  or walks away. Only term sheets bind; unstated terms close on the supplier's standard terms.
-- **Success:** case score = `clip((C_open - C_deal) / (C_open - C_best), 0, 1)`, C = the arena's
-  total-cost function (`arena_kit/cost.py`). Broken must-have or a deal worse than the opening = 0;
-  no deal = the alternative's score. **Live Final Sun 12:00:** hidden cases in 5 waves of 8 minutes,
-  every case weighs the same, points = sum of wave means x 100 (max 500). Practice does not rank.
-- **Constraints:** no human in the loop during the final; the agent must never call `/v1/events`,
-  `/v1/events/stream`, `/screen`, `/leaderboard`, `/results` (or `/v1/...`); one API key, 10 open
-  sessions, 10 calls/s; 60 s per message per thread (3 timeouts end a thread), 10 messages per
-  thread; code freeze 12:00 (team freeze **11:00**); **the final runs `main`** on Jonathan's MacBook.
-  Sunday data release at 08:00 (`uv run arena data`); hidden cases may cite it.
+- Team sellm's buyer agent for the Tacto Negotiation Arena: it negotiates by e-mail over
+  `https://arena.tacto.ai/v1` with hosted LLM supplier bots and accepts a standing term sheet or walks
+  away. Only term sheets bind; unstated terms close on the supplier's standard terms.
+- Case score `clip((C_open - C_deal) / (C_open - C_best), 0, 1)`; C = `arena_kit/cost.py`. Broken
+  must-have or a deal worse than the opening = 0; no deal = the alternative's score.
+- **Live Final Sun 12:00**: hidden cases, 5 waves of 8 min, every case weighs the same, points = sum of
+  wave means x 100. No human in the loop; never call `/v1/events*`, `/screen`, `/leaderboard`,
+  `/results`. One key, 10 open sessions, 10 calls/s, 60 s per message per thread. **Team freeze
+  11:00, the final runs `main`** on Jonathan's MacBook. Sunday data release 08:00.
 
-## 2. Current architecture
+## 2. Architecture (unchanged in shape)
 
-Execution path (one move):
+Runner -> agent -> negotiator -> template e-mail; no LLM in the default path.
 
-1. Runner: `sellm/runner.py` (final runner: one loop per thread, waves, closing before the cap,
-   resume; `python -m sellm.runner --set final --agent sellm`) or the kit's `arena play|run`
-   (`arena_kit/cli.py` -> `arena_kit/play.py`, one thread at a time). Both call `scripts/pull-first`
-   before practice runs (not for `--set final`).
-2. Agent: `sellm/agent.py:make_agent` -> `sellm/endgame.py:Persistent` (subclass of
-   `sellm/negotiator.py:Negotiator`) with `KNOBS = {past_target: True, fast_pay: True}`.
-   `SELLM_LLM=shadow|apply` swaps in `sellm/advisor.py:Advised` (LLM writer + verdict); **off by default**.
-3. `Negotiator.decide(case, threads, focus)` -> `move()` -> one of ask / hold / take_alternative /
-   accept / walk_away -> `message()` (`sellm/writer.py:compose`, template e-mails, no LLM).
-   Every move is a pure function of case + threads (resumable after a crash).
-4. Ask (`plan()`): structure from `calculator.packages()` (all option combinations priced with C at
-   one price; payment days by the dossier's cash persona); target from `aim()`: own-plant should-cost
-   (`calculator.supplier_cost`) or a prior share of the opening (`TARGET_SHARE` 0.945/0.88, moved by
-   dossier signals), first ask = target x 0.94 (`open_below` 0.06), then steps sized so both prices
-   meet after `horizon` 4 of our messages, staying just below its quoted price (`keep_below`).
-   Arguments: one new checked fact per e-mail (rival offer > own-plant should-cost > falling index >
-   `sellm/claims.py` bank, one per topic, fixed order by case type).
-5. Close: accept a `final_offer`/`agreed` standing sheet (never ask after a final offer); walk only
-   if the alternative is better. In relationship cases `past_target` keeps asking past our target.
-6. Supplier knowledge: `sellm/intel/` (`dossier(sid, parts, case, openings)`: 46 stored dossiers in
-   `sellm/dossiers/` + case overlay; never raises) -> cash persona, cost of money, signals;
-   `sellm/personas.py` names the personas (description only). Data: `arena_kit/data.py:DataPackage`
-   over `data/package` (not in git); `calculator.LOCK` serialises lookups across parallel cases.
-7. Lab (no arena): `sellm/lab/` (local API with calibrated engine or LLM suppliers, twins of the played
-   suppliers, invented scenarios). Architecture map: https://claude.ai/artifact/XH8RgDAuE42ZZTzNFPD8Ay
+1. **Runner** `sellm/runner.py` (`python -m sellm.runner --set final --agent sellm`). **New default on
+   omars_branch: one loop per case, the agent picks the thread, one message of a session in flight**
+   (`Limits.turns`/`serial`; `--per-thread` restores one loop per thread). Keeps the cap closing, resume,
+   move deadline, holds, re-read before accept. The kit runner (`arena run`) plays the same order.
+2. **Agent** `sellm/agent.py:make_agent` -> `sellm/endgame.py:Persistent` (subclass of
+   `sellm/negotiator.py:Negotiator`) with `KNOBS = {past_target, fast_pay, clause_offer, idx_recent=2.0}`.
+3. **Negotiator** `move()` -> ask / hold / take_alternative / accept / walk_away; `plan()` sizes the
+   price path (first ask = target x 0.94, meet after 4 messages); `opening_structure()` picks the
+   package with `sellm/calculator.py` (C of every option combination); `arguments()` sends one checked
+   fact per e-mail: rival offer > own-plant should-cost > falling cost-driver index > `sellm/claims.py`
+   bank (fixed order by case type). Every move is a pure function of case + threads.
+4. **Knowledge**: `sellm/intel/` dossiers (46 suppliers in `sellm/dossiers/`, case overlay, signals
+   such as `material_hedged`, `cash_short`, `list_price_fixed`); data via `arena_kit/data.py`.
+5. **Rules on this branch** (all knobs, default off in `Negotiator.DEFAULTS`; on via `KNOBS`):
+   - `clause_offer` (Jonathan, `sellm/endgame.py`, `sellm/planner.py`): with a relationship term and a
+     fixed price at the supplier's cost, the index clause as a second sheet at our cost-optimal price.
+   - `idx_recent=2.0` (this session, `Negotiator.index_claims`): cite the largest fall >= 2 % of a
+     cost-driver index from its 12-month peak when its yearly change rose (today: AS-14404 -5.5 %,
+     AS-14301 -7.6 %, PPI-C2431 -2.3 %), **not to a supplier whose dossier says `material_hedged`**
+     (`Negotiator.hedged`). Off-path knobs kept for experiments: `contract`, `gate`, `idx_window`.
 
 ## 3. Implementation state
 
-- **Git:** branch `omars_branch` (tracks `origin/omars_branch`) at `a5b363c`, identical to
-  `origin/main` at 01:41. Working tree clean before this file. Team rule since 01:20: one branch per
-  member for an independent version, shared files (`AGENTS.md`, `docs/`, `runs/`) on `main`, the
-  chosen version merged into `main` before 11:00 (`AGENTS.md` section 4); every result names
-  `<branch>@<hash>` (section 2).
-- **This session's changes (all committed and pushed to `main`):** lock + case facts in
-  `sellm/intel` (76be2c8); the dossier now reads all opening e-mails (b4361d2); "no qn after sc"
-  tried and reverted (0223875); experiments `experiments/llm_writer.py`, `price_path.py`,
-  `price_path_arena.py` with write-ups `LLM-WRITER.md`, `PRICE-PATH.md`; `AGENTS.md` rules (935973a, a5b363c).
-- **Agent code since the last measured full run (7a49c38, 72.9):** only a persona log line in
-  `sellm/endgame.py`; behaviour unchanged.
-- **Unfinished (teammates, on `main`):** Jonathan "P02 arguments" (`experiments/p02_arguments.py`,
-  no committed results yet); Codex "P02 experiment repair"; Amiad's playbooks (lab).
-- **Known issues:** `uv run ruff check .` reports 1 error in `sellm/lab/p02_c_agents.py` (I001,
-  not ours). On Omar's machine `.env` has `OPENAI_API_KEY` but the kit and `sellm/llm.py` read
-  `LLM_API_KEY`: LLM calls there fail silently unless it is added. P05 (RFQ): the final runner scored
-  0.665 twice vs the kit runner's 0.769 (open, Amiad). P11's 0.778 is one lucky path (0.710 on others).
+- **Branch `omars_branch`, candidate `f473d97` (tag `best-omars_branch-75.4`)**; HEAD adds only the
+  experiment knob `idx_window` (off), ledger lines and merges of `main`. Working tree clean, pushed.
+- Changes of this session: `sellm/negotiator.py` (knobs `contract`, `idx_recent` + `hedged`, `gate` +
+  `dismissed`, `idx_window`), `sellm/runner.py` (`serial`, `turns`, CLI default), `sellm/agent.py`
+  (KNOBS), `tests/test_runner.py` (+2 tests), `tests/test_endgame.py` (KNOBS pin), merge of
+  `jonathans_branch@67001e7`; experiments `experiments/structure_args.py`, `combined_replay.py`,
+  `LEDGER.md`. **205 tests pass, 1 skipped**; `ruff check .` only reports the old I001 in
+  `sellm/lab/p02_c_agents.py` (not ours).
+- **Not on `main` yet.** `main` still plays 72.9 (`@7a49c38` behaviour) with the old runner loops.
+- Known issues: `.env` on Omar's machine has `OPENAI_API_KEY` but the code reads `LLM_API_KEY` (only
+  matters if `SELLM_LLM` is set; it is off). P11's last accept is path-sensitive (0.778 vs 0.710).
 
-## 4. Experimental results (arena unless marked)
+## 4. Arena results (all measured; one session per case unless noted)
 
-Full practice runs (10 hosted cases, mean x 100):
-
-| Agent | Commit | Mean | Note |
+| ID | Change | Result | Decision |
 |---|---|---|---|
-| kit LLM agent (baseline) | - | 61.5 | `runs/BASELINE.md` |
-| negotiator v1.2 / after data-lock fix | 19b339f / d792ee3 | 67.5 / 67.7 | |
-| v1.4: argument bank + signals | cdd9cf8, 61f806f | 72.4 (twice, identical) | |
-| **current `--agent sellm`** (past_target + fast_pay) | **7a49c38** | **72.9** | P01 0.969, P02 0.531, P03 0.923, P04 0.860, P05 0.820, P07 0.747, P08 0.549, P10 0.647, P11 0.778, P18 0.467 |
-| same with LLM-written e-mails (shadow verdict) | 86db7be | 71.6 | `experiments/LLM-ADVISOR.md` |
+| E0 | reference `@7a49c38` | 72.9 (P01 .969 P02 .531 P03 .923 P04 .860 P05 .820 P07 .747 P08 .549 P10 .647 P11 .778 P18 .467) | - |
+| E1 | contract = horizon (24 not 36 months) | P08 0.538 (0.549): the clause is demanded at 24 months too | rejected |
+| E2 | recent index fall as argument | P18 **0.520** (0.467), P08 **0.438** (0.549, "not our reality: covered at fixed prices") | -> E2g |
+| E2g | E2 + hedge guard | P08 = reference by replay; P05 0.820 (C1) | **adopted** |
+| E3 | leave out facts the dossier predicts are dismissed | P08 0.515, P07 0.734, P03 0.923, P18 0.567 (net 0) | rejected |
+| E4 | cite the larger window of a falling index | P01 0.997, P11 0.710 twice, P05 0.820 (net -0.04) | rejected |
+| R1 | runner, one POST per session in flight | P05 0.735, 0 timeouts (was 0.665) | -> R2 |
+| R2 | runner, one loop per case (agent picks thread) | P05 0.820 = kit runner, 3 s | **adopted (runner default)** |
+| C1 | merge clause offer + E2g | P05 0.820; nine cases by exact replay -> **75.4** | **candidate** |
 
-Best per case ever (team, `GET /v1/me`): P01 0.984, P02 0.531, P03 0.933, P04 0.860, P05 0.820,
-P07 0.779, P08 0.560, P10 0.663, P11 0.778, P18 0.485 (mean 73.9).
+Sandbox with the candidate through the runner: D01 0.947, D02 0.567 (free). Lab stress of the
+agent at `a5b363c`: PASS (0 crashes, 0 refused, 0 broken; `runs/lab/20261011-020037-stress-omar-sellm-a5b/`).
+Earlier results (price path, LLM writer/verdict, persistence): previous handoff in `2df3350`,
+`experiments/PRICE-PATH.md`, `PERSISTENCE.md`, `LLM-ADVISOR.md`, `PRACTICE-ARMS.md`.
 
-Targeted tests (one session per case; practice suppliers answer identical e-mails identically):
+## 5. Budget
 
-| Test | Result | Source |
-|---|---|---|
-| Argument bank (one checked fact per e-mail) | P01 0.831 -> 0.915, P02 0.293 -> 0.531; no effect P04, P07, P08, P18 | `experiments/PRACTICE-ARMS.md` |
-| `past_target`; + `fast_pay` | P01 0.915 -> 0.953 -> 0.969; D01 +0.026 | `experiments/PERSISTENCE.md` |
-| push after `final_offer` | P04, P08 withdrew (0.000), P07 +0.032; all five P02 one-euro ladder sessions withdrew | PERSISTENCE.md, LOG Sun 00:18-00:45 |
-| `creep`, `zone`, `pay_probe`, `signal_facts`, `soft_give`, closer first ask | no gain (P11 0.710, P18 0.434-0.467, P07 0.773 vs D02 worse) | PERSISTENCE.md |
-| dossier: skip qn after sc (reverted) | P11 0.710 (0.778), P02 0.522 (0.531) | LOG Sat 22:18 |
-| dossier: read all openings | P05 0.820 (same) | LOG Sat 22:20 |
-| LLM verdict acting (`apply`) | P01 0.864 (0.984), P18 0.401 (0.446); P05 0.250 with kit runner timeouts | LLM-ADVISOR.md |
-| P02 dials (5 settings) / wording probes | 0.482-0.531 / 0.529, 0.406 | LOG Sat 22:45, 23:51 |
-| horizon 6 | P07 0.702, P11 0.710, P18 0.401, D01 0.921 (all below today) | `experiments/PRICE-PATH.md` |
-| cost oracle, first ask 3 % below the lab floor | P02 0.531, P07 0.766, P11 0.710, P18 0.406, D01 0.935 (mean -2.4) | PRICE-PATH.md |
-| relationship target x0.95 | P02 0.531 (same deal), D01 0.959 | PRICE-PATH.md |
+- Omar's budget: **50 arena runs; 1 run = 1 practice session** (`POST /v1/sessions` on a hosted case;
+  a full practice run = 10). Sandbox D01/D02 and `arena-sim` are free and not counted.
+- **This session: 14 practice sessions** (ledger). The previous session on this branch used 21. If the
+  50 includes those: 35 used, 15 left; if not: 14 used, 36 left. The ledger plans to stay within 29
+  for this session; **Omar should say which reading he meant.**
+- Team quota (shared, 450 per rolling 24 h): left 225 at 02:35; keep 40 for Sunday.
 
-Lab / offline only (not arena; models): LLM-written e-mails -3.1 points vs template on 12 twins with
-LLM suppliers (`LLM-WRITER.md`); price-path sweep, 18,444 negotiations: lower first ask, target x0.85
-to x1.08, horizon 3/6/8/10, relationship push all lose, oracle +2.0 in the lab but -2.4 in the arena
-(`PRICE-PATH.md`); LLM reading supplier personas from e-mails 32/48 = as good as always "no"
-(`PERSONA-READER.md`). Sandbox probes of supplier behaviour: `experiments/RESULTS.md`.
+## 6. Argumentation: what the data says
 
-## 5. Arena budget
+- Mechanism (`docs/CONTEXT.md` 7): a fact = data ID + our figure in one sentence; the arena checks it
+  (`claim_results`), the supplier then decides whether it matters to it. Its trace says so: "it holds and
+  we took it into account" / "we did not know that - a fair point" vs "it holds, but it does not change
+  our calculation" / "that is not our reality: ...".
+- **Measured, causal (same e-mails except the fact):** a recent AS-14404 fall moved P18 0.20 on the
+  first counter; the same fact to a hedged supplier (P08) moved nothing and lost 0.111 (an earlier
+  final offer). Earlier sessions: facts moved P01 (+0.084) and P02 (+0.238), not P04/P07/P08/P18;
+  'irrelevant' facts cancel a verified one in the same e-mail (Jonathan, P02).
+- **The dossier predicts acceptance (observational, `docs/LOG.md` 02:30):** material_hedged -> index
+  dismissed; list_price_fixed (70620) -> everything dismissed (37/37); capacity_tight -> volume
+  dismissed; informal_costing -> data taken; delivery records taken only with a delivery/quality
+  problem signal. Acting on the last one (E3) did not pay: a round with no fact also ends suppliers.
+- **Magnitude is not monotone** (E4): the larger fall helped P01 and hardened P11 (reproduced).
+- Untested: news and letter-based facts on hidden suppliers; reacting to a dismissal in the same thread;
+  two facts in one e-mail; the stated drivers of strangers that are not cost drivers of the part
+  (risk: 'irrelevant').
 
-- **The "50 runs" budget cannot be verified from the environment.** The arena's real limit is
-  **450 practice sessions per rolling 24 h for the whole team** (one API key; raised from 200).
-  `GET /v1/me` at 01:41: **used 195, left 255**, resets 2026-10-11 12:13 UTC (14:13 CEST, after the
-  final). `AGENTS.md`: keep at least 40 for Sunday (pre-flight, rehearsal).
-- **Counting:** one `POST /v1/sessions` on a hosted practice case = 1 session (a full run = 10).
-  Messages inside a session do not count. Sandbox `case:D01`/`case:D02` and the local `arena-sim`
-  do not count (verified Sat 14:49). `arena me` and replays are free.
-- **This session consumed 21 practice sessions** (+4 free D01), counted from `runs/labels.json`:
-  P11 and P02 (fix B), P05 (fix A), one full run of 10 (22:25), 8 price-path checks. Against a
-  50-run budget for this workstream that would leave 29 - an assumption, not a measured limit.
-
-## 6. Argumentation
-
-- **How it works (`docs/CONTEXT.md` section 7):** cite a data ID (`idx`, `po`, `fc`, `sc`, `qn`,
-  `cost`, `quote`, `news`, `doc`+`ctr`, `offer`) with our figure in the same sentence; the arena
-  checks against `facts.json` and returns at most 3 `claim_results` per message: verified,
-  irrelevant, contradicted (costs trust), duplicate (each ID, and in practice each topic such as
-  sc/qn, once per case). Prose without an ID is read by the bot but not checked.
-- **Logic today:** `sellm/claims.py` builds the bank (verified wording: ppm without thousands comma,
-  one figure per sentence); `Negotiator.arguments()` sends one new fact per e-mail in a fixed order
-  by case type. It does not choose by supplier, does not react to the supplier's answer, and does
-  not use the dossier's `stated_drivers` check.
-- **Evidence:** facts moved P01 and P02 (the largest single gain, 67.7 -> 72.4 with signals); they
-  did not move P04, P07, P08, P18 ("it holds, but it does not change our calculation"). A duplicate
-  citation still helps; a round without an argument gets a hold (P11). Rhetoric, LLM wording and
-  point-by-point rebuttals did not move prices (see section 4). After `final_offer` nothing helps.
-- **Untested:** choosing the fact per supplier (dossier signal, measured effect per kind), reacting
-  to "which figures?" / "does not change our calculation", the strongest fact first, more than one
-  fact per e-mail, countering the supplier's own stated cost drivers (all 17 in practice openings
-  matched the index, so this targets hidden cases). Jonathan's P02 arguments test is running.
-
-## 7. Evaluation infrastructure
+## 7. Evaluation
 
 ```bash
-export PATH="$HOME/.local/bin:$PATH"                 # uv
-uv run pytest -q                                     # 199 passed, 1 skipped (~2.5 min)
-uv run ruff check .
-uv run arena me                                      # quota and best scores (free)
-uv run arena play case:D01 --agent sellm -v          # sandbox, free (D01, D02)
-uv run arena play case:P07 --agent sellm -v          # one practice session (quota)
-uv run arena run --set practice --agent sellm --parallel 8   # full run (10 sessions)
-python -m sellm.runner --set practice --agent sellm --cases P05   # the final runner on chosen cases
-scripts/pull-runs --label "<agent> <branch>@<hash>"  # save every session to runs/ (index runs/README.md)
-uv run python -m sellm.lab compare <agent> <agent> [--supplier llm]  # lab, free; guide sellm/lab/README.md
-uv run python -m experiments.price_path --only base,horizon_6        # lab sweep with test switches
-uv run python -m experiments.price_path_arena --variant horizon_6 --cases P07   # arena check (quota)
-uv run python -m sellm.intel verify                  # dossiers V1-V10
-uv run python -m sellm.calculator P08                # a case's cost sheet
+export PATH="$HOME/.local/bin:$PATH"
+uv run pytest -q                                        # 205 passed, 1 skipped (~2.5 min)
+uv run python -m experiments.structure_args replay E4    # which recorded cases a variant changes (free)
+uv run python -m experiments.combined_replay             # today's KNOBS vs the measured sessions (free)
+uv run python -m experiments.structure_args arena E2g --cases P18   # 1 practice session, ledger line
+uv run python -m sellm.runner --set practice --cases P05 --label "..."   # through the final runner
+uv run python -m sellm.runner --set sandbox --cases D01 D02            # free
+uv run arena me                                          # quota (free)
 ```
 
-- **Logs and metrics:** `runs/<set>/<case>/<time>-<sid>.{json,md}` (full threads, result, cost
-  breakdown, supplier reasons), `runs/README.md`, `runs/labels.json`, `runs/logs/` (runner),
-  `experiments/results/*.json`, lab runs in `runs/lab/<run>/` (`summary.json`, `report.md`).
-- **Repeatability:** practice suppliers are deterministic for identical messages, so one session per
-  case compares variants; D01 varies 0.921-0.947 for one agent; P05 (RFQ) and any run with an LLM in
-  the loop vary. Lab: `--seeds`, `--invent-seed`, `--fixed-twins`, `--supplier engine|llm`, `--think`.
-- **Cheaper than the arena:** offline replay of recorded sessions (`tests/test_negotiator.py`
-  replays all real states; a variant that sends the same moves cannot score differently), the lab
-  (engine free; LLM suppliers cost tokens), sandbox D01/D02 (free, real bots), `arena-sim`
-  (plumbing only). The lab missed twice in direction (P02 dials +5.5 predicted, 0 real; oracle +2.0
-  predicted, -2.4 real): confirm lab gains in the arena before adopting them.
+Practice suppliers answer identical e-mail histories with identical prices, so a variant only needs
+sessions on the cases where replay shows a different e-mail; but the last accept/hold decision can
+flip on a changed history (P11), so one session is evidence for that case, not for a supplier type.
+Logs: `runs/<set>/<case>/*.{md,json}` (traces with supplier reasons), `runs/logs/` (runner),
+`experiments/results/2026-10-11-structure-args.json`.
 
-## 8. Important discoveries
+## 8. Discoveries and what not to repeat
 
-- Suppliers end negotiations on their own schedule: `final_offer` after a median of 4 of our
-  messages (64 % after at most 4, 171 threads), 2-24 % above their calibrated floor; a final offer
-  is final (asking below it lost P04, P08 and all five P02 ladder sessions; only P07 took it).
-- Our first ask does not change the supplier's final price (within-case -0.03 pp over 10 cases); a
-  very low first ask ends rounds earlier and in RFQs got bidders to quit (P05).
-- Price-path knobs (`open_below`, `horizon`, target) are at their optimum; cost knowledge does not
-  help in the arena (P18: lower price, but the supplier moved to 30 days and a 0-deadband clause).
-- Suppliers price payment days at their own cost of money (groups 6.5 %, measured from their sheets).
-- Verified facts are the one lever that moved price (some suppliers); wording, LLM writing, LLM
-  verdicts and LLM persona reading did not help or made it worse.
-- Wasteful to repeat: replaying a practice case with an unchanged agent; price-path sweeps; LLM
-  writer/verdict tests; pushes after `final_offer`; lab-only claims without an arena check.
+- RFQ timeouts came from parallel messages in one session, not from slow decisions: one message in
+  flight in the agent's order fixes them (R2). Do not run the final with one loop per thread.
+- Contract length beyond the horizon is neither priced nor rewarded by P07/P08/P10 suppliers (E1).
+- Do not re-test: E1-E4 above, the price path (horizon, first ask, oracle; `PRICE-PATH.md`), LLM
+  writer/verdict, pushes after a final offer.
 
 ## 9. Next steps (highest value first)
 
-1. **Sun 08:00 data release** (group B runbook, `docs/STATUS.md` Next up 4): `scripts/sync`,
-   `uv run arena data`, `uv run python -m sellm.intel build`, `check`, `verify` (must PASS), read the
-   new letters/news, commit `sellm/dossiers` on `main`. Dry run Sat 22:30 was clean.
-2. **Final readiness on `main` by 11:00:** decide which branch's version plays, merge it, run
-   `scripts/preflight` on Jonathan's MacBook, keep 40+ sessions; decide the RFQ runner (P05 issue).
-3. **Argument selection** (the one untested lever with evidence behind the mechanism): first measure
-   offline from `runs/` the supplier's concession after each verified fact kind, per supplier and
-   dossier signal; then a per-supplier order (strongest first) and answer-aware switching; replay
-   offline, sandbox, one practice session per changed case. Coordinate with Jonathan's P02 test.
-4. **Structure levers** (hypothesis from cost breakdowns): P08's index clause costs 32,000 of 79,000
-   EUR to `C_best`, P10's lead time 33,600 EUR - test asking for a deadband / shorter lead time.
-- Architectural uncertainties: how the agent generalises to the hidden suppliers (about a third
-  combine unseen types); lab-to-arena transfer; LLM key configuration on the final machine (only
-  matters if `SELLM_LLM` is used, which is off).
+1. **Merge the candidate into `main` before 11:00** (team decision; it is jonathans_branch's 74.9 +
+   E2g + the runner default). Then `scripts/preflight` on the final machine; final command
+   `python -m sellm.runner --set final --agent sellm` (one loop per case is the default).
+2. **Sun 08:00 data release** (group B, Omar): `scripts/sync`, `uv run arena data`,
+   `uv run python -m sellm.intel build`, `check`, `verify` (must PASS), read new letters/news for
+   signal wording (`material covered`, cash, capacity), commit `sellm/dossiers` on `main`. Then
+   `experiments/combined_replay.py` to see whether the rebuild changed any practice move.
+3. Optional, if budget is agreed: one full practice run of the merged `main` through the final runner
+   as the rehearsal (10 sessions).
+- Open questions: how the hedge and dismissal signals look in the Sunday data for the hidden pool;
+  whether hidden RFQs with 3 bidders stay inside 8 minutes under load (R1 replies took up to 47 s
+  while teammates ran a full run; the runner closes 90 s before the cap).
 
 ## 10. Repository handoff
 
-- Branch `omars_branch` @ `a5b363c` (= `origin/main` at 01:41); this file is the only change after it.
-- **Known-good baseline:** `a5b363c` - tests pass, agent behaviour identical to `7a49c38`, which
-  scored **72.9** on all 10 practice cases. Earlier full-run points: `61f806f` / `cdd9cf8` (72.4).
-- Restore: `git switch -c restore-<hash> <hash>` to test an older commit; bring it back with `git
-  revert` of later commits or a merge; never `git reset --hard` over pushed work, never force-push.
-  Tag versions worth keeping: `git tag -a best-<branch>-<score> <hash> -m "..."`, push the tag.
-- Reports (claude.ai, private until shared): price-path analysis
-  https://claude.ai/code/artifact/cd7f860c-5e80-433d-b1fe-40bb34782ddf; calculator explanation
-  https://claude.ai/code/artifact/ce2bfe89-d5d0-4cde-aa34-1c81057b3905; architecture map (above).
-- Session start in Claude Code runs `scripts/session-start` (state, claims, newest log). Before any
-  arena run: `scripts/sync` (works on the current branch; `git merge main` brings team changes in).
+- `omars_branch` (tracks `origin/omars_branch`), candidate `f473d97`, tag `best-omars_branch-75.4`.
+  Reference before this session: `a5b363c` (= behaviour of `@7a49c38`, 72.9).
+- Restore: `git switch -c restore-<hash> <hash>`; bring back with `git revert` or a merge; never
+  `git reset --hard` over pushed work, never force-push. Turn a rule off by removing it from `KNOBS`.
+- Shared files (`docs/`, `runs/`) live on `main`: switch, `scripts/sync`, change, commit, sync, switch
+  back, `git merge main` (take `main`'s `runs/labels.json` on conflict).

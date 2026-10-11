@@ -142,7 +142,8 @@ def test_creep_never_steps_further_than_its_share_of_the_gap(package):
 
 
 def test_the_agent_plays_the_rules_that_were_measured(package):
-    """`--agent sellm`: past the relationship target, fast payment for a supplier short of cash, the clause offer."""
+    """`--agent sellm`: past the relationship target, fast payment for a supplier short of cash, the clause offer,
+    and a recent fall of a cost-driver index as an argument (experiments/LEDGER.md E2g)."""
     from sellm.agent import KNOBS
     from sellm.agent import make_agent as the_agent
 
