@@ -190,6 +190,20 @@
   },
   {
    "about": "part:370021",
+   "figure": 5.7,
+   "helps_buyer": true,
+   "ids": [
+    "po:4500013735-10",
+    "po:4500014440-10"
+   ],
+   "kind": "po",
+   "private": false,
+   "statement": "We ordered from you at EUR 3.83 per unit in 2026-03 and at EUR 4.05 per unit in 2026-09 (po:4500013735-10, po:4500014440-10).",
+   "strength": 2.872063,
+   "unit": "%"
+  },
+  {
+   "about": "part:370021",
    "figure": 7.0,
    "helps_buyer": true,
    "ids": [

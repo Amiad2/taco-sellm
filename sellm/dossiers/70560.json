@@ -170,6 +170,20 @@
   },
   {
    "about": "part:350040",
+   "figure": 20.0,
+   "helps_buyer": true,
+   "ids": [
+    "po:4500013315-10",
+    "po:4500014438-10"
+   ],
+   "kind": "po",
+   "private": false,
+   "statement": "We ordered from you at EUR 263.62 per 100 units in 2025-12 and at EUR 316.35 per 100 units in 2026-09 (po:4500013315-10, po:4500014438-10).",
+   "strength": 10.001138,
+   "unit": "%"
+  },
+  {
+   "about": "part:350040",
    "figure": 18.5,
    "helps_buyer": true,
    "ids": [

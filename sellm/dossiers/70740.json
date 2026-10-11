@@ -189,6 +189,20 @@
    "unit": "%"
   },
   {
+   "about": "part:370010",
+   "figure": 11.0,
+   "helps_buyer": true,
+   "ids": [
+    "po:4500014078-10",
+    "po:4500014427-10"
+   ],
+   "kind": "po",
+   "private": false,
+   "statement": "We ordered from you at EUR 5.26 per unit in 2026-06 and at EUR 5.84 per unit in 2026-09 (po:4500014078-10, po:4500014427-10).",
+   "strength": 5.513308,
+   "unit": "%"
+  },
+  {
    "about": "part:370011",
    "figure": 7.4,
    "helps_buyer": true,
@@ -203,6 +217,20 @@
    "unit": "%"
   },
   {
+   "about": "part:370011",
+   "figure": 11.9,
+   "helps_buyer": true,
+   "ids": [
+    "po:4500013317-10",
+    "po:4500014441-10"
+   ],
+   "kind": "po",
+   "private": false,
+   "statement": "We ordered from you at EUR 2.86 per unit in 2025-12 and at EUR 3.20 per unit in 2026-09 (po:4500013317-10, po:4500014441-10).",
+   "strength": 5.944056,
+   "unit": "%"
+  },
+  {
    "about": "part:370012",
    "figure": 8.1,
    "helps_buyer": true,
@@ -214,6 +242,20 @@
    "private": false,
    "statement": "We ordered from you at EUR 132.65 per 100 units in 2024-09 and at EUR 143.39 per 100 units in 2026-09 (po:4500011374-10, po:4500014441-20).",
    "strength": 4.048247,
+   "unit": "%"
+  },
+  {
+   "about": "part:370012",
+   "figure": 11.0,
+   "helps_buyer": true,
+   "ids": [
+    "po:4500014082-10",
+    "po:4500014441-20"
+   ],
+   "kind": "po",
+   "private": false,
+   "statement": "We ordered from you at EUR 129.13 per 100 units in 2026-06 and at EUR 143.39 per 100 units in 2026-09 (po:4500014082-10, po:4500014441-20).",
+   "strength": 5.521567,
    "unit": "%"
   },
   {

@@ -170,6 +170,20 @@
   },
   {
    "about": "part:350050",
+   "figure": 3.1,
+   "helps_buyer": true,
+   "ids": [
+    "po:4500013334-10",
+    "po:4500014426-10"
+   ],
+   "kind": "po",
+   "private": false,
+   "statement": "We ordered from you at EUR 22.43 per unit in 2025-12 and at EUR 23.13 per unit in 2026-09 (po:4500013334-10, po:4500014426-10).",
+   "strength": 1.56041,
+   "unit": "%"
+  },
+  {
+   "about": "part:350050",
    "figure": 8.2,
    "helps_buyer": true,
    "ids": [
