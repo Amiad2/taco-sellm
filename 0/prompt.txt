@@ -1,0 +1,804 @@
+hi, wir machen jetzt was großes. du schaust dir diese projektordner komplett an. machst dir ein überblick. am wichtigsten sind die logs über verbesserungen die du dann mit codeänderung trackst usw. usw.. dann nutzen wir diese von 
+  dir gefundene lernkurve um das was wir hier implementiert haben komplett neu von grundauf zu schreiben. alles komplett anders und perfekt funktionieren, unsgewinnen lassen, alles aufeinmal. mach keine fehler,
+
+---
+
+sorry, das ich interuppted habe. ich hab vergessen zu erwähnen, du musst erstmal pullen auch noch und dann sollst du nicht überschreiben. du sollst einen branch benutzen und da in einem extra ordner alles neu schreiben. danke
+
+---
+
+<task-notification>
+<task-id>a4dc5e92a0d91c648</task-id>
+<tool-use-id>toolu_011NyhPLuFuhRxhahvXauGGg</tool-use-id>
+<output-file>/tmp/claude-1000/-home-amiad-Desktop-taco-sellm/fa55bb36-4417-4f3f-bfa4-355b7b3a7c4d/tasks/a4dc5e92a0d91c648.output</output-file>
+<status>completed</status>
+<summary>Agent "Map branches and score history" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result># Learning curve of team sellm's negotiation agent: commits, scores, branches and rejected experiments
+
+**Repo state (read-only checks):**
+- `main` = `origin/main` = `6374d4e`.
+- The last agent-code commit on main is `71ed7cd`. `git diff 7a49c38 main -- sellm/` shows only the persona log line in `endgame.py` and the new `personas.py`, so main still plays exactly like `7a49c38` (72.9).
+- `origin/jonathans_branch` (tip `cd9dcd1`) is missing only `6374d4e`, a docs-only commit. Tag `best-jonathans_branch-74.9` points to `67001e7`.
+- `origin/omars_branch` (tip `dbc9623`) already contains main's HEAD.
+- The two branches change different files, so they should merge without conflicts. This is an inference; I did not test a merge.
+
+Sources: `/home/amiad/Desktop/taco-sellm/docs/LOG.md`, `docs/STATUS.md`, `runs/README.md`, `experiments/PERSISTENCE.md`, `LLM-ADVISOR.md`, `LLM-WRITER.md`, `PRACTICE-ARMS.md`, and on the branches `experiments/P02-ARGUMENTS.md`, `experiments/LEDGER.md` and `SESSION_HANDOFF.md`.
+
+---
+
+## 1. Learning curve
+
+### 1a. Full 10-case practice runs
+
+| When | Agent @commit | Runner | Mean | What moved |
+|---|---|---|---|---|
+| Sat 15:27 | kit LLM agent (gpt-6.1-sol) | kit | **61.5** | baseline. P02 0.105, P18 0.377, P08 0.433 |
+| 20:32 | negotiator v1.1 @`2dadddb` | kit | **53.2** | regression: P04 0.000, P08 0.152 (kept the quoted 30 days / 12 months) |
+| 21:03 | v1.1 @`484d555` | sellm.runner v1.1 | **52.2** | same as kit except P05 0.665 (vs 0.769) |
+| 21:06 | v1.2 + calculator @`19b339f` | kit | **67.5** | P04 0→0.860, P08 0.152→0.527, P02 0.293 |
+| 21:36 | v1.3, data-lock fix @`d792ee3` | kit | **67.7** | P05 0.769→0.820; P08 0.515, P10 0.647 (designed openings) |
+| 21:49 | v1.4, argument bank + signals @`cdd9cf8` | kit | **72.4** | P01 0.915, P02 0.531, P11 0.778, P18 0.467, P08 0.549 |
+| 22:25 | v1.4 + dossier fix A @`61f806f` | kit | **72.4** | identical in all 10 |
+| 23:54 | + past_target + fast_pay + LLM writer (shadow) @`86db7be` | kit | **71.6** | rejected (section 5) |
+| Sun 00:20 | past_target + fast_pay, no LLM @`7a49c38` | kit | **72.9** | P01 0.969; the other 9 the same as v1.4 |
+| 02:18 | jonathans_branch@`67001e7` (clause_offer) | kit | **74.9** | P02 0.531→0.725; the other 9 the same as 72.9 |
+| (replay only) | omars_branch E2g @`c5c2d53` (knob not on by default) | — | **73.4** | P18 0.467→0.520; P08 kept at 0.549 |
+
+The two branch changes together would give about 75.4 (72.9 + 1.94 + 0.53). This is my own arithmetic from replays, not a measurement, and E2g's P05 change was never played.
+
+### 1b. Every main commit touching `sellm/` or `arena_kit/`, with the score measured on it
+
+| Commit | Time, author | Change to the agent | Measured |
+|---|---|---|---|
+| `44ee219` | Sat 14:02 Jonathan | kit starter | kit naive: P01 0.583, D01 0.200; kit LLM: D01 0.786, 10 cases 61.5 |
+| `a74a353` | 16:08 Jonathan | `pull_first` in `arena_kit/cli.py` | infrastructure |
+| `cc1f21a` `028da70` `3232cb5` `4e7b8d3` `8a8e51a` `aa098d5` `241505f` `20449e8` `dd8aed3` `fbd398e` | 16:22–18:14 Amiad | lab v1–v3, UI, LLM suppliers (`sellm/lab`) | lab only: Calculator search 54.5 vs naive 38.7; capping steps at the round limit −4.9 pts (refuted); backtest error 0.79 %; kit LLM 59.8 in the lab vs 61.5 in the arena |
+| `b19453f` | 17:16 Omar | `--agent sellm` registered (Calculator with lab-best knobs) | real D01 0.789 ×4 (`47ba2d6`, 18:30); a scripted moderate path got 0.95 |
+| `29e2d11`…`4e0c086` | 18:20–18:39 Omar | intel S1–S12: 46 dossiers, signals, overlay | not separately scored (later ablation: without dossier 64.4 vs 67.8 on 6 cases) |
+| `0f0bc5a` | 18:29 Amiad | lab challenge loop | champion stress FAIL (3 refused moves, sequential) |
+| `ebcdcd6` | 18:59 Jonathan | **negotiator v1**: stateless, bounded price path, template e-mails | D01 0.869 / 0.909 / 0.909 / 0.889 (mean 0.894); D02 0.448 |
+| `d1b07a8` | 20:03 Amiad | lab lowball penalty | predicts v1 at 0.891 on D01 |
+| `6330f9d` | 20:22 Amiad | clone agent (lab) | 45.7 vs Calculator 48.2 vs negotiator 47.2; never played in the arena |
+| `fcea884` | 20:24 Jonathan | **v1.1**: coverage and non-cash levers in the first ask, steps sized from the thread, RFQ close on the cheapest offer | D01 mean 0.920, D02 0.530 |
+| `2dadddb` | 20:32 Jonathan | holding e-mail before an RFQ accept; cost estimate capped at the opening | practice **53.2** |
+| `f4a9b14` `76cb8ce` `bad2b62` | 20:45–20:54 Amiad | `sellm/runner.py` v1 (one loop per thread, waves, cap, resume, holds) | D01 0.935 ×3; D02 0.535 / 0.514 / 0.535; practice 52.2 (P05 0.665) |
+| `f6e083b` | 21:02 Amiad | `sellm/claims.py` argument bank; dossiers rebuilt | not wired into the negotiator until `cdd9cf8` |
+| `19b339f` | 21:06 Jonathan | **v1.2**: `calculator.py`; first ask = cheapest package at the expected end price; payment days by cash_pressure; horizon 5→4 | **67.5** |
+| `db036d5` | 21:14 Amiad | runner v1.2: no network under the lock, attachment wait ≤ 20 s | D02 0.567 / 0.567 / 0.546; D01 0.921 / 0.947 / 0.935; P05 0.665 |
+| `cd67dda` | 21:23 Jonathan | second_choice: ask once for the cheapest option of a field the supplier changed | P08 0.419 ×3 (vs 0.515), P18 0.485 → switched off |
+| `d792ee3` | 21:36 Jonathan | **v1.3**: one LOCK around all data lookups (they failed silently in parallel); second_choice off | **67.7** |
+| `cdd9cf8` | 21:49 Jonathan | **v1.4**: argument bank, one fact per topic, plain ppm, signals set the aimed share (0.96 / 0.84) | **72.4** |
+| `76be2c8` | 22:03 Omar | intel RLock; a case's own facts become citable | no score change |
+| `b4361d2` | 22:15 Omar | fix A (dossier reads every opening) + fix B (no qn after an sc) | P11 0.710, P02 0.522 |
+| `0223875` | 22:18 Omar | fix B reverted | P05 0.820 with fix A; full run @`61f806f` 72.4 |
+| `272a392` | 22:23 Jonathan | `sellm/endgame.py` Persistent layer (knobs off) | past_target test: P01 0.953, D01 0.947 |
+| `4de3733` | 22:24 Amiad | playbooks (lab) | +0.05 in the lab; no book works everywhere |
+| `5ed8076` | 22:30 Jonathan | `zone` knob | P04 0.860, P11 0.710, P18 0.434 |
+| `54774da` | 22:40 Jonathan | `past_creep` knob | P01 0.960, D01 0.921 |
+| `6e57595` `28fc3db` | 22:42 / 22:51 Amiad | P02 dial settings a1–a5, b1–b3 | 0.482–0.531; b1 0.531 |
+| `ab6071b` | 23:21 Jonathan | knobs push_final, fast_pay, pay_probe, signal_facts, soft_give | tests T1–T4 (section 5) |
+| `18f739b` | 23:31 Amiad | repaired P02 probes (c3–c5 had scored 0.000 because of an ImportError) | repaired c1 / c2: 0.531 |
+| `755811f` | 23:48 Amiad | P02 wording probes | t1 0.529, t2 0.406 |
+| `86db7be` | 23:54 Jonathan | KNOBS past_target + fast_pay **on**; `advisor.py` and `llm.py` LLM layer (off) | P01 0.969; LLM shadow run 71.6 |
+| `71ed7cd` | Sun 00:22 Jonathan | `personas.py` (no behaviour change) | confirmation run @`7a49c38`: **72.9** |
+
+`7a49c38` (00:07) itself only edits `experiments/LLM-ADVISOR.md`. Its agent code is `86db7be`'s.
+
+After `71ed7cd`, main only received experiment scripts and records: price path (`@130210e`), P02 arguments (`@a00444a`, `@0fab3fd`), and the Codex one-euro ladders.
+
+---
+
+## 2. jonathans_branch vs main
+
+**Commits** (`main..origin/jonathans_branch`):
+- `5e4e333` 02:01: clause_offer, off by default.
+- `a49c9b4` 02:08: switched on.
+- `fb93252` merge.
+- `27cedb2` 02:10: P02-ARGUMENTS.md.
+- `67001e7` 02:10: merge (the tagged version).
+- `cd9dcd1` 02:20: merge.
+
+**Diff stat:** 7 files, +372 / −13.
+- `sellm/endgame.py` +99
+- `tests/test_endgame.py` +95
+- `sellm/agent.py` (`KNOBS` gets `clause_offer=True`)
+- `tests/test_negotiator.py` +2
+- `experiments/P02-ARGUMENTS.md`, `p02_arguments.py`, results json
+
+**Logic added to `Persistent`:**
+- **`clause_case`** decides whether the rule applies. All of these must hold, otherwise it returns None:
+  - the knob is on;
+  - `index_clause` is negotiable;
+  - the opening's first sheet has a fixed price and no clause;
+  - `estimate()` is non-None, which already requires a relationship goal (`RELATIONSHIP_GOALS`) and a priced opening;
+  - an own-plant should-cost exists and is at least `value(opening) × (1 − sustainable_margin_pct/100)`. In other words, our own data says a fixed price has no room left.
+- **`clause_price`** finds the price where our total cost is lowest, relationship term included. It searches a 601-point grid from 0.85× to 1.0× of the price that pays the supplier exactly its full cost.
+- **`clause_sheet`** builds the second offer:
+  - our first ask again, with the clause option that costs us least (the widest deadband), at `clause_price`;
+  - offered only if it costs us at least 0.2 % less than the fixed price at which the supplier just covers its cost.
+- **First e-mail:** carries `[fixed-price ask, clause sheet]` plus one sentence (`CLAUSE_LINE`).
+- **Guards:**
+  - `structure()`: a clause the supplier prices below `clause_price` is not followed; the agent goes back to the fixed price.
+  - `plan()`: our ask on a clause structure is raised to `clause_price`.
+  - `plan()`: an open clause offer below `clause_price` sets `enough=False`, so it is not accepted.
+- **Tests:** P02 gets the second sheet at the cost-minimal price. P01, P03, P04, P07, P08, P10, P11, P18 and D01 play move for move as before (at least 30 states). The 351.45 clause offer from the clause5-raise session is neither taken nor followed. The agreed clause5-direct sheet is accepted.
+
+**Measured:**
+- P02 agent-clause @`5e4e333`: 0.725 (362.70 with the CU-NOTATION clause, 5 % deadband, 90 days, agreed in its first reply).
+- Hand-built clause5-direct @`0fab3fd`: 0.735 at 361.35.
+- Lab stress @`a49c9b4`: PASS, 816 negotiations, 56.1 (one loop per thread) / 55.6 (sequential).
+- Full run @`67001e7`: **74.9**.
+
+**Why it works:** Nordmark's full cost is 367.56, which reproduces both relationship charges exactly. The fixed price of 371.66 at 90 days is its cost floor. A clause buys 5.3 % off the price, but going below about 361 costs more in the relationship term than it saves.
+
+---
+
+## 3. omars_branch vs main
+
+**Commits:** `2df3350` (handoff), `7bc38bf` (E1/E2 knobs), `c8c0eb5` (lock), `c5c2d53` (E2g `hedged`), `650e6e8` (`--serial`), `b312bc0` (`--turns`), `fdb262e` (lab stress PASS), `f60a212` (turns as default), plus merges.
+
+**Diff stat:** 8 files, +827 / −9.
+- `sellm/negotiator.py` +38
+- `sellm/runner.py` +42
+- `tests/test_runner.py` +37
+- `SESSION_HANDOFF.md`, `experiments/LEDGER.md`, `structure_args.py`, results json, lab stress report
+
+**Negotiator logic:**
+- **`contract`** knob (`"longest"` by default). With `"horizon"`, where total cost does not care about contract length, it takes the shortest option that covers the horizon. This is E1, rejected.
+- **`idx_recent`** knob (None by default). Set to a percentage, it adds one index argument: a cost-driver index whose yearly change rose but which fell at least that much from its peak of the last 12 months, ranked by weight × change, largest fall only. This is E2.
+- **`Negotiator.hedged()`** blocks material-index claims (anything except `LCI-` and `PPI-D35` series) to a supplier with the dossier signal `material_hedged`, and only acts when `idx_recent` is set. This is E2g.
+- **`sellm/agent.py` KNOBS are unchanged on the branch**, so E2g is not active in that branch's `--agent sellm`.
+
+**Runner logic:**
+- `Limits.serial` puts a `wire` lock around each POST, so one message per session is in flight.
+- `Limits.turns` makes one loop per case with no focus: the agent picks the thread (fewest of our messages first), as the kit's `play()` does.
+- **Default is now `turns` + `serial`.** `--per-thread` restores the old loops; `--serial` adds one-message-in-flight to them.
+
+**Results** (LEDGER; reference = `@7a49c38`, 72.9):
+
+| ID | Change | Result | Decision |
+|---|---|---|---|
+| E1 | contract="horizon" | P08 0.538 (0.549): "for a 24-month duration we cannot offer a fixed price" | rejected |
+| E2 | idx_recent=2.0 (AS-14404 −5.5 %, 2026-06→09) | P18 **0.520** (0.467), deal 5.30 with no deadband; P08 **0.438** (0.549): "not our reality", material hedged until March | split into E2g |
+| E2g | E2 + `hedged()` | by replay: P08 0.549 again, P18 0.520 → **73.4**; P05 changes offline but was not played | candidate |
+| R1 | `--serial`, one loop per thread | P05 0.735, 0 timeouts | not adopted |
+| R2 | `--turns` | P05 **0.820**, the kit run's e-mails exactly, 3.3 s | default on the branch |
+
+Lab stress of the reference agent (`a5b363c`): PASS, 568 negotiations, sequential 54.0 / one loop per thread 54.4.
+
+Correction to your milestone list: **P18 0.520 was played with plain E2 @`c8c0eb5`**. E2g was never played; its P18 score is inferred from a replay that sends the same e-mails.
+
+---
+
+## 4. Per hosted practice case
+
+"main" = `@7a49c38` behaviour, which is what main's HEAD plays.
+
+| Case | C_open | C_best | Best ever (agent @commit) | Best with the template agent | main | jon @67001e7 |
+|---|---|---|---|---|---|---|
+| P01 | 1,153,780 | 1,096,816 | 0.984, LLM writer shadow @`86db7be` (not repeatable) | 0.969 (PERSIST T2; @`7a49c38`; jon) | 0.969 | 0.969 |
+| P02 | 2,282,867 | 2,235,514 | 0.735, P02 ARG clause5-direct @`0fab3fd` | 0.725, jonathans_branch @`5e4e333` / @`67001e7` | 0.531 | 0.725 |
+| P03 | 4,246,314 | 3,909,043 | 0.933, LLM writer @`86db7be` | 0.923 (v1.4 onward) | 0.923 | 0.923 |
+| P04 | 198,846 | 196,529 | 0.860, v1.2 @`19b339f` and every version since | 0.860 | 0.860 | 0.860 |
+| P05 | 305,545 | 223,424 | 0.820, v1.3 @`d792ee3` kit runner (also omars R2 @`fdb262e`) | 0.820 | 0.820 (kit runner; 0.665 with main's per-thread runner) | 0.820 |
+| P07 | 391,027 | 299,241 | 0.779, kit LLM baseline (also PERSIST T1 push_final, which lost P04 and P08) | 0.773 (PERSIST E3 floor_share 0.927) | 0.747 | 0.747 |
+| P08 | 1,135,887 | 960,309 | 0.560, ab nego-template + recent_cap=false @`cd67dda`+local (same arm also 0.482) | 0.549 | 0.549 | 0.549 |
+| P10 | 1,932,492 | 1,328,927 | 0.663, v1.2 @`19b339f` (opening 28.60 came from the lookup bug) | 0.663 | 0.647 | 0.647 |
+| P11 | 817,578 | 722,500 | 0.778, EVAL full @`19b339f`, v1.4 and every version since | 0.778 ("lucky path"; 0.710 on other paths) | 0.778 | 0.778 |
+| P18 | 295,173 | 222,651 | 0.520, OMAR E2 omars_branch @`c8c0eb5` | 0.485 (second_choice @`cd67dda`) | 0.467 | 0.467 |
+
+The mean of the best per case is 76.3, according to `runs/README.md`.
+
+---
+
+## 5. Experiments rejected or that made things worse
+
+| Experiment | Commit | Result (reference) | Reason |
+|---|---|---|---|
+| Calculator with lab-best (lowball) knobs on real D01 | `b19453f` | 0.789 ×4 (v1 later 0.894) | a lowball opening costs rounds |
+| Lab: cap steps at the round limit | `aa098d5` | −4.9 pts (lab) | refuted |
+| Clone agent | `6330f9d` | 45.7 vs 48.2 (lab) | behind the plain Calculator |
+| v1.1 first ask kept 30 days / 12 months | `2dadddb` | 53.2 (61.5); P04 0.000, P08 0.152 | structure lost; fixed by the calculator |
+| sellm.runner, one loop per thread, on the RFQ | `2dadddb` / `03c8c84` | P05 0.665 ×2 (kit 0.769 / 0.820) | the arena processes a session's messages one at a time, so parallel e-mails counted as late |
+| Runner `--serial` (R1) | `650e6e8` | P05 0.735 | asks priced against stale rival offers |
+| second_choice (cheapest option of a changed field) | `cd67dda` | P08 0.419 ×3 (0.515); P18 0.485 | P08 re-prices the deadband; switched off in `d792ee3` |
+| Arm `bank` without fixes | `@19b339f` | P11 0.543 (0.710), P18 0.386, P05 0.659 | ppm written with a thousands comma came back "contradicted" |
+| Arm `clause` (widest deadband) | `@19b339f` | P08 0.462 (0.549) | supplier re-prices it |
+| No dossier | `@19b339f` | 64.4 vs 67.8 on 6 cases | dossier is needed |
+| recent_cap=false | `@cd67dda`+local | P08 0.560 / 0.482 | neutral |
+| Fix B, no qn after an sc | `b4361d2` | P11 0.710 (0.778), P02 0.522 (0.531) | a duplicate citation still moves the supplier; reverted in `0223875` |
+| creep 0.25 | endgame `272a392` | P01 0.960, D01 0.959, but P11 0.710 (0.778) | loses P11 |
+| zone 0.9 % | `5ed8076` | P18 0.434 (0.467), P11 0.710, P04 0.860 | path-dependent |
+| past_creep=0 | `54774da` | P01 0.960, D01 0.921 | no gain over past_target |
+| floor_share 0.927 (first ask closer to its price) | — | P07 0.773 (0.747), D02 0.441 (0.567) | one supplier each way |
+| T1 push_final 1 % below the final offer | `ab6071b` | P04 0.000, P08 0.000 (withdrew); P07 0.779 | never ask after a final_offer |
+| T3 pay_probe | `ab6071b` | P18 0.419 (0.467), P05 0.762 | no gain |
+| T4a / T4b signal_facts / soft_give | `ab6071b` | P18 0.430 / 0.467, P04 0.860 | no gain |
+| Playbooks per twin | `4de3733` | +0.05 (lab) | books do not transfer between suppliers |
+| P02 dials a1–a5 | `6e57595` | 0.527 / 0.510 / 0.531 / 0.521 / 0.482 | lab predicted +0.055; no gain in the arena |
+| P02 b1 precedent | `28fc3db` | 0.531 | no effect |
+| P02 probes c3–c5 | 23:09 | 0.000 | broken (ImportError), not a real result |
+| P02 wording t1 / t2 | `755811f` | 0.529 / 0.406 | rhetoric and oath rejected |
+| Lab: LLM writer | `a7fcc7a` | 62.0 vs 65.2 | softer position |
+| LLM writer in the arena (shadow) | `86db7be` / `e7a8fd7` | **71.6** (72.9); P10 0.562, P08 0.493 | worse, and not repeatable (P07 0.766 then 0.740; P02 0.515 then 0.531) |
+| LLM verdict acting (apply) | `e7a8fd7` | P01 0.864 (0.984), P18 0.401 (0.446), P05 0.250 (timeouts) | accepts early using our own wrong cost estimate |
+| P02 one-euro LLM ladders, push after the final offer | `7a49c38` `71e506d` `8596ee0` `b2f54e2` `130210e` | 0.000 ×5 (withdrew) | push after a final offer |
+| LLM persona reader | `5cf48b8` | 32/48 right (v2 28/48); always answering "no" scores 31/48 | no better than guessing |
+| Price path: horizon 6 | `@130210e` | P07 0.702, P11 0.710, P18 0.401, D01 0.921 | −5.1 pts |
+| Price path: cost oracle, first ask 3 % below the floor | `@130210e` | P02 0.531, P07 0.766, P11 0.710, P18 0.406, D01 0.935 | −2.4 avg (lab had said +2.0) |
+| Price path: relationship target ×0.95 | `@130210e` | P02 0.531, D01 0.959 | no change |
+| Lab price-path sweep | `@20a318a` | open_below 0.10 −1.90, 0.20 −6.55; target ×0.90 −4.21; horizon 10 −1.26; push_final −4.77 | all lose |
+| P02 arguments | `@a00444a` / `@0fab3fd` | clause5 0.242, market 0.394, sister 0.319, volume 0.525, committee 0.480, clause5-raise 0.242 | "irrelevant" facts cost points; a low clause price gets charged in the relationship term |
+| E1 contract at the horizon | omars `@c8c0eb5` | P08 0.538 (0.549) | supplier insists on the clause at 24 months too |
+| E2 idx argument to a hedged supplier | omars `@c8c0eb5` | P08 0.438 (0.549) | "not our reality" (material hedged); led to E2g |
+
+---
+
+## Caveats worth knowing
+- P01 0.984 and P03 0.933 come from the LLM writer and did not repeat.
+- P10 0.663 came from a bug: the silent lookup failure gave a 28.60 opening. The designed 24.72 opening scores 0.647.
+- P11 0.778 is a lucky path; other paths give 0.710.
+- On omars_branch, `idx_recent` defaults to None and the branch's `KNOBS` do not set it, so E2g is not active there. Its only default behaviour change is the runner. Its `--agent sellm` therefore plays like 72.9.</result>
+<usage><subagent_tokens>179759</subagent_tokens><tool_uses>22</tool_uses><duration_ms>254701</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a91215bb869e43505</task-id>
+<tool-use-id>toolu_014nAWZe8pMMNr9xneDZX3SV</tool-use-id>
+<output-file>/tmp/claude-1000/-home-amiad-Desktop-taco-sellm/fa55bb36-4417-4f3f-bfa4-355b7b3a7c4d/tasks/a91215bb869e43505.output</output-file>
+<status>completed</status>
+<summary>Agent "Map sellm agent code architecture" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>I've mapped the whole `sellm/` path on `main` @ 6374d4e. One limit up front: I did not run pytest, because it writes cache and temp files. Test runtimes are therefore not measured. The only recorded result is "184 passed, 1 skipped" (`docs/LOG.md:687`). Note also that `omars_branch` already holds a different runner default (section 7).
+
+## 1. Entry point
+
+- **CLI wiring:** `arena_kit/cli.py:32` lists `AGENTS = ["naive","llm","sellm"]`. `agent_factory` (`cli.py:49-63`) builds one shared `DataPackage(--data)`, calls `package.lookup("")` to pre-build the ID index, and returns `lambda: make_agent(package)`.
+- **Two runners exist.** `arena play` / `arena run` use the kit's `play()` / `play_waves()`: one loop per case, `decide` is called without `focus`. `python -m sellm.runner` is a separate runner (section 7).
+- **`make_agent`** (`sellm/agent.py:37-48`):
+  - Default: returns `endgame.Persistent(package, writer=SELLM_WRITER or None, **KNOBS)`.
+  - With `SELLM_LLM=shadow|apply`: returns `advisor.Advised` instead.
+- **`KNOBS`** (`agent.py:11-14`): `past_target=True`, `fast_pay=True`.
+- **`CALC_KNOBS`** (`agent.py:19-34`) is dead for the agent. It feeds `sellm.lab.strategies.Calculator`, used only by `experiments/ab_sandbox.py:55-60`, `sellm/lab/__main__.py:52` and `lab/backtest.py`. Keys such as `structure`, `guess_rate`, `steps`, `shape` and `after_final` do not exist in the negotiator.
+- **Returned object:** `Persistent` (`endgame.py:65`), a subclass of `Negotiator` (`negotiator.py:175`).
+- **`decide(case, threads, focus=None)`** (`negotiator.py:189-201`):
+  1. `move()` builds a draft: `{kind: ask|hold|take_alternative|accept|walk_away, sid, sheets, arguments, n, flags}`.
+  2. `message()` turns the draft into the API message.
+  3. Any exception goes to `rescue()` (`:203-218`). It sends a holding e-mail if more than one move is left, else `closing_move`, else walk away. With `SELLM_STRICT=1` the exception is re-raised instead (tests use this).
+  4. `self.fallback = self` (`:183`). The runner's fallback branch requires `fallback is not agent` (`runner.py:228`), so it never fires for sellm.
+- **Statelessness:** decisions are recomputed from the threads, except `_memo`, which caches openings, cheapest opening, s0, aim, intel, should-cost and index claims per (case, sid).
+
+## 2. negotiator.py: the per-move procedure
+
+**`Thread` view** (`:121-172`):
+- `theirs` / `ours` split the messages; `opening` is the first supplier message with sheets.
+- `standing` is the first sheet of its last message; only that one can be accepted (`:151-154`).
+- `asks` is the first sheet of each of our messages, so a second "menu" sheet is never counted as our ask.
+- `holds` counts our messages that have neither sheets nor an action.
+- `left` is `moves_left`.
+- `std0` comes from the opening quote PDF. `std = {**std0, **standard_terms(events)}`, i.e. the latest PDF wins.
+- `filled()` runs `complete_offer` over std plus the given terms.
+- `c()` is `total_cost` with `std`, plus an optional supplier estimate.
+
+**`move()`** (`:221-263`):
+1. `live` = threads with a supplier message whose status is not in {walked_away, no_bid}. None live → walk away.
+2. Memoised once per case: every opening (fed to the dossier overlay) and the cheapest opening price (the RFQ "market").
+3. `cost[sid]` = C of the standing offer, including the relationship term with our estimate (`offer_cost` `:265`). It is inf if there is no sheet ID or a must-have fails. `leader` = lowest cost.
+4. `rival[sid]` = cheapest plain C (no relationship term) among the other bidders.
+5. `movable` = live threads that are not `ready`, sorted by (number of our asks, cost).
+6. With `focus` (per-thread runner):
+   - focus is movable → `ask`.
+   - Else, if others are still movable → `hold` (needs finite cost, `holds &lt; max_holds`, `left &gt; 1`).
+   - Else, once the leader is no longer movable → `close`.
+7. Without `focus`: if anything is movable, `ask(movable[0])`; else `close()`.
+8. Kit-runner hack (`:255-262`): an accept in a multi-thread case whose thread is not `fresh` sends a `hold` first, so a timeout-replaced offer ID is refreshed before the accept.
+
+**Stop logic:**
+- `done` (`:272`): status in (`final_offer`, `agreed`), or `plan.capped` (no visible step left below its price), or `plan.enough` (relationship cases: its offer's C ≤ C at our target).
+- `ready` (`:280`): `left &lt;= 0`, or (it has a price and `done` and there is no better alternative sheet).
+
+**Accept / walk** (`close` `:288-301`):
+- Accept the takable offer with the lowest C.
+- Walk away only if nothing is takable, or the case `alternative` C is below the best offer.
+- `final_offer` and `agreed` are always accepted; `push_final` is off.
+
+**Take-alternative** (`:337-354`): once we are done asking, if one of its non-first sheets is valid and at least 0.2 % cheaper and not already sent back, we send it back as our sheet.
+
+**First ask** (`plan` `:357-402`, `aim` `:678-738`):
+- Price = `aim.target * (1 - open_below)`.
+- Structure = `opening_structure` (section 3).
+
+**Step sizing** (`:383-399`):
+- Ceiling:
+  - its quoted price on this structure × (1 − `keep_below`);
+  - else its standing C converted to a price on our structure (C is linear in price), also capped at its standing price × (1 − `keep_below`);
+  - capped again by the rival's C.
+- `rounds = max(1, horizon - len(asks))`. If its last body matches `TOO_LOW` (`:86`), rounds = 1.
+- `step = (ceiling - last) / (rounds * (1 + pace))`.
+- `pace` (`:404-432`) = its concession ÷ ours on an unchanged structure, measured once there are at least 2 rounds, clamped to [0.25, 2]; else the knob value.
+- On the same structure the price never goes down. If the structure changed, it can.
+- Price is rounded to 2 decimals. `capped` = same structure and no step up is possible.
+
+**Structure after the first reply** (`structure` `:541-565`): we switch to whichever of its quoted sheets (current or opening) has the lowest C, only if the gain is at least 0.2 %. The optional `second_choice` (`:586-606`) is off.
+
+**Term sheets:**
+- Each ask sends `[plan sheet]`.
+- On the first ask, `menu()` (`:650-665`) adds the same package with the latest payment days at a C-equal price, but only when `cash()` is None, i.e. the dossier coverage is not "full" (a supplier outside the 46 dossiers).
+- `message()` (`:850-879`) runs `complete_offer` (exactly the `negotiable` fields), dedupes, checks must-haves and caps at 3 sheets. An ask that ends up with no valid sheet becomes a `hold`.
+
+**Timeouts and round limit:**
+- No clock logic lives in the negotiator; the runner handles time.
+- Round limit enters only through `left`: `ready` when `left &lt;= 0`; `hold` needs `left &gt; 1`; alternative and push need `left &gt;= 1` and `&gt; 1`.
+
+**E-mail text:**
+- `writer.compose` → `template()` (`writer.py:88-130`), fully deterministic. `compose` ignores `chat`, so `writer="llm"` does nothing here.
+- Template:
+  - greeting: the contact name parsed from the signature, or "Dear Sir or Madam";
+  - an opening line (first ask) or "thank you for your reply [and for moving towards us]";
+  - optionally "You asked which figures…";
+  - the argument sentences;
+  - "On that basis we propose {terms}" or "We can improve our proposal to {terms}. Could you meet us there?";
+  - sign-off: "Purchasing, Hollerau Pumpenwerke".
+- Holds and take-alternative have fixed texts.
+- Flag `commitment` is set when our first-ask contract is longer than its own.
+
+**Negotiator knobs** (`negotiator.py:48-68`):
+
+| Knob | Default | What it changes |
+|---|---|---|
+| `open_below` | 0.06 | first ask = target × (1 − x) |
+| `horizon` | 4 | number of our messages in which the two prices should meet |
+| `pace` | 0.5 | assumed share of our steps the supplier gives back, until measured |
+| `keep_below` | 0.006 | stay at least this share below its price |
+| `floor_share` | None | overrides `TARGET_SHARE` {relationship case: 0.945, other: 0.88} (`:75`) |
+| `rate_guess` | 0.08 | supplier's cost of money when there is no dossier; `payment_trade` is skipped when the rate equals it |
+| `claims` | "bank" | "none" turns arguments off |
+| `max_holds` | 2 | holding e-mails per RFQ thread while others are still moving |
+| `levers` | "ours" | "theirs" uses its own terms, changed only to cover the need (`:490-500`) |
+| `dossier` | True | read sellm.intel |
+| `second_choice` | False | see "Structure after the first reply" |
+| `recent_cap` | True | cap the prior target at its own 12-month low price |
+| `bank` | True | use claims.py when nothing else applies |
+| `one_per_topic` | True | one fact per ID prefix (`ctr` counts as `doc`) |
+| `ppm` | "plain" | strip the thousands comma before "ppm" (or "skip" / "asis") |
+| `signals` | True | dossier signals move the share |
+| `writer` | "template" | no effect beyond that |
+| `opening_line` | not in DEFAULTS | read at `:316`; overrides the template's first line (wording experiments) |
+
+**Persistence layer knobs** (`endgame.py:46-58`):
+
+| Knob | Default | What it changes |
+|---|---|---|
+| `past_target` | False (on in KNOBS) | in relationship cases, keep asking past the target while the supplier still moved last round and its offer is above C at `low_target` (full cost × (1 − `estimate_error`), grid search `:208-229`) |
+| `estimate_error` | 0.05 | used by `past_target` |
+| `past_creep` | None | with `past_target`, limits the step once the target is reached |
+| `creep` | None | no step closes more than this share of the gap |
+| `zone` / `stall_after` | None / 1 | after it repeats its offer, ask this share below it |
+| `push_final` | None | one ask below its first final offer instead of accepting |
+| `fast_pay` | False (on in KINOBS) | when the dossier shows `cash_short` or cash pressure medium/high, first ask uses the fastest valid payment days (`:81-93`) |
+| `pay_probe` | False | first ask as two sheets that differ only in payment days |
+| `signal_facts` | False | a supplier that wants volume hears the forecast first |
+| `soft_give` | False | add a non-binding call-off schedule sentence |
+
+Correction to the `fast_pay` row: it is on in `KNOBS`, not "KINOBS".
+
+## 3. calculator.py
+
+- **`packages(case, standard, price, keep)`** (`:53-64`):
+  - cartesian product of `term_options` over the negotiable non-price fields (`structures` `:45`, duplicated at `negotiator.py:96`);
+  - `index_clause=None` is kept explicit, meaning a fixed price;
+  - `keep` overrides fields;
+  - `complete_offer`, then must-haves are checked;
+  - sorted by `total_cost(case, terms, standard)`. There is no relationship term here.
+- **`price_for`** (`:83`): the price on another structure with equal C (linear inversion). Used by `menu` and `other_payment`.
+- **`levers`** (`:67`): only used by the `sheet()` debug printer.
+- **How the first-ask terms are picked** (`negotiator.opening_structure` `:446-500`):
+  - Its quoted cash terms stay fixed: incoterm, tooling, chargeback, plus payment days unless cash pressure is "low".
+  - Everything else (contract_months, volume, effective_date, index_clause, lead time, ppm…) comes from `packages(case, v.std, opening_price × share, keep)`.
+  - Among near-ties (≤ 1e-4) it prefers the longest contract, then the closest to its terms.
+  - Then `payment_trade` (`:522-539`, only for medium/high cash pressure): days that keep its value equal but cost us ≥ 0.3 % less. `fast_pay` then overrides to the fastest days.
+  - Payment days are therefore: latest (C prefers late) for "low", its quoted days for None/medium/high, fastest under `fast_pay`.
+- **`supplier_cost(case, sid, events, package)`** (`:130-287`) gives `cost` only for:
+  - a case-file `cost:` fact matching the part and the supplier (or no supplier);
+  - else the package `should_cost` row of its own plant;
+  - else a cost-breakdown XLSX from `events`. The negotiator always passes `events=None` (`:720`, `:745`), so the breakdown is never used.
+  - Evidence only (no `cost`): generic should-cost × country factor, `own_low_12m` (flagged if the history says it sold "below full cost"), `rival_low_12m`, `index_justified`.
+  - Single-part cases only (`:144`).
+- **"Expected end price" = `aim.target`** (`negotiator.py:678-738`):
+  - **With an own-plant estimate:**
+    1. In relationship cases (goal in {stabilise, secure_supply} with per-point and margin set), the estimate is capped at worth(opening) × (1 − margin%).
+    2. `target` = the price that pays exactly its full cost on s0 (supplier_value is linear).
+    3. In relationship cases, `target` is instead the grid minimum (251 points between target and max(ref, 1.25 × target)) of C including `relationship_cost`. The supplier estimate there is `{standard: full_standard, interest_rate: dossier cost_of_money or rate_guess, full_cost}`.
+  - **Without one (the prior):**
+    1. `share` × min(own opening, cheapest opening).
+    2. `share()` (`:502-520`): `list_price_fixed ≥ 2` or `margin_floor ≥ 1` → max(base, 0.96); `wants_volume ≥ 2` → min(base, 0.84). Coverage must be "full".
+    3. Capped at its recent 12-month low price if `share &lt; 0.96`.
+    4. Converted to equal supplier worth on our structure.
+    5. `full_cost` is derived from the target, minus a margin adjustment in relationship cases.
+  - **Always:** `target ≤ 0.985 × reference`; if not finite, `0.9 × reference`.
+- **`estimate()`** (`:749`): the relationship term in `offer_cost` uses `aim.full_cost`. Note the circularity: the target is estimated from the prior.
+
+## 4. claims.py: the argument bank
+
+- **`_Bank(pkg)`** (`:59-94`) indexes `pkg.facts` (facts.json) by prefix and loads cost drivers, should-cost owners, parts, forecast shared flags and letters. It is cached per package (`_bank` `:273`).
+- **Builders per fact kind** (`:97-245`):
+
+| Kind | What it says | Counts as helping the buyer when |
+|---|---|---|
+| `idx` | each driver series over 12 and 6 months, ending at its last month; skipped if that is more than 12 months before the data end | change &lt; −0.5 % |
+| `cost` | case estimate, else own plant, else generic; never another plant's | always |
+| `sc_otd` / `sc_ppm` | latest scorecard quarter | OTD &lt; 95, ppm &gt; 1000 |
+| `qn` | up to 3 complaints within 12 months | ppm ≥ 1000 |
+| `po` | first and last order of a part within 24 months | price rose &gt; 0.5 % |
+| `fc` | latest forecast | change &gt; 0; private if not shared |
+| `news` | about this supplier, excluding noise and market | buyer-side topics; `sensitive` flag set |
+| `doc` + `ctr` | a letter's notice days against the contract's | notice shorter than required |
+| `quote` | `case_only`; rival quotes are private | always |
+
+- **`citable_for(pkg, sid, parts, case)`** (`:289`): bank entries plus entries from the case's own `facts`.
+- **`arguments(case, sid, dossier, package, used, private, price)`** (`:307-345`):
+  - merges the dossier's `citable` with `citable_for`;
+  - drops entries that do not help us, IDs already used, and private ones;
+  - drops `cost`/`quote` at or above the price (cost ≥ 0.98 × price);
+  - keeps `case_only` entries only when the case names them;
+  - ranks by `ORDER[case.type]` (only quality, capacity and rfq have their own order; price_increase, renewal, bundling and raw_material fall to `DEFAULT_ORDER`), then by strength.
+- **How the negotiator picks** (`negotiator.arguments` `:759-781`), one sentence per e-mail, first match wins:
+  1. A rival's cheaper standing offer, if not yet cited in this thread.
+  2. Own-plant should-cost, if not cited anywhere, price &gt; 1.02 × estimate and our ask ≥ estimate.
+  3. `index_claims` (`:816-847`). This duplicates `_idx` but uses `ids[-13]`/`ids[-1]`, with no contiguity or recency check.
+  4. `banked` (`:783-814`): skips `quote`, sentences already in the thread, and topics already used.
+- **Dedupe:** `cited` = `ID_RE` matches over all our bodies in all threads (`ID_RE` comes from `arena_kit/agents/llm.py:27`).
+- **No runtime verification.** Sentences are built from facts.json values. Offline, `tests/test_claims.py:44` runs every statement of the 46 suppliers through `sellm/lab/claims.py:ClaimChecker` and expects zero contradicted.
+
+## 5. The other modules
+
+| Module | What it does | Used by default? |
+|---|---|---|
+| `endgame.py` | `Persistent` (section 2). `ask()` logs persona lines once per supplier (`:101-109`) | **Yes**: it is the returned class |
+| `personas.py` | `traits` / `describe`: names cash and price personas from dossier thresholds; also a CLI | Only for log lines (`endgame.py:95-109`). `TAGS` is "read by nobody yet" (`:43`) |
+| `writer.py` | Deterministic template | **Yes**. The LLM path is a no-op |
+| `advisor.py` | `Advised(_Writer, Persistent)`. `_Writer` loads `experiments/llm_writer.py` by file path (`:82-95`). Gives an A/B verdict via `llm.chat_tools` with three tools (cost_of_price, supplier_profile, facts_left), confidence from first-token logprobs. `apply` accepts early only in single-supplier, open status, with p ≥ 0.85. Writes a trace to `runs/logs/advisor-trace.jsonl` | No, only with `SELLM_LLM` |
+| `llm.py` | OpenAI-compatible `chat` / `chat_json` / `chat_tools` with hard wall-clock timeouts in a thread pool; sends `reasoning_effort:"none"` and logprobs | No, only via the advisor |
+
+## 6. sellm/intel (dossiers)
+
+- **Schema** (`intel/schema.py`):
+  - Top-level keys: schema_version, supplier_id, coverage (full/thin/case_only), built_from, identity (19 keys), contact, standard_terms (payment/skonto/incoterm/lead), economics (cost_of_money, cash_pressure low/medium/high, archetype, spend, share of turnover, late payment days, discount taken), signals, contract, parts, performance, citable, documents, news, market_news, stated_drivers, opening_offer, case_facts, own_quotes, profile_text, warnings.
+  - Each part (`PART_KEYS`) carries current_price, history, should_cost, floor_estimate, price_to_should_cost, drivers, forecast and private alternatives.
+- **Signal vocabulary:** 13 kinds (`schema.py:7-21`), each with strength 1-3, evidence IDs and an excerpt.
+  - Text regexes (`signals.py:9-26`): cash_short, wants_volume, capacity_tight, list_price_fixed, material_hedged ("material covered until"), partnership, margin_floor, quality_problem, delivery_problem, ownership_change, approval_ladder, informal_costing, price_claim.
+  - Data rules: skonto → cash_short; news topics; group owner → approval_ladder; "below full cost" history → wants_volume; price ≤ should-cost → margin_floor; scorecard → quality/delivery.
+  - `derive.cash_pressure` / `archetype` / `cost_of_money` (`derive.py:217-261`): skonto-implied rate, else by owner type (group 6.5 %, family 9 %, job shop 25 %, other 10 %) plus a credit surcharge.
+- **Build pipeline:** `python -m sellm.intel build` → `assemble.build_supplier` (SQL via `extract.Source`) → `signals.apply` → `claims.citable_for` → `render.profile`. Output: `sellm/dossiers/&lt;number&gt;.json`, 46 files (70110…70740) plus `index.json`, all coverage "full", about 1 MB.
+- **At runtime** (`intel/__init__.py:53` `dossier()` → `overlay.overlay` `:453-517`):
+  1. stored JSON (lru-cached) or a live build;
+  2. blocked-record alias;
+  3. parts limited to the case parts;
+  4. case `cost:` facts; case briefing, trigger doc, docs and news as extra signal texts; alternatives (buyer alternative, RFQ rivals' opening offers);
+  5. opening e-mail: quote-PDF standard terms, `opening_offer`, contact, stated drivers;
+  6. signals recomputed, citable recomputed.
+- **What the negotiator consumes** (`intel()` `:622-639`, called without a `package` argument):
+  - `coverage`, `economics.cash_pressure`, `economics.cost_of_money`;
+  - signals `list_price_fixed`, `margin_floor`, `wants_volume` (in `share`), `cash_short` (in `fast_pay`);
+  - `citable` (via claims), `opening_offer`.
+- **Signals read by no decision:** capacity_tight, material_hedged, informal_costing, approval_ladder, partnership, quality_problem, delivery_problem, ownership_change, price_claim.
+
+## 7. runner.py
+
+- **Modes:**
+  - `CaseRunner.run` (`:431`) runs one loop per thread when `agent.decide` accepts `focus` (sellm does), else a single loop.
+  - **There is no per-case "turns" mode on main.** `docs/STATUS.md:13` says one loop per thread scores 0.665 on P05 against 0.820 for one loop per case. The per-case default lives only on `omars_branch@f60a212`.
+- **Waves** (`run_final` `:515-555`): polls `client.cases("final")` every 5 s, starts each open case once (`seconds_left` &gt; 0), follows cap extensions, stops after `waves` closed waves. `run_cases` covers practice and sandbox.
+- **Move deadline** (`decide` `:194-246`):
+  - the agent runs on a deep copy in a pool; warning at 15 s, hard limit at 40 s;
+  - fallback, then a holding e-mail, else `closing_move`;
+  - 2 failures in a row → `broken` → close.
+- **Clock guard** (`:386-405`): a holding e-mail after 42 s of silence, at most 2 per thread.
+- **Re-reads:** after 50 s of silence. The `timeouts[]` of a GET thread are merged as synthetic `from: "timeout@sid"` events (`_merge` `:167-184`).
+- **Accept:** waits for in-flight messages (≤ 70 s), re-reads the offer ID and decides again if it changed (`:254-264`). A 409/422 triggers a re-read.
+- **Closing before the cap:** `closing_due` (`:187`) at cap − max(90 s, slowest round + 15 s); practice cases stop at 540 s. `finish()` (`:407`) uses `closing_move` with 3 attempts.
+- **Resume:** a 409 "one session per case" leads to `resume()` (`:142`). A crash triggers one retry (`play_case` `:474`).
+- **Attachments:** waited for at most 20 s (`documents` `:290`).
+- **Warm-up** (`:490-512`) is hardcoded to `dossier("sup:70110", ["part:310010"])`.
+- **Logging:** `runs/logs/&lt;stamp&gt;-runner-&lt;set&gt;.log` plus a `.jsonl` row per case; `--label` writes `runs/labels.json`.
+- **`pull_first`:** yes. `main()` calls `arena_kit.cli.pull_first` (`:627-630`), with `final=True` for the final.
+- **Forbidden endpoints:** none touched. Calls are limited to cases, open_session, send_message, thread, session and attachment. `tests/test_runner.py:313` greps runner/negotiator/agent for `/events`, `/screen`, `leaderboard`, `/results`. The `arena board` CLI command does call the leaderboard, but it is outside the agent path.
+
+## 8. Tests
+
+| File | Count | What it asserts |
+|---|---|---|
+| `test_negotiator.py` | 14 | Replays every saved state in `runs/practice` and `runs/sandbox`: every move valid (exact negotiable fields, options, must-haves, price in body, ≤ 3 sheets), pure function, our ask never goes back, cheaper first ask, final offer accepted, no walk-away while a valid offer stands, relationship stop, contact name, RFQ focus, no LLM or data needed, a bug becomes a safe move, `second_choice`, parallel cases behave as alone, dossier reads all openings |
+| `test_endgame.py` | 7 | Seam methods exist; knobs off = Negotiator; `past_target`; creep share; KNOBS play the measured rules; no ask after a final offer |
+| `test_runner.py` | 10 | FakeArena over `sellm.lab` LocalTable twins, FAST limits ("played in seconds"): plays to the end, RFQ timeout/422 race, slow agent → hold, repeated failure → close, clock hold, slow attachment, closing before the cap, resume, waves, no live feed |
+| `test_claims.py` | 7 | All 46 suppliers, &gt; 500 statements, 0 contradicted; &lt; 50 ms; no other plant's estimate; P01 order (doc first, then idx/cost); filtering; hidden-case facts; never raises |
+| `test_intel.py` | 34 | Schema, build, signals, overlay, CLI (check rebuilds into a temp dir) |
+| `test_calculator.py` | 8 | Packages, levers, price_for, breakdown parse, supplier_cost, sheet |
+| `test_advisor.py` | 6 | Logprob verdict, shadow is a no-op, apply guards, failing model, no model unless asked |
+| `test_personas.py` | 3 | Personas match the first ask |
+| `test_sellm_agent.py` | 2 | CLI lists sellm; plays every arena-sim case with and without data (needs fastapi/uvicorn) |
+
+Most tests skip without `data/package` or the `runs/` sessions.
+
+## 9. arena_kit pieces we rely on
+
+- **`cost.py`:**
+  - `closing_terms(case, terms, standard)` layers buyer plan &lt; supplier standard &lt; `fixed_terms` &lt; terms. An unknown incoterm counts as the costliest.
+  - `total_cost(case, terms, standard=None, supplier=None)` returns inf without a price and is rounded to 2 decimals. `cost_breakdown` gives the parts (`relationship` included).
+  - `supplier_value(case, terms, supplier)` needs `supplier["standard"]` with payment_days and incoterm (else KeyError) and `interest_rate`.
+  - `relationship_cost` is 0 unless the goal is in `RELATIONSHIP_GOALS` and a supplier with `full_cost` is passed.
+  - `must_haves_ok` fails on None unless the op is `==` or `!=`.
+  - `snap` silently returns `options[0]` for a non-numeric value not in the options (index_clause dicts).
+  - `complete_offer` fills gaps from the **buyer plan, not the supplier's standard terms**, sets the cheapest-freight incoterm, and rounds the price.
+- **`play.py`:**
+  - `ENDED = {walked_away, no_bid}`; `final_offer` and `agreed` count as live.
+  - `latest()` raises StopIteration if no supplier message exists. `standing(events)`, `live_threads`.
+  - `moves_left` counts buyer messages, holds included.
+  - `closing_move` uses only `standard_terms(events)` (latest PDF, not std0) and no relationship term.
+  - `play()` handles one thread at a time (RFQ clocks can run out); `play_waves` has 90/15 s closing.
+  - There is no `pull_first` in `play.py`; it is in `cli.py:35`.
+- **`docs.py`:** `quote_terms(text)` → {stated, standard, fixed, agreed} parsed by fixed labels. `standard_terms(events)` reads the latest quote PDF.
+- **`data.py`:**
+  - `DataPackage(root)` loads facts.json plus the Sunday release, and a read-only SQLite connection with `check_same_thread=False`, shared across threads; hence `calculator.LOCK` and `intel._LOCK`.
+  - `query` returns 200 rows by default; `lookup(id)`; `ids(prefix)` sorted; the `_ids` index is built lazily (slow on first call).
+
+## 10. Dead code, duplication, hacks, bugs
+
+**Dead:**
+- `CALC_KNOBS`.
+- The `writer="llm"` / `chat` path, and `stats["fallbacks"]` from the writer.
+- `self.fallback = self`.
+- `negotiator.COUNTRY` (`:77`, "for a later use").
+- The `levers="theirs"` branch.
+- The `dossier=` object parameter.
+- `calculator.levers` (only used by the debug sheet).
+- Most endgame knobs and signal kinds (off or unread).
+
+**Duplicated:**
+- `structures` (negotiator.py and calculator.py).
+- `CASH_FIELDS` (both files).
+- Country factors (three copies: `negotiator.COUNTRY`, `calculator.COUNTRY`, `derive.COUNTRY_FACTOR`).
+- `topic()` (`negotiator.py:790`, `endgame.py:142`).
+- Index and should-cost sentences (negotiator vs. claims `_idx` / `_cost`).
+- `PPM_HIGH` = 1000 in claims vs. 1500 in signals.
+- Holding-e-mail text (`negotiator.py:211`, `runner.py:53`).
+- Two runners: the kit's `play` vs. `sellm.runner`.
+
+**Fragile:**
+- `intel()` calls `dossier()` without the package, so it reads `$ARENA_DATA` or the cwd-relative `data/package`: a second DataPackage, independent of `--data`.
+- `advisor` depends on `experiments/llm_writer.py` by file path.
+- The non-fresh-accept hold hack (`:255`).
+- `index_claims` takes `ids[-13]` with no date check.
+- Should-cost is pinned for the whole case (memoised); a cost breakdown is never read.
+- Contact names are parsed from signature lines by regex.
+- `TOO_LOW` and `ASKS_DATA` are English regexes on supplier prose.
+
+**Hardcoding:**
+- `sup:70110` / `part:310010` in the runner warm-up.
+- `DATA_TODAY = "2026-09-30"` (`derive.py:5`).
+- "Hollerau" in the writer and advisor.
+- `TARGET_SHARE` 0.945/0.88 and the 0.96/0.84 signal shares were fitted on P01-P11 and D01-D02 (docs say held-out cases P04, P10, P18 were not used).
+- No case IDs appear in decision code.
+
+**Known issues:**
+- No TODO/FIXME anywhere in `sellm/` or `arena_kit/` outside `lab/`.
+- The documented issue is the runner: per-thread loops lose RFQ P05 (`docs/STATUS.md:13`).
+- A changed structure can lower our ask, since the never-go-back rule only holds on an unchanged structure (`plan` `:394-397`).</result>
+<usage><subagent_tokens>191247</subagent_tokens><tool_uses>39</tool_uses><duration_ms>279151</duration_ms></usage>
+</task-notification>
+
+---
+
+<task-notification>
+<task-id>a1d43d25875c8fb0f</task-id>
+<tool-use-id>toolu_01DYXSgGx3ioMZwoMx4Katzx</tool-use-id>
+<output-file>/tmp/claude-1000/-home-amiad-Desktop-taco-sellm/fa55bb36-4417-4f3f-bfa4-355b7b3a7c4d/tasks/a1d43d25875c8fb0f.output</output-file>
+<status>completed</status>
+<summary>Agent "Analyze per-case negotiation runs" finished</summary>
+<note>A task-notification fires each time this agent stops with no live background children of its own. The user can send it another message and resume it, so the same task-id may notify more than once.</note>
+<result>I couldn't find a hidden lever that lifts most cases. Three cases have a clear structure change the agent has never tried (P11, P18, P05), and the biggest gaps (P10, P08, P18, P07) need the supplier's price to fall 7–16 %.
+
+The current agent scores 72.9 on main@7a49c38 and 74.9 on jonathans_branch@67001e7. The README says the main run was at 00:20; STATUS calls it 00:45. The two runs differ only on P02. About 25 points per case remain on average.
+
+Sources: transcripts in `/home/amiad/Desktop/taco-sellm/runs/practice/&lt;case&gt;/`, `runs/README.md`, `runs/BASELINE.md`, `docs/LEARNINGS.md`, `experiments/*.md`, the P02 notes on jonathans_branch and Omar's ledger on omars_branch.
+
+Two kinds of estimate appear below beyond the transcripts:
+- **"C_best price on our structure"** for P01/P02/P03 is my own calculation from the relationship charges the arena actually billed. For the other cases it is the "price that reaches C_best" from the session analysis files.
+- **"Twin"** is the lab's supplier model (`sellm/lab/twins.json`, `persona.best_package`), which I ran read-only. It is a model, and it gets P02's relationship term wrong.
+
+## Per-case table
+
+| Case | C_open | C_best | Best score (session) / deal | Now: main / jb | Deal now | C_best price on our structure | Gap now: where it sits |
+|---|---|---|---|---|---|---|---|
+| P01 | 1,153,780 | 1,096,816 | 0.984 `afc73dd6` 132.28, 14 d, Apr 2027 | 0.969 / 0.969 | 132.96, 14 d, Apr | ≈131.0–131.4 (computed, relationship included) | 1,791 (relationship charge 8,737) |
+| P02 | 2,282,867 | 2,235,514 | 0.735 `d4a6145c` 361.35, 90 d, CU clause 5 % deadband | 0.531 / 0.725 | 371.66 fixed / 362.70 + clause | ≈365.5 at 90 d, no clause (computed; relationship ≈15.5k); 368.14 without the relationship term | main 22,204 price; jb 13,042 = index risk 17,729 + relationship 28,313 |
+| P03 | 4,246,314 | 3,909,043 | 0.933 `16e0de69` 431.71, 90 d, 36 m | 0.923 / 0.923 | 432.14, 90 d, 36 m | ≈428.5 (computed); 429.4 without relationship | 25,945, all price |
+| P04 | 198,846 | 196,529 | 0.860 (10 sessions) 4.94, 90 d, 36 m | 0.860 | 4.94, 90 d, 36 m | 4.93 | 323 (one cent) |
+| P05 | 305,545 | 223,424 | 0.820 `cca13ace` 70250 28.00, 14 d, 28 d lead | 0.820 | same | 26.26 on that structure | 14,745: 3,972 payment structure + 10,772 price |
+| P07 | 391,027 | 299,241 | 0.779 `b6759d5e` (kit LLM) 5.36, 90 d, 24 m; `bed39f20` 5.36 / 36 m | 0.747 | 5.41, 90 d, 36 m | 5.02 | 23,223, all price |
+| P08 | 1,135,887 | 960,309 | 0.560 `2e896490` 5.34, clause 0 % deadband, 90 d, 36 m | 0.549 | 5.35, 0 % deadband, 90 d, 36 m | 4.94 (0 % deadband) / 5.05 (5 %) / 5.10 (no clause) | 79,241 = clause 31,952 + price 47,288 |
+| P10 | 1,932,492 | 1,328,927 | 0.663 `e88ab062` 31.70, 23,400/yr, 36 m, 56 d lead | 0.647 | 31.90, 56 d | 28.09 at 42 d (≈27.4 at 56 d), relationship not included | 212,881 = lead time 33,600 + price 179,281 |
+| P11 | 817,578 | 722,500 | 0.778 `799e5f69` 45.09, 300 ppm, chargeback 0 | 0.778 | same | 43.76 (300 ppm) / **43.22 (1500 ppm)** / 43.9 (300 ppm, chargeback 500) | 21,063 = quality 2,146 + price 18,917 |
+| P18 | 295,173 | 222,651 | 0.520 `78ad49af` 5.30, 0 % deadband, 90 d, 36 m | 0.467 | 5.50, 5 % deadband, 90 d, 36 m | 4.58 (0 %) / 4.69 (5 %) / 4.73 (no clause) | 38,657 = clause 2,346 + price 36,311 |
+
+Twin-model best packages, which show the levers that matter:
+- P01: 129.45, 14 d.
+- P02: 368.01, 90 d, no clause.
+- P03: 414.54, 14 d, 24 m.
+- P04: 4.85, 14 d, 24 m.
+- P05: supplier 70240 at 26.01, 14 d, 42 d lead.
+- P07: 4.94, 24 m.
+- P08: 5.05, 5 % deadband, 90 d, 24 m.
+- P10: 27.72, 24 m, 42 d.
+- P11: **43.23 at 1500 ppm, chargeback 0**.
+- P18: 4.61, 5 % deadband, **14 d**, 24 m.
+
+## Per-case notes
+
+**P01 – Brandlhuber (family foundry, short of cash, informal costing)**
+- Best ladder: 138.55 → 139.30 (moved to 14 d and April) → 135.60 → 134.70 → 133.10 → `agreed` 132.28. It never said `final_offer`.
+- Every fact was "verified, we did not know that – a fair point" and each one moved it: electricity index PPI-D351 −3.7 %; notice letter `doc:20260911-70110-P01` (51 days) against contract `ctr:4600070110` (90 days); should-cost `cost:310010` 132.64; forecast `fc:310010@2026-09` +10.1 %; on-time delivery `sc:70110@2026Q3` 85.2 %.
+- Stated reasons: "Faster payment helps our cash flow; that is reflected in the price." "We are happy to discuss this in a call; until then our offer stands."
+- With 14 days every offer came 1.2–2.4 lower than with 30 (PERSISTENCE P7).
+- It takes asks 0.6–1 % below its standing offer: 132.28 against 133.10, 132.96 against 133.90.
+- What's left: about 1 EUR more (≈+0.016). The supplier was still moving, so one more 1 % ask would probably land.
+
+**P02 – Nordmark (group, approval ladder, priced at 0.98× should-cost)**
+- Fixed-price ladder: 373.97 → 372.03 → 371.82 → `final_offer` 371.66 at 90 d, in more than ten sessions.
+- What moved it: price history `po` −1.11, forecast −1.91, on-time delivery −0.21 or 0.
+- What hurt:
+  - The complaint `qn` came back `duplicate` and was followed by `final_offer`.
+  - Facts the arena calls `irrelevant` (electric-motor index PPI-C2711, electricity PPI-D351, the sister part) weakened the verified fact next to them and brought the final offer one message earlier: 0.394 and 0.319.
+- 371.66 at 90 d equals its full cost of 367.56 at 6.67 % cost of money: "Below this price we would need facts, not just a lower number."
+- The index clause is the lever: "We agree to implement the CU-NOTATION index clause, which effectively addresses the copper risk".
+  - Ask 343.47 with the clause → 351.45. That costs a relationship charge of 119,974, score 0.242.
+  - Ask 361.35 with the clause → `agreed` in its first reply (0.735).
+  - After its own 351.45 it refused 361.35 twice: "economically viable and remains our official position".
+- Post-final pushes at 370.00 / 369.03 / 368.14, and a full point-by-point rebuttal, all ended `walked_away`.
+- Probably capped at ≈0.735 with this supplier. C_best needs a fixed price ≈365.5 at 90 d, below the floor the supplier has shown.
+
+**P03 – Selvbrunn (group, list price fixed)**
+- "Our management has frozen all price reductions until December 2027. We can talk about the terms instead – payment, volume or contract length."
+- At 90 d / 36 m: first counter 431.92 → 431.71 → held for four rounds → `final_offer` at our sixth message.
+- Should-cost moved the first counter and volume change took 0.21 off. The delivery record "does not change our calculation".
+- The wall is in value terms: at 30 d / 24 m it held 429.0 (45 d at 430.88, i.e. 4.1 %/yr). That is the same value as ≈431.9 at 90 d.
+- The 5,496/yr volume alternative at 426.14 is a trap: C +725k.
+- What's left: 3.2 EUR (0.75 %), locked behind the freeze. Only a new, verified fact topic chips at it.
+
+**P04 – Wälzlager-Zentrum (family, list price fixed, wants volume)**
+- 4.94 at 90 d / 36 m from the first counter onward. Alternatives: 4.88 at 30 d; 4.91 at 60 d / 24 m; 4.96 at 30 d / 12 m.
+- Every fact: "That does not change our position."
+- An ask of 4.90 before the final offer was refused. After the final offer, 4.89 → `walked_away`: "We thank you for your time and wish Hollerau Pumpenwerke GmbH all the best." (`997db712`).
+- The remaining 0.14 is one cent. Treat the case as capped.
+
+**P05 – RFQ: 70210 Dralveck, 70240 Hrvelec (Czech), 70250 Fuchsreiter**
+- 70210: 36.0 → 32.5 (index fact, "I like the 14 days payment") → 29.5 (rival cited) → `final_offer` 28.0, "This is my limit".
+- 70250: 38.5 → 31.0 → 29.0 → 28.5 ("absolute bottom line") → `final_offer` 28.0, matching the rival.
+- Both said "We need to clarify this internally" and then moved further.
+- 70240 is mishandled. We always asked 90 d (the dossier says cash pressure "low"). It answered:
+  - "90 days payment and 35 days lead time means more cost for us, not less!"
+  - "If you can do faster payment or standard lead time, we can give you a much better price."
+  - Its measured cost of money is 0.17–0.35.
+- Nobody has asked 70240 for 14 d with a 42-day lead time; 42 days costs us only 1,400. One caution: at 30 d / 42 d it quoted 32.50 (kit session `5f15d192`).
+- The order of the runner matters: the kit's order scored 0.820, one loop per thread 0.665.
+
+**P07 – Leitner (family distributor)**
+- It follows a fixed ladder whatever we ask: 5.58 → 5.48 → 5.41 → 5.36.
+- Our asks of 4.82 / 4.98 / 5.12 got `final_offer` at the 3rd answer (5.41). The kit's asks of 5.0 / 5.1 / 5.2 / 5.25 got a 4th answer (5.36).
+- It priced 24 m and 36 m the same. On 90 d it said "outside our standard commercial framework" but quoted 5.58 against 5.51 at 30 d (≈7.6 %/yr, about neutral for us).
+- Forecast: "factored the verified volume increase into our pricing". Delivery record: no effect.
+- Scheduled call-offs "help us optimize our logistics" (kit session).
+- The push after its final offer worked here (5.36 against 5.41, `bed39f20`) but lost the deal in P04 and P08.
+- What's left: 0.39 EUR (7 %) on price.
+
+**P08 – Donautal (group, material hedged)**
+- Ladder: 5.57 → 5.48 → 5.39 → `final_offer` 5.35. Best session: 5.57 → 5.57 → 5.36 (5.48 with 5 % deadband) → 5.34.
+- "For a contract of this duration a fixed price is not feasible; we must include an AS-14404 index clause." Asking for a deadband: "increases our risk ... higher base price"; it charged 0.12, the full value to us.
+- Volume change: "took it into account". Delivery: "does not affect".
+- Index fall: **"That is not our reality: our AS-14404 is covered at fixed prices until March 2027"**. That cost a round, final came at 5.45 (0.438, `04f83caa`).
+- A push after the final offer → `walked_away` (`d5d264ba`).
+- The kit's call-off schedule took off 0.03.
+- What's left: price 5.35 → 4.94 (7.5 %), plus 31,952 for the clause, which it will not drop for 24 or 36 months. The 12-month option without a clause leaves a year uncovered.
+
+**P10 – Ravensteiner (group, approval ladder &gt;2 %, capacity tight / allocates volumes)**
+- With a first ask ≤28.6 it said `final_offer` in its **first reply** every time: 33.6–33.8 at 42 d, alternative 31.7–31.9 at 54 d. We send back 56 d and it agrees.
+- Should-cost was "verified ... took it into account", but "does not reflect the realities of our specialized manufacturing and current capacity" and "Your offer is far below any calculation we can make."
+- Only the kit's first ask of 29.89 kept it `open` for one more round: 33.80 / 32.00 → `final_offer` 33.60.
+- Lead time costs it 0.158 EUR/day per unit, so the 54/56-day package is right for us.
+- What's left (0.35) is pure price, −13 to −16 %. Asking from near its own level so it stays `open` has not been tried.
+
+**P11 – Kalwisz (job shop, cash short strength 3, margin floor)**
+- Ladder: 46.5 → 46.0 → 45.5 → 45.5 → `agreed` 45.09 (our ask). On another path the same 45.09 was refused.
+- "We see your figures, but we cannot give up margin right now. Faster payment would help us more than anything." But `payment_days` is fixed at 60 in P11, so it can't go in a term sheet.
+- ppm with a thousands comma came back `contradicted` ("That costs trust"); without the comma it was verified.
+- Dropping the chargeback from 500 to 0 bought about 3 EUR (kit: 48.5 → 46.5 → 45.5).
+- **Untried lever: 1500 ppm.** It is allowed (must-have ≤1500) and it is the twin's C_best. It costs us 8,587 (0.54 EUR/unit).
+  - The kit's first alternative was 46.5 at 1500 ppm / chargeback 150 against 49.0 at 300 / 500. The twin's ppm premium is 1.39 per 1000 ppm, i.e. 1.67 EUR from 300 to 1500.
+  - At 1500 ppm, 43.22 = 1.0. If its ladder shifts down ≈1.0, the score is ≈0.85.
+
+**P18 – Werdenfels (family, wants volume strength 3)**
+- Ladder: 5.60 (5.70 with 5 % deadband) → 5.60 → 5.60 → `agreed` 5.50 (our ask, 1.8 % below).
+- Recent AS-14404 fall (−5.5 %, June to September): "We have verified the recent decrease in the AS-14404 index and have reduced our price" → 5.40 → 5.30 `final_offer` (0.520).
+- Volume change: "took it into account" (−0.10). Price history and delivery: "does not change our calculation".
+- The clause is mandatory for 24 and 36 months.
+- **Payment costs us here.** Its sheets differ by 0.10 per 30 days (≈21 %/yr): 5.70 at 90 d, 5.60 at 60 d, 5.50 at 30 d. It also said "we have already reached our limit for these extended payment terms". 30 days are worth only 0.037 to us, so asking 90 d loses ≈0.13 EUR/unit.
+- The one session at 30 d ended at 5.40 with 5 % deadband (0.485).
+- Untried: the index-fall argument together with 30 or 14 days.
+
+## General supplier rules, with evidence
+
+1. **A final offer is final; pushing after it risks losing the deal.**
+   - Walked away: P04 `997db712` (−1 %), P08 `d5d264ba` (−1 %), five P02 branches (`1a882885`, `25746cb9`, `4e8673b8`, `ba9d28cf`, `80108787`), D01 `38943908`.
+   - Only P07 `bed39f20` gained (+0.03). Practice: 3 of 4 pushes withdrew. A lost case costs 0.5–0.9, a won push gains 0.03.
+   - A holding message with no term sheet keeps the offer alive (D01 h2-hold).
+2. **Only the first sheet in an e-mail can be accepted.** Accepting the alternative's ID returns 422. Send its terms back, get `agreed`, then accept (sandbox h1c; P10 31.70 at 54 → 56 d).
+3. **On a given structure the supplier follows its own ladder; our first ask does not change it.**
+   - P04 (first ask 4.09 vs 4.54 → 4.94 both), P11 (38.88 vs 42.41 → 45.50), P18 (5.02 vs 4.89 → 5.50), P07 (the same ladder in two agents).
+   - D01: the first counter was 51.50 in all 20 sessions.
+   - What the first ask can change is which alternative sheets the supplier offers (P18 5 % deadband sheet).
+4. **Step size is mirrored, how many rounds you get varies.**
+   - D01: the supplier gives back 0.6–0.85 of each step. Steps of 0.05 → early final, 0.676; steps of 0.40 → 0.88–0.90. Final offer at our 6th message.
+   - Job shop D02: gives back the whole step and asks for "bigger steps".
+   - Practice: final offer after a median of 4 of our messages (64 % within 4, 171 threads). A 6-round horizon lost in 4 of 4 (P07 −0.045, P11 −0.068, P18 −0.066, D01 −0.026).
+   - P07 gives one more round when our asks are closer to its price.
+5. **A lowball hardens the supplier.**
+   - P02 at 1.00 EUR: "placeholder", "request a realistic proposal". Steps shrank to 0.30–0.38 and the final offer came after 3 messages.
+   - P10: first ask ≤28.6 → `final_offer` at once; "far below any calculation we can make".
+   - P05: 2 walk-aways when the first ask was 13.6 % below the floor.
+   - Lab optimum: first ask 6 % below. An oracle first ask 3 % below the floor scored −2.4 points in the arena.
+6. **Suppliers price every lever at their own value.**
+   - Payment at the supplier's cost of money: P02 6.6 %, P08 6.5 %, P03 4.1 %, P04 7.3 %, P07 7.5 %, P18 11–22 %, P05 70240 17–35 %, D01 9.3 %. Ours is 8 %, so ask for long payment only from suppliers below 8 %; ask cash-short ones for short payment (P01 14 d: +0.016).
+   - Start date: D01 51.30 / 51.50 / 51.80 for December / February / April, the same value to it.
+   - Deadband: P08 +0.12; P18 +0.10.
+   - Lead time: P10 0.158/day.
+7. **The supplier answers on the structure we send** (294 of 304 replies). With several sheets it answers the one worth most to it (65 of 79). It changes a field only to refuse it.
+8. **Facts move some suppliers by 1–2 %, and some kinds of fact hurt.**
+   - Moved: P01 (all), P02 (price history, forecast), P05 (rival offer, index, news), P11 (index, quality without the comma, volume), P18 (index fall, volume), P08 and P07 (volume).
+   - "Holds, but does not change our calculation": P04 (all), delivery records almost everywhere, price history in P18/P04.
+   - `irrelevant` and "not our reality" facts lose a round or the step (P02 0.394/0.319, P08 0.438).
+   - A ppm with a thousands comma is `contradicted` and costs trust.
+   - Each topic counts once per case. A round with no argument gets a hold (P11 0.778 → 0.710).
+9. **A supplier never raises a price it has named.** P02 held 351.45 against an ask of 361.35. So an ask the supplier might undercut must already be the price we want.
+10. **It usually takes an ask about 1 % below its standing offer, but it depends on the path.** Taken: P01 0.6–1.0 %, P18 1.8 %. Refused: P04 0.8 %, and P11's 45.09 on another path.
+11. **Relationship term (stabilise / secure_supply).** A clause or a longer contract is security, not cash, so the arena still charges for a squeezed price: P02 at 351.45 → 119,974, optimum at 361.35. P01 at 132.28 → 11,124. Code has to choose the price.
+12. **Answers within a case are repeatable.** Practice suppliers answer identical e-mails with identical numbers (v1.1 9 of 10). Only RFQ threads vary with timing.
+13. **RFQ timing.** A thread left waiting at `final_offer` for over a minute withdrew. After a timeout the offer ID changes and the supplier hardens.
+14. **Not levers:**
+    - Binding volume above need: C pays for all of it.
+    - Volume or call-off sentences: no effect on P02, P04, P18; small on P07, P08.
+    - Asking for the pricing committee: P02 0.480.
+    - creep / zone / pay_probe / signal_facts: no gain.
+
+**Rules the experiments adopted:**
+- Price every sheet by C.
+- Never push after `final_offer`.
+- About five large steps, never shrinking them early.
+- First ask 6 % below the target estimate (target ×1.00), horizon of 4 messages.
+- `past_target` and `fast_pay` on; one fact per topic; ppm without the comma.
+- Kit order for RFQs; the clause offer for relationship cases.
+
+## Where the remaining points most likely are, ranked
+
+1. **P11: offer 1500 ppm**, ≈+0.08 to +0.22.
+2. **P18:**
+   - Idx_recent is the agent's knob for the index-fall argument; it is still only a candidate on omars_branch. Making it default adds +0.05.
+   - Not asking 90 d from a supplier whose rate is above 8 % could add more (untested).
+3. **P05: give 70240 the trade it asked for** (14 d, 42-day lead), and keep the kit's order.
+4. **P10: a first ask near its own level so it stays `open`** (untested; 0.35 at stake).
+5. **P07: one more round**, by asking closer to its price (+0.03).
+6. **P01: one more ~1 % ask** (+0.016).
+
+P02 (≈0.735), P03 and P04 look capped by the supplier's own wall.</result>
+<usage><subagent_tokens>302973</subagent_tokens><tool_uses>52</tool_uses><duration_ms>661715</duration_ms></usage>
+</task-notification>
+
+---
+
+execute more of the plan, but change more than ipreviously said. the logic should be completely new. thankyou
+
+---
+
+execute most of the plan but change more then i previoulsy said. the logic should be completely new and finished, fully tested, perfect, and scoring  at least 9 at 5 of the tests

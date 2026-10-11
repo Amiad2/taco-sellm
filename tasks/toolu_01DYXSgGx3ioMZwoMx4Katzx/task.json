@@ -1,0 +1,15 @@
+{
+  "tool_use_id": "toolu_01DYXSgGx3ioMZwoMx4Katzx",
+  "agent_id": "a1d43d25875c8fb0f",
+  "subagent_type": "Explore",
+  "task_description": "Analyze per-case negotiation runs",
+  "token_usage": {
+    "input_tokens": 94,
+    "cache_creation_tokens": 284546,
+    "cache_read_tokens": 8107758,
+    "output_tokens": 1660,
+    "api_call_count": 47
+  },
+  "started_at": "2026-10-11T02:29:49.543366942+02:00",
+  "completed_at": "2026-10-11T02:40:51.134639992+02:00"
+}

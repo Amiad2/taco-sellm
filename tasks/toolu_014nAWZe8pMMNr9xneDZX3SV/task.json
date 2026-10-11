@@ -1,0 +1,15 @@
+{
+  "tool_use_id": "toolu_014nAWZe8pMMNr9xneDZX3SV",
+  "agent_id": "a91215bb869e43505",
+  "subagent_type": "Explore",
+  "task_description": "Map sellm agent code architecture",
+  "token_usage": {
+    "input_tokens": 52,
+    "cache_creation_tokens": 178917,
+    "cache_read_tokens": 2888959,
+    "output_tokens": 805,
+    "api_call_count": 26
+  },
+  "started_at": "2026-10-11T02:29:49.362503751+02:00",
+  "completed_at": "2026-10-11T02:34:28.313303977+02:00"
+}

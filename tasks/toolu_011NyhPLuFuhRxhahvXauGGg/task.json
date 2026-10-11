@@ -1,0 +1,15 @@
+{
+  "tool_use_id": "toolu_011NyhPLuFuhRxhahvXauGGg",
+  "agent_id": "a4dc5e92a0d91c648",
+  "subagent_type": "Explore",
+  "task_description": "Map branches and score history",
+  "token_usage": {
+    "input_tokens": 30,
+    "cache_creation_tokens": 165456,
+    "cache_read_tokens": 1405982,
+    "output_tokens": 614,
+    "api_call_count": 15
+  },
+  "started_at": "2026-10-11T02:29:49.372128459+02:00",
+  "completed_at": "2026-10-11T02:34:03.803080259+02:00"
+}
