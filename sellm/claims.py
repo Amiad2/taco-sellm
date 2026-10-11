@@ -178,6 +178,21 @@ class _Bank:
                     f"in {fb['date'][:7]} ({a}, {b}).")  # fmt: skip
             out.append(_entry([a, b], "po", round(change, 1), "%", part, text, change > 0.5,
                               strength=abs(change) / 2))  # fmt: skip
+            # The same history as an argument: the last order at its lowest price of the last twelve months
+            # against the latest one, where the price has jumped since. "5.75 two years ago, 5.84 today" was
+            # dismissed 42 times; "5.26 in June, 5.84 in September" was taken into account (P18 0.598 -> 0.657,
+            # P08 0.637 -> 0.659, Sun 04:30).
+            year = _month(self.data_last, 12) if self.data_last else ""
+            recent = [r for r in rows[:-1] if r[1]["date"][:7] >= year]
+            if recent:
+                lowest = min(float(r[1]["unit_price"]) for r in recent)
+                c, fc = [r for r in recent if float(r[1]["unit_price"]) == lowest][-1]
+                jump = (pb / lowest - 1) * 100
+                if jump >= 2.0 and jump > change + 0.5 and c != a:
+                    months = (fc["date"][:7], fb["date"][:7])
+                    text = (f"We ordered from you at EUR {lowest:,.2f} {per} in {months[0]} and at EUR {pb:,.2f} {per} "
+                            f"in {months[1]} ({c}, {b}).")  # fmt: skip
+                    out.append(_entry([c, b], "po", round(jump, 1), "%", part, text, True, strength=abs(jump) / 2))
         return out
 
     def _fc(self, kinds, facts, sid, parts, prefer=()):

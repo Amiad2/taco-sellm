@@ -113,6 +113,7 @@ VARIANTS = {
         ],
     ),
     "control": dict(),
+    "agent": dict(knobs=dict(plan="llm")),  # --agent sellm as it is on this commit, with the planner
     # the order history as an argument, not as a record: the pair of orders around its last price jump (P18: 5.26 in
     # June, 5.84 since July; P08: 5.17 last winter, 5.45 now) instead of the first and last order of two years
     "po-jump-P18": dict(
