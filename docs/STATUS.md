@@ -59,7 +59,7 @@ signal vocabulary). Build against section 10; add fields freely, rename core fie
 
 **Full practice run with `--agent sellm` on Sun 00:45 (@7a49c38: calculator, argument bank, dossier signals, past the relationship target, fast payment for cash-short suppliers; no LLM, kit runner): mean 72.9** - baseline 61.5. At or above the baseline in 9 of 10 cases (P07 0.747 against 0.779); 0 timeouts. With the LLM writing the e-mails the same agent scored 71.6 and stopped being repeatable; an LLM verdict that may accept made P01 and P18 worse (`experiments/LLM-ADVISOR.md`). Still weak: P18 0.47, P02 0.53, P08 0.55. Details: `docs/LOG.md` Sun 00:50.
 
-**`jonathans_branch@a49c9b4` (Sun 02:10): P02 0.725 (main: 0.531)** with the index clause offered as a second sheet at the price where our total cost is lowest (session 411824454914aa5f). The other nine cases are played move for move as on main (tests), so the practice mean by replay is **74.8** (main 72.9). Findings: `docs/LEARNINGS.md`, section "From the P02 argument tests".
+**`jonathans_branch@67001e7` (Sun 02:25), full practice run, kit runner, no LLM: mean 74.9** (main@7a49c38: 72.9; tag `best-jonathans_branch-74.9`). P02 0.725 with the index clause offered as a second sheet at the price where our total cost is lowest; the other nine exactly as on main (P01 0.969, P03 0.923, P04 0.860, P05 0.820, P07 0.747, P08 0.549, P10 0.647, P11 0.778, P18 0.467). Findings: `docs/LEARNINGS.md`, section "From the P02 argument tests".
 
 Generated, do not keep by hand: `runs/README.md` (per case `C_open`, `C_best`, our best, every
 session). Baseline of the kit's LLM agent on all 10 hosted cases, Sat 15:27: **mean 61.5**.

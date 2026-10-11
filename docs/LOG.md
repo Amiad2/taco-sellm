@@ -899,3 +899,9 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 ## 2026-10-11 02:10 CEST · Jonathan @ MacBook-Pro-von-Jonathan
 **[run] Lab stress of jonathans_branch@a49c9b4 (clause offer on): PASS, 0 crashes, 0 refused moves, 0 broken must-haves over 816 negotiations**
 - scripts/lab stress sellm.agent:make_agent, 204 scenarios in both runner modes: mean 56.1 with one loop per thread, 55.6 with the kit's sequential runner (main's agent on Sat 23:50: 56.2 / 53.9). The lab's engine suppliers do not price an index clause, so the score says nothing about the rule's gain - the run shows that the second sheet and the guards break nothing. Report: runs/lab/20261011-020946-stress-jonathans-clause/report.md
+
+## 2026-10-11 02:20 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] Full practice run of jonathans_branch@67001e7 (--agent sellm with the clause offer, no LLM, kit runner): mean 74.9 (main 72.9)**
+- commit jonathans_branch@67001e7 (pushed, clean tree), uv run arena run --set practice --agent sellm --parallel 8; tag best-jonathans_branch-74.9. 10 deals, 0 timeouts.
+- P01 0.969, P02 0.725 (362.70 with the copper clause, agreed in its first reply; main 0.531), P03 0.923, P04 0.860, P05 0.820, P07 0.747, P08 0.549, P10 0.647, P11 0.778, P18 0.467 - the nine others exactly as in the 72.9 run of main@7a49c38, as the tests said.
+- Sessions labelled 'sellm + clause offer (no LLM), kit runner, jonathans_branch@67001e7' in runs/. pull-runs also fetched a teammate's P05 (5aa402cd, 0.735) under my label: corrected to 'played by a teammate'. Quota left 238 of 450 (Jonathan's own budget: 30 of 40 left).
