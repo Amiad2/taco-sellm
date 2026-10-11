@@ -373,6 +373,18 @@ def test_waves_start_their_cases_and_the_runner_stops_after_the_last():
     assert ("cases", "final") in arena.calls
 
 
+def test_waves_in_the_final_mode_one_loop_per_case_with_an_rfq():
+    """What `python -m sellm.runner --set final` runs since Sun 02:20: one loop per case, one message in
+    flight, waves with an RFQ among single-supplier cases."""
+    pkg = _package()
+    scen = [_scenario(n) for n in ("P01", "P05", "P18")]
+    arena = FakeArena(scen, pkg.facts, waves=[(0.2, 8.0, ["case:P01", "case:P05"]), (0.6, 8.0, ["case:P18"])])
+    lim = dataclasses.replace(FAST, turns=True, serial=True)
+    rows = runner.run_final(arena, lambda: _agent(pkg), waves=2, parallel=10, limits=lim)
+    assert set(rows) == {"case:P01", "case:P05", "case:P18"}
+    assert all(r["crash"] is None and r["end_reason"] in ("accepted", "walked_away") for r in rows.values())
+
+
 def test_the_runner_never_calls_the_live_feed():
     """docs/CONTEXT.md section 11: reading events, screen, leaderboard or results disqualifies."""
     for path in (ROOT / "sellm" / "runner.py", ROOT / "sellm" / "negotiator.py", ROOT / "sellm" / "agent.py"):
