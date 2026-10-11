@@ -113,6 +113,8 @@ VARIANTS = {
         ],
     ),
     "control": dict(),
+    # Amiad's rule for a capacity-tight supplier, on this agent: the first ask no lower than 93 % of its opening
+    "agent-nolow": dict(knobs=dict(plan="llm", no_lowball=0.93)),
     # the rules as built in: every fallen cost-driver index, one per e-mail (idx_many); the larger fall of an index
     # the supplier blames (idx_blamed, needs the planner)
     "agent-idx": dict(knobs=dict(plan="llm", idx_blamed=True, idx_many=3)),

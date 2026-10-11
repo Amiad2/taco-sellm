@@ -74,6 +74,11 @@ DEFAULTS = dict(
     # foundry's letter blames energy, PPI-D351 -6.1 % since November instead of -3.7 % on the year, 0.969 -> 0.997.
     # Not for a supplier that gave no such reason: P11 lost its close with the same sentence (Omar's E4).
     idx_blamed=False,
+    # A fraction (0.93): the first ask to a supplier the dossier calls capacity-tight is no lower than this share
+    # of its opening price. P10's seal maker answered every lower first ask (24.72, 28.60) with its final offer at
+    # once and stayed open at 29.89-29.95 (Amiad's sellm2: 0.647 -> 0.671). A supplier that allocates its
+    # volume does not need our order.
+    no_lowball=None,
 )
 CLAUSE_LINE = "With the index clause of the second option the price follows {series} beyond the deadband, so that this risk does not have to be priced in up front."
 IDX_LINE = re.compile(
@@ -421,6 +426,11 @@ class Persistent(Negotiator):
                 floor = self.clause_price(case, v, {f: x for f, x in its.items() if f != "unit_price"})
                 if floor and its["unit_price"] < floor - 0.005:
                     plan = {**plan, "enough": False}
+        if self.e["no_lowball"] and not v.asks and v.opening and self.signal(case, v, "capacity_tight"):
+            its = v.opening["term_sheets"][0]["terms"].get("unit_price")
+            floor = round(its * self.e["no_lowball"], 2) if its else None
+            if floor and plan["sheet"]["unit_price"] < floor:
+                plan = {**plan, "sheet": complete_offer(case, {**plan["sheet"], "unit_price": floor})}
         push = self.push_price(case, v)
         if push is not None:
             s = {f: x for f, x in v.filled(v.standing[1]).items() if f != "unit_price"}
