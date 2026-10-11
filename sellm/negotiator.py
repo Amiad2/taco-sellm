@@ -69,6 +69,11 @@ DEFAULTS = dict(
     idx_recent=None,  # a % (e.g. 2.0): also cite a cost-driver index that fell at least this much from its peak of the last 12 months
     gate=False,  # leave out a fact the supplier's dossier says it will dismiss (see `dismissed`)
     idx_window="year",  # a falling cost-driver index: year (its last 12 months) | max (also the fall from its peak, the larger)
+    refill=False,  # no new topic left: a fact of a topic already used (the arena says duplicate), else one question
+)
+# the question for a round without any fact left (refill): asks for what it values, gives nothing away
+REFILL_QUESTION = (
+    "To close the remaining gap, could you show us how your price is built up, for example as a cost breakdown?"
 )
 # Where deals could end, as a share of the supplier's opening price, when no should-cost of its own
 # plant exists. Two numbers on purpose (few cases, so no finer split): cases with a relationship term,
@@ -818,9 +823,29 @@ class Negotiator:
                     if self.k["ppm"] == "plain":
                         sentence = re.sub(r"(\d),(\d{3})(?=\s*ppm)", r"\1\2", sentence)
                 return [sentence]
+            if self.k["refill"] and price and self.gap(case, v) > 0.02:
+                # Nothing new: a round without any fact made suppliers end sooner (experiments/LEDGER.md E3:
+                # P08, P07), a duplicate complaint that the supplier still read kept P11 conceding (Sat 22:16).
+                # Not near the close: there a plain ask got 'agreed' (P11 45.09 against its 45.50)
+                for a in found:
+                    if a["kind"] == "quote" or a["sentence"] in ours_here or not a.get("ids"):
+                        continue
+                    if "ppm" in a["sentence"] and self.k["ppm"] != "asis":
+                        continue
+                    return [a["sentence"]]
+                if REFILL_QUESTION not in ours_here:
+                    return [REFILL_QUESTION]
         except Exception as e:  # an argument less, never a lost move
             log.warning("%s %s: argument bank failed (%s: %s)", case.get("case_id"), v.sid, type(e).__name__, e)
         return []
+
+    def gap(self, case, v):
+        """How far our last ask is below its standing price, as a share of its price (0 before our first ask)."""
+        _, standing = v.standing
+        if not v.asks or not standing.get("unit_price"):
+            return 0.0
+        last = complete_offer(case, v.asks[-1])
+        return max(0.0, 1 - last["unit_price"] / standing["unit_price"])
 
     def dismissed(self, case, v, kind):
         """A fact this supplier will answer with 'it holds, but it does not change our calculation',

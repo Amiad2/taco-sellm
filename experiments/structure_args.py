@@ -41,6 +41,8 @@ VARIANTS = {
     "E3": {"idx_recent": 2.0, "gate": True},
     # the candidate (KNOBS since f473d97 already has idx_recent) + the larger of the yearly and the peak fall
     "E4": {"idx_window": "max"},
+    # the candidate + a fact of a used topic, else one question, in a round that has no new fact
+    "E5": {"refill": True},
 }
 
 
