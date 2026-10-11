@@ -781,7 +781,7 @@ class Negotiator:
                     f"Our bottom-up estimate of the full cost is EUR {estimate[1]:.2f} per unit before margin ({estimate[0]})."
                 ]
         for ref, sentence in self.index_claims(case):
-            if ref not in cited:
+            if ref not in cited and not self.hedged(case, v, ref):
                 return [sentence]
         return self.banked(case, v, cited, ours_here, price) if self.k["bank"] else []
 
@@ -817,6 +817,15 @@ class Negotiator:
         except Exception as e:  # an argument less, never a lost move
             log.warning("%s %s: argument bank failed (%s: %s)", case.get("case_id"), v.sid, type(e).__name__, e)
         return []
+
+    def hedged(self, case, v, ref):
+        """A material index whose fall does not reach this supplier: its dossier says its material is
+        covered at fixed prices ('Material covered until March 2027'). P08's supplier answered the fall of
+        AS-14404 with 'that is not our reality' and ended 0.10 higher (0.438 against 0.549). Labour and
+        energy series are not material. Only with `idx_recent`, so the agent without it is unchanged."""
+        if not self.k["idx_recent"] or ref.split(":", 1)[-1].startswith(("LCI-", "PPI-D35")):
+            return False
+        return any(sig.get("kind") == "material_hedged" for sig in self.intel(case, v).get("signals") or [])
 
     def index_claims(self, case):
         """Cost-driver indices of the case's parts that fell over the last twelve months of their series."""

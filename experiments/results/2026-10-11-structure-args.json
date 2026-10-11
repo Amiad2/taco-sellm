@@ -1,0 +1,227 @@
+[
+ {
+  "session_id": "c2a43a93eb19604c",
+  "case_id": "case:P08",
+  "deal": true,
+  "score": 0.5376202421773347,
+  "c_deal": 1041493.02,
+  "supplier": "sup:70710",
+  "terms": {
+   "payment_days": 90,
+   "lead_time_days": 10,
+   "volume_per_year": 94800,
+   "contract_months": 24,
+   "effective_date": "2027-01-01",
+   "index_clause": {
+    "series": "AS-14404",
+    "material_share": 0.45,
+    "deadband_pct": 0.0,
+    "base_month": "2026-08"
+   },
+   "incoterm": "DAP",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 50,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 5.36
+  },
+  "end_reason": "accepted",
+  "seconds": 69,
+  "threads": {
+   "sup:70710": {
+    "our_messages": 4,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 4,
+    "their_prices": [
+     6.05,
+     5.45,
+     5.42,
+     5.39,
+     5.36
+    ],
+    "our_prices": [
+     [
+      4.91
+     ],
+     [
+      5.02
+     ],
+     [
+      5.14
+     ],
+     [
+      5.31
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 5,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "label": "E1",
+  "knobs": {
+   "contract": "horizon"
+  },
+  "version": "omars_branch@c8c0eb5"
+ },
+ {
+  "session_id": "78ad49af234d527a",
+  "case_id": "case:P18",
+  "deal": true,
+  "score": 0.5200438598184602,
+  "c_deal": 257458.63,
+  "supplier": "sup:70740",
+  "terms": {
+   "payment_days": 90,
+   "lead_time_days": 14,
+   "volume_per_year": 23700,
+   "contract_months": 36,
+   "effective_date": "2027-01-01",
+   "index_clause": {
+    "series": "AS-14404",
+    "material_share": 0.45,
+    "deadband_pct": 0.0,
+    "base_month": "2026-08"
+   },
+   "incoterm": "DAP",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 70,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 5.3
+  },
+  "end_reason": "accepted",
+  "seconds": 103,
+  "threads": {
+   "sup:70740": {
+    "our_messages": 4,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 4,
+    "their_prices": [
+     6.1,
+     5.4,
+     5.4,
+     5.3,
+     5.3
+    ],
+    "our_prices": [
+     [
+      4.89
+     ],
+     [
+      5.02
+     ],
+     [
+      5.14
+     ],
+     [
+      5.23
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified",
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 5,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "label": "E2",
+  "knobs": {
+   "idx_recent": 2.0
+  },
+  "version": "omars_branch@c8c0eb5"
+ },
+ {
+  "session_id": "04f83caa53890e47",
+  "case_id": "case:P08",
+  "deal": true,
+  "score": 0.43801912483885347,
+  "c_deal": 1058980.78,
+  "supplier": "sup:70710",
+  "terms": {
+   "payment_days": 90,
+   "lead_time_days": 10,
+   "volume_per_year": 94800,
+   "contract_months": 36,
+   "effective_date": "2027-01-01",
+   "index_clause": {
+    "series": "AS-14404",
+    "material_share": 0.45,
+    "deadband_pct": 0.0,
+    "base_month": "2026-08"
+   },
+   "incoterm": "DAP",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 50,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 5.45
+  },
+  "end_reason": "accepted",
+  "seconds": 75,
+  "threads": {
+   "sup:70710": {
+    "our_messages": 4,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 4,
+    "their_prices": [
+     6.05,
+     5.57,
+     5.52,
+     5.48,
+     5.45
+    ],
+    "our_prices": [
+     [
+      4.91
+     ],
+     [
+      5.05
+     ],
+     [
+      5.2
+     ],
+     [
+      5.4
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 5,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "label": "E2",
+  "knobs": {
+   "idx_recent": 2.0
+  },
+  "version": "omars_branch@c8c0eb5"
+ }
+]

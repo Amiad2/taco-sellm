@@ -34,6 +34,9 @@ VARIANTS = {
     "E1": {"contract": "horizon"},  # where C does not care, commit for the horizon, not longer
     "E2": {"idx_recent": 2.0},  # a cost-driver index that fell >= 2 % from its peak of the last 12 months
     "E12": {"contract": "horizon", "idx_recent": 2.0},
+    # E2 with the hedge guard (commit after c8c0eb5): no material index fall to a supplier whose
+    # dossier says its material is covered at fixed prices. Same knobs, new code
+    "E2g": {"idx_recent": 2.0},
 }
 
 
