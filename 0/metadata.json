@@ -1,0 +1,38 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4M9FGHB52TSWH6PT97KVG31",
+  "session_id": "fa55bb36-4417-4f3f-bfa4-355b7b3a7c4d",
+  "strategy": "manual-commit",
+  "created_at": "2026-10-11T01:33:19.57641075Z",
+  "branch": "amiads_branch",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "sellm2/runner.py",
+    "sellm2/tests/test_s2_policy.py"
+  ],
+  "agent": "Claude Code",
+  "model": "claude-sonnet-5-5",
+  "turn_id": "3f7b2b199a07",
+  "checkpoint_transcript_start": 1248,
+  "transcript_lines_at_start": 1248,
+  "compact_transcript_start": 155,
+  "token_usage": {
+    "input_tokens": 6,
+    "cache_creation_tokens": 5130,
+    "cache_read_tokens": 1858732,
+    "output_tokens": 2395,
+    "api_call_count": 3
+  },
+  "initial_attribution": {
+    "calculated_at": "2026-10-11T01:33:19.290137391Z",
+    "agent_lines": 18,
+    "agent_removed": 4,
+    "human_added": 0,
+    "human_modified": 0,
+    "human_removed": 0,
+    "total_committed": 18,
+    "total_lines_changed": 22,
+    "agent_percentage": 100,
+    "metric_version": 2
+  }
+}
