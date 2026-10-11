@@ -125,7 +125,7 @@ cat <<'EOF'
 
 Start the final (Sun 11:30 at the latest, it polls until wave 1 opens and stops after wave 5):
   caffeinate -dims &      # macOS: no sleep
-  nohup uv run python -m sellm.runner --set final --agent sellm > runs/logs/final.out 2>&1 &
+  SELLM_PLAN=llm SELLM_MODEL=gpt-6-sol nohup uv run python -m sellm.runner --set final --agent sellm > runs/logs/final.out 2>&1 &
   tail -f runs/logs/final.out      # watch; the per-move log is runs/logs/<time>-runner-final.log
 After a crash: run the same command again; it resumes the running sessions.
 EOF

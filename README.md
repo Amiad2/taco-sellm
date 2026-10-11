@@ -22,7 +22,7 @@ opens, plays every case of a wave in parallel, closes each case before the wave'
 wave 5; run the same command again after a crash and it resumes the running sessions):
 
 ```bash
-nohup uv run python -m sellm.runner --set final --agent sellm > runs/logs/final.out 2>&1 &
+SELLM_PLAN=llm SELLM_MODEL=gpt-6-sol nohup uv run python -m sellm.runner --set final --agent sellm > runs/logs/final.out 2>&1 &
 ```
 
 Measured runs use the same runner: `uv run python -m sellm.runner --set sandbox --cases D01 D02

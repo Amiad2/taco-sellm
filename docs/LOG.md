@@ -1208,3 +1208,9 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 ## 2026-10-11 11:16 CEST · Jonathan @ MacBook-Pro-von-Jonathan
 **[change] Entire on Jonathan's machine: this morning's sessions attached as checkpoints**
 - The Claude sessions here were started in the parent folder, so the repo's Entire hooks never fired: no checkpoint, no Entire-Checkpoint trailer on Jonathan's commits. The transcripts were scanned for the arena key and the LLM key (not found, no key-shaped string) and then attached with 'entire session attach'. 'entire login' still has to be done by Jonathan himself.
+
+## 2026-10-11 11:29 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] Pre-flight on main (Jonathan's MacBook, the final machine): all checks pass; the final command now sets the planner**
+- scripts/preflight on main@58facd3 (11:18-11:22): repo in step, .env and data with the Sunday release, arena me ok, no live-feed endpoint in the agent path, 228 tests pass, sandbox D01 through the final runner 0.947. Then two practice cases as the final will run them (SELLM_PLAN=llm SELLM_MODEL=gpt-6-sol, a fresh planner cache so the model is really called): P01 0.997, P05 0.820, 0 crashes, 16 s.
+- Fixed: README and scripts/preflight printed the final command without SELLM_PLAN=llm SELLM_MODEL=gpt-6-sol (without the planner P01 is 0.969, the mean 80.8); ruff's import-order complaint in sellm/lab/p02_c_agents.py.
+- Network: 11:09-11:17 the machine was on a phone hotspot with IPv6 only (arena and GitHub unreachable); while switching to eduroam a captive portal answered for arena.tacto.ai (certificate mismatch, two sessions not opened, no quota used). On eduroam /health answers in 0.1-0.4 s. Open for the person at the machine: power cable, caffeinate -dims.

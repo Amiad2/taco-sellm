@@ -7,9 +7,9 @@ import math
 
 from arena_kit.cost import complete_offer
 
-from .dials import DialNegotiator
 from ..endgame import Persistent
 from ..negotiator import Thread
+from .dials import DialNegotiator
 
 
 def _set_opening_price(case, v, plan, price):
