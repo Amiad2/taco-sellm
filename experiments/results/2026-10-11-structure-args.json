@@ -512,5 +512,159 @@
    "gate": true
   },
   "version": "omars_branch@2be638a"
+ },
+ {
+  "session_id": "6d45cb41b80edc53",
+  "case_id": "case:P01",
+  "deal": true,
+  "score": 0.9967709407843144,
+  "c_deal": 1096999.72,
+  "supplier": "sup:70110",
+  "terms": {
+   "payment_days": 14,
+   "lead_time_days": 42,
+   "volume_per_year": 8150,
+   "contract_months": 12,
+   "effective_date": "2027-04-01",
+   "index_clause": null,
+   "incoterm": "FCA",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 900,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 131.39
+  },
+  "end_reason": "accepted",
+  "seconds": 103,
+  "threads": {
+   "sup:70110": {
+    "our_messages": 4,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": null,
+    "their_prices": [
+     138.55,
+     139.3,
+     134.8,
+     133.2,
+     131.39
+    ],
+    "our_prices": [
+     [
+      127.89
+     ],
+     [
+      130.24
+     ],
+     [
+      130.88
+     ],
+     [
+      131.39
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified",
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 5,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "label": "E4",
+  "knobs": {
+   "idx_window": "max"
+  },
+  "version": "omars_branch@7e6b558"
+ },
+ {
+  "session_id": "66f7858c2fd3578b",
+  "case_id": "case:P11",
+  "deal": true,
+  "score": 0.7098962346486538,
+  "c_deal": 750082.5,
+  "supplier": "sup:70140",
+  "terms": {
+   "payment_days": 60,
+   "lead_time_days": 56,
+   "volume_per_year": 15900,
+   "contract_months": 12,
+   "effective_date": "2027-01-01",
+   "index_clause": null,
+   "incoterm": "FCA",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 300,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 45.5
+  },
+  "end_reason": "accepted",
+  "seconds": 134,
+  "threads": {
+   "sup:70140": {
+    "our_messages": 7,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 7,
+    "their_prices": [
+     47.0,
+     46.5,
+     46.0,
+     45.5,
+     45.5,
+     45.5,
+     45.5,
+     45.5
+    ],
+    "our_prices": [
+     [
+      42.41
+     ],
+     [
+      43.26
+     ],
+     [
+      44.04
+     ],
+     [
+      44.78
+     ],
+     [
+      45.09
+     ],
+     [
+      45.19
+     ],
+     [
+      45.22
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified",
+     "duplicate",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 8,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "label": "E4",
+  "knobs": {
+   "idx_window": "max"
+  },
+  "version": "omars_branch@7e6b558"
  }
 ]

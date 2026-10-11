@@ -58,3 +58,5 @@ hypothesis is marked as one.
 | Sun 02:24 | E3 | P07 | 1 | 0.734 | accepted | omars_branch@2be638a | 5536877450191e3a |
 | Sun 02:24 | E3 | P03 | 1 | 0.923 | accepted | omars_branch@2be638a | 5a0f11a7244d2ea5 |
 | Sun 02:29 | C1 combined agent (clause offer + E2g), runner default | P05 | 1 | 0.820 | accepted | omars_branch@f473d97 | (runner log 20261011-022926) |
+| Sun 02:35 | E4 | P01 | 1 | 0.997 | accepted | omars_branch@7e6b558 | 6d45cb41b80edc53 |
+| Sun 02:36 | E4 | P11 | 1 | 0.71 | accepted | omars_branch@7e6b558 | 66f7858c2fd3578b |
