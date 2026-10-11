@@ -13,9 +13,11 @@ TEXT_RULES = {
     r"|new customers",
     "capacity_tight": r"\ballocation\b|fully booked|capacity is (?:tight|limited)|sold out|full order book",
     "list_price_fixed": r"head-office directive|list conditions|discounts not possible|price list"
-    r"|frozen all price reductions|no room on price|individual price reductions",
-    "material_hedged": r"material covered until|covered at fixed prices|forward at fixed prices"
-    r"|bought .{0,60}\bforward\b",
+    r"|frozen all price reductions|no room on price",
+    # Sunday release, a steel trader's letter: "we bought our bright and cold-drawn bar requirement forward at
+    # fixed prices until June 2027"
+    "material_hedged": r"material covered until|bought .{0,80}forward|(?:covered|bought|secured) at fixed prices"
+    r"|at fixed prices until",
     "partnership": r"partnership|kept supplying|old price|long-standing|for generations",
     "margin_floor": r"lowers? our margin|cannot sign|below (?:our )?cost",
     "quality_problem": r"\b8D\b|\bcomplaints?\b|\breject|\bdefects?\b",
@@ -32,9 +34,9 @@ NEWS_TOPICS = {
     "capacity_tight": {"allocation", "full_order_book", "big_order", "chip_shortage"},
     "ownership_change": {"new_owner", "succession", "restructuring", "refocus", "acquisition"},
 }
-# A later news item of these topics voids the earlier evidence of the kind (Sunday release: 'semiconductor supply
-# back to normal' after a 'warns of longer delivery times'). The case's own texts are always later.
-RELIEF = {"capacity_tight": {"supply_normalises"}}
+# News that ends a shortage: capacity news older than it no longer counts (Sunday release: "semiconductor supply
+# back to normal" for a supplier that had warned of a chip shortage in March)
+EASES = {"supply_normalises"}
 DRIVER_CLAIM = re.compile(
     r"(?P<series>[A-Z][A-Z0-9.-]+) (?P<dir>rose|fell) (?P<chg>\d+(?:\.\d+)?) % in twelve months and is "
     r"(?P<share>\d+(?:\.\d+)?) % of our cost",
@@ -79,9 +81,12 @@ def _structured(d):
             "skonto",
             f"Skonto {st['skonto_pct']} % at {st['skonto_days']} days instead of {st['payment_days']}.",
         )
+    eased = max(((n["date"] or "") for n in d["news"] if n["topic"] in EASES), default="")
     for n in d["news"]:
         for kind, topics in NEWS_TOPICS.items():
             if not n["noise"] and n["topic"] in topics:
+                if kind == "capacity_tight" and eased and (n["date"] or "") < eased:
+                    continue
                 add(kind, n["id"], "news", n["headline"] or "")
     if ident.get("owner_type") == "group" or ident.get("group_parent"):
         add(
@@ -126,21 +131,13 @@ def _structured(d):
 def detect(d, extra=()):
     """The dossier's signals: text rules over its texts (plus `extra` (id, date, subject, text)) and data rules."""
     items = _structured(d)
-    texts, dates = {}, {n["id"]: n["date"] or "" for n in d["news"]}
+    texts = {}
     for ref, date, subject, text in [*text_sources(d), *extra]:
-        dates[ref] = date
         for kind, rx in COMPILED.items():
             sub = SUBJECTS.get(kind)
             if rx.search(text) or (sub and sub.search(subject)):
                 items.setdefault(kind, []).append((ref, "text", ""))
                 texts.setdefault(kind, []).append((date, ref, excerpt(text, rx) or subject))
-    for kind, topics in RELIEF.items():
-        since = max((n["date"] or "" for n in d["news"] if not n["noise"] and n["topic"] in topics), default="")
-        if since and kind in items:
-            items[kind] = [x for x in items[kind] if dates.get(x[0], "") > since]
-            texts[kind] = [t for t in texts.get(kind, []) if t[0] > since]
-            if not items[kind]:
-                del items[kind]
     otd = ((d["performance"] or {}).get("latest") or {}).get("otd_pct")
     signals = []
     for kind in sorted(items):
