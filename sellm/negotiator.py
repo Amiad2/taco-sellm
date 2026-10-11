@@ -67,6 +67,7 @@ DEFAULTS = dict(
     writer="template",
     contract="longest",  # where C does not care how long we commit: longest | horizon (the shortest option that covers it)
     idx_recent=None,  # a % (e.g. 2.0): also cite a cost-driver index that fell at least this much from its peak of the last 12 months
+    gate=False,  # leave out a fact the supplier's dossier says it will dismiss (see `dismissed`)
 )
 # Where deals could end, as a share of the supplier's opening price, when no should-cost of its own
 # plant exists. Two numbers on purpose (few cases, so no finer split): cases with a relationship term,
@@ -807,6 +808,8 @@ class Negotiator:
                     continue
                 if self.k["one_per_topic"] and topic(a["ids"][0]) in used:
                     continue
+                if self.k["gate"] and self.dismissed(case, v, a["kind"]):
+                    continue
                 sentence = a["sentence"]
                 if a["kind"] in ("sc_ppm", "qn") or "ppm" in sentence:
                     if self.k["ppm"] == "skip":
@@ -817,6 +820,19 @@ class Negotiator:
         except Exception as e:  # an argument less, never a lost move
             log.warning("%s %s: argument bank failed (%s: %s)", case.get("case_id"), v.sid, type(e).__name__, e)
         return []
+
+    def dismissed(self, case, v, kind):
+        """A fact this supplier will answer with 'it holds, but it does not change our calculation',
+        by its dossier. Over every recorded single-fact e-mail, an on-time-delivery record was taken
+        into account by the suppliers with a delivery or quality problem signal (70110, 70140, 70210:
+        13 of 13) and dismissed by the others in about 60 of 70 answers (70250, 70610, 70620, 70710,
+        70740; 70510 split). Only for a supplier with a full dossier: a stranger's silence is no
+        evidence."""
+        found = self.intel(case, v)
+        if kind != "sc_otd" or found.get("coverage") != "full":
+            return False
+        kinds = {sig.get("kind") for sig in found.get("signals") or []}
+        return not kinds & {"delivery_problem", "quality_problem"}
 
     def hedged(self, case, v, ref):
         """A material index whose fall does not reach this supplier: its dossier says its material is

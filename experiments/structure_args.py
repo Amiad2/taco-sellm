@@ -37,6 +37,8 @@ VARIANTS = {
     # E2 with the hedge guard (commit after c8c0eb5): no material index fall to a supplier whose
     # dossier says its material is covered at fixed prices. Same knobs, new code
     "E2g": {"idx_recent": 2.0},
+    # E2g + no on-time-delivery record to a supplier whose dossier has no delivery or quality problem
+    "E3": {"idx_recent": 2.0, "gate": True},
 }
 
 
