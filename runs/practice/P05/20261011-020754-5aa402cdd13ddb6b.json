@@ -3,7 +3,7 @@
  "case_id": "case:P05",
  "set": "practice",
  "created_at": "2026-10-11T02:07:54+02:00",
- "label": "played by a teammate - pulled Sun 02:25 before its player labelled it",
+ "label": "OMAR R1 runner --serial (one loop per thread, one message in flight), sellm reference knobs, omars_branch@650e6e8",
  "replay": "https://arena.tacto.ai/replay/5aa402cdd13ddb6b",
  "case": {
   "case_id": "case:P05",
