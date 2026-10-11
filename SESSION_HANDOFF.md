@@ -1,4 +1,11 @@
-# SESSION_HANDOFF - omars_branch, Sun 11 Oct 2026 ~02:55 CEST
+# SESSION_HANDOFF - omars_branch, Sun 11 Oct 2026 04:40 CEST
+
+**Where the team stands (04:40):** the frontier is `jonathans_branch@8a854c4`, **80.3** through the final
+runner (tag `best-jonathans_branch-80.3`, planner live with `SELLM_PLAN=llm`). It contains everything
+adopted on this branch (E2g, the runner's one loop per case, its clock guard and slot wait) and builds
+on its findings (a second index series is a new fact; price-history windows). `omars_branch@0466bcf`
+(75.4 through the final runner) is a strict subset. Amiad proposes `sellm2` (76.4, `amiads_branch`).
+This branch plays no more practice sessions (27 used).
 
 For the next agent on `omars_branch`. Written from the repo, `docs/LOG.md`, the arena traces and
 `experiments/LEDGER.md` (every arena session of this research, with its commit). Measured results
@@ -45,17 +52,21 @@ Runner -> agent -> negotiator -> template e-mail; no LLM in the default path.
 
 ## 3. Implementation state
 
-- **Branch `omars_branch`, candidate `f473d97` (tag `best-omars_branch-75.4`)**; HEAD adds only the
-  experiment knob `idx_window` (off), ledger lines and merges of `main`. Working tree clean, pushed.
+- **Branch `omars_branch`**, validated version `0466bcf` (tag `best-omars_branch-75.4-runner`); later
+  commits are ledger, docs and merges of `main` only. Working tree clean, pushed.
 - Changes of this session: `sellm/negotiator.py` (knobs `contract`, `idx_recent` + `hedged`, `gate` +
-  `dismissed`, `idx_window`), `sellm/runner.py` (`serial`, `turns`, CLI default), `sellm/agent.py`
-  (KNOBS), `tests/test_runner.py` (+2 tests), `tests/test_endgame.py` (KNOBS pin), merge of
-  `jonathans_branch@67001e7`; experiments `experiments/structure_args.py`, `combined_replay.py`,
-  `LEDGER.md`. **205 tests pass, 1 skipped**; `ruff check .` only reports the old I001 in
+  `dismissed`, `idx_window`, `refill` + `gap`; only `idx_recent` is on), `sellm/runner.py` (`serial`,
+  `turns`, CLI default one loop per case, clock guard for waiting bidders, wait for a free session slot),
+  `sellm/agent.py` (KNOBS), `tests/test_runner.py` (+6 tests), `tests/test_endgame.py` (KNOBS pin),
+  merge of `jonathans_branch@67001e7`; `experiments/structure_args.py`, `combined_replay.py`,
+  `LEDGER.md`. Tests: 206+ passed, 1 skipped; `ruff check .` only reports the old I001 in
   `sellm/lab/p02_c_agents.py` (not ours).
-- **Not on `main` yet.** `main` still plays 72.9 (`@7a49c38` behaviour) with the old runner loops.
-- Known issues: `.env` on Omar's machine has `OPENAI_API_KEY` but the code reads `LLM_API_KEY` (only
-  matters if `SELLM_LLM` is set; it is off). P11's last accept is path-sensitive (0.778 vs 0.710).
+- **All adopted changes are in `jonathans_branch`** (checked with `git merge-base --is-ancestor` for
+  `c5c2d53`, `f60a212`, `4912998`, `0c60254`). Nothing of this branch is on `main` except docs and runs;
+  `main`'s agent is still `@7a49c38` (72.9) with one loop per thread.
+- Known issues: P11's last accept is path-sensitive (0.778 vs 0.710 on changed histories). `.env` on
+  Omar's machine has `OPENAI_API_KEY` but the code reads `LLM_API_KEY` - matters for the planner
+  (`SELLM_PLAN=llm`) of jonathans_branch if it is run from this machine.
 
 ## 4. Arena results (all measured; one session per case unless noted)
 
@@ -66,24 +77,27 @@ Runner -> agent -> negotiator -> template e-mail; no LLM in the default path.
 | E2 | recent index fall as argument | P18 **0.520** (0.467), P08 **0.438** (0.549, "not our reality: covered at fixed prices") | -> E2g |
 | E2g | E2 + hedge guard | P08 = reference by replay; P05 0.820 (C1) | **adopted** |
 | E3 | leave out facts the dossier predicts are dismissed | P08 0.515, P07 0.734, P03 0.923, P18 0.567 (net 0) | rejected |
-| E4 | cite the larger window of a falling index | P01 0.997, P11 0.710 twice, P05 0.820 (net -0.04) | rejected |
+| E4 | cite the larger window of a falling index | P01 0.997, P11 0.710 twice, P05 0.820 (net -0.04) | rejected here; jonathans_branch uses it only for an index the supplier blames |
+| E5 | fill a round without a new fact (duplicate, question) | P07 0.740, P08 0.515, P03 0.923 | rejected |
 | R1 | runner, one POST per session in flight | P05 0.735, 0 timeouts (was 0.665) | -> R2 |
 | R2 | runner, one loop per case (agent picks thread) | P05 0.820 = kit runner, 3 s | **adopted (runner default)** |
-| C1 | merge clause offer + E2g | P05 0.820; nine cases by exact replay -> **75.4** | **candidate** |
+| C1 | merge clause offer + E2g | P05 0.820; nine cases by exact replay -> 75.4 | candidate |
+| V1/V1b | the candidate, ten cases in parallel through the final runner | **75.4, every case as predicted**; P07/P10 first lost to `429 at most 10 open sessions` | runner now waits for a slot |
 
-Sandbox with the candidate through the runner: D01 0.947, D02 0.567 (free). Lab stress of the
-agent at `a5b363c`: PASS (0 crashes, 0 refused, 0 broken; `runs/lab/20261011-020037-stress-omar-sellm-a5b/`).
-Earlier results (price path, LLM writer/verdict, persistence): previous handoff in `2df3350`,
-`experiments/PRICE-PATH.md`, `PERSISTENCE.md`, `LLM-ADVISOR.md`, `PRACTICE-ARMS.md`.
+Sandbox with the candidate through the runner: D01 0.947, D02 0.567 (free). Lab stress of the agent
+at `a5b363c`: PASS (`runs/lab/20261011-020037-stress-omar-sellm-a5b/`). Team frontier after this:
+`jonathans_branch@8a854c4` 80.3 (its ledger `experiments/LEDGER-JONATHAN.md`, J1-J10).
 
 ## 5. Budget
 
 - Omar's budget: **50 arena runs; 1 run = 1 practice session** (`POST /v1/sessions` on a hosted case;
-  a full practice run = 10). Sandbox D01/D02 and `arena-sim` are free and not counted.
-- **This session: 14 practice sessions** (ledger). The previous session on this branch used 21. If the
-  50 includes those: 35 used, 15 left; if not: 14 used, 36 left. The ledger plans to stay within 29
-  for this session; **Omar should say which reading he meant.**
-- Team quota (shared, 450 per rolling 24 h): left 225 at 02:35; keep 40 for Sunday.
+  a full practice run = 10; a case whose session never opened costs nothing). Sandbox D01/D02 and
+  `arena-sim` are free and not counted.
+- **This session: 27 practice sessions** (ledger, one line per session). The previous session on this
+  branch used 21. If the 50 includes those: 48 used, 2 left; if not: 27 used, 23 left. The ledger
+  kept within 29 to be safe under both readings; **Omar should say which one he meant.**
+- Team quota (shared, 450 per rolling 24 h): 188 left at 03:08; Jonathan's night search stops at 100
+  left; keep 40 for Sunday.
 
 ## 6. Argumentation: what the data says
 
@@ -133,24 +147,29 @@ Logs: `runs/<set>/<case>/*.{md,json}` (traces with supplier reasons), `runs/logs
 
 ## 9. Next steps (highest value first)
 
-1. **Merge the candidate into `main` before 11:00** (team decision; it is jonathans_branch's 74.9 +
-   E2g + the runner default). Then `scripts/preflight` on the final machine; final command
-   `python -m sellm.runner --set final --agent sellm` (one loop per case is the default).
+1. **Team decision before 11:00: which version goes to `main`.** Measured through the final runner:
+   `jonathans_branch@8a854c4` **80.3** (needs `SELLM_PLAN=llm` and an LLM key on the final machine for
+   `idx_blamed`; without the planner P01 plays 0.969, i.e. ~80.0), `amiads_branch` `sellm2` 76.4,
+   `omars_branch@0466bcf` 75.4 (a subset of jonathans_branch). On this evidence jonathans_branch is
+   the strongest; it also carries this branch's runner fixes.
 2. **Sun 08:00 data release** (group B, Omar): `scripts/sync`, `uv run arena data`,
-   `uv run python -m sellm.intel build`, `check`, `verify` (must PASS), read new letters/news for
-   signal wording (`material covered`, cash, capacity), commit `sellm/dossiers` on `main`. Then
-   `experiments/combined_replay.py` to see whether the rebuild changed any practice move.
-3. Optional, if budget is agreed: one full practice run of the merged `main` through the final runner
-   as the rehearsal (10 sessions).
+   `uv run python -m sellm.intel build`, `check`, `verify` (must PASS), read new letters/news for signal
+   wording (`material covered`, cash, capacity), commit `sellm/dossiers` on `main`; the chosen branch
+   merges `main`. Then replay the practice cases on the chosen version to see what the rebuild changed.
+3. Then `scripts/preflight` and the rehearsal on the final machine; final command
+   `nohup uv run python -m sellm.runner --set final --agent sellm > runs/logs/final.out 2>&1 &`
+   (one loop per case is the default). Nobody plays practice/sandbox on the key during the final.
 - Open questions: how the hedge and dismissal signals look in the Sunday data for the hidden pool;
-  whether hidden RFQs with 3 bidders stay inside 8 minutes under load (R1 replies took up to 47 s
-  while teammates ran a full run; the runner closes 90 s before the cap).
+  whether 3-bidder RFQs stay inside 8 minutes under load (jonathans_branch's J10 drops a far-behind
+  bidder for that reason; the runner closes 90 s before the cap).
 
 ## 10. Repository handoff
 
-- `omars_branch` (tracks `origin/omars_branch`), candidate `f473d97`, tag `best-omars_branch-75.4`.
+- `omars_branch` (tracks `origin/omars_branch`); validated version `0466bcf`, tags
+  `best-omars_branch-75.4-runner` (`0466bcf`) and `best-omars_branch-75.4` (`f473d97`, agent only).
   Reference before this session: `a5b363c` (= behaviour of `@7a49c38`, 72.9).
 - Restore: `git switch -c restore-<hash> <hash>`; bring back with `git revert` or a merge; never
-  `git reset --hard` over pushed work, never force-push. Turn a rule off by removing it from `KNOBS`.
+  `git reset --hard` over pushed work, never force-push. Turn a rule off by removing it from `KNOBS`;
+  the old runner loops with `--per-thread`.
 - Shared files (`docs/`, `runs/`) live on `main`: switch, `scripts/sync`, change, commit, sync, switch
   back, `git merge main` (take `main`'s `runs/labels.json` on conflict).
