@@ -113,6 +113,30 @@ VARIANTS = {
         ],
     ),
     "control": dict(),
+    # the order history as an argument, not as a record: the pair of orders around its last price jump (P18: 5.26 in
+    # June, 5.84 since July; P08: 5.17 last winter, 5.45 now) instead of the first and last order of two years
+    "po-jump-P18": dict(
+        knobs=dict(plan="llm"),
+        script={
+            2: {
+                "replace": True,
+                "after": [
+                    "We ordered from you at EUR 5.26 per unit in 2026-06 and at EUR 5.84 per unit in 2026-09 (po:4500014078-10, po:4500014427-10)."
+                ],
+            }
+        },
+    ),
+    "po-jump-P08": dict(
+        knobs=dict(plan="llm"),
+        script={
+            2: {
+                "replace": True,
+                "after": [
+                    "We ordered from you at EUR 5.17 per unit in 2025-12 and at EUR 5.45 per unit in 2026-09 (po:4500013278-10, po:4500014455-10)."
+                ],
+            }
+        },
+    ),
     # P11: the supplier is short of cash (the dossier: we pay it 8.8 days late on average) and says in every e-mail
     # "faster payment would help us more than anything"; payment days are not negotiable in this case. What we can
     # give truthfully is payment on the due date.
