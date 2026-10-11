@@ -3,6 +3,7 @@ lose points in the final - an RFQ timeout that replaces the offer ID, a slow age
 crash and its resume, waves that start and close - are played in seconds, without quota."""
 
 import copy
+import dataclasses
 import threading
 import time
 from pathlib import Path
@@ -155,6 +156,42 @@ def test_rfq_timeout_replacing_the_offer_id_does_not_lose_the_case():
     assert any("refused" in n for n in row["notes"])
     accepts = [c for c in arena.calls if c[0] == "send" and c[3] == "accept"]
     assert len(accepts) <= 2
+
+
+def test_serial_keeps_one_message_of_a_session_in_flight():
+    """With `serial` the runner never has two POSTs of one session on their way at once (the arena works
+    through them one after another and counts the one behind a slow reply as late), and still plays the
+    RFQ to its end."""
+    pkg = _package()
+
+    class Slow(FakeArena):
+        flying, most = 0, 0
+
+        def send_message(self, sid, sup, message):
+            with self.lock:
+                self.flying += 1
+                self.most = max(self.most, self.flying)
+            try:
+                time.sleep(0.02)  # a reply that takes a while, outside the lock
+                return super().send_message(sid, sup, message)
+            finally:
+                with self.lock:
+                    self.flying -= 1
+
+    arena = Slow([_scenario("P05")], pkg.facts)
+    row = runner.play_case(arena, "case:P05", _agent(pkg), limits=dataclasses.replace(FAST, serial=True))
+    assert row["crash"] is None and row["end_reason"] in ("accepted", "walked_away")
+    assert arena.most == 1
+
+
+def test_turns_plays_an_rfq_in_the_agents_order_one_message_at_a_time():
+    """`turns`: one loop for the case, the agent (without focus) picks each thread, as the kit's play()."""
+    pkg = _package()
+    arena = FakeArena([_scenario("P05")], pkg.facts)
+    row = runner.play_case(arena, "case:P05", _agent(pkg), limits=dataclasses.replace(FAST, turns=True, serial=True))
+    assert row["crash"] is None and row["end_reason"] in ("accepted", "walked_away")
+    sends = [c[2] for c in arena.calls if c[0] == "send" and c[3] == "e-mail"]
+    assert len(set(sends)) == 3, "every bidder heard from us"
 
 
 def test_a_slow_agent_gets_a_holding_email_not_a_lost_thread():

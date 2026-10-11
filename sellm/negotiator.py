@@ -65,6 +65,9 @@ DEFAULTS = dict(
     ppm="plain",  # ppm figures without a thousands comma ("2,376 ppm" came back contradicted 3 of 3): plain | skip | asis
     signals=True,  # the dossier's signals move the share of its opening we aim at (see `share`)
     writer="template",
+    contract="longest",  # where C does not care how long we commit: longest | horizon (the shortest option that covers it)
+    idx_recent=None,  # a % (e.g. 2.0): also cite a cost-driver index that fell at least this much from its peak of the last 12 months
+    gate=False,  # leave out a fact the supplier's dossier says it will dismiss (see `dismissed`)
 )
 # Where deals could end, as a share of the supplier's opening price, when no should-cost of its own
 # plant exists. Two numbers on purpose (few cases, so no finer split): cases with a relationship term,
@@ -482,6 +485,9 @@ class Negotiator:
             cheapest = ranked[0][0]
             near = [s for c, s in ranked if c <= cheapest * (1 + 1e-4)]  # C does not care: commit longer, stay closer
             best = min(near, key=lambda s: (-(s.get("contract_months") or 0), away(s)))
+            covering = [s for s in near if (s.get("contract_months") or 0) >= 12 * b["horizon_years"]]
+            if self.k["contract"] == "horizon" and covering:  # no longer than the horizon: a longer fixed price is a risk it prices
+                best = min(covering, key=lambda s: (s.get("contract_months") or 0, away(s)))
             if self.cash(case, v) in ("medium", "high"):
                 best = self.payment_trade(case, v, best, price * share)
             self._memo[key] = best
@@ -776,7 +782,7 @@ class Negotiator:
                     f"Our bottom-up estimate of the full cost is EUR {estimate[1]:.2f} per unit before margin ({estimate[0]})."
                 ]
         for ref, sentence in self.index_claims(case):
-            if ref not in cited:
+            if ref not in cited and not self.hedged(case, v, ref):
                 return [sentence]
         return self.banked(case, v, cited, ours_here, price) if self.k["bank"] else []
 
@@ -802,6 +808,8 @@ class Negotiator:
                     continue
                 if self.k["one_per_topic"] and topic(a["ids"][0]) in used:
                     continue
+                if self.k["gate"] and self.dismissed(case, v, a["kind"]):
+                    continue
                 sentence = a["sentence"]
                 if a["kind"] in ("sc_ppm", "qn") or "ppm" in sentence:
                     if self.k["ppm"] == "skip":
@@ -813,12 +821,34 @@ class Negotiator:
             log.warning("%s %s: argument bank failed (%s: %s)", case.get("case_id"), v.sid, type(e).__name__, e)
         return []
 
+    def dismissed(self, case, v, kind):
+        """A fact this supplier will answer with 'it holds, but it does not change our calculation',
+        by its dossier. Over every recorded single-fact e-mail, an on-time-delivery record was taken
+        into account by the suppliers with a delivery or quality problem signal (70110, 70140, 70210:
+        13 of 13) and dismissed by the others in about 60 of 70 answers (70250, 70610, 70620, 70710,
+        70740; 70510 split). Only for a supplier with a full dossier: a stranger's silence is no
+        evidence."""
+        found = self.intel(case, v)
+        if kind != "sc_otd" or found.get("coverage") != "full":
+            return False
+        kinds = {sig.get("kind") for sig in found.get("signals") or []}
+        return not kinds & {"delivery_problem", "quality_problem"}
+
+    def hedged(self, case, v, ref):
+        """A material index whose fall does not reach this supplier: its dossier says its material is
+        covered at fixed prices ('Material covered until March 2027'). P08's supplier answered the fall of
+        AS-14404 with 'that is not our reality' and ended 0.10 higher (0.438 against 0.549). Labour and
+        energy series are not material. Only with `idx_recent`, so the agent without it is unchanged."""
+        if not self.k["idx_recent"] or ref.split(":", 1)[-1].startswith(("LCI-", "PPI-D35")):
+            return False
+        return any(sig.get("kind") == "material_hedged" for sig in self.intel(case, v).get("signals") or [])
+
     def index_claims(self, case):
         """Cost-driver indices of the case's parts that fell over the last twelve months of their series."""
         key = (case.get("case_id"), "idx")
         if key in self._memo:
             return self._memo[key]
-        out = []
+        out, recent = [], []
         parts = case.get("parts") or []
         if self.package and parts:
             try:
@@ -827,6 +857,11 @@ class Negotiator:
                     rows = self.package.query(
                         f"select distinct series_id from cost_drivers where part_id in ({marks})", tuple(parts)
                     )
+                    weights = self.package.query(
+                        f"select series_id, max(weight) as weight from cost_drivers where part_id in ({marks}) group by series_id",
+                        tuple(parts),
+                    )
+                    weight = {w["series_id"]: w["weight"] or 0.0 for w in weights}
                     for r in rows:
                         ids = self.package.ids(f"idx:{r['series_id']}@")
                         if len(ids) < 13:
@@ -841,6 +876,21 @@ class Negotiator:
                                     f"The index {r['series_id']} changed {change:+.1f} % from {months[0]} to {months[1]} ({a}, {b}).",
                                 )
                             )
+                        elif self.k["idx_recent"]:
+                            # rose over the year but fell since its peak: a window of at most 12 months that ends
+                            # with the data is checked like the yearly one (docs/CONTEXT.md section 7)
+                            peak = max(ids[-13:-1], key=lambda i: self.package.lookup(i)["value"])
+                            change = (self.package.lookup(b)["value"] / self.package.lookup(peak)["value"] - 1) * 100
+                            if change <= -self.k["idx_recent"]:
+                                months = (peak.split("@", 1)[1], b.split("@", 1)[1])
+                                recent.append(
+                                    (
+                                        change * weight.get(r["series_id"], 0.0),
+                                        b,
+                                        f"The index {r['series_id']} changed {change:+.1f} % from {months[0]} to {months[1]} ({peak}, {b}).",
+                                    )
+                                )
+                    out += [(b, sentence) for _, b, sentence in sorted(recent)[:1]]  # the largest fall in our cost; one, a second may count as duplicate
             except Exception:  # an argument less, never a lost move
                 log.warning("%s: index arguments not available", case.get("case_id"))
         self._memo[key] = out

@@ -146,7 +146,7 @@ def test_the_agent_plays_the_rules_that_were_measured(package):
     from sellm.agent import KNOBS
     from sellm.agent import make_agent as the_agent
 
-    assert KNOBS == {"past_target": True, "fast_pay": True, "clause_offer": True}
+    assert KNOBS == {"past_target": True, "fast_pay": True, "clause_offer": True, "idx_recent": 2.0}
     agent = the_agent(package)
     assert isinstance(agent, Persistent) and agent.e["past_target"] and agent.e["fast_pay"] and agent.e["clause_offer"]
     assert not any(agent.e[k] for k in ("push_final", "pay_probe", "signal_facts", "soft_give", "creep", "zone"))

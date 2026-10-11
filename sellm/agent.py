@@ -15,6 +15,10 @@ KNOBS = dict(
     # negotiable: the clause as a second offer, at the price where our total cost is lowest (P02 0.531 -> 0.725,
     # no other recorded case changes; experiments/P02-ARGUMENTS.md)
     clause_offer=True,
+    # A cost-driver index that fell >= 2 % from its peak of the last 12 months is cited (AS-14404 -5.5 % since
+    # 2026-06), except to a supplier whose material is hedged (dossier material_hedged). P18 0.467 -> 0.520,
+    # P08 unchanged (without the guard 0.438: 'not our reality'); experiments/LEDGER.md E2, E2g
+    idx_recent=2.0,
 )
 
 # The best Calculator variant of the first lab search (runs/lab/20261010-1632-search-first/report.md,
