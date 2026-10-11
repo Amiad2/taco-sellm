@@ -113,6 +113,18 @@ VARIANTS = {
         ],
     ),
     "control": dict(),
+    # P18 (leverage, two approved sources of the same bar): what the other source charges, instead of our own
+    # order history with this one, which it dismissed
+    "rival": dict(
+        script={
+            1: {
+                "replace": True,
+                "after": [
+                    "We ordered the same part from our second source at EUR 5.45 per unit in 2026-08 and at EUR 5.45 per unit in 2026-09 (po:4500014305-10, po:4500014455-10)."
+                ],
+            }
+        }
+    ),
     # the clause again, at the price where our total cost is lowest (relationship term with its full cost
     # 367.56 as the arena charged it in two deals): asked at once, or after its own lower offer
     "clause5-direct": dict(
