@@ -68,6 +68,21 @@ offline replay showed a different e-mail.
   late), one message in flight 0.735, one loop per case in the agent's order (fewest of our messages
   first, as the kit's play()) 0.820 in 3-52 s. That is the default of `sellm/runner.py` on omars_branch.
 
+## From sellm2 (Sun 03:00-03:30, 17 practice sessions; `docs/LOG.md` Sun 03:30)
+
+- **Suppliers walk their price ladder whatever non-cash lever we give them** (confirmed, 2 cases): P11
+  answered 1500 ppm with the same ladder as 300 ppm (46.5, 46.0, 45.5; 0.620 against 0.778); P05's
+  non-tight bidders ended at 28.00 with a 42-day lead time as with 28 days (0.803 against 0.820). Give
+  a lever only where the supplier has shown it prices it: payment days at its cost of money, lead time
+  when its capacity is tight (P10 1.90 for 12 days, P05's 70240 1.50 for 10 days).
+- **No lowball to a capacity-tight supplier** (confirmed, P10): a first ask at 93 % of its opening on its
+  own lead time (29.95 at 56 days) got 31.70 and 0.671; every first ask <= 28.6 had got final_offer at once.
+- **A recent fall of a cost driver from its 12-month peak moves a supplier that is not hedged**
+  (confirmed again, P18): first counter 5.40 (5.50 with the 5 % deadband), deal 5.30 with the deadband,
+  0.598 - the best P18 so far.
+- **A fixed-list-price supplier does not take an ask 0.2 % below its repeated price either** (P04 4.93
+  against 4.94, P03 431.28 against 432.14): it says final_offer at its price, as before, one round sooner.
+
 ## From the P02 argument tests (Sun 01:20-02:10, 8 practice sessions; `experiments/P02-ARGUMENTS.md` on `jonathans_branch`)
 
 Nordmark (P02) ended at EUR 371.66 with 90 days in more than ten sessions, whatever was asked or

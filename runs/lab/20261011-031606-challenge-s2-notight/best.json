@@ -1,0 +1,12 @@
+[
+ {
+  "knobs": {
+   "no_lowball_tight": false
+  },
+  "delta": {
+   "no_lowball_tight": false
+  },
+  "diff": 0.0044982887435763355,
+  "se": 0.00475762030347935
+ }
+]

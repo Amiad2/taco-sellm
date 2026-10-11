@@ -1,0 +1,4 @@
+03:17:53 pools: train 169 (9 twins), test 83 (3 twins); options {'clock': True, 'mode': 'parallel', 'wave_cap_s': 480, 'think_s': 2.0, 'vary': True, 'reader': 'keywords', 'supplier': 'engine', 'no_cache': False}
+03:17:53 compare ['sellm.agent:make_agent', 'sellm2.agent:make_agent']: 1008 negotiations
+03:18:47 done in 54 s
+03:18:47 report: runs/lab/20261011-031741-compare-s2-vs-main/report.md
