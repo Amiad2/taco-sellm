@@ -113,6 +113,10 @@ VARIANTS = {
         ],
     ),
     "control": dict(),
+    # P18's supplier lowers its price 0.10 for every 30 days it is paid sooner (its own two-sheet answers); the dossier
+    # reads it as relaxed about cash, so we ask 90 days
+    "pay30": dict(structure={"payment_days": 30}, knobs=dict(plan="llm")),
+    "pay14": dict(structure={"payment_days": 14}, knobs=dict(plan="llm")),
     # two facts in the first e-mail: suppliers that walk a ladder say final_offer after about four messages
     "agent-two": dict(knobs=dict(plan="llm", first_facts=2)),
     "agent-three": dict(knobs=dict(plan="llm", first_facts=3)),

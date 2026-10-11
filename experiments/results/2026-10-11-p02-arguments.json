@@ -1270,5 +1270,151 @@
   },
   "variant": "agent-nolow",
   "label": "ARG agent-nolow jonathans_branch@c74d723"
+ },
+ {
+  "session_id": "f428ea736329802f",
+  "case_id": "case:P08",
+  "deal": true,
+  "score": 0.5929541835976557,
+  "c_deal": 1031777.6,
+  "supplier": "sup:70710",
+  "terms": {
+   "payment_days": 90,
+   "lead_time_days": 10,
+   "volume_per_year": 94800,
+   "contract_months": 36,
+   "effective_date": "2027-01-01",
+   "index_clause": {
+    "series": "AS-14404",
+    "material_share": 0.45,
+    "deadband_pct": 0.0,
+    "base_month": "2026-08"
+   },
+   "incoterm": "DAP",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 50,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 5.31
+  },
+  "end_reason": "accepted",
+  "seconds": 77,
+  "threads": {
+   "sup:70710": {
+    "our_messages": 4,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 4,
+    "their_prices": [
+     6.05,
+     5.52,
+     5.42,
+     5.35,
+     5.31
+    ],
+    "our_prices": [
+     [
+      4.91
+     ],
+     [
+      5.04
+     ],
+     [
+      5.16
+     ],
+     [
+      5.26
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 5,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "variant": "agent-two",
+  "label": "ARG agent-two jonathans_branch@e0af192"
+ },
+ {
+  "session_id": "2bdb002fe3dea9fc",
+  "case_id": "case:P18",
+  "deal": true,
+  "score": 0.5643685030024008,
+  "c_deal": 254244.12,
+  "supplier": "sup:70740",
+  "terms": {
+   "payment_days": 60,
+   "lead_time_days": 14,
+   "volume_per_year": 23700,
+   "contract_months": 36,
+   "effective_date": "2027-01-01",
+   "index_clause": {
+    "series": "AS-14404",
+    "material_share": 0.45,
+    "deadband_pct": 0.0,
+    "base_month": "2026-08"
+   },
+   "incoterm": "DAP",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 70,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 5.2
+  },
+  "end_reason": "accepted",
+  "seconds": 82,
+  "threads": {
+   "sup:70740": {
+    "our_messages": 4,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 4,
+    "their_prices": [
+     6.1,
+     5.5,
+     5.3,
+     5.2,
+     5.2
+    ],
+    "our_prices": [
+     [
+      4.89
+     ],
+     [
+      5.0
+     ],
+     [
+      5.09
+     ],
+     [
+      5.13
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified",
+     "verified",
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 5,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "variant": "agent-two",
+  "label": "ARG agent-two jonathans_branch@e0af192"
  }
 ]
