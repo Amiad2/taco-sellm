@@ -70,6 +70,7 @@ class Limits:
     docs: float = 20.0  # a reply's attachments are waited for this long, then it goes on without their text
     idle: float = 2.0  # a loop with nothing to send waits this long (an LLM agent is asked again after it)
     poll: float = 5.0  # the final's case list is read this often
+    serial: bool = False  # at most one message of a session on its way to the arena (see CaseRunner.post)
 
 
 def ended(result, reason):
@@ -100,6 +101,7 @@ class CaseRunner:
         self.deadline, self.lim, self.case_file = deadline, limits or Limits(), case
         self.lock, self.done = threading.Lock(), threading.Event()
         self.closing = threading.Lock()  # one accept or walk-away at a time: two threads may both decide to close
+        self.wire = threading.Lock()  # with lim.serial: one message of this session in flight at a time
         self.flying, self.notes, self.outcome = set(), [], {}
         self.stats = {
             "moves": 0,
@@ -263,7 +265,7 @@ class CaseRunner:
                 self.note(f"{target}: offer ID changed before the accept ({old} -> {current}), deciding again")
                 return False
         try:
-            reply = self.client.send_message(self.sid, target, decision["message"])
+            reply = self.post(target, decision["message"])
         except ArenaError as e:
             self.stats["refused"] += 1
             self.note(f"{target}: {action['type']} refused: {e}", logging.WARNING)
@@ -305,12 +307,23 @@ class CaseRunner:
             self.note(f"{message.get('from')}: attachments failed: {type(e).__name__}: {e}", logging.WARNING)
         return message
 
+    def post(self, sup, message):
+        """POST one message. With `lim.serial` one at a time per session: the arena works through a
+        session's messages one after another, so with three bidders in flight a reply took up to 131 s
+        and the message behind it was counted late (P05, docs/LOG.md Sat 21:23: a timeout on 70250 in
+        every runner session, 0.665, against 0.820 with the kit's one-at-a-time play()). One message in
+        flight gets its reply in seconds, so the others wait seconds, not minutes."""
+        if not self.lim.serial:
+            return self.client.send_message(self.sid, sup, message)
+        with self.wire:
+            return self.client.send_message(self.sid, sup, message)
+
     # -- the loops -----------------------------------------------------------------------------
     def send(self, sup, message):
         """One e-mail and its reply. Returns False if the loop should stop."""
         t0 = time.monotonic()
         try:
-            reply = self.client.send_message(self.sid, sup, message)
+            reply = self.post(sup, message)
         except ArenaError as e:
             self.stats["refused"] += 1
             self.note(f"{sup}: send refused: {e}", logging.WARNING)
@@ -623,6 +636,7 @@ def main(argv=None):
     ap.add_argument("--parallel", type=int, default=10)
     ap.add_argument("--data", default=os.environ.get("ARENA_DATA", "data/package"))
     ap.add_argument("--label", default="", help="practice/sandbox: label the sessions for scripts/pull-runs")
+    ap.add_argument("--serial", action="store_true", help="one message per session in flight (RFQ timeouts)")
     a = ap.parse_args(argv)
     if a.set == "final":
         pull_first(final=True)  # the final runs the commit that is checked out: report only
@@ -647,8 +661,9 @@ def main(argv=None):
                     row["end_reason"], row["score"] or 0.0, row["seconds"], row["stats"].get("rereads"),
                     row["stats"].get("refused"), row["stats"].get("holds"), row["stats"].get("fallbacks"))  # fmt: skip
 
+    lim = Limits(serial=a.serial)
     if a.set == "final":
-        rows = list(run_final(client, new_agent, a.waves, min(a.parallel, 10), on_row=on_row).values())
+        rows = list(run_final(client, new_agent, a.waves, min(a.parallel, 10), limits=lim, on_row=on_row).values())
     else:
         ids = a.cases
         if not ids or ids == ["all"]:
@@ -656,7 +671,7 @@ def main(argv=None):
 
             ids = [c["case_id"] for c in hosted(client.cases(a.set))]
         ids = [i if i.startswith("case:") else f"case:{i}" for i in ids]
-        rows = run_cases(client, ids, new_agent, a.parallel, repeat=a.repeat, on_row=on_row)
+        rows = run_cases(client, ids, new_agent, a.parallel, limits=lim, repeat=a.repeat, on_row=on_row)
         if a.label:
             label_sessions(rows, a.label)
     scores = [r["score"] or 0.0 for r in rows]
