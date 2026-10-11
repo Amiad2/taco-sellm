@@ -37,6 +37,25 @@ Tacto's docs or FAQ, not yet seen by us). Raw history goes to `docs/LOG.md`.
   rolling scorecard. Pick the right reference before citing, and build the argument bank only from
   IDs checked against `facts.json`, never from a supplier's stated reasons.
 
+## From the Sunday release (Sun 08:50-09:20, 3 practice sessions; `experiments/LEDGER-JONATHAN.md` J13-J15 on `jonathans_branch`)
+
+- **Practice stays on package v1** (`brief/api.md`: "Hidden cases may cite them; practice cases stay on
+  package v1"). Measured: the release's news about P11's supplier, cited there, is `contradicted`
+  ("that news is completely fake"), and the supplier makes no further step (0.626 against 0.778). No
+  practice supplier knows the release; a practice score says nothing about a release rule.
+- **The kit merges the release into `DataPackage.facts` for every case.** An agent that cites any ID
+  `lookup()` knows is contradicted on practice. Ours cites no release ID on the ten hosted cases.
+- **A letter says what its writer needs.** As the trigger of a case with several bidders it must not be
+  read for the others (found offline: one bidder's request to be paid within 10 days made all three
+  bidders look short of cash). Our own memo is nobody's statement.
+- **Saying a supplier's letter back to it adds nothing** (P05: the bidder on short-time work, 28.50
+  instead of 28.00). What it asks for has to be in the term sheet: the 14 days moved it, as before.
+- **News about the supplier that favours the buyer is a fact that moves** (recorded sessions: "looks
+  for new customers" cited to 70250, verified, a step of 0.50 in 8 of 8).
+- **Offering what a letter names costs nothing**: a fixed call-off schedule offered to the supplier
+  that wrote "open to discuss payment terms and call-off planning" left P02 at 0.725; its reasons
+  name the forecast. Whether it gains can only show in the final.
+
 ## From omars_branch's experiments (Sun 01:50-03:30, 17 practice sessions; `experiments/LEDGER.md` on `omars_branch`)
 
 One change at a time against the recorded sessions of today's agent; a case was played only where an
