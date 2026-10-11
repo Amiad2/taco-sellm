@@ -195,6 +195,19 @@ VARIANTS = {
     "agent-near3": dict(knobs=dict(plan="llm", near=0.03)),
     # the rule as built in: hold the fixed-price ask against a supplier whose material is not hedged
     "agent-holdfixed": dict(knobs=dict(plan="llm", hold_fixed=True)),
+    # P18 with hold_fixed: a fourth fact that is its own - last January's price cut, on two order lines not yet cited
+    "second-po": dict(
+        knobs=dict(plan="llm", creep=0.25),
+        keep=5,
+        script={
+            3: {
+                "replace": True,
+                "after": [
+                    "We ordered from you at EUR 5.49 per unit in 2025-12 and at EUR 5.26 per unit in 2026-01 (po:4500013336-10, po:4500013373-10)."
+                ],
+            }
+        },
+    ),
     # P10 says its last word after our second message: a second ask close to its sheet (31.70) instead of 30.30
     "second-31.0": dict(knobs=dict(plan="llm"), prices={1: 31.0}),
     "second-30.7": dict(knobs=dict(plan="llm"), prices={1: 30.7}),
