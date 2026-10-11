@@ -165,6 +165,76 @@ def plan(case, opening, dossier, quoted, timeout_s=25.0):
     return {**check(answer, case, quoted, user), "seconds": round(took, 2)}
 
 
+def direction(field, value, quoted):
+    """What a want changes against the supplier's own quote: a clause or none, sooner/less or later/more."""
+    if field == "index_clause":
+        return "clause" if value else "none"
+    its = quoted.get(field)
+    try:
+        return "lower" if value < its else "higher"
+    except TypeError:
+        return repr(value)
+
+
+def voted(case, opening, dossier, quoted, votes=3, need=2, timeout_s=12.0):
+    """{field: {"direction", "value", "evidence", "votes"}}: the wants named in at least `need` of
+    `votes` calls made at once. The confidence is counted, not asked for. A plan is kept on disk
+    per case, supplier and material (runs/logs/plans/), so a resumed or repeated session plays the
+    same moves. Never raises: no usable answer in `timeout_s` is an empty plan."""
+    import hashlib
+    import os
+    import time
+    from concurrent.futures import ThreadPoolExecutor, wait
+    from pathlib import Path
+
+    user = brief(case, opening, dossier, quoted)
+    name = hashlib.sha256((SYSTEM + user + llm.model()).encode()).hexdigest()[:16]
+    sid = str((dossier or {}).get("supplier_id") or "supplier").split(":")[-1]
+    folder = Path(os.environ.get("SELLM_PLANS") or Path(__file__).resolve().parents[1] / "runs" / "logs" / "plans")
+    path = folder / f"{str(case.get('case_id')).split(':')[-1]}-{sid}-{name}.json"
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))["wants"]
+    except (OSError, ValueError, KeyError):
+        pass
+    t0 = time.monotonic()
+    pool = ThreadPoolExecutor(max_workers=votes)
+    futures = [pool.submit(llm.chat_json, SYSTEM, user, timeout_s) for _ in range(votes)]
+    wait(futures, timeout=timeout_s)
+    pool.shutdown(wait=False)
+    plans = []
+    for f in futures:
+        if f.done() and not f.exception():
+            plans.append(check(f.result()[0], case, quoted, user))
+    count, out = {}, {}
+    for p in plans:
+        for w in p["wants"]:
+            key = (w["field"], direction(w["field"], w["value"], quoted))
+            count.setdefault(key, []).append(w)
+    for (field, way), found in count.items():
+        if len(found) >= need and field not in out:
+            out[field] = {
+                "direction": way,
+                "value": found[0]["value"],
+                "evidence": found[0]["evidence"],
+                "votes": len(found),
+            }
+    record = {
+        "case": case.get("case_id"),
+        "supplier": sid,
+        "answers": len(plans),
+        "seconds": round(time.monotonic() - t0, 2),
+        "wants": out,
+        "plans": plans,
+    }
+    if plans:  # an outage is not a plan: ask again next time
+        try:
+            folder.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps(record, indent=1, default=str), encoding="utf-8")
+        except OSError:
+            pass
+    return out
+
+
 def main(argv=None):
     import glob
     import os

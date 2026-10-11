@@ -47,7 +47,11 @@ def make_agent(package=None, writer=None, **knobs):
 
     `SELLM_LLM=shadow|apply` adds the LLM (sellm/advisor.py): it writes the e-mail around the moves
     code has fixed and gives a verdict with a confidence on the supplier's standing offer - logged
-    only (`shadow`) or acted on within guards (`apply`). Without it no LLM is called."""
+    only (`shadow`) or acted on within guards (`apply`). `SELLM_PLAN=llm|off` switches the planner
+    (sellm/planner.py: the model names the terms a supplier would give price for, code acts on two
+    measured kinds). Without either, and with `plan` unset in KNOBS, no LLM is called."""
+    if os.environ.get("SELLM_PLAN", "").strip().lower() in ("llm", "off"):  # the planner (sellm/planner.py), on or off
+        knobs = {"plan": {"llm": "llm", "off": None}[os.environ["SELLM_PLAN"].strip().lower()], **knobs}
     mode = os.environ.get("SELLM_LLM", "").strip().lower()
     if mode in ("shadow", "apply"):
         from sellm.advisor import Advised

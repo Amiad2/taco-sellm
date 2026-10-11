@@ -61,6 +61,13 @@ DEFAULTS = dict(
     # which the relationship term then charges us for - and it never goes back up (P02: 351.45 taken
     # = 0.242, 361.35 asked at once = 0.735, fixed price 0.531; experiments/P02-ARGUMENTS.md)
     clause_offer=False,
+    # "llm": before the first ask the model reads the supplier (its opening, letters, notes, quote remarks) and
+    # names the terms it would give price for, each with the passage it rests on (sellm/planner.py; three calls,
+    # two must agree). Code acts on two kinds only, both measured: a faster payment it asked for (`fast_pay`)
+    # and an index clause where a relationship term applies (`clause_offer`). Everything else is logged.
+    plan=None,
+    plan_timeout=12.0,
+    plan_only=False,  # a test: the two trades are triggered by the planner alone, not by the dossier's rules
 )
 CLAUSE_LINE = "With the index clause of the second option the price follows {series} beyond the deadband, so that this risk does not have to be priced in up front."
 SOFT_GIVE = (
@@ -85,10 +92,74 @@ class Persistent(Negotiator):
             (sig.get("strength") or 1 for sig in found.get("signals") or [] if sig.get("kind") == kind), default=0
         )
 
+    def wants(self, case, v):
+        """{field: {"direction", "value", "evidence", "votes"}} from the planner, {} without one. Read
+        once per supplier; `prepare` asks for all suppliers of a case at once."""
+        key = (case.get("case_id"), v.sid, "wants")
+        if key not in self._memo:
+            found = {}
+            if self.e["plan"] == "llm" and v.opening:
+                try:
+                    from . import llm, planner
+
+                    if llm.configured():
+                        quoted = v.filled(v.opening["term_sheets"][0]["terms"])
+                        found = planner.voted(
+                            case, v.opening, self.intel(case, v), quoted, timeout_s=self.e["plan_timeout"]
+                        )
+                        for field, w in found.items():
+                            log.info(
+                                '%s %s: it would give price for %s (%s, %d votes) - "%s"',
+                                case.get("case_id"),
+                                v.sid,
+                                field,
+                                w["direction"],
+                                w["votes"],
+                                w["evidence"][:120],
+                            )
+                    else:
+                        log.warning(
+                            "%s: plan=llm but no model is configured, playing without a plan", case.get("case_id")
+                        )
+                except Exception as e:  # a plan less, never a lost move
+                    log.warning("%s %s: no plan (%s: %s)", case.get("case_id"), v.sid, type(e).__name__, e)
+            self._memo[key] = found
+        return self._memo[key]
+
+    def prepare(self, case, threads):
+        """The plans of all suppliers of a case, asked for at once before our first e-mail: in an RFQ
+        every thread's clock is already running."""
+        key = (case.get("case_id"), "planned")
+        if self.e["plan"] != "llm" or key in self._memo:
+            return
+        self._memo[key] = True
+        from concurrent.futures import ThreadPoolExecutor
+
+        from .negotiator import Thread
+
+        views = [Thread(case, sid, events) for sid, events in threads.items()]
+        openings = (case.get("case_id"), "openings")
+        if openings not in self._memo:  # as `move` sets it: the dossier's overlay reads every bidder's opening
+            self._memo[openings] = {w.sid: [w.opening] for w in views if w.opening}
+        views = [v for v in views if v.opening and v.opening["term_sheets"][0]["terms"].get("unit_price") is not None]
+        if len(views) > 1:
+            for v in views:
+                self.intel(case, v)  # the dossier's own lock is taken one at a time
+            with ThreadPoolExecutor(max_workers=len(views)) as pool:
+                list(pool.map(lambda v: self.wants(case, v), views))
+
+    def move(self, case, threads, focus=None):
+        self.prepare(case, threads)
+        return super().move(case, threads, focus)
+
     def opening_structure(self, case, v):
         s = super().opening_structure(case, v)
         if self.e["fast_pay"] and "payment_days" in s:
-            if self.signal(case, v, "cash_short") or self.cash(case, v) in ("medium", "high"):
+            asked = (self.wants(case, v).get("payment_days") or {}).get("direction") == "lower"
+            ruled = not self.e["plan_only"] and (
+                self.signal(case, v, "cash_short") or self.cash(case, v) in ("medium", "high")
+            )
+            if asked or ruled:
                 days = [
                     d
                     for d in case.get("term_options", {}).get("payment_days") or []
@@ -113,17 +184,23 @@ class Persistent(Negotiator):
         if opening.get("unit_price") is None or opening.get("index_clause"):
             return None
         estimate, own = self.estimate(case, v), self.should_cost(case, v.sid)
-        if not estimate or not own:
+        if not estimate:
             return None
         ceiling = self.value(case, v, opening) * (1 - case["buyer"]["sustainable_margin_pct"] / 100)
-        return estimate if own[1] >= ceiling * (1 - 1e-9) else None
+        if own and own[1] >= ceiling * (1 - 1e-9) and not self.e["plan_only"]:
+            return estimate
+        if (self.wants(case, v).get("index_clause") or {}).get("direction") == "clause":
+            # the planner read that it would pay for a clause, but our data does not say its price is at its
+            # cost: price the clause with the highest cost its own quote allows, so that we cannot squeeze it
+            return {**estimate, "full_cost": max(estimate["full_cost"], ceiling)}
+        return None
 
     def clause_price(self, case, v, s):
         """The price on structure `s` where our total cost is lowest, the relationship term priced with
         our estimate of its full cost: below it a lower price costs us more than it saves."""
         key = (case.get("case_id"), v.sid, "clause-price", _key(s))
         if key not in self._memo:
-            estimate = self.estimate(case, v)
+            estimate = self.clause_case(case, v) or self.estimate(case, v)
             v0, v1 = self.value(case, v, {**s, "unit_price": 0.0}), self.value(case, v, {**s, "unit_price": 1.0})
             even = (estimate["full_cost"] - v0) / (v1 - v0) if v1 > v0 else None  # pays it exactly its full cost
             if not even or even <= 0:
