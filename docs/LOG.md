@@ -1019,3 +1019,9 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 ## 2026-10-11 03:29 CEST · Amiad @ fedora
 **[finding] Runner trap: a supplier's exit can show only in the thread state (closed/status, timeouts list), not in its messages**
 - P05 on sellm2@2d8945e: 70210 walked away after a timeout; the loop kept asking it (188 x 409) while 70250 at final_offer 28.00 waited and withdrew - score 0. sellm2/runner.py now rebuilds a thread from its state on every 409/422 (walked_away or the re-issued offer ID) and holds only the best final offer. Anyone writing a case loop: read 'closed', 'status' and 'timeouts' of GET thread, not only 'messages'.
+
+## 2026-10-11 03:44 CEST · Amiad @ fedora
+**[handoff] sellm2 (Amiad's rewrite) is finished, measured and pushed; it waits for the team's decision to play the final**
+- State: amiads_branch@623aac4 pushed, clean (except a teammate's uncommitted sellm/lab/twins.json, untouched). Full run 76.4 at @dc028e5; since then two changes that no practice case reaches: end_reason in the rows, and with several bidders a thread's last message is kept for the refresh hold before an accept (strict lab: 192/192 without a refused move).
+- Next: the team's yes to the merge (STATUS Next up has the commands), the 08:00 release check and one more full run; sellm2 has 23 of its 40 practice sessions left.
+- Traps: the kit's 'arena run --agent' does not list sellm2 - use python -m sellm2 (or python -m sellm.runner --agent sellm2.agent:make_agent). Under load RFQ replies took 15-40 s: never send holding e-mails to open threads in an RFQ (each one costs the others a turn and a timeout), only to the best final offer. The target of >= 0.90 in 5 of 10 practice cases was NOT reached: P01 and P03 are above 0.90; P04 sits one cent (0.14) below 1.0 and refused 4.93 against its 4.94; the others are held by the suppliers' own floors (docs/LEARNINGS.md).
