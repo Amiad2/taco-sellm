@@ -1034,3 +1034,10 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - J6 P18 asked with 30 and with 14 days payment from the start: 0.603 (5.11) and 0.606 (5.20) against 0.598 at 90 days (5.30). It prices payment at about our own rate; not adopted. Sessions 82af6326fdc6fbb8, 5ad07f6ae3839b14 @d9e6957.
 - J7 P07, order history of two of the kit's parts in e-mails 3 and 4 (the agent has no fact left there): verified, and the final offer still came at the third message at 5.41, 0.747 (=). Its patience is three messages. Session e93d45d42a375fac @39672a0.
 - Team quota left about 155 of 450; Jonathan's limit is 100.
+
+## 2026-10-11 04:10 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] Rehearsal through the final runner: jonathans_branch@79c2d0a, ten practice cases in parallel with the planner live - mean 78.2, 0 crashes, 0 refused moves**
+- commit jonathans_branch@79c2d0a (pushed, clean tree; = the 77.3 agent + no lowball to a capacity-tight supplier + omars_branch's runner that waits for a free session slot). SELLM_PLAN=llm SELLM_MODEL=gpt-6-sol python -m sellm.runner --set practice --cases all --parallel 10 --agent sellm, plans made live. Tag best-jonathans_branch-78.2.
+- Per case: P01 0.997, P02 0.725, P03 0.923, P04 0.860, P05 0.872, P07 0.747, P08 0.637, P10 0.679, P11 0.778, P18 0.598. The nine single-supplier cases are exactly what the offline replay of this commit said (4-12 s each); P05, the RFQ, varies with timing (0.735-0.872 tonight): 203 s, one timeout on 70250's thread, two holding e-mails, closed at 27.50.
+- Against main (72.9): P02 +0.194 (clause offer), P08 +0.088 and P18 +0.131 (every fallen cost-driver index, one per e-mail; Omar's recent-fall rule started it), P01 +0.028 (the larger fall of the index the supplier blames, read by the planner), P10 +0.032 (no lowball; Amiad's rule).
+- Rows: runs/logs/20261011-040648-runner-practice.jsonl (not in git). Team quota left 152 of 450.
