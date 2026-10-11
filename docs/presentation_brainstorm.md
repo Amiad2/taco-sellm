@@ -8,7 +8,7 @@ and 09:26) and does not replace it.
 
 Jonathan's voice memo has two points: **point 1** is the intro slide on our agent memory system (section 2),
 **point 2** is "use arguments in a targeted way", which belongs on the Highlight 2 slide of the deck
-(section 3.3).
+(section 3.3). **The two slides are built: `pitch-additions.pdf` in the repo root** (page 1 the memory system, page 2 "The same fact, the right supplier", the companion of Highlight 2; `sellm-pitch.pdf` is unchanged). The built memory slide shows the memory as one tall store with the three agents beside it, so the "visual idea" in 2.2 is superseded.
 
 Rule for everything below: **no number on a slide that is not in `docs/LOG.md`, `docs/STATUS.md` or
 `experiments/LEDGER-JONATHAN.md`.** Practice scores are in-sample (section 6).
@@ -29,8 +29,9 @@ Rule for everything below: **no number on a slide that is not in `docs/LOG.md`, 
    supplier takes, and the rules learned from reading real replies. `omars_branch` (75.4) is a subset of it;
    `sellm2` (76.4) lacks the price-jump pair and the second index on P08. Section 4.
 5. **The newest measured version is 81.1** (`jonathans_branch@f1c3fb9`, Sun 09:57, tag
-   `best-jonathans_branch-81.1`), 80.3 before it (`@363b6e6`). Amiad's deck still says 80.3. The rule that
-   carried 77.3 -> 80.3 is the price-jump order pair (`_po`); 80.3 -> 81.1 is `hold_fixed` (P18 0.657 -> 0.729).
+   `best-jonathans_branch-81.1`; again 81.1 at 10:11 and 10:22), 80.3 before it (`@363b6e6`). **`main` is that
+   agent since 10:39** (`jonathans_branch@49eebc9`). Amiad's deck still says 80.3. The rule that carried
+   77.3 -> 80.3 is the price-jump order pair (`_po`); 80.3 -> 81.1 is `hold_fixed` (P18 0.657 -> 0.729).
 6. **Fix before showing:** the "0.72 %" simulator claim has a narrower scope than the slide implies, "What others
    don't do" says something we cannot know about other teams, and the slot length differs between files
    (section 9).
@@ -135,7 +136,7 @@ score went up version by version instead of jumping up and down."
   not "never conflict".
 - Before any STATUS screenshot: the "In progress" table still lists claims that are 8 to 12 hours old (Amiad
   group C, playbooks, Codex P02 repair). Clean them or do not show the table.
-- Entire checkpoints are deliberately not pushed (`AGENTS.md` section 7). Do not show session transcripts.
+- Entire session checkpoints are pushed to origin since Sun 10:42 (LOG decision by Amiad, 56 checkpoints searched for keys first). They can still hold internal prompts: do not put a transcript on a slide without reading it first.
 
 ## 3. Where our edge is
 
@@ -296,9 +297,7 @@ If "the 80.2 rule" meant **the rule that took us from 77.3 to 80.3**: that is th
 was dismissed 42 times; the two orders around the supplier's jump ("5.17 in 2025-12, 5.45 in 2026-09") were
 taken into account. Same data, the right two rows.
 
-**State as measured:** `363b6e6` = 80.3, `f1c3fb9` = 81.1 (tag `best-jonathans_branch-81.1`, Sun 09:57, final
-runner, planner live, 0 refused). The branch has moved on since with experiment commits and knobs that are off
-(`near`); slides and README must name a hash that a full run measured.
+**State as measured:** `363b6e6` = 80.3, `f1c3fb9` = 81.1 (tag `best-jonathans_branch-81.1`, Sun 09:57), 81.1 again at `362bf0f` (10:11) and `abf71c0` (10:22): final runner, planner live, 0 refused. **`main` is `jonathans_branch@49eebc9` since 10:39 (LOG decision)**: its agent code is the measured `362bf0f`, fallback tags `best-jonathans_branch-81.1-head` and `best-jonathans_branch-80.3-sunday3`. Later commits on the branch change `experiments/` only.
 
 ## 5. Mechanisms worth a sentence each (the "what did it learn about suppliers" answer)
 
@@ -395,10 +394,7 @@ dossier slide (one supplier, its signals with their quoted evidence: `uv run pyt
 4. **"0.72 %":** it is the Sat 20:03 refit on 307 replies (LOG). `runs/lab/BACKTEST.md` (Sat 22:45) reports
    1.85 % over 1100 replies, P05 9.2 %, D02 2.7 %. Safe wording: "about 1 % on the single-supplier practice
    cases, under 2 % over 1100 real replies".
-5. **Commit hash for the submission:** 80.3 was measured at `363b6e6`, 81.1 at `f1c3fb9`. Experiment commits and
-   off-by-default knobs have landed on `jonathans_branch` since. The slide and the README must name a hash that a
-   full run measured. Which branch reaches `main` for the final is still the team's decision (STATUS "Open
-   questions").
+5. **Commit hash for the submission:** `main` is the 81.1 agent since Sun 10:39 (`jonathans_branch@49eebc9`, its code is the measured `362bf0f`; 81.1 three times). The submission and the README name the hash of `main` at the freeze; the slides say 81.1 and the same hash. `README.md` still has `_TODO_` for commit and approach.
 6. **STATUS cleanup** before any screenshot (2.5).
 7. **Final-case replay:** decide Plan A or B (7.1) by 12:30 so the replay is open in a tab at 13:00.
 

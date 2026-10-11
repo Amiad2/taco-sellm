@@ -1,11 +1,11 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-11 10:20 CEST by Jonathan (Claude Code).
+Last updated: 2026-10-11 11:00 CEST by Jonathan (Claude Code).
 
 ## Now
 
-- **Pitch material (Sun 10:20, Jonathan's Claude Code): `docs/presentation_brainstorm.md`** (the pitch is in English) - point 1, the intro slide on our agent memory system ("six eyes, three agents, one memory", Jonathan's memo); point 2, arguments used in a targeted way, which belongs on the Highlight 2 slide (P08, page 6 of `sellm-pitch.pdf`); where our edge is (what we ask for 9.5 points, what we say 10.1, of the 19.6 from 61.5 to 81.1); why `jonathans_branch` beats the other versions per case; caveats for the jury; slide order for the 3-minute and 5-minute slot. Open points for the team are in its section 9: slot length (3 or 5 + 2 minutes), **the deck still says 80.3 while the newest full run is 81.1 (`jonathans_branch@f1c3fb9`, tag `best-jonathans_branch-81.1`)**, the wording of Amiad's slide 3 and of the "0.72 %" claim, and which hash the slides and README name.
+- **Pitch material (Sun 10:20, Jonathan's Claude Code): `docs/presentation_brainstorm.md`** (the pitch is in English) - point 1, the intro slide on our agent memory system ("six eyes, three agents, one memory", Jonathan's memo); point 2, arguments used in a targeted way, which belongs on the Highlight 2 slide (P08, page 6 of `sellm-pitch.pdf`); where our edge is (what we ask for 9.5 points, what we say 10.1, of the 19.6 from 61.5 to 81.1); why `jonathans_branch` beats the other versions per case; caveats for the jury; slide order for the 3-minute and 5-minute slot. **Two new slides are built as `pitch-additions.pdf` in the repo root** (memory system; "the same fact, the right supplier", the companion of Highlight 2); `sellm-pitch.pdf` is unchanged. Open points for the team are in its section 9: slot length (3 or 5 + 2 minutes), **the deck still says 80.3 while the newest full run is 81.1 (`jonathans_branch@f1c3fb9`, tag `best-jonathans_branch-81.1`)**, the wording of Amiad's slide 3 and of the "0.72 %" claim, and which hash the slides and README name.
 - Repo is set up on the official starter kit; tests pass (31 passed, 1 skipped).
 - Team key works: team **sellm**, active. `uv run arena me` is the source of truth for quota and best scores.
 - **OpenAI works with the kit's LLM agent** (`LLM_PROVIDER=openai`, model `gpt-6.1-sol`, Sat 15:00): D01 scored 0.786 against 0.200 for the naive agent, no `LLM failed` in the log. Each machine needs the values in its own `.env`; `llm_from_env` was not changed.
