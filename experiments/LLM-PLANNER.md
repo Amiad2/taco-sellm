@@ -12,7 +12,7 @@ what was rejected. Sessions and commits: `experiments/LEDGER-JONATHAN.md`.
   P01's and P05's faster payment and P04's / P10's longer contract - 3 of 3 calls each, every time
   with the passage it rests on.
 - **No, it must not decide the move.** Followed beyond what was measured it lost: the clause offered
-  at once to the two suppliers that demand one (P08 0.53 against 0.55, P18 0.39-0.40 against 0.47);
+  at once to the two suppliers that demand one (P08 0.48-0.53 against 0.55, P18 0.39-0.40 against 0.47);
   "open on payment terms" read as a wish for faster payment (P03, 2 of 3 calls); a looser ppm
   commitment for P11 (Amiad measured it: 0.620 against 0.778).
 - **So the model reads and code acts.** The planner names what the supplier wants and which cost
