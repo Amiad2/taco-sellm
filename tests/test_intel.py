@@ -638,3 +638,22 @@ def test_a_trigger_letter_of_the_release_speaks_for_its_writer_only(real_pkg):
         assert "wants_planning" in {s["kind"] for s in d["signals"]}
         assert not any(s["kind"] == "price_claim" and "S" in s["evidence"][-1].rsplit("-", 1)[-1] for s in d["signals"])
         assert all(doc["asked_pct"] != "" for doc in d.get("documents") or [])
+
+
+def test_the_sunday_release_is_read_by_its_wording(real_pkg):
+    """Release of Sun 11 Oct: its letters carry empty asked_pct fields, which are no price demand
+    (extract._released); forward buying at fixed prices is a hedge, insolvency is cash pressure, an acquisition an
+    ownership change, and 'supply back to normal' voids the earlier capacity news."""
+    if not real_pkg.release:
+        pytest.skip("Sunday release not downloaded (uv run arena data)")
+    src = Source(real_pkg)
+    by_id = {s: signals.apply(build_supplier(src, s)) for s in ("sup:70720", "sup:70250", "sup:70510", "sup:70540")}
+    got = {s: _signals(d) for s, d in by_id.items()}
+    assert got["sup:70720"] == {"material_hedged": 1}
+    assert got["sup:70250"]["cash_short"] == 2 and "price_claim" not in got["sup:70250"]
+    assert got["sup:70510"]["price_claim"] == 1 and got["sup:70510"]["list_price_fixed"] == 1
+    assert "capacity_tight" not in got["sup:70540"]
+    insolvent = signals.apply(build_supplier(src, "sup:70140"))
+    assert any("news:20261006-S1" in s["evidence"] for s in insolvent["signals"] if s["kind"] == "cash_short")
+    sold = signals.apply(build_supplier(src, "sup:70650"))
+    assert any("news:20261006-S9" in s["evidence"] for s in sold["signals"] if s["kind"] == "ownership_change")
