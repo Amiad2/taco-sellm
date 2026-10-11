@@ -85,3 +85,8 @@ hypothesis is marked as one.
 | Sun 03:07 | V1b (runner) | P07 | 1 | 0.747 | accepted | omars_branch@0466bcf | runner log 20261011-030736 |
 | Sun 03:07 | V1b (runner) | P10 | 1 | 0.647 | accepted | omars_branch@0466bcf | runner log 20261011-030736 |
 **Total practice sessions (runs) so far: 27** (E1 1, E2 2, R1 1, R2 1, E3 4, C1 1, E4 4, E5 3, V1 8 - P07 and P10 never opened, V1b 2; plus 2 free sandbox sessions).
+
+Sun 08:01-08:30, Sunday release (group B): **0 arena sessions**. Offline only: dossier rebuild on
+`main@d57b8e9`, replay of 137 recorded states before/after (main and a scratch merge of
+`jonathans_branch` + `main`: 0 changed moves), 18 planner calls on P02/P05 (LLM, no arena; same
+trades voted before and after). The total stays **27**.

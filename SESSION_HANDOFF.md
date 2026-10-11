@@ -1,4 +1,15 @@
-# SESSION_HANDOFF - omars_branch, Sun 11 Oct 2026 04:40 CEST
+# SESSION_HANDOFF - omars_branch, Sun 11 Oct 2026 08:30 CEST
+
+**08:30 - the Sunday release is in (group B done).** `uv run arena data` at 08:01; dossiers rebuilt on
+`main@d57b8e9` (`check` identical, `verify` PASS, 200 tests). Jonathan wrote the same four signal rules on
+his branch at 08:08 (forward buying = hedge, insolvency = cash_short, acquisition = ownership_change, a
+later 'supply back to normal' ends older capacity news); `main` took his `signals.py` byte for byte and
+adds one fix his branch lacks: empty release CSV fields are no price claim (`extract._released`).
+Trial merge of `main` into a scratch copy of `jonathans_branch`: conflicts only in `sellm/dossiers`
+(rebuild resolves them); 137 recorded states replay unchanged (planner off), the planner votes the same
+trades on P02/P05 before and after (9 LLM calls, no arena), his suite green. Jonathan re-ran his branch
+with the release on the final machine at 08:07: **80.3**, every case as before (tag
+`best-jonathans_branch-80.3-sunday`). No arena session was played from this branch since 03:10.
 
 **Where the team stands (04:40):** the frontier is `jonathans_branch@8a854c4`, **80.3** through the final
 runner (tag `best-jonathans_branch-80.3`, planner live with `SELLM_PLAN=llm`). It contains everything
@@ -155,10 +166,11 @@ Logs: `runs/<set>/<case>/*.{md,json}` (traces with supplier reasons), `runs/logs
    `idx_blamed`; without the planner P01 plays 0.969, i.e. ~80.0), `amiads_branch` `sellm2` 76.4,
    `omars_branch@0466bcf` 75.4 (a subset of jonathans_branch). On this evidence jonathans_branch is
    the strongest; it also carries this branch's runner fixes.
-2. **Sun 08:00 data release** (group B, Omar): `scripts/sync`, `uv run arena data`,
-   `uv run python -m sellm.intel build`, `check`, `verify` (must PASS), read new letters/news for signal
-   wording (`material covered`, cash, capacity), commit `sellm/dossiers` on `main`; the chosen branch
-   merges `main`. Then replay the practice cases on the chosen version to see what the rebuild changed.
+2. **Sun 08:00 data release: done** (08:25, `[change]` and `[decision]` entries in `docs/LOG.md`). Left:
+   the branch that goes to `main` merges `main` once (`sellm/dossiers` conflicts only -> take either
+   side, `uv run python -m sellm.intel build`, `check`, `verify`, `pytest`). Trap: run the agent from the
+   repo root with `data/package` present - without it the stored citable lists are used and e-mails cite
+   another part's facts (seen offline, fc:370011 instead of fc:370010 on P18).
 3. Then `scripts/preflight` and the rehearsal on the final machine; final command
    `nohup uv run python -m sellm.runner --set final --agent sellm > runs/logs/final.out 2>&1 &`
    (one loop per case is the default). Nobody plays practice/sandbox on the key during the final.
