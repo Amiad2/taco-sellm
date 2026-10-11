@@ -113,6 +113,47 @@ VARIANTS = {
         ],
     ),
     "control": dict(),
+    # the strongest fact first: the price jump in the first e-mail, the indices after it
+    "jump-first-P08": dict(
+        knobs=dict(plan="llm"),
+        script={
+            0: {
+                "replace": True,
+                "after": [
+                    "We ordered from you at EUR 5.17 per unit in 2025-12 and at EUR 5.45 per unit in 2026-09 (po:4500013278-10, po:4500014455-10)."
+                ],
+            },
+            1: {
+                "replace": True,
+                "after": [
+                    "The index PPI-C2431 changed -2.3 % from 2026-06 to 2026-08 (idx:PPI-C2431@2026-06, idx:PPI-C2431@2026-08)."
+                ],
+            },
+        },
+    ),
+    "jump-first-P18": dict(
+        knobs=dict(plan="llm"),
+        script={
+            0: {
+                "replace": True,
+                "after": [
+                    "We ordered from you at EUR 5.26 per unit in 2026-06 and at EUR 5.84 per unit in 2026-09 (po:4500014078-10, po:4500014427-10)."
+                ],
+            },
+            1: {
+                "replace": True,
+                "after": [
+                    "The index AS-14404 changed -5.5 % from 2026-06 to 2026-09 (idx:AS-14404@2026-06, idx:AS-14404@2026-09)."
+                ],
+            },
+            2: {
+                "replace": True,
+                "after": [
+                    "The index PPI-C2431 changed -2.3 % from 2026-06 to 2026-08 (idx:PPI-C2431@2026-06, idx:PPI-C2431@2026-08)."
+                ],
+            },
+        },
+    ),
     "agent": dict(knobs=dict(plan="llm")),  # --agent sellm as it is on this commit, with the planner
     # the order history as an argument, not as a record: the pair of orders around its last price jump (P18: 5.26 in
     # June, 5.84 since July; P08: 5.17 last winter, 5.45 now) instead of the first and last order of two years
