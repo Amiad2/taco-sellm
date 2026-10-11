@@ -183,6 +183,11 @@ VARIANTS = {
         },
     ),
     "agent": dict(knobs=dict(plan="llm")),  # --agent sellm as it is on this commit, with the planner
+    # Sun 10:00. The case's expected index path (+6 % on AS-14404) makes every clause cost us: 3.15 % of the spend
+    # without a deadband, 0.9 % with the widest, nothing at a fixed price - never asked for 36 months
+    "fixed": dict(knobs=dict(plan="llm"), structure={"index_clause": None}, hold=True),
+    # P10: the lead time it calls feasible (its alternative sheet) asked from the first e-mail
+    "lead56": dict(knobs=dict(plan="llm"), structure={"lead_time_days": 56}, hold=True),
     # Sunday release: a supplier whose letter says it is open to discuss call-off planning is offered a fixed
     # call-off schedule in the first e-mail (plan_give; on practice that is P02's supplier only)
     "agent-plangive": dict(knobs=dict(plan="llm", plan_give=True)),
