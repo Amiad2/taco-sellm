@@ -45,3 +45,10 @@ Earlier tonight (records: `experiments/P02-ARGUMENTS.md`, `docs/LOG.md`): clause
 | Sun 04:10 | `@79c2d0a`, tag `-78.2` | final runner, 10 in parallel, planner live | 78.2 | P10 .679, P05 .872 |
 | Sun 04:25 | `@2caef7f`, tag `-79.3` | final runner, planner live | 79.3 | P03 .956 P08 .814 P18 .657, P05 .717 (a bidder timed out) |
 | Sun 04:29 | `@8a854c4`, tag `-80.3` | final runner, planner live | **80.3** | P01 .997 P02 .725 P03 .956 P04 .860 P05 .820 P07 .747 P08 .814 P10 .679 P11 .778 P18 .657 |
+
+## After the 80.3 run
+
+| ID | Hypothesis | Change | Case | Result (reference) | Decision | Session |
+|---|---|---|---|---|---|---|
+| J11 | The strongest fact should come first: the price jump in the first e-mail, the indices after it | scripted order | P08, P18 | 0.803 (0.814), 0.542 (0.657) | rejected: indices first, then the jump, as the agent does | 5514dbc17dbe1c82, 6544c8c84fe5461b |
+| - | Unplayed case files in the lab with the planner on (no arena session): how does the first e-mail look for suppliers we never met? | - | P06, P09, P12, P13, P14, P16 | a supplier that signs without a person was greeted "Dear Mit freundlichen Grüßen," | fixed in `sellm/writer.py` (`contact`), test; the fifteen real suppliers' names are read as before | - |
