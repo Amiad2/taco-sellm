@@ -69,6 +69,12 @@ def render_sheets(case, sheets):
     return "; ".join(f"option {chr(65 + i)}: {render_terms(case, s)}" for i, s in enumerate(sheets))
 
 
+CLOSING = re.compile(
+    r"gr[uü](ß|ss)|regards|sincerely|faithfully|cordially|cheers|thank|dank|wishes|servus|moin|hallo|hello|dear|^yours|^best$",
+    re.I,
+)
+
+
 def contact(events):
     """The person who signs the supplier's e-mails: the line above the role line of the signature."""
     for message in events:
@@ -79,7 +85,9 @@ def contact(events):
         for i in range(len(lines) - 1, 0, -1):
             if (role and lines[i] == role) or (not role and ROLE_WORDS.search(lines[i])):
                 name = lines[i - 1]
-                if 1 < len(name.split()) <= 4 and not any(ch.isdigit() for ch in name) and not ROLE_WORDS.search(name):
+                plain = not any(ch.isdigit() for ch in name) and not ROLE_WORDS.search(name)
+                # a signature without a person ("Mit freundlichen Grüßen / Sales, ...") has its closing formula there
+                if 1 < len(name.split()) <= 4 and plain and not CLOSING.search(name) and not name.endswith(","):
                     return name
                 break
     return None

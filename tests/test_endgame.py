@@ -316,3 +316,19 @@ def test_a_bidder_far_behind_is_not_asked_again(package):
     for sid in opening:  # before two answers nobody is dropped
         with_rule = make_persistent(package, **KNOBS).decide(case, opening, focus=sid)
         assert with_rule == make_persistent(package, **{**KNOBS, "drop_behind": None}).decide(case, opening, focus=sid)
+
+
+def test_a_closing_formula_is_no_name():
+    """A supplier that signs without a person ("Mit freundlichen Grüßen / Sales, ...") was greeted with
+    "Dear Mit freundlichen Grüßen," (seen in the lab on unplayed case files, Sun 04:40)."""
+    from sellm.writer import contact
+
+    def mail(*lines):
+        body = "\n".join(("Dear Sir or Madam,", "We offer.", *lines))
+        return [{"from": "sales@x", "from_name": lines[-1], "body": body}]
+
+    signed = mail("Mit freundlichen Grüßen", "Petra Lechner", "Key Account Manager, Nordmark AG")
+    assert contact(signed) == "Petra Lechner"
+    closings = ("Mit freundlichen Grüßen", "Viele Grüße", "Beste Grüße", "Best regards", "Kind regards,")
+    for closing in (*closings, "Yours faithfully"):
+        assert contact(mail(closing, "Sales, Kabelwerk GmbH")) is None, closing
