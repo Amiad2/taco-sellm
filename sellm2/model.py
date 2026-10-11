@@ -277,7 +277,10 @@ class Supplier:
         """EUR per unit it asks for moving non-cash levers from `ref_structure` to `structure`."""
         extra = 0.0
         a, b = ref_structure, structure
-        if "lead_time_days" in self.cm.negotiable and a.get("lead_time_days") is not None and b.get("lead_time_days") is not None:
+        # lead time: priced only by a supplier whose capacity is tight (P10 1.90 for 12 days, P05's 70240
+        # 1.50 for 10 days); the others walked the same price ladder at 42 as at 28 days (P05, Sun 03:19)
+        tight = bool(self.brief and self.brief.signal("capacity_tight"))
+        if tight and "lead_time_days" in self.cm.negotiable and a.get("lead_time_days") is not None and b.get("lead_time_days") is not None:
             extra += (a["lead_time_days"] - b["lead_time_days"]) * self.LEAD_PER_DAY * price
         if "ppm_commitment" in self.cm.negotiable and a.get("ppm_commitment") is not None and b.get("ppm_commitment") is not None:
             extra += (a["ppm_commitment"] - b["ppm_commitment"]) / 1000 * self.PPM_PER_1000 * price

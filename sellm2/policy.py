@@ -162,19 +162,22 @@ class Policy:
             if mode in ("quoted", "menu") or not days:
                 keep["payment_days"] = base["payment_days"]
         ranked = []
-        seen = set()
-        for s in cm.structures(base or None):
-            s = strip(cm.sheet({**base, **s, **keep, "unit_price": 1.0}))
-            if mode == "latest" and days and "payment_days" in s:
-                s["payment_days"] = max(days)
-            if mode == "fastest" and days and "payment_days" in s:
-                s["payment_days"] = min(d for d in days)
-            kk = key(s)
-            if kk in seen or not cm.ok({**s, "unit_price": 1.0}, v.std):
-                continue
-            seen.add(kk)
-            p = end + (sup.lever_premium(s, base, end) if self.k["lever_prices"] else 0.0)
-            ranked.append((v.c({**s, "unit_price": p}), s))
+        for fixed in (keep, {}):  # its own cash terms where they keep the must-haves, else any valid ones
+            seen = set()
+            for s in cm.structures(base or None):
+                s = strip(cm.sheet({**base, **s, **fixed, "unit_price": 1.0}))
+                if mode == "latest" and days and "payment_days" in s and "payment_days" not in fixed:
+                    s["payment_days"] = max(days)
+                if mode == "fastest" and days and "payment_days" in s and "payment_days" not in fixed:
+                    s["payment_days"] = min(days)
+                kk = key(s)
+                if kk in seen or not cm.ok({**s, "unit_price": 1.0}, v.std):
+                    continue
+                seen.add(kk)
+                p = end + (sup.lever_premium(s, base, end) if self.k["lever_prices"] else 0.0)
+                ranked.append((v.c({**s, "unit_price": p}), s))
+            if ranked:
+                break
         if not ranked:
             self._memo[k] = base
             return base
