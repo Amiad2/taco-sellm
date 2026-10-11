@@ -113,6 +113,18 @@ VARIANTS = {
         ],
     ),
     "control": dict(),
+    # a second cost-driver index that fell from its peak (the supplier's quote says it rose 12.3 % in twelve
+    # months and is 38 % of its cost), in the second e-mail instead of the fact the supplier dismissed there
+    "idx2": dict(
+        script={
+            1: {
+                "replace": True,
+                "after": [
+                    "The index PPI-C2431 changed -2.3 % from 2026-06 to 2026-08 (idx:PPI-C2431@2026-06, idx:PPI-C2431@2026-08)."
+                ],
+            }
+        }
+    ),
     # eleven suppliers "offered to walk us through their calculation (hourly rates and material) if that helps to
     # settle prices" (call notes; P04, P08, P18 among them) - nobody ever asked
     "openbook": dict(
