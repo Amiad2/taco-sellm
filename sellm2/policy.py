@@ -94,9 +94,10 @@ class Policy:
         draft = self.close(cm, live, cost)
         if focus is None and len(views) > 1 and draft["kind"] == "accept":
             # A runner that serves one thread at a time lets the others time out, and a timeout
-            # replaces the offer ID: a holding e-mail first brings this thread up to date.
+            # replaces the offer ID: a holding e-mail first brings this thread up to date. The last
+            # message of a thread is kept for it (`ready`); an accept is allowed at the round limit.
             v = views[draft["sid"]]
-            if not v.fresh and v.left > 1:
+            if not v.fresh and v.left >= 1:
                 return {"kind": "hold", "sid": v.sid, "sheets": [], "n": len(v.asks), "reasons": ["refresh the offer ID before accepting"]}
         return draft
 
@@ -512,8 +513,9 @@ class Policy:
         return p["capped"] or p["enough"]
 
     def ready(self, cm, v, rival=math.inf):
-        """Nothing more to ask here and none of its other sheets is better."""
-        if v.left <= 0:
+        """Nothing more to ask here and none of its other sheets is better. With several bidders the
+        last message of a thread is kept for the holding e-mail before an accept."""
+        if v.left <= (1 if len(cm.case.get("suppliers") or []) > 1 else 0):
             return True
         if v.standing[1].get("unit_price") is None:
             return False
