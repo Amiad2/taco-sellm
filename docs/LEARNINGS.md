@@ -37,6 +37,19 @@ Tacto's docs or FAQ, not yet seen by us). Raw history goes to `docs/LOG.md`.
   rolling scorecard. Pick the right reference before citing, and build the argument bank only from
   IDs checked against `facts.json`, never from a supplier's stated reasons.
 
+## From Sunday morning's structure tests (Sun 09:45-10:10, 14 practice sessions; `experiments/LEDGER-JONATHAN.md` J16-J21)
+
+- **An index clause the supplier insists on is paid back in price if we keep asking for the fixed price** (P18:
+  its clause sheets fell 0.20 per fact instead of 0.10; 0.657 -> 0.729). Following onto its clause at once gives
+  that away. Not so for a supplier whose material is hedged (P08: a cent worse).
+- **Other refused terms are not paid back**: a lead time it calls not feasible (P10, 0.586) or a chargeback (P11,
+  0.398) kept in every ask costs the price instead.
+- **P10's supplier stops at 31.50 after our second message**, whatever that message asks (30.30 to 31.30).
+- **P07's final offer comes at the third message whatever the third ask is**; a round more needs a first ask
+  near 5.00, which costs P11 and P18.
+- **What a case's index path makes of a clause**: with an expected rise of 6 % and 45 % material share a clause
+  without a deadband costs 3.15 % of the spend, with a 5 % deadband 0.9 %, a fixed price nothing.
+
 ## From the Sunday release (Sun 08:50-09:20, 3 practice sessions; `experiments/LEDGER-JONATHAN.md` J13-J15 on `jonathans_branch`)
 
 - **Practice stays on package v1** (`brief/api.md`: "Hidden cases may cite them; practice cases stay on
