@@ -1143,3 +1143,9 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 **[change] Pitch deck draft (12 slides) built on jonathans_branch 80.3: journey, what is unique to us, per-case stats**
 - Claude artifact (private, Amiad shares it from its Share menu): https://claude.ai/artifact/EatRbWMK8iAvrapwfhZQhX
 - Slides: cover 61.5 -> 80.3; 11 measured versions; statement (code decides, LLM reads); own supplier lab (0.72 % error, 18,444 runs); replay proof (451 sessions); per case kit vs ours; P02 index clause (0.105 -> 0.725, full cost 367.56); P08 price-jump argument (0.433 -> 0.814); LLM measured and kept out; graveyard of rejected ideas; final readiness (14 s, 240 -> 12 s RFQ); close. All figures from docs/LOG.md and experiments/LEDGER-JONATHAN.md; speaker notes on every slide.
+
+## 2026-10-11 09:21 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] jonathans_branch@363b6e6 (main merged in): all ten practice cases through the final runner with SELLM_PLAN=llm - mean 80.3, every case as before**
+- P01 0.997, P02 0.725, P03 0.956, P04 0.860, P05 0.820, P07 0.747, P08 0.814, P10 0.679, P11 0.778, P18 0.657. 0 crashes, 0 refused moves, 14 s. Tag best-jonathans_branch-80.3-sunday3.
+- This commit contains main as of Sun 09:17 (Omar's release fix in sellm/intel/extract.py, docs, runs) and the branch's release work of this morning; merging it into main is a fast-forward of the code. 227 tests pass, intel verify PASS, dossiers rebuilt with the release.
+- Quota: 237 of 600 left.
