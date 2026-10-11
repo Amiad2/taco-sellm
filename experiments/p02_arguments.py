@@ -113,6 +113,20 @@ VARIANTS = {
         ],
     ),
     "control": dict(),
+    # P11: the supplier is short of cash (the dossier: we pay it 8.8 days late on average) and says in every e-mail
+    # "faster payment would help us more than anything"; payment days are not negotiable in this case. What we can
+    # give truthfully is payment on the due date.
+    "ontime": dict(
+        knobs=dict(plan="llm"),
+        when=[
+            (
+                r"faster payment|pay us faster|pay earlier",
+                [
+                    "We hear you on payment: from this contract on we will pay your invoices on their due date at the latest - so far they were paid about nine days late on average."
+                ],
+            )
+        ],
+    ),
     # P07 (a kit of four parts, three of them bought from this supplier today): the agent runs out of facts after
     # two e-mails and the third, without one, gets the final offer. The brief counts order lines of different
     # parts as separate arguments.
