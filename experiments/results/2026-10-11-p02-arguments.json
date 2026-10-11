@@ -3219,5 +3219,259 @@
   },
   "variant": "agent-near",
   "label": "ARG agent-near jonathans_branch@0ef1717"
+ },
+ {
+  "session_id": "a109045c4de4058b",
+  "case_id": "case:P10",
+  "deal": true,
+  "score": 0.6785164534560958,
+  "c_deal": 1522963.2,
+  "supplier": "sup:70410",
+  "terms": {
+   "payment_days": 30,
+   "lead_time_days": 56,
+   "volume_per_year": 23400,
+   "contract_months": 36,
+   "effective_date": "2027-01-01",
+   "index_clause": null,
+   "incoterm": "DAP",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 300,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 31.5
+  },
+  "end_reason": "accepted",
+  "seconds": 18,
+  "threads": {
+   "sup:70410": {
+    "our_messages": 2,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 2,
+    "their_prices": [
+     32.2,
+     33.6,
+     31.5
+    ],
+    "our_prices": [
+     [
+      29.95
+     ],
+     [
+      31.3
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 3,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "variant": "second-31.3",
+  "label": "ARG second-31.3 jonathans_branch@362bf0f"
+ },
+ {
+  "session_id": "0f5a86e4c7e4998b",
+  "case_id": "case:P10",
+  "deal": true,
+  "score": 0.6785164534560958,
+  "c_deal": 1522963.2,
+  "supplier": "sup:70410",
+  "terms": {
+   "payment_days": 30,
+   "lead_time_days": 56,
+   "volume_per_year": 23400,
+   "contract_months": 36,
+   "effective_date": "2027-01-01",
+   "index_clause": null,
+   "incoterm": "DAP",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 300,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 31.5
+  },
+  "end_reason": "accepted",
+  "seconds": 21,
+  "threads": {
+   "sup:70410": {
+    "our_messages": 2,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 2,
+    "their_prices": [
+     32.2,
+     33.6,
+     31.5
+    ],
+    "our_prices": [
+     [
+      29.95
+     ],
+     [
+      30.7
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 3,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "variant": "second-30.7",
+  "label": "ARG second-30.7 jonathans_branch@362bf0f"
+ },
+ {
+  "session_id": "656aef7fbe80d755",
+  "case_id": "case:P10",
+  "deal": true,
+  "score": 0.6785164534560958,
+  "c_deal": 1522963.2,
+  "supplier": "sup:70410",
+  "terms": {
+   "payment_days": 30,
+   "lead_time_days": 56,
+   "volume_per_year": 23400,
+   "contract_months": 36,
+   "effective_date": "2027-01-01",
+   "index_clause": null,
+   "incoterm": "DAP",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 300,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 31.5
+  },
+  "end_reason": "accepted",
+  "seconds": 23,
+  "threads": {
+   "sup:70410": {
+    "our_messages": 2,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 2,
+    "their_prices": [
+     32.2,
+     33.6,
+     31.5
+    ],
+    "our_prices": [
+     [
+      29.95
+     ],
+     [
+      31.0
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 3,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "variant": "second-31.0",
+  "label": "ARG second-31.0 jonathans_branch@362bf0f"
+ },
+ {
+  "session_id": "954dfafbc0c9a6b3",
+  "case_id": "case:P11",
+  "deal": true,
+  "score": 0.3980101386251581,
+  "c_deal": 779736.0,
+  "supplier": "sup:70140",
+  "terms": {
+   "payment_days": 60,
+   "lead_time_days": 56,
+   "volume_per_year": 15900,
+   "contract_months": 12,
+   "effective_date": "2027-01-01",
+   "index_clause": null,
+   "incoterm": "FCA",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 300,
+   "chargeback_eur_per_complaint": 500.0,
+   "unit_price": 47.5
+  },
+  "end_reason": "accepted",
+  "seconds": 178,
+  "threads": {
+   "sup:70140": {
+    "our_messages": 7,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 7,
+    "their_prices": [
+     47.0,
+     48.0,
+     47.5,
+     47.5,
+     47.5,
+     47.5,
+     47.5,
+     47.5
+    ],
+    "our_prices": [
+     [
+      43.52
+     ],
+     [
+      44.45
+     ],
+     [
+      45.35
+     ],
+     [
+      46.81
+     ],
+     [
+      47.13
+     ],
+     [
+      47.19
+     ],
+     [
+      47.2
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified",
+     "duplicate",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 8,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "variant": "chargeback-hold",
+  "label": "ARG chargeback-hold jonathans_branch@362bf0f"
  }
 ]
