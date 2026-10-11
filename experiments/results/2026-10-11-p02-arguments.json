@@ -2557,5 +2557,64 @@
   },
   "variant": "shorttime",
   "label": "ARG shorttime jonathans_branch@3b3df9f"
+ },
+ {
+  "session_id": "c5df08dc91c18229",
+  "case_id": "case:P02",
+  "deal": true,
+  "score": 0.7245828391770466,
+  "c_deal": 2248556.0,
+  "supplier": "sup:70510",
+  "terms": {
+   "payment_days": 90,
+   "lead_time_days": 35,
+   "volume_per_year": 6110,
+   "contract_months": 12,
+   "effective_date": "2027-01-01",
+   "index_clause": {
+    "series": "CU-NOTATION",
+    "material_share": 0.2,
+    "deadband_pct": 5.0,
+    "base_month": "2026-08"
+   },
+   "incoterm": "DAP",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 250,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 362.7
+  },
+  "end_reason": "accepted",
+  "seconds": 27,
+  "threads": {
+   "sup:70510": {
+    "our_messages": 1,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": null,
+    "their_prices": [
+     370.96,
+     362.7
+    ],
+    "our_prices": [
+     [
+      343.47,
+      362.7
+     ]
+    ],
+    "claims": [
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 2,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "variant": "agent-plangive",
+  "label": "ARG agent-plangive jonathans_branch@e658273"
  }
 ]

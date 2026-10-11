@@ -610,3 +610,31 @@ def test_a_case_fact_is_citable_in_its_case(real_pkg):
     d = dossier("sup:70110", case["parts"], case=case, package=real_pkg)
     assert any("cost:310010-H" in c["ids"] and "128.50" in c["statement"] for c in d["citable"])
     assert d["parts"]["part:310010"]["should_cost"]["id"] == "cost:310010-H"
+
+
+def test_a_trigger_letter_of_the_release_speaks_for_its_writer_only(real_pkg):
+    """A hidden case may be triggered by a Sunday letter: one bidder asking for payment within 10 days does not make
+    the other bidders short of cash, and our own memo (headlines about many suppliers) is nobody's statement."""
+    if real_pkg.release is None:
+        pytest.skip("needs the Sunday release")
+    import sellm.intel as intel
+
+    lab = Path(__file__).resolve().parents[1] / "sellm" / "lab" / "cases"
+    rfq = json.loads((lab / "P05.json").read_text(encoding="utf-8"))
+
+    def kinds(case, sid):
+        d = intel.dossier(sid, case.get("parts"), case, None, package=real_pkg)
+        return {s["kind"]: s["strength"] for s in d["signals"]}
+
+    letter = {**rfq, "trigger_doc": "doc:20261005-70250-S2"}
+    for sid in rfq["suppliers"]:
+        assert kinds(letter, sid) == kinds(rfq, sid), sid
+    assert kinds(rfq, "sup:70250")["cash_short"] >= 2  # its own letter is in its dossier
+    bundle = json.loads((lab / "P07.json").read_text(encoding="utf-8"))
+    memo = {**bundle, "trigger_doc": "doc:20261009-HPW-MEMO"}
+    assert kinds(memo, bundle["suppliers"][0]) == kinds(bundle, bundle["suppliers"][0])
+    for sid in ("sup:70510", "sup:70650"):  # the two letters that name the terms still open
+        d = intel.dossier(sid, (), None, None, package=real_pkg)
+        assert "wants_planning" in {s["kind"] for s in d["signals"]}
+        assert not any(s["kind"] == "price_claim" and "S" in s["evidence"][-1].rsplit("-", 1)[-1] for s in d["signals"])
+        assert all(doc["asked_pct"] != "" for doc in d.get("documents") or [])

@@ -34,6 +34,11 @@ KNOBS = dict(
     # message to it costs the leaders their 60 seconds (P05 Sun 04:25: the bidder at its final 28.00 withdrew
     # while the loop waited for one at 33.00). J10
     drop_behind=0.08,
+    # A supplier whose own letter says it is open to discuss call-off planning (dossier wants_planning; two letters
+    # of the Sunday release, whose writers rule out price reductions) is offered a fixed call-off schedule in the
+    # first e-mail. Practice stays on package v1, so its effect cannot be measured there: P02 unchanged at 0.725,
+    # its supplier 'appreciates the rolling twelve-month forecast for our capacity planning'. J14
+    plan_give=True,
 )
 
 # The best Calculator variant of the first lab search (runs/lab/20261010-1632-search-first/report.md,

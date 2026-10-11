@@ -156,6 +156,7 @@ def test_the_agent_plays_the_rules_that_were_measured(package):
         "idx_blamed": True,
         "no_lowball": 0.93,
         "drop_behind": 0.08,
+        "plan_give": True,
     }
     agent = the_agent(package)
     assert isinstance(agent, Persistent) and agent.e["past_target"] and agent.e["fast_pay"] and agent.e["clause_offer"]
@@ -181,6 +182,24 @@ def test_no_ask_after_a_final_offer_by_default(package):
         final = next(i for i, m in enumerate(messages) if m.get("status") == "final_offer")
         decision = the_agent(package).decide(case, {sid: messages[: final + 1]})
         assert (decision["message"].get("action") or {}).get("type") == "accept"
+
+
+def test_a_supplier_open_to_call_off_planning_is_offered_a_schedule(package):
+    """Sunday release: P02's supplier wrote that it is open to discuss call-off planning; P01's did not."""
+    from sellm.agent import KNOBS
+    from sellm.endgame import SOFT_GIVE
+
+    if package is None or package.release is None:
+        pytest.skip("needs the data package with the Sunday release")
+    for case_id, offered in (("P02", True), ("P01", False), ("P04", False)):
+        rec = record(case_id)
+        case = rec["case"]
+        sid = case["suppliers"][0]
+        threads = {sid: rec["threads"][sid]["messages"][:1]}
+        body = make_persistent(package, **KNOBS).decide(case, threads)["message"]["body"]
+        assert (SOFT_GIVE in body) is offered, case_id
+        plain = make_persistent(package, **{**KNOBS, "plan_give": False}).decide(case, threads)["message"]
+        assert SOFT_GIVE not in plain["body"]
 
 
 # -- the clause offer (experiments/P02-ARGUMENTS.md) ---------------------------------------------------

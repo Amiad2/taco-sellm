@@ -351,8 +351,13 @@ def test_the_practice_quota_is_not_waited_for():
         def open_session(self, case_id):
             raise ArenaError(429, "practice limit: 450 sessions per 24 h")
 
-    row = runner.play_case(Quota([_scenario("P01")], pkg.facts), "case:P01", _agent(pkg),
-                           limits=dataclasses.replace(FAST, open_retry=0.01), retries=0)
+    row = runner.play_case(
+        Quota([_scenario("P01")], pkg.facts),
+        "case:P01",
+        _agent(pkg),
+        limits=dataclasses.replace(FAST, open_retry=0.01),
+        retries=0,
+    )
     assert row["crash"] and "practice limit" in row["crash"]
 
 
