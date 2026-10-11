@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-11 04:12 CEST by Jonathan (Claude Code).
+Last updated: 2026-10-11 04:32 CEST by Jonathan (Claude Code).
 
 ## Now
 
@@ -76,7 +76,7 @@ signal vocabulary). Build against section 10; add fields freely, rename core fie
 
 **`jonathans_branch@0eaf946` (Sun 03:12), all ten practice cases with `SELLM_PLAN=llm` (gpt-6-sol), kit runner: mean 77.3** (tag `best-jonathans_branch-77.3`; P10 and P11 played singly after a 429 on opening). New against 75.4: every fallen cost-driver index is cited, one per e-mail, and with the planner an index the supplier itself blames is cited with its larger fall. P01 0.997, P02 0.725, P03 0.923, P04 0.860, P05 0.820, P07 0.747, P08 0.637, P10 0.647, P11 0.778, P18 0.598. Ledger: `experiments/LEDGER-JONATHAN.md` on `jonathans_branch`.
 
-**`jonathans_branch@79c2d0a` (Sun 04:10), ten practice cases in parallel through the final runner (`python -m sellm.runner`, one loop per case) with `SELLM_PLAN=llm` (gpt-6-sol, plans live): mean 78.2**, 0 crashes, 0 refused moves (tag `best-jonathans_branch-78.2`). P01 0.997, P02 0.725, P03 0.923, P04 0.860, P05 0.872 (RFQ, varies 0.74-0.87), P07 0.747, P08 0.637, P10 0.679, P11 0.778, P18 0.598. It is main's agent plus: the clause offer, every fallen cost-driver index one per e-mail (with Omar's hedge guard narrowed to the clause's material), the larger fall of an index the supplier blames (planner), no lowball to a capacity-tight supplier (Amiad's rule), and omars_branch's runner. Run it with `SELLM_PLAN=llm SELLM_MODEL=gpt-6-sol`; without them it plays the same rules minus the two that need the planner (P01 0.969).
+**`jonathans_branch@8a854c4` (Sun 04:29), ten practice cases in parallel through the final runner (`python -m sellm.runner`, one loop per case) with `SELLM_PLAN=llm` (gpt-6-sol, plans live): mean 80.3**, 0 crashes, 0 refused moves, every case under 15 s (tag `best-jonathans_branch-80.3`; earlier tags -79.3, -78.2, -77.3, -75.4, -74.9 are the steps before, table in `experiments/LEDGER-JONATHAN.md`). P01 0.997, P02 0.725, P03 0.956, P04 0.860, P05 0.820, P07 0.747, P08 0.814, P10 0.679, P11 0.778, P18 0.657. On top of main's agent: the clause offer (P02); every fallen cost-driver index one per e-mail, hedge guard on the clause's material (P08, P18); the order history cited as the pair around a price jump of the last twelve months (P08, P18, P03); the larger fall of an index the supplier itself blames, read by the LLM planner (P01); no lowball to a capacity-tight supplier (P10, Amiad's rule); in an RFQ a bidder far behind after two answers is not asked again (P05); omars_branch's runner. Without `SELLM_PLAN=llm` only the planner rule is missing (P01 0.969, mean 80.0).
 
 Generated, do not keep by hand: `runs/README.md` (per case `C_open`, `C_best`, our best, every
 session). Baseline of the kit's LLM agent on all 10 hosted cases, Sat 15:27: **mean 61.5**.
