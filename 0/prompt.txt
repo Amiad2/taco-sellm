@@ -1,0 +1,25 @@
+pull und erklär mir alles was passiert ist
+
+---
+
+was ht jnathan gemacht um dies verbesserungen zu machen??
+
+---
+
+ok kreir anhand jonathans bot die slides. da jedes team was gleiches haben wird, highlighte was bei uns anders ist. erstelldie slides über unseren werdegang, wie wir was verbessert haben. wenig text, viele bilder und voralllem statistiken und heb sachen die besonders/einzigartig sind/waren vor
+
+---
+
+bitte als pdf hier in ordner. und wir haben nur 3 minuten präsentation also nur diehighlights
+
+---
+
+wo liegt die pdf?
+
+---
+
+ok mein branch ist ja dann unnötig. ich möchte auf den main branch und dann müssen wir noch ein problem lösen. und zwar müssen wir entire verwenden und ich bin mir nicht sicher ob wir das gemacht haben
+
+---
+
+so wie ich es verstanden habe muss es jeder sehen können undhaben, ich weiß nicht wie ich die jetzt auf entire bekomme
