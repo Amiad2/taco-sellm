@@ -113,6 +113,9 @@ VARIANTS = {
         ],
     ),
     "control": dict(),
+    # two facts in the first e-mail: suppliers that walk a ladder say final_offer after about four messages
+    "agent-two": dict(knobs=dict(plan="llm", first_facts=2)),
+    "agent-three": dict(knobs=dict(plan="llm", first_facts=3)),
     # Amiad's rule for a capacity-tight supplier, on this agent: the first ask no lower than 93 % of its opening
     "agent-nolow": dict(knobs=dict(plan="llm", no_lowball=0.93)),
     # the rules as built in: every fallen cost-driver index, one per e-mail (idx_many); the larger fall of an index

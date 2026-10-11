@@ -42,7 +42,7 @@ import re
 from arena_kit.cost import complete_offer
 
 from . import calculator
-from .negotiator import EPS, Negotiator, _key, log
+from .negotiator import EPS, Negotiator, Thread, _key, log
 
 DEFAULTS = dict(
     past_target=False,
@@ -79,6 +79,9 @@ DEFAULTS = dict(
     # once and stayed open at 29.89-29.95 (Amiad's sellm2: 0.647 -> 0.671). A supplier that allocates its
     # volume does not need our order.
     no_lowball=None,
+    # How many facts the first e-mail carries (the next ones the agent would cite, one sentence each). Suppliers
+    # that walk a price ladder say final_offer after about four of our messages: a fact in hand at the end is lost.
+    first_facts=1,
 )
 CLAUSE_LINE = "With the index clause of the second option the price follows {series} beyond the deadband, so that this risk does not have to be priced in up front."
 IDX_LINE = re.compile(
@@ -169,8 +172,21 @@ class Persistent(Negotiator):
         return self._memo[key]
 
     def arguments(self, case, v, views, live, sheet):
-        """The negotiator's argument; an index the supplier blames for its price is cited with its larger fall."""
-        out = super().arguments(case, v, views, live, sheet)
+        """The negotiator's argument; an index the supplier blames for its price is cited with its larger fall;
+        the first e-mail may carry more than one fact (`first_facts`)."""
+        out = self.blamed(case, v, super().arguments(case, v, views, live, sheet))
+        if not v.asks and out:
+            seen = v
+            while len(out) < int(self.e["first_facts"] or 1):
+                # as if the facts so far had been sent: the next one the agent would cite
+                seen = Thread(case, v.sid, [*seen.events[: len(v.events)], {"from": "buyer", "body": " ".join(out)}])
+                more = self.blamed(case, v, super().arguments(case, seen, {**views, v.sid: seen}, live, sheet))
+                if not more or more[0] in out:
+                    break
+                out = [*out, more[0]]
+        return out
+
+    def blamed(self, case, v, out):
         if not (out and self.e["idx_blamed"] and self.e["plan"] == "llm" and self.package):
             return out
         found = IDX_LINE.match(out[0])
@@ -200,8 +216,6 @@ class Persistent(Negotiator):
             return
         self._memo[key] = True
         from concurrent.futures import ThreadPoolExecutor
-
-        from .negotiator import Thread
 
         views = [Thread(case, sid, events) for sid, events in threads.items()]
         openings = (case.get("case_id"), "openings")
