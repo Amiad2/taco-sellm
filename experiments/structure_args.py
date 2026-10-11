@@ -39,6 +39,8 @@ VARIANTS = {
     "E2g": {"idx_recent": 2.0},
     # E2g + no on-time-delivery record to a supplier whose dossier has no delivery or quality problem
     "E3": {"idx_recent": 2.0, "gate": True},
+    # the candidate (KNOBS since f473d97 already has idx_recent) + the larger of the yearly and the peak fall
+    "E4": {"idx_window": "max"},
 }
 
 
@@ -46,6 +48,11 @@ def make(package, **knobs):
     from sellm.agent import make_agent
 
     return make_agent(package, **knobs)
+
+
+def e4(package):
+    """For `python -m sellm.runner --agent experiments.structure_args:e4` (RFQ cases through the final runner)."""
+    return make(package, **VARIANTS["E4"])
 
 
 def reference_sessions():

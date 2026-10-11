@@ -68,6 +68,7 @@ DEFAULTS = dict(
     contract="longest",  # where C does not care how long we commit: longest | horizon (the shortest option that covers it)
     idx_recent=None,  # a % (e.g. 2.0): also cite a cost-driver index that fell at least this much from its peak of the last 12 months
     gate=False,  # leave out a fact the supplier's dossier says it will dismiss (see `dismissed`)
+    idx_window="year",  # a falling cost-driver index: year (its last 12 months) | max (also the fall from its peak, the larger)
 )
 # Where deals could end, as a share of the supplier's opening price, when no should-cost of its own
 # plant exists. Two numbers on purpose (few cases, so no finer split): cases with a relationship term,
@@ -868,6 +869,11 @@ class Negotiator:
                             continue
                         a, b = ids[-13], ids[-1]
                         change = (self.package.lookup(b)["value"] / self.package.lookup(a)["value"] - 1) * 100
+                        if change < -0.5 and self.k["idx_window"] == "max":  # the larger fall: from its 12-month peak
+                            peak = max(ids[-13:-1], key=lambda i: self.package.lookup(i)["value"])
+                            fall = (self.package.lookup(b)["value"] / self.package.lookup(peak)["value"] - 1) * 100
+                            if fall < change - 0.5:
+                                a, change = peak, fall
                         if change < -0.5:  # worded as the kit's worked example, which the arena verified
                             months = (a.split("@", 1)[1], b.split("@", 1)[1])
                             out.append(
