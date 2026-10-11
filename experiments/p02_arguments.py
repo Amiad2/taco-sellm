@@ -113,6 +113,17 @@ VARIANTS = {
         ],
     ),
     "control": dict(),
+    # eleven suppliers "offered to walk us through their calculation (hourly rates and material) if that helps to
+    # settle prices" (call notes; P04, P08, P18 among them) - nobody ever asked
+    "openbook": dict(
+        script={
+            0: {
+                "after": [
+                    "You offered to walk us through your calculation: could you send us your cost breakdown for this part (material, conversion, overhead)? That would help us to settle on a price that is fair for both sides."
+                ]
+            }
+        }
+    ),
     # P18 (leverage, two approved sources of the same bar): what the other source charges, instead of our own
     # order history with this one, which it dismissed
     "rival": dict(
