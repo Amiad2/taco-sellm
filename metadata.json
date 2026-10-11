@@ -1,0 +1,27 @@
+{
+  "cli_version": "0.11.4",
+  "checkpoint_id": "01M4M93FANPKVSX3FE34GE981G",
+  "strategy": "manual-commit",
+  "branch": "amiads_branch",
+  "checkpoints_count": 1,
+  "files_touched": [
+    "sellm2/model.py",
+    "sellm2/policy.py"
+  ],
+  "sessions": [
+    {
+      "metadata": "/0/metadata.json",
+      "transcript": "/0/full.jsonl",
+      "compact_transcript": "/0/transcript.jsonl",
+      "content_hash": "/0/content_hash.txt",
+      "prompt": ""
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 24,
+    "cache_creation_tokens": 22607,
+    "cache_read_tokens": 7096174,
+    "output_tokens": 10071,
+    "api_call_count": 12
+  }
+}
