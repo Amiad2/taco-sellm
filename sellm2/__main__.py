@@ -210,16 +210,9 @@ def summarise(rows, client):
 
 def stress(a):
     """The lab's stress test with sellm2 (sellm.lab is the team's simulator; nothing of it changes)."""
-    from sellm.lab import stress as lab_stress
-
-    pkg = package(a.data)
-    out = ROOT / "runs" / "lab" / f"{time.strftime('%Y%m%d-%H%M%S')}-stress-sellm2"
-    rows = lab_stress.run(out, "sellm2.agent:make_agent", {}, pkg, n=a.n, seeds=a.seeds)
-    text, verdict = lab_stress.report(rows, "sellm2.agent:make_agent", {})
-    out.mkdir(parents=True, exist_ok=True)
-    (out / "report.md").write_text(text, encoding="utf-8")
-    print(text)
-    return 0 if verdict == "PASS" else 1
+    cmd = [sys.executable, "-m", "sellm.lab", "stress", "--agent", "sellm2.agent:make_agent", "--n", str(a.n),
+           "--seeds", str(a.seeds), "--label", "sellm2"]  # fmt: skip
+    return subprocess.run(cmd, cwd=ROOT, check=False).returncode
 
 
 if __name__ == "__main__":

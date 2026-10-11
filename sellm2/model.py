@@ -226,7 +226,9 @@ class Supplier:
     # What suppliers charged for levers that are not cash in its value (measured from their own
     # alternative sheets, docs/LEARNINGS.md): share of its price per unit of the lever.
     LEAD_PER_DAY = 0.0049  # P10: 1.90 on 32.20 for 12 days shorter
-    PPM_PER_1000 = 0.026  # P11: about 1.40 on 45 for 1200 ppm tighter
+    # ppm: not priced. P11 (Sun 03:05, session a11271a2) walked the same price ladder (46.5, 46.0,
+    # 45.5) for 1500 ppm as for 300 ppm, so a looser commitment only cost us (0.620 against 0.778).
+    PPM_PER_1000 = 0.0
     DEADBAND_PER_PT = 0.004  # P08 0.12 on 5.5 and P18 0.10 on 5.6 for 5 points
 
     def __init__(self, cm, thread, brief, rate=None):

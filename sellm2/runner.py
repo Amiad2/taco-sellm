@@ -41,7 +41,7 @@ ROOT = Path(__file__).resolve().parents[1]
 class Limits:
     move_hard: float = 40.0  # a decision that takes longer is replaced by a holding e-mail
     docs: float = 20.0  # wait at most this long for an attachment
-    hold_after: float = 45.0  # a waiting thread silent this long gets a holding e-mail
+    hold_after: float = 40.0  # the best offer, final or agreed, waiting this long gets a holding e-mail
     max_holds: int = 2
     close_before_cap: float = 90.0  # close this long before a wave's cap ...
     round_margin: float = 15.0  # ... or the slowest round so far plus this margin
@@ -83,8 +83,24 @@ class CaseRun:
         return message
 
     def reread(self, sid):
+        """The thread as the arena has it now. A timeout follow-up (new offer ID) or the end of the
+        thread is not always among its messages: it is added from the thread's state, so the agent
+        never asks a supplier that has left, nor accepts an offer ID that was replaced."""
         t = self.client.thread(self.table.session_id, sid)
         msgs = [self.docs(dict(m)) for m in t.get("messages") or []]
+        last = next((m for m in reversed(msgs) if m.get("from") != "buyer"), {})
+        standing = ((last.get("term_sheets") or [{}])[0]).get("term_sheet_id")
+        timeouts = t.get("timeouts") or []
+        if t.get("closed") or t.get("status") in ("walked_away", "no_bid"):
+            if last.get("status") not in ("walked_away", "no_bid"):
+                text = (timeouts[-1].get("text") if timeouts else None) or "(the thread has ended)"
+                msgs.append({"from": f"arena@{sid}", "status": t.get("status") if t.get("status") in ("walked_away", "no_bid") else "walked_away",
+                             "term_sheets": [], "body": text, "attachments": []})  # fmt: skip
+        elif timeouts and t.get("offer_id") and t.get("offer_id") != standing:
+            to = timeouts[-1]
+            msgs.append({"from": f"arena@{sid}", "status": to.get("status") or t.get("status"),
+                         "term_sheets": [{"term_sheet_id": t["offer_id"], "terms": to.get("terms") or (last.get("term_sheets") or [{}])[0].get("terms", {})}],
+                         "body": to.get("text") or "", "attachments": [], "missing_fields": to.get("missing_fields") or []})  # fmt: skip
         self.seen[sid] = time.time()
         return msgs
 
@@ -121,15 +137,26 @@ class CaseRun:
         return closing_move(self.case, threads)
 
     def waiting(self, threads, target):
-        """A thread other than `target` that has waited too long for an answer from us."""
-        now = time.time()
-        for sid in live_threads(threads):
-            if sid == target or self.holds.get(sid, 0) >= self.lim.max_holds:
-                continue
-            ev = threads[sid]
-            if ev and ev[-1].get("from") != "buyer" and now - self.seen.get(sid, now) > self.lim.hold_after:
-                if self.case.get("round_limit", 10) - sum(m.get("from") == "buyer" for m in ev) > 2:
-                    return sid
+        """The best standing offer, if it is a final offer or an agreement that has waited too long
+        while the agent moves another bidder: a supplier at final_offer left over a minute withdrew
+        (sandbox D02, P05). Only that thread is held: with one message in flight per session every
+        hold costs the others a turn, so open threads are not held."""
+        policy = getattr(self.agent, "policy", None)
+        if policy is None or len(threads) < 2:
+            return None
+        from .model import READY, CaseModel, Thread
+
+        cm = CaseModel(self.case)
+        views = [Thread(cm, s, threads[s]) for s in live_threads(threads)]
+        costs = {v.sid: policy.offer_cost(cm, v) for v in views}
+        if not costs:
+            return None
+        best = min(costs, key=costs.get)
+        v = next(v for v in views if v.sid == best)
+        if best == target or v.status not in READY or costs[best] == float("inf"):
+            return None
+        if time.time() - self.seen.get(best, time.time()) > self.lim.hold_after and self.holds.get(best, 0) < self.lim.max_holds and v.left > 1:
+            return best
         return None
 
     def hold_message(self, threads, sid):
@@ -193,6 +220,10 @@ class CaseRun:
                 if state.get("status") == "ended":
                     return state.get("result") or {"deal": False, "end_reason": state.get("end_reason")}
                 threads[sid] = self.reread(sid)
+                if self.stats["late"] > 30:  # something we do not understand: close on what stands
+                    d = self.closing(threads)
+                    if d["message"].get("action"):
+                        return self.table.close(d["supplier_id"], d["message"])
                 continue
             self.stats["moves"] += 1
             if "result" in reply:
