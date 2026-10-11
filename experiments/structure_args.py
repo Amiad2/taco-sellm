@@ -81,10 +81,13 @@ def summary(decision):
     if msg.get("action"):
         return f"{msg['action']['type']}"
     sheets = [s["terms"] for s in msg.get("term_sheets") or []]
-    return " | ".join(
-        ", ".join(f"{k}={v if not isinstance(v, dict) else v.get('deadband_pct')}" for k, v in sorted(t.items()))
-        for t in sheets
-    ) + f" || {msg.get('body', '')[:0]}"
+    return (
+        " | ".join(
+            ", ".join(f"{k}={v if not isinstance(v, dict) else v.get('deadband_pct')}" for k, v in sorted(t.items()))
+            for t in sheets
+        )
+        + f" || {msg.get('body', '')[:0]}"
+    )
 
 
 def replay(variants):
@@ -128,9 +131,15 @@ def arena(name, cases):
     from arena_kit.client import ArenaClient
     from arena_kit.data import DataPackage
 
-    commit = subprocess.run(["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True, cwd=ROOT).stdout.strip()
-    branch = subprocess.run(["git", "branch", "--show-current"], capture_output=True, text=True, cwd=ROOT).stdout.strip()
-    dirty = subprocess.run(["git", "status", "--porcelain", "sellm", "arena_kit"], capture_output=True, text=True, cwd=ROOT).stdout.strip()
+    commit = subprocess.run(
+        ["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True, cwd=ROOT
+    ).stdout.strip()
+    branch = subprocess.run(
+        ["git", "branch", "--show-current"], capture_output=True, text=True, cwd=ROOT
+    ).stdout.strip()
+    dirty = subprocess.run(
+        ["git", "status", "--porcelain", "sellm", "arena_kit"], capture_output=True, text=True, cwd=ROOT
+    ).stdout.strip()
     spec = importlib.util.spec_from_file_location("ab_sandbox", ROOT / "experiments" / "ab_sandbox.py")
     ab = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(ab)

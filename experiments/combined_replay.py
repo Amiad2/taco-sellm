@@ -21,7 +21,7 @@ from experiments.structure_args import states, summary  # noqa: E402
 
 # labels of sessions played by the rules now in KNOBS, the most specific first
 REFERENCES = [
-    "OMAR E2 {\"idx_recent\": 2.0} sellm.agent omars_branch@c8c0eb5",  # P18 (E2 = E2g on 70740)
+    'OMAR E2 {"idx_recent": 2.0} sellm.agent omars_branch@c8c0eb5',  # P18 (E2 = E2g on 70740)
     "jonathans_branch@67001e7",  # the full run with the clause offer (P02 and the nine others)
     "@7a49c38",
 ]
@@ -32,12 +32,19 @@ def main():
     from sellm.agent import make_agent
 
     package = DataPackage(os.environ.get("ARENA_DATA", "data/package"))
-    records = [json.loads(Path(p).read_text(encoding="utf-8")) for p in sorted(glob.glob(str(ROOT / "runs" / "practice" / "*" / "*.json")))]
+    records = [
+        json.loads(Path(p).read_text(encoding="utf-8"))
+        for p in sorted(glob.glob(str(ROOT / "runs" / "practice" / "*" / "*.json")))
+    ]
     total, open_cases = 0.0, []
     for cid in sorted({r["case_id"] for r in records}):
         found = None
         for ref in REFERENCES:
-            cands = [r for r in records if r["case_id"] == cid and ref in (r.get("label") or "") and "no hedge guard" not in r["label"]]
+            cands = [
+                r
+                for r in records
+                if r["case_id"] == cid and ref in (r.get("label") or "") and "no hedge guard" not in r["label"]
+            ]
             if cid == "case:P05":
                 cands = [r for r in records if r["case_id"] == cid and ref in (r.get("label") or "")]
             if cands:
@@ -49,7 +56,14 @@ def main():
         case, agent, diff = found["case"], make_agent(package), None
         for sid, threads in states(found):
             a = agent.decide(case, threads, None if len(threads) > 1 else None)
-            ours = next((m for m in found["threads"][sid]["messages"][len(threads[sid]):] if m.get("from") == "buyer" or m.get("action")), None)
+            ours = next(
+                (
+                    m
+                    for m in found["threads"][sid]["messages"][len(threads[sid]) :]
+                    if m.get("from") == "buyer" or m.get("action")
+                ),
+                None,
+            )
             if len(threads) > 1:
                 break  # an RFQ's order of threads is the runner's: not replayed here
             if ours is None:
@@ -59,7 +73,9 @@ def main():
             if ours.get("action") or got.get("action"):
                 same = (ours.get("action") or {}).get("type") == (got.get("action") or {}).get("type")
             else:
-                same = got.get("body") == sent.get("body") and [s["terms"] for s in got.get("term_sheets") or []] == [s["terms"] for s in sent.get("term_sheets") or []]
+                same = got.get("body") == sent.get("body") and [s["terms"] for s in got.get("term_sheets") or []] == [
+                    s["terms"] for s in sent.get("term_sheets") or []
+                ]
             if not same:
                 diff = (sid, summary(a))
                 break

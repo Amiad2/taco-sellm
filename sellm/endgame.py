@@ -59,6 +59,11 @@ DEFAULTS = dict(
     # A supplier whose own letter says it is open to discuss call-off planning (dossier wants_planning) is offered
     # that schedule in the first e-mail: the sentence of `soft_give`, which cost nothing where it was not asked for
     plan_give=False,
+    # A supplier that answers our fixed-price ask with clause sheets only ("we cannot offer a fixed price for a
+    # 36-month contract") is still asked for the fixed price - unless its material is hedged (dossier): P18's
+    # supplier then lowered its clause sheets by 0.20 per fact instead of 0.10, and its sheet is taken once our
+    # step would meet it (0.657 -> 0.729). P08's, hedged, ended a cent higher that way (0.803 against 0.814).
+    hold_fixed=False,
     # With a relationship term, where an index clause is negotiable and the supplier quotes a fixed
     # price: the clause as a second offer in the first ask, at the price where our total cost is lowest.
     # A clause is security for the supplier, not cash: it pays for it with a price far below its cost,
@@ -327,6 +332,15 @@ class Persistent(Negotiator):
         """With the clause offer: a clause it prices below `clause_price` is no structure to follow -
         it never raises a price it has named, and that price costs us more than its fixed one."""
         s = super().structure(case, v, s0)
+        if (
+            self.e["hold_fixed"]
+            and s.get("index_clause")
+            and "index_clause" in s0
+            and s0["index_clause"] is None
+            and not self.clause_case(case, v)
+            and not self.signal(case, v, "material_hedged")
+        ):
+            return s0
         if not s.get("index_clause") or not self.clause_case(case, v):
             return s
         quoted, floor = self.quoted(case, v).get(_key(s)), self.clause_price(case, v, s)

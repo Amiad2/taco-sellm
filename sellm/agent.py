@@ -39,6 +39,10 @@ KNOBS = dict(
     # first e-mail. Practice stays on package v1, so its effect cannot be measured there: P02 unchanged at 0.725,
     # its supplier 'appreciates the rolling twelve-month forecast for our capacity planning'. J14
     plan_give=True,
+    # A supplier that answers our fixed-price ask with clause sheets only is still asked for the fixed price,
+    # unless the dossier says its material is hedged; its sheet is taken once our next step would meet it.
+    # P18: its clause sheets fell 0.20 per fact instead of 0.10 (0.657 -> 0.729); P08 (hedged) plays as before. J17
+    hold_fixed=True,
 )
 
 # The best Calculator variant of the first lab search (runs/lab/20261010-1632-search-first/report.md,

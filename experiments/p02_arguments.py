@@ -190,6 +190,8 @@ VARIANTS = {
     "fixed-creep": dict(knobs=dict(plan="llm", creep=0.25), structure={"index_clause": None}, hold=True),
     # ... and no taking of its sheet while each answer is cheaper than the one before (up to six asks)
     "fixed-keep": dict(knobs=dict(plan="llm", creep=0.25), structure={"index_clause": None}, hold=True, keep=6),
+    # the rule as built in: hold the fixed-price ask against a supplier whose material is not hedged
+    "agent-holdfixed": dict(knobs=dict(plan="llm", hold_fixed=True)),
     # P10: the lead time we need (42 days), which it calls not feasible, kept in every ask
     "lead42-hold": dict(knobs=dict(plan="llm"), structure={"lead_time_days": 42}, hold=True),
     # P10: the lead time it calls feasible (its alternative sheet) asked from the first e-mail

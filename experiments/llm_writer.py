@@ -97,7 +97,9 @@ class LLMWriterNegotiator(Negotiator):
             f"Case: {case.get('title', '')}\n\n"
             f"The supplier's last e-mail (from {last.get('from_name') or last.get('from') or 'the supplier'}):\n---\n{(last.get('body') or '')[:2500]}\n---\n\n"
             f"Our draft (correct facts, plain wording):\n---\n{msg['body']}\n---\n\n"
-            "Required sentences, each word for word:\n" + "\n".join(f"{i + 1}. {s}" for i, s in enumerate(required)) + "\n"
+            "Required sentences, each word for word:\n"
+            + "\n".join(f"{i + 1}. {s}" for i, s in enumerate(required))
+            + "\n"
             f"(The last one is our offer: write it inside a sentence of your own, the terms exactly as given.)\n"
             f"Greeting: {'Dear ' + name + ',' if name else 'Dear Sir or Madam,'}"
         )
@@ -109,8 +111,17 @@ class LLMWriterNegotiator(Negotiator):
             reason = guard(body, required, msg["body"] + " " + (last.get("body") or ""))
         except llm.LLMError as e:
             body, took, reason = None, time.monotonic() - t0, f"llm: {e}"
-        _log({"case": case.get("case_id"), "sid": sid, "n": draft.get("n"), "ok": reason is None, "reason": reason,
-              "s": round(took, 2), "words": len((body or "").split())})
+        _log(
+            {
+                "case": case.get("case_id"),
+                "sid": sid,
+                "n": draft.get("n"),
+                "ok": reason is None,
+                "reason": reason,
+                "s": round(took, 2),
+                "words": len((body or "").split()),
+            }
+        )
         if reason is None:
             msg = {**msg, "body": body.strip()[:8000]}
             return {**decision, "message": msg}

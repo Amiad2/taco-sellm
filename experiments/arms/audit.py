@@ -79,7 +79,9 @@ try:  # the dossier is imported lazily inside Negotiator.intel(): wrap the packa
         except Exception as e:
             _note(tool="intel.dossier", error=repr(e)[:160])
             raise
-        _note(tool="intel.dossier", coverage=(out or {}).get("coverage"), warnings=((out or {}).get("warnings") or [])[:3])
+        _note(
+            tool="intel.dossier", coverage=(out or {}).get("coverage"), warnings=((out or {}).get("warnings") or [])[:3]
+        )
         return out
 
     _intel.dossier = _audited_dossier
@@ -141,7 +143,11 @@ class Audited(Negotiator):
                 "citable": len(found.get("citable") or []),
             }
             aim = self.aim(case, view, self.opening_structure(case, view))
-            rec["aim"] = {"target": round(aim["target"], 3), "source": aim["source"], "full_cost": round(aim["full_cost"], 3)}
+            rec["aim"] = {
+                "target": round(aim["target"], 3),
+                "source": aim["source"],
+                "full_cost": round(aim["full_cost"], 3),
+            }
         except Exception as e:  # the audit must never break a move
             rec["audit_error"] = repr(e)[:160]
         with _LOCK:
@@ -174,7 +180,9 @@ def report(path):
         if errs or errors:
             flags.append("ERRORS")
         bad += bool(flags)
-        print(f"{case:10} decisions {len(recs):3}  dossier {sorted(c for c in cov if c)}  dossier calls {doss:3}  packages() calls {packages:3}  arguments {cites:2}  rescue {errors}  {' '.join(flags) or 'ok'}")
+        print(
+            f"{case:10} decisions {len(recs):3}  dossier {sorted(c for c in cov if c)}  dossier calls {doss:3}  packages() calls {packages:3}  arguments {cites:2}  rescue {errors}  {' '.join(flags) or 'ok'}"
+        )
     return bad
 
 

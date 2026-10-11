@@ -157,6 +157,7 @@ def test_the_agent_plays_the_rules_that_were_measured(package):
         "no_lowball": 0.93,
         "drop_behind": 0.08,
         "plan_give": True,
+        "hold_fixed": True,
     }
     agent = the_agent(package)
     assert isinstance(agent, Persistent) and agent.e["past_target"] and agent.e["fast_pay"] and agent.e["clause_offer"]
@@ -200,6 +201,27 @@ def test_a_supplier_open_to_call_off_planning_is_offered_a_schedule(package):
         assert (SOFT_GIVE in body) is offered, case_id
         plain = make_persistent(package, **{**KNOBS, "plan_give": False}).decide(case, threads)["message"]
         assert SOFT_GIVE not in plain["body"]
+
+
+def test_the_fixed_price_ask_is_held_against_a_supplier_that_is_not_hedged(package):
+    """P18's supplier answers the fixed-price ask with clause sheets: we still ask the fixed price. P08's supplier,
+    whose material is hedged, is followed onto its clause as before."""
+    from sellm.agent import KNOBS
+
+    if package is None:
+        pytest.skip("needs the data package")
+    for case_id, held in (("P18", True), ("P08", False)):
+        rec = record(case_id)
+        case = rec["case"]
+        sid = case["suppliers"][0]
+        messages = rec["threads"][sid]["messages"]
+        first = next(i for i, m in enumerate(messages) if m.get("from") != "buyer" and i > 0)
+        reply = messages[first]
+        assert reply["term_sheets"][0]["terms"].get("index_clause"), "it answers with a clause"
+        ask = make_persistent(package, **KNOBS).decide(case, {sid: messages[: first + 1]})["message"]
+        assert (ask["term_sheets"][0]["terms"]["index_clause"] is None) is held, case_id
+        plain = make_persistent(package, **{**KNOBS, "hold_fixed": False}).decide(case, {sid: messages[: first + 1]})
+        assert plain["message"]["term_sheets"][0]["terms"]["index_clause"] is not None
 
 
 # -- the clause offer (experiments/P02-ARGUMENTS.md) ---------------------------------------------------

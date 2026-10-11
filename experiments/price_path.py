@@ -213,7 +213,9 @@ def main(argv=None):
             "reader": "keywords", "supplier": "engine", "no_cache": False}  # fmt: skip
     run = T.Run(out, opts, scenarios, [], workers=a.workers, log=print)
     jobs = [(AGENT, VARIANTS[n], s.name, k) for n in names for s in scenarios for k in range(a.seeds)]
-    run.log(f"price path: {len(names)} variants x {len(scenarios)} scenarios x {a.seeds} seeds = {len(jobs)} negotiations")
+    run.log(
+        f"price path: {len(names)} variants x {len(scenarios)} scenarios x {a.seeds} seeds = {len(jobs)} negotiations"
+    )
     t0 = time.time()
     rows = run.play(jobs)
     run.log(f"done in {time.time() - t0:.0f} s")
@@ -225,15 +227,21 @@ def main(argv=None):
             f.write(json.dumps(r) + "\n")
     summary = summarise(rows, a.seeds)
     (out / "summary.json").write_text(json.dumps(summary, indent=1), encoding="utf-8")
-    print(f"\n{'variant':<22} {'all':>7} {'diff':>7} {'se':>5} {'twins':>7} {'diff':>7} {'invent':>7} {'diff':>7} {'rel':>7} {'diff':>7} {'other':>7} {'diff':>7} {'nodeal':>6} {'rounds':>6}")
+    print(
+        f"\n{'variant':<22} {'all':>7} {'diff':>7} {'se':>5} {'twins':>7} {'diff':>7} {'invent':>7} {'diff':>7} {'rel':>7} {'diff':>7} {'other':>7} {'diff':>7} {'nodeal':>6} {'rounds':>6}"
+    )
     for s in summary:
         cols = [s["variant"]]
         for g in ("all", "twins", "invented", "relationship", "other_goals"):
             x = s.get(g) or {}
-            cols += [f"{x.get('mean', 0):.1f}", f"{x.get('diff') or 0:+.2f}"] + ([f"{x.get('se', 0):.2f}"] if g == "all" else [])
+            cols += [f"{x.get('mean', 0):.1f}", f"{x.get('diff') or 0:+.2f}"] + (
+                [f"{x.get('se', 0):.2f}"] if g == "all" else []
+            )
         allg = s.get("all") or {}
         cols += [str(allg.get("no_deal", 0)), f"{allg.get('rounds', 0):.1f}"]
-        print(f"{cols[0]:<22} " + " ".join(f"{c:>7}" if i not in (2,) else f"{c:>5}" for i, c in enumerate(cols[1:], 1)))
+        print(
+            f"{cols[0]:<22} " + " ".join(f"{c:>7}" if i not in (2,) else f"{c:>5}" for i, c in enumerate(cols[1:], 1))
+        )
     print(f"\nrun folder: {out}")
     return 0
 
