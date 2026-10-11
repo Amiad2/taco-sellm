@@ -1223,3 +1223,7 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 **[change] Final pitch deck: sellm-pitch.pdf, 5 slides for the 3-minute slot (team decision)**
 - 1 hook 'Our AI never says a number.' (61.5 -> 81.1); 2 'The LLM gives instructions. A deterministic engine negotiates.' (planner: one call per supplier, evidence quoted, no numbers; code checks, prices with the arena's cost function, cites one verified fact, writes from a template; 0 numbers by the LLM, LLM-written e-mails 71.6 vs 72.9); 3 'Our own data set. Our own arena.' (521 sessions, 1,100 real replies, 46 dossiers; twins + invented suppliers, 1.85 % mean error on 1,100 replies, 18,444-negotiation sweep, 0 crashes in 816 stress runs); 4 Jonathan's 'Six eyes, three agents, one memory' (page 1 of pitch-additions.pdf, unchanged); 5 journey of 12 measured versions ending at 81.1 (09:57, measured three times).
 - Dropped: the other slides of the earlier sellm-pitch.pdf and page 2 of pitch-additions.pdf (that file stays as Jonathan built it). The '0.72 %' of the earlier deck was replaced by the current backtest (1.85 % over 1,100 replies).
+
+## 2026-10-11 11:48 CEST · Amiad @ dhcp-10-177-3-104
+**[change] Pitch deck: hook slide 'Built on logic. Not on hallucinations.' without numbers; slide 2 without score figures**
+- Asked by Amiad (team): slide 1 carries no figures (61.5 -> 81.1 removed), slide 2's '71.6 vs 72.9' replaced by 'Repeatable - same situation, same e-mail'. sellm-pitch.pdf, 5 slides, otherwise unchanged.
