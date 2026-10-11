@@ -113,6 +113,32 @@ VARIANTS = {
         ],
     ),
     "control": dict(),
+    # Sunday release, on the two practice suppliers it names. P11: its supplier has filed for insolvency (news, a
+    # citable ID), cited in the third e-mail instead of the duplicate complaint. P05: one bidder wrote that it goes
+    # on short-time work and needs cash (a letter, no checkable figure): said in words, to that bidder only.
+    "insolvency": dict(
+        knobs=dict(plan="llm"),
+        script={
+            2: {
+                "replace": True,
+                "after": [
+                    "We have read that Odlewnia Kalwisz Sp. z o.o. files for insolvency (news:20261006-S1).",
+                    "We intend to keep ordering from you and want terms that both sides can rely on through this time.",
+                ],
+            }
+        },
+    ),
+    "shorttime": dict(
+        knobs=dict(plan="llm"),
+        only="70250",
+        script={
+            0: {
+                "after": [
+                    "You wrote to us on 5 October that your turning department goes on short-time work from November: this order would bring you work, and we would pay within 14 days."
+                ]
+            }
+        },
+    ),
     # Omar's E1 again, now that the facts are stronger: the shortest contract that covers the horizon (24 months)
     "agent-24m": dict(knobs=dict(plan="llm", contract="horizon")),
     # the strongest fact first: the price jump in the first e-mail, the indices after it
@@ -330,6 +356,8 @@ class Probe(Persistent):
         if raise_it:
             return {**draft, "arguments": [FAIR]}
         step = (self.p.get("script") or {}).get(draft.get("n", len(v.asks))) or {}
+        if self.p.get("only") and not v.sid.endswith(self.p["only"]):
+            step = {}
         arguments = [] if step.get("replace") else list(draft.get("arguments") or [])
         arguments = [*step.get("before", []), *arguments, *step.get("after", [])]
         said = " ".join(m.get("body") or "" for m in v.ours)
