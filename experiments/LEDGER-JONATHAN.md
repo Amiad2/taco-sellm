@@ -47,6 +47,7 @@ Earlier tonight (records: `experiments/P02-ARGUMENTS.md`, `docs/LOG.md`): clause
 | Sun 04:29 | `@8a854c4`, tag `-80.3` | final runner, planner live | **80.3** | P01 .997 P02 .725 P03 .956 P04 .860 P05 .820 P07 .747 P08 .814 P10 .679 P11 .778 P18 .657 |
 | Sun 08:08 | `@a434a55`, tag `-80.3-sunday` | final runner, planner live, dossiers with the Sunday release | **80.3** | every case as at 04:29 |
 | Sun 09:14 | `@6c7d3c4`, tag `-80.3-sunday2` | final runner, planner live, release fixes + `plan_give` | **80.3** | every case as at 04:29; 14 s, 0 refused |
+| Sun 09:20 | `@363b6e6`, tag `-80.3-sunday3` | the same after merging main (Omar's `extract.py` fix; dossiers identical) | **80.3** | every case as at 04:29; 14 s, 0 refused |
 
 ## After the 80.3 run
 
