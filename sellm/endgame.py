@@ -37,6 +37,7 @@ Knobs (all off by default, so `Persistent()` plays exactly like the negotiator):
 """
 
 import math
+import re
 
 from arena_kit.cost import complete_offer
 
@@ -68,8 +69,16 @@ DEFAULTS = dict(
     plan=None,
     plan_timeout=12.0,
     plan_only=False,  # a test: the two trades are triggered by the planner alone, not by the dossier's rules
+    # With the planner: a cost driver the supplier itself blames for its price (its letter says "energy") and that
+    # fell is cited with its larger fall, from its peak of the last twelve months, not over the year. P01: the
+    # foundry's letter blames energy, PPI-D351 -6.1 % since November instead of -3.7 % on the year, 0.969 -> 0.997.
+    # Not for a supplier that gave no such reason: P11 lost its close with the same sentence (Omar's E4).
+    idx_blamed=False,
 )
 CLAUSE_LINE = "With the index clause of the second option the price follows {series} beyond the deadband, so that this risk does not have to be priced in up front."
+IDX_LINE = re.compile(
+    r"^The index (\S+) changed ([+-][\d.]+) % from (\d{4}-\d{2}) to (\d{4}-\d{2}) \((idx:[^,]+), (idx:[^)]+)\)\.$"
+)
 SOFT_GIVE = (
     "We can give you a fixed call-off schedule and a rolling twelve-month forecast, so that you can plan your capacity."
 )
@@ -105,9 +114,17 @@ class Persistent(Negotiator):
                     if llm.configured():
                         quoted = v.filled(v.opening["term_sheets"][0]["terms"])
                         found = planner.voted(
-                            case, v.opening, self.intel(case, v), quoted, timeout_s=self.e["plan_timeout"]
+                            case,
+                            v.opening,
+                            self.intel(case, v),
+                            quoted,
+                            timeout_s=self.e["plan_timeout"],
+                            drivers=self.drivers(case),
                         )
                         for field, w in found.items():
+                            if field == "blames":
+                                log.info("%s %s: it blames %s for its price", case.get("case_id"), v.sid, ", ".join(w))
+                                continue
                             log.info(
                                 '%s %s: it would give price for %s (%s, %d votes) - "%s"',
                                 case.get("case_id"),
@@ -125,6 +142,50 @@ class Persistent(Negotiator):
                     log.warning("%s %s: no plan (%s: %s)", case.get("case_id"), v.sid, type(e).__name__, e)
             self._memo[key] = found
         return self._memo[key]
+
+    def drivers(self, case):
+        """[(series, name)] of the cost drivers of the case's parts, for the planner."""
+        key = (case.get("case_id"), "drivers")
+        if key not in self._memo:
+            out, parts = [], case.get("parts") or []
+            if self.package and parts:
+                try:
+                    with calculator.LOCK:
+                        marks = ",".join("?" * len(parts))
+                        rows = self.package.query(
+                            "select distinct d.series_id as series, s.name as name from cost_drivers d "
+                            f"left join index_series s on s.id = d.series_id where d.part_id in ({marks}) order by 1",
+                            tuple(parts),
+                        )
+                    out = [(r["series"], r["name"] or "") for r in rows]
+                except Exception as e:
+                    log.warning("%s: cost drivers not available (%s: %s)", case.get("case_id"), type(e).__name__, e)
+            self._memo[key] = out
+        return self._memo[key]
+
+    def arguments(self, case, v, views, live, sheet):
+        """The negotiator's argument; an index the supplier blames for its price is cited with its larger fall."""
+        out = super().arguments(case, v, views, live, sheet)
+        if not (out and self.e["idx_blamed"] and self.e["plan"] == "llm" and self.package):
+            return out
+        found = IDX_LINE.match(out[0])
+        if not found or found.group(1) not in (self.wants(case, v).get("blames") or {}):
+            return out
+        series, change, last = found.group(1), float(found.group(2)), found.group(6)
+        try:
+            with calculator.LOCK:
+                ids = self.package.ids(f"idx:{series}@")
+                if last != ids[-1] or len(ids) < 13:
+                    return out
+                peak = max(ids[-13:-1], key=lambda i: self.package.lookup(i)["value"])
+                fall = (self.package.lookup(last)["value"] / self.package.lookup(peak)["value"] - 1) * 100
+        except Exception as e:
+            log.warning("%s: index window not available (%s: %s)", case.get("case_id"), type(e).__name__, e)
+            return out
+        if fall >= change - 0.5:
+            return out
+        months = (peak.split("@", 1)[1], last.split("@", 1)[1])
+        return [f"The index {series} changed {fall:+.1f} % from {months[0]} to {months[1]} ({peak}, {last}).", *out[1:]]
 
     def prepare(self, case, threads):
         """The plans of all suppliers of a case, asked for at once before our first e-mail: in an RFQ
@@ -155,7 +216,9 @@ class Persistent(Negotiator):
     def opening_structure(self, case, v):
         s = super().opening_structure(case, v)
         if self.e["fast_pay"] and "payment_days" in s:
-            asked = (self.wants(case, v).get("payment_days") or {}).get("direction") == "lower"
+            # the planner fills gaps, it does not overrule the dossier: where our data has a cash reading, that decides
+            unread = self.e["plan_only"] or self.cash(case, v) is None
+            asked = unread and (self.wants(case, v).get("payment_days") or {}).get("direction") == "lower"
             ruled = not self.e["plan_only"] and (
                 self.signal(case, v, "cash_short") or self.cash(case, v) in ("medium", "high")
             )

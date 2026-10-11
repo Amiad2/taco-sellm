@@ -33,11 +33,14 @@ How suppliers in this world decide (the organiser's rules):
 - Some terms are worth more to a supplier than they cost the buyer. Being paid faster helps a supplier that is short of cash. A longer contract, a binding volume or an index clause on a raw material is security: with it the supplier no longer has to price that risk into the unit price. A later start date, a longer lead time or a relaxed quality term can free it from a cost.
 - What weighs for a supplier is in its own letters, notes, quote remarks and news. Its stated reason for a price shows what it worries about. Some notes are noise; a general remark is no evidence.
 
-Task: name at most TWO terms this supplier would value, strongest first. Only name a term if a passage of the material shows that the supplier itself cares about it; if nothing does, return no wants. For each, quote that passage word for word.
+Task: name at most TWO terms this supplier would value, strongest first. Only name a term if a passage of the material shows that the supplier itself cares about it; if nothing does, return no wants. For each, quote that passage word for word. Faster payment only if the supplier asked to be paid sooner, offered a discount for it or shows a cash problem; a supplier that is "open" or "flexible" on payment terms can wait, which is the opposite.
+
+Second task: which of the listed COST DRIVERS does the supplier itself name as a reason for its price - in its own letter or quote, in words (energy, wages, copper ...) or by the series' name? Only those it names; none if it gives no reason. Quote the passage.
 
 Answer with JSON only:
 {"reason": "<its stated reason for its price, in a few words>",
  "wants": [{"field": "<one of the negotiable fields>", "option": "<the letter of the option it would value>", "evidence": "<a passage copied word for word from the material>", "because": "<one short sentence>"}],
+ "blames": [{"series": "<the id of a listed cost driver>", "evidence": "<a passage of the supplier's own letter or quote, word for word>"}],
  "note": "<one sentence: the trade to offer>"}"""
 
 GOALS = {
@@ -100,7 +103,7 @@ def material(case, opening, dossier):
     return "\n".join(lines)[:9000]
 
 
-def brief(case, opening, dossier, quoted):
+def brief(case, opening, dossier, quoted, drivers=()):
     b = case["buyer"]
     lines = [
         f"CASE: {case.get('title', '')} ({case.get('type')}; goal {b.get('category_goal')} = {GOALS.get(b.get('category_goal'), '')}).",
@@ -113,7 +116,12 @@ def brief(case, opening, dossier, quoted):
             f"{letter} = {_show(v)}{' (its quote)' if quoted.get(field) == v else ''}" for letter, v in values
         )
         lines.append(f"- {field}: {shown}")
-    lines += ["- unit_price: priced by code, not your task", "", material(case, opening, dossier)]
+    lines += ["- unit_price: priced by code, not your task", ""]
+    if drivers:
+        lines += ["COST DRIVERS OF THE PART (index series our category team assigned):"]
+        lines += [f"- {series}: {name}" for series, name in drivers]
+        lines.append("")
+    lines.append(material(case, opening, dossier))
     return "\n".join(lines)
 
 
@@ -121,20 +129,29 @@ def _norm(text):
     return re.sub(r"[^a-z0-9]+", " ", (text or "").lower()).strip()
 
 
-def check(answer, case, quoted, text):
+def _grounded(evidence, flat):
+    evidence = _norm(evidence)
+    parts = [part for part in re.split(r" \.\.\. | … ", evidence) if len(part) >= 12]
+    return len(evidence) >= 12 and (evidence in flat or (bool(parts) and all(part in flat for part in parts)))
+
+
+def check(answer, case, quoted, text, drivers=()):
     """The model's answer as a plan code may use: every want has a real field, a real option and
-    evidence that stands in the material. Returns {"reason", "note", "wants": [...], "dropped": [...]}."""
+    evidence that stands in the material; every blamed cost driver is one of the part's and has such
+    evidence too. Returns {"reason", "note", "wants": [...], "blames": [...], "dropped": [...]}."""
     opts, flat = options(case, quoted), _norm(text)
     wants, dropped = [], []
+    known, blames = {series for series, _ in drivers}, []
+    for x in (answer.get("blames") or [])[:6]:
+        if isinstance(x, dict) and x.get("series") in known and _grounded(x.get("evidence"), flat):
+            if x["series"] not in [y["series"] for y in blames]:
+                blames.append({"series": x["series"], "evidence": str(x.get("evidence"))[:300]})
     for w in (answer.get("wants") or [])[:2]:
         if not isinstance(w, dict):
             continue
         field, letter = w.get("field"), str(w.get("option") or "").strip().upper()[:1]
         value = next((v for k, v in opts.get(field, []) if k == letter), "?")
-        evidence = _norm(w.get("evidence"))
-        grounded = len(evidence) >= 12 and (
-            evidence in flat or all(part in flat for part in re.split(r" \.\.\. | … ", evidence) if len(part) >= 12)
-        )
+        grounded = _grounded(w.get("evidence"), flat)
         if field not in opts or value == "?":
             dropped.append({**w, "why": "no such field or option"})
         elif not grounded:
@@ -154,15 +171,16 @@ def check(answer, case, quoted, text):
         "reason": str(answer.get("reason") or "")[:120],
         "note": str(answer.get("note") or "")[:300],
         "wants": wants,
+        "blames": blames,
         "dropped": dropped,
     }
 
 
-def plan(case, opening, dossier, quoted, timeout_s=25.0):
+def plan(case, opening, dossier, quoted, timeout_s=25.0, drivers=()):
     """The checked plan, with "seconds"; raises llm.LLMError when there is no usable answer in time."""
-    user = brief(case, opening, dossier, quoted)
+    user = brief(case, opening, dossier, quoted, drivers)
     answer, took = llm.chat_json(SYSTEM, user, timeout_s=timeout_s)
-    return {**check(answer, case, quoted, user), "seconds": round(took, 2)}
+    return {**check(answer, case, quoted, user, drivers), "seconds": round(took, 2)}
 
 
 def direction(field, value, quoted):
@@ -176,9 +194,9 @@ def direction(field, value, quoted):
         return repr(value)
 
 
-def voted(case, opening, dossier, quoted, votes=3, need=2, timeout_s=12.0):
-    """{field: {"direction", "value", "evidence", "votes"}}: the wants named in at least `need` of
-    `votes` calls made at once. The confidence is counted, not asked for. A plan is kept on disk
+def voted(case, opening, dossier, quoted, votes=3, need=2, timeout_s=12.0, drivers=()):
+    """{field: {"direction", "value", "evidence", "votes"}, "blames": {series: {"evidence", "votes"}}}:
+    the wants and the blamed cost drivers named in at least `need` of `votes` calls made at once. The confidence is counted, not asked for. A plan is kept on disk
     per case, supplier and material (runs/logs/plans/), so a resumed or repeated session plays the
     same moves. Never raises: no usable answer in `timeout_s` is an empty plan."""
     import hashlib
@@ -187,7 +205,7 @@ def voted(case, opening, dossier, quoted, votes=3, need=2, timeout_s=12.0):
     from concurrent.futures import ThreadPoolExecutor, wait
     from pathlib import Path
 
-    user = brief(case, opening, dossier, quoted)
+    user = brief(case, opening, dossier, quoted, drivers)
     name = hashlib.sha256((SYSTEM + user + llm.model()).encode()).hexdigest()[:16]
     sid = str((dossier or {}).get("supplier_id") or "supplier").split(":")[-1]
     folder = Path(os.environ.get("SELLM_PLANS") or Path(__file__).resolve().parents[1] / "runs" / "logs" / "plans")
@@ -204,8 +222,11 @@ def voted(case, opening, dossier, quoted, votes=3, need=2, timeout_s=12.0):
     plans = []
     for f in futures:
         if f.done() and not f.exception():
-            plans.append(check(f.result()[0], case, quoted, user))
-    count, out = {}, {}
+            plans.append(check(f.result()[0], case, quoted, user, drivers))
+    count, out, blamed = {}, {}, {}
+    for p in plans:
+        for x in p["blames"]:
+            blamed.setdefault(x["series"], []).append(x)
     for p in plans:
         for w in p["wants"]:
             key = (w["field"], direction(w["field"], w["value"], quoted))
@@ -218,6 +239,11 @@ def voted(case, opening, dossier, quoted, votes=3, need=2, timeout_s=12.0):
                 "evidence": found[0]["evidence"],
                 "votes": len(found),
             }
+    blames = {
+        x: {"evidence": found[0]["evidence"], "votes": len(found)} for x, found in blamed.items() if len(found) >= need
+    }
+    if blames:
+        out["blames"] = blames
     record = {
         "case": case.get("case_id"),
         "supplier": sid,

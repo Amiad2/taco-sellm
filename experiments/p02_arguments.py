@@ -113,6 +113,9 @@ VARIANTS = {
         ],
     ),
     "control": dict(),
+    # the rules as built in: every fallen cost-driver index, one per e-mail (idx_many); the larger fall of an index
+    # the supplier blames (idx_blamed, needs the planner)
+    "agent-idx": dict(knobs=dict(plan="llm", idx_blamed=True, idx_many=3)),
     # a second cost-driver index that fell from its peak (the supplier's quote says it rose 12.3 % in twelve
     # months and is 38 % of its cost), in the second e-mail instead of the fact the supplier dismissed there
     "idx2": dict(

@@ -67,6 +67,8 @@ DEFAULTS = dict(
     writer="template",
     contract="longest",  # where C does not care how long we commit: longest | horizon (the shortest option that covers it)
     idx_recent=None,  # a % (e.g. 2.0): also cite a cost-driver index that fell at least this much from its peak of the last 12 months
+    idx_many=1,  # how many such indices, one per e-mail, largest fall in our cost first. A second series is a new fact to
+    # the arena and to the supplier (Sun 03:05: PPI-C2431 after AS-14404, P18 0.520 -> 0.598; P08 0.549 -> 0.560)
     gate=False,  # leave out a fact the supplier's dossier says it will dismiss (see `dismissed`)
 )
 # Where deals could end, as a share of the supplier's opening price, when no should-cost of its own
@@ -486,7 +488,9 @@ class Negotiator:
             near = [s for c, s in ranked if c <= cheapest * (1 + 1e-4)]  # C does not care: commit longer, stay closer
             best = min(near, key=lambda s: (-(s.get("contract_months") or 0), away(s)))
             covering = [s for s in near if (s.get("contract_months") or 0) >= 12 * b["horizon_years"]]
-            if self.k["contract"] == "horizon" and covering:  # no longer than the horizon: a longer fixed price is a risk it prices
+            if (
+                self.k["contract"] == "horizon" and covering
+            ):  # no longer than the horizon: a longer fixed price is a risk it prices
                 best = min(covering, key=lambda s: (s.get("contract_months") or 0, away(s)))
             if self.cash(case, v) in ("medium", "high"):
                 best = self.payment_trade(case, v, best, price * share)
@@ -636,7 +640,9 @@ class Negotiator:
 
                     # the openings of all threads, as {supplier: [messages]}: one e-mail alone is not a thread
                     # to the overlay, which then saw neither this opening nor the rivals' (until Sat 22:40)
-                    openings = self._memo.get((case.get("case_id"), "openings")) or {v.sid: [v.opening] if v.opening else []}
+                    openings = self._memo.get((case.get("case_id"), "openings")) or {
+                        v.sid: [v.opening] if v.opening else []
+                    }
                     with calculator.LOCK:  # one cache for all cases played at once
                         found = dossier(v.sid, case.get("parts") or [], case, openings) or {}
                 except Exception as e:
@@ -839,8 +845,15 @@ class Negotiator:
         covered at fixed prices ('Material covered until March 2027'). P08's supplier answered the fall of
         AS-14404 with 'that is not our reality' and ended 0.10 higher (0.438 against 0.549). Labour and
         energy series are not material. Only with `idx_recent`, so the agent without it is unchanged."""
-        if not self.k["idx_recent"] or ref.split(":", 1)[-1].startswith(("LCI-", "PPI-D35")):
+        series = ref.split(":", 1)[-1].split("@", 1)[0]
+        if not self.k["idx_recent"] or series.startswith(("LCI-", "PPI-D35")):
             return False
+        if int(self.k["idx_many"] or 1) > 1 and series.startswith("PPI-"):
+            # what its hedge covers is the material its clause is on: the same supplier took the fall of the
+            # producer-price index of its other cost driver ("adjusted our calculation accordingly", P08 Sun 03:05)
+            clause = {o.get("series") for o in case.get("term_options", {}).get("index_clause") or [] if o}
+            if series not in clause:
+                return False
         return any(sig.get("kind") == "material_hedged" for sig in self.intel(case, v).get("signals") or [])
 
     def index_claims(self, case):
@@ -890,7 +903,9 @@ class Negotiator:
                                         f"The index {r['series_id']} changed {change:+.1f} % from {months[0]} to {months[1]} ({peak}, {b}).",
                                     )
                                 )
-                    out += [(b, sentence) for _, b, sentence in sorted(recent)[:1]]  # the largest fall in our cost; one, a second may count as duplicate
+                    out += [
+                        (b, sentence) for _, b, sentence in sorted(recent)[: max(1, int(self.k["idx_many"] or 1))]
+                    ]  # the largest fall in our cost first
             except Exception:  # an argument less, never a lost move
                 log.warning("%s: index arguments not available", case.get("case_id"))
         self._memo[key] = out
