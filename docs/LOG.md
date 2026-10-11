@@ -926,3 +926,10 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - R2, omars_branch@fdb262e, --turns (one loop per case, the agent decides without focus and picks the thread, fewest of our messages first, as the kit's play(); the runner keeps cap, resume, deadline, holds): P05 0.820, the kit run's e-mails and prices exactly, 0 timeouts, 3.3 s for the case. Replay https://arena.tacto.ai/replay/b6c71e626f579a83
 - omars_branch@f60a212: this is the default of python -m sellm.runner (--per-thread restores the old loops). Single-thread cases play the same moves either way. 12 runner tests green (fake arena: at most one POST in flight; an RFQ in turns mode reaches every bidder and ends).
 - For the final (Amiad, Jonathan): whichever version is merged, run the final runner in this mode or the kit runner - not one loop per thread. The change is in sellm/runner.py only and merges cleanly into any branch.
+
+## 2026-10-11 02:29 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] P08 and P18 with the index clause already in our first ask (4 practice sessions, jonathans_branch@0400b0b): worse than asking a fixed price first**
+- Idea from the offline planner (sellm/planner.py on jonathans_branch): both suppliers' letters propose an alloy-surcharge clause, so offer it at once. experiments/p02_arguments.py --case P08|P18 --variants clause0 clause5; reference = the full run of jonathans_branch@67001e7.
+- P08: clause with deadband 0 first 0.527 (5.37; reference 0.549 at 5.35), deadband 5 first 0.484 (5.53). P18: deadband 5 first 0.401 (5.60; reference 0.467), deadband 0 first 0.386 (5.50).
+- Reading: where the supplier itself demands the clause, taking it later is a move it pays for ('we appreciate your flexibility in accepting the AS-14404 index clause'); offered up front it is free. The clause as our offer pays only where the supplier quotes a fixed price and did not ask for one (P02, relationship term). Sessions 0f3250ac, f8191a5c, 1847ba7c, 80380e16. Jonathan's budget: 26 of 40 left; team quota 224 of 450.
+- pull-runs also fetched four sessions of Omar's E3 (d25922d1, 93bdda16, 55368774, 5a0f11a7); labelled as in his ledger.
