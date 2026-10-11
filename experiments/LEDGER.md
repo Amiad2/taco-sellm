@@ -77,7 +77,8 @@ hypothesis is marked as one.
 | Sun 03:05 | V1 full run (runner, parallel 10) | P18 | 1 | 0.520 | accepted | omars_branch@39489d2 | runner log 20261011-030544 |
 | Sun 03:05 | V1 full run (runner, parallel 10) | P07 | 0 (never opened) | 0 | 429 open sessions | omars_branch@39489d2 | - |
 | Sun 03:05 | V1 full run (runner, parallel 10) | P10 | 0 (never opened) | 0 | 429 open sessions | omars_branch@39489d2 | - |
-**Total practice sessions (runs) so far: 25** (E1 1, E2 2, R1 1, R2 1, E3 4, C1 1, E4 4, E5 3, V1 8 - P07 and P10 never opened; plus 2 free sandbox sessions).
 | Sun 02:51 | E5 | P07 | 1 | 0.74 | accepted | omars_branch@7175c51 | 31d91a66390b80f0 |
 | Sun 02:51 | E5 | P08 | 1 | 0.515 | accepted | omars_branch@7175c51 | 41c3399c6ba0f2af |
 | Sun 02:52 | E5 | P03 | 1 | 0.923 | accepted | omars_branch@7175c51 | 55909281584c21a0 |
+
+**Total practice sessions (runs) so far: 25** (E1 1, E2 2, R1 1, R2 1, E3 4, C1 1, E4 4, E5 3, V1 8 - P07 and P10 never opened; plus 2 free sandbox sessions).
