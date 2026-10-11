@@ -71,6 +71,7 @@ class Limits:
     idle: float = 2.0  # a loop with nothing to send waits this long (an LLM agent is asked again after it)
     poll: float = 5.0  # the final's case list is read this often
     serial: bool = False  # at most one message of a session on its way to the arena (see CaseRunner.post)
+    turns: bool = False  # one loop for all threads, the agent picks the thread (the kit's play() order), see run()
 
 
 def ended(result, reason):
@@ -448,7 +449,11 @@ class CaseRunner:
             if self.open():
                 self.heard = {s: self.heard.get(s, time.monotonic()) for s in self.threads}
                 self.replied = {s: self.replied.get(s, time.monotonic()) for s in self.threads}
-                loops = list(self.threads) if self.takes_focus else [None]
+                # `turns`: the agent chooses whom to write next, one message at a time, as in the kit's play().
+                # In P05 that order (fewest of our messages first) gave 0.820 in five sessions; one loop per
+                # thread gave 0.665 (timeouts at the arena) and 0.735 with `serial` (no timeout, but the
+                # rivals' prices stood at other moments when each ask was priced)
+                loops = list(self.threads) if self.takes_focus and not self.lim.turns else [None]
                 with ThreadPoolExecutor(max_workers=len(loops), thread_name_prefix=f"thread-{self.case_id}") as pool:
                     for f in [pool.submit(self.loop, s) for s in loops]:
                         try:
@@ -637,6 +642,7 @@ def main(argv=None):
     ap.add_argument("--data", default=os.environ.get("ARENA_DATA", "data/package"))
     ap.add_argument("--label", default="", help="practice/sandbox: label the sessions for scripts/pull-runs")
     ap.add_argument("--serial", action="store_true", help="one message per session in flight (RFQ timeouts)")
+    ap.add_argument("--turns", action="store_true", help="one loop per case, the agent picks the thread (kit order)")
     a = ap.parse_args(argv)
     if a.set == "final":
         pull_first(final=True)  # the final runs the commit that is checked out: report only
@@ -661,7 +667,7 @@ def main(argv=None):
                     row["end_reason"], row["score"] or 0.0, row["seconds"], row["stats"].get("rereads"),
                     row["stats"].get("refused"), row["stats"].get("holds"), row["stats"].get("fallbacks"))  # fmt: skip
 
-    lim = Limits(serial=a.serial)
+    lim = Limits(serial=a.serial or a.turns, turns=a.turns)
     if a.set == "final":
         rows = list(run_final(client, new_agent, a.waves, min(a.parallel, 10), limits=lim, on_row=on_row).values())
     else:

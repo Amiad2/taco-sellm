@@ -107,6 +107,7 @@
  "56a5429b4ce2918c": "ab nego-template @ebcdcd6+local",
  "5a345ea1032b5173": "P02 dials a3 @6e57595",
  "5a7f3da375c619a5": "runner v1.1, sellm (negotiator v1.1 @2dadddb)",
+ "5aa402cdd13ddb6b": "OMAR R1 runner --serial, sellm reference knobs, omars_branch@650e6e8",
  "5bbbe16ce04d1bc8": "runner v1.1 (clock guard), sellm (negotiator v1.1)",
  "5c8da0c8ac6eced3": "PRICE-PATH horizon_6 {\"horizon\": 6} (Omar, sellm.agent + test switches)",
  "5da6804eb45f6e84": "EVAL bank: a1 + argument bank @19b339f (claude eval session)",

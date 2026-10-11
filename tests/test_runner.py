@@ -184,6 +184,16 @@ def test_serial_keeps_one_message_of_a_session_in_flight():
     assert arena.most == 1
 
 
+def test_turns_plays_an_rfq_in_the_agents_order_one_message_at_a_time():
+    """`turns`: one loop for the case, the agent (without focus) picks each thread, as the kit's play()."""
+    pkg = _package()
+    arena = FakeArena([_scenario("P05")], pkg.facts)
+    row = runner.play_case(arena, "case:P05", _agent(pkg), limits=dataclasses.replace(FAST, turns=True, serial=True))
+    assert row["crash"] is None and row["end_reason"] in ("accepted", "walked_away")
+    sends = [c[2] for c in arena.calls if c[0] == "send" and c[3] == "e-mail"]
+    assert len(set(sends)) == 3, "every bidder heard from us"
+
+
 def test_a_slow_agent_gets_a_holding_email_not_a_lost_thread():
     pkg = _package()
     inner = _agent(pkg)
