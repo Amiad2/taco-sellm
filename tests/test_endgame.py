@@ -153,6 +153,7 @@ def test_the_agent_plays_the_rules_that_were_measured(package):
         "idx_recent": 2.0,
         "idx_many": 3,
         "idx_blamed": True,
+        "no_lowball": 0.93,
     }
     agent = the_agent(package)
     assert isinstance(agent, Persistent) and agent.e["past_target"] and agent.e["fast_pay"] and agent.e["clause_offer"]
@@ -265,3 +266,26 @@ def test_the_clause_at_our_price_is_accepted_once_it_agrees(package):
         "type": "accept",
         "term_sheet_id": messages[agreed]["term_sheets"][0]["term_sheet_id"],
     }
+
+
+def test_no_lowball_to_a_capacity_tight_supplier(package):
+    """P10: its seal maker allocates volume; a first ask below about 93 % of its price got its final offer at once."""
+    if package is None:
+        pytest.skip("needs the data package")
+    rec = record("P10")
+    case = rec["case"]
+    sid = case["suppliers"][0]
+    threads = {sid: rec["threads"][sid]["messages"][:1]}
+    opening = threads[sid][0]["term_sheets"][0]["terms"]["unit_price"]
+    from sellm.agent import KNOBS
+
+    asked = make_persistent(package, **KNOBS).decide(case, threads)["message"]["term_sheets"][0]["terms"]["unit_price"]
+    low = make_persistent(package, **{**KNOBS, "no_lowball": None}).decide(case, threads)["message"]["term_sheets"][0]
+    assert asked == round(opening * 0.93, 2) and low["terms"]["unit_price"] < asked
+    for case_id in ("P01", "P02", "P04", "P08", "P18"):  # no capacity signal: the first ask is not touched
+        rec = record(case_id)
+        case = rec["case"]
+        sid = case["suppliers"][0]
+        threads = {sid: rec["threads"][sid]["messages"][:1]}
+        with_rule = make_persistent(package, **KNOBS).decide(case, threads)
+        assert with_rule == make_persistent(package, **{**KNOBS, "no_lowball": None}).decide(case, threads), case_id

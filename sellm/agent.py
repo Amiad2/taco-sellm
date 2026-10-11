@@ -26,6 +26,9 @@ KNOBS = dict(
     # With the planner (SELLM_PLAN=llm): an index the supplier's own letter blames for its price is cited with its
     # larger fall, from its twelve-month peak (P01: energy, -6.1 % instead of -3.7 %, 0.969 -> 0.997). J3
     idx_blamed=True,
+    # The first ask to a supplier the dossier calls capacity-tight is no lower than 93 % of its opening price: P10's
+    # seal maker answered a lower first ask with its final offer at once (0.647 -> 0.679; Amiad's rule, J4)
+    no_lowball=0.93,
 )
 
 # The best Calculator variant of the first lab search (runs/lab/20261010-1632-search-first/report.md,
