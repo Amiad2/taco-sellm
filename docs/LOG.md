@@ -1181,3 +1181,9 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 **[run] jonathans_branch@362bf0f: all ten practice cases through the final runner with SELLM_PLAN=llm - mean 81.1 (twice: @f1c3fb9 at 09:57 and @362bf0f at 10:11)**
 - P01 0.997, P02 0.725, P03 0.956, P04 0.860, P05 0.820, P07 0.747, P08 0.814, P10 0.679, P11 0.778, P18 0.729. 0 crashes, 0 refused moves. Tags best-jonathans_branch-81.1 (f1c3fb9) and best-jonathans_branch-81.1-head (fd45d53: the code of @362bf0f, i.e. the same agent plus the switch near, off; 228 tests pass).
 - The 80.3 agent stays at tag best-jonathans_branch-80.3-sunday3 (363b6e6). Quota: 213 of 600 left.
+
+## 2026-10-11 10:32 CEST · Jonathan @ dhcp-10-177-2-129
+**[run] jonathans_branch@abf71c0 (main merged in, code of @362bf0f): ten practice cases through the final runner - 81.1 a third time; one more test rejected**
+- P01 0.997, P02 0.725, P03 0.956, P04 0.860, P05 0.820, P07 0.747, P08 0.814, P10 0.679, P11 0.778, P18 0.729; 0 crashes, 0 refused moves, 21 s (10:22). The arena answered slowly at that time: /health 3 to 5 s per call, a git push hung for five minutes.
+- P18, a second order-history fact on two order lines not yet cited as the fourth argument: duplicate (the order history of a part counts once), final offer, 0.721 against 0.729 (session 77de68e306546227). experiments/LEDGER-JONATHAN.md J22.
+- The newest measured code is jonathans_branch at tag best-jonathans_branch-81.1-head; later commits on the branch change experiments/ only. Quota: 193 of 600 left.
