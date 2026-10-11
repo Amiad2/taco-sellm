@@ -33,3 +33,15 @@ Earlier tonight (records: `experiments/P02-ARGUMENTS.md`, `docs/LOG.md`): clause
 | J8 | The order history is dismissed because of what it says ("5.75 two years ago, 5.84 today"), not because it is history: the pair around the supplier's last price jump is an argument | scripted: third e-mail cites the last order at the old price and the latest one | P18, P08 | **0.657** (0.598): "verified the prices from June and September ... we can reduce our price", then agreed at 5.21. **0.659** (0.637): "took it into account", 5.28 instead of 5.31 | built into `sellm/claims.py` (`_po`): where the price rose >= 2 % within twelve months | `@e381ed8`, b8f073fc4b476df2, 24b3c399db70b112 |
 | J9 | With the rule in the bank the fact comes earlier in P08 and exists for P03 for the first time | `--agent sellm` as it is (`agent`) | P08, P03, P18 | **P08 0.814** (0.637): second e-mail "5.17 in 2025-12, 5.45 in 2026-09" - it went from 5.52 to 5.17 at once, deal 5.11. **P03 0.956** (0.923): 430.71. P18 0.657 as scripted | adopted | `@e303538`, 3778b21e05901271, 26d30dbdbb5f5c1b, 622e183a563f67a0 |
 | - | A cash-short supplier whose payment days are fixed says "faster payment would help us more than anything" in every e-mail: promise payment on the due date (we pay it 8.8 days late) | sentence after its request (`ontime`) | P11 | 0.710 (0.778): the same ladder 46.5, 46.0, 45.5 and a final offer at 45.5; the close at 45.09 of the reference path did not come | rejected: words do not buy price; P11's 0.778 hangs on one answer | `@539670e`, 4179c48e07748d3a |
+| J10 | In an RFQ every message costs the other threads their clock (the arena answers a session's messages one after another); a bidder that cannot win should not be asked | `drop_behind=0.08`: not asked again once it has answered two asks and still costs 8 % more than the best other offer | P05 | the lost state replayed: accept 28.00 instead of a fourth ask to the bidder at 33.00; live 0.820, 0.820 (12 s each); in the full run 0.820 (13 s; before 203 s and 243 s with 0.872 / 0.717) | adopted | `@c4efa65`, 78bd2811a77e6731, b33e92e35279093d |
+
+## Full runs (the versions to go back to)
+
+| When | Version | How | Mean | Per case |
+|---|---|---|---|---|
+| Sun 02:25 | `jonathans_branch@67001e7`, tag `best-jonathans_branch-74.9` | kit runner, no LLM | 74.9 | P01 .969 P02 .725 P03 .923 P04 .860 P05 .820 P07 .747 P08 .549 P10 .647 P11 .778 P18 .467 |
+| Sun 02:38 | `@b7b279e`, tag `-75.4` | kit runner, planner live | 75.4 | as above, P18 .520 (Omar's recent index fall) |
+| Sun 03:12 | `@0eaf946`, tag `-77.3` | kit runner, planner live (P10, P11 singly after a 429) | 77.3 | P01 .997 P08 .637 P18 .598 |
+| Sun 04:10 | `@79c2d0a`, tag `-78.2` | final runner, 10 in parallel, planner live | 78.2 | P10 .679, P05 .872 |
+| Sun 04:25 | `@2caef7f`, tag `-79.3` | final runner, planner live | 79.3 | P03 .956 P08 .814 P18 .657, P05 .717 (a bidder timed out) |
+| Sun 04:29 | `@8a854c4`, tag `-80.3` | final runner, planner live | **80.3** | P01 .997 P02 .725 P03 .956 P04 .860 P05 .820 P07 .747 P08 .814 P10 .679 P11 .778 P18 .657 |
