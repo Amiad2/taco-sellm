@@ -1116,3 +1116,25 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 ## 2026-10-11 08:59 CEST · Amiad @ fedora
 **[decision] Amiad withdraws the 03:45 proposal to play sellm2 in the final: jonathans_branch measured 80.3 since (sellm2 76.4)**
 - sellm2 stays on amiads_branch as a measured fallback (python -m sellm2; 40 tests, lab stress PASS). No merge into main from amiads_branch is proposed.
+
+## 2026-10-11 09:16 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[finding] The Sunday release cannot be measured on practice: practice stays on package v1 (brief/api.md), a release ID cited there is contradicted**
+- brief/api.md, GET /v1/data: 'Hidden cases may cite them; practice cases stay on package v1.' Checked with one session: P11, the news 'Odlewnia Kalwisz files for insolvency' (news:20261006-S1) as the third fact -> claim result contradicted, 'I don't know where you read about us filing for insolvency, but that news is completely fake', no further step: 0.626 against 0.778 (session d3f24a1fb9820b34, jonathans_branch@3b3df9f, scripted probe).
+- So: never test release content on practice, and do not read a practice score as evidence for or against a release rule. The kit's DataPackage merges the release into its facts for every case, so an agent that cites whatever lookup() knows will be contradicted on practice. --agent sellm cites no release ID on the ten hosted cases (full run unchanged).
+- P05, the bidder that wrote on 5 October (short-time work, asks payment within 10 days), told in words that we read it, with our 14 days: 28.50 instead of 28.00, 0.769 against 0.820 (session 4e944b1d9464ff89). Rejected: the payment term does the work.
+- From the recorded sessions: news about the supplier that favours the buyer is a fact that moves - 'looks for new customers' (free_capacity) cited to 70250 was verified and followed by a step of 0.50 in 8 of 8 sessions. In the final the release's news of that kind (70540: semiconductor supply back to normal; 70350: credit insurer withdraws cover) is cited the same way, late, after the data facts; the insolvency of 70140 is not cited (sensitive).
+- experiments/LEDGER-JONATHAN.md J13, J14 on jonathans_branch. Quota: 247 of 600 left.
+
+## 2026-10-11 09:16 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[change] jonathans_branch@6c7d3c4: hidden cases triggered by a release letter are read correctly; a supplier that names call-off planning is offered a schedule**
+- Found offline, with the eight suppliers of the release in invented cases (sellm/lab/invent.py, 48 negotiations, no crash) and with practice case files whose trigger_doc was replaced by a release document:
+- 1. sellm/intel/overlay.py: a case's trigger letter was read as a signal for every supplier of the case. With doc:20261005-70250-S2 as the trigger of an RFQ all three bidders became cash_short and would have been offered 14 days. Now a letter speaks for its writer, our own memo for nobody, an RFQ text for every bidder as before. Test in tests/test_intel.py.
+- 2. sellm/intel/assemble.py: empty cells of release rows are None (the same fix Omar made in extract.py on main; both stay).
+- 3. New dossier signal wants_planning ('open to discuss ... call-off planning': the letters of 70510 and 70650, both of which rule out price reductions) and knob plan_give=True in sellm/agent.py: such a supplier is offered a fixed call-off schedule and a rolling forecast in the first e-mail (the sentence of soft_give, measured harmless on P04 and P18 on Saturday). P02 with it: 0.725 as before, its reasons: 'We appreciate your constructive proposal and the provision of a rolling twelve-month forecast for our capacity planning' (session c5df08dc91c18229, jonathans_branch@e658273 with the knob set).
+- Not changed, checked: cash-short suppliers of the release (70250, 70350, 70140) are asked the fastest payment, list-price ones (70510, 70650, 70540) the longest; the steel trader that bought forward (70720) hears no steel index; the noise item (70610) and the market item are never cited.
+- The lab stress test reports one refused accept in an invented RFQ (X07-083, parallel mode; already there at 04:33): the agent accepts an offer ID a timeout has replaced. sellm/runner.py re-reads the thread before every accept, so the final runner is not affected; the kit's play() would be.
+
+## 2026-10-11 09:16 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] jonathans_branch@6c7d3c4: all ten practice cases through the final runner with SELLM_PLAN=llm - mean 80.3, every case as before**
+- P01 0.997, P02 0.725, P03 0.956, P04 0.860, P05 0.820, P07 0.747, P08 0.814, P10 0.679, P11 0.778, P18 0.657. 0 crashes, 0 refused moves, 14 s. Tag best-jonathans_branch-80.3-sunday2. Sessions labelled 'FULL sunday2 plan_give jonathans_branch@6c7d3c4'.
+- Command: SELLM_PLAN=llm SELLM_MODEL=gpt-6-sol uv run python -m sellm.runner --set practice --cases all --parallel 10 --agent sellm
