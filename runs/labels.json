@@ -343,6 +343,7 @@
  "f090da7948c826f6": "PERSIST T4a a supplier that wants volume hears the forecast first {\"signal_facts\": true}",
  "f137ed9ee57ca253": "kit naive (test of pull-first)",
  "f387b4ae1daf4dfa": "runner v1, sellm (negotiator v1.1)",
+ "f619da40ff4745fe": "P08 ARG agent-idx jonathans_branch@8600f3f",
  "f731bcdeb7497fb9": "P02 ARG volume @a00444a",
  "f8191a5cca47c29c": "P08 ARG clause5 jonathans_branch@0400b0b",
  "f8ee381f24b016da": "probe h8-low",
