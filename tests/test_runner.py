@@ -260,6 +260,32 @@ def test_a_thread_the_agent_leaves_waiting_gets_a_holding_email_before_its_clock
     assert any("while the agent works elsewhere" in n for n in row["notes"])
 
 
+def test_turns_holds_a_bidder_left_waiting_while_it_writes_to_the_others():
+    """One loop per case: the agent keeps writing to one bidder while replies are slow; the others get a
+    holding e-mail before their 60 s run out (here 0.6 s), at most max_holds times each."""
+    pkg = _package()
+
+    class Fixated:
+        def __init__(self):
+            self.inner = _agent(pkg)
+
+        def decide(self, case, threads, focus=None):
+            first = sorted(threads)[0]
+            return self.inner.decide(case, threads, focus=first)
+
+    class Slow(FakeArena):
+        def send_message(self, sid, sup, message):
+            time.sleep(0.3)  # every reply takes a while, as under load
+            return super().send_message(sid, sup, message)
+
+    arena = Slow([_scenario("P05")], pkg.facts)
+    row = runner.play_case(arena, "case:P05", Fixated(), limits=dataclasses.replace(FAST, turns=True, serial=True))
+    assert row["crash"] is None and row["stats"]["clock_holds"] >= 1
+    first = sorted(arena.sessions[row["session_id"]].threads)[0]
+    held = [c[2] for c in arena.calls if c[0] == "send" and c[3] == "e-mail" and c[2] != first]
+    assert held and all(held.count(s) <= FAST.max_holds for s in set(held))
+
+
 def test_an_attachment_held_behind_another_reply_does_not_stop_the_other_threads():
     """Practice P05: the arena answered an attachment only once another bidder's pending reply was
     written (37-61 s); the runner held the case lock meanwhile and a bidder timed out. Here every

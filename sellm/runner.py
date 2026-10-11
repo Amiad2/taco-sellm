@@ -385,6 +385,12 @@ class CaseRunner:
                     decision = None
             elif sup is not None and target != sup:
                 decision = None  # a move for another thread: its own loop sends it
+            elif sup is None and len(self.threads) > 1:
+                # one loop per case: while it writes to one bidder, a bidder it leaves waiting (at its final
+                # offer, say) must not run out of its 60 s - with slow replies under load it could
+                for other in list(self.threads):
+                    if other != target and not self.done.is_set():
+                        self.guard_clock(other)
             if decision is None:
                 if any([self.guard_clock(s) for s in ([sup] if sup is not None else list(self.threads))]):
                     continue
