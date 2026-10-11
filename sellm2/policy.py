@@ -376,6 +376,12 @@ class Policy:
         else:
             price = last["unit_price"]
         same = last is not None and strip(last) == s
+        if same and quoted is not None and self.k["stall_gap"] and v.status == "open" and self.stalled(cm, v, s):
+            # A supplier with a fixed list price that repeats its price does not walk down our ladder
+            # (P04 held 4.94 against 4.54/4.62/4.74, P03 432.14 for five rounds) and says final_offer at
+            # that price. Asking just below it costs nothing more and may be taken (P04: one cent is 0.14).
+            price = max(price, quoted * (1 - self.k["stall_gap"]))
+            ceiling = max(ceiling, price)
         price = min(price, ceiling)
         if same:
             price = max(price, last["unit_price"])
@@ -399,6 +405,14 @@ class Policy:
                 enough = False  # it still moves and our estimate of its cost may be high: one more ask
         sheet = complete_offer(cm.case, {**s, "unit_price": price})
         return {"sheet": sheet, "capped": capped, "enough": enough, "target": aim["target"], "structure": s}
+
+    def stalled(self, cm, v, s):
+        """Its last two prices on structure `s` are the same, and its list price is fixed (dossier)."""
+        if self.brief(cm, v).signal("list_price_fixed") < 2:
+            return False
+        prices = [v.filled(m["term_sheets"][0]["terms"]) for m in v.theirs if m.get("term_sheets")]
+        prices = [t["unit_price"] for t in prices if strip(t) == s and t.get("unit_price") is not None]
+        return len(prices) >= 2 and abs(prices[-1] - prices[-2]) < 0.005
 
     def low_target(self, cm, v):
         """Where C would be lowest if its full cost were `estimate_error` lower than we think."""

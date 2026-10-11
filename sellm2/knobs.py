@@ -13,7 +13,8 @@ KNOBS = dict(
     fast_rate=0.15,  # a supplier whose money costs this much gets the fastest payment (job shops: 17-35 %)
     past_target=True,  # relationship cases: keep asking past our target while it still moves (P01 0.915 -> 0.953, D01 +0.026)
     estimate_error=0.05,  # ... down to the target of a cost estimate this much lower
-    max_holds=2,  # holding e-mails per waiting RFQ thread
+    max_holds=2,
+    stall_gap=0.002,  # a fixed-list-price supplier that repeats its price: ask this far below it (P04 one cent = 0.14)  # holding e-mails per waiting RFQ thread
     # -- structure -------------------------------------------------------------------------------
     lever_prices=True,  # price lead time, ppm and deadband at what suppliers charged for them (P10, P11, P08, P18)
     clause_offer=True,  # P02 0.531 -> 0.725: the index clause as option B at the C-minimal price
