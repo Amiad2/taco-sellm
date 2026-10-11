@@ -113,6 +113,24 @@ VARIANTS = {
         ],
     ),
     "control": dict(),
+    # P07 (a kit of four parts, three of them bought from this supplier today): the agent runs out of facts after
+    # two e-mails and the third, without one, gets the final offer. The brief counts order lines of different
+    # parts as separate arguments.
+    "po-parts": dict(
+        knobs=dict(plan="llm"),
+        script={
+            2: {
+                "after": [
+                    "We ordered from you at EUR 12.46 per 100 units in 2024-10 and at EUR 12.46 per 100 units in 2026-09 (po:4500011549-10, po:4500014475-10)."
+                ]
+            },
+            3: {
+                "after": [
+                    "We ordered from you at EUR 4.91 per 100 units in 2024-10 and at EUR 4.91 per 100 units in 2026-09 (po:4500011556-10, po:4500014466-10)."
+                ]
+            },
+        },
+    ),
     # P18's supplier lowers its price 0.10 for every 30 days it is paid sooner (its own two-sheet answers); the dossier
     # reads it as relaxed about cash, so we ask 90 days
     "pay30": dict(structure={"payment_days": 30}, knobs=dict(plan="llm")),
