@@ -141,14 +141,14 @@ def test_creep_never_steps_further_than_its_share_of_the_gap(package):
     assert checked >= 10
 
 
-def test_the_agent_plays_the_two_rules_that_were_measured(package):
-    """`--agent sellm`: past the relationship target, and fast payment for a supplier short of cash."""
+def test_the_agent_plays_the_rules_that_were_measured(package):
+    """`--agent sellm`: past the relationship target, fast payment for a supplier short of cash, the clause offer."""
     from sellm.agent import KNOBS
     from sellm.agent import make_agent as the_agent
 
-    assert KNOBS == {"past_target": True, "fast_pay": True}
+    assert KNOBS == {"past_target": True, "fast_pay": True, "clause_offer": True}
     agent = the_agent(package)
-    assert isinstance(agent, Persistent) and agent.e["past_target"] and agent.e["fast_pay"]
+    assert isinstance(agent, Persistent) and agent.e["past_target"] and agent.e["fast_pay"] and agent.e["clause_offer"]
     assert not any(agent.e[k] for k in ("push_final", "pay_probe", "signal_facts", "soft_give", "creep", "zone"))
     if package is None:
         return

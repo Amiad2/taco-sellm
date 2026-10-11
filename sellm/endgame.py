@@ -102,13 +102,21 @@ class Persistent(Negotiator):
     # -- security instead of price: the index clause (experiments/P02-ARGUMENTS.md) -------------------
     def clause_case(self, case, v):
         """Our estimate of the supplier where the clause offer applies, else None: a relationship term,
-        an index clause to negotiate, and an opening that quotes a fixed price."""
+        an index clause to negotiate, an opening that quotes a fixed price - and a should-cost of its
+        own plant that leaves that price no more than the sustainable margin. Then a fixed price has
+        no room left by our own data, and the cost we price the clause with is the highest its own
+        quote allows: an estimate that is too low would make us squeeze it without noticing, because
+        with a clause its price no longer stops at its cost."""
         if not self.e["clause_offer"] or "index_clause" not in case.get("negotiable", ()) or not v.opening:
             return None
         opening = v.filled(v.opening["term_sheets"][0]["terms"])
         if opening.get("unit_price") is None or opening.get("index_clause"):
             return None
-        return self.estimate(case, v)
+        estimate, own = self.estimate(case, v), self.should_cost(case, v.sid)
+        if not estimate or not own:
+            return None
+        ceiling = self.value(case, v, opening) * (1 - case["buyer"]["sustainable_margin_pct"] / 100)
+        return estimate if own[1] >= ceiling * (1 - 1e-9) else None
 
     def clause_price(self, case, v, s):
         """The price on structure `s` where our total cost is lowest, the relationship term priced with
