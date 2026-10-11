@@ -1112,3 +1112,7 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Jonathan (08:08, jonathans_branch@a434a55) and Omar (08:13, main@d10fd07) wrote the same four rules for the release in parallel. To keep the final merge free of conflicts main now carries his signals.py and his test counts unchanged; the dossiers this builds are byte-identical to Omar's (check identical, verify PASS, 200 tests green).
 - What main adds and his branch lacks: sellm/intel/extract.py reads an empty field of the release CSVs as None. Without it every new letter (70250, 70510, 70650, 70720) carries a price_claim 'Letter asks  % from .' - in jonathans_branch's dossiers today too. No rule reads price_claim, but profile_text ('price claim (1)') goes to the LLM planner. Plus one test (test_the_sunday_release_is_read_by_its_wording).
 - For the branch that goes to main: git merge main; the conflicts are in sellm/dossiers only - take either side, then uv run python -m sellm.intel build, check, verify, pytest.
+
+## 2026-10-11 08:59 CEST · Amiad @ fedora
+**[decision] Amiad withdraws the 03:45 proposal to play sellm2 in the final: jonathans_branch measured 80.3 since (sellm2 76.4)**
+- sellm2 stays on amiads_branch as a measured fallback (python -m sellm2; 40 tests, lab stress PASS). No merge into main from amiads_branch is proposed.
