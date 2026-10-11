@@ -49,6 +49,7 @@ Earlier tonight (records: `experiments/P02-ARGUMENTS.md`, `docs/LOG.md`): clause
 | Sun 09:14 | `@6c7d3c4`, tag `-80.3-sunday2` | final runner, planner live, release fixes + `plan_give` | **80.3** | every case as at 04:29; 14 s, 0 refused |
 | Sun 09:20 | `@363b6e6`, tag `-80.3-sunday3` | the same after merging main (Omar's `extract.py` fix; dossiers identical) | **80.3** | every case as at 04:29; 14 s, 0 refused |
 | Sun 09:57 | `@f1c3fb9`, tag `-81.1` | final runner, planner live, `hold_fixed` | **81.1** | P18 .729, the other nine as at 04:29; 0 refused |
+| Sun 10:11, 10:22 | `@362bf0f`, `@abf71c0` (the same code, main merged in), tag `-81.1-head` | final runner, planner live | **81.1** twice | as at 09:57 |
 
 ## After the 80.3 run
 
@@ -88,4 +89,5 @@ a fixed price); P10 pays 14 days of late delivery; the rest is price.
 | J19 | P07 gets its final offer because our third ask is far below its price (5.12 against 5.48) | `near=0.045` / `0.03`: third ask 5.23 / 5.32 | P07 | 0.740, 0.747 (0.747): final offer at the third message either way | rejected (`near` stays off). What kept it open a round longer on Saturday was a first ask near 5.00, which costs P11 and P18 | 1965a1710d24cb21, f90ab79149f0bd8c |
 | J20 | P10 says its last word after our second message: a second ask close to its sheet is agreed to (as suppliers agree to asks within about 1.5 % of their offer) | scripted second ask 30.70 / 31.00 / 31.30 instead of 30.30 | P10 | 0.679 three times: final offer 31.50 whatever we ask | rejected: 31.50 is where it stops | 0f5a86e4c7e4998b, 656aef7fbe80d755, a109045c4de4058b |
 | J21 | A term it has to refuse brings a lower price (as the fixed price did on P18): a chargeback of EUR 500 kept in every ask | scripted | P11 | 0.398 (0.778): it priced the chargeback (48.00, 47.50) and stayed there | rejected | 954dfafbc0c9a6b3 |
+| J22 | With `hold_fixed` P18's supplier gives 0.20 per fact and has three: a second order-history fact on two order lines not yet cited (last January's price cut) is a fourth | scripted fourth e-mail | P18 | 0.721 (0.729): `duplicate` - the order history of a part counts once, whatever lines are cited - and its final offer | rejected | 77de68e306546227 |
 
