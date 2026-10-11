@@ -3,7 +3,7 @@
  "case_id": "case:P05",
  "set": "practice",
  "created_at": "2026-10-11T04:21:08+02:00",
- "label": null,
+ "label": "sellm + index rules + price jump + no lowball + LLM planner (gpt-6-sol, live), final runner, jonathans_branch@2caef7f",
  "replay": "https://arena.tacto.ai/replay/8e079c889aa96c91",
  "case": {
   "case_id": "case:P05",
