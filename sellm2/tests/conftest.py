@@ -1,3 +1,4 @@
+# ruff: noqa: E501  (long test data lines)
 import glob
 import json
 from pathlib import Path

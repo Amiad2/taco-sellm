@@ -1,3 +1,4 @@
+# ruff: noqa: E501  (long test data lines)
 """The rewritten data layer: it must know what the team's measured agent knew (the old dossiers serve
 as the oracle here, read-only), and every fact it may cite must check out against facts.json."""
 

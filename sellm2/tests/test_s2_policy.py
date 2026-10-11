@@ -1,3 +1,4 @@
+# ruff: noqa: E501  (long test data lines)
 """sellm2's decisions on every state of every session the team played (runs/), and on states made up
 to hit the rules the arena taught us: valid moves only, a pure function of the threads, never a push
 after a final offer, never a deal thrown away."""
@@ -50,7 +51,7 @@ def test_every_recorded_state_gets_a_valid_move(pkg):
 
 def test_a_move_is_a_pure_function_of_the_threads(pkg):
     for r in records()[::7]:
-        for sid, threads in states(r):
+        for _sid, threads in states(r):
             a = make_agent(pkg).decide(r["case"], copy.deepcopy(threads))
             b = make_agent(pkg).decide(r["case"], copy.deepcopy(threads))
             assert a == b
@@ -110,7 +111,7 @@ def test_the_measured_moves_are_kept_where_no_new_rule_applies(pkg, case_id):
 def test_works_without_any_data(pkg):
     """A supplier we hold nothing on, or a machine without the package: still a valid move."""
     for r in records()[:40]:
-        for sid, threads in list(states(r))[:3]:
+        for _sid, threads in list(states(r))[:3]:
             check(r["case"], threads, make_agent(None).decide(r["case"], threads))
             check(r["case"], threads, make_agent(pkg, data=False).decide(r["case"], threads))
 
