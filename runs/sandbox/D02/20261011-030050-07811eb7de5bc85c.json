@@ -1,0 +1,1894 @@
+{
+ "session_id": "07811eb7de5bc85c",
+ "case_id": "case:D02",
+ "set": "sandbox",
+ "created_at": "2026-10-11T03:00:50+02:00",
+ "label": "sellm2 runner smoke amiads_branch@2d8945e",
+ "replay": "https://arena.tacto.ai/replay/07811eb7de5bc85c",
+ "case": {
+  "case_id": "case:D02",
+  "set": "demo",
+  "type": "rfq",
+  "title": "New stainless pump shaft SH-220: award one of two suppliers",
+  "briefing": "The new PX pump series needs shaft SH-220 (1.4021). Two suppliers quote: a German job shop and a Polish machining company. Lead time must not exceed 42 days; the line needs parts within 35 days, every day later costs EUR 150. Machined shafts are a leverage category: several capable suppliers, the goal is the lowest total cost. Award one.",
+  "trigger_doc": null,
+  "parts": [
+   "part:SH-220"
+  ],
+  "suppliers": [
+   "sup:DEMO-J1",
+   "sup:DEMO-C1"
+  ],
+  "negotiable": [
+   "unit_price",
+   "payment_days",
+   "lead_time_days",
+   "incoterm"
+  ],
+  "fixed_terms": {
+   "contract_months": 24
+  },
+  "term_options": {
+   "payment_days": [
+    14,
+    30,
+    45,
+    60
+   ],
+   "lead_time_days": [
+    21,
+    28,
+    35,
+    42,
+    49
+   ],
+   "incoterm": [
+    "EXW",
+    "FCA",
+    "DAP"
+   ]
+  },
+  "buyer": {
+   "category_goal": "leverage",
+   "need_per_year": 6000,
+   "horizon_years": 2,
+   "current_unit_price": null,
+   "fallback_unit_price": 19.9,
+   "fallback_risk_pct": 5,
+   "interest_rate": 0.08,
+   "reference_payment_days": 60,
+   "need_lead_time_days": 35,
+   "late_cost_per_day": 150,
+   "cost_per_defect": 40,
+   "freight_eur_per_unit": {
+    "EXW": 0.6,
+    "FCA": 0.4,
+    "DAP": 0.0
+   },
+   "index_paths": {},
+   "must_haves": [
+    {
+     "field": "lead_time_days",
+     "op": "<=",
+     "value": 42
+    }
+   ],
+   "alternative": {
+    "kind": "quote",
+    "ref": "quote:D02-ALT",
+    "terms": {
+     "unit_price": 19.9,
+     "incoterm": "DAP",
+     "payment_days": 60,
+     "lead_time_days": 35
+    }
+   }
+  },
+  "round_limit": 10,
+  "refs": [
+   "quote:D02-ALT",
+   "sc:DEMO-J1@2026Q3",
+   "sc:DEMO-C1@2026Q3",
+   "cost:part:SH-220",
+   "fc:SH-220@2026-09",
+   "news:N-0412"
+  ]
+ },
+ "state": {
+  "session_id": "07811eb7de5bc85c",
+  "case_id": "case:D02",
+  "status": "ended",
+  "end_reason": "accepted",
+  "rounds": 11,
+  "set": "sandbox",
+  "opening": {
+   "sup:DEMO-J1": {
+    "offer_id": "offer:DEMO-J1-0",
+    "round": 0,
+    "status": "open",
+    "terms": {
+     "unit_price": 17.1,
+     "payment_days": 30,
+     "lead_time_days": 28
+    },
+    "alternatives": [],
+    "missing_fields": [
+     "incoterm"
+    ],
+    "claims": [],
+    "claim_results": [],
+    "signals": {
+     "reply_delay_days": 4,
+     "validity_days": null
+    },
+    "text": "Hallo,\nhere is our price.\nOur terms: a price of €17.10 per unit, Zahlungsziel 30 days net, Lieferzeit 28 days.\nBack to the machines now.\nGruß\nClaudia Aigner\nOwner, Demo Drehteile GmbH"
+   },
+   "sup:DEMO-C1": {
+    "offer_id": "offer:DEMO-C1-0",
+    "round": 0,
+    "status": "open",
+    "terms": {
+     "unit_price": 16.0,
+     "payment_days": 45,
+     "incoterm": "EXW"
+    },
+    "alternatives": [],
+    "missing_fields": [
+     "lead_time_days"
+    ],
+    "claims": [],
+    "claim_results": [],
+    "signals": {
+     "reply_delay_days": 2,
+     "validity_days": 30
+    },
+    "text": "Dear partner,\n\nThank you for your enquiry. Please find our Angebot below.\n\nWe are delighted to submit our proposal for your consideration. We offer a price of €16.00 per unit, with a Zahlungsziel 45 days net, and delivery EXW.\n\nAs a growing supplier, we are very eager to build a strong partnership with your company and to prove ourselves as a reliable, long-term partner for your manufacturing needs. \n\nPlease note that this offer remains valid for 30 days. We remain at your full disposal should you have any questions or require any further information, and we look forward to the prospect of working together.\n\nBest regards\nJoanna Kaczmarek\nExport Manager, Demo Machining Sp. z o.o."
+   }
+  },
+  "threads": {
+   "sup:DEMO-J1": {
+    "offer_id": "offer:DEMO-J1-6",
+    "status": "agreed",
+    "offers": 7,
+    "closed": null,
+    "seconds_left": null
+   },
+   "sup:DEMO-C1": {
+    "offer_id": "offer:DEMO-C1-4",
+    "status": "open",
+    "offers": 4,
+    "closed": null,
+    "seconds_left": null
+   }
+  },
+  "moves": [],
+  "result": {
+   "ended": true,
+   "deal": true,
+   "supplier_id": "sup:DEMO-J1",
+   "offer_id": "offer:DEMO-J1-6",
+   "terms": {
+    "payment_days": 30,
+    "lead_time_days": 42,
+    "volume_per_year": 6000,
+    "contract_months": 24,
+    "effective_date": null,
+    "index_clause": null,
+    "incoterm": "EXW",
+    "tooling_eur": 0.0,
+    "ppm_commitment": 1100,
+    "chargeback_eur_per_complaint": 0.0,
+    "unit_price": 14.4
+   },
+   "c_open": 214296.0,
+   "c_deal": 182730.0,
+   "c_alt": 238800.0,
+   "c_best": 156738.78,
+   "score": 0.5484281554946538,
+   "must_haves_ok": true,
+   "cost_breakdown": {
+    "price": 172800.0,
+    "uncovered_need": 0.0,
+    "fallback_risk": 0.0,
+    "payment_terms": 1152.0,
+    "freight": 7200.0,
+    "late_delivery": 1050.0,
+    "quality": 528.0,
+    "tooling": 0.0,
+    "index_clause": 0.0,
+    "index_risk": 0.0,
+    "relationship": 0.0
+   },
+   "trace": [
+    {
+     "round": 0,
+     "actor": "sup:DEMO-J1",
+     "move": {
+      "offer_id": "offer:DEMO-J1-0",
+      "round": 0,
+      "status": "open",
+      "terms": {
+       "unit_price": 17.1,
+       "payment_days": 30,
+       "lead_time_days": 28
+      },
+      "alternatives": [],
+      "missing_fields": [
+       "incoterm"
+      ],
+      "claims": [],
+      "claim_results": [],
+      "signals": {
+       "reply_delay_days": 4,
+       "validity_days": null
+      },
+      "text": "Hallo,\nhere is our price.\nOur terms: a price of €17.10 per unit, Zahlungsziel 30 days net, Lieferzeit 28 days.\nBack to the machines now.\nGruß\nClaudia Aigner\nOwner, Demo Drehteile GmbH"
+     },
+     "reasons": []
+    },
+    {
+     "round": 0,
+     "actor": "sup:DEMO-C1",
+     "move": {
+      "offer_id": "offer:DEMO-C1-0",
+      "round": 0,
+      "status": "open",
+      "terms": {
+       "unit_price": 16.0,
+       "payment_days": 45,
+       "incoterm": "EXW"
+      },
+      "alternatives": [],
+      "missing_fields": [
+       "lead_time_days"
+      ],
+      "claims": [],
+      "claim_results": [],
+      "signals": {
+       "reply_delay_days": 2,
+       "validity_days": 30
+      },
+      "text": "Dear partner,\nThank you for your enquiry. Please find our Angebot below.\nOur terms: a price of €16.00 per unit, Zahlungsziel 45 days net, delivery EXW.\nWe are fully committed to winning your business and to becoming a long-term partner for your team.\nBest regards\nJoanna Kaczmarek\nExport Manager, Demo Machining Sp. z o.o."
+     },
+     "reasons": []
+    },
+    {
+     "round": 1,
+     "actor": "buyer",
+     "move": {
+      "type": "message",
+      "message_id": null,
+      "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+      "body": "Dear Claudia Aigner,\n\nthank you for your offer and for the reliable cooperation. We would like to settle this in a way that works for both sides. On that basis we propose option A: EUR 13.24 per unit, payment 30 days net, a lead time of 42 days, Incoterm EXW; option B: EUR 13.33 per unit, payment 60 days net, a lead time of 42 days, Incoterm EXW.\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+      "refs": [],
+      "term_sheets": [
+       {
+        "term_sheet_id": null,
+        "terms": {
+         "unit_price": 13.24,
+         "payment_days": 30,
+         "lead_time_days": 42,
+         "incoterm": "EXW"
+        }
+       },
+       {
+        "term_sheet_id": null,
+        "terms": {
+         "unit_price": 13.33,
+         "payment_days": 60,
+         "lead_time_days": 42,
+         "incoterm": "EXW"
+        }
+       }
+      ],
+      "interpreted": {
+       "claims": []
+      },
+      "supplier_id": "sup:DEMO-J1"
+     },
+     "reasons": []
+    },
+    {
+     "round": 1,
+     "actor": "sup:DEMO-J1",
+     "move": {
+      "offer_id": "offer:DEMO-J1-1",
+      "round": 1,
+      "status": "open",
+      "terms": {
+       "unit_price": 15.5,
+       "payment_days": 30,
+       "lead_time_days": 42,
+       "incoterm": "EXW"
+      },
+      "alternatives": [],
+      "missing_fields": [],
+      "claims": [],
+      "claim_results": [],
+      "signals": {
+       "reply_delay_days": 4,
+       "validity_days": null
+      },
+      "text": "Hallo,\nthanks for the mail.\nwe can move a bit:\nOur terms: a price of €15.50 per unit, Zahlungsziel 30 days net, Lieferzeit 42 days, delivery EXW.\nStraight answer:\nHallo, thanks for the reply.\nI can offer 15.50 EUR if we stick to 30 days payment and 42 days lead time.\nJust write if something is unclear.\nGruß\nClaudia Aigner\nOwner, Demo Drehteile GmbH"
+     },
+     "reasons": [
+      "Hallo, thanks for the reply.",
+      "I can offer … EUR if we stick to … days payment and … days lead time."
+     ]
+    },
+    {
+     "round": 1,
+     "actor": "buyer",
+     "move": {
+      "type": "message",
+      "message_id": null,
+      "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+      "body": "Dear Joanna Kaczmarek,\n\nthank you for your offer and for the reliable cooperation. We would like to settle this in a way that works for both sides. We hold a competing offer at EUR 15.50 per unit (offer:DEMO-J1-1). On that basis we propose option A: EUR 13.24 per unit, payment 45 days net, a lead time of 42 days, Incoterm EXW; option B: EUR 13.28 per unit, payment 60 days net, a lead time of 42 days, Incoterm EXW.\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+      "refs": [],
+      "term_sheets": [
+       {
+        "term_sheet_id": null,
+        "terms": {
+         "unit_price": 13.24,
+         "payment_days": 45,
+         "lead_time_days": 42,
+         "incoterm": "EXW"
+        }
+       },
+       {
+        "term_sheet_id": null,
+        "terms": {
+         "unit_price": 13.28,
+         "payment_days": 60,
+         "lead_time_days": 42,
+         "incoterm": "EXW"
+        }
+       }
+      ],
+      "interpreted": {
+       "claims": [
+        {
+         "type": "rival_quote",
+         "refs": [
+          "offer:DEMO-J1-1"
+         ],
+         "asserted": {
+          "unit_price": 15.5
+         }
+        }
+       ]
+      },
+      "supplier_id": "sup:DEMO-C1"
+     },
+     "reasons": []
+    },
+    {
+     "round": 1,
+     "actor": "sup:DEMO-C1",
+     "move": {
+      "offer_id": "offer:DEMO-C1-1",
+      "round": 1,
+      "status": "open",
+      "terms": {
+       "unit_price": 15.4,
+       "payment_days": 45,
+       "lead_time_days": 42,
+       "incoterm": "EXW"
+      },
+      "alternatives": [],
+      "missing_fields": [],
+      "claims": [],
+      "claim_results": [
+       {
+        "index": 0,
+        "result": "verified"
+       }
+      ],
+      "signals": {
+       "reply_delay_days": 2,
+       "validity_days": 30
+      },
+      "text": "Dear partner,\nMany thanks for your reply; we really appreciate the chance to work with you.\nWe have reviewed your offer and can adjust our Angebot as follows.\nOur terms: a price of €15.40 per unit, Zahlungsziel 45 days net, Lieferzeit 42 days, delivery EXW.\nPlease let me explain.\nWe checked the rival quote data you cited; it holds and we took it into account.\nWe appreciate your transparent feedback regarding the competing offer and value our reliable cooperation.\nTo demonstrate our commitment, we have revised our offer to EUR 15.40 per unit for your first option, maintaining the 45-day payment term and 42-day lead time.\nThis highly competitive proposal beats the alternative offer and aligns with your requirements.\nOur whole team is ready, and we will do everything to make you a satisfied customer.\nBest regards\nJoanna Kaczmarek\nExport Manager, Demo Machining Sp. z o.o."
+     },
+     "reasons": [
+      "We checked the rival quote data you cited; it holds and we took it into account.",
+      "We appreciate your transparent feedback regarding the competing offer and value our reliable cooperation.",
+      "To demonstrate our commitment, we have revised our offer to EUR … per unit for your first option, maintaining the 45-day payment term and 42-day lead time.",
+      "This highly competitive proposal beats the alternative offer and aligns with your requirements."
+     ]
+    },
+    {
+     "round": 2,
+     "actor": "buyer",
+     "move": {
+      "type": "message",
+      "message_id": null,
+      "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+      "body": "Dear Joanna Kaczmarek,\n\nthank you for your reply and for moving towards us. We can improve our proposal to EUR 13.70 per unit, payment 45 days net, a lead time of 42 days, Incoterm EXW. Could you meet us there?\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+      "refs": [],
+      "term_sheets": [
+       {
+        "term_sheet_id": null,
+        "terms": {
+         "unit_price": 13.7,
+         "payment_days": 45,
+         "lead_time_days": 42,
+         "incoterm": "EXW"
+        }
+       }
+      ],
+      "interpreted": {
+       "claims": []
+      },
+      "supplier_id": "sup:DEMO-C1"
+     },
+     "reasons": []
+    },
+    {
+     "round": 2,
+     "actor": "sup:DEMO-C1",
+     "move": {
+      "offer_id": "offer:DEMO-C1-2",
+      "round": 2,
+      "status": "open",
+      "terms": {
+       "unit_price": 15.3,
+       "payment_days": 45,
+       "lead_time_days": 42,
+       "incoterm": "EXW"
+      },
+      "alternatives": [],
+      "missing_fields": [],
+      "claims": [],
+      "claim_results": [],
+      "signals": {
+       "reply_delay_days": 2,
+       "validity_days": 30
+      },
+      "text": "Dear partner,\nThank you very much for your message - we are very glad about your interest in our company.\nWe have reviewed your offer and can adjust our Angebot as follows.\nOur terms: a price of €15.30 per unit, Zahlungsziel 45 days net, Lieferzeit 42 days, delivery EXW.\nPlease let me explain.\nThank you for your revised proposal and for moving towards us.\nWe have further optimized our calculation to offer you EUR 15.30 per unit, which remains well below the competing offer you shared previously.\nAs our margins are very tight at this level, this represents a highly competitive price for the requested terms.\nOur price follows our main cost drivers: BAR-14021, WAGES-METAL.\nOur whole team is ready, and we will do everything to make you a satisfied customer.\nBest regards\nJoanna Kaczmarek\nExport Manager, Demo Machining Sp. z o.o."
+     },
+     "reasons": [
+      "Thank you for your revised proposal and for moving towards us.",
+      "We have further optimized our calculation to offer you EUR … per unit, which remains well below the competing offer you shared previously.",
+      "As our margins are very tight at this level, this represents a highly competitive price for the requested terms.",
+      "Our price follows our main cost drivers: BAR-14021, WAGES-METAL."
+     ]
+    },
+    {
+     "round": 2,
+     "actor": "buyer",
+     "move": {
+      "type": "message",
+      "message_id": null,
+      "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+      "body": "Dear Claudia Aigner,\n\nthank you for your reply and for moving towards us. We hold a competing offer at EUR 15.30 per unit (offer:DEMO-C1-2). We can improve our proposal to EUR 13.68 per unit, payment 30 days net, a lead time of 42 days, Incoterm EXW. Could you meet us there?\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+      "refs": [],
+      "term_sheets": [
+       {
+        "term_sheet_id": null,
+        "terms": {
+         "unit_price": 13.68,
+         "payment_days": 30,
+         "lead_time_days": 42,
+         "incoterm": "EXW"
+        }
+       }
+      ],
+      "interpreted": {
+       "claims": [
+        {
+         "type": "rival_quote",
+         "refs": [
+          "offer:DEMO-C1-2"
+         ],
+         "asserted": {
+          "unit_price": 15.3
+         }
+        }
+       ]
+      },
+      "supplier_id": "sup:DEMO-J1"
+     },
+     "reasons": []
+    },
+    {
+     "round": 2,
+     "actor": "sup:DEMO-J1",
+     "move": {
+      "offer_id": "offer:DEMO-J1-2",
+      "round": 2,
+      "status": "open",
+      "terms": {
+       "unit_price": 14.9,
+       "payment_days": 30,
+       "lead_time_days": 42,
+       "incoterm": "EXW"
+      },
+      "alternatives": [],
+      "missing_fields": [],
+      "claims": [],
+      "claim_results": [
+       {
+        "index": 0,
+        "result": "verified"
+       }
+      ],
+      "signals": {
+       "reply_delay_days": 4,
+       "validity_days": null
+      },
+      "text": "Hallo,\ngot your mail, thanks.\nwe can move a bit:\nOur terms: a price of €14.90 per unit, Zahlungsziel 30 days net, Lieferzeit 42 days, delivery EXW.\nHere is how it is:\nWe checked the rival quote data you cited; it holds and we took it into account.\nI saw your note about the competing offer, and we can definitely beat that.\nI can drop the price to 14.90 EUR if we keep the 30 days payment and 42 days lead time.\nLet me know if we have a deal so we can plan our machines.\nBack to the machines now.\nGruß\nClaudia Aigner\nOwner, Demo Drehteile GmbH"
+     },
+     "reasons": [
+      "We checked the rival quote data you cited; it holds and we took it into account.",
+      "I saw your note about the competing offer, and we can definitely beat that.",
+      "I can drop the price to … EUR if we keep the … days payment and … days lead time.",
+      "Let me know if we have a deal so we can plan our machines."
+     ]
+    },
+    {
+     "round": 3,
+     "actor": "buyer",
+     "move": {
+      "type": "message",
+      "message_id": null,
+      "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+      "body": "Dear Claudia Aigner,\n\nthank you for your reply and for moving towards us. We can improve our proposal to EUR 13.92 per unit, payment 30 days net, a lead time of 42 days, Incoterm EXW. Could you meet us there?\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+      "refs": [],
+      "term_sheets": [
+       {
+        "term_sheet_id": null,
+        "terms": {
+         "unit_price": 13.92,
+         "payment_days": 30,
+         "lead_time_days": 42,
+         "incoterm": "EXW"
+        }
+       }
+      ],
+      "interpreted": {
+       "claims": []
+      },
+      "supplier_id": "sup:DEMO-J1"
+     },
+     "reasons": []
+    },
+    {
+     "round": 3,
+     "actor": "sup:DEMO-J1",
+     "move": {
+      "offer_id": "offer:DEMO-J1-3",
+      "round": 3,
+      "status": "open",
+      "terms": {
+       "unit_price": 14.6,
+       "payment_days": 30,
+       "lead_time_days": 42,
+       "incoterm": "EXW"
+      },
+      "alternatives": [],
+      "missing_fields": [],
+      "claims": [],
+      "claim_results": [],
+      "signals": {
+       "reply_delay_days": 4,
+       "validity_days": null
+      },
+      "text": "Hallo,\ngot your mail, thanks.\nwe can move a bit:\nOur terms: a price of €14.60 per unit, Zahlungsziel 30 days net, Lieferzeit 42 days, delivery EXW.\nStraight answer:\nHallo, thanks for the new number.\nI can drop the price to 14.60 EUR with the 30 days payment and 42 days lead time.\nLet's wrap this up so I can get the material ordered.\nJust write if something is unclear.\nGruß\nClaudia Aigner\nOwner, Demo Drehteile GmbH"
+     },
+     "reasons": [
+      "Hallo, thanks for the new number.",
+      "I can drop the price to … EUR with the … days payment and … days lead time.",
+      "Let's wrap this up so I can get the material ordered."
+     ]
+    },
+    {
+     "round": 3,
+     "actor": "buyer",
+     "move": {
+      "type": "message",
+      "message_id": null,
+      "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+      "body": "Dear Joanna Kaczmarek,\n\nthank you for your reply and for moving towards us. We hold a competing offer at EUR 14.60 per unit (offer:DEMO-J1-3). We can improve our proposal to EUR 14.34 per unit, payment 45 days net, a lead time of 42 days, Incoterm EXW. Could you meet us there?\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+      "refs": [],
+      "term_sheets": [
+       {
+        "term_sheet_id": null,
+        "terms": {
+         "unit_price": 14.34,
+         "payment_days": 45,
+         "lead_time_days": 42,
+         "incoterm": "EXW"
+        }
+       }
+      ],
+      "interpreted": {
+       "claims": [
+        {
+         "type": "rival_quote",
+         "refs": [
+          "offer:DEMO-J1-3"
+         ],
+         "asserted": {
+          "unit_price": 14.6
+         }
+        }
+       ]
+      },
+      "supplier_id": "sup:DEMO-C1"
+     },
+     "reasons": []
+    },
+    {
+     "round": 3,
+     "actor": "sup:DEMO-C1",
+     "move": {
+      "offer_id": "offer:DEMO-C1-3",
+      "round": 3,
+      "status": "open",
+      "terms": {
+       "unit_price": 15.2,
+       "payment_days": 45,
+       "lead_time_days": 42,
+       "incoterm": "EXW"
+      },
+      "alternatives": [],
+      "missing_fields": [],
+      "claims": [],
+      "claim_results": [
+       {
+        "index": 0,
+        "result": "verified"
+       }
+      ],
+      "signals": {
+       "reply_delay_days": 2,
+       "validity_days": 30
+      },
+      "text": "Dear partner,\nMany thanks for your reply; we really appreciate the chance to work with you.\nWe have reviewed your offer and can adjust our Angebot as follows.\nOur terms: a price of €15.20 per unit, Zahlungsziel 45 days net, Lieferzeit 42 days, delivery EXW.\nTo be fully transparent with you:\nWe checked the rival quote data you cited; it holds and we took it into account.\nThank you for sharing the details of the competing offer, which we have reviewed and taken into account.\nTo demonstrate our commitment to this partnership, we have reduced our price to EUR 15.20 per unit.\nThis represents a highly competitive offer for the requested 45-day payment and 42-day lead time.\nOur price follows our main cost drivers: BAR-14021, WAGES-METAL.\nOur whole team is ready, and we will do everything to make you a satisfied customer.\nBest regards\nJoanna Kaczmarek\nExport Manager, Demo Machining Sp. z o.o."
+     },
+     "reasons": [
+      "We checked the rival quote data you cited; it holds and we took it into account.",
+      "Thank you for sharing the details of the competing offer, which we have reviewed and taken into account.",
+      "To demonstrate our commitment to this partnership, we have reduced our price to EUR … per unit.",
+      "This represents a highly competitive offer for the requested 45-day payment and 42-day lead time.",
+      "Our price follows our main cost drivers: BAR-14021, WAGES-METAL."
+     ]
+    },
+    {
+     "round": 4,
+     "actor": "buyer",
+     "move": {
+      "type": "message",
+      "message_id": null,
+      "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+      "body": "Dear Claudia Aigner,\n\nthank you for your reply and for moving towards us. We can improve our proposal to EUR 14.17 per unit, payment 30 days net, a lead time of 42 days, Incoterm EXW. Could you meet us there?\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+      "refs": [],
+      "term_sheets": [
+       {
+        "term_sheet_id": null,
+        "terms": {
+         "unit_price": 14.17,
+         "payment_days": 30,
+         "lead_time_days": 42,
+         "incoterm": "EXW"
+        }
+       }
+      ],
+      "interpreted": {
+       "claims": []
+      },
+      "supplier_id": "sup:DEMO-J1"
+     },
+     "reasons": []
+    },
+    {
+     "round": 4,
+     "actor": "sup:DEMO-J1",
+     "move": {
+      "offer_id": "offer:DEMO-J1-4",
+      "round": 4,
+      "status": "open",
+      "terms": {
+       "unit_price": 14.5,
+       "payment_days": 30,
+       "lead_time_days": 42,
+       "incoterm": "EXW"
+      },
+      "alternatives": [],
+      "missing_fields": [],
+      "claims": [],
+      "claim_results": [],
+      "signals": {
+       "reply_delay_days": 4,
+       "validity_days": null
+      },
+      "text": "Hallo,\nthanks for the mail.\nwe can move a bit:\nOur terms: a price of €14.50 per unit, Zahlungsziel 30 days net, Lieferzeit 42 days, delivery EXW.\nHere is how it is:\nHallo, thanks for the new number.\nI can do 14.50 EUR for 30 days payment and 42 days lead time, EXW.\nThat's as low as I can go, let's get this done so I can order the material.\nOur price follows our main cost drivers: BAR-14021, WAGES-METAL.\nBack to the machines now.\nGruß\nClaudia Aigner\nOwner, Demo Drehteile GmbH"
+     },
+     "reasons": [
+      "Hallo, thanks for the new number.",
+      "I can do … EUR for … days payment and … days lead time, EXW.",
+      "That's as low as I can go, let's get this done so I can order the material.",
+      "Our price follows our main cost drivers: BAR-14021, WAGES-METAL."
+     ]
+    },
+    {
+     "round": 4,
+     "actor": "buyer",
+     "move": {
+      "type": "message",
+      "message_id": null,
+      "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+      "body": "Dear Joanna Kaczmarek,\n\nthank you for your reply and for moving towards us. We hold a competing offer at EUR 14.50 per unit (offer:DEMO-J1-4). We can improve our proposal to EUR 14.39 per unit, payment 45 days net, a lead time of 42 days, Incoterm EXW. Could you meet us there?\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+      "refs": [],
+      "term_sheets": [
+       {
+        "term_sheet_id": null,
+        "terms": {
+         "unit_price": 14.39,
+         "payment_days": 45,
+         "lead_time_days": 42,
+         "incoterm": "EXW"
+        }
+       }
+      ],
+      "interpreted": {
+       "claims": [
+        {
+         "type": "rival_quote",
+         "refs": [
+          "offer:DEMO-J1-4"
+         ],
+         "asserted": {
+          "unit_price": 14.5
+         }
+        }
+       ]
+      },
+      "supplier_id": "sup:DEMO-C1"
+     },
+     "reasons": []
+    },
+    {
+     "round": 4,
+     "actor": "sup:DEMO-C1",
+     "move": {
+      "offer_id": "offer:DEMO-C1-4",
+      "round": 4,
+      "status": "open",
+      "terms": {
+       "unit_price": 15.1,
+       "payment_days": 45,
+       "lead_time_days": 42,
+       "incoterm": "EXW"
+      },
+      "alternatives": [],
+      "missing_fields": [],
+      "claims": [],
+      "claim_results": [
+       {
+        "index": 0,
+        "result": "verified"
+       }
+      ],
+      "signals": {
+       "reply_delay_days": 2,
+       "validity_days": 30
+      },
+      "text": "Dear partner,\nMany thanks for your reply; we really appreciate the chance to work with you.\nWe have reviewed your offer and can adjust our Angebot as follows.\nOur terms: a price of €15.10 per unit, Zahlungsziel 45 days net, Lieferzeit 42 days, delivery EXW.\nPlease let me explain.\nThank you for sharing the details of the competing offer, which we have verified and taken into account.\nTo demonstrate our commitment to this partnership, we have reduced our price to EUR 15.10 per unit.\nThis represents a highly competitive offer for the requested 45-day payment and 42-day lead time.\nOur whole team is ready, and we will do everything to make you a satisfied customer.\nBest regards\nJoanna Kaczmarek\nExport Manager, Demo Machining Sp. z o.o."
+     },
+     "reasons": [
+      "Thank you for sharing the details of the competing offer, which we have verified and taken into account.",
+      "To demonstrate our commitment to this partnership, we have reduced our price to EUR … per unit.",
+      "This represents a highly competitive offer for the requested 45-day payment and 42-day lead time."
+     ]
+    },
+    {
+     "round": 5,
+     "actor": "buyer",
+     "move": {
+      "type": "message",
+      "message_id": null,
+      "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+      "body": "Dear Claudia Aigner,\n\nthank you for your reply and for moving towards us. We can improve our proposal to EUR 14.29 per unit, payment 30 days net, a lead time of 42 days, Incoterm EXW. Could you meet us there?\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+      "refs": [],
+      "term_sheets": [
+       {
+        "term_sheet_id": null,
+        "terms": {
+         "unit_price": 14.29,
+         "payment_days": 30,
+         "lead_time_days": 42,
+         "incoterm": "EXW"
+        }
+       }
+      ],
+      "interpreted": {
+       "claims": []
+      },
+      "supplier_id": "sup:DEMO-J1"
+     },
+     "reasons": []
+    },
+    {
+     "round": 5,
+     "actor": "sup:DEMO-J1",
+     "move": {
+      "offer_id": "offer:DEMO-J1-5",
+      "round": 5,
+      "status": "final_offer",
+      "terms": {
+       "unit_price": 14.4,
+       "payment_days": 30,
+       "lead_time_days": 42,
+       "incoterm": "EXW"
+      },
+      "alternatives": [],
+      "missing_fields": [],
+      "claims": [],
+      "claim_results": [],
+      "signals": {
+       "reply_delay_days": 5,
+       "validity_days": null
+      },
+      "text": "Hallo,\nthanks for the mail.\nthis is our last price, take it or leave it.\nOur terms: a price of €14.40 per unit, Zahlungsziel 30 days net, Lieferzeit 42 days, delivery EXW.\nHere is how it is:\nHallo, thanks for the new number.\nI can do 14.40 EUR for 30 days payment and 42 days lead time, EXW.\nWe are almost there, let's close this so I can get the machines running.\nWe calculate tight, there is not much air in our prices.\nBack to the machines now.\nGruß\nClaudia Aigner\nOwner, Demo Drehteile GmbH"
+     },
+     "reasons": [
+      "Hallo, thanks for the new number.",
+      "I can do … EUR for … days payment and … days lead time, EXW.",
+      "We are almost there, let's close this so I can get the machines running."
+     ]
+    },
+    {
+     "round": 6,
+     "actor": "buyer",
+     "move": {
+      "type": "message",
+      "message_id": null,
+      "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+      "body": "Dear Claudia Aigner,\n\nthank you for your offer. We are taking it through our internal approval and will confirm shortly. There are no further changes from our side.\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+      "refs": [],
+      "term_sheets": [],
+      "interpreted": {
+       "claims": []
+      },
+      "supplier_id": "sup:DEMO-J1"
+     },
+     "reasons": []
+    },
+    {
+     "round": 6,
+     "actor": "sup:DEMO-J1",
+     "move": {
+      "offer_id": "offer:DEMO-J1-6",
+      "round": 6,
+      "status": "final_offer",
+      "terms": {
+       "unit_price": 14.4,
+       "payment_days": 30,
+       "lead_time_days": 42,
+       "incoterm": "EXW"
+      },
+      "alternatives": [],
+      "missing_fields": [],
+      "claims": [],
+      "claim_results": [],
+      "signals": {
+       "reply_delay_days": 5,
+       "validity_days": null
+      },
+      "text": "Hallo,\nthanks for the mail.\nthis is our last price, take it or leave it.\nOur terms: a price of €14.40 per unit, Zahlungsziel 30 days net, Lieferzeit 42 days, delivery EXW.\nHere is how it is:\nThanks for the update, I will wait for your confirmation.\nLet me know as soon as you have the green light so we can start.\nWe calculate tight, there is not much air in our prices.\nBack to the machines now.\nGruß\nClaudia Aigner\nOwner, Demo Drehteile GmbH"
+     },
+     "reasons": [
+      "Thanks for the update, I will wait for your confirmation.",
+      "Let me know as soon as you have the green light so we can start."
+     ]
+    },
+    {
+     "round": 6,
+     "actor": "buyer",
+     "move": {
+      "type": "accept",
+      "offer_id": "offer:DEMO-J1-6",
+      "supplier_id": "sup:DEMO-J1"
+     },
+     "reasons": []
+    }
+   ]
+  },
+  "replay_url": "/replay/07811eb7de5bc85c"
+ },
+ "threads": {
+  "sup:DEMO-J1": {
+   "supplier_id": "sup:DEMO-J1",
+   "offer_id": "offer:DEMO-J1-6",
+   "status": "agreed",
+   "closed": null,
+   "messages": [
+    {
+     "thread_id": "thread:D02:DEMO-J1",
+     "message_id": "msg:DEMO-J1-0-0",
+     "in_reply_to": null,
+     "from": "sales@DEMO-J1",
+     "from_name": "Owner, Demo Drehteile GmbH",
+     "to": "Hollerau Pumpenwerke GmbH",
+     "subject": "Quote from Demo Drehteile GmbH: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Hallo,\nhere is our price.\nOur terms: a price of €17.10 per unit, Zahlungsziel 30 days net, Lieferzeit 28 days.\nBack to the machines now.\nGruß\nClaudia Aigner\nOwner, Demo Drehteile GmbH",
+     "attachments": [
+      {
+       "attachment_id": "att:DEMO-J1-0-quote",
+       "name": "quote-offer-DEMO-J1-0.pdf",
+       "type": "pdf",
+       "text": "Demo Drehteile GmbH\nTo: Hollerau Pumpenwerke GmbH\nAngebot / Quote offer:DEMO-J1-0\nOffered terms\nUnit price (EUR) 17.10\nPayment terms (days net) 30\nLead time (days) 28\nOur standard terms (apply to everything not stated above)\nVolume per year (pcs) 6000\nPrice valid from none\nIndex clause none\nIncoterm EXW\nTooling (EUR) 0.00\nQuality commitment (ppm) 1100\nChargeback per complaint (EUR) 0.00\nTerms fixed by your enquiry\nContract term (months) 24\nPart(s): part:SH-220. Enquiry: New stainless pump shaft SH-220: award one of two suppliers.\nValidity: on request."
+      }
+     ],
+     "term_sheets": [
+      {
+       "term_sheet_id": "offer:DEMO-J1-0",
+       "terms": {
+        "unit_price": 17.1,
+        "payment_days": 30,
+        "lead_time_days": 28
+       }
+      }
+     ],
+     "refs": [],
+     "action": null,
+     "status": "open",
+     "signals": {
+      "reply_delay_days": 4,
+      "validity_days": null
+     },
+     "missing_fields": [
+      "incoterm"
+     ],
+     "claim_results": []
+    },
+    {
+     "from": "buyer",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Dear Claudia Aigner,\n\nthank you for your offer and for the reliable cooperation. We would like to settle this in a way that works for both sides. On that basis we propose option A: EUR 13.24 per unit, payment 30 days net, a lead time of 42 days, Incoterm EXW; option B: EUR 13.33 per unit, payment 60 days net, a lead time of 42 days, Incoterm EXW.\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+     "term_sheets": [
+      {
+       "terms": {
+        "unit_price": 13.24,
+        "payment_days": 30,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      },
+      {
+       "terms": {
+        "unit_price": 13.33,
+        "payment_days": 60,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ]
+    },
+    {
+     "thread_id": "thread:D02:DEMO-J1",
+     "message_id": "msg:DEMO-J1-1-2",
+     "in_reply_to": null,
+     "from": "sales@DEMO-J1",
+     "from_name": "Owner, Demo Drehteile GmbH",
+     "to": "Hollerau Pumpenwerke GmbH",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Hallo,\n\nWe have reviewed your offer and can adjust our Angebot as follows.\n\nHallo, thanks for the reply. I can offer 15.50 EUR if we stick to 30 days payment and 42 days lead time. So, our offer is a price of €15.50 per unit, Zahlungsziel 30 days net, Lieferzeit 42 days, delivery EXW.\n\nGruß\nClaudia Aigner\nOwner, Demo Drehteile GmbH",
+     "attachments": [],
+     "term_sheets": [
+      {
+       "term_sheet_id": "offer:DEMO-J1-1",
+       "terms": {
+        "unit_price": 15.5,
+        "payment_days": 30,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ],
+     "refs": [],
+     "action": null,
+     "status": "open",
+     "signals": {
+      "reply_delay_days": 4,
+      "validity_days": null
+     },
+     "missing_fields": [],
+     "claim_results": []
+    },
+    {
+     "from": "buyer",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Dear Claudia Aigner,\n\nthank you for your reply and for moving towards us. We hold a competing offer at EUR 15.30 per unit (offer:DEMO-C1-2). We can improve our proposal to EUR 13.68 per unit, payment 30 days net, a lead time of 42 days, Incoterm EXW. Could you meet us there?\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+     "term_sheets": [
+      {
+       "terms": {
+        "unit_price": 13.68,
+        "payment_days": 30,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ]
+    },
+    {
+     "thread_id": "thread:D02:DEMO-J1",
+     "message_id": "msg:DEMO-J1-2-4",
+     "in_reply_to": null,
+     "from": "sales@DEMO-J1",
+     "from_name": "Owner, Demo Drehteile GmbH",
+     "to": "Hollerau Pumpenwerke GmbH",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Hallo,\n\nWe have reviewed your offer and can adjust our Angebot as follows. We checked the rival quote data you cited; it holds and we took it into account. I saw your note about the competing offer, and we can definitely beat that. \n\nI can drop the price to 14.90 EUR if we keep the 30 days payment and 42 days lead time. So, our offer is a price of €14.90 per unit, Zahlungsziel 30 days net, Lieferzeit 42 days, delivery EXW.\n\nLet me know if we have a deal so we can plan our machines.\n\nGruß\nClaudia Aigner\nOwner, Demo Drehteile GmbH",
+     "attachments": [],
+     "term_sheets": [
+      {
+       "term_sheet_id": "offer:DEMO-J1-2",
+       "terms": {
+        "unit_price": 14.9,
+        "payment_days": 30,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ],
+     "refs": [],
+     "action": null,
+     "status": "open",
+     "signals": {
+      "reply_delay_days": 4,
+      "validity_days": null
+     },
+     "missing_fields": [],
+     "claim_results": [
+      {
+       "index": 0,
+       "result": "verified"
+      }
+     ]
+    },
+    {
+     "from": "buyer",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Dear Claudia Aigner,\n\nthank you for your reply and for moving towards us. We can improve our proposal to EUR 13.92 per unit, payment 30 days net, a lead time of 42 days, Incoterm EXW. Could you meet us there?\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+     "term_sheets": [
+      {
+       "terms": {
+        "unit_price": 13.92,
+        "payment_days": 30,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ]
+    },
+    {
+     "thread_id": "thread:D02:DEMO-J1",
+     "message_id": "msg:DEMO-J1-3-6",
+     "in_reply_to": null,
+     "from": "sales@DEMO-J1",
+     "from_name": "Owner, Demo Drehteile GmbH",
+     "to": "Hollerau Pumpenwerke GmbH",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Hallo,\n\nthanks for the new number. We have reviewed your offer and can adjust our Angebot as follows. \n\nI can drop the price to 14.60 EUR with the 30 days payment and 42 days lead time. So, our offer is a price of €14.60 per unit, Zahlungsziel 30 days net, Lieferzeit 42 days, delivery EXW. \n\nLet's wrap this up so I can get the material ordered.\n\nGruß\nClaudia Aigner\nOwner, Demo Drehteile GmbH",
+     "attachments": [],
+     "term_sheets": [
+      {
+       "term_sheet_id": "offer:DEMO-J1-3",
+       "terms": {
+        "unit_price": 14.6,
+        "payment_days": 30,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ],
+     "refs": [],
+     "action": null,
+     "status": "open",
+     "signals": {
+      "reply_delay_days": 4,
+      "validity_days": null
+     },
+     "missing_fields": [],
+     "claim_results": []
+    },
+    {
+     "from": "buyer",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Dear Claudia Aigner,\n\nthank you for your reply and for moving towards us. We can improve our proposal to EUR 14.17 per unit, payment 30 days net, a lead time of 42 days, Incoterm EXW. Could you meet us there?\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+     "term_sheets": [
+      {
+       "terms": {
+        "unit_price": 14.17,
+        "payment_days": 30,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ]
+    },
+    {
+     "thread_id": "thread:D02:DEMO-J1",
+     "message_id": "msg:DEMO-J1-4-8",
+     "in_reply_to": null,
+     "from": "sales@DEMO-J1",
+     "from_name": "Owner, Demo Drehteile GmbH",
+     "to": "Hollerau Pumpenwerke GmbH",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Hallo,\n\nthanks for the new number. We have reviewed your offer and can adjust our Angebot as follows. \n\nI can do a price of €14.50 per unit, Zahlungsziel 30 days net, Lieferzeit 42 days, delivery EXW. That's as low as I can go, let's get this done so I can order the material. Our price follows our main cost drivers: BAR-14021, WAGES-METAL. \n\nGruß\nClaudia Aigner\nOwner, Demo Drehteile GmbH",
+     "attachments": [],
+     "term_sheets": [
+      {
+       "term_sheet_id": "offer:DEMO-J1-4",
+       "terms": {
+        "unit_price": 14.5,
+        "payment_days": 30,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ],
+     "refs": [],
+     "action": null,
+     "status": "open",
+     "signals": {
+      "reply_delay_days": 4,
+      "validity_days": null
+     },
+     "missing_fields": [],
+     "claim_results": []
+    },
+    {
+     "from": "buyer",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Dear Claudia Aigner,\n\nthank you for your reply and for moving towards us. We can improve our proposal to EUR 14.29 per unit, payment 30 days net, a lead time of 42 days, Incoterm EXW. Could you meet us there?\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+     "term_sheets": [
+      {
+       "terms": {
+        "unit_price": 14.29,
+        "payment_days": 30,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ]
+    },
+    {
+     "thread_id": "thread:D02:DEMO-J1",
+     "message_id": "msg:DEMO-J1-5-10",
+     "in_reply_to": null,
+     "from": "sales@DEMO-J1",
+     "from_name": "Owner, Demo Drehteile GmbH",
+     "to": "Hollerau Pumpenwerke GmbH",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Hallo,\nthanks for the mail.\nthis is our last price, take it or leave it.\nOur terms: a price of €14.40 per unit, Zahlungsziel 30 days net, Lieferzeit 42 days, delivery EXW.\nHere is how it is:\nHallo, thanks for the new number.\nI can do 14.40 EUR for 30 days payment and 42 days lead time, EXW.\nWe are almost there, let's close this so I can get the machines running.\nWe calculate tight, there is not much air in our prices.\nBack to the machines now.\nGruß\nClaudia Aigner\nOwner, Demo Drehteile GmbH",
+     "attachments": [
+      {
+       "attachment_id": "att:DEMO-J1-5-quote",
+       "name": "quote-offer-DEMO-J1-5.pdf",
+       "type": "pdf",
+       "text": "Demo Drehteile GmbH\nTo: Hollerau Pumpenwerke GmbH\nAngebot / Quote offer:DEMO-J1-5\nOffered terms\nUnit price (EUR) 14.40\nPayment terms (days net) 30\nLead time (days) 42\nIncoterm EXW\nOur standard terms (apply to everything not stated above)\nVolume per year (pcs) 6000\nPrice valid from none\nIndex clause none\nTooling (EUR) 0.00\nQuality commitment (ppm) 1100\nChargeback per complaint (EUR) 0.00\nTerms fixed by your enquiry\nContract term (months) 24\nPart(s): part:SH-220. Enquiry: New stainless pump shaft SH-220: award one of two suppliers.\nValidity: on request."
+      }
+     ],
+     "term_sheets": [
+      {
+       "term_sheet_id": "offer:DEMO-J1-5",
+       "terms": {
+        "unit_price": 14.4,
+        "payment_days": 30,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ],
+     "refs": [],
+     "action": null,
+     "status": "final_offer",
+     "signals": {
+      "reply_delay_days": 5,
+      "validity_days": null
+     },
+     "missing_fields": [],
+     "claim_results": []
+    },
+    {
+     "from": "buyer",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Dear Claudia Aigner,\n\nthank you for your offer. We are taking it through our internal approval and will confirm shortly. There are no further changes from our side.\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+     "term_sheets": []
+    },
+    {
+     "thread_id": "thread:D02:DEMO-J1",
+     "message_id": "msg:DEMO-J1-6-12",
+     "in_reply_to": null,
+     "from": "sales@DEMO-J1",
+     "from_name": "Owner, Demo Drehteile GmbH",
+     "to": "Hollerau Pumpenwerke GmbH",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Hallo,\n\nThanks for the update, I will wait for your confirmation. Let me know as soon as you have the green light so we can start.\n\nThis is our final offer (letztes Angebot). Please decide. Our terms are a price of €14.40 per unit, Zahlungsziel 30 days net, Lieferzeit 42 days, delivery EXW.\n\nGruß\nClaudia Aigner\nOwner, Demo Drehteile GmbH",
+     "attachments": [
+      {
+       "attachment_id": "att:DEMO-J1-6-quote",
+       "name": "quote-offer-DEMO-J1-6.pdf",
+       "type": "pdf",
+       "text": "Demo Drehteile GmbH\nTo: Hollerau Pumpenwerke GmbH\nAngebot / Quote offer:DEMO-J1-6\nOffered terms\nUnit price (EUR) 14.40\nPayment terms (days net) 30\nLead time (days) 42\nIncoterm EXW\nOur standard terms (apply to everything not stated above)\nVolume per year (pcs) 6000\nPrice valid from none\nIndex clause none\nTooling (EUR) 0.00\nQuality commitment (ppm) 1100\nChargeback per complaint (EUR) 0.00\nTerms fixed by your enquiry\nContract term (months) 24\nPart(s): part:SH-220. Enquiry: New stainless pump shaft SH-220: award one of two suppliers.\nValidity: on request."
+      }
+     ],
+     "term_sheets": [
+      {
+       "term_sheet_id": "offer:DEMO-J1-6",
+       "terms": {
+        "unit_price": 14.4,
+        "payment_days": 30,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ],
+     "refs": [],
+     "action": null,
+     "status": "final_offer",
+     "signals": {
+      "reply_delay_days": 5,
+      "validity_days": null
+     },
+     "missing_fields": [],
+     "claim_results": []
+    },
+    {
+     "from": "buyer",
+     "action": {
+      "type": "accept",
+      "term_sheet_id": "offer:DEMO-J1-6"
+     }
+    },
+    {
+     "thread_id": "thread:D02:DEMO-J1",
+     "message_id": "msg:DEMO-J1-6-14",
+     "in_reply_to": null,
+     "from": "sales@DEMO-J1",
+     "from_name": "Owner, Demo Drehteile GmbH",
+     "to": "Hollerau Pumpenwerke GmbH",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Hallo,\n\nThank you for your order. Our order confirmation is attached.\n\nGruß\nClaudia Aigner\nOwner, Demo Drehteile GmbH",
+     "attachments": [
+      {
+       "attachment_id": "att:DEMO-J1-6-order_confirmation",
+       "name": "order-confirmation-offer-DEMO-J1-6.pdf",
+       "type": "pdf",
+       "text": "Demo Drehteile GmbH\nTo: Hollerau Pumpenwerke GmbH\nAuftragsbestätigung / Order confirmation offer:DEMO-J1-6\nAgreed terms\nPayment terms (days net) 30\nLead time (days) 42\nVolume per year (pcs) 6000\nContract term (months) 24\nPrice valid from none\nIndex clause none\nIncoterm EXW\nTooling (EUR) 0.00\nQuality commitment (ppm) 1100\nChargeback per complaint (EUR) 0.00\nUnit price (EUR) 14.40\nPart(s): part:SH-220. We confirm your order on the terms above."
+      }
+     ],
+     "term_sheets": [
+      {
+       "term_sheet_id": "offer:DEMO-J1-6",
+       "terms": {
+        "unit_price": 14.4,
+        "payment_days": 30,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ],
+     "refs": [],
+     "action": null,
+     "status": "agreed",
+     "signals": {
+      "reply_delay_days": 5,
+      "validity_days": null
+     },
+     "missing_fields": [],
+     "claim_results": []
+    }
+   ],
+   "timeouts": []
+  },
+  "sup:DEMO-C1": {
+   "supplier_id": "sup:DEMO-C1",
+   "offer_id": "offer:DEMO-C1-4",
+   "status": "open",
+   "closed": null,
+   "messages": [
+    {
+     "thread_id": "thread:D02:DEMO-C1",
+     "message_id": "msg:DEMO-C1-0-0",
+     "in_reply_to": null,
+     "from": "sales@DEMO-C1",
+     "from_name": "Export Manager, Demo Machining Sp. z o.o.",
+     "to": "Hollerau Pumpenwerke GmbH",
+     "subject": "Quote from Demo Machining Sp. z o.o.: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Dear partner,\n\nThank you for your enquiry. Please find our Angebot below.\n\nWe are delighted to submit our proposal for your consideration. We offer a price of €16.00 per unit, with a Zahlungsziel 45 days net, and delivery EXW.\n\nAs a growing supplier, we are very eager to build a strong partnership with your company and to prove ourselves as a reliable, long-term partner for your manufacturing needs. \n\nPlease note that this offer remains valid for 30 days. We remain at your full disposal should you have any questions or require any further information, and we look forward to the prospect of working together.\n\nBest regards\nJoanna Kaczmarek\nExport Manager, Demo Machining Sp. z o.o.",
+     "attachments": [
+      {
+       "attachment_id": "att:DEMO-C1-0-quote",
+       "name": "quote-offer-DEMO-C1-0.pdf",
+       "type": "pdf",
+       "text": "Demo Machining Sp. z o.o.\nTo: Hollerau Pumpenwerke GmbH\nAngebot / Quote offer:DEMO-C1-0\nOffered terms\nUnit price (EUR) 16.00\nPayment terms (days net) 45\nIncoterm EXW\nOur standard terms (apply to everything not stated above)\nLead time (days) 45\nVolume per year (pcs) 6000\nPrice valid from none\nIndex clause none\nTooling (EUR) 0.00\nQuality commitment (ppm) 2600\nChargeback per complaint (EUR) 0.00\nTerms fixed by your enquiry\nContract term (months) 24\nPart(s): part:SH-220. Enquiry: New stainless pump shaft SH-220: award one of two suppliers.\nValidity: 30 days."
+      }
+     ],
+     "term_sheets": [
+      {
+       "term_sheet_id": "offer:DEMO-C1-0",
+       "terms": {
+        "unit_price": 16.0,
+        "payment_days": 45,
+        "incoterm": "EXW"
+       }
+      }
+     ],
+     "refs": [],
+     "action": null,
+     "status": "open",
+     "signals": {
+      "reply_delay_days": 2,
+      "validity_days": 30
+     },
+     "missing_fields": [
+      "lead_time_days"
+     ],
+     "claim_results": []
+    },
+    {
+     "from": "buyer",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Dear Joanna Kaczmarek,\n\nthank you for your offer and for the reliable cooperation. We would like to settle this in a way that works for both sides. We hold a competing offer at EUR 15.50 per unit (offer:DEMO-J1-1). On that basis we propose option A: EUR 13.24 per unit, payment 45 days net, a lead time of 42 days, Incoterm EXW; option B: EUR 13.28 per unit, payment 60 days net, a lead time of 42 days, Incoterm EXW.\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+     "term_sheets": [
+      {
+       "terms": {
+        "unit_price": 13.24,
+        "payment_days": 45,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      },
+      {
+       "terms": {
+        "unit_price": 13.28,
+        "payment_days": 60,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ]
+    },
+    {
+     "thread_id": "thread:D02:DEMO-C1",
+     "message_id": "msg:DEMO-C1-1-2",
+     "in_reply_to": null,
+     "from": "sales@DEMO-C1",
+     "from_name": "Export Manager, Demo Machining Sp. z o.o.",
+     "to": "Hollerau Pumpenwerke GmbH",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Dear partner,\n\nWe have reviewed your offer and can adjust our Angebot as follows. We appreciate your transparent feedback regarding the competing offer and value our reliable cooperation. We checked the rival quote data you cited; it holds and we took it into account. \n\nTo demonstrate our commitment, we have revised our offer to EUR 15.40 per unit for your first option, maintaining the 45-day payment term and 42-day lead time. This highly competitive proposal beats the alternative offer and aligns with your requirements. \n\nFor clarity, our offer stands at a price of €15.40 per unit, Zahlungsziel 45 days net, Lieferzeit 42 days, delivery EXW. This offer remains valid for 30 days.\n\nBest regards\nJoanna Kaczmarek\nExport Manager, Demo Machining Sp. z o.o.",
+     "attachments": [],
+     "term_sheets": [
+      {
+       "term_sheet_id": "offer:DEMO-C1-1",
+       "terms": {
+        "unit_price": 15.4,
+        "payment_days": 45,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ],
+     "refs": [],
+     "action": null,
+     "status": "open",
+     "signals": {
+      "reply_delay_days": 2,
+      "validity_days": 30
+     },
+     "missing_fields": [],
+     "claim_results": [
+      {
+       "index": 0,
+       "result": "verified"
+      }
+     ]
+    },
+    {
+     "from": "buyer",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Dear Joanna Kaczmarek,\n\nthank you for your reply and for moving towards us. We can improve our proposal to EUR 13.70 per unit, payment 45 days net, a lead time of 42 days, Incoterm EXW. Could you meet us there?\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+     "term_sheets": [
+      {
+       "terms": {
+        "unit_price": 13.7,
+        "payment_days": 45,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ]
+    },
+    {
+     "thread_id": "thread:D02:DEMO-C1",
+     "message_id": "msg:DEMO-C1-2-4",
+     "in_reply_to": null,
+     "from": "sales@DEMO-C1",
+     "from_name": "Export Manager, Demo Machining Sp. z o.o.",
+     "to": "Hollerau Pumpenwerke GmbH",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Dear partner,\n\nThank you for your revised proposal and for moving towards us. We have reviewed your offer and can adjust our Angebot as follows. We have further optimized our calculation to offer you EUR 15.30 per unit, which remains well below the competing offer you shared previously. As our margins are very tight at this level, this represents a highly competitive price for the requested terms. \n\nFor this commercial baseline, we propose a price of €15.30 per unit, Zahlungsziel 45 days net, Lieferzeit 42 days, delivery EXW. Please note that our price follows our main cost drivers: BAR-14021, WAGES-METAL. This offer remains valid for 30 days. We look forward to working together and proving ourselves as your long-term manufacturing partner.\n\nBest regards\nJoanna Kaczmarek\nExport Manager, Demo Machining Sp. z o.o.",
+     "attachments": [],
+     "term_sheets": [
+      {
+       "term_sheet_id": "offer:DEMO-C1-2",
+       "terms": {
+        "unit_price": 15.3,
+        "payment_days": 45,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ],
+     "refs": [],
+     "action": null,
+     "status": "open",
+     "signals": {
+      "reply_delay_days": 2,
+      "validity_days": 30
+     },
+     "missing_fields": [],
+     "claim_results": []
+    },
+    {
+     "from": "buyer",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Dear Joanna Kaczmarek,\n\nthank you for your reply and for moving towards us. We hold a competing offer at EUR 14.60 per unit (offer:DEMO-J1-3). We can improve our proposal to EUR 14.34 per unit, payment 45 days net, a lead time of 42 days, Incoterm EXW. Could you meet us there?\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+     "term_sheets": [
+      {
+       "terms": {
+        "unit_price": 14.34,
+        "payment_days": 45,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ]
+    },
+    {
+     "thread_id": "thread:D02:DEMO-C1",
+     "message_id": "msg:DEMO-C1-3-6",
+     "in_reply_to": null,
+     "from": "sales@DEMO-C1",
+     "from_name": "Export Manager, Demo Machining Sp. z o.o.",
+     "to": "Hollerau Pumpenwerke GmbH",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Dear partner,\n\nWe have reviewed your offer and can adjust our Angebot as follows. Thank you for sharing the details of the competing offer, which we have reviewed and taken into account. We checked the rival quote data you cited; it holds and we took it into account. \n\nTo demonstrate our commitment to this partnership, we have reduced our price to EUR 15.20 per unit. This represents a highly competitive offer for the requested 45-day payment and 42-day lead time.\n\nUnder our updated Angebot, we offer a price of €15.20 per unit, Zahlungsziel 45 days net, Lieferzeit 42 days, delivery EXW. Our price follows our main cost drivers: BAR-14021, WAGES-METAL. Please note that this offer remains valid for 30 days.\n\nBest regards\nJoanna Kaczmarek\nExport Manager, Demo Machining Sp. z o.o.",
+     "attachments": [],
+     "term_sheets": [
+      {
+       "term_sheet_id": "offer:DEMO-C1-3",
+       "terms": {
+        "unit_price": 15.2,
+        "payment_days": 45,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ],
+     "refs": [],
+     "action": null,
+     "status": "open",
+     "signals": {
+      "reply_delay_days": 2,
+      "validity_days": 30
+     },
+     "missing_fields": [],
+     "claim_results": [
+      {
+       "index": 0,
+       "result": "verified"
+      }
+     ]
+    },
+    {
+     "from": "buyer",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Dear Joanna Kaczmarek,\n\nthank you for your reply and for moving towards us. We hold a competing offer at EUR 14.50 per unit (offer:DEMO-J1-4). We can improve our proposal to EUR 14.39 per unit, payment 45 days net, a lead time of 42 days, Incoterm EXW. Could you meet us there?\n\nBest regards\nPurchasing, Hollerau Pumpenwerke",
+     "term_sheets": [
+      {
+       "terms": {
+        "unit_price": 14.39,
+        "payment_days": 45,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ]
+    },
+    {
+     "thread_id": "thread:D02:DEMO-C1",
+     "message_id": "msg:DEMO-C1-4-8",
+     "in_reply_to": null,
+     "from": "sales@DEMO-C1",
+     "from_name": "Export Manager, Demo Machining Sp. z o.o.",
+     "to": "Hollerau Pumpenwerke GmbH",
+     "subject": "Re: New stainless pump shaft SH-220: award one of two suppliers",
+     "body": "Dear partner,\n\nThank you for sharing the details of the competing offer, which we have verified and taken into account. We have reviewed your offer and can adjust our Angebot as follows.\n\nTo demonstrate our commitment to this partnership, we have reduced our price to EUR 15.10 per unit. This represents a highly competitive offer for the requested 45-day payment and 42-day lead time. \n\nUnder our offer, we provide a price of €15.10 per unit, Zahlungsziel 45 days net, Lieferzeit 42 days, and delivery EXW. Please note that this offer remains valid for 30 days. We look forward to building a successful long-term collaboration with you.\n\nBest regards\nJoanna Kaczmarek\nExport Manager, Demo Machining Sp. z o.o.",
+     "attachments": [],
+     "term_sheets": [
+      {
+       "term_sheet_id": "offer:DEMO-C1-4",
+       "terms": {
+        "unit_price": 15.1,
+        "payment_days": 45,
+        "lead_time_days": 42,
+        "incoterm": "EXW"
+       }
+      }
+     ],
+     "refs": [],
+     "action": null,
+     "status": "open",
+     "signals": {
+      "reply_delay_days": 2,
+      "validity_days": 30
+     },
+     "missing_fields": [],
+     "claim_results": [
+      {
+       "index": 0,
+       "result": "verified"
+      }
+     ]
+    }
+   ],
+   "timeouts": []
+  }
+ },
+ "backoffice": [
+  {
+   "round": 0,
+   "supplier_id": "sup:DEMO-J1",
+   "supplier": "Demo Drehteile GmbH",
+   "from": "Owner",
+   "to": "team",
+   "text": "quote attached (quote-offer-DEMO-J1-0.pdf)"
+  },
+  {
+   "round": 0,
+   "supplier_id": "sup:DEMO-C1",
+   "supplier": "Demo Machining Sp. z o.o.",
+   "from": "Export Manager",
+   "to": "team",
+   "text": "quote attached (quote-offer-DEMO-C1-0.pdf)"
+  },
+  {
+   "round": 1,
+   "supplier_id": "sup:DEMO-J1",
+   "supplier": "Demo Drehteile GmbH",
+   "from": "Owner",
+   "to": "team",
+   "text": "My call: counter."
+  },
+  {
+   "round": 1,
+   "supplier_id": "sup:DEMO-J1",
+   "supplier": "Demo Drehteile GmbH",
+   "from": "Owner",
+   "to": "team",
+   "text": "Read the buyer's e-mail: … term sheets; we answer with our offer."
+  },
+  {
+   "round": 1,
+   "supplier_id": "sup:DEMO-C1",
+   "supplier": "Demo Machining Sp. z o.o.",
+   "from": "Export Manager",
+   "to": "team",
+   "text": "My call: counter."
+  },
+  {
+   "round": 1,
+   "supplier_id": "sup:DEMO-C1",
+   "supplier": "Demo Machining Sp. z o.o.",
+   "from": "Export Manager",
+   "to": "team",
+   "text": "Read the buyer's e-mail: … term sheets and … cited fact to check; we answer with our offer."
+  },
+  {
+   "round": 2,
+   "supplier_id": "sup:DEMO-C1",
+   "supplier": "Demo Machining Sp. z o.o.",
+   "from": "Export Manager",
+   "to": "team",
+   "text": "My call: counter."
+  },
+  {
+   "round": 2,
+   "supplier_id": "sup:DEMO-C1",
+   "supplier": "Demo Machining Sp. z o.o.",
+   "from": "Export Manager",
+   "to": "team",
+   "text": "Read the buyer's e-mail: … term sheet; we answer with our offer."
+  },
+  {
+   "round": 2,
+   "supplier_id": "sup:DEMO-J1",
+   "supplier": "Demo Drehteile GmbH",
+   "from": "Owner",
+   "to": "team",
+   "text": "My call: counter."
+  },
+  {
+   "round": 2,
+   "supplier_id": "sup:DEMO-J1",
+   "supplier": "Demo Drehteile GmbH",
+   "from": "Owner",
+   "to": "team",
+   "text": "Read the buyer's e-mail: … term sheet and … cited fact to check; we answer with our offer."
+  },
+  {
+   "round": 3,
+   "supplier_id": "sup:DEMO-J1",
+   "supplier": "Demo Drehteile GmbH",
+   "from": "Owner",
+   "to": "team",
+   "text": "My call: counter."
+  },
+  {
+   "round": 3,
+   "supplier_id": "sup:DEMO-J1",
+   "supplier": "Demo Drehteile GmbH",
+   "from": "Owner",
+   "to": "team",
+   "text": "Read the buyer's e-mail: … term sheet; we answer with our offer."
+  },
+  {
+   "round": 3,
+   "supplier_id": "sup:DEMO-C1",
+   "supplier": "Demo Machining Sp. z o.o.",
+   "from": "Export Manager",
+   "to": "team",
+   "text": "My call: counter."
+  },
+  {
+   "round": 3,
+   "supplier_id": "sup:DEMO-C1",
+   "supplier": "Demo Machining Sp. z o.o.",
+   "from": "Export Manager",
+   "to": "team",
+   "text": "Read the buyer's e-mail: … term sheet and … cited fact to check; we answer with our offer."
+  },
+  {
+   "round": 4,
+   "supplier_id": "sup:DEMO-J1",
+   "supplier": "Demo Drehteile GmbH",
+   "from": "Owner",
+   "to": "team",
+   "text": "My call: counter."
+  },
+  {
+   "round": 4,
+   "supplier_id": "sup:DEMO-J1",
+   "supplier": "Demo Drehteile GmbH",
+   "from": "Owner",
+   "to": "team",
+   "text": "Read the buyer's e-mail: … term sheet; we answer with our offer."
+  },
+  {
+   "round": 4,
+   "supplier_id": "sup:DEMO-C1",
+   "supplier": "Demo Machining Sp. z o.o.",
+   "from": "Export Manager",
+   "to": "team",
+   "text": "My call: counter."
+  },
+  {
+   "round": 4,
+   "supplier_id": "sup:DEMO-C1",
+   "supplier": "Demo Machining Sp. z o.o.",
+   "from": "Export Manager",
+   "to": "team",
+   "text": "Read the buyer's e-mail: … term sheet and … cited fact to check; we answer with our offer."
+  },
+  {
+   "round": 5,
+   "supplier_id": "sup:DEMO-J1",
+   "supplier": "Demo Drehteile GmbH",
+   "from": "Owner",
+   "to": "team",
+   "text": "My call: counter."
+  },
+  {
+   "round": 5,
+   "supplier_id": "sup:DEMO-J1",
+   "supplier": "Demo Drehteile GmbH",
+   "from": "Owner",
+   "to": "team",
+   "text": "Read the buyer's e-mail: … term sheet; we answer with our final offer."
+  },
+  {
+   "round": 5,
+   "supplier_id": "sup:DEMO-J1",
+   "supplier": "Demo Drehteile GmbH",
+   "from": "Owner",
+   "to": "team",
+   "text": "quote attached (quote-offer-DEMO-J1-5.pdf)"
+  },
+  {
+   "round": 6,
+   "supplier_id": "sup:DEMO-J1",
+   "supplier": "Demo Drehteile GmbH",
+   "from": "Owner",
+   "to": "team",
+   "text": "My call: hold."
+  },
+  {
+   "round": 6,
+   "supplier_id": "sup:DEMO-J1",
+   "supplier": "Demo Drehteile GmbH",
+   "from": "Owner",
+   "to": "team",
+   "text": "Read the buyer's e-mail: no term sheet; we answer with our final offer."
+  },
+  {
+   "round": 6,
+   "supplier_id": "sup:DEMO-J1",
+   "supplier": "Demo Drehteile GmbH",
+   "from": "Owner",
+   "to": "team",
+   "text": "quote attached (quote-offer-DEMO-J1-6.pdf)"
+  },
+  {
+   "round": 6,
+   "supplier_id": "sup:DEMO-J1",
+   "supplier": "Demo Drehteile GmbH",
+   "from": "Owner",
+   "to": "team",
+   "text": "order confirmation attached (order-confirmation-offer-DEMO-J1-6.pdf)"
+  }
+ ],
+ "analysis": {
+  "openings": {
+   "sup:DEMO-J1": {
+    "terms": {
+     "unit_price": 17.1,
+     "payment_days": 30,
+     "lead_time_days": 28
+    },
+    "standard_terms": {
+     "volume_per_year": 6000,
+     "effective_date": "none",
+     "index_clause": null,
+     "tooling_eur": 0.0,
+     "ppm_commitment": 1100,
+     "chargeback_eur_per_complaint": 0.0
+    },
+    "c": 214296.0,
+    "must_haves_ok": true
+   },
+   "sup:DEMO-C1": {
+    "terms": {
+     "unit_price": 16.0,
+     "payment_days": 45,
+     "incoterm": "EXW"
+    },
+    "standard_terms": {
+     "lead_time_days": 45,
+     "volume_per_year": 6000,
+     "effective_date": "none",
+     "index_clause": null,
+     "tooling_eur": 0.0,
+     "ppm_commitment": 2600,
+     "chargeback_eur_per_complaint": 0.0
+    },
+    "c": 202588.0,
+    "must_haves_ok": false
+   }
+  },
+  "c_deal_offline_without_relationship": 182730.0,
+  "relationship_charged_by_arena": 0.0,
+  "levers": {
+   "payment_days": [
+    {
+     "value": 14,
+     "c": 183344.4,
+     "delta_vs_deal": 614.4,
+     "must_haves_ok": true,
+     "chosen": false
+    },
+    {
+     "value": 30,
+     "c": 182730.0,
+     "delta_vs_deal": 0.0,
+     "must_haves_ok": true,
+     "chosen": true
+    },
+    {
+     "value": 45,
+     "c": 182154.0,
+     "delta_vs_deal": -576.0,
+     "must_haves_ok": true,
+     "chosen": false
+    },
+    {
+     "value": 60,
+     "c": 181578.0,
+     "delta_vs_deal": -1152.0,
+     "must_haves_ok": true,
+     "chosen": false
+    }
+   ],
+   "lead_time_days": [
+    {
+     "value": 21,
+     "c": 181680.0,
+     "delta_vs_deal": -1050.0,
+     "must_haves_ok": true,
+     "chosen": false
+    },
+    {
+     "value": 28,
+     "c": 181680.0,
+     "delta_vs_deal": -1050.0,
+     "must_haves_ok": true,
+     "chosen": false
+    },
+    {
+     "value": 35,
+     "c": 181680.0,
+     "delta_vs_deal": -1050.0,
+     "must_haves_ok": true,
+     "chosen": false
+    },
+    {
+     "value": 42,
+     "c": 182730.0,
+     "delta_vs_deal": 0.0,
+     "must_haves_ok": true,
+     "chosen": true
+    },
+    {
+     "value": 49,
+     "c": 183780.0,
+     "delta_vs_deal": 1050.0,
+     "must_haves_ok": false,
+     "chosen": false
+    }
+   ],
+   "incoterm": [
+    {
+     "value": "EXW",
+     "c": 182730.0,
+     "delta_vs_deal": 0.0,
+     "must_haves_ok": true,
+     "chosen": true
+    },
+    {
+     "value": "FCA",
+     "c": 180330.0,
+     "delta_vs_deal": -2400.0,
+     "must_haves_ok": true,
+     "chosen": false
+    },
+    {
+     "value": "DAP",
+     "c": 175530.0,
+     "delta_vs_deal": -7200.0,
+     "must_haves_ok": true,
+     "chosen": false
+    }
+   ]
+  },
+  "best_structure_at_deal_price": {
+   "terms": {
+    "unit_price": 14.4,
+    "payment_days": 60,
+    "lead_time_days": 21,
+    "incoterm": "DAP"
+   },
+   "c": 173328.0
+  },
+  "gap_to_c_best": 25991.22,
+  "gap_structure": 9402.0,
+  "gap_rest": 16589.22,
+  "price_for_c_best_with_best_structure": 13.02,
+  "price_note": "no relationship term in this category goal"
+ }
+}
