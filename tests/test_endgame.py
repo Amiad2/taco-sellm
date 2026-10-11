@@ -155,6 +155,7 @@ def test_the_agent_plays_the_rules_that_were_measured(package):
         "idx_many": 3,
         "idx_blamed": True,
         "no_lowball": 0.93,
+        "drop_behind": 0.08,
     }
     agent = the_agent(package)
     assert isinstance(agent, Persistent) and agent.e["past_target"] and agent.e["fast_pay"] and agent.e["clause_offer"]
@@ -290,3 +291,28 @@ def test_no_lowball_to_a_capacity_tight_supplier(package):
         threads = {sid: rec["threads"][sid]["messages"][:1]}
         with_rule = make_persistent(package, **KNOBS).decide(case, threads)
         assert with_rule == make_persistent(package, **{**KNOBS, "no_lowball": None}).decide(case, threads), case_id
+
+
+def test_a_bidder_far_behind_is_not_asked_again(package):
+    """P05, Sun 04:25: two bidders at their final offers (28.00, 29.00), the third open at 33.00. The agent asked the
+    third once more, its answer took 98 s, and the bidder at 28.00 timed out and withdrew."""
+    if package is None:
+        pytest.skip("needs the data package")
+    rec = record("P05", "jonathans_branch@2caef7f")
+    case = rec["case"]
+    threads = {}
+    for sid, thread in rec["threads"].items():
+        messages = thread["messages"]
+        finals = [i for i, m in enumerate(messages) if m.get("status") == "final_offer"]
+        quotes = [i for i, m in enumerate(messages) if m.get("from") != "buyer" and m.get("term_sheets")]
+        threads[sid] = messages[: (quotes[2] if sid.endswith("70240") else finals[0]) + 1]
+    from sellm.agent import KNOBS
+
+    before = make_persistent(package, **{**KNOBS, "drop_behind": None}).decide(case, threads)
+    assert before["supplier_id"].endswith("70240") and before["message"].get("term_sheets")
+    now = make_persistent(package, **KNOBS).decide(case, threads)
+    assert now["supplier_id"].endswith("70210") and now["message"]["action"]["type"] == "accept"
+    opening = {sid: thread["messages"][:1] for sid, thread in rec["threads"].items()}
+    for sid in opening:  # before two answers nobody is dropped
+        with_rule = make_persistent(package, **KNOBS).decide(case, opening, focus=sid)
+        assert with_rule == make_persistent(package, **{**KNOBS, "drop_behind": None}).decide(case, opening, focus=sid)

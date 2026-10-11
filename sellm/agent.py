@@ -30,6 +30,10 @@ KNOBS = dict(
     # The first ask to a supplier the dossier calls capacity-tight is no lower than 93 % of its opening price: P10's
     # seal maker answered a lower first ask with its final offer at once (0.647 -> 0.679; Amiad's rule, J4)
     no_lowball=0.93,
+    # RFQ: a bidder still 8 % dearer than the best other offer after two answers is not asked again - every
+    # message to it costs the leaders their 60 seconds (P05 Sun 04:25: the bidder at its final 28.00 withdrew
+    # while the loop waited for one at 33.00). J10
+    drop_behind=0.08,
 )
 
 # The best Calculator variant of the first lab search (runs/lab/20261010-1632-search-first/report.md,

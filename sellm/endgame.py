@@ -82,6 +82,12 @@ DEFAULTS = dict(
     # How many facts the first e-mail carries (the next ones the agent would cite, one sentence each). Suppliers
     # that walk a price ladder say final_offer after about four of our messages: a fact in hand at the end is lost.
     first_facts=1,
+    # RFQ: a bidder that has answered `behind_after` of our asks and still costs us this share more than the best
+    # other standing offer is not asked again. The arena answers a session's messages one after another: in P05
+    # the loop waited 98 s for a bidder at 33.00 while the one at its final 28.00 timed out and withdrew
+    # (0.717 instead of 0.820, Sun 04:25).
+    drop_behind=None,
+    behind_after=2,
 )
 CLAUSE_LINE = "With the index clause of the second option the price follows {series} beyond the deadband, so that this risk does not have to be priced in up front."
 IDX_LINE = re.compile(
@@ -417,9 +423,19 @@ class Persistent(Negotiator):
             price = max(price, last["unit_price"])
         return price if price < terms["unit_price"] - 0.005 else None
 
+    def behind(self, case, v, rival):
+        """This bidder cannot win any more: after `behind_after` answers its offer is still far above the best other."""
+        share = self.e["drop_behind"]
+        if not share or rival == math.inf or v.status != "open" or len(v.asks) < self.e["behind_after"]:
+            return False
+        its = v.filled(v.standing[1]) if v.standing[0] else {}
+        return bool(its) and v.valid(its) and v.c(its) > rival * (1 + share)
+
     def ready(self, case, v, rival=math.inf):
         if self.push_price(case, v) is not None:
             return False
+        if self.behind(case, v, rival):
+            return True
         return super().ready(case, v, rival)
 
     def plan(self, case, v, rival=math.inf):
