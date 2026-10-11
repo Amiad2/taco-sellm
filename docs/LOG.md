@@ -1187,3 +1187,9 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - P01 0.997, P02 0.725, P03 0.956, P04 0.860, P05 0.820, P07 0.747, P08 0.814, P10 0.679, P11 0.778, P18 0.729; 0 crashes, 0 refused moves, 21 s (10:22). The arena answered slowly at that time: /health 3 to 5 s per call, a git push hung for five minutes.
 - P18, a second order-history fact on two order lines not yet cited as the fourth argument: duplicate (the order history of a part counts once), final offer, 0.721 against 0.729 (session 77de68e306546227). experiments/LEDGER-JONATHAN.md J22.
 - The newest measured code is jonathans_branch at tag best-jonathans_branch-81.1-head; later commits on the branch change experiments/ only. Quota: 193 of 600 left.
+
+## 2026-10-11 10:39 CEST · Jonathan @ dhcp-10-177-2-129
+**[decision] main = jonathans_branch@49eebc9 (fast-forward): the 81.1 agent is on main**
+- Asked by Jonathan Sun 10:37. main's code is that of the measured commit 362bf0f: ten practice cases through the final runner 81.1 three times (09:57, 10:11, 10:22), 228 tests pass, intel verify PASS, dossiers built with the Sunday release.
+- Run it with the planner: SELLM_PLAN=llm SELLM_MODEL=gpt-6-sol uv run python -m sellm.runner --set final --agent sellm --parallel 10 (through sellm.runner, not the kit's arena run).
+- Fallbacks: tag best-jonathans_branch-80.3-sunday3 (without hold_fixed), best-jonathans_branch-81.1-head (this code).
