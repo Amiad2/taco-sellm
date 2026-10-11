@@ -114,9 +114,12 @@ at `a5b363c`: PASS (`runs/lab/20261011-020037-stress-omar-sellm-a5b/`). Team fro
   dismissed; informal_costing -> data taken; delivery records taken only with a delivery/quality
   problem signal. Acting on the last one (E3) did not pay: a round with no fact also ends suppliers.
 - **Magnitude is not monotone** (E4): the larger fall helped P01 and hardened P11 (reproduced).
-- Untested: news and letter-based facts on hidden suppliers; reacting to a dismissal in the same thread;
-  two facts in one e-mail; the stated drivers of strangers that are not cost drivers of the part
-  (risk: 'irrelevant').
+- Tested since on jonathans_branch (`experiments/LEDGER-JONATHAN.md`): a second fallen index series is a
+  new fact (J1: P18 0.598, P08 0.637 - the hedge covers only the hedged material); the price-history
+  pair around the supplier's last price jump moves it (J8/J9: P08 0.814, P03 0.956, P18 0.657); two
+  facts in the first e-mail lose (J5); promises and questions do not buy price (J-ontime, E5).
+- Untested: news and letter-based facts on hidden suppliers; reacting to a dismissal in the same
+  thread; the stated drivers of strangers that are not cost drivers of the part (risk: 'irrelevant').
 
 ## 7. Evaluation
 
