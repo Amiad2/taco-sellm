@@ -261,7 +261,7 @@ def play_case(client, case, new_agent, cap=None, limits=None):
         "session_id": run.table.session_id,
         "score": result.get("score"),
         "deal": result.get("deal"),
-        "end_reason": result.get("end_reason"),
+        "end_reason": result.get("end_reason") or ("accepted" if result.get("deal") else ("no_deal" if result else None)),
         "terms": result.get("terms"),
         "seconds": round(time.time() - t0, 1),
         "stats": run.stats,

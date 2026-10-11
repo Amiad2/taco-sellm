@@ -97,10 +97,24 @@ def test_our_price_never_goes_back_on_an_unchanged_structure(pkg):
                 assert ours["unit_price"] >= last["unit_price"] - 1e-9
 
 
-@pytest.mark.parametrize("case_id", ["P01", "P02", "P03", "P04", "P07", "P08"])
+@pytest.mark.parametrize("case_id", ["P03", "P04"])
+def test_a_fixed_list_price_that_repeats_is_asked_just_below(pkg, case_id):
+    """P03/P04: up to the supplier's repeated price the measured moves; then one ask 0.2 % below it."""
+    recs = [r for r in records(MEASURED) if r["case_id"] == f"case:{case_id}"]
+    if not recs:
+        pytest.skip("the measured session is not in runs/")
+    rows = replay(recs[0], lambda: make_agent(pkg))
+    first = next(i for i, row in enumerate(rows) if row[2] != row[3])
+    assert all(row[4] for row in rows[:first])
+    v = Thread(CaseModel(recs[0]["case"]), rows[first][0], recs[0]["threads"][rows[first][0]]["messages"][: rows[first][1]])
+    quoted = v.standing[1]["unit_price"]
+    assert rows[first][3][1][0][0] == round(quoted * (1 - 0.002), 2)
+
+
+@pytest.mark.parametrize("case_id", ["P01", "P02", "P07", "P08", "P11"])
 def test_the_measured_moves_are_kept_where_no_new_rule_applies(pkg, case_id):
-    """Practice suppliers answer identical e-mails identically: these cases then score what the 74.9
-    run scored (P01 0.969, P02 0.725, P03 0.923, P04 0.860, P07 0.747, P08 0.549)."""
+    """Practice suppliers answer identical e-mails identically: these cases then score what the
+    measured runs scored (P01 0.969, P02 0.725, P07 0.747, P08 0.549, P11 0.778)."""
     recs = [r for r in records(MEASURED) if r["case_id"] == f"case:{case_id}"]
     if not recs:
         pytest.skip("the measured session is not in runs/")
