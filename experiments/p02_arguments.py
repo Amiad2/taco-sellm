@@ -188,6 +188,8 @@ VARIANTS = {
     "fixed": dict(knobs=dict(plan="llm"), structure={"index_clause": None}, hold=True),
     # ... and with smaller steps of ours, so that the thread lasts a round longer (it gave 0.20 per fact)
     "fixed-creep": dict(knobs=dict(plan="llm", creep=0.25), structure={"index_clause": None}, hold=True),
+    # ... and no taking of its sheet while each answer is cheaper than the one before (up to six asks)
+    "fixed-keep": dict(knobs=dict(plan="llm", creep=0.25), structure={"index_clause": None}, hold=True, keep=6),
     # P10: the lead time we need (42 days), which it calls not feasible, kept in every ask
     "lead42-hold": dict(knobs=dict(plan="llm"), structure={"lead_time_days": 42}, hold=True),
     # P10: the lead time it calls feasible (its alternative sheet) asked from the first e-mail
@@ -349,6 +351,19 @@ class Probe(Persistent):
 
     def ready(self, case, v, rival=math.inf):
         return False if self.below(case, v) else super().ready(case, v, rival)
+
+    def done(self, case, v, rival=math.inf):
+        """`keep`: not done before that many asks while it is open and its last answer was cheaper than the one before."""
+        keep = self.p.get("keep")
+        if keep and v.status == "open" and len(v.asks) < keep and v.left > 1:
+            costs = [
+                min(v.c(v.filled(x["terms"])) for x in m["term_sheets"] if v.valid(v.filled(x["terms"])))
+                for m in v.theirs
+                if m.get("term_sheets") and any(v.valid(v.filled(x["terms"])) for x in m["term_sheets"])
+            ]
+            if len(costs) < 2 or costs[-1] < costs[-2] - 1e-6:
+                return False
+        return super().done(case, v, rival)
 
     def plan(self, case, v, rival=math.inf):
         plan = super().plan(case, v, rival)
