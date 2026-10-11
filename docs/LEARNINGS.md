@@ -37,6 +37,44 @@ Tacto's docs or FAQ, not yet seen by us). Raw history goes to `docs/LOG.md`.
   rolling scorecard. Pick the right reference before citing, and build the argument bank only from
   IDs checked against `facts.json`, never from a supplier's stated reasons.
 
+## From the P02 argument tests (Sun 01:20-02:10, 8 practice sessions; `experiments/P02-ARGUMENTS.md` on `jonathans_branch`)
+
+Nordmark (P02) ended at EUR 371.66 with 90 days in more than ten sessions, whatever was asked or
+argued. One session per untested kind of argument, on top of `--agent sellm`:
+
+- **An index clause is security for a supplier, and it pays for it with price - far more than the
+  clause costs us** (confirmed, P02). Asked for the copper clause with the 5 % deadband (cost to us:
+  0.8 % of spend), Nordmark's first answer was 351.45 instead of 373.97: "we agree to introduce the
+  CU-NOTATION index clause to reduce the base price". Its letter passes copper on; the clause does
+  that for it.
+- **With a relationship term the lowest price is not the best one, and code has to choose the
+  price** (confirmed, computed). The arena counts a clause as security, not cash: 351.45 is 5.8 %
+  below Nordmark's full cost and cost us EUR 119,974 in the relationship term - score 0.242, worse
+  than the fixed price (0.531). Our total cost is lowest at 361.35 (score 0.735): there the next
+  euro off the price costs more in the relationship term than it saves.
+- **A supplier never raises a price it has named** (confirmed, P02): asked 361.35 after its own
+  351.45 ("we do not want a price that leaves you below a sustainable margin") it answered twice
+  "our offer of EUR 351.45 is economically viable and remains our official position". Asked 361.35
+  at once, it agreed in its first reply. So an ask the supplier may undercut must already be the
+  price we want: never open below it on a structure that gives the supplier security.
+- **Two sheets in the first e-mail work as a menu** (confirmed, P02): the fixed-price ask and the
+  clause at our price - it agreed to the clause sheet at once (362.70, score 0.725; the price came
+  from our own cost estimate, capped by its opening).
+- **A fixed-price wall can be the supplier's cost floor exactly** (computed from two relationship
+  charges, to the euro): Nordmark's full cost is EUR 367.56 at a cost of money of 6.67 %, and 371.66
+  with 90 days is worth exactly that to it. No argument goes below it: "below this price we would
+  need facts, not just a lower number".
+- **A fact the arena calls `irrelevant` is not free** (confirmed 2 of 2, P02): an index that is not a
+  cost driver of the part (producer prices of electric motors, electricity) and order prices or the
+  forecast of another part of the same supplier came back `irrelevant`; the verified fact next to
+  them lost its effect (the forecast moved it 0.46 instead of 1.91) and it said `final_offer` after
+  three messages instead of four (0.394 and 0.319 against 0.531). Cite only facts about this part
+  and its cost drivers.
+- **Not levers on Nordmark** (one session each): answering its question "which volume can you
+  commit to?" with the contract's binding volume and a call-off schedule (0.525), asking it to put
+  our proposal before its pricing committee (0.480). Earlier, by Amiad: past renewals asked vs
+  settled, more arguments per e-mail, a warmer or a coercive tone.
+
 ## From the practice arms (Sat 21:15-21:35, 30 practice sessions; `experiments/PRACTICE-ARMS.md`)
 
 One change per arm on the real practice suppliers, base `19b339f`. Per-case scores and the code of

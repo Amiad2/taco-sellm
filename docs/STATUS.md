@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-11 00:55 CEST by Jonathan (Claude Code).
+Last updated: 2026-10-11 02:10 CEST by Jonathan (Claude Code).
 
 ## Now
 
@@ -25,7 +25,7 @@ Last updated: 2026-10-11 00:55 CEST by Jonathan (Claude Code).
 | Amiad (Claude Code) | **Group C - Runner, arguments, measurement, final** (`docs/PLAN.md` section 3). Done: `sellm/runner.py` v1.2 (fake-arena tests, sandbox, one full practice run), `sellm/claims.py` (argument bank, dossiers rebuilt), `scripts/preflight`, README run section. Open: in P05 the runner scored 0.665 twice against the kit runner's 0.769 (the arena counts parallel messages as late, `[finding]` Sat 21:25) - next is a one-message-in-flight option; then the Sunday checklist, rehearsal on Jonathan's machine, submission text (`[handoff]` Sat 21:25). Also keeps the lab; the clone loop is paused | `sellm/runner.py`, `tests/test_runner.py`, `sellm/claims.py`, `tests/test_claims.py`, `scripts/preflight`, `sellm/lab/`, `scripts/lab`, `runs/lab/`, README run section | Sat 20:50 |
 | Amiad (Claude Code) | **Playbooks (Sat 21:35, until about 01:00)**: per-case negotiator knob sets that reach 0.95+ in the lab (engine, then OpenAI suppliers), confirmed on practice with at most 25 sessions (no parallel run with Jonathan: I ask first), then a test of selecting a playbook from the dossier vs. one merged set on invented suppliers. Lab only until then; does not change `sellm/negotiator.py` | `sellm/lab/playbooks.py`, `runs/lab/playbooks/` | Sat 21:35 |
 | Omar (Claude Code) | **Group B - Data**, and since Sat 22:00 **the dossier's use in the negotiator and calculator** (taken over from Jonathan, who asked Omar for help and does not edit these files meanwhile). Done (Sat 22:30): a lock in `sellm.intel.dossier`, the case's facts in its citable list, the dossier reads every opening (it got one e-mail; P05's job shop read as a monopolist). Measured and reverted: no `qn:` after an `sc:` (P11 0.710, P02 0.522). Not taken by Omar: payment days by cost of money for every supplier, a rate read live from its sheets, arguments ordered by signals. The negotiator files are free again for Jonathan. Open: the Sunday 08:00 rebuild (dry run Sat 22:30: rebuild identical, verify PASS) and V11 | `sellm/intel/` (package), `sellm/dossiers/`, `tests/test_intel.py` | Sat 22:00 |
-| Jonathan (Claude Code) | **P02 arguments (Sun 01:20)**: which argument moves a supplier that has stopped at its limit - Nordmark ends at 371.66 with 90 days in ten sessions whatever is asked. One practice session per variant (index clause on copper, market and energy indices, the sister part, its own volume question answered, the approval ladder), 5-10 sessions, each logged. New file only; `--agent sellm` unchanged until a variant is measured and agreed | `experiments/p02_arguments.py`, `experiments/P02-ARGUMENTS.md` | Sun 01:20 |
+| Jonathan (Claude Code) | **Own version on `jonathans_branch` (Sun 02:10)**: `--agent sellm` of main plus the clause offer (`clause_offer`, P02 0.531 -> 0.725). Open: the record `experiments/P02-ARGUMENTS.md`, a lab stress run of the branch, then the same question for P18 and P08 (which structure does the supplier pay for?) | `sellm/endgame.py`, `sellm/agent.py`, `tests/test_endgame.py`, `experiments/p02_arguments.py` on `jonathans_branch` | Sun 01:20 |
 | Codex | **P02 experiment repair**: fix the probe's invalid `Thread` import and case-mismatched assumptions; validate locally, then run five valid P02 variants | `sellm/lab/p02_c_agents.py`, `runs/practice/P02/`, `runs/labels.json`, `docs/LOG.md` | Sat 23:29 |
 
 ## Next up
@@ -59,6 +59,8 @@ signal vocabulary). Build against section 10; add fields freely, rename core fie
 
 **Full practice run with `--agent sellm` on Sun 00:45 (@7a49c38: calculator, argument bank, dossier signals, past the relationship target, fast payment for cash-short suppliers; no LLM, kit runner): mean 72.9** - baseline 61.5. At or above the baseline in 9 of 10 cases (P07 0.747 against 0.779); 0 timeouts. With the LLM writing the e-mails the same agent scored 71.6 and stopped being repeatable; an LLM verdict that may accept made P01 and P18 worse (`experiments/LLM-ADVISOR.md`). Still weak: P18 0.47, P02 0.53, P08 0.55. Details: `docs/LOG.md` Sun 00:50.
 
+**`jonathans_branch@a49c9b4` (Sun 02:10): P02 0.725 (main: 0.531)** with the index clause offered as a second sheet at the price where our total cost is lowest (session 411824454914aa5f). The other nine cases are played move for move as on main (tests), so the practice mean by replay is **74.8** (main 72.9). Findings: `docs/LEARNINGS.md`, section "From the P02 argument tests".
+
 Generated, do not keep by hand: `runs/README.md` (per case `C_open`, `C_best`, our best, every
 session). Baseline of the kit's LLM agent on all 10 hosted cases, Sat 15:27: **mean 61.5**.
 Weakest: P02 0.105, P18 0.377, P08 0.433, P10 0.570. Analysis and hypotheses: `runs/BASELINE.md`.
@@ -66,7 +68,7 @@ Weakest: P02 0.105, P18 0.377, P08 0.433, P10 0.570. Analysis and hypotheses: `r
 ## Decisions
 
 - **Groups: A Jonathan, B Omar, C Amiad** (Sat 20:50). **The Live Final runs on Jonathan's machine** (MacBook; decided by Amiad Sat 20:45): the runner and the pre-flight must work on macOS, Jonathan starts the final.
-- **Each member builds an own version on an own branch** (Sun 01:20, asked by Omar for the team): Omar `omars_branch`; Jonathan and Amiad add theirs here. Shared files (`AGENTS.md`, `docs/`, `runs/`) stay on `main`; the best version, chosen by its measured results (`<branch>@<hash>`), is merged into `main` before 11:00 for the final (`AGENTS.md` section 4).
+- **Each member builds an own version on an own branch** (Sun 01:20, asked by Omar for the team): Omar `omars_branch`; Jonathan `jonathans_branch` (Sun 02:05); Amiad adds his here. Shared files (`AGENTS.md`, `docs/`, `runs/`) stay on `main`; the best version, chosen by its measured results (`<branch>@<hash>`), is merged into `main` before 11:00 for the final (`AGENTS.md` section 4).
 - **Pull before every run.** `arena play`, `arena run`, `scripts/pull-runs` and the probe scripts call `scripts/pull-first` themselves and restart on the new code; new runners must call `arena_kit.cli.pull_first()` (`AGENTS.md` section 2).
 - Docs and logs are written in English: the jury and tum.ai read the repo.
 - Our code lives in `sellm/` (lab in `sellm/lab/`, the agent's entry point `sellm/agent.py`); `arena_kit/` stays the kit except for `pull_first` and the `--agent sellm` registration.
