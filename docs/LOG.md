@@ -1149,3 +1149,7 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - P01 0.997, P02 0.725, P03 0.956, P04 0.860, P05 0.820, P07 0.747, P08 0.814, P10 0.679, P11 0.778, P18 0.657. 0 crashes, 0 refused moves, 14 s. Tag best-jonathans_branch-80.3-sunday3.
 - This commit contains main as of Sun 09:17 (Omar's release fix in sellm/intel/extract.py, docs, runs) and the branch's release work of this morning; merging it into main is a fast-forward of the code. 227 tests pass, intel verify PASS, dossiers rebuilt with the release.
 - Quota: 237 of 600 left.
+
+## 2026-10-11 09:26 CEST · Amiad @ fedora
+**[change] Pitch deck for the 3-minute slot: sellm-pitch.pdf (7 slides)**
+- In the repo root, built from https://claude.ai/artifact/EatRbWMK8iAvrapwfhZQhX (speaker notes there): title 61.5 -> 80.3, journey of 11 measured versions, what others don't do (own simulator, replay proof, LLM measured), case by case, P02 index clause, P08 price-jump argument, close. Figures from jonathans_branch@8a854c4 (80.3) and docs/LOG.md.
