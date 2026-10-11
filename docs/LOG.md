@@ -1214,3 +1214,8 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - scripts/preflight on main@58facd3 (11:18-11:22): repo in step, .env and data with the Sunday release, arena me ok, no live-feed endpoint in the agent path, 228 tests pass, sandbox D01 through the final runner 0.947. Then two practice cases as the final will run them (SELLM_PLAN=llm SELLM_MODEL=gpt-6-sol, a fresh planner cache so the model is really called): P01 0.997, P05 0.820, 0 crashes, 16 s.
 - Fixed: README and scripts/preflight printed the final command without SELLM_PLAN=llm SELLM_MODEL=gpt-6-sol (without the planner P01 is 0.969, the mean 80.8); ruff's import-order complaint in sellm/lab/p02_c_agents.py.
 - Network: 11:09-11:17 the machine was on a phone hotspot with IPv6 only (arena and GitHub unreachable); while switching to eduroam a captive portal answered for arena.tacto.ai (certificate mismatch, two sessions not opened, no quota used). On eduroam /health answers in 0.1-0.4 s. Open for the person at the machine: power cable, caffeinate -dims.
+
+## 2026-10-11 11:38 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[change] sellm/runner.py: the final's polling loop survives a network failure**
+- Found Sun 11:36 while the runner was already waiting for wave 1: client.cases('final') was caught for ArenaError only, so a lost connection (httpx.TransportError after the client's four attempts) ended the whole process. Now it is logged and polling goes on; the cases in play are untouched. tests/test_runner.py: 16 passed.
+- The runner on Jonathan's MacBook is restarted on this commit; the hash of the submission changes from 8efb99c to this one.

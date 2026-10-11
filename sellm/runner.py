@@ -581,6 +581,9 @@ def run_final(client, new_agent, waves=5, parallel=10, limits=None, on_row=None)
             if e.status != 403:
                 log.warning("case list: %s", e)
             cases = []
+        except Exception as e:  # the network is gone for a moment: keep polling, the cases in play go on
+            log.warning("case list: %s: %s", type(e).__name__, e)
+            cases = []
         for case in cases:
             wave = case.get("wave")
             if not case.get("open"):
