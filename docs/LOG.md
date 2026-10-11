@@ -991,3 +991,10 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Fix, omars_branch@0c60254: CaseRunner.open waits for a free slot on that 429 (every 5 s, up to 300 s or until the case must close); the practice-quota 429 still fails at once. 16 runner tests (fake arena: three refusals, then the case plays).
 - V1b, omars_branch@0466bcf: P07 0.747, P10 0.647 - as predicted. All ten measured through the final runner: 75.4 (tag best-omars_branch-75.4-runner). Practice sessions of this research: 27 (experiments/LEDGER.md); team quota left 188 at 03:08.
 - For the final: any session open on our key counts against the 10 - nobody plays practice or sandbox from 11:55 until the last wave ends. main's runner (one loop per thread, no slot wait) has neither fix.
+
+## 2026-10-11 03:13 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] jonathans_branch@0eaf946 with SELLM_PLAN=llm (gpt-6-sol, plans made live), all ten practice cases: mean 77.3 (75.4 before the index rules, main 72.9)**
+- commit jonathans_branch@0eaf946 (pushed, clean tree); tag best-jonathans_branch-77.3. uv run arena run --set practice --agent sellm --parallel 8 played eight cases; P10 and P11 did not open (HTTP 429: a teammate's sessions were open at the same moment, the key allows ten) and were played singly on the same commit right after (arena play). 0 timeouts, plans in 3-8 s.
+- Per case: P01 0.997 (0.969; PPI-D351 -6.1 % since its peak, the planner read 'energy' in the supplier's letter), P02 0.725, P03 0.923, P04 0.860, P05 0.820, P07 0.747, P08 0.637 (0.549; the fall of PPI-C2431 first), P10 0.647, P11 0.778, P18 0.598 (0.520; both fallen indices, then the order history).
+- The kit runner printed 'mean score: 78.8': that is the mean of the eight cases it played, not of ten. A case that fails to open is dropped from its mean without a retry - for the final only one machine may hold sessions.
+- Team quota left 181 of 450; Jonathan's instruction: stop at 100.

@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-11 02:40 CEST by Jonathan (Claude Code).
+Last updated: 2026-10-11 03:15 CEST by Jonathan (Claude Code).
 
 ## Now
 
@@ -67,6 +67,8 @@ signal vocabulary). Build against section 10; add fields freely, rename core fie
 **`jonathans_branch@67001e7` (Sun 02:25), full practice run, kit runner, no LLM: mean 74.9** (main@7a49c38: 72.9; tag `best-jonathans_branch-74.9`). P02 0.725 with the index clause offered as a second sheet at the price where our total cost is lowest; the other nine exactly as on main (P01 0.969, P03 0.923, P04 0.860, P05 0.820, P07 0.747, P08 0.549, P10 0.647, P11 0.778, P18 0.467). Findings: `docs/LEARNINGS.md`, section "From the P02 argument tests".
 
 **`jonathans_branch@b7b279e` (Sun 02:38), full practice run with the LLM planner live (`SELLM_PLAN=llm`, gpt-6-sol), kit runner: mean 75.4**, 0 timeouts (tag `best-jonathans_branch-75.4`). It is the 74.9 agent plus Omar's `idx_recent` with the hedge guard (P18 0.520) plus `sellm/planner.py`: before the first ask the model names the terms a supplier would give price for, with a quoted passage; code acts on a faster payment it asked for and on an index clause under a relationship term. Same ten deals as `omars_branch@f473d97`; the planner changes no e-mail on these cases, it is there for suppliers the dossier's rules do not cover.
+
+**`jonathans_branch@0eaf946` (Sun 03:12), all ten practice cases with `SELLM_PLAN=llm` (gpt-6-sol), kit runner: mean 77.3** (tag `best-jonathans_branch-77.3`; P10 and P11 played singly after a 429 on opening). New against 75.4: every fallen cost-driver index is cited, one per e-mail, and with the planner an index the supplier itself blames is cited with its larger fall. P01 0.997, P02 0.725, P03 0.923, P04 0.860, P05 0.820, P07 0.747, P08 0.637, P10 0.647, P11 0.778, P18 0.598. Ledger: `experiments/LEDGER-JONATHAN.md` on `jonathans_branch`.
 
 Generated, do not keep by hand: `runs/README.md` (per case `C_open`, `C_best`, our best, every
 session). Baseline of the kit's LLM agent on all 10 hosted cases, Sat 15:27: **mean 61.5**.
