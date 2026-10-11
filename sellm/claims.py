@@ -22,9 +22,9 @@ import threading
 log = logging.getLogger(__name__)
 
 # news topics: what they mean for our position (docs/PLAN.md section 10, signal kinds)
-BUYER_NEWS = {"free_capacity", "short_time_work", "credit_watch", "credit_downgrade", "new_plant"}
+BUYER_NEWS = {"free_capacity", "short_time_work", "credit_watch", "credit_downgrade", "new_plant", "supply_normalises"}
 SUPPLIER_NEWS = {"allocation", "full_order_book", "big_order", "chip_shortage", "energy_contract"}
-SENSITIVE_NEWS = {"credit_watch", "credit_downgrade", "short_time_work", "restructuring"}
+SENSITIVE_NEWS = {"credit_watch", "credit_downgrade", "short_time_work", "restructuring", "insolvency"}
 SKIP_NEWS = {"noise", "market"}
 PPM_HIGH = 1000  # a scorecard above this is a quality lever
 OTD_TARGET = 95.0  # Hollerau's quality agreement

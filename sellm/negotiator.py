@@ -878,7 +878,9 @@ class Negotiator:
             # what its hedge covers is the material its clause is on: the same supplier took the fall of the
             # producer-price index of its other cost driver ("adjusted our calculation accordingly", P08 Sun 03:05)
             clause = {o.get("series") for o in case.get("term_options", {}).get("index_clause") or [] if o}
-            if series not in clause:
+            # ... and only where that clause is on a notation of its own (AS-14404). A supplier that bought its bar
+            # steel forward (a letter of the Sunday release) is hedged against the producer-price series themselves.
+            if clause and series not in clause and not any(c.startswith("PPI-") for c in clause):
                 return False
         return any(sig.get("kind") == "material_hedged" for sig in self.intel(case, v).get("signals") or [])
 

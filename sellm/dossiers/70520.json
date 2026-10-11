@@ -1,9 +1,9 @@
 {
  "built_from": {
   "case_id": null,
-  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "facts_sha256": "411943e51cc915a92a129e3d3adfe3f6269f4a5bbb4bddabecbdc6fdcfc57af2",
   "package": "1.0.0",
-  "sunday_release": false
+  "sunday_release": true
  },
  "case_facts": {},
  "citable": [
@@ -912,7 +912,7 @@
   "qn_supplier_caused_12m": 4,
   "trend": "worse"
  },
- "profile_text": "Vesmo Elektromotory a.s. (CZ; group; 1200 staff; turnover EUR 192.0 M). Our spend FY2026 EUR 2.2 M (1.15 % of its turnover). Standard terms: 45 days net, FCA, lead time 42 days. Cost of money about 6.5 % a year; cash pressure low; type group. Signals: approval ladder (3), material hedged (2), wants volume (1). Performance 2026Q3: green, OTD 81.1 %, 764 ppm. Parts: part:350010 Motor IE3 4 kW, 4-pole: price 225.61 per 1, 1.02x should-cost; part:350012 Motor IE3 15 kW, 4-pole: price 601.27 per 1, 1.02x should-cost.",
+ "profile_text": "Vesmo Elektromotory a.s. (CZ; group; 1200 staff; turnover EUR 192.0 M). Our spend FY2026 EUR 2.2 M (1.15 % of its turnover). Standard terms: 45 days net, FCA, lead time 42 days. Cost of money about 6.5 % a year; cash pressure low; type group. Signals: approval ladder (3), material hedged (3), wants volume (1). Performance 2026Q3: green, OTD 81.1 %, 764 ppm. Parts: part:350010 Motor IE3 4 kW, 4-pole: price 225.61 per 1, 1.02x should-cost; part:350012 Motor IE3 15 kW, 4-pole: price 601.27 per 1, 1.02x should-cost.",
  "schema_version": 1,
  "signals": [
   {
@@ -927,12 +927,14 @@
   },
   {
    "evidence": [
+    "doc:20260620-70520-M1",
+    "doc:20260701-70520-M4",
     "quote:7300054",
     "quote:7300077"
    ],
    "excerpt": "Material covered until March 2027; price valid accordingly.",
    "kind": "material_hedged",
-   "strength": 2
+   "strength": 3
   },
   {
    "evidence": [

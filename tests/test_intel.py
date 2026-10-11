@@ -138,7 +138,8 @@ def test_extract_reads_every_row_of_the_real_package(real_pkg):
     src = Source(real_pkg)
     assert len(src.detailed_ids()) == 46
     assert len(src.q("SELECT id FROM po_lines")) == 5400
-    assert len(src.documents("sup:70130")) == 7 and len(src.market_news()) == 7
+    sunday = 1 if real_pkg.release else 0  # the Sunday release adds one market news item
+    assert len(src.documents("sup:70130")) == 7 and len(src.market_news()) == 7 + sunday
 
 
 def test_parts_follow_the_rules(fixture_pkg):
@@ -258,8 +259,9 @@ def test_the_real_package_in_numbers(real_pkg):
     src = Source(real_pkg)
     ds = [build_supplier(src, s) for s in src.detailed_ids()]
     assert len(ds) == 46 and all(validate(d) == [] for d in ds)
-    assert sum(len(d["parts"]) for d in ds) == 90 and sum(len(d["documents"]) for d in ds) == 208
-    assert sum(len(d["news"]) for d in ds) == 32
+    letters = 4 if real_pkg.release else 0  # the Sunday release: four supplier letters (the memo has no supplier)
+    assert sum(len(d["parts"]) for d in ds) == 90 and sum(len(d["documents"]) for d in ds) == 208 + letters
+    assert sum(len(d["news"]) for d in ds) == 32 + (5 if real_pkg.release else 0)  # five supplier news on Sunday
     market = {"news:20260910-27", "news:20260912-30", "news:20260914-31", "news:20260916-32"}
     assert not any(n["id"] in market for d in ds for n in d["news"])
 
@@ -340,7 +342,8 @@ def test_noise_and_market_news_never_make_a_signal(real_pkg):
     ds = [signals.apply(build_supplier(src, s)) for s in src.detailed_ids()]
     noise = {n["id"] for d in ds for n in d["news"] if n["noise"]}
     market = {n["id"] for n in src.market_news()}
-    assert len(noise) == 10 and len(market) == 7
+    sunday = 1 if real_pkg.release else 0  # the Sunday release: one more noise item, one more market item
+    assert len(noise) == 10 + sunday and len(market) == 7 + sunday
     assert not any(e in noise | market for d in ds for s in d["signals"] for e in s["evidence"])
     by_id = {d["supplier_id"]: _signals(d) for d in ds}
     assert "ownership_change" not in by_id["sup:70230"] and "ownership_change" not in by_id["sup:70160"]

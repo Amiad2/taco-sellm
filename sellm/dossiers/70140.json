@@ -1,9 +1,9 @@
 {
  "built_from": {
   "case_id": null,
-  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "facts_sha256": "411943e51cc915a92a129e3d3adfe3f6269f4a5bbb4bddabecbdc6fdcfc57af2",
   "package": "1.0.0",
-  "sunday_release": false
+  "sunday_release": true
  },
  "case_facts": {},
  "citable": [
@@ -240,6 +240,22 @@
    "statement": "Our forecast fc:310030@2026-09 expects 8,530 units a year, a change of +14.2 %.",
    "strength": 2.84,
    "unit": "%"
+  },
+  {
+   "about": "sup:70140",
+   "figure": null,
+   "helps_buyer": false,
+   "helps_supplier": false,
+   "ids": [
+    "news:20261006-S1"
+   ],
+   "kind": "news",
+   "private": false,
+   "sensitive": true,
+   "statement": "We have read that Odlewnia Kalwisz Sp. z o.o. files for insolvency (news:20261006-S1).",
+   "strength": 0.5,
+   "topic": "insolvency",
+   "unit": ""
   },
   {
    "about": "sup:70140",
@@ -560,6 +576,15 @@
    "noise": false,
    "source": "Zulieferer Report",
    "topic": "restructuring"
+  },
+  {
+   "body": "Odlewnia Kalwisz Sp. z o.o. has filed for insolvency proceedings; a provisional administrator keeps production running for now. Customers are advised to secure their supply.",
+   "date": "2026-10-06",
+   "headline": "Odlewnia Kalwisz Sp. z o.o. files for insolvency",
+   "id": "news:20261006-S1",
+   "noise": false,
+   "source": "Zulieferer Report",
+   "topic": "insolvency"
   }
  ],
  "opening_offer": null,
@@ -1119,6 +1144,7 @@
     "doc:20260710-70140-M2",
     "doc:20260715-70140-M1",
     "news:20260911-28",
+    "news:20261006-S1",
     "quote:7300011"
    ],
    "excerpt": "Payment within 10 days requested.",

@@ -1,9 +1,9 @@
 {
  "built_from": {
   "case_id": null,
-  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "facts_sha256": "411943e51cc915a92a129e3d3adfe3f6269f4a5bbb4bddabecbdc6fdcfc57af2",
   "package": "1.0.0",
-  "sunday_release": false
+  "sunday_release": true
  },
  "case_facts": {},
  "citable": [
@@ -930,7 +930,7 @@
   "qn_supplier_caused_12m": 7,
   "trend": "flat"
  },
- "profile_text": "Edelstahl-Service Donautal GmbH (DE; group; 350 staff; turnover EUR 165.0 M). Our spend FY2026 EUR 493,832 (0.3 % of its turnover). Standard terms: 30 days net, DAP, lead time 10 days. Cost of money about 6.5 % a year; cash pressure low; type group. Signals: approval ladder (1), material hedged (1). Performance 2026Q3: green, OTD 88.0 %, 75 ppm. Parts: part:370010 Round bar 1.4404 dia 30 mm, peeled: price 5.45 per 1; part:370021 Sheet 1.4301 2 mm, 2B, cut to size.",
+ "profile_text": "Edelstahl-Service Donautal GmbH (DE; group; 350 staff; turnover EUR 165.0 M). Our spend FY2026 EUR 493,832 (0.3 % of its turnover). Standard terms: 30 days net, DAP, lead time 10 days. Cost of money about 6.5 % a year; cash pressure low; type group. Signals: approval ladder (1), material hedged (2). Performance 2026Q3: green, OTD 88.0 %, 75 ppm. Parts: part:370010 Round bar 1.4404 dia 30 mm, peeled: price 5.45 per 1; part:370021 Sheet 1.4301 2 mm, 2B, cut to size.",
  "schema_version": 1,
  "signals": [
   {
@@ -943,11 +943,12 @@
   },
   {
    "evidence": [
+    "doc:20260706-70710-M1",
     "quote:7300008"
    ],
    "excerpt": "Material covered until March 2027; price valid accordingly.",
    "kind": "material_hedged",
-   "strength": 1
+   "strength": 2
   }
  ],
  "standard_terms": {

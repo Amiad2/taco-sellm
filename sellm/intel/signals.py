@@ -14,7 +14,10 @@ TEXT_RULES = {
     "capacity_tight": r"\ballocation\b|fully booked|capacity is (?:tight|limited)|sold out|full order book",
     "list_price_fixed": r"head-office directive|list conditions|discounts not possible|price list"
     r"|frozen all price reductions|no room on price",
-    "material_hedged": r"material covered until",
+    # Sunday release, a steel trader's letter: "we bought our bright and cold-drawn bar requirement forward at
+    # fixed prices until June 2027"
+    "material_hedged": r"material covered until|bought .{0,80}forward|(?:covered|bought|secured) at fixed prices"
+    r"|at fixed prices until",
     "partnership": r"partnership|kept supplying|old price|long-standing|for generations",
     "margin_floor": r"lowers? our margin|cannot sign|below (?:our )?cost",
     "quality_problem": r"\b8D\b|\bcomplaints?\b|\breject|\bdefects?\b",
@@ -26,11 +29,14 @@ TEXT_RULES = {
 }
 SUBJECT_RULES = {}
 NEWS_TOPICS = {
-    "cash_short": {"credit_downgrade", "credit_watch", "short_time_work"},
+    "cash_short": {"credit_downgrade", "credit_watch", "short_time_work", "insolvency"},
     "wants_volume": {"free_capacity"},
     "capacity_tight": {"allocation", "full_order_book", "big_order", "chip_shortage"},
-    "ownership_change": {"new_owner", "succession", "restructuring", "refocus"},
+    "ownership_change": {"new_owner", "succession", "restructuring", "refocus", "acquisition"},
 }
+# News that ends a shortage: capacity news older than it no longer counts (Sunday release: "semiconductor supply
+# back to normal" for a supplier that had warned of a chip shortage in March)
+EASES = {"supply_normalises"}
 DRIVER_CLAIM = re.compile(
     r"(?P<series>[A-Z][A-Z0-9.-]+) (?P<dir>rose|fell) (?P<chg>\d+(?:\.\d+)?) % in twelve months and is "
     r"(?P<share>\d+(?:\.\d+)?) % of our cost",
@@ -75,9 +81,12 @@ def _structured(d):
             "skonto",
             f"Skonto {st['skonto_pct']} % at {st['skonto_days']} days instead of {st['payment_days']}.",
         )
+    eased = max(((n["date"] or "") for n in d["news"] if n["topic"] in EASES), default="")
     for n in d["news"]:
         for kind, topics in NEWS_TOPICS.items():
             if not n["noise"] and n["topic"] in topics:
+                if kind == "capacity_tight" and eased and (n["date"] or "") < eased:
+                    continue
                 add(kind, n["id"], "news", n["headline"] or "")
     if ident.get("owner_type") == "group" or ident.get("group_parent"):
         add(

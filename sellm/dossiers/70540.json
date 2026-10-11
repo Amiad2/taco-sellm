@@ -1,9 +1,9 @@
 {
  "built_from": {
   "case_id": null,
-  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "facts_sha256": "411943e51cc915a92a129e3d3adfe3f6269f4a5bbb4bddabecbdc6fdcfc57af2",
   "package": "1.0.0",
-  "sunday_release": false
+  "sunday_release": true
  },
  "case_facts": {},
  "citable": [
@@ -188,6 +188,22 @@
    "statement": "Our forecast fc:350021@2026-09 expects 1,947 units a year, a change of +5.4 %.",
    "strength": 1.08,
    "unit": "%"
+  },
+  {
+   "about": "sup:70540",
+   "figure": null,
+   "helps_buyer": true,
+   "helps_supplier": false,
+   "ids": [
+    "news:20261008-S4"
+   ],
+   "kind": "news",
+   "private": false,
+   "sensitive": false,
+   "statement": "We have read that Konvertek Antriebselektronik GmbH: semiconductor supply back to normal (news:20261008-S4).",
+   "strength": 0.5,
+   "topic": "supply_normalises",
+   "unit": ""
   },
   {
    "about": "sup:70540",
@@ -451,6 +467,15 @@
    "noise": false,
    "source": "Gießerei-Rundschau Süd",
    "topic": "chip_shortage"
+  },
+  {
+   "body": "Konvertek Antriebselektronik GmbH reports that power semiconductor deliveries have normalised and that converter lead times will return to about twelve weeks over the winter.",
+   "date": "2026-10-08",
+   "headline": "Konvertek Antriebselektronik GmbH: semiconductor supply back to normal",
+   "id": "news:20261008-S4",
+   "noise": false,
+   "source": "Metall-Kurier",
+   "topic": "supply_normalises"
   }
  ],
  "opening_offer": null,
@@ -811,7 +836,7 @@
   "qn_supplier_caused_12m": 0,
   "trend": "flat"
  },
- "profile_text": "Konvertek Antriebselektronik GmbH (AT; group; 800 staff; turnover EUR 196.0 M). Our spend FY2026 EUR 1.3 M (0.65 % of its turnover). Standard terms: 30 days net, DAP, lead time 84 days. Cost of money about 6.5 % a year; cash pressure low; type group. Signals: approval ladder (2), capacity tight (1), list price fixed (2), margin floor (1), wants volume (1). Performance 2026Q3: green, OTD 81.5 %, 0 ppm. Parts: part:350020 Frequency converter 7.5 kW, IP55; part:350021 Frequency converter 15 kW, IP55: price 684.92 per 1, 0.99x should-cost.",
+ "profile_text": "Konvertek Antriebselektronik GmbH (AT; group; 800 staff; turnover EUR 196.0 M). Our spend FY2026 EUR 1.3 M (0.65 % of its turnover). Standard terms: 30 days net, DAP, lead time 84 days. Cost of money about 6.5 % a year; cash pressure low; type group. Signals: approval ladder (2), list price fixed (2), margin floor (1), wants volume (1). Performance 2026Q3: green, OTD 81.5 %, 0 ppm. Parts: part:350020 Frequency converter 7.5 kW, IP55; part:350021 Frequency converter 15 kW, IP55: price 684.92 per 1, 0.99x should-cost.",
  "schema_version": 1,
  "signals": [
   {
@@ -822,14 +847,6 @@
    "excerpt": "Their key account manager explained that price changes above 2 % need the approval of their pricing committee, which meets every two weeks.",
    "kind": "approval_ladder",
    "strength": 2
-  },
-  {
-   "evidence": [
-    "news:20260302-01"
-   ],
-   "excerpt": "Konvertek Antriebselektronik GmbH warns of longer delivery times",
-   "kind": "capacity_tight",
-   "strength": 1
   },
   {
    "evidence": [
