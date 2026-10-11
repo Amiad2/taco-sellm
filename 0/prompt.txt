@@ -107,3 +107,9 @@ pull mal und dann schau die neuen slides an
 ---
 
 pull mal und dann schau die neuen slides an
+
+---
+
+also wir haben uns jetzt so entschieden. entfern von der 2 folien 
+  präsentation die 2. folie. von der anderen entfernst du alle außer
+die 2. ordnest sinvoll. dann brauchen wir noch eine folie, dann füg eine foliehinzu, das wir keine llm benutzen zum antworten, sondern ein deterministisches skript das anweisungen von der llm bekommt. dann eine foliedas wir ein eigenes datenset und eine eigene arena zum lokal trainieren benutz haben. wir brauchen dann eine 1. folie mit catchy hook. was dasultra gut ankommt und wirklich unser projekt im großen ganzen beschreibt aber trotzdem einzigartig ist. mein kollege hatte sowas wie combining artifial intelligence with deterministic models oder so ähnlich. aber wir brauchen was was hookt. extrem hookt
