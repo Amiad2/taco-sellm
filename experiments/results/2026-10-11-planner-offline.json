@@ -1,0 +1,969 @@
+[
+ {
+  "case": "P01",
+  "supplier": "sup:70110",
+  "run": 0,
+  "quoted": {
+   "unit_price": 138.55,
+   "effective_date": "2026-11-01",
+   "payment_days": 30
+  },
+  "reason": "Rising energy, raw-material and wage costs.",
+  "note": "Offer 14-day payment in exchange for a lower, sustainable unit price.",
+  "wants": [
+   {
+    "field": "payment_days",
+    "value": 14,
+    "evidence": "Could you pay our invoices within 10 days? In return we would grant a cash discount.",
+    "because": "Faster payment is the clearest term it has offered to exchange for a discount."
+   }
+  ],
+  "dropped": [],
+  "seconds": 4.26
+ },
+ {
+  "case": "P01",
+  "supplier": "sup:70110",
+  "run": 1,
+  "quoted": {
+   "unit_price": 138.55,
+   "effective_date": "2026-11-01",
+   "payment_days": 30
+  },
+  "reason": "Rising energy, raw material and wage costs.",
+  "note": "Offer 14-day payment in exchange for a lower unit price that preserves a sustainable margin.",
+  "wants": [
+   {
+    "field": "payment_days",
+    "value": 14,
+    "evidence": "Could you pay our invoices within 10 days? In return we would grant a cash discount.",
+    "because": "The supplier explicitly offers a discount for faster payment; 14 days is the fastest available option."
+   }
+  ],
+  "dropped": [],
+  "seconds": 6.29
+ },
+ {
+  "case": "P01",
+  "supplier": "sup:70110",
+  "run": 2,
+  "quoted": {
+   "unit_price": 138.55,
+   "effective_date": "2026-11-01",
+   "payment_days": 30
+  },
+  "reason": "Rising energy, raw material and wage costs.",
+  "note": "Offer 14-day payment in exchange for a moderated price increase that preserves a sustainable margin.",
+  "wants": [
+   {
+    "field": "payment_days",
+    "value": 14,
+    "evidence": "Could you pay our invoices within 10 days? In return we would grant a cash discount.",
+    "because": "Faster payment addresses its cash needs, and it explicitly offers a discount in return."
+   }
+  ],
+  "dropped": [],
+  "seconds": 2.93
+ },
+ {
+  "case": "P02",
+  "supplier": "sup:70510",
+  "run": 0,
+  "quoted": {
+   "unit_price": 370.96,
+   "payment_days": 30,
+   "index_clause": null
+  },
+  "reason": "Rising copper and electronic component costs",
+  "note": "Offer a CU-NOTATION index clause in exchange for a lower fixed component of the unit price.",
+  "wants": [
+   {
+    "field": "index_clause",
+    "value": {
+     "series": "CU-NOTATION",
+     "material_share": 0.2,
+     "deadband_pct": 0,
+     "base_month": "2026-08"
+    },
+    "evidence": "Regarding our cost structure, CU-NOTATION rose 47.7 % in twelve months and is 20 % of our cost.",
+    "because": "Indexing copper removes the risk behind its price increase."
+   }
+  ],
+  "dropped": [],
+  "seconds": 3.19
+ },
+ {
+  "case": "P02",
+  "supplier": "sup:70510",
+  "run": 1,
+  "quoted": {
+   "unit_price": 370.96,
+   "payment_days": 30,
+   "index_clause": null
+  },
+  "reason": "Rising copper and electronic component costs",
+  "note": "Offer the CU-NOTATION index clause in exchange for a lower initial price increase.",
+  "wants": [
+   {
+    "field": "index_clause",
+    "value": {
+     "series": "CU-NOTATION",
+     "material_share": 0.2,
+     "deadband_pct": 0,
+     "base_month": "2026-08"
+    },
+    "evidence": "Regarding our cost structure, CU-NOTATION rose 47.7 % in twelve months and is 20 % of our cost.",
+    "because": "A copper index clause would reduce Nordmark\u2019s exposure to further copper price changes."
+   }
+  ],
+  "dropped": [],
+  "seconds": 3.55
+ },
+ {
+  "case": "P02",
+  "supplier": "sup:70510",
+  "run": 2,
+  "quoted": {
+   "unit_price": 370.96,
+   "payment_days": 30,
+   "index_clause": null
+  },
+  "reason": "Rising copper and electronic component costs",
+  "note": "Offer copper indexation in exchange for a more stable base unit price.",
+  "wants": [
+   {
+    "field": "index_clause",
+    "value": {
+     "series": "CU-NOTATION",
+     "material_share": 0.2,
+     "deadband_pct": 0,
+     "base_month": "2026-08"
+    },
+    "evidence": "Regarding our cost structure, CU-NOTATION rose 47.7 % in twelve months and is 20 % of our cost.",
+    "because": "A CU-NOTATION clause would protect it against the copper cost increases behind its price claim."
+   }
+  ],
+  "dropped": [],
+  "seconds": 3.55
+ },
+ {
+  "case": "P03",
+  "supplier": "sup:70530",
+  "run": 0,
+  "quoted": {
+   "unit_price": 438.21,
+   "payment_days": 30,
+   "contract_months": 12,
+   "volume_per_year": 4580
+  },
+  "reason": "Rising copper, labour and component costs.",
+  "note": "Offer faster payment in return for a price concession, subject to its head-office pricing restriction.",
+  "wants": [
+   {
+    "field": "payment_days",
+    "value": 14,
+    "evidence": "He was open on payment terms and call-off flexibility.",
+    "because": "Faster payment benefits the supplier, even though its cash pressure is low."
+   }
+  ],
+  "dropped": [],
+  "seconds": 7.32
+ },
+ {
+  "case": "P03",
+  "supplier": "sup:70530",
+  "run": 1,
+  "quoted": {
+   "unit_price": 438.21,
+   "payment_days": 30,
+   "contract_months": 12,
+   "volume_per_year": 4580
+  },
+  "reason": "Rising copper, labour and electronics costs.",
+  "note": "No supplier-valued term-for-price trade is supported by the material.",
+  "wants": [],
+  "dropped": [],
+  "seconds": 4.37
+ },
+ {
+  "case": "P03",
+  "supplier": "sup:70530",
+  "run": 2,
+  "quoted": {
+   "unit_price": 438.21,
+   "payment_days": 30,
+   "contract_months": 12,
+   "volume_per_year": 4580
+  },
+  "reason": "Rising copper, labour and electronics input costs.",
+  "note": "No supported term-for-price trade is evident; seek a sustainable renewal without assuming a discount.",
+  "wants": [],
+  "dropped": [],
+  "seconds": 5.12
+ },
+ {
+  "case": "P04",
+  "supplier": "sup:70620",
+  "run": 0,
+  "quoted": {
+   "unit_price": 4.96,
+   "payment_days": 30,
+   "contract_months": 12
+  },
+  "reason": "Rising labor and producer-price indices",
+  "note": "Offer a 36-month agreement in exchange for a lower unit price.",
+  "wants": [
+   {
+    "field": "contract_months",
+    "value": 36,
+    "evidence": "W\u00e4lzlager-Zentrum S\u00fcd GmbH stated that standard items are not discounted; only multi-year volume agreements change prices.",
+    "because": "A 36-month agreement meets its stated condition for changing prices."
+   }
+  ],
+  "dropped": [],
+  "seconds": 3.17
+ },
+ {
+  "case": "P04",
+  "supplier": "sup:70620",
+  "run": 1,
+  "quoted": {
+   "unit_price": 4.96,
+   "payment_days": 30,
+   "contract_months": 12
+  },
+  "reason": "Rising labour and producer-price indices",
+  "note": "Offer a 36-month agreement for 20,000 units a year in exchange for a lower unit price.",
+  "wants": [
+   {
+    "field": "contract_months",
+    "value": 36,
+    "evidence": "W\u00e4lzlager-Zentrum S\u00fcd GmbH stated that standard items are not discounted; only multi-year volume agreements change prices.",
+    "because": "A longer agreement with the stated annual volume is the documented route to a lower price."
+   }
+  ],
+  "dropped": [],
+  "seconds": 3.08
+ },
+ {
+  "case": "P04",
+  "supplier": "sup:70620",
+  "run": 2,
+  "quoted": {
+   "unit_price": 4.96,
+   "payment_days": 30,
+   "contract_months": 12
+  },
+  "reason": "Higher labour and producer-price indices",
+  "note": "Offer a 36-month agreement with the expected annual volume in exchange for a lower unit price, subject to its willingness to renew an individual agreement.",
+  "wants": [
+   {
+    "field": "contract_months",
+    "value": 36,
+    "evidence": "W\u00e4lzlager-Zentrum S\u00fcd GmbH stated that standard items are not discounted; only multi-year volume agreements change prices.",
+    "because": "A multi-year agreement is the only stated route to a price change."
+   }
+  ],
+  "dropped": [],
+  "seconds": 3.74
+ },
+ {
+  "case": "P05",
+  "supplier": "sup:70210",
+  "run": 0,
+  "quoted": {
+   "unit_price": 36.0,
+   "payment_days": 30,
+   "lead_time_days": 28
+  },
+  "reason": "Top quality from its machines; no specific cost rationale stated.",
+  "note": "Offer 14-day payment in exchange for a lower code-priced unit price.",
+  "wants": [
+   {
+    "field": "payment_days",
+    "value": 14,
+    "evidence": "Several of our invoices are overdue again. We ask you to keep to the agreed payment terms; otherwise we will have to review our conditions.",
+    "because": "Its warning about overdue invoices shows that reliable, faster payment matters to it."
+   }
+  ],
+  "dropped": [],
+  "seconds": 3.38
+ },
+ {
+  "case": "P05",
+  "supplier": "sup:70210",
+  "run": 1,
+  "quoted": {
+   "unit_price": 36.0,
+   "payment_days": 30,
+   "lead_time_days": 28
+  },
+  "reason": "No specific reason stated for its price.",
+  "note": "Offer payment in 14 days in exchange for a lower unit price.",
+  "wants": [
+   {
+    "field": "payment_days",
+    "value": 14,
+    "evidence": "Several of our invoices are overdue again. We ask you to keep to the agreed payment terms; otherwise we will have to review our conditions.",
+    "because": "Reliable, faster payment addresses its stated concern about overdue invoices."
+   }
+  ],
+  "dropped": [],
+  "seconds": 3.85
+ },
+ {
+  "case": "P05",
+  "supplier": "sup:70210",
+  "run": 2,
+  "quoted": {
+   "unit_price": 36.0,
+   "payment_days": 30,
+   "lead_time_days": 28
+  },
+  "reason": "No specific reason stated for its price",
+  "note": "Offer 14-day payment in exchange for a lower unit price.",
+  "wants": [
+   {
+    "field": "payment_days",
+    "value": 14,
+    "evidence": "Several of our invoices are overdue again. We ask you to keep to the agreed payment terms; otherwise we will have to review our conditions.",
+    "because": "Faster payment addresses the cash concern it raised."
+   }
+  ],
+  "dropped": [],
+  "seconds": 2.97
+ },
+ {
+  "case": "P05",
+  "supplier": "sup:70240",
+  "run": 0,
+  "quoted": {
+   "unit_price": 31.5,
+   "payment_days": 45,
+   "lead_time_days": 56
+  },
+  "reason": "No reason stated for its price.",
+  "note": "Offer 42 days rather than the 35-day target in exchange for a lower unit price.",
+  "wants": [
+   {
+    "field": "lead_time_days",
+    "value": 42,
+    "evidence": "Stroj\u00edrna Hrvelec s.r.o. reports an order backlog of more than six months and has stopped accepting new projects for now.",
+    "because": "Its backlog makes a longer lead time valuable."
+   }
+  ],
+  "dropped": [],
+  "seconds": 6.34
+ },
+ {
+  "case": "P05",
+  "supplier": "sup:70240",
+  "run": 1,
+  "quoted": {
+   "unit_price": 31.5,
+   "payment_days": 45,
+   "lead_time_days": 56
+  },
+  "reason": "Capacity is fully booked, with an order backlog of more than six months.",
+  "note": "Its requested longer lead time exceeds the 42-day limit, and the binding 12-month commitment it seeks is not a negotiable term.",
+  "wants": [],
+  "dropped": [],
+  "seconds": 4.13
+ },
+ {
+  "case": "P05",
+  "supplier": "sup:70240",
+  "run": 2,
+  "quoted": {
+   "unit_price": 31.5,
+   "payment_days": 45,
+   "lead_time_days": 56
+  },
+  "reason": "Strong order intake and a backlog of more than six months.",
+  "note": "The supplier asks for a binding 12-month commitment, but it is not a negotiable option here; its longer lead time also exceeds the 42-day limit.",
+  "wants": [],
+  "dropped": [],
+  "seconds": 4.62
+ },
+ {
+  "case": "P05",
+  "supplier": "sup:70250",
+  "run": 0,
+  "quoted": {
+   "unit_price": 38.5,
+   "payment_days": 30,
+   "lead_time_days": 28
+  },
+  "reason": "No specific reason stated for its price.",
+  "note": "Offer 14-day payment in exchange for a lower unit price.",
+  "wants": [
+   {
+    "field": "payment_days",
+    "value": 14,
+    "evidence": "Could you pay our invoices within 10 days? In return we would grant a cash discount.",
+    "because": "Faster payment is the only available term it expressly offers to reward with a discount."
+   }
+  ],
+  "dropped": [],
+  "seconds": 2.34
+ },
+ {
+  "case": "P05",
+  "supplier": "sup:70250",
+  "run": 1,
+  "quoted": {
+   "unit_price": 38.5,
+   "payment_days": 30,
+   "lead_time_days": 28
+  },
+  "reason": "No specific reason stated for its price.",
+  "note": "Offer faster payment in exchange for a lower unit price.",
+  "wants": [
+   {
+    "field": "payment_days",
+    "value": 14,
+    "evidence": "Could you pay our invoices within 10 days? In return we would grant a cash discount.",
+    "because": "The supplier explicitly offers a discount for faster payment."
+   }
+  ],
+  "dropped": [],
+  "seconds": 2.14
+ },
+ {
+  "case": "P05",
+  "supplier": "sup:70250",
+  "run": 2,
+  "quoted": {
+   "unit_price": 38.5,
+   "payment_days": 30,
+   "lead_time_days": 28
+  },
+  "reason": "No reason for the quoted price stated.",
+  "note": "Offer 14-day payment in exchange for a lower unit price.",
+  "wants": [
+   {
+    "field": "payment_days",
+    "value": 14,
+    "evidence": "Could you pay our invoices within 10 days? In return we would grant a cash discount.",
+    "because": "The supplier explicitly offers a discount for faster payment."
+   }
+  ],
+  "dropped": [],
+  "seconds": 2.43
+ },
+ {
+  "case": "P07",
+  "supplier": "sup:70610",
+  "run": 0,
+  "quoted": {
+   "unit_price": 5.74,
+   "payment_days": 30,
+   "contract_months": 12
+  },
+  "reason": "Price quoted for the requested volume; no further rationale stated.",
+  "note": "No supported term concession to trade; keep the quoted terms and seek a lower bundled-kit price.",
+  "wants": [],
+  "dropped": [],
+  "seconds": 3.43
+ },
+ {
+  "case": "P07",
+  "supplier": "sup:70610",
+  "run": 1,
+  "quoted": {
+   "unit_price": 5.74,
+   "payment_days": 30,
+   "contract_months": 12
+  },
+  "reason": "Requested volume",
+  "note": "No supported term trade; keep the quoted payment and contract terms unchanged.",
+  "wants": [],
+  "dropped": [],
+  "seconds": 2.62
+ },
+ {
+  "case": "P07",
+  "supplier": "sup:70610",
+  "run": 2,
+  "quoted": {
+   "unit_price": 5.74,
+   "payment_days": 30,
+   "contract_months": 12
+  },
+  "reason": "Requested volume",
+  "note": "No supported term trade is evident; leave the quoted terms unchanged and let code price the offer.",
+  "wants": [],
+  "dropped": [],
+  "seconds": 2.95
+ },
+ {
+  "case": "P08",
+  "supplier": "sup:70710",
+  "run": 0,
+  "quoted": {
+   "unit_price": 6.05,
+   "index_clause": null,
+   "payment_days": 30,
+   "contract_months": 12
+  },
+  "reason": "Rising AS-14404 and other input costs.",
+  "note": "Offer the AS-14404 index clause in exchange for a lower base price.",
+  "wants": [
+   {
+    "field": "index_clause",
+    "value": {
+     "series": "AS-14404",
+     "material_share": 0.45,
+     "deadband_pct": 0,
+     "base_month": "2026-08"
+    },
+    "evidence": "for Round bar 1.4404 dia 30 mm, peeled (part:370010) we propose to agree the price basis for the coming period, including a price adjustment clause based on AS-14404.",
+    "because": "The supplier expressly asks for an AS-14404 adjustment clause, which would reduce its future material-price risk."
+   }
+  ],
+  "dropped": [],
+  "seconds": 3.99
+ },
+ {
+  "case": "P08",
+  "supplier": "sup:70710",
+  "run": 1,
+  "quoted": {
+   "unit_price": 6.05,
+   "index_clause": null,
+   "payment_days": 30,
+   "contract_months": 12
+  },
+  "reason": "Rising alloy and producer prices.",
+  "note": "Offer the AS-14404 index clause in exchange for a lower unit price, taking account of its fixed material costs through March 2027.",
+  "wants": [
+   {
+    "field": "index_clause",
+    "value": {
+     "series": "AS-14404",
+     "material_share": 0.45,
+     "deadband_pct": 0,
+     "base_month": "2026-08"
+    },
+    "evidence": "for Round bar 1.4404 dia 30 mm, peeled (part:370010) we propose to agree the price basis for the coming period, including a price adjustment clause based on AS-14404.",
+    "because": "It explicitly asks for an AS-14404 adjustment clause."
+   }
+  ],
+  "dropped": [],
+  "seconds": 4.15
+ },
+ {
+  "case": "P08",
+  "supplier": "sup:70710",
+  "run": 2,
+  "quoted": {
+   "unit_price": 6.05,
+   "index_clause": null,
+   "payment_days": 30,
+   "contract_months": 12
+  },
+  "reason": "Rising input costs, especially AS-14404.",
+  "note": "Offer the AS-14404 index clause in exchange for a lower base price.",
+  "wants": [
+   {
+    "field": "index_clause",
+    "value": {
+     "series": "AS-14404",
+     "material_share": 0.45,
+     "deadband_pct": 0,
+     "base_month": "2026-08"
+    },
+    "evidence": "for Round bar 1.4404 dia 30 mm, peeled (part:370010) we propose to agree the price basis for the coming period, including a price adjustment clause based on AS-14404.",
+    "because": "It gives the supplier protection against alloy-price changes, which its fixed-price cover does not provide after March 2027."
+   }
+  ],
+  "dropped": [],
+  "seconds": 3.34
+ },
+ {
+  "case": "P10",
+  "supplier": "sup:70410",
+  "run": 0,
+  "quoted": {
+   "unit_price": 32.2,
+   "volume_per_year": 19890,
+   "contract_months": 12,
+   "lead_time_days": 56
+  },
+  "reason": "High capacity utilisation is restricting seal allocation and extending lead times.",
+  "note": "Offer a firm 36-month commitment and discuss a longer lead time in exchange for full annual coverage.",
+  "wants": [
+   {
+    "field": "contract_months",
+    "value": 36,
+    "evidence": "We will prioritise customers with firm, long-term commitments.",
+    "because": "A 36-month commitment gives Ravensteiner the security it says it prioritises."
+   }
+  ],
+  "dropped": [
+   {
+    "field": "lead_time_days",
+    "option": "C",
+    "evidence": "Lead times are currently longer than agreed.",
+    "because": "A 56-day lead time accommodates its stated capacity constraint.",
+    "why": "that is what it quotes already"
+   }
+  ],
+  "seconds": 4.97
+ },
+ {
+  "case": "P10",
+  "supplier": "sup:70410",
+  "run": 1,
+  "quoted": {
+   "unit_price": 32.2,
+   "volume_per_year": 19890,
+   "contract_months": 12,
+   "lead_time_days": 56
+  },
+  "reason": "High capacity utilisation limits its seal allocation and lengthens lead times.",
+  "note": "Offer a longer commitment and accept its quoted lead time in exchange for coverage of the full annual need.",
+  "wants": [
+   {
+    "field": "contract_months",
+    "value": 36,
+    "evidence": "We will prioritise customers with firm, long-term commitments.",
+    "because": "A 36-month contract gives Ravensteiner the long-term commitment it says it prioritises."
+   }
+  ],
+  "dropped": [
+   {
+    "field": "lead_time_days",
+    "option": "C",
+    "evidence": "Lead times are currently longer than agreed.",
+    "because": "Keeping the 56-day lead time accommodates its stated capacity constraint.",
+    "why": "that is what it quotes already"
+   }
+  ],
+  "seconds": 6.57
+ },
+ {
+  "case": "P10",
+  "supplier": "sup:70410",
+  "run": 2,
+  "quoted": {
+   "unit_price": 32.2,
+   "volume_per_year": 19890,
+   "contract_months": 12,
+   "lead_time_days": 56
+  },
+  "reason": "High capacity utilisation limits the volume it can confirm.",
+  "note": "Offer a longer commitment and more delivery time in exchange for an allocation covering the full annual need.",
+  "wants": [
+   {
+    "field": "contract_months",
+    "value": 36,
+    "evidence": "We will prioritise customers with firm, long-term commitments.",
+    "because": "A 36-month commitment gives Ravensteiner the security it says it prioritises."
+   }
+  ],
+  "dropped": [
+   {
+    "field": "lead_time_days",
+    "option": "C",
+    "evidence": "Lead times are currently longer than agreed.",
+    "because": "A 56-day lead time gives Ravensteiner more room to manage its constrained capacity.",
+    "why": "that is what it quotes already"
+   }
+  ],
+  "seconds": 4.39
+ },
+ {
+  "case": "P11",
+  "supplier": "sup:70140",
+  "run": 0,
+  "quoted": {
+   "ppm_commitment": 2500,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 47.0
+  },
+  "reason": "It says it cannot lower its margin.",
+  "note": "Offer 1500 ppm rather than a tighter quality commitment in exchange for a lower unit price.",
+  "wants": [
+   {
+    "field": "ppm_commitment",
+    "value": 1500,
+    "evidence": "For our offer, we can propose a price of \u20ac47.00 per unit, alongside a quality commitment of 6400 ppm.",
+    "because": "A 1500-ppm commitment is the least stringent option that meets the buyer\u2019s must-have."
+   }
+  ],
+  "dropped": [],
+  "seconds": 6.89
+ },
+ {
+  "case": "P11",
+  "supplier": "sup:70140",
+  "run": 1,
+  "quoted": {
+   "ppm_commitment": 2500,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 47.0
+  },
+  "reason": "Protecting its margin amid cash pressure",
+  "note": "Offer the least stringent compliant quality commitment in exchange for a code-priced discount.",
+  "wants": [
+   {
+    "field": "ppm_commitment",
+    "value": 1500,
+    "evidence": "For our offer, we can propose a price of \u20ac47.00 per unit, alongside a quality commitment of 6400 ppm.",
+    "because": "Its proposed quality commitment is looser than the buyer permits, so it would value the least stringent compliant option."
+   }
+  ],
+  "dropped": [],
+  "seconds": 6.55
+ },
+ {
+  "case": "P11",
+  "supplier": "sup:70140",
+  "run": 2,
+  "quoted": {
+   "ppm_commitment": 2500,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 47.0
+  },
+  "reason": "Protecting its margin",
+  "note": "Kalwisz requests faster payment, but payment is not negotiable here; do not relax the required quality commitment.",
+  "wants": [],
+  "dropped": [],
+  "seconds": 5.92
+ },
+ {
+  "case": "P18",
+  "supplier": "sup:70740",
+  "run": 0,
+  "quoted": {
+   "unit_price": 6.1,
+   "index_clause": null,
+   "payment_days": 30,
+   "contract_months": 12
+  },
+  "reason": "Rising AS-14404 and other input costs.",
+  "note": "Offer an AS-14404 index clause and a longer commitment in exchange for a lower base price.",
+  "wants": [
+   {
+    "field": "index_clause",
+    "value": {
+     "series": "AS-14404",
+     "material_share": 0.45,
+     "deadband_pct": 0,
+     "base_month": "2026-08"
+    },
+    "evidence": "for Round bar 1.4404 dia 30 mm, peeled (part:370010) we propose to agree the price basis for the coming period, including a price adjustment clause based on AS-14404.",
+    "because": "The supplier explicitly asks to link the price to its material index."
+   },
+   {
+    "field": "contract_months",
+    "value": 36,
+    "evidence": "The sales director of Blankstahl Werdenfels GmbH said they are reviewing small accounts and will focus on customers with volume.",
+    "because": "A longer commitment secures the buyer\u2019s annual volume."
+   }
+  ],
+  "dropped": [],
+  "seconds": 4.38
+ },
+ {
+  "case": "P18",
+  "supplier": "sup:70740",
+  "run": 1,
+  "quoted": {
+   "unit_price": 6.1,
+   "index_clause": null,
+   "payment_days": 30,
+   "contract_months": 12
+  },
+  "reason": "Rising AS-14404 and other input costs",
+  "note": "Offer an AS-14404 index clause in exchange for a lower base price.",
+  "wants": [
+   {
+    "field": "index_clause",
+    "value": {
+     "series": "AS-14404",
+     "material_share": 0.45,
+     "deadband_pct": 0,
+     "base_month": "2026-08"
+    },
+    "evidence": "for Round bar 1.4404 dia 30 mm, peeled (part:370010) we propose to agree the price basis for the coming period, including a price adjustment clause based on AS-14404.",
+    "because": "An AS-14404 clause addresses the material-cost risk it raised in its price explanation."
+   }
+  ],
+  "dropped": [],
+  "seconds": 3.67
+ },
+ {
+  "case": "P18",
+  "supplier": "sup:70740",
+  "run": 2,
+  "quoted": {
+   "unit_price": 6.1,
+   "index_clause": null,
+   "payment_days": 30,
+   "contract_months": 12
+  },
+  "reason": "Rising material and production costs",
+  "note": "Offer the index clause in exchange for a lower unit price.",
+  "wants": [
+   {
+    "field": "index_clause",
+    "value": {
+     "series": "AS-14404",
+     "material_share": 0.45,
+     "deadband_pct": 0,
+     "base_month": "2026-08"
+    },
+    "evidence": "for Round bar 1.4404 dia 30 mm, peeled (part:370010) we propose to agree the price basis for the coming period, including a price adjustment clause based on AS-14404.",
+    "because": "An AS-14404 clause addresses the material-price risk it identified."
+   }
+  ],
+  "dropped": [],
+  "seconds": 4.14
+ },
+ {
+  "case": "D01",
+  "supplier": "sup:DEMO-F1",
+  "run": 0,
+  "quoted": {
+   "unit_price": 52.9,
+   "payment_days": 30,
+   "contract_months": 12,
+   "effective_date": "2026-12-01"
+  },
+  "reason": "Rising wages and metal costs",
+  "note": "No evidence supports trading a negotiable term for a price concession; have code price an offer that preserves a sustainable supplier margin.",
+  "wants": [],
+  "dropped": [],
+  "seconds": 2.74
+ },
+ {
+  "case": "D01",
+  "supplier": "sup:DEMO-F1",
+  "run": 1,
+  "quoted": {
+   "unit_price": 52.9,
+   "payment_days": 30,
+   "contract_months": 12,
+   "effective_date": "2026-12-01"
+  },
+  "reason": "Rising wages and metal costs.",
+  "note": "No evidence-backed term trade is available; negotiate the price while preserving a sustainable supplier margin.",
+  "wants": [],
+  "dropped": [],
+  "seconds": 2.92
+ },
+ {
+  "case": "D01",
+  "supplier": "sup:DEMO-F1",
+  "run": 2,
+  "quoted": {
+   "unit_price": 52.9,
+   "payment_days": 30,
+   "contract_months": 12,
+   "effective_date": "2026-12-01"
+  },
+  "reason": "Rising energy and wages, including higher WAGES-METAL costs",
+  "note": "No non-price term has evidenced value to this supplier, so leave the quoted terms unchanged and let code price the offer.",
+  "wants": [],
+  "dropped": [],
+  "seconds": 3.92
+ },
+ {
+  "case": "D02",
+  "supplier": "sup:DEMO-J1",
+  "run": 0,
+  "quoted": {
+   "unit_price": 17.1,
+   "payment_days": 30,
+   "lead_time_days": 28,
+   "incoterm": "EXW"
+  },
+  "reason": "No stated reason for its price",
+  "note": "No supplier-valued term is evidenced; have code price the offers for comparison.",
+  "wants": [],
+  "dropped": [],
+  "seconds": 1.95
+ },
+ {
+  "case": "D02",
+  "supplier": "sup:DEMO-J1",
+  "run": 1,
+  "quoted": {
+   "unit_price": 17.1,
+   "payment_days": 30,
+   "lead_time_days": 28,
+   "incoterm": "EXW"
+  },
+  "reason": "No stated reason for its price",
+  "note": "No supplier-backed term trade is identified; let code compare offers on total cost.",
+  "wants": [],
+  "dropped": [],
+  "seconds": 1.69
+ },
+ {
+  "case": "D02",
+  "supplier": "sup:DEMO-J1",
+  "run": 2,
+  "quoted": {
+   "unit_price": 17.1,
+   "payment_days": 30,
+   "lead_time_days": 28,
+   "incoterm": "EXW"
+  },
+  "reason": "No reason stated for its price.",
+  "note": "No supplier-specific evidence supports offering a term concession; compare the offers on total cost.",
+  "wants": [],
+  "dropped": [],
+  "seconds": 2.09
+ },
+ {
+  "case": "D02",
+  "supplier": "sup:DEMO-C1",
+  "run": 0,
+  "quoted": {
+   "unit_price": 16.0,
+   "payment_days": 45,
+   "lead_time_days": 42,
+   "incoterm": "EXW"
+  },
+  "reason": "No stated reason for its price.",
+  "note": "No supplier-valued term is evidenced; use competition to seek the lowest total cost.",
+  "wants": [],
+  "dropped": [],
+  "seconds": 1.75
+ },
+ {
+  "case": "D02",
+  "supplier": "sup:DEMO-C1",
+  "run": 1,
+  "quoted": {
+   "unit_price": 16.0,
+   "payment_days": 45,
+   "lead_time_days": 42,
+   "incoterm": "EXW"
+  },
+  "reason": "No specific reason for its price stated",
+  "note": "No supplier-supported term trade is identified; let code compare the offers on total cost.",
+  "wants": [],
+  "dropped": [],
+  "seconds": 1.77
+ },
+ {
+  "case": "D02",
+  "supplier": "sup:DEMO-C1",
+  "run": 2,
+  "quoted": {
+   "unit_price": 16.0,
+   "payment_days": 45,
+   "lead_time_days": 42,
+   "incoterm": "EXW"
+  },
+  "reason": "No stated reason for its price",
+  "note": "No supported term to trade for a lower price.",
+  "wants": [],
+  "dropped": [],
+  "seconds": 2.67
+ }
+]
