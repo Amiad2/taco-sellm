@@ -1,7 +1,7 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-11 04:50 CEST by Jonathan (Claude Code).
+Last updated: 2026-10-11 08:12 CEST by Jonathan (Claude Code).
 
 ## Now
 
@@ -75,6 +75,8 @@ signal vocabulary). Build against section 10; add fields freely, rename core fie
 **`jonathans_branch@b7b279e` (Sun 02:38), full practice run with the LLM planner live (`SELLM_PLAN=llm`, gpt-6-sol), kit runner: mean 75.4**, 0 timeouts (tag `best-jonathans_branch-75.4`). It is the 74.9 agent plus Omar's `idx_recent` with the hedge guard (P18 0.520) plus `sellm/planner.py`: before the first ask the model names the terms a supplier would give price for, with a quoted passage; code acts on a faster payment it asked for and on an index clause under a relationship term. Same ten deals as `omars_branch@f473d97`; the planner changes no e-mail on these cases, it is there for suppliers the dossier's rules do not cover.
 
 **`jonathans_branch@0eaf946` (Sun 03:12), all ten practice cases with `SELLM_PLAN=llm` (gpt-6-sol), kit runner: mean 77.3** (tag `best-jonathans_branch-77.3`; P10 and P11 played singly after a 429 on opening). New against 75.4: every fallen cost-driver index is cited, one per e-mail, and with the planner an index the supplier itself blames is cited with its larger fall. P01 0.997, P02 0.725, P03 0.923, P04 0.860, P05 0.820, P07 0.747, P08 0.637, P10 0.647, P11 0.778, P18 0.598. Ledger: `experiments/LEDGER-JONATHAN.md` on `jonathans_branch`.
+
+**`jonathans_branch@a434a55` (Sun 08:07), with the Sunday release built in, ten practice cases through the final runner with `SELLM_PLAN=llm`: mean 80.3 again** - every case as before the release, 0 crashes, 0 refused moves, 0 timeouts, the whole run 16 s on the final machine (tag `best-jonathans_branch-80.3-sunday`). The release is read (four letters, six news items, a memo) and the dossiers on that branch are rebuilt with it (`[change]` Sun 08:10 in `docs/LOG.md`); main's dossiers are not rebuilt yet - merging `jonathans_branch` brings them.
 
 **`jonathans_branch@8a854c4` (Sun 04:29), ten practice cases in parallel through the final runner (`python -m sellm.runner`, one loop per case) with `SELLM_PLAN=llm` (gpt-6-sol, plans live): mean 80.3**, 0 crashes, 0 refused moves, every case under 15 s (tag `best-jonathans_branch-80.3`; earlier tags -79.3, -78.2, -77.3, -75.4, -74.9 are the steps before, table in `experiments/LEDGER-JONATHAN.md`). P01 0.997, P02 0.725, P03 0.956, P04 0.860, P05 0.820, P07 0.747, P08 0.814, P10 0.679, P11 0.778, P18 0.657. On top of main's agent: the clause offer (P02); every fallen cost-driver index one per e-mail, hedge guard on the clause's material (P08, P18); the order history cited as the pair around a price jump of the last twelve months (P08, P18, P03); the larger fall of an index the supplier itself blames, read by the LLM planner (P01); no lowball to a capacity-tight supplier (P10, Amiad's rule); in an RFQ a bidder far behind after two answers is not asked again (P05); omars_branch's runner. Without `SELLM_PLAN=llm` only the planner rule is missing (P01 0.969, mean 80.0).
 
