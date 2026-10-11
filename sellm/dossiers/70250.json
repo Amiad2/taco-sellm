@@ -1,9 +1,9 @@
 {
  "built_from": {
   "case_id": null,
-  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "facts_sha256": "411943e51cc915a92a129e3d3adfe3f6269f4a5bbb4bddabecbdc6fdcfc57af2",
   "package": "1.0.0",
-  "sunday_release": false
+  "sunday_release": true
  },
  "case_facts": {},
  "citable": [
@@ -460,12 +460,25 @@
    "part_ids": [],
    "subject": "Payment of invoices",
    "text": "Could you pay our invoices within 10 days? In return we would grant a cash discount."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Drehteile Fuchsreiter GmbH",
+   "date": "2026-10-05",
+   "effective_date": null,
+   "id": "doc:20261005-70250-S2",
+   "kind": "letter",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Payment of invoices from November",
+   "text": "Dear Sir or Madam,\n\nwe have had to put our turning department on short-time work from November. Our bank is watching our figures every month, and what would help us most now is cash: we kindly ask you to pay our invoices within 10 days from November.\n\nYours faithfully,\nDrehteile Fuchsreiter GmbH"
   }
  ],
  "economics": {
   "archetype": "job_shop",
   "archetype_basis": "staff 18 < 80",
-  "cash_pressure": "medium",
+  "cash_pressure": "high",
   "cost_of_money": 0.25,
   "cost_of_money_basis": "rule: job shop or short of cash",
   "discount_taken_share_pct": null,
@@ -902,16 +915,17 @@
   "qn_supplier_caused_12m": 4,
   "trend": "worse"
  },
- "profile_text": "Drehteile Fuchsreiter GmbH (DE; founder; 18 staff; turnover 0-2 M EUR). Our spend FY2026 EUR 58,768 (5.88 % of its turnover). Standard terms: 30 days net, EXW, lead time 28 days. Cost of money about 25 % a year; cash pressure medium; type job shop. Signals: cash short (1), wants volume (1). Performance 2026Q3: green, OTD 88.0 %, 318 ppm. Parts: part:320060 Coupling hub; part:320090 Spacer sleeve: price 4.64 per 1.",
+ "profile_text": "Drehteile Fuchsreiter GmbH (DE; founder; 18 staff; turnover 0-2 M EUR). Our spend FY2026 EUR 58,768 (5.88 % of its turnover). Standard terms: 30 days net, EXW, lead time 28 days. Cost of money about 25 % a year; cash pressure high; type job shop. Signals: cash short (2), wants volume (1). Performance 2026Q3: green, OTD 88.0 %, 318 ppm. Parts: part:320060 Coupling hub; part:320090 Spacer sleeve: price 4.64 per 1.",
  "schema_version": 1,
  "signals": [
   {
    "evidence": [
-    "doc:20260904-70250-M4"
+    "doc:20260904-70250-M4",
+    "doc:20261005-70250-S2"
    ],
-   "excerpt": "Could you pay our invoices within 10 days?",
+   "excerpt": "Our bank is watching our figures every month, and what would help us most now is cash: we kindly ask you to pay our invoices within 10 days from November.",
    "kind": "cash_short",
-   "strength": 1
+   "strength": 2
   },
   {
    "evidence": [

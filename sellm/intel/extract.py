@@ -167,8 +167,8 @@ class Source:
                 continue
             fact = self.facts.get(ref) or {}
             owner = row.get("supplier_id") or fact.get("supplier") or None
-            if owner == sid:
-                out.append({**fact, **row, "supplier_id": owner})
+            if owner == sid:  # an empty CSV field is a missing value, as NULL in the SQLite tables
+                out.append({**fact, **{k: None if v == "" else v for k, v in row.items()}, "supplier_id": owner})
         return out
 
     def documents(self, sid):

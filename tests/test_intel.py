@@ -138,7 +138,8 @@ def test_extract_reads_every_row_of_the_real_package(real_pkg):
     src = Source(real_pkg)
     assert len(src.detailed_ids()) == 46
     assert len(src.q("SELECT id FROM po_lines")) == 5400
-    assert len(src.documents("sup:70130")) == 7 and len(src.market_news()) == 7
+    sunday = 1 if real_pkg.release else 0  # the Sunday release adds one market news item
+    assert len(src.documents("sup:70130")) == 7 and len(src.market_news()) == 7 + sunday
 
 
 def test_parts_follow_the_rules(fixture_pkg):
@@ -258,8 +259,9 @@ def test_the_real_package_in_numbers(real_pkg):
     src = Source(real_pkg)
     ds = [build_supplier(src, s) for s in src.detailed_ids()]
     assert len(ds) == 46 and all(validate(d) == [] for d in ds)
-    assert sum(len(d["parts"]) for d in ds) == 90 and sum(len(d["documents"]) for d in ds) == 208
-    assert sum(len(d["news"]) for d in ds) == 32
+    letters = 4 if real_pkg.release else 0  # the Sunday release: four supplier letters (the memo has no supplier)
+    assert sum(len(d["parts"]) for d in ds) == 90 and sum(len(d["documents"]) for d in ds) == 208 + letters
+    assert sum(len(d["news"]) for d in ds) == 32 + (5 if real_pkg.release else 0)  # five supplier news on Sunday
     market = {"news:20260910-27", "news:20260912-30", "news:20260914-31", "news:20260916-32"}
     assert not any(n["id"] in market for d in ds for n in d["news"])
 
@@ -340,7 +342,8 @@ def test_noise_and_market_news_never_make_a_signal(real_pkg):
     ds = [signals.apply(build_supplier(src, s)) for s in src.detailed_ids()]
     noise = {n["id"] for d in ds for n in d["news"] if n["noise"]}
     market = {n["id"] for n in src.market_news()}
-    assert len(noise) == 10 and len(market) == 7
+    sunday = 1 if real_pkg.release else 0  # the Sunday release: one more noise item, one more market item
+    assert len(noise) == 10 + sunday and len(market) == 7 + sunday
     assert not any(e in noise | market for d in ds for s in d["signals"] for e in s["evidence"])
     by_id = {d["supplier_id"]: _signals(d) for d in ds}
     assert "ownership_change" not in by_id["sup:70230"] and "ownership_change" not in by_id["sup:70160"]
@@ -607,3 +610,22 @@ def test_a_case_fact_is_citable_in_its_case(real_pkg):
     d = dossier("sup:70110", case["parts"], case=case, package=real_pkg)
     assert any("cost:310010-H" in c["ids"] and "128.50" in c["statement"] for c in d["citable"])
     assert d["parts"]["part:310010"]["should_cost"]["id"] == "cost:310010-H"
+
+
+def test_the_sunday_release_is_read_by_its_wording(real_pkg):
+    """Release of Sun 11 Oct: its letters carry empty asked_pct fields, which are no price demand
+    (extract._released); forward buying at fixed prices is a hedge, insolvency is cash pressure, an acquisition an
+    ownership change, and 'supply back to normal' voids the earlier capacity news."""
+    if not real_pkg.release:
+        pytest.skip("Sunday release not downloaded (uv run arena data)")
+    src = Source(real_pkg)
+    by_id = {s: signals.apply(build_supplier(src, s)) for s in ("sup:70720", "sup:70250", "sup:70510", "sup:70540")}
+    got = {s: _signals(d) for s, d in by_id.items()}
+    assert got["sup:70720"] == {"material_hedged": 1}
+    assert got["sup:70250"]["cash_short"] == 2 and "price_claim" not in got["sup:70250"]
+    assert got["sup:70510"]["price_claim"] == 1 and got["sup:70510"]["list_price_fixed"] == 1
+    assert "capacity_tight" not in got["sup:70540"]
+    insolvent = signals.apply(build_supplier(src, "sup:70140"))
+    assert any("news:20261006-S1" in s["evidence"] for s in insolvent["signals"] if s["kind"] == "cash_short")
+    sold = signals.apply(build_supplier(src, "sup:70650"))
+    assert any("news:20261006-S9" in s["evidence"] for s in sold["signals"] if s["kind"] == "ownership_change")
