@@ -183,6 +183,9 @@ VARIANTS = {
         },
     ),
     "agent": dict(knobs=dict(plan="llm")),  # --agent sellm as it is on this commit, with the planner
+    # Sunday release: a supplier whose letter says it is open to discuss call-off planning is offered a fixed
+    # call-off schedule in the first e-mail (plan_give; on practice that is P02's supplier only)
+    "agent-plangive": dict(knobs=dict(plan="llm", plan_give=True)),
     # the order history as an argument, not as a record: the pair of orders around its last price jump (P18: 5.26 in
     # June, 5.84 since July; P08: 5.17 last winter, 5.45 now) instead of the first and last order of two years
     "po-jump-P18": dict(

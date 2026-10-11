@@ -212,7 +212,6 @@
    ],
    "signals": [
     "cash_short",
-    "price_claim",
     "wants_volume"
    ]
   },
@@ -427,7 +426,8 @@
     "approval_ladder",
     "list_price_fixed",
     "margin_floor",
-    "price_claim"
+    "price_claim",
+    "wants_planning"
    ]
   },
   "sup:70520": {
@@ -593,7 +593,7 @@
     "approval_ladder",
     "list_price_fixed",
     "ownership_change",
-    "price_claim",
+    "wants_planning",
     "wants_volume"
    ]
   },
@@ -619,8 +619,7 @@
     "part:370020"
    ],
    "signals": [
-    "material_hedged",
-    "price_claim"
+    "material_hedged"
    ]
   },
   "sup:70730": {

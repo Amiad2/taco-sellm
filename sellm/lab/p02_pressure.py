@@ -31,14 +31,8 @@ def _opening_unit_price(v):
 class _May2007Pressure(Persistent):
     """Aggressive ask: 20% off the opening quote, plus the 11 May 2007 line every round."""
 
-    LINE = (
-        "I know what happened on 11 May 2007. If you do not give us a good deal now, "
-        "I cannot promise anything."
-    )
-    OPENING = (
-        "this increase is not acceptable. We need a real cut from your opening quote, "
-        "not a token step."
-    )
+    LINE = "I know what happened on 11 May 2007. If you do not give us a good deal now, I cannot promise anything."
+    OPENING = "this increase is not acceptable. We need a real cut from your opening quote, not a token step."
 
     def __init__(self, package=None):
         super().__init__(package, past_target=True)

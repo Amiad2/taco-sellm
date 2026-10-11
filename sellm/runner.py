@@ -667,8 +667,11 @@ def main(argv=None):
     ap.add_argument("--parallel", type=int, default=10)
     ap.add_argument("--data", default=os.environ.get("ARENA_DATA", "data/package"))
     ap.add_argument("--label", default="", help="practice/sandbox: label the sessions for scripts/pull-runs")
-    ap.add_argument("--per-thread", action="store_true",
-                    help="one loop per thread (default: one loop per case, the agent picks the thread)")
+    ap.add_argument(
+        "--per-thread",
+        action="store_true",
+        help="one loop per thread (default: one loop per case, the agent picks the thread)",
+    )
     ap.add_argument("--serial", action="store_true", help="with --per-thread: one message per session in flight")
     a = ap.parse_args(argv)
     if a.set == "final":

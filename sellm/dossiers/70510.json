@@ -546,14 +546,14 @@
    "text": "Dear Sir or Madam,\n\nwe have supplied Hollerau Pumpenwerke reliably for many years. Owing to the strong rise in copper and electronic component prices, we are forced to adjust our prices for Motor IE3 7.5 kW, 4-pole (part:350011) by **6.5 %** with effect from **01 January 2027**: from EUR 348.32 to EUR 370.96 per  pc.\n\nWe regret this step and ask for your understanding.\n\nYours faithfully,\nAntriebstechnik Nordmark AG"
   },
   {
-   "asked_pct": "",
-   "asked_price": "",
+   "asked_pct": null,
+   "asked_price": null,
    "author": "Antriebstechnik Nordmark AG",
    "date": "2026-10-01",
-   "effective_date": "",
+   "effective_date": null,
    "id": "doc:20261001-70510-S5",
    "kind": "letter",
-   "notice_days": "",
+   "notice_days": null,
    "part_ids": [],
    "subject": "Price list 2027",
    "text": "Dear Sir or Madam,\n\nour price list 2027 applies to all customers without exception; our board has ruled out individual price reductions for the coming year. We remain open to discuss payment terms and call-off planning.\n\nYours faithfully,\nAntriebstechnik Nordmark AG"
@@ -1291,7 +1291,7 @@
   "qn_supplier_caused_12m": 3,
   "trend": "better"
  },
- "profile_text": "Antriebstechnik Nordmark AG (DE; group; part of Nordmark Gruppe; 4800 staff; turnover EUR 1380.0 M). Our spend FY2026 EUR 3.2 M (0.23 % of its turnover). Standard terms: 30 days net, DAP, lead time 35 days. Cost of money about 6.5 % a year; cash pressure low; type group. Signals: approval ladder (3), list price fixed (1), margin floor (2), price claim (2). Performance 2026Q3: green, OTD 90.4 %, 273 ppm. Parts: part:350010 Motor IE3 4 kW, 4-pole: price 239.21 per 1, 0.98x should-cost; part:350011 Motor IE3 7.5 kW, 4-pole: price 348.32 per 1, 0.93x should-cost; part:350012 Motor IE3 15 kW, 4-pole; part:350013 Motor IE4 30 kW, 4-pole.",
+ "profile_text": "Antriebstechnik Nordmark AG (DE; group; part of Nordmark Gruppe; 4800 staff; turnover EUR 1380.0 M). Our spend FY2026 EUR 3.2 M (0.23 % of its turnover). Standard terms: 30 days net, DAP, lead time 35 days. Cost of money about 6.5 % a year; cash pressure low; type group. Signals: approval ladder (3), list price fixed (1), margin floor (2), price claim (1), wants planning (1). Performance 2026Q3: green, OTD 90.4 %, 273 ppm. Parts: part:350010 Motor IE3 4 kW, 4-pole: price 239.21 per 1, 0.98x should-cost; part:350011 Motor IE3 7.5 kW, 4-pole: price 348.32 per 1, 0.93x should-cost; part:350012 Motor IE3 15 kW, 4-pole; part:350013 Motor IE4 30 kW, 4-pole.",
  "schema_version": 1,
  "signals": [
   {
@@ -1323,12 +1323,19 @@
   },
   {
    "evidence": [
-    "doc:20260914-70510-P02",
-    "doc:20261001-70510-S5"
+    "doc:20260914-70510-P02"
    ],
    "excerpt": "Letter asks 6.5 % from 2027-01-01.",
    "kind": "price_claim",
-   "strength": 2
+   "strength": 1
+  },
+  {
+   "evidence": [
+    "doc:20261001-70510-S5"
+   ],
+   "excerpt": "We remain open to discuss payment terms and call-off planning.",
+   "kind": "wants_planning",
+   "strength": 1
   }
  ],
  "standard_terms": {

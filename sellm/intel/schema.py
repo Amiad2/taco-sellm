@@ -10,6 +10,7 @@ SIGNAL_KINDS = (
     "capacity_tight",
     "list_price_fixed",
     "material_hedged",
+    "wants_planning",
     "partnership",
     "margin_floor",
     "quality_problem",

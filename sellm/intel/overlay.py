@@ -145,9 +145,14 @@ def _case_texts(d, case, facts, src):
                 text = src.pkg.document(trigger)
             except (FileNotFoundError, OSError, ValueError):
                 text = None
-        fact = facts.get(trigger) or {}
+        fact = facts.get(trigger) or (src.pkg.lookup(trigger) if src is not None else None) or {}
         text = text or fact.get("text") or fact.get("body") or fact.get("title")
-        if text and fact.get("supplier") in (None, sid):
+        # A letter says what its writer needs, not what the other bidders of the case need (Sunday release: one
+        # bidder asks to be paid within 10 days), and our own memo lists headlines about many suppliers. An RFQ
+        # is the same text for every bidder.
+        writer = fact.get("supplier") or fact.get("supplier_id")
+        kind = fact.get("type") or fact.get("kind")
+        if text and kind != "memo" and (writer in (None, "", sid) or kind == "rfq"):
             extra.append((trigger, CASE_DATE, fact.get("title") or "", text))
     for ref, f in sorted(facts.items()):
         if not isinstance(f, dict) or f.get("supplier") != sid:

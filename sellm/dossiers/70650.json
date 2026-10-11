@@ -449,14 +449,14 @@
    "text": "We are reorganising our range around our key accounts. Standard items will be supplied from stock at list conditions; individual agreements will not be extended."
   },
   {
-   "asked_pct": "",
-   "asked_price": "",
+   "asked_pct": null,
+   "asked_price": null,
    "author": "Verbindungstechnik Mairhofer GmbH",
    "date": "2026-10-08",
-   "effective_date": "",
+   "effective_date": null,
    "id": "doc:20261008-70650-S10",
    "kind": "letter",
-   "notice_days": "",
+   "notice_days": null,
    "part_ids": [],
    "subject": "Prices and conditions in the Strelvo group",
    "text": "Dear Sir or Madam,\n\nas you may have read, our company now belongs to the Strelvo group. Our prices are set centrally from now on: the group price list 2027 applies to all customers without exception, and we can no longer grant individual price reductions. We remain open to discuss payment terms, call-off planning and contract length.\n\nYours faithfully,\nVerbindungstechnik Mairhofer GmbH"
@@ -1020,7 +1020,7 @@
   "qn_supplier_caused_12m": 25,
   "trend": "better"
  },
- "profile_text": "Verbindungstechnik Mairhofer GmbH (DE; family; 40 staff; turnover EUR 19.5 M). Our spend FY2026 EUR 140,220 (0.72 % of its turnover). Standard terms: 30 days net, DAP, lead time 7 days. Cost of money about 25 % a year; cash pressure low; type job shop. Signals: approval ladder (1), list price fixed (3), ownership change (2), price claim (1), wants volume (2). Performance 2026Q3: green, OTD 84.1 %, 296 ppm. Parts: part:360010 Hex bolt ISO 4017 M12x40 8.8, zinc: price 14.52 per 100; part:360011 Hex bolt ISO 4017 M16x60 8.8, zinc: price 37.64 per 100; part:360012 Hex nut ISO 4032 M12 8, zinc: price 5.6 per 100.",
+ "profile_text": "Verbindungstechnik Mairhofer GmbH (DE; family; 40 staff; turnover EUR 19.5 M). Our spend FY2026 EUR 140,220 (0.72 % of its turnover). Standard terms: 30 days net, DAP, lead time 7 days. Cost of money about 25 % a year; cash pressure low; type job shop. Signals: approval ladder (1), list price fixed (3), ownership change (2), wants planning (1), wants volume (2). Performance 2026Q3: green, OTD 84.1 %, 296 ppm. Parts: part:360010 Hex bolt ISO 4017 M12x40 8.8, zinc: price 14.52 per 100; part:360011 Hex bolt ISO 4017 M16x60 8.8, zinc: price 37.64 per 100; part:360012 Hex nut ISO 4032 M12 8, zinc: price 5.6 per 100.",
  "schema_version": 1,
  "signals": [
   {
@@ -1055,8 +1055,8 @@
    "evidence": [
     "doc:20261008-70650-S10"
    ],
-   "excerpt": "Letter asks  % from .",
-   "kind": "price_claim",
+   "excerpt": "We remain open to discuss payment terms, call-off planning and contract length.",
+   "kind": "wants_planning",
    "strength": 1
   },
   {

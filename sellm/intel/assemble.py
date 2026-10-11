@@ -98,8 +98,12 @@ def contract(src, sid):
 
 def documents(rows):
     keys = ("id", "date", "kind", "subject", "author", "asked_pct", "asked_price", "effective_date", "notice_days")
-    out = [
-        {**{k: row.get(k) for k in keys}, "part_ids": split_ids(row.get("part_ids")), "text": row["text"]}
+    out = [  # an empty cell (rows of the Sunday release come from CSV) is no value
+        {
+            **{k: (None if row.get(k) == "" else row.get(k)) for k in keys},
+            "part_ids": split_ids(row.get("part_ids")),
+            "text": row["text"],
+        }
         for row in rows
     ]
     return sorted(out, key=lambda d: (d["date"] or "", d["id"]))

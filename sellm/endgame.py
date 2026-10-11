@@ -56,6 +56,9 @@ DEFAULTS = dict(
     pay_probe=False,  # first ask as two offers of equal cost to us that differ in payment days only
     signal_facts=False,  # a supplier that wants volume hears the forecast first
     soft_give=False,  # ... and is offered a fixed call-off schedule in the first e-mail (not binding)
+    # A supplier whose own letter says it is open to discuss call-off planning (dossier wants_planning) is offered
+    # that schedule in the first e-mail: the sentence of `soft_give`, which cost nothing where it was not asked for
+    plan_give=False,
     # With a relationship term, where an index clause is negotiable and the supplier quotes a fixed
     # price: the clause as a second offer in the first ask, at the price where our total cost is lowest.
     # A clause is security for the supplier, not cash: it pays for it with a price far below its cost,
@@ -360,7 +363,9 @@ class Persistent(Negotiator):
             other = self.other_payment(case, v, sheet)
             if other:
                 draft = {**draft, "sheets": [sheet, other]}
-        if self.e["soft_give"] and self.signal(case, v, "wants_volume"):
+        if (self.e["soft_give"] and self.signal(case, v, "wants_volume")) or (
+            self.e["plan_give"] and self.signal(case, v, "wants_planning")
+        ):
             draft = {**draft, "arguments": [SOFT_GIVE, *(draft.get("arguments") or [])]}
         return draft
 

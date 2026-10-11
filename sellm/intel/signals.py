@@ -18,6 +18,9 @@ TEXT_RULES = {
     # fixed prices until June 2027"
     "material_hedged": r"material covered until|bought .{0,80}forward|(?:covered|bought|secured) at fixed prices"
     r"|at fixed prices until",
+    # Sunday release, two letters: "our price list applies without exception ... We remain open to discuss payment
+    # terms, call-off planning and contract length"
+    "wants_planning": r"open to discuss[^.]{0,80}call-off planning",
     "partnership": r"partnership|kept supplying|old price|long-standing|for generations",
     "margin_floor": r"lowers? our margin|cannot sign|below (?:our )?cost",
     "quality_problem": r"\b8D\b|\bcomplaints?\b|\breject|\bdefects?\b",
