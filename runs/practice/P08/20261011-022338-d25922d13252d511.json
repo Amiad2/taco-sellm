@@ -3,7 +3,7 @@
  "case_id": "case:P08",
  "set": "practice",
  "created_at": "2026-10-11T02:23:38+02:00",
- "label": "E3 (Omar, experiments/LEDGER.md) omars_branch@2be638a",
+ "label": "OMAR E3 {\"gate\": true, \"idx_recent\": 2.0} sellm.agent omars_branch@2be638a",
  "replay": "https://arena.tacto.ai/replay/d25922d13252d511",
  "case": {
   "case_id": "case:P08",
