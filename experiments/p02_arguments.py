@@ -113,6 +113,8 @@ VARIANTS = {
         ],
     ),
     "control": dict(),
+    # Omar's E1 again, now that the facts are stronger: the shortest contract that covers the horizon (24 months)
+    "agent-24m": dict(knobs=dict(plan="llm", contract="horizon")),
     # the strongest fact first: the price jump in the first e-mail, the indices after it
     "jump-first-P08": dict(
         knobs=dict(plan="llm"),
