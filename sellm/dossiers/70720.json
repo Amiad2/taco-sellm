@@ -1,9 +1,9 @@
 {
  "built_from": {
   "case_id": null,
-  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "facts_sha256": "411943e51cc915a92a129e3d3adfe3f6269f4a5bbb4bddabecbdc6fdcfc57af2",
   "package": "1.0.0",
-  "sunday_release": false
+  "sunday_release": true
  },
  "case_facts": {},
  "citable": [
@@ -366,6 +366,19 @@
    "part_ids": [],
    "subject": "Supplier day",
    "text": "At our supplier day Stahlhandel Rupprecht-Kessel GmbH said Hollerau is an important reference customer for them."
+  },
+  {
+   "asked_pct": null,
+   "asked_price": null,
+   "author": "Stahlhandel Rupprecht-Kessel GmbH",
+   "date": "2026-10-02",
+   "effective_date": null,
+   "id": "doc:20261002-70720-S6",
+   "kind": "letter",
+   "notice_days": null,
+   "part_ids": [],
+   "subject": "Bar steel purchasing",
+   "text": "Dear Sir or Madam,\n\nfor your planning: we bought our bright and cold-drawn bar requirement forward at fixed prices until June 2027. Mill price movements will reach our prices only after that.\n\nYours faithfully,\nStahlhandel Rupprecht-Kessel GmbH"
   }
  ],
  "economics": {
@@ -740,9 +753,18 @@
   "qn_supplier_caused_12m": 9,
   "trend": "flat"
  },
- "profile_text": "Stahlhandel Rupprecht-Kessel GmbH (DE; family; 500 staff; turnover EUR 196.0 M). Our spend FY2026 EUR 440,941 (0.22 % of its turnover). Standard terms: 30 days net, DAP, lead time 10 days. Cost of money about 9 % a year; cash pressure low; type family. Signals: none. Performance 2026Q3: green, OTD 92.2 %, 44 ppm. Parts: part:370012 Round bar C45 dia 50 mm, cold drawn: price 126.05 per 100; part:370020 Sheet S235JR 3 mm, hot rolled, cut to size: price 84.34 per 100.",
+ "profile_text": "Stahlhandel Rupprecht-Kessel GmbH (DE; family; 500 staff; turnover EUR 196.0 M). Our spend FY2026 EUR 440,941 (0.22 % of its turnover). Standard terms: 30 days net, DAP, lead time 10 days. Cost of money about 9 % a year; cash pressure low; type family. Signals: material hedged (1). Performance 2026Q3: green, OTD 92.2 %, 44 ppm. Parts: part:370012 Round bar C45 dia 50 mm, cold drawn: price 126.05 per 100; part:370020 Sheet S235JR 3 mm, hot rolled, cut to size: price 84.34 per 100.",
  "schema_version": 1,
- "signals": [],
+ "signals": [
+  {
+   "evidence": [
+    "doc:20261002-70720-S6"
+   ],
+   "excerpt": "for your planning: we bought our bright and cold-drawn bar requirement forward at fixed prices until June 2027.",
+   "kind": "material_hedged",
+   "strength": 1
+  }
+ ],
  "standard_terms": {
   "incoterm": "DAP",
   "lead_time_days": 10,

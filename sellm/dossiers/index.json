@@ -1,9 +1,9 @@
 {
  "built_from": {
   "case_id": null,
-  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "facts_sha256": "411943e51cc915a92a129e3d3adfe3f6269f4a5bbb4bddabecbdc6fdcfc57af2",
   "package": "1.0.0",
-  "sunday_release": false
+  "sunday_release": true
  },
  "schema_version": 1,
  "suppliers": {
@@ -424,6 +424,7 @@
    ],
    "signals": [
     "approval_ladder",
+    "list_price_fixed",
     "margin_floor",
     "price_claim"
    ]
@@ -465,7 +466,6 @@
    ],
    "signals": [
     "approval_ladder",
-    "capacity_tight",
     "list_price_fixed",
     "margin_floor",
     "wants_volume"
@@ -616,7 +616,9 @@
     "part:370012",
     "part:370020"
    ],
-   "signals": []
+   "signals": [
+    "material_hedged"
+   ]
   },
   "sup:70730": {
    "coverage": "full",

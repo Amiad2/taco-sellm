@@ -1,9 +1,9 @@
 {
  "built_from": {
   "case_id": null,
-  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "facts_sha256": "411943e51cc915a92a129e3d3adfe3f6269f4a5bbb4bddabecbdc6fdcfc57af2",
   "package": "1.0.0",
-  "sunday_release": false
+  "sunday_release": true
  },
  "case_facts": {},
  "citable": [
@@ -1426,16 +1426,17 @@
   "qn_supplier_caused_12m": 13,
   "trend": "worse"
  },
- "profile_text": "Gießerei Pfaffenreuth GmbH (DE; family; 95 staff; turnover EUR 14.8 M). Our spend FY2026 EUR 1.0 M (7.08 % of its turnover). Standard terms: 30 days net, FCA, lead time 42 days. Cost of money about 9 % a year; cash pressure low; type family. Signals: material hedged (1), quality problem (2). Performance 2026Q3: amber, OTD 85.1 %, 715 ppm, 1 overdue 8D. Parts: part:310011 Volute casing HN 65-250; part:310020 Bearing bracket HN; part:310030 Impeller HN 200; part:310040 Casing cover HB: price 33.94 per 1, 1.00x should-cost; part:310060 Pump housing HB 40: price 43.39 per 1, 1.09x should-cost.",
+ "profile_text": "Gießerei Pfaffenreuth GmbH (DE; family; 95 staff; turnover EUR 14.8 M). Our spend FY2026 EUR 1.0 M (7.08 % of its turnover). Standard terms: 30 days net, FCA, lead time 42 days. Cost of money about 9 % a year; cash pressure low; type family. Signals: material hedged (2), quality problem (2). Performance 2026Q3: amber, OTD 85.1 %, 715 ppm, 1 overdue 8D. Parts: part:310011 Volute casing HN 65-250; part:310020 Bearing bracket HN; part:310030 Impeller HN 200; part:310040 Casing cover HB: price 33.94 per 1, 1.00x should-cost; part:310060 Pump housing HB 40: price 43.39 per 1, 1.09x should-cost.",
  "schema_version": 1,
  "signals": [
   {
    "evidence": [
+    "doc:20260623-70190-M1",
     "quote:7300064"
    ],
    "excerpt": "Material covered until December 2028; price valid accordingly.",
    "kind": "material_hedged",
-   "strength": 1
+   "strength": 2
   },
   {
    "evidence": [

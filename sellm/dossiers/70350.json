@@ -1,9 +1,9 @@
 {
  "built_from": {
   "case_id": null,
-  "facts_sha256": "2375875e51735c915950fe8a2bc8caac5c1a36a99556c08cfc94838e33a3ac2d",
+  "facts_sha256": "411943e51cc915a92a129e3d3adfe3f6269f4a5bbb4bddabecbdc6fdcfc57af2",
   "package": "1.0.0",
-  "sunday_release": false
+  "sunday_release": true
  },
  "case_facts": {},
  "citable": [
@@ -207,6 +207,22 @@
    "helps_buyer": true,
    "helps_supplier": false,
    "ids": [
+    "news:20261002-S3"
+   ],
+   "kind": "news",
+   "private": false,
+   "sensitive": true,
+   "statement": "We have read that Credit insurer withdraws cover for Oberflächentechnik Weißacher GmbH (news:20261002-S3).",
+   "strength": 0.5,
+   "topic": "credit_downgrade",
+   "unit": ""
+  },
+  {
+   "about": "sup:70350",
+   "figure": null,
+   "helps_buyer": true,
+   "helps_supplier": false,
+   "ids": [
     "news:20260904-26"
    ],
    "kind": "news",
@@ -365,6 +381,15 @@
    "id": "news:20260904-26",
    "noise": false,
    "source": "Metall-Kurier",
+   "topic": "credit_downgrade"
+  },
+  {
+   "body": "A trade credit insurer has withdrawn its limits for Oberflächentechnik Weißacher GmbH; suppliers of the coating shop now ask for prepayment.",
+   "date": "2026-10-02",
+   "headline": "Credit insurer withdraws cover for Oberflächentechnik Weißacher GmbH",
+   "id": "news:20261002-S3",
+   "noise": false,
+   "source": "Gießerei-Rundschau Süd",
    "topic": "credit_downgrade"
   }
  ],
@@ -553,6 +578,7 @@
     "doc:20260821-70350-M2",
     "doc:20260912-70350-M1",
     "news:20260904-26",
+    "news:20261002-S3",
     "quote:7300070",
     "sup:70350#skonto"
    ],
