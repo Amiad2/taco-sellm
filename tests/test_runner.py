@@ -325,6 +325,37 @@ def test_an_attachment_held_behind_another_reply_does_not_stop_the_other_threads
     assert any("going on without" in n for n in row["notes"])
 
 
+def test_a_case_waits_for_a_free_session_slot_instead_of_losing_the_case():
+    """Sun 03:05: with a teammate's sessions open on the key, 'at most 10 open sessions per key' made two
+    cases of a full run score 0. The runner now waits for a slot and plays the case."""
+    pkg = _package()
+
+    class Full(FakeArena):
+        refused = 0
+
+        def open_session(self, case_id):
+            if self.refused < 3:
+                self.refused += 1
+                raise ArenaError(429, "at most 10 open sessions per key")
+            return super().open_session(case_id)
+
+    arena = Full([_scenario("P01")], pkg.facts)
+    row = runner.play_case(arena, "case:P01", _agent(pkg), limits=dataclasses.replace(FAST, open_retry=0.01))
+    assert arena.refused == 3 and row["crash"] is None and row["end_reason"] in ("accepted", "walked_away")
+
+
+def test_the_practice_quota_is_not_waited_for():
+    pkg = _package()
+
+    class Quota(FakeArena):
+        def open_session(self, case_id):
+            raise ArenaError(429, "practice limit: 450 sessions per 24 h")
+
+    row = runner.play_case(Quota([_scenario("P01")], pkg.facts), "case:P01", _agent(pkg),
+                           limits=dataclasses.replace(FAST, open_retry=0.01), retries=0)
+    assert row["crash"] and "practice limit" in row["crash"]
+
+
 def test_closes_on_what_stands_before_the_cap():
     pkg = _package()
 

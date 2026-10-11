@@ -53,6 +53,7 @@ from arena_kit.play import ENDED, closing_move, fetch_documents, latest, live_th
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNNING = re.compile(r"one session per case in the final: (\S+)")
+SLOTS = re.compile(r"open sessions", re.I)  # 429 'at most 10 open sessions per key': a slot frees when a session ends
 ENDS = {"accept": "accepted", "walk_away": "walked_away"}
 HOLD_BODY = "Dear Sir or Madam,\n\nthank you for your offer. We are reviewing it internally and will revert shortly."
 log = logging.getLogger("sellm.runner")
@@ -76,6 +77,8 @@ class Limits:
     poll: float = 5.0  # the final's case list is read this often
     serial: bool = False  # at most one message of a session on its way to the arena (see CaseRunner.post)
     turns: bool = False  # one loop for all threads, the agent picks the thread (the kit's play() order), see run()
+    open_wait: float = 300.0  # a case that finds every session slot of the key taken waits this long for one
+    open_retry: float = 5.0  # ... asking again this often
 
 
 def ended(result, reason):
@@ -131,13 +134,26 @@ class CaseRunner:
         log.log(level, "%s %s %s", self.case_id, getattr(self, "sid", "-"), text)
 
     def open(self):
-        try:
-            opened = self.client.open_session(self.case_id)
-        except ArenaError as e:
-            running = RUNNING.search(str(e.detail)) if e.status == 409 else None
-            if not running:
+        t0, tries = time.monotonic(), 0
+        while True:
+            try:
+                opened = self.client.open_session(self.case_id)
+                break
+            except ArenaError as e:
+                running = RUNNING.search(str(e.detail)) if e.status == 409 else None
+                if running:
+                    return self.resume(running.group(1))
+                # Sun 03:05, full practice run with a teammate's sessions open on the same key: P07 and P10
+                # got 'at most 10 open sessions per key', were resumed once at once and scored 0. A slot
+                # frees when any session ends, so wait for it while the case still has time
+                full = e.status == 429 and SLOTS.search(str(e.detail))
+                if full and time.monotonic() - t0 < self.lim.open_wait and not self.closing_due():
+                    if not tries % 6:
+                        self.note(f"no free session slot ({e.detail}); waiting", logging.WARNING)
+                    tries += 1
+                    time.sleep(self.lim.open_retry)
+                    continue
                 raise
-            return self.resume(running.group(1))
         self.sid, self.case, self.threads = opened["session_id"], opened["case"], opened["threads"]
         self.table = Table(self.client, self.sid)
         for events in self.threads.values():
