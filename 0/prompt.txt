@@ -1,0 +1,109 @@
+pull und erklär mir alles was passiert ist
+
+---
+
+was ht jnathan gemacht um dies verbesserungen zu machen??
+
+---
+
+ok kreir anhand jonathans bot die slides. da jedes team was gleiches haben wird, highlighte was bei uns anders ist. erstelldie slides über unseren werdegang, wie wir was verbessert haben. wenig text, viele bilder und voralllem statistiken und heb sachen die besonders/einzigartig sind/waren vor
+
+---
+
+bitte als pdf hier in ordner. und wir haben nur 3 minuten präsentation also nur diehighlights
+
+---
+
+wo liegt die pdf?
+
+---
+
+ok mein branch ist ja dann unnötig. ich möchte auf den main branch und dann müssen wir noch ein problem lösen. und zwar müssen wir entire verwenden und ich bin mir nicht sicher ob wir das gemacht haben
+
+---
+
+so wie ich es verstanden habe muss es jeder sehen können undhaben, ich weiß nicht wie ich die jetzt auf entire bekomme
+
+---
+
+<pasted_content id="146d">
+amiad@fedora:~$ ! sed -i 's/"push_sessions": false/"push_sessions": true/' .entire/settings.json
+sed: can't read .entire/settings.json: No such file or directory
+amiad@fedora:~$ cd Desktop/taco-sellm/
+amiad@fedora:~/Desktop/taco-sellm$ ! sed -i 's/"push_sessions": false/"push_sessions": true/' .entire/settings.json
+amiad@fedora:~/Desktop/taco-sellm$ ! git push origin 'refs/entire/checkpoints/*:refs/entire/checkpoints/*'
+[entire] Pushing 56 checkpoint ref(s) to origin.............................................................. done
+Enumerating objects: 641, done.
+Counting objects: 100% (641/641), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (316/316), done.
+Writing objects: 100% (641/641), 10.30 MiB | 321.00 KiB/s, done.
+Total 641 (delta 331), reused 630 (delta 322), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (331/331), done.
+To https://github.com/Amiad2/taco-sellm.git
+ ! [remote rejected] refs/entire/checkpoints/00/01M4M8NNFVR4BMTPTXCJNM8M00 -> refs/entire/checkpoints/00/01M4M8NNFVR4BMTPTXCJNM8M00 (cannot lock ref 'refs/entire/checkpoints/00/01M4M8NNFVR4BMTPTXCJNM8M00': reference already exists)
+ ! [remote rejected] refs/entire/checkpoints/06/01M4KFRNKE5WBFBR7BSG0QMX06 -> refs/entire/checkpoints/06/01M4KFRNKE5WBFBR7BSG0QMX06 (failed)
+ ! [remote rejected] refs/entire/checkpoints/06/01M4MA3ZNB3Z0RZMAJC7DM5V06 -> refs/entire/checkpoints/06/01M4MA3ZNB3Z0RZMAJC7DM5V06 (failed)
+ ! [remote rejected] refs/entire/checkpoints/0K/01M4KJ4ME314A4YP9SHKYX6F0K -> refs/entire/checkpoints/0K/01M4KJ4ME314A4YP9SHKYX6F0K (failed)
+ ! [remote rejected] refs/entire/checkpoints/0W/01M4KK5V5B8NQXM6Y2NCK1ZS0W -> refs/entire/checkpoints/0W/01M4KK5V5B8NQXM6Y2NCK1ZS0W (failed)
+ ! [remote rejected] refs/entire/checkpoints/1G/01M4M93FANPKVSX3FE34GE981G -> refs/entire/checkpoints/1G/01M4M93FANPKVSX3FE34GE981G (failed)
+ ! [remote rejected] refs/entire/checkpoints/25/01M4MXPQCYWC9VT7TZQNN8N125 -> refs/entire/checkpoints/25/01M4MXPQCYWC9VT7TZQNN8N125 (failed)
+ ! [remote rejected] refs/entire/checkpoints/2B/01M4K342CESQQPM50MHJAZA62B -> refs/entire/checkpoints/2B/01M4K342CESQQPM50MHJAZA62B (failed)
+ ! [remote rejected] refs/entire/checkpoints/2K/01M4M99WQS0NC42EG8PR17EE2K -> refs/entire/checkpoints/2K/01M4M99WQS0NC42EG8PR17EE2K (failed)
+ ! [remote rejected] refs/entire/checkpoints/2Y/01M4K9JHWDVJVPA7D07FTK6A2Y -> refs/entire/checkpoints/2Y/01M4K9JHWDVJVPA7D07FTK6A2Y (failed)
+ ! [remote rejected] refs/entire/checkpoints/31/01M4M9FGHB52TSWH6PT97KVG31 -> refs/entire/checkpoints/31/01M4M9FGHB52TSWH6PT97KVG31 (failed)
+ ! [remote rejected] refs/entire/checkpoints/3B/01M4KM9NJPS5ZKFJ7FK07W033B -> refs/entire/checkpoints/3B/01M4KM9NJPS5ZKFJ7FK07W033B (failed)
+ ! [remote rejected] refs/entire/checkpoints/3R/01M4M7KY99C0C213WNJJ896Q3R -> refs/entire/checkpoints/3R/01M4M7KY99C0C213WNJJ896Q3R (failed)
+ ! [remote rejected] refs/entire/checkpoints/3Y/01M4KGTZ7DG2M4B28DQ8XSC43Y -> refs/entire/checkpoints/3Y/01M4KGTZ7DG2M4B28DQ8XSC43Y (failed)
+ ! [remote rejected] refs/entire/checkpoints/43/01M4KRZRD75NAB2C7SMT5ZN743 -> refs/entire/checkpoints/43/01M4KRZRD75NAB2C7SMT5ZN743 (failed)
+ ! [remote rejected] refs/entire/checkpoints/4S/01M4KQTSZFSHPTKZXFBZY1504S -> refs/entire/checkpoints/4S/01M4KQTSZFSHPTKZXFBZY1504S (failed)
+ ! [remote rejected] refs/entire/checkpoints/50/01M4K6X8DST5WQ3B1RVW2ERX50 -> refs/entire/checkpoints/50/01M4K6X8DST5WQ3B1RVW2ERX50 (failed)
+ ! [remote rejected] refs/entire/checkpoints/6A/01M4KK4RESZ4QBXMMCYPJYRQ6A -> refs/entire/checkpoints/6A/01M4KK4RESZ4QBXMMCYPJYRQ6A (failed)
+ ! [remote rejected] refs/entire/checkpoints/7V/01M4KKSV16HX0VGY4ZVG2CED7V -> refs/entire/checkpoints/7V/01M4KKSV16HX0VGY4ZVG2CED7V (failed)
+ ! [remote rejected] refs/entire/checkpoints/80/01M4K69KCAH8TVF6HVNQ2HNS80 -> refs/entire/checkpoints/80/01M4K69KCAH8TVF6HVNQ2HNS80 (failed)
+ ! [remote rejected] refs/entire/checkpoints/8C/01M4KMTN2R5WTJNXDX3BQW3X8C -> refs/entire/checkpoints/8C/01M4KMTN2R5WTJNXDX3BQW3X8C (failed)
+ ! [remote rejected] refs/entire/checkpoints/8W/01M4MW4Q8K98D4DQGQSK7R9P8W -> refs/entire/checkpoints/8W/01M4MW4Q8K98D4DQGQSK7R9P8W (failed)
+ ! [remote rejected] refs/entire/checkpoints/93/01M4K7FX4MRP3BN5GCQGKJ0P93 -> refs/entire/checkpoints/93/01M4K7FX4MRP3BN5GCQGKJ0P93 (failed)
+ ! [remote rejected] refs/entire/checkpoints/96/01M4M7G75W0XPCEYM7TKT1JJ96 -> refs/entire/checkpoints/96/01M4M7G75W0XPCEYM7TKT1JJ96 (failed)
+ ! [remote rejected] refs/entire/checkpoints/9V/01M4M9NAN4A7JKZ5HHD1PF1R9V -> refs/entire/checkpoints/9V/01M4M9NAN4A7JKZ5HHD1PF1R9V (failed)
+ ! [remote rejected] refs/entire/checkpoints/A2/01M4KQSF5JP0HZM4TAR7BXDJA2 -> refs/entire/checkpoints/A2/01M4KQSF5JP0HZM4TAR7BXDJA2 (failed)
+ ! [remote rejected] refs/entire/checkpoints/AX/01M4K562BDMKN68S2ZEZW23HAX -> refs/entire/checkpoints/AX/01M4K562BDMKN68S2ZEZW23HAX (failed)
+ ! [remote rejected] refs/entire/checkpoints/C2/01M4KRVQTBB7X9V402XX7T3EC2 -> refs/entire/checkpoints/C2/01M4KRVQTBB7X9V402XX7T3EC2 (failed)
+ ! [remote rejected] refs/entire/checkpoints/DB/01M4KYC952CEEBDXHP8Q8A83DB -> refs/entire/checkpoints/DB/01M4KYC952CEEBDXHP8Q8A83DB (failed)
+ ! [remote rejected] refs/entire/checkpoints/DM/01M4K9FK1CJDBACVJEBJ0107DM -> refs/entire/checkpoints/DM/01M4K9FK1CJDBACVJEBJ0107DM (failed)
+ ! [remote rejected] refs/entire/checkpoints/EV/01M4KVN64R2HQ0FZV3RSZXFKEV -> refs/entire/checkpoints/EV/01M4KVN64R2HQ0FZV3RSZXFKEV (failed)
+ ! [remote rejected] refs/entire/checkpoints/FZ/01M4M98BCWY1ESJQAAECWXX0FZ -> refs/entire/checkpoints/FZ/01M4M98BCWY1ESJQAAECWXX0FZ (failed)
+ ! [remote rejected] refs/entire/checkpoints/GE/01M4KSBRR10E2TYCDCG6KNBWGE -> refs/entire/checkpoints/GE/01M4KSBRR10E2TYCDCG6KNBWGE (failed)
+ ! [remote rejected] refs/entire/checkpoints/GV/01M4K4CHFVCKJ0WNPC3ZBD3KGV -> refs/entire/checkpoints/GV/01M4K4CHFVCKJ0WNPC3ZBD3KGV (failed)
+ ! [remote rejected] refs/entire/checkpoints/H9/01M4KWTEF72STJQS4E4FZZ90H9 -> refs/entire/checkpoints/H9/01M4KWTEF72STJQS4E4FZZ90H9 (failed)
+ ! [remote rejected] refs/entire/checkpoints/HA/01M4KHJ216DHPTRNM9D78AMFHA -> refs/entire/checkpoints/HA/01M4KHJ216DHPTRNM9D78AMFHA (failed)
+ ! [remote rejected] refs/entire/checkpoints/J7/01M4KJBWMCPQFCREB55X3JZJJ7 -> refs/entire/checkpoints/J7/01M4KJBWMCPQFCREB55X3JZJJ7 (failed)
+ ! [remote rejected] refs/entire/checkpoints/JD/01M4M8KQF711ZRMN6RCBHSNKJD -> refs/entire/checkpoints/JD/01M4M8KQF711ZRMN6RCBHSNKJD (failed)
+ ! [remote rejected] refs/entire/checkpoints/K0/01M4K3RQTZBZ7XZM08DANS30K0 -> refs/entire/checkpoints/K0/01M4K3RQTZBZ7XZM08DANS30K0 (failed)
+ ! [remote rejected] refs/entire/checkpoints/K4/01M4K6WVAN4HXDHF4Z67WVENK4 -> refs/entire/checkpoints/K4/01M4K6WVAN4HXDHF4Z67WVENK4 (failed)
+ ! [remote rejected] refs/entire/checkpoints/K4/01M4KABQFJB6V0QGAY4S8P8AK4 -> refs/entire/checkpoints/K4/01M4KABQFJB6V0QGAY4S8P8AK4 (failed)
+ ! [remote rejected] refs/entire/checkpoints/M6/01M4K1C56MXND4PPGGYZCVAAM6 -> refs/entire/checkpoints/M6/01M4K1C56MXND4PPGGYZCVAAM6 (failed)
+ ! [remote rejected] refs/entire/checkpoints/MS/01M4K7AYCK0615847D48S51BMS -> refs/entire/checkpoints/MS/01M4K7AYCK0615847D48S51BMS (failed)
+ ! [remote rejected] refs/entire/checkpoints/NQ/01M4KZ0D7FQFMM3MC39VEKD7NQ -> refs/entire/checkpoints/NQ/01M4KZ0D7FQFMM3MC39VEKD7NQ (failed)
+ ! [remote rejected] refs/entire/checkpoints/P0/01M4KZXMCF5YND0RE5MZJ8NPP0 -> refs/entire/checkpoints/P0/01M4KZXMCF5YND0RE5MZJ8NPP0 (failed)
+ ! [remote rejected] refs/entire/checkpoints/P7/01M4KYVEXJ9PAGXKPX735M5VP7 -> refs/entire/checkpoints/P7/01M4KYVEXJ9PAGXKPX735M5VP7 (failed)
+ ! [remote rejected] refs/entire/checkpoints/PQ/01M4M8FT1QKY730P33J13YTWPQ -> refs/entire/checkpoints/PQ/01M4M8FT1QKY730P33J13YTWPQ (failed)
+ ! [remote rejected] refs/entire/checkpoints/RB/01M4M6V72HKRZVPWPHP40D73RB -> refs/entire/checkpoints/RB/01M4M6V72HKRZVPWPHP40D73RB (failed)
+ ! [remote rejected] refs/entire/checkpoints/SG/01M4K70J7TNC221S81XMGB02SG -> refs/entire/checkpoints/SG/01M4K70J7TNC221S81XMGB02SG (failed)
+ ! [remote rejected] refs/entire/checkpoints/V4/01M4KZ5TQ5QNBDNY4FNKJ10YV4 -> refs/entire/checkpoints/V4/01M4KZ5TQ5QNBDNY4FNKJ10YV4 (failed)
+ ! [remote rejected] refs/entire/checkpoints/VD/01M4KJNEFMXKN9ANTW38BNRTVD -> refs/entire/checkpoints/VD/01M4KJNEFMXKN9ANTW38BNRTVD (failed)
+ ! [remote rejected] refs/entire/checkpoints/VF/01M4K3NTDYKWRRY0SXJXNT6GVF -> refs/entire/checkpoints/VF/01M4K3NTDYKWRRY0SXJXNT6GVF (failed)
+ ! [remote rejected] refs/entire/checkpoints/VK/01M4KKVYB6KD3Q7KE972TMGWVK -> refs/entire/checkpoints/VK/01M4KKVYB6KD3Q7KE972TMGWVK (failed)
+ ! [remote rejected] refs/entire/checkpoints/XE/01M4KACCSW4ND53DKQN1ZR9KXE -> refs/entire/checkpoints/XE/01M4KACCSW4ND53DKQN1ZR9KXE (failed)
+ ! [remote rejected] refs/entire/checkpoints/YD/01M4K9HFC33YNB4PHFG6GF2WYD -> refs/entire/checkpoints/YD/01M4K9HFC33YNB4PHFG6GF2WYD (failed)
+ ! [remote rejected] refs/entire/checkpoints/ZA/01M4KVHX0NMBE5V666KNX9W2ZA -> refs/entire/checkpoints/ZA/01M4KVHX0NMBE5V666KNX9W2ZA (failed)
+error: failed to push some refs to 'https://github.com/Amiad2/taco-sellm.git'
+</pasted_content id="146d">
+
+---
+
+pull mal und dann schau die neuen slides an
+
+---
+
+pull mal und dann schau die neuen slides an
