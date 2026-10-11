@@ -1,10 +1,11 @@
 # STATUS - where we are right now
 
 Keep this file short and true. Edit it in place; history belongs in `docs/LOG.md`.
-Last updated: 2026-10-11 08:25 CEST by Omar (Claude Code).
+Last updated: 2026-10-11 10:10 CEST by Jonathan (Claude Code).
 
 ## Now
 
+- **Pitch material (Sun 10:10, Jonathan's Claude Code): `docs/presentation_brainstorm.md`** - intro slide on our agent memory system (Jonathan's voice memo; the pitch is in English), where our edge is (what we ask for 8.8 points, what we say 10.1, of the 18.8 from 61.5 to 80.3), why `jonathans_branch@363b6e6` beats the other versions per case, caveats for the jury, slide order for the 3-minute and 5-minute slot. Open points for the team are in its section 9: slot length (3 or 5 + 2 minutes), the wording of Amiad's slide 3 and of the "0.72 %" claim, and **which hash the slides and README name** (`hold_fixed` was added to `jonathans_branch` at 09:57 and is not part of the measured 80.3).
 - Repo is set up on the official starter kit; tests pass (31 passed, 1 skipped).
 - Team key works: team **sellm**, active. `uv run arena me` is the source of truth for quota and best scores.
 - **OpenAI works with the kit's LLM agent** (`LLM_PROVIDER=openai`, model `gpt-6.1-sol`, Sat 15:00): D01 scored 0.786 against 0.200 for the naive agent, no `LLM failed` in the log. Each machine needs the values in its own `.env`; `llm_from_env` was not changed.
