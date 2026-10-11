@@ -991,3 +991,75 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Fix, omars_branch@0c60254: CaseRunner.open waits for a free slot on that 429 (every 5 s, up to 300 s or until the case must close); the practice-quota 429 still fails at once. 16 runner tests (fake arena: three refusals, then the case plays).
 - V1b, omars_branch@0466bcf: P07 0.747, P10 0.647 - as predicted. All ten measured through the final runner: 75.4 (tag best-omars_branch-75.4-runner). Practice sessions of this research: 27 (experiments/LEDGER.md); team quota left 188 at 03:08.
 - For the final: any session open on our key counts against the 10 - nobody plays practice or sandbox from 11:55 until the last wave ends. main's runner (one loop per thread, no slot wait) has neither fix.
+
+## 2026-10-11 03:13 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] jonathans_branch@0eaf946 with SELLM_PLAN=llm (gpt-6-sol, plans made live), all ten practice cases: mean 77.3 (75.4 before the index rules, main 72.9)**
+- commit jonathans_branch@0eaf946 (pushed, clean tree); tag best-jonathans_branch-77.3. uv run arena run --set practice --agent sellm --parallel 8 played eight cases; P10 and P11 did not open (HTTP 429: a teammate's sessions were open at the same moment, the key allows ten) and were played singly on the same commit right after (arena play). 0 timeouts, plans in 3-8 s.
+- Per case: P01 0.997 (0.969; PPI-D351 -6.1 % since its peak, the planner read 'energy' in the supplier's letter), P02 0.725, P03 0.923, P04 0.860, P05 0.820, P07 0.747, P08 0.637 (0.549; the fall of PPI-C2431 first), P10 0.647, P11 0.778, P18 0.598 (0.520; both fallen indices, then the order history).
+- The kit runner printed 'mean score: 78.8': that is the mean of the eight cases it played, not of ten. A case that fails to open is dropped from its mean without a retry - for the final only one machine may hold sessions.
+- Team quota left 181 of 450; Jonathan's instruction: stop at 100.
+
+## 2026-10-11 03:29 CEST · Amiad @ fedora
+**[change] sellm2: the agent rewritten from scratch on amiads_branch (folder sellm2/, nothing outside it changed)**
+- New data layer (sellm2/knowledge: reads the package and the Sunday release itself, no committed dossiers; briefs equal the old dossiers on 105 supplier x part x case checks; 935 citable facts, all verified by the lab ClaimChecker), case/thread/supplier model, policy (joint-gains structure, measured price path, one checked fact per e-mail, clause offer, recent index fall with the hedge guard), template e-mails, own runner (one loop per case, one message in flight, 40 s deadline, 422 re-read, own close before the cap, resume) and CLI: python -m sellm2 play|run|final|replay|brief|stress.
+- New rules, each measured: payment days fastest for a supplier whose money costs >= 15 % (P05's job shop); no lowball (first ask >= 93 % of its opening) to a capacity-tight supplier (P10 0.647 -> 0.671); lead time priced only by capacity-tight suppliers; a fixed-list-price supplier that repeats its price is asked 0.2 % below it (P04/P03 unchanged, shorter).
+- Tests: sellm2/tests 39 green (knowledge oracle vs sellm.intel, every recorded state of runs/ gets a valid move, the 74.9 run's moves kept where no new rule applies, fake-arena runner incl. a supplier that leaves mid-case). Lab stress PASS (816 negotiations: 0 crashes, 0 refused, 0 broken must-haves); lab compare vs main: +1.8 +- 1.0 for main, not distinguishable (lab's suppliers do not price the clause, P02).
+
+## 2026-10-11 03:29 CEST · Amiad @ fedora
+**[run] sellm2 full practice run: mean 76.4 (amiads_branch@dc028e5; best other branch 75.4, main 72.9)**
+- python -m sellm2 run --set practice --cases all --parallel 8, own runner, no LLM. 10 deals, 0 refused, 0 late, 0 crashes, every case < 75 s.
+- P01 0.969, P02 0.725, P03 0.923, P04 0.860, P05 0.820, P07 0.747, P08 0.549, P10 0.671 (0.647), P11 0.778, P18 0.598 (0.467; best ever before 0.567). Exactly what the replay diagnosis plus single-case runs predicted (python -m sellm2 replay --label 67001e7).
+- Single sessions before it (amiads_branch@2d8945e, bb584c7): P10 0.671, P18 0.598, P11 0.620 (ppm 1500, reverted), P05 0.000 (runner bug, fixed), P04 0.860, P03 0.923, P05 0.803 (lead 42, reverted); sandbox D01 0.947, D02 0.548. sellm2 used 17 practice sessions; quota left 168 of 450.
+
+## 2026-10-11 03:29 CEST · Amiad @ fedora
+**[finding] Suppliers walk their price ladder whatever non-cash lever we give: 1500 ppm (P11) and 42 days lead time (P05's 70210/70250) bought nothing; only capacity-tight suppliers price lead time**
+- P11 (a11271a2): 46.5, 46.0, 45.5, 45.5 at 1500 ppm - the same ladder as at 300 ppm; deal 45.50 at 1500 ppm = 0.620 against 0.778. P05 (832c76ee): 70250 ended at 28.00 with 42 days as with 28 days, 0.803 against 0.820. P10 (capacity tight) charged 1.90 for 12 days and P05's 70240 (capacity tight) 1.50 for 10 days.
+- So in sellm2 a lever is traded only where the supplier has shown it prices it: payment days at its cost of money, lead time with a capacity signal, the index clause in relationship cases.
+
+## 2026-10-11 03:29 CEST · Amiad @ fedora
+**[finding] Runner trap: a supplier's exit can show only in the thread state (closed/status, timeouts list), not in its messages**
+- P05 on sellm2@2d8945e: 70210 walked away after a timeout; the loop kept asking it (188 x 409) while 70250 at final_offer 28.00 waited and withdrew - score 0. sellm2/runner.py now rebuilds a thread from its state on every 409/422 (walked_away or the re-issued offer ID) and holds only the best final offer. Anyone writing a case loop: read 'closed', 'status' and 'timeouts' of GET thread, not only 'messages'.
+
+## 2026-10-11 03:44 CEST · Amiad @ fedora
+**[handoff] sellm2 (Amiad's rewrite) is finished, measured and pushed; it waits for the team's decision to play the final**
+- State: amiads_branch@623aac4 pushed, clean (except a teammate's uncommitted sellm/lab/twins.json, untouched). Full run 76.4 at @dc028e5; since then two changes that no practice case reaches: end_reason in the rows, and with several bidders a thread's last message is kept for the refresh hold before an accept (strict lab: 192/192 without a refused move).
+- Next: the team's yes to the merge (STATUS Next up has the commands), the 08:00 release check and one more full run; sellm2 has 23 of its 40 practice sessions left.
+- Traps: the kit's 'arena run --agent' does not list sellm2 - use python -m sellm2 (or python -m sellm.runner --agent sellm2.agent:make_agent). Under load RFQ replies took 15-40 s: never send holding e-mails to open threads in an RFQ (each one costs the others a turn and a timeout), only to the best final offer. The target of >= 0.90 in 5 of 10 practice cases was NOT reached: P01 and P03 are above 0.90; P04 sits one cent (0.14) below 1.0 and refused 4.93 against its 4.94; the others are held by the suppliers' own floors (docs/LEARNINGS.md).
+
+## 2026-10-11 04:02 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] Night search on jonathans_branch, six single sessions: no lowball to a capacity-tight supplier lifts P10 to 0.679; two facts in the first e-mail, faster payment on P18 and order-history facts on P07 gain nothing**
+- Ledger with every row: experiments/LEDGER-JONATHAN.md on jonathans_branch (J4-J7). Reference per case: the 77.3 run of jonathans_branch@0eaf946.
+- J4 P10, first ask no lower than 93 % of the opening for a supplier the dossier calls capacity-tight (Amiad's sellm2 rule, on this agent): 0.679 (0.647; sellm2 0.671) - it stayed open after the first e-mail and closed at 31.50 with 56 days. Adopted (KNOBS no_lowball=0.93, test). Session b1e54e486bfbb175 @c74d723.
+- J5 two facts in the first e-mail (first_facts=2): P18 0.564 (0.598), P08 0.593 (0.637). The first answer is the same or worse and the later steps are smaller. Rejected: one fact per e-mail. Sessions 2bdb002fe3dea9fc, f428ea736329802f @e0af192.
+- J6 P18 asked with 30 and with 14 days payment from the start: 0.603 (5.11) and 0.606 (5.20) against 0.598 at 90 days (5.30). It prices payment at about our own rate; not adopted. Sessions 82af6326fdc6fbb8, 5ad07f6ae3839b14 @d9e6957.
+- J7 P07, order history of two of the kit's parts in e-mails 3 and 4 (the agent has no fact left there): verified, and the final offer still came at the third message at 5.41, 0.747 (=). Its patience is three messages. Session e93d45d42a375fac @39672a0.
+- Team quota left about 155 of 450; Jonathan's limit is 100.
+
+## 2026-10-11 04:10 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] Rehearsal through the final runner: jonathans_branch@79c2d0a, ten practice cases in parallel with the planner live - mean 78.2, 0 crashes, 0 refused moves**
+- commit jonathans_branch@79c2d0a (pushed, clean tree; = the 77.3 agent + no lowball to a capacity-tight supplier + omars_branch's runner that waits for a free session slot). SELLM_PLAN=llm SELLM_MODEL=gpt-6-sol python -m sellm.runner --set practice --cases all --parallel 10 --agent sellm, plans made live. Tag best-jonathans_branch-78.2.
+- Per case: P01 0.997, P02 0.725, P03 0.923, P04 0.860, P05 0.872, P07 0.747, P08 0.637, P10 0.679, P11 0.778, P18 0.598. The nine single-supplier cases are exactly what the offline replay of this commit said (4-12 s each); P05, the RFQ, varies with timing (0.735-0.872 tonight): 203 s, one timeout on 70250's thread, two holding e-mails, closed at 27.50.
+- Against main (72.9): P02 +0.194 (clause offer), P08 +0.088 and P18 +0.131 (every fallen cost-driver index, one per e-mail; Omar's recent-fall rule started it), P01 +0.028 (the larger fall of the index the supplier blames, read by the planner), P10 +0.032 (no lowball; Amiad's rule).
+- Rows: runs/logs/20261011-040648-runner-practice.jsonl (not in git). Team quota left 152 of 450.
+
+## 2026-10-11 04:26 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] jonathans_branch@2caef7f through the final runner, ten practice cases in parallel, planner live: mean 79.3 - P08 0.814 and P03 0.956 with the order history cited as a price jump; P05 lost its best bidder to a timeout (0.717)**
+- commit jonathans_branch@2caef7f (pushed, clean tree); SELLM_PLAN=llm SELLM_MODEL=gpt-6-sol python -m sellm.runner --set practice --cases all --parallel 10 --agent sellm. Tag best-jonathans_branch-79.3. 0 crashes, 0 refused moves.
+- Per case: P01 0.997, P02 0.725, P03 0.956 (0.923), P04 0.860, P05 0.717, P07 0.747, P08 0.814 (0.637), P10 0.679, P11 0.778, P18 0.657 (0.598). The nine single-supplier cases are what single sessions and replay had shown.
+- New since 78.2, sellm/claims.py _po: where a supplier raised its price by 2 % or more within the last twelve months, the bank cites the last order at the old price and the latest one, instead of the first and last order of two years. P08: 'We ordered from you at EUR 5.17 per unit in 2025-12 and at EUR 5.45 per unit in 2026-09' - 'verified ... adjusted our calculation accordingly', 5.52 -> 5.17 in one step, deal 5.11. P18: 5.26 in June, 5.84 in September - 'based on this historical data we can reduce our price', deal 5.21. P03 has an order-history fact for the first time (400.19 in 2025-12, 412.74 now): 430.71 instead of 432.14. The two-year pair had been dismissed in 42 of 46 answers ('it holds, but it does not change our calculation'). Single sessions before the run: experiments/LEDGER-JONATHAN.md J8, J9.
+- P05 (RFQ): 70210 said final_offer at 28.00, the loop then waited 98 s for an answer of 70240 (standing at 33.00, never near the others), 70210 timed out and withdrew; closed with 70250 at 29.00. The arena answers a session's messages one after another, so every message to a bidder that cannot win costs the leaders their clock. Next: stop asking a bidder that is far behind after two answers. With P05 at its usual 0.820 the mean is 80.3.
+- Team quota left 136 of 450; Jonathan's limit is 100.
+
+## 2026-10-11 04:29 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] jonathans_branch@8a854c4 through the final runner, ten practice cases in parallel, planner live: mean 80.3 (main 72.9), 0 crashes, 0 refused moves, 14 s for the whole run**
+- commit jonathans_branch@8a854c4 (pushed, clean tree); SELLM_PLAN=llm SELLM_MODEL=gpt-6-sol python -m sellm.runner --set practice --cases all --parallel 10 --agent sellm. Tag best-jonathans_branch-80.3.
+- Per case: P01 0.997, P02 0.725, P03 0.956, P04 0.860, P05 0.820, P07 0.747, P08 0.814, P10 0.679, P11 0.778, P18 0.657. Against main@7a49c38 (72.9): P02 +0.194, P08 +0.265, P18 +0.190, P03 +0.033, P10 +0.032, P01 +0.028.
+- New since 79.3: in an RFQ a bidder that has answered two asks and still costs 8 % more than the best other offer is not asked again (drop_behind, sellm/endgame.py). The state that lost P05's 28.00 offer at 04:25 is a test: the agent now accepts instead of asking the bidder at 33.00 a fourth time. P05 alone twice: 0.820, 0.820 in 12 s.
+- What the branch is, on top of main's agent: (1) clause offer under a relationship term (P02); (2) every fallen cost-driver index, one per e-mail, hedge guard on the clause's material (P08, P18; from Omar's recent-fall rule); (3) the order history cited as the pair around a price jump of the last twelve months (P08, P18, P03); (4) the larger fall of an index the supplier blames, read by the LLM planner (P01); (5) no lowball to a capacity-tight supplier (P10; Amiad's rule); (6) the far-behind rule for RFQs; (7) omars_branch's runner. Run it with SELLM_PLAN=llm SELLM_MODEL=gpt-6-sol; without the planner only (4) is missing (P01 0.969, mean 80.0).
+- Ledger of every experiment of the night, adopted or rejected: experiments/LEDGER-JONATHAN.md on jonathans_branch. Team quota left 124 of 450; Jonathan's limit is 100.
+
+## 2026-10-11 04:34 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
+**[run] Independent lab stress of the 80.3 candidate (jonathans_branch@efb53af = 8a854c4 + merges): 0 crashes, 0 broken must-haves; 1 refused move, only in one loop per thread - none in the order the final runner now uses**
+- Omar's session, free (lab, no arena): python -m sellm.lab stress --agent sellm.agent:make_agent --n 200 on a detached worktree of origin/jonathans_branch, without SELLM_PLAN (the planner's rules are off, the code paths are the same). 284 scenarios x 2 seeds x 2 runner modes. Report: runs/lab/20261011-043308-stress-omar-check-jonathans-efb53af/report.md.
+- sequential (one message at a time, the kit's order = the final runner's default since Sun 02:20): mean 54.3, 0 crashes, 0 refused, 0 broken, 22 deals no better than the opening (as main's agent: 25), timeouts are the lab clock's 20-60 s replies. parallel (one loop per thread): 54.4, 0 crashes, 0 broken, 1 refused - X07-083 (invented 3-bidder RFQ), seed 1: an accept of an offer ID the lab's parallel view had already replaced; the runner survives that (re-read, decide again). Same scenario in sequential mode, seeds 1-4: 0 refused.
+- So the stress check's FAIL comes from a mode the final no longer runs. No change needed on jonathans_branch.

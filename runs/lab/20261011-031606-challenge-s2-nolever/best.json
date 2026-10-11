@@ -1,0 +1,12 @@
+[
+ {
+  "knobs": {
+   "lever_prices": false
+  },
+  "delta": {
+   "lever_prices": false
+  },
+  "diff": -0.007080187612311371,
+  "se": 0.004017428542906824
+ }
+]
