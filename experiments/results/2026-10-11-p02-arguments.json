@@ -3095,5 +3095,129 @@
   },
   "variant": "fixed-keep",
   "label": "ARG fixed-keep jonathans_branch@806bd1f"
+ },
+ {
+  "session_id": "f90ab79149f0bd8c",
+  "case_id": "case:P07",
+  "deal": true,
+  "score": 0.7469839325011869,
+  "c_deal": 322464.8,
+  "supplier": "sup:70610",
+  "terms": {
+   "payment_days": 90,
+   "lead_time_days": 5,
+   "volume_per_year": 30000,
+   "contract_months": 36,
+   "effective_date": "2027-01-01",
+   "index_clause": null,
+   "incoterm": "DAP",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 80,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 5.41
+  },
+  "end_reason": "accepted",
+  "seconds": 13,
+  "threads": {
+   "sup:70610": {
+    "our_messages": 3,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 3,
+    "their_prices": [
+     5.74,
+     5.58,
+     5.48,
+     5.41
+    ],
+    "our_prices": [
+     [
+      4.82
+     ],
+     [
+      4.98
+     ],
+     [
+      5.32
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 4,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "variant": "agent-near3",
+  "label": "ARG agent-near3 jonathans_branch@0ef1717"
+ },
+ {
+  "session_id": "1965a1710d24cb21",
+  "case_id": "case:P07",
+  "deal": true,
+  "score": 0.7404905611329671,
+  "c_deal": 323060.8,
+  "supplier": "sup:70610",
+  "terms": {
+   "payment_days": 90,
+   "lead_time_days": 5,
+   "volume_per_year": 30000,
+   "contract_months": 36,
+   "effective_date": "2027-01-01",
+   "index_clause": null,
+   "incoterm": "DAP",
+   "tooling_eur": 0.0,
+   "ppm_commitment": 80,
+   "chargeback_eur_per_complaint": 0.0,
+   "unit_price": 5.42
+  },
+  "end_reason": "accepted",
+  "seconds": 17,
+  "threads": {
+   "sup:70610": {
+    "our_messages": 3,
+    "timeouts": 0,
+    "status": "agreed",
+    "closed": null,
+    "final_offer_after_our_message": 3,
+    "their_prices": [
+     5.74,
+     5.58,
+     5.48,
+     5.42
+    ],
+    "our_prices": [
+     [
+      4.82
+     ],
+     [
+      4.98
+     ],
+     [
+      5.23
+     ]
+    ],
+    "claims": [
+     "verified",
+     "verified"
+    ]
+   }
+  },
+  "notes": [],
+  "crash": null,
+  "agent_stats": {
+   "moves": 4,
+   "errors": 0,
+   "fallbacks": 0
+  },
+  "variant": "agent-near",
+  "label": "ARG agent-near jonathans_branch@0ef1717"
  }
 ]

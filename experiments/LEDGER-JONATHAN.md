@@ -48,6 +48,7 @@ Earlier tonight (records: `experiments/P02-ARGUMENTS.md`, `docs/LOG.md`): clause
 | Sun 08:08 | `@a434a55`, tag `-80.3-sunday` | final runner, planner live, dossiers with the Sunday release | **80.3** | every case as at 04:29 |
 | Sun 09:14 | `@6c7d3c4`, tag `-80.3-sunday2` | final runner, planner live, release fixes + `plan_give` | **80.3** | every case as at 04:29; 14 s, 0 refused |
 | Sun 09:20 | `@363b6e6`, tag `-80.3-sunday3` | the same after merging main (Omar's `extract.py` fix; dossiers identical) | **80.3** | every case as at 04:29; 14 s, 0 refused |
+| Sun 09:57 | `@f1c3fb9`, tag `-81.1` | final runner, planner live, `hold_fixed` | **81.1** | P18 .729, the other nine as at 04:29; 0 refused |
 
 ## After the 80.3 run
 
@@ -72,4 +73,17 @@ see that this is so, then every supplier the release names played offline in inv
 | - | A hidden case triggered by a release letter: who is the letter read for? | offline, P05's case file with `doc:20261005-70250-S2` as trigger | - | the letter of one bidder made all three bidders `cash_short` (they would all have been offered 14 days); our memo as trigger gave any supplier `list_price_fixed` | fixed in `sellm/intel/overlay.py`: a letter speaks for its writer, the memo for nobody, an RFQ for every bidder; test | - |
 | - | What do we write to the eight suppliers of the release? | offline, invented cases | 70510, 70720, 70250, 70650, 70140, 70350, 70540, 70610 | cash-short ones are asked the fastest payment (14 days), list-price ones the longest (90), the hedged steel trader hears no steel index, the noise item and the market item are never cited; the two citable news (`supply_normalises`, `credit_downgrade`) come late, after the data facts | no change | - |
 | - | The lab's stress test with the release: one refused accept in an invented RFQ (X07-083, parallel mode), already there at 04:33 | reproduced | - | the agent accepts an offer ID that a timeout has replaced; `sellm/runner.py` re-reads the thread before every accept, the lab's loop does not | no change: the final is played through `sellm.runner` | - |
+
+## Sunday morning, after the release (Sun 09:45-10:05)
+
+Where the last full run lost (`runs/practice/*/*.md`, "Where the deal lost"): P08 and P18 pay for the index clause
+(the case expects AS-14404 to rise 6 %: 3.15 % of the spend without a deadband, 0.9 % with the widest, nothing at
+a fixed price); P10 pays 14 days of late delivery; the rest is price.
+
+| ID | Hypothesis | Change | Case | Result (reference) | Decision | Session |
+|---|---|---|---|---|---|---|
+| J16 | A fixed price for 36 months was never asked beyond the first e-mail: hold it when the supplier answers with clause sheets | scripted (`fixed`: structure held) | P18, P08 | **0.729 (0.657)**: "we cannot offer a fixed price for a 36-month contract", but its clause sheets fell 0.20 per fact instead of 0.10 (5.40, 5.20, 5.00 / with the 5 % deadband 5.50, 5.30, 5.10), and we took the deadband sheet at 5.10; P08 0.803 (0.814): 5.12 instead of 5.11 | adopted as `hold_fixed`, not for a supplier whose material is hedged (P08's): full run 81.1 | 6c25c9a29abc724c, c0ebbfc674c93704 |
+| J17 | ... and smaller steps of ours, or asking on while it still moves, get a further round out of it | `creep=0.25`; `keep` | P18, P08 | 0.729, 0.803 (unchanged); a fourth fact (forecast) moved nothing: 0.721 | rejected: three facts, then its sheet | fa67aaa7cdfe58dd, e149157b570b0a4c, cd8eeba5059fdf69 |
+| J18 | The same with a refused lead time: P10 calls 42 days not feasible | lead time 42 held; or 56 asked from the start | P10 | 0.586 (0.679): it lowers the 42-day sheet by 0.20 only; 0.671 with 56 from the start | rejected: the rule is for the index clause only | 01d3d3510aa79d6f, 6bedb999ed7630a3 |
+| J19 | P07 gets its final offer because our third ask is far below its price (5.12 against 5.48) | `near=0.045` / `0.03`: third ask 5.23 / 5.32 | P07 | 0.740, 0.747 (0.747): final offer at the third message either way | rejected (`near` stays off). What kept it open a round longer on Saturday was a first ask near 5.00, which costs P11 and P18 | 1965a1710d24cb21, f90ab79149f0bd8c |
 
