@@ -190,6 +190,9 @@ VARIANTS = {
     "fixed-creep": dict(knobs=dict(plan="llm", creep=0.25), structure={"index_clause": None}, hold=True),
     # ... and no taking of its sheet while each answer is cheaper than the one before (up to six asks)
     "fixed-keep": dict(knobs=dict(plan="llm", creep=0.25), structure={"index_clause": None}, hold=True, keep=6),
+    # from the third ask on no further than 4.5 % below its price (P07: the third ask 5.12 against 5.48 got its final)
+    "agent-near": dict(knobs=dict(plan="llm", near=0.045)),
+    "agent-near3": dict(knobs=dict(plan="llm", near=0.03)),
     # the rule as built in: hold the fixed-price ask against a supplier whose material is not hedged
     "agent-holdfixed": dict(knobs=dict(plan="llm", hold_fixed=True)),
     # P10: the lead time we need (42 days), which it calls not feasible, kept in every ask

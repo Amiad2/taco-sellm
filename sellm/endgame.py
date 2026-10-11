@@ -64,6 +64,10 @@ DEFAULTS = dict(
     # supplier then lowered its clause sheets by 0.20 per fact instead of 0.10, and its sheet is taken once our
     # step would meet it (0.657 -> 0.729). P08's, hedged, ended a cent higher that way (0.803 against 0.814).
     hold_fixed=False,
+    # A fraction: from the third ask on, to a single supplier, no ask is further below the price it quotes for our
+    # structure than this share - an ask far below its offer late in a thread got its final offer (P07: 5.12
+    # against 5.48), a closer one a further round
+    near=None,
     # With a relationship term, where an index clause is negotiable and the supplier quotes a fixed
     # price: the clause as a second offer in the first ask, at the price where our total cost is lowest.
     # A clause is security for the supplier, not cash: it pays for it with a price far below its cost,
@@ -496,6 +500,8 @@ class Persistent(Negotiator):
                 plan = self.zoned(case, v, plan)
             elif self.e["creep"]:
                 plan = self.crept(case, v, plan)
+        if self.e["near"] and len(v.asks) >= 2 and v.status == "open" and len(case.get("suppliers") or []) == 1:
+            plan = self.neared(case, v, plan)
         if self.e["past_target"] and plan["enough"]:
             plan = self.past(case, v, plan)
             if not plan["enough"] and self.e["past_creep"] is not None and v.asks:
@@ -555,6 +561,17 @@ class Persistent(Negotiator):
         if price <= last["unit_price"] + EPS:
             return plan  # we are in the zone already: the negotiator's rule decides (step or take its offer)
         return {**plan, "sheet": complete_offer(case, {**s, "unit_price": price}), "capped": False}
+
+    def neared(self, case, v, plan):
+        """The same ask, but no further below the price it quotes for this structure than `near`."""
+        s = plan["structure"]
+        quoted = self.quoted(case, v).get(_key(s))
+        if quoted is None or plan.get("capped") or plan.get("enough"):
+            return plan
+        price = round(quoted * (1 - self.e["near"]), 2)
+        if price <= plan["sheet"]["unit_price"] + EPS:
+            return plan
+        return {**plan, "sheet": complete_offer(case, {**s, "unit_price": price})}
 
     def crept(self, case, v, plan, share=None):
         """The same ask, but no further up than `creep` of the way to the price it quotes for this
