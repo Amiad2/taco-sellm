@@ -36,6 +36,7 @@
  "207d1c4d62950628": "PRICE-PATH horizon_6 {\"horizon\": 6} (Omar, sellm.agent + test switches)",
  "20d6ff527e5e34fa": "ab calc @29e2d11+local",
  "21e7a3ebe111ce35": "probe h8-slow",
+ "230478b974c08606": "OMAR E4 {\"idx_window\": \"max\"} sellm.agent omars_branch@7da67e4",
  "23296c62598b6652": "sellm + clause offer (no LLM), kit runner, jonathans_branch@67001e7",
  "2387cb4bda645e11": "runner v1.2, sellm (negotiator v1.2 + calculator @db036d5)",
  "23ea61eacb28ed0f": "ab nego-template @ebcdcd6+local",
