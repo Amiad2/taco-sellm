@@ -45,6 +45,8 @@ Earlier tonight (records: `experiments/P02-ARGUMENTS.md`, `docs/LOG.md`): clause
 | Sun 04:10 | `@79c2d0a`, tag `-78.2` | final runner, 10 in parallel, planner live | 78.2 | P10 .679, P05 .872 |
 | Sun 04:25 | `@2caef7f`, tag `-79.3` | final runner, planner live | 79.3 | P03 .956 P08 .814 P18 .657, P05 .717 (a bidder timed out) |
 | Sun 04:29 | `@8a854c4`, tag `-80.3` | final runner, planner live | **80.3** | P01 .997 P02 .725 P03 .956 P04 .860 P05 .820 P07 .747 P08 .814 P10 .679 P11 .778 P18 .657 |
+| Sun 08:08 | `@a434a55`, tag `-80.3-sunday` | final runner, planner live, dossiers with the Sunday release | **80.3** | every case as at 04:29 |
+| Sun 09:14 | `@6c7d3c4`, tag `-80.3-sunday2` | final runner, planner live, release fixes + `plan_give` | **80.3** | every case as at 04:29; 14 s, 0 refused |
 
 ## After the 80.3 run
 
@@ -53,3 +55,20 @@ Earlier tonight (records: `experiments/P02-ARGUMENTS.md`, `docs/LOG.md`): clause
 | J11 | The strongest fact should come first: the price jump in the first e-mail, the indices after it | scripted order | P08, P18 | 0.803 (0.814), 0.542 (0.657) | rejected: indices first, then the jump, as the agent does | 5514dbc17dbe1c82, 6544c8c84fe5461b |
 | - | Unplayed case files in the lab with the planner on (no arena session): how does the first e-mail look for suppliers we never met? | - | P06, P09, P12, P13, P14, P16 | a supplier that signs without a person was greeted "Dear Mit freundlichen Grüßen," | fixed in `sellm/writer.py` (`contact`), test; the fifteen real suppliers' names are read as before | - |
 | J12 | Omar's E1 once more with tonight's facts: the shortest contract that covers the horizon (24 months) gets a lower first counter | `contract="horizon"` | P08, P18 | 0.748 (0.814), 0.598 (0.657) | rejected: 36 months stay | 323573be5f5e753f, c63ed4a41eb456da |
+
+## The Sunday release (Sun 08:50-09:20)
+
+The brief (`brief/api.md`): "Hidden cases may cite them; practice cases stay on package v1." So no practice
+supplier knows the release, and nothing in it can be measured on practice. What we did instead: two sessions to
+see that this is so, then every supplier the release names played offline in invented cases
+(`sellm/lab/invent.py`, 48 negotiations, no crash, every claim verified by the lab's checker).
+
+| ID | Hypothesis | Change | Case | Result (reference) | Decision | Session |
+|---|---|---|---|---|---|---|
+| J13 | The release's news is a checked fact on practice too: "files for insolvency" as the third fact | scripted | P11 | 0.626 (0.778): `contradicted`, "that news is completely fake", no step after it | never cite a release ID on practice; in the final the news is in the fact base, and an insolvency stays uncited (`SENSITIVE_NEWS`) | d3f24a1fb9820b34 |
+| J14 | A bidder's letter (short-time work, asks payment within 10 days) said back to it in words, with our 14 days | scripted, that bidder only | P05 | 0.769 (0.820): 28.50 instead of 28.00, it thanked for the 14 days as it always does | rejected: the payment term does the work, the sentence adds nothing | 4e944b1d9464ff89 |
+| J15 | A supplier whose letter says "we remain open to discuss payment terms and call-off planning" is offered a fixed call-off schedule in the first e-mail | `plan_give=True` (dossier `wants_planning`) | P02 | 0.725 (0.725); its reasons: "we appreciate ... the rolling twelve-month forecast for our capacity planning" | adopted: free where the supplier named it, acts on two suppliers of the release (70510, 70650) | c5df08dc91c18229 |
+| - | A hidden case triggered by a release letter: who is the letter read for? | offline, P05's case file with `doc:20261005-70250-S2` as trigger | - | the letter of one bidder made all three bidders `cash_short` (they would all have been offered 14 days); our memo as trigger gave any supplier `list_price_fixed` | fixed in `sellm/intel/overlay.py`: a letter speaks for its writer, the memo for nobody, an RFQ for every bidder; test | - |
+| - | What do we write to the eight suppliers of the release? | offline, invented cases | 70510, 70720, 70250, 70650, 70140, 70350, 70540, 70610 | cash-short ones are asked the fastest payment (14 days), list-price ones the longest (90), the hedged steel trader hears no steel index, the noise item and the market item are never cited; the two citable news (`supply_normalises`, `credit_downgrade`) come late, after the data facts | no change | - |
+| - | The lab's stress test with the release: one refused accept in an invented RFQ (X07-083, parallel mode), already there at 04:33 | reproduced | - | the agent accepts an offer ID that a timeout has replaced; `sellm/runner.py` re-reads the thread before every accept, the lab's loop does not | no change: the final is played through `sellm.runner` | - |
+
