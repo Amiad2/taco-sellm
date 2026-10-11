@@ -242,6 +242,7 @@
  "bbb071f7e97ef408": "ab nego-template @8e0f876+local",
  "bed004ba9d14bcb9": "sellm + clause offer (no LLM), kit runner, jonathans_branch@67001e7",
  "bed39f209dfcb852": "PERSIST T1 one ask 1% below its final offer {\"push_final\": 0.01}",
+ "bf3125943f747a8c": "OMAR C1 combined agent (clause offer + E2g), runner one loop per case, omars_branch@f473d97",
  "bf543514eeac97f7": "P02 c4 quid_pro_quo",
  "c09c6150cee544eb": "sellm + two rules + LLM writer, verdict APPLIED (gpt-6-sol) @e7a8fd7, kit runner",
  "c10faa2450392cb6": "sellm negotiator v1.4 + dossier fix A @61f806f, full practice run, kit runner --parallel 8, no LLM",
