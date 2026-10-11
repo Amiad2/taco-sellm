@@ -5,12 +5,17 @@ import os
 from sellm.endgame import Persistent
 
 # What `--agent sellm` plays on top of the defaults of the negotiator (sellm/negotiator.py DEFAULTS)
-# and of its persistence layer (sellm/endgame.py DEFAULTS). Both rules were measured on practice
-# (experiments/PERSISTENCE.md): together they change P01 (0.915 -> 0.969) and D01's accept, and no
-# other move in the recorded sessions.
+# and of its persistence layer (sellm/endgame.py DEFAULTS). Each rule was measured on practice
+# (experiments/PERSISTENCE.md, experiments/P02-ARGUMENTS.md, experiments/LEDGER.md): the first two change
+# P01 (0.915 -> 0.969) and D01's accept, the third P02 (jonathans_branch), the fourth P18 and P05
+# (omars_branch), and no other move in the recorded sessions.
 KNOBS = dict(
     past_target=True,  # with a relationship term: keep asking past our target while the supplier still moves
     fast_pay=True,  # a supplier the dossier calls short of cash is asked for the fastest payment
+    # With a relationship term, where the supplier quotes a fixed price at its cost and an index clause is
+    # negotiable: the clause as a second offer, at the price where our total cost is lowest (P02 0.531 -> 0.725,
+    # no other recorded case changes; experiments/P02-ARGUMENTS.md)
+    clause_offer=True,
     # A cost-driver index that fell >= 2 % from its peak of the last 12 months is cited (AS-14404 -5.5 % since
     # 2026-06), except to a supplier whose material is hedged (dossier material_hedged). P18 0.467 -> 0.520,
     # P08 unchanged (without the guard 0.438: 'not our reality'); experiments/LEDGER.md E2, E2g

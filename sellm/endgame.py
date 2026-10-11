@@ -55,7 +55,14 @@ DEFAULTS = dict(
     pay_probe=False,  # first ask as two offers of equal cost to us that differ in payment days only
     signal_facts=False,  # a supplier that wants volume hears the forecast first
     soft_give=False,  # ... and is offered a fixed call-off schedule in the first e-mail (not binding)
+    # With a relationship term, where an index clause is negotiable and the supplier quotes a fixed
+    # price: the clause as a second offer in the first ask, at the price where our total cost is lowest.
+    # A clause is security for the supplier, not cash: it pays for it with a price far below its cost,
+    # which the relationship term then charges us for - and it never goes back up (P02: 351.45 taken
+    # = 0.242, 361.35 asked at once = 0.735, fixed price 0.531; experiments/P02-ARGUMENTS.md)
+    clause_offer=False,
 )
+CLAUSE_LINE = "With the index clause of the second option the price follows {series} beyond the deadband, so that this risk does not have to be priced in up front."
 SOFT_GIVE = (
     "We can give you a fixed call-off schedule and a rolling twelve-month forecast, so that you can plan your capacity."
 )
@@ -92,6 +99,74 @@ class Persistent(Negotiator):
                     self._memo[(case.get("case_id"), v.sid, "s0")] = s
         return s
 
+    # -- security instead of price: the index clause (experiments/P02-ARGUMENTS.md) -------------------
+    def clause_case(self, case, v):
+        """Our estimate of the supplier where the clause offer applies, else None: a relationship term,
+        an index clause to negotiate, an opening that quotes a fixed price - and a should-cost of its
+        own plant that leaves that price no more than the sustainable margin. Then a fixed price has
+        no room left by our own data, and the cost we price the clause with is the highest its own
+        quote allows: an estimate that is too low would make us squeeze it without noticing, because
+        with a clause its price no longer stops at its cost."""
+        if not self.e["clause_offer"] or "index_clause" not in case.get("negotiable", ()) or not v.opening:
+            return None
+        opening = v.filled(v.opening["term_sheets"][0]["terms"])
+        if opening.get("unit_price") is None or opening.get("index_clause"):
+            return None
+        estimate, own = self.estimate(case, v), self.should_cost(case, v.sid)
+        if not estimate or not own:
+            return None
+        ceiling = self.value(case, v, opening) * (1 - case["buyer"]["sustainable_margin_pct"] / 100)
+        return estimate if own[1] >= ceiling * (1 - 1e-9) else None
+
+    def clause_price(self, case, v, s):
+        """The price on structure `s` where our total cost is lowest, the relationship term priced with
+        our estimate of its full cost: below it a lower price costs us more than it saves."""
+        key = (case.get("case_id"), v.sid, "clause-price", _key(s))
+        if key not in self._memo:
+            estimate = self.estimate(case, v)
+            v0, v1 = self.value(case, v, {**s, "unit_price": 0.0}), self.value(case, v, {**s, "unit_price": 1.0})
+            even = (estimate["full_cost"] - v0) / (v1 - v0) if v1 > v0 else None  # pays it exactly its full cost
+            if not even or even <= 0:
+                self._memo[key] = None
+            else:
+                grid = [even * (0.85 + 0.15 * i / 600) for i in range(601)]
+                self._memo[key] = round(min(grid, key=lambda p: v.c({**s, "unit_price": p}, estimate)), 2)
+        return self._memo[key]
+
+    def clause_sheet(self, case, v, sheet):
+        """Our first ask again with the index clause that costs us least, at `clause_price` - if that
+        is cheaper for us than the fixed price at which the supplier just covers its cost (the lowest
+        fixed price it can take). Else None."""
+        estimate = self.clause_case(case, v)
+        if not estimate or sheet.get("index_clause"):
+            return None
+        base = {f: x for f, x in sheet.items() if f != "unit_price"}
+        ref = v.filled(v.opening["term_sheets"][0]["terms"])["unit_price"]
+        options = [{**base, "index_clause": o} for o in case.get("term_options", {}).get("index_clause") or [] if o]
+        options = [s for s in options if v.valid({**s, "unit_price": ref})]
+        if not options:
+            return None
+        s = min(options, key=lambda s: v.c({**s, "unit_price": ref}))
+        price = self.clause_price(case, v, s)
+        v0, v1 = self.value(case, v, {**base, "unit_price": 0.0}), self.value(case, v, {**base, "unit_price": 1.0})
+        if price is None or v1 <= v0:
+            return None
+        fixed = v.c({**base, "unit_price": (estimate["full_cost"] - v0) / (v1 - v0)}, estimate)
+        other = complete_offer(case, {**s, "unit_price": price})
+        return other if v.valid(other) and v.c(other, estimate) < fixed * (1 - 0.002) else None
+
+    def structure(self, case, v, s0):
+        """With the clause offer: a clause it prices below `clause_price` is no structure to follow -
+        it never raises a price it has named, and that price costs us more than its fixed one."""
+        s = super().structure(case, v, s0)
+        if not s.get("index_clause") or not self.clause_case(case, v):
+            return s
+        quoted, floor = self.quoted(case, v).get(_key(s)), self.clause_price(case, v, s)
+        if quoted is None or floor is None or quoted >= floor - 0.005:
+            return s
+        fixed = {**s, "index_clause": None}
+        return fixed if v.valid({**fixed, "unit_price": quoted}) else s
+
     def persona(self, case, v):
         """Which personas this supplier has and what follows (sellm/personas.py): a description of the rules, not a rule."""
         from .personas import describe
@@ -108,6 +183,14 @@ class Persistent(Negotiator):
             for line in self.persona(case, v)["lines"]:
                 log.info("%s %s: %s", case.get("case_id"), v.sid, line)
         sheet = draft["sheets"][0]
+        secured = self.clause_sheet(case, v, sheet)
+        if secured:
+            line = CLAUSE_LINE.format(series=secured["index_clause"].get("series"))
+            draft = {
+                **draft,
+                "sheets": [sheet, secured, *draft["sheets"][1:]],
+                "arguments": [*(draft.get("arguments") or []), line],
+            }
         if self.e["pay_probe"] and len(draft["sheets"]) == 1 and "payment_days" in sheet:
             other = self.other_payment(case, v, sheet)
             if other:
@@ -182,6 +265,22 @@ class Persistent(Negotiator):
 
     def plan(self, case, v, rival=math.inf):
         plan = super().plan(case, v, rival)
+        s = plan["structure"]
+        if s.get("index_clause") and self.clause_case(case, v):
+            floor = self.clause_price(case, v, s)
+            if floor and plan["sheet"]["unit_price"] < floor:  # it would take a lower ask, and we would pay for it
+                quoted = self.quoted(case, v).get(_key(s))
+                plan = {
+                    **plan,
+                    "sheet": complete_offer(case, {**s, "unit_price": floor}),
+                    "capped": quoted is not None and floor >= quoted - 0.005,
+                }
+        if self.clause_case(case, v) and v.status == "open" and v.standing[1].get("unit_price") is not None:
+            its = v.filled(v.standing[1])
+            if its.get("index_clause"):  # a clause it prices below what our cost can bear is no offer to stop at
+                floor = self.clause_price(case, v, {f: x for f, x in its.items() if f != "unit_price"})
+                if floor and its["unit_price"] < floor - 0.005:
+                    plan = {**plan, "enough": False}
         push = self.push_price(case, v)
         if push is not None:
             s = {f: x for f, x in v.filled(v.standing[1]).items() if f != "unit_price"}

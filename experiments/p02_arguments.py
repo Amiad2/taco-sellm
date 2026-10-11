@@ -118,6 +118,8 @@ VARIANTS = {
     "clause5-direct": dict(
         structure=clause(5), hold=True, first_price=361.35, floor=361.35, script={0: {"after": [CLAUSE]}}
     ),
+    # the rule as built into sellm/endgame.py (`clause_offer`): fixed-price ask and the clause at our price, two sheets
+    "agent-clause": dict(knobs=dict(clause_offer=True)),
     "clause5-raise": dict(structure=clause(5), hold=True, floor=361.35, script={0: {"after": [CLAUSE]}}),
 }
 FAIR = "We do not want a price that leaves you below a sustainable margin: a healthy supplier matters more to us than the last euro."
@@ -127,8 +129,8 @@ class Probe(Persistent):
     """`--agent sellm` with a plan for what the e-mails argue; it computes no price itself."""
 
     def __init__(self, package=None, plan=None, **knobs):
-        super().__init__(package, **{**KNOBS, **knobs})
         self.p = plan or {}
+        super().__init__(package, **{**KNOBS, **(self.p.get("knobs") or {}), **knobs})
 
     def first(self, case, v):
         s = super().opening_structure(case, v)
@@ -233,22 +235,24 @@ def main():
     spec = importlib.util.spec_from_file_location("ab_sandbox", ROOT / "experiments" / "ab_sandbox.py")
     ab = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(ab)
-    commit = subprocess.run(
-        ["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, capture_output=True, text=True
-    ).stdout.strip()
+
+    def git(*a):
+        return subprocess.run(["git", *a], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+
+    commit = f"{git('branch', '--show-current')}@{git('rev-parse', '--short', 'HEAD')}"
     case_id = f"case:{args.case.split(':')[-1]}"
     lock = threading.Lock()
 
     def play(name):
         row = ab.play_case(ArenaClient(), case_id, Probe(package, plan=VARIANTS[name]))
-        row.update(variant=name, label=f"ARG {name} @{commit}")
+        row.update(variant=name, label=f"ARG {name} {commit}")
         with lock:
             rows = json.loads(OUT.read_text(encoding="utf-8")) if OUT.is_file() else []
             rows.append(row)
             OUT.parent.mkdir(parents=True, exist_ok=True)
             OUT.write_text(json.dumps(rows, indent=1, default=str), encoding="utf-8")
             labels = json.loads(LABELS.read_text(encoding="utf-8")) if LABELS.is_file() else {}
-            labels[row["session_id"]] = f"{args.case} ARG {name} @{commit}"
+            labels[row["session_id"]] = f"{args.case} ARG {name} {commit}"
             LABELS.write_text(json.dumps(labels, indent=1, sort_keys=True) + "\n", encoding="utf-8")
             for t in (row.get("threads") or {}).values():
                 ours = [p[0] if p else None for p in t["our_prices"]]

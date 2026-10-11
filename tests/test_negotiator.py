@@ -160,6 +160,8 @@ def test_first_ask_costs_us_less_than_its_own_terms_at_the_price_we_aim_for(pack
                 f"{case['case_id']}: {first}"
             )
             for other in sheets[1:]:  # a second offer costs us the same as the first
+                if other.get("index_clause") and not first.get("index_clause"):
+                    continue  # the clause offer: priced where our total cost is lowest (tests/test_endgame.py)
                 assert abs(view.c(other) - view.c(first)) <= max(1.0, 0.002 * view.c(first)), (
                     f"{case['case_id']}: {sheets}"
                 )
