@@ -19,6 +19,13 @@ KNOBS = dict(
     # 2026-06), except to a supplier whose material is hedged (dossier material_hedged). P18 0.467 -> 0.520,
     # P08 unchanged (without the guard 0.438: 'not our reality'); experiments/LEDGER.md E2, E2g
     idx_recent=2.0,
+    # ... every such index, one per e-mail, before the other facts: a second series is a new fact to the arena and
+    # to the supplier (PPI-C2431 after AS-14404: P18 0.520 -> 0.598; P08, whose hedge covers the alloy only,
+    # 0.549 -> 0.637). experiments/LEDGER-JONATHAN.md J1, J2
+    idx_many=3,
+    # With the planner (SELLM_PLAN=llm): an index the supplier's own letter blames for its price is cited with its
+    # larger fall, from its twelve-month peak (P01: energy, -6.1 % instead of -3.7 %, 0.969 -> 0.997). J3
+    idx_blamed=True,
 )
 
 # The best Calculator variant of the first lab search (runs/lab/20261010-1632-search-first/report.md,

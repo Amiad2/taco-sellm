@@ -168,3 +168,94 @@ def test_a_clause_want_does_nothing_without_a_relationship_term(package, monkeyp
         planned = Persistent(package, **{**KNOBS, "plan": "llm"})
         assert planned.decide(case, threads) == Persistent(package, **KNOBS).decide(case, threads)
         assert planned.wants(case, view), "the want was read, and logged only"
+
+
+# -- index arguments (experiments/LEDGER-JONATHAN.md J1-J3) -------------------------------------------
+
+
+def first_two_facts(package, case, sid, threads, **knobs):
+    """The index sentences of our first two e-mails, the second from the recorded reply."""
+    from sellm.endgame import IDX_LINE
+
+    out = []
+    for upto in (1, 3):
+        events = threads[sid][:upto]
+        if len(events) < upto:
+            break
+        body = Persistent(package, **{**KNOBS, **knobs}).decide(case, {sid: events})["message"].get("body") or ""
+        out.append(
+            next(
+                (s.strip() + "." for s in body.replace("\n", " ").split(". ") if IDX_LINE.match(s.strip() + ".")), None
+            )
+        )
+    return out
+
+
+def session(case_id, label):
+    files = sorted(glob.glob(str(ROOT / "runs" / "practice" / case_id / "*.json")))
+    recs = [json.loads(Path(f).read_text(encoding="utf-8")) for f in files]
+    recs = [r for r in recs if label in (r.get("label") or "")]
+    if not recs:
+        pytest.skip(f"no saved session of {case_id} labelled {label}")
+    rec = recs[-1]
+    sid = rec["case"]["suppliers"][0]
+    return rec["case"], sid, {sid: rec["threads"][sid]["messages"]}
+
+
+def test_every_fallen_cost_driver_index_is_cited_one_per_email(package):
+    """P18: the alloy surcharge first, then the producer price of cold-drawn bars (0.520 -> 0.598)."""
+    case, sid, threads = session("P18", "ARG idx2")
+    one = first_two_facts(package, case, sid, threads, idx_many=1)
+    many = first_two_facts(package, case, sid, threads)
+    assert "AS-14404" in one[0] and one[1] is None
+    assert "AS-14404" in many[0] and "PPI-C2431" in many[1] and "-2.3 %" in many[1]
+
+
+def test_a_hedge_covers_the_material_of_its_clause_only(package):
+    """P08: 'our AS-14404 is covered at fixed prices' - but it took the fall of PPI-C2431 (0.549 -> 0.637)."""
+    case, sid, threads = session("P08", "ARG agent-idx")
+    assert first_two_facts(package, case, sid, threads, idx_many=1)[0] is None
+    first = first_two_facts(package, case, sid, threads)[0]
+    assert first and "PPI-C2431" in first and "AS-14404" not in first
+
+
+def test_an_index_the_supplier_blames_is_cited_with_its_larger_fall(package, monkeypatch, tmp_path):
+    """P01: its letter blames energy; PPI-D351 fell 6.1 % from its peak and 3.7 % over the year (0.969 -> 0.997).
+    Without a blame - P11 gave no reason - the yearly sentence stays (the larger one lost its close there)."""
+    case, sid, threads = opening("P01")
+    passage = "Owing to sustained increases in energy, raw material and wage costs"
+    fake(monkeypatch, tmp_path, [{"wants": [], "blames": [{"series": "PPI-D351", "evidence": passage}]}])
+    body = Persistent(package, **{**KNOBS, "plan": "llm"}).decide(case, threads)["message"]["body"]
+    assert "PPI-D351 changed -6.1 % from 2025-11 to 2026-08" in body
+    plain = Persistent(package, **KNOBS).decide(case, threads)["message"]["body"]
+    assert "PPI-D351 changed -3.7 % from 2025-08 to 2026-08" in plain
+    fake(
+        monkeypatch,
+        tmp_path / "b",
+        [{"wants": [], "blames": [{"series": "PPI-D351", "evidence": "the bank told us so"}]}],
+    )
+    assert Persistent(package, **{**KNOBS, "plan": "llm"}).decide(case, threads)["message"]["body"] == plain
+    case, sid, threads = opening("P11")
+    fake(monkeypatch, tmp_path / "c", [{"wants": [], "blames": []}])
+    body = Persistent(package, **{**KNOBS, "plan": "llm"}).decide(case, threads)["message"]["body"]
+    assert "PPI-D351 changed -3.7 %" in body
+
+
+def test_the_planner_does_not_overrule_the_dossiers_cash_reading(package, monkeypatch, tmp_path):
+    """P03: 'He was open on payment terms' was read as a wish for faster payment in 2 of 3 calls (Sun 03:20);
+    the dossier calls this supplier relaxed about cash, and that decides."""
+    case, sid, threads = opening("P03")
+    view = Thread(case, sid, threads[sid])
+    quoted = view.filled(view.opening["term_sheets"][0]["terms"])
+    days = sorted(case["term_options"]["payment_days"])
+    letter = chr(65 + case["term_options"]["payment_days"].index(days[0]))
+    passage = max((view.opening.get("body") or "").split("\n"), key=len).strip()
+    fake(
+        monkeypatch,
+        tmp_path,
+        [{"wants": [{"field": "payment_days", "option": letter, "evidence": passage, "because": "x"}]}],
+    )
+    planned = Persistent(package, **{**KNOBS, "plan": "llm"})
+    decision = planned.decide(case, threads)
+    assert planned.wants(case, view)["payment_days"]["direction"] == "lower" and days[0] < quoted["payment_days"]
+    assert decision == Persistent(package, **KNOBS).decide(case, threads)
