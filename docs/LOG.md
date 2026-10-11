@@ -998,3 +998,30 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - Per case: P01 0.997 (0.969; PPI-D351 -6.1 % since its peak, the planner read 'energy' in the supplier's letter), P02 0.725, P03 0.923, P04 0.860, P05 0.820, P07 0.747, P08 0.637 (0.549; the fall of PPI-C2431 first), P10 0.647, P11 0.778, P18 0.598 (0.520; both fallen indices, then the order history).
 - The kit runner printed 'mean score: 78.8': that is the mean of the eight cases it played, not of ten. A case that fails to open is dropped from its mean without a retry - for the final only one machine may hold sessions.
 - Team quota left 181 of 450; Jonathan's instruction: stop at 100.
+
+## 2026-10-11 03:29 CEST · Amiad @ fedora
+**[change] sellm2: the agent rewritten from scratch on amiads_branch (folder sellm2/, nothing outside it changed)**
+- New data layer (sellm2/knowledge: reads the package and the Sunday release itself, no committed dossiers; briefs equal the old dossiers on 105 supplier x part x case checks; 935 citable facts, all verified by the lab ClaimChecker), case/thread/supplier model, policy (joint-gains structure, measured price path, one checked fact per e-mail, clause offer, recent index fall with the hedge guard), template e-mails, own runner (one loop per case, one message in flight, 40 s deadline, 422 re-read, own close before the cap, resume) and CLI: python -m sellm2 play|run|final|replay|brief|stress.
+- New rules, each measured: payment days fastest for a supplier whose money costs >= 15 % (P05's job shop); no lowball (first ask >= 93 % of its opening) to a capacity-tight supplier (P10 0.647 -> 0.671); lead time priced only by capacity-tight suppliers; a fixed-list-price supplier that repeats its price is asked 0.2 % below it (P04/P03 unchanged, shorter).
+- Tests: sellm2/tests 39 green (knowledge oracle vs sellm.intel, every recorded state of runs/ gets a valid move, the 74.9 run's moves kept where no new rule applies, fake-arena runner incl. a supplier that leaves mid-case). Lab stress PASS (816 negotiations: 0 crashes, 0 refused, 0 broken must-haves); lab compare vs main: +1.8 +- 1.0 for main, not distinguishable (lab's suppliers do not price the clause, P02).
+
+## 2026-10-11 03:29 CEST · Amiad @ fedora
+**[run] sellm2 full practice run: mean 76.4 (amiads_branch@dc028e5; best other branch 75.4, main 72.9)**
+- python -m sellm2 run --set practice --cases all --parallel 8, own runner, no LLM. 10 deals, 0 refused, 0 late, 0 crashes, every case < 75 s.
+- P01 0.969, P02 0.725, P03 0.923, P04 0.860, P05 0.820, P07 0.747, P08 0.549, P10 0.671 (0.647), P11 0.778, P18 0.598 (0.467; best ever before 0.567). Exactly what the replay diagnosis plus single-case runs predicted (python -m sellm2 replay --label 67001e7).
+- Single sessions before it (amiads_branch@2d8945e, bb584c7): P10 0.671, P18 0.598, P11 0.620 (ppm 1500, reverted), P05 0.000 (runner bug, fixed), P04 0.860, P03 0.923, P05 0.803 (lead 42, reverted); sandbox D01 0.947, D02 0.548. sellm2 used 17 practice sessions; quota left 168 of 450.
+
+## 2026-10-11 03:29 CEST · Amiad @ fedora
+**[finding] Suppliers walk their price ladder whatever non-cash lever we give: 1500 ppm (P11) and 42 days lead time (P05's 70210/70250) bought nothing; only capacity-tight suppliers price lead time**
+- P11 (a11271a2): 46.5, 46.0, 45.5, 45.5 at 1500 ppm - the same ladder as at 300 ppm; deal 45.50 at 1500 ppm = 0.620 against 0.778. P05 (832c76ee): 70250 ended at 28.00 with 42 days as with 28 days, 0.803 against 0.820. P10 (capacity tight) charged 1.90 for 12 days and P05's 70240 (capacity tight) 1.50 for 10 days.
+- So in sellm2 a lever is traded only where the supplier has shown it prices it: payment days at its cost of money, lead time with a capacity signal, the index clause in relationship cases.
+
+## 2026-10-11 03:29 CEST · Amiad @ fedora
+**[finding] Runner trap: a supplier's exit can show only in the thread state (closed/status, timeouts list), not in its messages**
+- P05 on sellm2@2d8945e: 70210 walked away after a timeout; the loop kept asking it (188 x 409) while 70250 at final_offer 28.00 waited and withdrew - score 0. sellm2/runner.py now rebuilds a thread from its state on every 409/422 (walked_away or the re-issued offer ID) and holds only the best final offer. Anyone writing a case loop: read 'closed', 'status' and 'timeouts' of GET thread, not only 'messages'.
+
+## 2026-10-11 03:44 CEST · Amiad @ fedora
+**[handoff] sellm2 (Amiad's rewrite) is finished, measured and pushed; it waits for the team's decision to play the final**
+- State: amiads_branch@623aac4 pushed, clean (except a teammate's uncommitted sellm/lab/twins.json, untouched). Full run 76.4 at @dc028e5; since then two changes that no practice case reaches: end_reason in the rows, and with several bidders a thread's last message is kept for the refresh hold before an accept (strict lab: 192/192 without a refused move).
+- Next: the team's yes to the merge (STATUS Next up has the commands), the 08:00 release check and one more full run; sellm2 has 23 of its 40 practice sessions left.
+- Traps: the kit's 'arena run --agent' does not list sellm2 - use python -m sellm2 (or python -m sellm.runner --agent sellm2.agent:make_agent). Under load RFQ replies took 15-40 s: never send holding e-mails to open threads in an RFQ (each one costs the others a turn and a timeout), only to the best final offer. The target of >= 0.90 in 5 of 10 practice cases was NOT reached: P01 and P03 are above 0.90; P04 sits one cent (0.14) below 1.0 and refused 4.93 against its 4.94; the others are held by the suppliers' own floors (docs/LEARNINGS.md).
