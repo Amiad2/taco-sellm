@@ -926,3 +926,22 @@ and commit them with the change they describe. Types: `[change]`, `[run]`, `[fin
 - R2, omars_branch@fdb262e, --turns (one loop per case, the agent decides without focus and picks the thread, fewest of our messages first, as the kit's play(); the runner keeps cap, resume, deadline, holds): P05 0.820, the kit run's e-mails and prices exactly, 0 timeouts, 3.3 s for the case. Replay https://arena.tacto.ai/replay/b6c71e626f579a83
 - omars_branch@f60a212: this is the default of python -m sellm.runner (--per-thread restores the old loops). Single-thread cases play the same moves either way. 12 runner tests green (fake arena: at most one POST in flight; an RFQ in turns mode reaches every bidder and ends).
 - For the final (Amiad, Jonathan): whichever version is merged, run the final runner in this mode or the kit runner - not one loop per thread. The change is in sellm/runner.py only and merges cleanly into any branch.
+
+## 2026-10-11 02:29 CEST · Jonathan @ MacBook-Pro-von-Jonathan
+**[run] P08 and P18 with the index clause already in our first ask (4 practice sessions, jonathans_branch@0400b0b): worse than asking a fixed price first**
+- Idea from the offline planner (sellm/planner.py on jonathans_branch): both suppliers' letters propose an alloy-surcharge clause, so offer it at once. experiments/p02_arguments.py --case P08|P18 --variants clause0 clause5; reference = the full run of jonathans_branch@67001e7.
+- P08: clause with deadband 0 first 0.527 (5.37; reference 0.549 at 5.35), deadband 5 first 0.484 (5.53). P18: deadband 5 first 0.401 (5.60; reference 0.467), deadband 0 first 0.386 (5.50).
+- Reading: where the supplier itself demands the clause, taking it later is a move it pays for ('we appreciate your flexibility in accepting the AS-14404 index clause'); offered up front it is free. The clause as our offer pays only where the supplier quotes a fixed price and did not ask for one (P02, relationship term). Sessions 0f3250ac, f8191a5c, 1847ba7c, 80380e16. Jonathan's budget: 26 of 40 left; team quota 224 of 450.
+- pull-runs also fetched four sessions of Omar's E3 (d25922d1, 93bdda16, 55368774, 5a0f11a7); labelled as in his ledger.
+
+## 2026-10-11 02:31 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
+**[run] omars_branch: leaving out a fact the dossier predicts the supplier will dismiss does not help on average (E3: P08 -0.034, P07 -0.013, P03 0, P18 +0.047) - rejected**
+- omars_branch@2be638a, experiments/structure_args.py arena E3 (= E2g + gate: no on-time-delivery fact to a full-dossier supplier without a delivery or quality problem signal; 13 of 13 such facts were taken by suppliers with one, ~60 of 70 dismissed by the others). One practice session each.
+- P08 0.515 (0.549): no fact in round 2, final_offer a round earlier at 5.38. P07 0.734 (0.747). P03 0.923 (same). P18 0.567 (0.520): it agreed to our 5.23 instead of 'we must hold our price' at 5.30 after the dismissed fact. Sign depends on the supplier: for 70710 and 70610 a round without any fact ends sooner, for 70740 a dismissed fact does. Keep one fact per round (as the P11 finding said).
+- Replays: d25922d1 (P08), 55368774 (P07), 5a0f11a7 (P03), 93bdda16 (P18) on https://arena.tacto.ai/replay/<sid>.
+
+## 2026-10-11 02:31 CEST · Omar Homsi @ omar-Yoga-7-2-in-1-14AKP10
+**[run] omars_branch@f473d97 = jonathans_branch's clause offer + the recent index fall with the hedge guard + the runner in one loop per case: 75.4 on the 10 practice cases (main 72.9, jonathans_branch 74.9)**
+- Merged jonathans_branch@67001e7 into omars_branch; KNOBS past_target, fast_pay, clause_offer, idx_recent=2.0. 205 tests green. experiments/combined_replay.py: P01-P04, P07, P08, P10, P11 send exactly the e-mails of jonathans_branch's 74.9 run, P18 those of the E2 session (0.520) - practice suppliers answer identical e-mails identically, so those scores stand.
+- P05 measured through python -m sellm.runner (one loop per case, the new default): 0.820, 52 s, 0 timeouts, session bf3125943f747a8c. Per case: P01 .969 P02 .725 P03 .923 P04 .860 P05 .820 P07 .747 P08 .549 P10 .647 P11 .778 P18 .520.
+- Tag best-omars_branch-75.4. Practice sessions of this research: 10 (experiments/LEDGER.md). Team quota left 228 of 450 at 02:30.

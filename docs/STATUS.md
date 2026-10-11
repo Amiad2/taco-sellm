@@ -56,6 +56,8 @@ signal vocabulary). Build against section 10; add fields freely, rename core fie
 
 ## Scoreboard
 
+**`omars_branch@f473d97` (Sun 02:30): 75.4** on the 10 practice cases = jonathans_branch's clause offer (P02 0.725) + a recent fall of a cost-driver index as an argument, not to a hedged supplier (P18 0.467 -> 0.520) + the final runner in one loop per case (P05 0.820 measured through it). Nine cases by exact replay of measured sessions, P05 played; tag `best-omars_branch-75.4`; ledger `experiments/LEDGER.md` on omars_branch.
+
 **Full practice run at 22:25 (@61f806f, v1.4 + the dossier fix, kit runner): mean 72.4 again, all 10 cases identical to 21:58** (0 timeouts, 36 verified / 3 duplicate / 0 contradicted; replays in `runs/README.md`). Best per case over every session the team played: 73.6. Points still missing per case (x10): P18 5.3, P02 4.7, P08 4.5, P10 3.5, P07 2.5, P11 2.2, P05 1.8, P04 1.4, P01 0.9, P03 0.8.
 
 **Full practice run with `--agent sellm` on Sun 00:45 (@7a49c38: calculator, argument bank, dossier signals, past the relationship target, fast payment for cash-short suppliers; no LLM, kit runner): mean 72.9** - baseline 61.5. At or above the baseline in 9 of 10 cases (P07 0.747 against 0.779); 0 timeouts. With the LLM writing the e-mails the same agent scored 71.6 and stopped being repeatable; an LLM verdict that may accept made P01 and P18 worse (`experiments/LLM-ADVISOR.md`). Still weak: P18 0.47, P02 0.53, P08 0.55. Details: `docs/LOG.md` Sun 00:50.
