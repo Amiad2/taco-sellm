@@ -221,6 +221,7 @@
  "b5e4bb8bb96a3946": "sellm negotiator v1.4 + dossier fix A @0223875 (fix B reverted; P05 unaffected by B), kit runner, no LLM",
  "b62447687636e5a1": "probe h1b",
  "b6759d5e9b760a5b": "kit llm, gpt-6.1-sol",
+ "b6c71e626f579a83": "OMAR R2 runner --turns, sellm reference knobs, omars_branch@fdb262e",
  "b7f37a230bf6f9b0": "TEST past-target (one-off, not in the agent): keep asking past the relationship target while the supplier moves",
  "b9bd6f9b3b878b6c": "probe h13-a",
  "b9eb9670c83ff68c": "probe h2-trade",

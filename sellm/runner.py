@@ -10,8 +10,12 @@ accepting the old ID is a 422 that stops `play()` and loses the case (lab: 6 ref
 408 negotiations; sandbox D02: 2 timeouts per session). This runner plays every case with one loop
 per thread, after Jonathan's `experiments/ab_sandbox.py:play_case`, and adds what the final needs:
 
-- **one loop per thread**: each thread answers as soon as its own reply is in; a thread is re-read
-  after a silence and before every accept (offer ID changed: decide again); 409/422 are survived;
+- **one loop per case** (default since Sun 02:20; `--per-thread` for one loop per thread): the agent
+  picks the thread it writes to next, one message of the session in flight at a time. The arena works
+  through a session's messages one after another, so parallel messages to three bidders were counted
+  late (P05 0.665); in the agent's order P05 scored 0.820 in 3 s (experiments/LEDGER.md R1, R2).
+  A thread is re-read after a silence and before every accept (offer ID changed: decide again);
+  409/422 are survived;
 - **a deadline per move**: the agent decides on a copy of the threads in a worker, so a slow LLM
   never blocks the other threads; warning at 15 s, at 40 s its fallback (if it has one of its own)
   or a holding e-mail without a term sheet (the offer stands, the clock restarts). Logged, never silent;
@@ -641,8 +645,9 @@ def main(argv=None):
     ap.add_argument("--parallel", type=int, default=10)
     ap.add_argument("--data", default=os.environ.get("ARENA_DATA", "data/package"))
     ap.add_argument("--label", default="", help="practice/sandbox: label the sessions for scripts/pull-runs")
-    ap.add_argument("--serial", action="store_true", help="one message per session in flight (RFQ timeouts)")
-    ap.add_argument("--turns", action="store_true", help="one loop per case, the agent picks the thread (kit order)")
+    ap.add_argument("--per-thread", action="store_true",
+                    help="one loop per thread (default: one loop per case, the agent picks the thread)")
+    ap.add_argument("--serial", action="store_true", help="with --per-thread: one message per session in flight")
     a = ap.parse_args(argv)
     if a.set == "final":
         pull_first(final=True)  # the final runs the commit that is checked out: report only
@@ -667,7 +672,9 @@ def main(argv=None):
                     row["end_reason"], row["score"] or 0.0, row["seconds"], row["stats"].get("rereads"),
                     row["stats"].get("refused"), row["stats"].get("holds"), row["stats"].get("fallbacks"))  # fmt: skip
 
-    lim = Limits(serial=a.serial or a.turns, turns=a.turns)
+    # default since Sun 02:20 (experiments/LEDGER.md R1, R2): one loop per case in the agent's order, one
+    # message in flight - P05 0.820 as the kit runner (0.665 with one loop per thread, 0.735 with --serial)
+    lim = Limits(serial=a.serial or not a.per_thread, turns=not a.per_thread)
     if a.set == "final":
         rows = list(run_final(client, new_agent, a.waves, min(a.parallel, 10), limits=lim, on_row=on_row).values())
     else:
